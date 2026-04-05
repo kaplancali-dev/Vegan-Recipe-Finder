@@ -236,16 +236,27 @@ header p{color:#86efac;font-size:0.93rem;margin-top:6px}
     </button>
     <div class="intro-body open" id="introBody">
       <p>Preparing a great meal often starts with a simple spark — and that spark is usually whatever you already have in your refrigerator, freezer, and pantry.</p>
-      <p>This app helps you turn those ingredients into delicious, healthy meals by pulling recipes from the most trusted vegan and gluten-free websites. You can easily refine your search by selecting additional allergies or dietary needs, such as tree nuts, peanuts, or soy.</p>
-      <p>The app features 75 common kitchen staples. You can select the ones you have on hand or easily add any extras that aren't listed.</p>
-      <h3>How it works</h3>
+      <p>This app helps you turn those ingredients into delicious, healthy meals — all recipes are 100% vegan and gluten-free. You can refine your search by category, cook time, dietary needs, or recipe name, and filter out anything you're allergic to.</p>
+      <p>The ingredient list includes over 120 common kitchen staples across proteins, grains, vegetables, fruits, nuts, plant-based milks, pantry essentials, spices, and a dedicated dessert pantry. Smart substitutions are built in — selecting <strong>plant-based milk (any)</strong> covers almond, oat, soy, cashew, and more. Selecting <strong>any cooking oil</strong> covers olive oil, coconut oil, avocado oil, and others interchangeably.</p>
+      <h3>🔍 Search Tab — How it works</h3>
       <ol>
-        <li>Select or add the staples you currently have at home.</li>
-        <li>Choose the recipe category or categories you want (e.g., breakfast, high-protein, etc.).</li>
-        <li>Pick which websites you'd like recipes from — or select all sites to see more options.</li>
-        <li>Choose how much time you want to spend preparing the meal.</li>
-        <li>The app then generates a list of matching recipes and helps you build a shopping list for any additional ingredients you'll need.</li>
-        <li>You'll be taken directly to the original recipe on Google or a YouTube video. You can also view photos of the finished dish and explore similar recipes from other sites, giving you plenty of options before you decide.</li>
+        <li>Start with <strong>Category</strong> at the top — choose what you're in the mood for (breakfast, dinner, dessert, sauces, and more).</li>
+        <li>Set your <strong>Max Cook Time</strong>, flag any <strong>Allergies</strong>, or search by <strong>Recipe Name</strong> — all quick-access above your staples.</li>
+        <li>Load your saved <strong>Staples</strong> or use <strong>Quick Add</strong> to tick off what you have on hand.</li>
+        <li>Type in any additional ingredients not on the list.</li>
+        <li>Hit <strong>Find Vegan Recipes</strong> — results appear instantly, sorted by how many ingredients you already have.</li>
+        <li>Click <strong>🔍 Find Recipe</strong> to go directly to the full recipe, or <strong>🛒 Add Missing</strong> to build your shopping list automatically.</li>
+        <li>Save your favorites with <strong>❤️</strong> and add personal notes to any recipe with <strong>📝</strong>.</li>
+      </ol>
+      <h3>🧑‍🍳 What Can I Make? Tab — How it works</h3>
+      <ol>
+        <li>Pick your mood at the top — <strong>Meal</strong>, <strong>Dessert</strong>, <strong>Sauces &amp; Dips</strong>, or <strong>All</strong>.</li>
+        <li>Check off everything you currently have in your kitchen, or tap <strong>Load My Staples</strong> to pre-fill your saved ingredients.</li>
+        <li>Hit <strong>Find What I Can Make</strong> — recipes are instantly grouped by readiness:</li>
+        <li>🟢 <strong>Make Right Now</strong> — you have every ingredient.</li>
+        <li>🟡 <strong>Missing 1 Ingredient</strong> — one quick addition and you're cooking.</li>
+        <li>🔴 <strong>Missing 2–3 Ingredients</strong> — close enough to plan ahead.</li>
+        <li>Tap <strong>🛒 Add Missing to List</strong> on any recipe to send just the missing items to your Shopping List.</li>
       </ol>
       <p>Ready to cook something delicious and nutritious?</p>
       <p class="intro-sign">To your health! 🌱</p>
@@ -271,8 +282,7 @@ header p{color:#86efac;font-size:0.93rem;margin-top:6px}
           <div class="filter-chips" id="catGrid">
             <button class="fc on" id="catAllBtn" onclick="pickFilter(this,'cat','')">🍽️ All</button>
             <button class="fc" onclick="pickFilter(this,'cat','Breakfast')">🧇 Breakfast</button>
-            <button class="fc" onclick="pickFilter(this,'cat','Lunch')">🥪 Lunch</button>
-            <button class="fc" onclick="pickFilter(this,'cat','Dinner')">🍢 Dinner</button>
+            <button class="fc" onclick="pickFilter(this,'cat','Lunch|Dinner')">🍢 Lunch / Dinner</button>
             <button class="fc" onclick="pickFilter(this,'cat','Soups &amp; Stews')">🍲 Soups</button>
             <button class="fc" onclick="pickFilter(this,'cat','Salads')">🥗 Salads</button>
             <button class="fc" onclick="pickFilter(this,'cat','Pasta &amp; Noodles')">🍝 Pasta</button>
@@ -2320,7 +2330,7 @@ function findRecipes() {
   const userNorm = expandWithAliases(ingredients);
 
   let pool = RECIPES;
-  if (selectedCats.length) pool = pool.filter(r => r.cats && selectedCats.every(c => r.cats.includes(c)));
+  if (selectedCats.length) pool = pool.filter(r => r.cats && selectedCats.every(c => c.includes('|') ? c.split('|').some(s => r.cats.includes(s.trim())) : r.cats.includes(c)));
   if (selectedSite) pool = pool.filter(r => r.site === selectedSite);
   if (maxTime > 0)  pool = pool.filter(r => r.time && r.time <= maxTime);
   if (nameSearch)   pool = pool.filter(r => r.title.toLowerCase().includes(nameSearch.toLowerCase()));
