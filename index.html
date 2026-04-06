@@ -437,7 +437,7 @@ header p{color:#86efac;font-size:0.93rem;margin-top:6px}
             <span>🎯 Only show recipes I can make right now (100% match)</span>
           </label>
 
-          <button class="btn-find" id="btnFind" onclick="findRecipes()" disabled>🌿 Find Vegan Recipes</button>
+          <button class="btn-find" id="btnFind" onclick="findRecipes(true)" disabled>🌿 Find Vegan Recipes</button>
         </div>
       </div>
 
@@ -2511,9 +2511,10 @@ function expandWithAliases(ings) {
 // ── FIND RECIPES ──────────────────────────────────────────────────────────────
 const norm = s => s.toLowerCase().replace(/[^a-z0-9 ]/g, '').trim();
 
-function findRecipes() {
-  // show all recipes when no filters active — no early return
-  try { document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth', block: 'start' }); } catch(e) { document.getElementById('resultsSection').scrollIntoView(true); }
+function findRecipes(scrollToResults = false) {
+  if (scrollToResults) {
+    try { document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth', block: 'start' }); } catch(e) { document.getElementById('resultsSection').scrollIntoView(true); }
+  }
 
   const allIngs  = expandWithAliases([...ingredients, ...staples]);
   const userNorm = expandWithAliases(ingredients);
