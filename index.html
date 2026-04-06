@@ -518,15 +518,40 @@ header p{color:#86efac;font-size:0.93rem;margin-top:6px}
   <!-- ══════ FAVORITES PANEL ══════ -->
   <div class="panel" id="panel-favorites">
     <div class="card" style="margin-bottom:12px;background:#1a2a1a;border:1px solid #2e4a2e;">
-      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
-        <div style="font-size:1.1rem;font-weight:700;color:#86efac;flex:1 1 200px;">💾 Backup Your Data</div>
+      <div style="font-size:1.1rem;font-weight:700;color:#86efac;margin-bottom:10px;">💾 Backup &amp; Sync</div>
+
+      <!-- File backup row -->
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px;">
         <button onclick="exportData()" style="background:#166534;color:#fff;border:none;border-radius:8px;padding:8px 16px;font-size:.9rem;cursor:pointer;font-weight:600;">⬇️ Export Backup</button>
         <button onclick="document.getElementById('importFileInput').click()" style="background:#1e3a5f;color:#fff;border:none;border-radius:8px;padding:8px 16px;font-size:.9rem;cursor:pointer;font-weight:600;">⬆️ Import Backup</button>
         <input type="file" id="importFileInput" accept=".json" style="display:none" onchange="importData(event)">
       </div>
-      <div style="margin-top:10px;font-size:.82rem;color:#86efac;line-height:1.6;opacity:.85;">
-        <strong>How to use:</strong> Click <em>Export Backup</em> to download a file with all your saved favorites, notes, staples, and shopping list. Store it somewhere safe (Downloads, Google Drive, etc.). If you ever lose your data, click <em>Import Backup</em> and select that file to restore everything instantly.
-        <br><strong>Tip:</strong> Export a fresh backup anytime you've saved new recipes or added notes.
+      <div style="font-size:.8rem;color:#86efac;opacity:.8;line-height:1.5;margin-bottom:14px;">
+        <strong>File backup:</strong> Export saves a file with all your favorites, notes, staples, and shopping list. Import restores it. Keep a copy in Downloads, iCloud, or Google Drive.
+      </div>
+
+      <!-- Sync code row -->
+      <div style="border-top:1px solid #2e4a2e;padding-top:12px;">
+        <div style="font-size:.95rem;font-weight:700;color:#86efac;margin-bottom:6px;">📲 Sync Between Devices</div>
+        <div style="font-size:.8rem;color:#86efac;opacity:.8;line-height:1.5;margin-bottom:10px;">
+          Use this to sync your data between your laptop and iPhone — no file transfer needed. Generate a code on one device, then paste it on the other.
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;">
+          <button onclick="generateSyncCode()" style="background:#166534;color:#fff;border:none;border-radius:8px;padding:8px 16px;font-size:.9rem;cursor:pointer;font-weight:600;">🔑 Generate Sync Code</button>
+          <button onclick="document.getElementById('syncImportWrap').style.display=document.getElementById('syncImportWrap').style.display==='none'?'block':'none'" style="background:#1e3a5f;color:#fff;border:none;border-radius:8px;padding:8px 16px;font-size:.9rem;cursor:pointer;font-weight:600;">📋 Import from Code</button>
+        </div>
+        <!-- Generated code display -->
+        <div id="syncCodeWrap" style="display:none;margin-bottom:10px;">
+          <div style="font-size:.8rem;color:#86efac;opacity:.8;margin-bottom:5px;">Copy this code and paste it on your other device:</div>
+          <textarea id="syncCodeOut" readonly style="width:100%;height:80px;background:#0a130b;color:#86efac;border:1px solid #2e4a2e;border-radius:8px;padding:8px;font-size:.72rem;font-family:monospace;resize:none;box-sizing:border-box"></textarea>
+          <button onclick="copySyncCode()" id="syncCopyBtn" style="margin-top:6px;background:#14532d;color:#fff;border:none;border-radius:8px;padding:6px 14px;font-size:.85rem;cursor:pointer;">📋 Copy Code</button>
+        </div>
+        <!-- Import code input -->
+        <div id="syncImportWrap" style="display:none;">
+          <div style="font-size:.8rem;color:#86efac;opacity:.8;margin-bottom:5px;">Paste your sync code here:</div>
+          <textarea id="syncCodeIn" style="width:100%;height:80px;background:#0a130b;color:#86efac;border:1px solid #2e4a2e;border-radius:8px;padding:8px;font-size:.72rem;font-family:monospace;resize:none;box-sizing:border-box" placeholder="Paste sync code here…"></textarea>
+          <button onclick="importSyncCode()" style="margin-top:6px;background:#166534;color:#fff;border:none;border-radius:8px;padding:6px 14px;font-size:.85rem;cursor:pointer;">✅ Apply Sync Code</button>
+        </div>
       </div>
     </div>
     <div class="card">
@@ -2726,6 +2751,52 @@ let instructions = _lsGet('vrf_instr', '{}');
 let _instrCurrentId = null;
 
 function saveInstrData() { _lsSet('vrf_instr', instructions); }
+
+// ── SYNC CODE ─────────────────────────────────────────────────────────────────
+function generateSyncCode() {
+  const data = {
+    v: 1,
+    f: _lsGet('vrf_favs',    '[]'),
+    n: _lsGet('vrf_instr',   '{}'),
+    s: _lsGet('vrf_staples', '[]'),
+    h: _lsGet('vrf_shop',    '[]'),
+    i: _lsGet('vrf_ings',    '[]'),
+  };
+  const code = btoa(unescape(encodeURIComponent(JSON.stringify(data))));
+  const out  = document.getElementById('syncCodeOut');
+  const wrap = document.getElementById('syncCodeWrap');
+  out.value  = code;
+  wrap.style.display = 'block';
+}
+
+function copySyncCode() {
+  const out = document.getElementById('syncCodeOut');
+  navigator.clipboard.writeText(out.value).then(() => {
+    const btn = document.getElementById('syncCopyBtn');
+    btn.textContent = '✅ Copied!';
+    setTimeout(() => btn.textContent = '📋 Copy Code', 2500);
+  });
+}
+
+function importSyncCode() {
+  const raw = document.getElementById('syncCodeIn').value.trim();
+  if (!raw) { alert('Please paste a sync code first.'); return; }
+  try {
+    const data = JSON.parse(decodeURIComponent(escape(atob(raw))));
+    if (!data.v) throw new Error('Invalid code');
+    if (data.f !== undefined) { _lsSet('vrf_favs',    data.f); favorites     = data.f; }
+    if (data.n !== undefined) { _lsSet('vrf_instr',   data.n); instructions  = data.n; }
+    if (data.s !== undefined) { _lsSet('vrf_staples', data.s); staples       = data.s; }
+    if (data.h !== undefined) { _lsSet('vrf_shop',    data.h); shopList      = data.h; }
+    if (data.i !== undefined) { _lsSet('vrf_ings',    data.i); ingredients   = data.i; }
+    renderFavs(); render(); renderAllIngPanels();
+    document.getElementById('syncCodeIn').value = '';
+    document.getElementById('syncImportWrap').style.display = 'none';
+    alert('✅ Sync complete!\n\nYour favorites, notes, staples, and shopping list have been loaded on this device.');
+  } catch(e) {
+    alert('❌ Invalid sync code. Make sure you copied the full code from your other device.');
+  }
+}
 
 // ── BACKUP: Export & Import ───────────────────────────────────────────────────
 function exportData() {
