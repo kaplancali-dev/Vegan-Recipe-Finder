@@ -438,6 +438,8 @@ header p{color:#86efac;font-size:0.93rem;margin-top:6px}
       </div>
       <div class="modal-footer">
         <button class="btn-sm-danger" id="instrDeleteBtn" onclick="deleteInstr()" style="display:none;margin-right:auto">🗑️ Delete</button>
+        <button class="btn-sm-green" id="instrPrintBtn" onclick="printInstr()" style="display:none">🖨️ Print</button>
+        <button class="btn-sm-green" id="instrCopyBtn" onclick="copyInstr()" style="display:none">📋 Copy</button>
         <button class="btn-sm-green" onclick="closeInstrModal()">Cancel</button>
         <button class="btn-sm-green" onclick="saveInstr()">💾 Save</button>
       </div>
@@ -2485,17 +2487,53 @@ function renderFavs() {
     el.innerHTML = `<div class="empty"><div class="e-icon">❤️</div><p>No saved recipes yet.<br>Heart a recipe to save it here.</p></div>`;
     return;
   }
-  el.innerHTML = favorites.map(f => `
-    <div class="fav-card">
-      <div>
-        <div class="fav-title">${f.title}</div>
-        <div class="fav-site">${f.site}</div>
+  el.innerHTML = favorites.map(f => {
+    const notes = instructions[f.id] || '';
+    return `
+    <div class="fav-card" style="flex-direction:column;align-items:stretch;gap:10px">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px">
+        <div>
+          <div class="fav-title">${f.title}</div>
+          <div class="fav-site">${f.site}</div>
+        </div>
+        <div style="display:flex;gap:6px;flex-shrink:0;flex-wrap:wrap;justify-content:flex-end">
+          <a href="${searchUrl(f)}" target="_blank"><button class="btn-sm btn-link" title="Find Recipe">🔗 Find</button></a>
+          <button class="btn-sm btn-notes${notes ? ' on' : ''}" onclick="openInstrModal(${f.id})" title="${notes ? 'View Notes' : 'Add Notes'}">📝 ${notes ? 'View Notes' : 'Add Notes'}</button>
+          ${notes ? `<button class="btn-sm btn-link" onclick="favCopyNotes(${f.id})" title="Copy notes to clipboard">📋 Copy</button>` : ''}
+          ${notes ? `<button class="btn-sm btn-link" onclick="favPrintNotes(${f.id})" title="Print notes">🖨️ Print</button>` : ''}
+          <button class="btn-sm btn-fav on" onclick="toggleFav(${f.id});renderFavs()" title="Remove from favorites">❤️</button>
+        </div>
       </div>
-      <div style="display:flex;gap:6px;flex-shrink:0">
-        <a href="${searchUrl(f)}" target="_blank"><button class="btn-sm btn-link">🔗</button></a>
-        <button class="btn-sm btn-fav on" onclick="toggleFav(${f.id});renderFavs()">❤️</button>
-      </div>
-    </div>`).join('');
+      ${notes ? `<div class="saved-instructions-label">📝 Saved Notes</div><div class="saved-instructions" onclick="openInstrModal(${f.id})">${notes.substring(0,200)}${notes.length>200?'…':''}</div>` : ''}
+    </div>`;
+  }).join('');
+}
+
+function favCopyNotes(id) {
+  const notes = instructions[id] || '';
+  if (!notes) return;
+  navigator.clipboard.writeText(notes).then(() => {
+    // find the copy button and flash it
+    event.target.textContent = '✅ Copied!';
+    setTimeout(() => { event.target.textContent = '📋 Copy'; }, 2000);
+  });
+}
+
+function copyInstr() {
+  if (_instrCurrentId === null) return;
+  const notes = instructions[_instrCurrentId] || '';
+  if (!notes) return;
+  navigator.clipboard.writeText(notes).then(() => {
+    const btn = document.getElementById('instrCopyBtn');
+    btn.textContent = '✅ Copied!';
+    setTimeout(() => btn.textContent = '📋 Copy', 2000);
+  });
+}
+
+function favPrintNotes(id) {
+  _instrCurrentId = id;
+  printInstr();
+  _instrCurrentId = null;
 }
 
 // ── SHOPPING LIST ─────────────────────────────────────────────────────────────
@@ -2554,8 +2592,10 @@ function openInstrModal(id) {
   const r = RECIPES.find(r => r.id === id);
   document.getElementById('instrModalTitle').textContent = '📝 ' + (r ? r.title : 'Recipe Notes');
   document.getElementById('instrTextarea').value = instructions[id] || '';
-  const delBtn = document.getElementById('instrDeleteBtn');
-  delBtn.style.display = instructions[id] ? 'inline-block' : 'none';
+  const hasNotes = !!instructions[id];
+  document.getElementById('instrDeleteBtn').style.display = hasNotes ? 'inline-block' : 'none';
+  document.getElementById('instrPrintBtn').style.display = hasNotes ? 'inline-block' : 'none';
+  document.getElementById('instrCopyBtn').style.display = hasNotes ? 'inline-block' : 'none';
   document.getElementById('instrModal').classList.add('open');
   setTimeout(() => document.getElementById('instrTextarea').focus(), 100);
 }
@@ -2565,6 +2605,12 @@ function closeInstrModal() {
   _instrCurrentId = null;
 }
 
+function refreshAfterNotes() {
+  render();
+  if (document.getElementById('panel-canmake').classList.contains('on') && cmSelected.size > 0) runCanMake();
+  if (document.getElementById('panel-favorites').classList.contains('on')) renderFavs();
+}
+
 function saveInstr() {
   const val = document.getElementById('instrTextarea').value.trim();
   if (_instrCurrentId === null) return;
@@ -2572,7 +2618,7 @@ function saveInstr() {
   else delete instructions[_instrCurrentId];
   saveInstrData();
   closeInstrModal();
-  render();
+  refreshAfterNotes();
 }
 
 function deleteInstr() {
@@ -2580,7 +2626,40 @@ function deleteInstr() {
   delete instructions[_instrCurrentId];
   saveInstrData();
   closeInstrModal();
-  render();
+  refreshAfterNotes();
+}
+
+function printInstr() {
+  if (_instrCurrentId === null) return;
+  const r = RECIPES.find(r => r.id === _instrCurrentId);
+  const title = r ? r.title : 'Recipe';
+  const site  = r ? r.site  : '';
+  const notes = (instructions[_instrCurrentId] || '').replace(/\n/g, '<br>');
+  const meta  = r ? `⏱ ${r.time} min &nbsp;|&nbsp; 👤 ${r.servings} servings` : '';
+  const nut   = r && r.nut ? `<p style="font-size:13px;color:#555">Cal: ${r.nut.cal} &nbsp;|&nbsp; Protein: ${r.nut.pro}g &nbsp;|&nbsp; Carbs: ${r.nut.carb}g &nbsp;|&nbsp; Fat: ${r.nut.fat}g &nbsp;|&nbsp; Fiber: ${r.nut.fib}g</p>` : '';
+  const win = window.open('', '_blank');
+  win.document.write(`<!DOCTYPE html><html><head><title>${title}</title>
+  <style>
+    body{font-family:Georgia,serif;max-width:680px;margin:40px auto;padding:0 20px;color:#222;line-height:1.7}
+    h1{font-size:1.6rem;margin-bottom:4px;color:#14532d}
+    .site{font-size:0.85rem;color:#666;margin-bottom:6px}
+    .meta{font-size:0.88rem;color:#444;margin-bottom:10px}
+    .nut{font-size:0.82rem;color:#555;margin-bottom:18px}
+    hr{border:none;border-top:1px solid #ccc;margin:16px 0}
+    .notes{font-size:0.95rem;white-space:pre-wrap}
+    .footer{margin-top:30px;font-size:0.75rem;color:#aaa;text-align:center}
+    @media print{body{margin:20px}}
+  </style></head><body>
+  <h1>🌿 ${title}</h1>
+  <div class="site">${site}</div>
+  <div class="meta">${meta}</div>
+  ${nut}
+  <hr>
+  <div class="notes">${notes}</div>
+  <div class="footer">Printed from 🌿 Vegan Recipe Finder</div>
+  <script>window.onload=()=>{window.print()}<\/script>
+  </body></html>`);
+  win.document.close();
 }
 
 // Close modal on Escape key
@@ -2878,6 +2957,7 @@ function runCanMake() {
 
 function cmCard(r, group) {
   const isFav = favorites.some(f => f.id === r.id);
+  const instrNotes = instructions[r.id] || '';
   const missingChips = r.needNames.map(i => `<span class="cm-missing-chip">${i}</span>`).join('');
   return `<div class="cm-r-card g${group}">
   <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
@@ -2904,7 +2984,9 @@ function cmCard(r, group) {
     <a href="${searchUrl(r)}" target="_blank" rel="noopener"><button class="btn-sm btn-link">🔍 Find Recipe</button></a>
     <button class="btn-sm btn-fav${isFav?' on':''}" onclick="toggleFav(${r.id});runCanMake()">${isFav?'❤️ Saved':'🤍 Save'}</button>
     ${r.needNames.length ? `<button class="btn-sm btn-shop" onclick="cmAddMissingToShop(${r.id},[${r.needNames.map(n=>`'${n.replace(/'/g,"\\'")}' `).join(',')}])">🛒 Add Missing to List</button>` : ''}
+    <button class="btn-sm btn-notes${instrNotes ? ' on' : ''}" onclick="openInstrModal(${r.id})">📝 ${instrNotes ? 'View Notes' : 'Add Notes'}</button>
   </div>
+  ${instrNotes ? `<div class="saved-instructions-label">📝 Saved Notes</div><div class="saved-instructions" onclick="openInstrModal(${r.id})">${instrNotes.substring(0,200)}${instrNotes.length>200?'…':''}</div>` : ''}
 </div>`;
 }
 
