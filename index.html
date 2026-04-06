@@ -63,6 +63,13 @@ header p{color:#86efac;font-size:0.93rem;margin-top:6px}
 .qa-chip{display:inline-flex;align-items:center;background:#0a130b;border:1.5px solid #2d5a33;border-radius:99px;padding:4px 11px;font-size:0.8rem;color:#86efac;cursor:pointer;transition:all .12s;margin:2px 3px 2px 0}
 .qa-chip:hover{background:#14532d;border-color:#4ade80}
 .qa-chip.sel{background:#14532d;border-color:#4ade80;color:#fff;box-shadow:0 0 0 2px #4ade8044}
+.qa-chip.on{background:#14532d;border-color:#4ade80;color:#fff;box-shadow:0 0 0 2px #4ade8044}
+.chip-wrap{display:inline-flex;align-items:center;margin:2px 3px 2px 0}
+.chip-star{background:none;border:none;cursor:pointer;font-size:.82rem;padding:0 0 0 2px;line-height:1;opacity:.55;transition:opacity .12s}
+.chip-star:hover{opacity:1}
+.always-chip{display:inline-flex;align-items:center;gap:4px;background:#14532d;border:1.5px solid #4ade80;border-radius:99px;padding:4px 11px;font-size:0.8rem;color:#bbf7d0;margin:2px 3px 2px 0}
+.always-chip .x{background:none;border:none;cursor:pointer;color:#4ade80;font-size:0.9rem;line-height:1;padding:0 0 0 2px}
+.always-chip .x:hover{color:#f87171}
 .qa-add-row{display:flex;gap:6px;margin-top:11px}
 .qa-custom-input{flex:1;padding:7px 11px;border:1.5px solid #2d5a33;border-radius:10px;background:#0a130b;color:#e8f5e9;font-size:0.83rem;outline:none}
 .qa-custom-input:focus{border-color:#4ade80}
@@ -329,51 +336,66 @@ header p{color:#86efac;font-size:0.93rem;margin-top:6px}
             oninput="onNameSearch(this.value)">
         </div>
 
-        <!-- MY STAPLES -->
-        <div class="card">
-          <div class="section-top">
-            <div class="card-title" style="margin-bottom:0">⭐ My Staples</div>
-            <div style="display:flex;gap:7px">
-              <button class="btn-sm-green" id="btnLoadStaples" onclick="loadStaples()" disabled>Load All</button>
-              <button class="btn-sm-green" id="btnLoadSelected" onclick="loadSelected()" style="display:none">Load Selected</button>
-              <button class="btn-sm-danger" onclick="clearStaples()">Clear All</button>
+        <!-- SECTION 1: INGREDIENTS I ALWAYS HAVE -->
+        <div class="qa-card">
+          <button class="qa-toggle open" id="alwaysToggle" onclick="toggleAlwaysPanel()">
+            ⭐ Ingredients I Always Have <span class="arrow">▲</span>
+          </button>
+          <div class="qa-body open" id="alwaysBody">
+            <p style="font-size:.8rem;color:#86efac;opacity:.8;margin-bottom:8px;line-height:1.5">Saved permanently by clicking ⭐ next to the ingredient from the list below. The ingredient will always appear here unless you unselect it.</p>
+            <div id="alwaysChips"><span style="color:#4b7a52;font-size:.82rem">None selected yet — click an ingredient from the list below to save it here permanently.</span></div>
+            <div id="alwaysClearWrap" style="display:none;margin-top:8px">
+              <button class="btn-sm-danger" onclick="alwaysClearAll()">Clear All</button>
             </div>
           </div>
-          <div class="chip-row" id="stapleChips"><span style="color:#4b7a52;font-size:0.82rem">No staples saved yet.</span></div>
-          <p class="hint-text">💡 Saved in your browser — here every time you open the app.</p>
         </div>
 
-        <!-- QUICK ADD PANEL -->
+        <!-- SECTION 2: ADDITIONAL INGREDIENTS I HAVE TODAY -->
         <div class="qa-card">
-          <button class="qa-toggle" id="qaToggle" onclick="toggleQA()">
-            ⚡ Quick Add — Top 75 Ingredients <span class="arrow">▼</span>
+          <button class="qa-toggle open" id="todayToggle" onclick="toggleTodayPanel()">
+            🥦 Additional Ingredients I Have Today <span class="arrow">▲</span>
           </button>
-          <div class="qa-body" id="qaBody">
-            <div class="qa-actions">
-              <button class="btn-sm-green" onclick="qaSelectAll()">Select All</button>
-              <button class="btn-sm-green" onclick="qaSelectNone()">Select None</button>
-              <button class="btn-sm-green" id="btnQAAdd" onclick="qaAddToIngs()" style="display:none">Add Selected (<span id="qaCount">0</span>)</button>
+          <div class="qa-body open" id="todayBody">
+            <p style="font-size:.8rem;color:#86efac;opacity:.8;margin-bottom:8px;line-height:1.5">Ingredients you have on hand today only. Click any ingredient from the list below to add it here.</p>
+            <div id="todayChips"><span style="color:#4b7a52;font-size:.82rem">None selected yet — click an ingredient from the list below to add it for today.</span></div>
+            <div id="todayClearWrap" style="display:none;margin-top:8px">
+              <button class="btn-sm-danger" onclick="todayClearAll()">Clear All</button>
             </div>
-            <div id="qaChips"></div>
+          </div>
+        </div>
+
+        <!-- SECTION 3: INGREDIENTS NOT SELECTED -->
+        <div class="qa-card">
+          <button class="qa-toggle open" id="notSelToggle" onclick="toggleNotSelPanel()">
+            📋 Ingredients Not Selected <span class="arrow">▲</span>
+          </button>
+          <div class="qa-body open" id="notSelBody">
+            <p style="font-size:.8rem;color:#86efac;opacity:.8;margin-bottom:8px;line-height:1.5">Click any ingredient to add it to <strong>Today</strong>. Click <strong>⭐</strong> to save it to <strong>Always Have</strong>.</p>
+            <div class="qa-actions">
+              <button class="btn-sm-green" onclick="notSelSelectAllToday()">Add All to Today</button>
+              <button class="btn-sm-green" onclick="notSelSelectAllAlways()">Add All to Always Have</button>
+            </div>
+            <div id="notSelChips"></div>
+          </div>
+        </div>
+
+        <!-- SECTION 4: ADD INGREDIENTS NOT LISTED -->
+        <div class="qa-card">
+          <button class="qa-toggle open" id="customToggle" onclick="toggleCustomPanel()">
+            ✏️ Add Ingredients Not Listed <span class="arrow">▲</span>
+          </button>
+          <div class="qa-body open" id="customBody">
+            <p style="font-size:.8rem;color:#86efac;opacity:.8;margin-bottom:8px;line-height:1.5">Type any ingredient not in the list above and press Enter or click + Add.</p>
             <div class="qa-add-row">
-              <input class="qa-custom-input" id="qaCustomInput" type="text" placeholder="Add your own ingredient…" onkeydown="if(event.key==='Enter')qaAddCustom()">
+              <input class="qa-custom-input" id="qaCustomInput" type="text" placeholder="e.g. jackfruit, miso paste…" onkeydown="if(event.key==='Enter')qaAddCustom()">
               <button class="btn-sm-green" onclick="qaAddCustom()">+ Add</button>
             </div>
+            <div class="tags" id="customIngTags"></div>
           </div>
         </div>
 
-        <!-- INGREDIENT INPUT -->
+        <!-- FILTERS + FIND -->
         <div class="card">
-          <div class="card-title">What's in your fridge &amp; pantry?</div>
-          <div class="ing-row">
-            <input class="ing-input" id="ingInput" type="text" placeholder="Type an ingredient, press Enter…" onkeydown="if(event.key==='Enter')addIng()">
-            <button class="btn-add" onclick="addIng()">+ Add</button>
-          </div>
-          <div class="tags" id="ingTags"></div>
-          <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
-            <button class="btn-save-staple" id="btnSaveStaple" onclick="saveAsStaples()">⭐ Save as Staples</button>
-            <button class="btn-sm-danger" id="btnClearIngs" onclick="clearIngs()" style="display:none">🗑️ Clear All</button>
-          </div>
 
           <!-- SITE FILTER -->
           <div class="filter-section">
@@ -2219,138 +2241,180 @@ function pickFilter(btn, type, val) {
   findRecipes();
 }
 
-// ── STAPLES ───────────────────────────────────────────────────────────────────
-let selectedStaples = new Set();
+// ── INGREDIENT PANEL TOGGLES ──────────────────────────────────────────────────
+let alwaysOpen = true, todayOpen = true, notSelOpen = true, customOpen = true;
 
-function toggleStaple(s) {
-  if (selectedStaples.has(s)) {
-    selectedStaples.delete(s);
-  } else {
-    selectedStaples.add(s);
-  }
-  const loadSelBtn = document.getElementById('btnLoadSelected');
-  if (loadSelBtn) loadSelBtn.style.display = selectedStaples.size ? 'inline-block' : 'none';
-  renderStapleChips();
+function toggleAlwaysPanel() {
+  alwaysOpen = !alwaysOpen;
+  document.getElementById('alwaysBody').classList.toggle('open', alwaysOpen);
+  document.getElementById('alwaysToggle').classList.toggle('open', alwaysOpen);
+  document.querySelector('#alwaysToggle .arrow').textContent = alwaysOpen ? '▲' : '▼';
+}
+function toggleTodayPanel() {
+  todayOpen = !todayOpen;
+  document.getElementById('todayBody').classList.toggle('open', todayOpen);
+  document.getElementById('todayToggle').classList.toggle('open', todayOpen);
+  document.querySelector('#todayToggle .arrow').textContent = todayOpen ? '▲' : '▼';
+}
+function toggleNotSelPanel() {
+  notSelOpen = !notSelOpen;
+  document.getElementById('notSelBody').classList.toggle('open', notSelOpen);
+  document.getElementById('notSelToggle').classList.toggle('open', notSelOpen);
+  document.querySelector('#notSelToggle .arrow').textContent = notSelOpen ? '▲' : '▼';
+}
+function toggleCustomPanel() {
+  customOpen = !customOpen;
+  document.getElementById('customBody').classList.toggle('open', customOpen);
+  document.getElementById('customToggle').classList.toggle('open', customOpen);
+  document.querySelector('#customToggle .arrow').textContent = customOpen ? '▲' : '▼';
 }
 
-function loadSelected() {
-  selectedStaples.forEach(s => {
-    if (!ingredients.includes(s)) ingredients.push(s);
-  });
-  selectedStaples.clear();
-  document.getElementById('btnLoadSelected').style.display = 'none';
-  saveIngs();
-  renderIngTags();
-  renderStapleChips();
-  updateFindBtn();
-  if (ingredients.length) findRecipes();
+// ── RENDER ALL FOUR SECTIONS ──────────────────────────────────────────────────
+function renderAllIngPanels() {
+  renderAlwaysChips();
+  renderTodayChips();
+  renderNotSelChips();
+  renderCustomIngTags();
 }
 
-function renderStapleChips() {
-  const el = document.getElementById('stapleChips');
-  const btn = document.getElementById('btnLoadStaples');
+// SECTION 1: Always Have — shows saved staples as removable chips
+function renderAlwaysChips() {
+  const el   = document.getElementById('alwaysChips');
+  const wrap = document.getElementById('alwaysClearWrap');
+  if (!el) return;
   if (!staples.length) {
-    el.innerHTML = '<span style="color:#4b7a52;font-size:0.82rem">No staples saved yet.</span>';
-    btn.disabled = true;
+    el.innerHTML = '<span style="color:#4b7a52;font-size:.82rem">None selected yet — click an ingredient from the list below to save it here permanently.</span>';
+    if (wrap) wrap.style.display = 'none';
     return;
   }
-  btn.disabled = false;
+  if (wrap) wrap.style.display = 'block';
   el.innerHTML = staples.map(s => {
-    const esc = s.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
-    const sel = selectedStaples.has(s) ? ' selected' : '';
-    return `<span class="staple-chip${sel}" onclick="toggleStaple('${esc}')" title="Click to select">
-      ⭐ ${s}<button class="x" onclick="removeStaple('${esc}');event.stopPropagation()">×</button>
-    </span>`;
+    const esc = s.replace(/'/g, "\\'");
+    return `<span class="always-chip">⭐ ${s}<button class="x" onclick="removeFromAlways('${esc}')">×</button></span>`;
   }).join('');
 }
 
-function loadStaples() {
-  staples.forEach(s => {
-    if (!ingredients.includes(s)) ingredients.push(s);
-  });
-  saveIngs();
-  renderIngTags();
-  updateFindBtn();
-  if (ingredients.length) findRecipes();
-}
-
-function loadOneStaple(s) {
-  if (!ingredients.includes(s)) {
-    ingredients.push(s);
-    saveIngs();
-    renderIngTags();
-    updateFindBtn();
-    findRecipes();
+// SECTION 2: Today — shows today-only ingredients as removable chips
+function renderTodayChips() {
+  const el   = document.getElementById('todayChips');
+  const wrap = document.getElementById('todayClearWrap');
+  if (!el) return;
+  const qaAllItems = new Set(QA_ITEMS.flatMap(g => g.items.map(i => i.toLowerCase())));
+  const todayQA = ingredients.filter(i => qaAllItems.has(i.toLowerCase()));
+  if (!todayQA.length) {
+    el.innerHTML = '<span style="color:#4b7a52;font-size:.82rem">None selected yet — click an ingredient from the list below to add it for today.</span>';
+    if (wrap) wrap.style.display = 'none';
+    return;
   }
+  if (wrap) wrap.style.display = 'block';
+  el.innerHTML = todayQA.map(i => {
+    const esc = i.replace(/'/g, "\\'");
+    return `<span class="always-chip" style="background:#0e3a1a;border-color:#86efac;"><span style="margin-right:4px">🥦</span>${i}<button class="x" onclick="removeFromToday('${esc}')">×</button></span>`;
+  }).join('');
 }
 
-function clearStaples() {
+// SECTION 3: Not Selected — shows all QA items not in Always Have or Today
+function renderNotSelChips() {
+  const el = document.getElementById('notSelChips');
+  if (!el) return;
+  const stapleSet = new Set(staples.map(s => s.toLowerCase()));
+  const todaySet  = new Set(ingredients.map(i => i.toLowerCase()));
+  el.innerHTML = QA_ITEMS.map(group => {
+    const chips = group.items
+      .filter(item => !stapleSet.has(item.toLowerCase()) && !todaySet.has(item.toLowerCase()))
+      .map(item => {
+        const esc = item.replace(/'/g, "\\'");
+        return `<span class="chip-wrap"><span class="qa-chip" onclick="addToToday('${esc}')">${item}</span><button class="chip-star" onclick="addToAlways('${esc}')" title="Save to Always Have">⭐</button></span>`;
+      }).join('');
+    if (!chips) return '';
+    return `<div class="qa-cat-label">${group.cat}</div><div>${chips}</div>`;
+  }).join('');
+}
+
+// SECTION 4: Custom typed ingredients
+function renderCustomIngTags() {
+  const el = document.getElementById('customIngTags');
+  if (!el) return;
+  const qaAllItems = new Set(QA_ITEMS.flatMap(g => g.items.map(i => i.toLowerCase())));
+  const custom = ingredients.filter(i => !qaAllItems.has(i.toLowerCase()));
+  el.innerHTML = custom.length
+    ? custom.map(ing => {
+        const esc = ing.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+        return `<span class="tag">${ing}<button onclick="removeCustomIng('${esc}')">×</button></span>`;
+      }).join('')
+    : '';
+}
+
+// ── ACTIONS ───────────────────────────────────────────────────────────────────
+function addToAlways(item) {
+  if (!staples.find(s => s.toLowerCase() === item.toLowerCase())) staples.push(item);
+  ingredients = ingredients.filter(i => i.toLowerCase() !== item.toLowerCase());
+  saveStaples(); saveIngs();
+  renderAllIngPanels(); updateFindBtn(); findRecipes();
+}
+
+function removeFromAlways(item) {
+  staples = staples.filter(s => s.toLowerCase() !== item.toLowerCase());
+  saveStaples();
+  renderAllIngPanels(); updateFindBtn(); findRecipes();
+}
+
+function alwaysClearAll() {
   staples = [];
   saveStaples();
-  renderStapleChips();
+  renderAllIngPanels(); updateFindBtn(); findRecipes();
 }
 
-function removeStaple(s) {
-  staples = staples.filter(x => x !== s);
-  saveStaples();
-  renderStapleChips();
-}
-
-function saveAsStaples() {
-  staples = [...new Set([...staples, ...ingredients])];
-  saveStaples();
-  renderStapleChips();
-}
-
-// ── INGREDIENTS ───────────────────────────────────────────────────────────────
-function addIng() {
-  const input = document.getElementById('ingInput');
-  const val = input.value.trim().toLowerCase();
-  if (!val || ingredients.includes(val)) { input.value = ''; return; }
-  ingredients.push(val);
-  input.value = '';
+function addToToday(item) {
+  if (!ingredients.find(i => i.toLowerCase() === item.toLowerCase())) ingredients.push(item);
   saveIngs();
-  renderIngTags();
-  updateFindBtn();
-  findRecipes();
+  renderAllIngPanels(); updateFindBtn(); findRecipes();
 }
 
-function clearIngs() {
-  ingredients = [];
+function removeFromToday(item) {
+  ingredients = ingredients.filter(i => i.toLowerCase() !== item.toLowerCase());
   saveIngs();
-  renderIngTags();
-  updateFindBtn();
-  findRecipes();
+  renderAllIngPanels(); updateFindBtn(); findRecipes();
 }
 
-function removeIng(val) {
+function todayClearAll() {
+  const qaAllItems = new Set(QA_ITEMS.flatMap(g => g.items.map(i => i.toLowerCase())));
+  ingredients = ingredients.filter(i => !qaAllItems.has(i.toLowerCase()));
+  saveIngs();
+  renderAllIngPanels(); updateFindBtn(); findRecipes();
+}
+
+function notSelSelectAllToday() {
+  const stapleSet  = new Set(staples.map(s => s.toLowerCase()));
+  const todaySet   = new Set(ingredients.map(i => i.toLowerCase()));
+  QA_ITEMS.forEach(g => g.items.forEach(i => {
+    if (!stapleSet.has(i.toLowerCase()) && !todaySet.has(i.toLowerCase())) ingredients.push(i);
+  }));
+  saveIngs();
+  renderAllIngPanels(); updateFindBtn(); findRecipes();
+}
+
+function notSelSelectAllAlways() {
+  const stapleSet = new Set(staples.map(s => s.toLowerCase()));
+  QA_ITEMS.forEach(g => g.items.forEach(i => {
+    if (!stapleSet.has(i.toLowerCase())) staples.push(i);
+  }));
+  ingredients = ingredients.filter(i => {
+    const qaAllItems = new Set(QA_ITEMS.flatMap(g => g.items.map(x => x.toLowerCase())));
+    return !qaAllItems.has(i.toLowerCase());
+  });
+  saveStaples(); saveIngs();
+  renderAllIngPanels(); updateFindBtn(); findRecipes();
+}
+
+function removeCustomIng(val) {
   ingredients = ingredients.filter(i => i !== val);
   saveIngs();
-  renderIngTags();
-  updateFindBtn();
-  findRecipes();
+  renderAllIngPanels(); updateFindBtn(); findRecipes();
 }
 
-function renderIngTags() {
-  const el = document.getElementById('ingTags');
-  const saveBtn = document.getElementById('btnSaveStaple');
-  const clearBtn = document.getElementById('btnClearIngs');
-  if (!ingredients.length) {
-    el.innerHTML = '';
-    if (saveBtn) saveBtn.style.display = 'none';
-    if (clearBtn) clearBtn.style.display = 'none';
-    return;
-  }
-  if (saveBtn) saveBtn.style.display = 'inline-block';
-  if (clearBtn) clearBtn.style.display = 'inline-block';
-  el.innerHTML = ingredients.map(ing => {
-    const isStaple = staples.includes(ing);
-    const esc = ing.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
-    return `<span class="tag${isStaple ? ' is-staple' : ''}">
-      ${ing}<button onclick="removeIng('${esc}')">×</button>
-    </span>`;
-  }).join('');
-}
+// ── CUSTOM INGREDIENT INPUT ───────────────────────────────────────────────────
+// (handled via qaAddCustom / removeCustomIng in the Today panel)
 
 function onNameSearch(val) {
   nameSearch = val.trim();
@@ -2362,7 +2426,7 @@ function onNameSearch(val) {
 }
 
 function updateFindBtn() {
-  document.getElementById('btnFind').disabled = !ingredients.length && !nameSearch;
+  document.getElementById('btnFind').disabled = !staples.length && !ingredients.length && !nameSearch;
 }
 
 // ── INGREDIENT ALIASES ────────────────────────────────────────────────────────
@@ -2826,7 +2890,7 @@ function recipeHasAllergen(r, key) {
 
 // ── QUICK ADD ─────────────────────────────────────────────────────────────────
 const QA_ITEMS = [
-  {cat:'🫘 Proteins & Legumes', items:['chickpeas','black beans','lentils','kidney beans','navy beans','pinto beans','white beans','tofu','tempeh','edamame','hemp hearts','chia seeds','flax seeds','pumpkin seeds','sunflower seeds','peanut butter','tahini','cashews','protein powder','hemp protein powder']},
+  {cat:'🫘 Proteins & Legumes', items:['chickpeas','black beans','lentils','kidney beans','navy beans','pinto beans','white beans','tofu','tempeh','edamame','hemp seeds','chia seeds','flax seeds','pumpkin seeds','sunflower seeds','peanut butter','tahini','cashews','protein powder','hemp protein powder']},
   {cat:'🌾 Grains & Starches',  items:['rice','quinoa','oats','sweet potatoes','potatoes','corn tortillas','polenta','buckwheat','almond flour','coconut flour','oat flour','tapioca flour','brown rice flour','arrowroot powder']},
   {cat:'🥦 Vegetables',         items:['garlic','onions','spinach','kale','carrots','broccoli','cauliflower','bell peppers','mushrooms','tomatoes','avocado','zucchini','corn','cucumber','green onions']},
   {cat:'🍋 Fruits',             items:['lemon','lime','banana','blueberries','mango','apple','dates']},
@@ -2837,78 +2901,18 @@ const QA_ITEMS = [
   {cat:'🍨 Dessert Pantry',     items:['vanilla extract','vanilla','cocoa powder','dark chocolate chips','dark chocolate','coconut cream','coconut sugar','vegan butter','flax egg','baking soda','baking powder','cornstarch','shredded coconut','medjool dates']},
 ];
 
-let selectedQA = new Set();
-let qaOpen = false;
-
-function toggleQA() {
-  qaOpen = !qaOpen;
-  document.getElementById('qaBody').classList.toggle('open', qaOpen);
-  document.getElementById('qaToggle').classList.toggle('open', qaOpen);
-  if (qaOpen && !document.getElementById('qaChips').innerHTML) renderQAChips();
-}
-
-function renderQAChips() {
-  const el = document.getElementById('qaChips');
-  el.innerHTML = QA_ITEMS.map(group => {
-    const chips = group.items.map(item => {
-      const sel = selectedQA.has(item) ? ' sel' : '';
-      const esc = item.replace(/'/g,"\'");
-      return `<span class="qa-chip${sel}" onclick="toggleQAItem('${esc}')">${item}</span>`;
-    }).join('');
-    return `<div class="qa-cat-label">${group.cat}</div><div>${chips}</div>`;
-  }).join('');
-  updateQABtn();
-}
-
-function toggleQAItem(item) {
-  if (selectedQA.has(item)) selectedQA.delete(item);
-  else selectedQA.add(item);
-  renderQAChips();
-}
-
-function qaSelectAll() {
-  QA_ITEMS.forEach(g => g.items.forEach(i => selectedQA.add(i)));
-  renderQAChips();
-}
-
-function qaSelectNone() {
-  selectedQA.clear();
-  renderQAChips();
-}
-
-function updateQABtn() {
-  const btn = document.getElementById('btnQAAdd');
-  const countEl = document.getElementById('qaCount');
-  if (btn) btn.style.display = selectedQA.size ? 'inline-block' : 'none';
-  if (countEl) countEl.textContent = selectedQA.size;
-}
-
-function qaAddToIngs() {
-  selectedQA.forEach(item => {
-    if (!ingredients.includes(item)) ingredients.push(item);
-  });
-  selectedQA.clear();
-  saveIngs();
-  renderIngTags();
-  renderQAChips();
-  updateFindBtn();
-  if (ingredients.length) findRecipes();
-}
-
 function qaAddCustom() {
   const input = document.getElementById('qaCustomInput');
   const val = input.value.trim().toLowerCase();
   if (!val) return;
-  // Add to a custom group if not already in QA_ITEMS
-  const allItems = QA_ITEMS.flatMap(g => g.items);
-  if (!allItems.includes(val)) {
-    let customGroup = QA_ITEMS.find(g => g.cat === '✏️ Custom');
-    if (!customGroup) { customGroup = {cat:'✏️ Custom', items:[]}; QA_ITEMS.push(customGroup); }
-    customGroup.items.push(val);
+  if (!ingredients.find(i => i.toLowerCase() === val) && !staples.find(s => s.toLowerCase() === val)) {
+    ingredients.push(val);
+    saveIngs();
   }
-  selectedQA.add(val);
   input.value = '';
-  renderQAChips();
+  renderAllIngPanels();
+  updateFindBtn();
+  findRecipes();
 }
 
 // ── WHAT CAN I MAKE ───────────────────────────────────────────────────────────
@@ -2926,8 +2930,9 @@ function setCMType(type) {
 
 function initCanMake() {
   if (!cmInited) {
-    // Pre-load saved staples on first open
+    // Pre-load saved staples and today's ingredients on first open
     staples.forEach(s => cmSelected.add(s.toLowerCase()));
+    ingredients.forEach(i => cmSelected.add(i.toLowerCase()));
     cmInited = true;
   }
   renderCMChips();
@@ -3123,8 +3128,7 @@ function cmAddMissingToShop(id, items) {
 }
 
 // ── INIT ──────────────────────────────────────────────────────────────────────
-renderIngTags();
-renderStapleChips();
+renderAllIngPanels();
 updateFindBtn();
 findRecipes();
 </script>
