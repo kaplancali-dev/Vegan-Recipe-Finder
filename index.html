@@ -51,25 +51,38 @@ header p{color:#86efac;font-size:0.93rem;margin-top:6px}
 .allergy-chip:hover{background:#2a1010;border-color:#f87171}
 .allergy-chip.on{background:#7f1d1d;border-color:#f87171;color:#fff;box-shadow:0 0 0 2px #f8717144}
 /* ── QUICK ADD ── */
-.qa-card{background:#0f1f12;border:1px solid #1a3a1f;border-radius:14px;margin-bottom:14px;overflow:hidden}
-.qa-toggle{width:100%;background:none;border:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;padding:13px 18px;color:#86efac;font-size:0.88rem;font-weight:700;text-align:left}
-.qa-toggle:hover{background:#14532d22}
-.qa-toggle .arrow{transition:transform .2s;font-size:0.75rem}
-.qa-toggle.open .arrow{transform:rotate(180deg)}
+.qa-card{border-radius:14px;margin-bottom:12px;overflow:hidden;border:1.5px solid #1a3a1f}
+.qa-card-always{background:#1a1400;border-color:#78350f}
+.qa-card-today{background:#071a0d;border-color:#166534}
+.qa-card-notsel{background:#0d1117;border-color:#1e3a5f}
+.qa-card-custom{background:#111318;border-color:#2d3748}
+.qa-toggle{width:100%;background:none;border:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;padding:13px 18px;font-size:0.9rem;font-weight:700;text-align:left;letter-spacing:.01em}
+.qa-toggle-always{color:#fbbf24}
+.qa-toggle-today{color:#4ade80}
+.qa-toggle-notsel{color:#93c5fd}
+.qa-toggle-custom{color:#a78bfa}
+.qa-toggle:hover{opacity:.85}
+.qa-toggle .arrow{font-size:0.75rem;opacity:.7}
 .qa-body{display:none;padding:0 14px 14px}
 .qa-body.open{display:block}
 .qa-actions{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:10px;align-items:center}
-.qa-cat-label{font-size:0.72rem;font-weight:700;color:#4ade80;text-transform:uppercase;letter-spacing:.06em;margin:10px 0 5px;padding-left:2px}
+.qa-cat-label{font-size:0.7rem;font-weight:700;color:#4ade80;text-transform:uppercase;letter-spacing:.08em;margin:12px 0 5px;padding-left:2px;opacity:.7}
 .qa-chip{display:inline-flex;align-items:center;background:#0a130b;border:1.5px solid #2d5a33;border-radius:99px;padding:4px 11px;font-size:0.8rem;color:#86efac;cursor:pointer;transition:all .12s;margin:2px 3px 2px 0}
 .qa-chip:hover{background:#14532d;border-color:#4ade80}
 .qa-chip.sel{background:#14532d;border-color:#4ade80;color:#fff;box-shadow:0 0 0 2px #4ade8044}
 .qa-chip.on{background:#14532d;border-color:#4ade80;color:#fff;box-shadow:0 0 0 2px #4ade8044}
-.chip-wrap{display:inline-flex;align-items:center;margin:2px 3px 2px 0}
-.chip-star{background:none;border:none;cursor:pointer;font-size:.82rem;padding:0 0 0 2px;line-height:1;opacity:.55;transition:opacity .12s}
-.chip-star:hover{opacity:1}
-.always-chip{display:inline-flex;align-items:center;gap:4px;background:#14532d;border:1.5px solid #4ade80;border-radius:99px;padding:4px 11px;font-size:0.8rem;color:#bbf7d0;margin:2px 3px 2px 0}
-.always-chip .x{background:none;border:none;cursor:pointer;color:#4ade80;font-size:0.9rem;line-height:1;padding:0 0 0 2px}
-.always-chip .x:hover{color:#f87171}
+.chip-wrap{display:inline-flex;align-items:center;margin:2px 2px 2px 0;border-radius:99px;background:#0d1a0f;border:1.5px solid #2d5a33;transition:border-color .12s}
+.chip-wrap:hover{border-color:#4ade80}
+.chip-wrap .qa-chip{border:none;background:none;margin:0;border-radius:0;padding:5px 8px 5px 12px;font-size:.82rem}
+.chip-wrap .qa-chip.on{background:none;box-shadow:none;color:#4ade80;font-weight:600}
+.chip-star{background:none;border:none;cursor:pointer;font-size:1rem;padding:4px 10px 4px 2px;line-height:1;color:#78350f;opacity:.6;transition:all .15s;border-radius:0 99px 99px 0}
+.chip-star:hover{opacity:1;color:#fbbf24;background:#2d1a00}
+.always-chip{display:inline-flex;align-items:center;gap:6px;background:#2d1a00;border:1.5px solid #d97706;border-radius:99px;padding:5px 12px;font-size:0.82rem;color:#fef3c7;margin:2px 3px 2px 0;font-weight:600}
+.always-chip .x{background:none;border:none;cursor:pointer;color:#d97706;font-size:1rem;line-height:1;padding:0 0 0 4px;opacity:.7;transition:all .12s}
+.always-chip .x:hover{color:#f87171;opacity:1}
+.today-chip{display:inline-flex;align-items:center;gap:6px;background:#052e16;border:1.5px solid #22c55e;border-radius:99px;padding:5px 12px;font-size:0.82rem;color:#dcfce7;margin:2px 3px 2px 0;font-weight:600}
+.today-chip .x{background:none;border:none;cursor:pointer;color:#22c55e;font-size:1rem;line-height:1;padding:0 0 0 4px;opacity:.7;transition:all .12s}
+.today-chip .x:hover{color:#f87171;opacity:1}
 .qa-add-row{display:flex;gap:6px;margin-top:11px}
 .qa-custom-input{flex:1;padding:7px 11px;border:1.5px solid #2d5a33;border-radius:10px;background:#0a130b;color:#e8f5e9;font-size:0.83rem;outline:none}
 .qa-custom-input:focus{border-color:#4ade80}
@@ -337,55 +350,55 @@ header p{color:#86efac;font-size:0.93rem;margin-top:6px}
         </div>
 
         <!-- SECTION 1: INGREDIENTS I ALWAYS HAVE -->
-        <div class="qa-card">
-          <button class="qa-toggle open" id="alwaysToggle" onclick="toggleAlwaysPanel()">
-            ⭐ Ingredients I Always Have <span class="arrow">▲</span>
+        <div class="qa-card qa-card-always">
+          <button class="qa-toggle qa-toggle-always open" id="alwaysToggle" onclick="toggleAlwaysPanel()">
+            <span>⭐ Ingredients I Always Have <span id="alwaysCount" style="font-weight:400;opacity:.7;font-size:.8rem"></span></span><span class="arrow">▼</span>
           </button>
           <div class="qa-body open" id="alwaysBody">
-            <p style="font-size:.8rem;color:#86efac;opacity:.8;margin-bottom:8px;line-height:1.5">Saved permanently by clicking ⭐ next to the ingredient from the list below. The ingredient will always appear here unless you unselect it.</p>
-            <div id="alwaysChips"><span style="color:#4b7a52;font-size:.82rem">None selected yet — click an ingredient from the list below to save it here permanently.</span></div>
-            <div id="alwaysClearWrap" style="display:none;margin-top:8px">
-              <button class="btn-sm-danger" onclick="alwaysClearAll()">Clear All</button>
+            <p style="font-size:.8rem;color:#fbbf24;opacity:.7;margin-bottom:10px;line-height:1.5">Saved permanently. Tap <strong>⭐</strong> next to any ingredient below to add it here. It will always be here when you return.</p>
+            <div id="alwaysChips"><span style="color:#92400e;font-size:.82rem;font-style:italic">Nothing saved yet — tap ⭐ next to any ingredient in the list below.</span></div>
+            <div id="alwaysClearWrap" style="display:none;margin-top:10px">
+              <button class="btn-sm-danger" onclick="alwaysClearAll()">Remove All</button>
             </div>
           </div>
         </div>
 
         <!-- SECTION 2: ADDITIONAL INGREDIENTS I HAVE TODAY -->
-        <div class="qa-card">
-          <button class="qa-toggle open" id="todayToggle" onclick="toggleTodayPanel()">
-            🥦 Additional Ingredients I Have Today <span class="arrow">▲</span>
+        <div class="qa-card qa-card-today">
+          <button class="qa-toggle qa-toggle-today open" id="todayToggle" onclick="toggleTodayPanel()">
+            <span>🌿 Additional Ingredients I Have Today <span id="todayCount" style="font-weight:400;opacity:.7;font-size:.8rem"></span></span><span class="arrow">▼</span>
           </button>
           <div class="qa-body open" id="todayBody">
-            <p style="font-size:.8rem;color:#86efac;opacity:.8;margin-bottom:8px;line-height:1.5">Ingredients you have on hand today only. Click any ingredient from the list below to add it here.</p>
-            <div id="todayChips"><span style="color:#4b7a52;font-size:.82rem">None selected yet — click an ingredient from the list below to add it for today.</span></div>
-            <div id="todayClearWrap" style="display:none;margin-top:8px">
-              <button class="btn-sm-danger" onclick="todayClearAll()">Clear All</button>
+            <p style="font-size:.8rem;color:#4ade80;opacity:.7;margin-bottom:10px;line-height:1.5">For today only. Tap any ingredient in the list below to add it here. Won't be here next time you open the app.</p>
+            <div id="todayChips"><span style="color:#166534;font-size:.82rem;font-style:italic">Nothing added yet — tap any ingredient in the list below.</span></div>
+            <div id="todayClearWrap" style="display:none;margin-top:10px">
+              <button class="btn-sm-danger" onclick="todayClearAll()">Remove All</button>
             </div>
           </div>
         </div>
 
         <!-- SECTION 3: INGREDIENTS NOT SELECTED -->
-        <div class="qa-card">
-          <button class="qa-toggle open" id="notSelToggle" onclick="toggleNotSelPanel()">
-            📋 Ingredients Not Selected <span class="arrow">▲</span>
+        <div class="qa-card qa-card-notsel">
+          <button class="qa-toggle qa-toggle-notsel open" id="notSelToggle" onclick="toggleNotSelPanel()">
+            <span>📋 Ingredients Not Selected <span id="notSelCount" style="font-weight:400;opacity:.7;font-size:.8rem"></span></span><span class="arrow">▼</span>
           </button>
           <div class="qa-body open" id="notSelBody">
-            <p style="font-size:.8rem;color:#86efac;opacity:.8;margin-bottom:8px;line-height:1.5">Click any ingredient to add it to <strong>Today</strong>. Click <strong>⭐</strong> to save it to <strong>Always Have</strong>.</p>
+            <p style="font-size:.8rem;color:#93c5fd;opacity:.7;margin-bottom:10px;line-height:1.5">Tap an ingredient to add to <strong style="color:#4ade80">Today</strong>. Tap <strong style="color:#fbbf24">⭐</strong> to save it to <strong style="color:#fbbf24">Always Have</strong>.</p>
             <div class="qa-actions">
               <button class="btn-sm-green" onclick="notSelSelectAllToday()">Add All to Today</button>
-              <button class="btn-sm-green" onclick="notSelSelectAllAlways()">Add All to Always Have</button>
+              <button class="btn-sm-green" style="background:#78350f" onclick="notSelSelectAllAlways()">⭐ Add All to Always Have</button>
             </div>
             <div id="notSelChips"></div>
           </div>
         </div>
 
         <!-- SECTION 4: ADD INGREDIENTS NOT LISTED -->
-        <div class="qa-card">
-          <button class="qa-toggle open" id="customToggle" onclick="toggleCustomPanel()">
-            ✏️ Add Ingredients Not Listed <span class="arrow">▲</span>
+        <div class="qa-card qa-card-custom">
+          <button class="qa-toggle qa-toggle-custom open" id="customToggle" onclick="toggleCustomPanel()">
+            <span>✏️ Add Ingredients Not Listed</span><span class="arrow">▼</span>
           </button>
           <div class="qa-body open" id="customBody">
-            <p style="font-size:.8rem;color:#86efac;opacity:.8;margin-bottom:8px;line-height:1.5">Type any ingredient not in the list above and press Enter or click + Add.</p>
+            <p style="font-size:.8rem;color:#a78bfa;opacity:.7;margin-bottom:10px;line-height:1.5">Type any ingredient not in the list above and press Enter or tap + Add.</p>
             <div class="qa-add-row">
               <input class="qa-custom-input" id="qaCustomInput" type="text" placeholder="e.g. jackfruit, miso paste…" onkeydown="if(event.key==='Enter')qaAddCustom()">
               <button class="btn-sm-green" onclick="qaAddCustom()">+ Add</button>
@@ -2302,13 +2315,15 @@ function renderAllIngPanels() {
   renderCustomIngTags();
 }
 
-// SECTION 1: Always Have — shows saved staples as removable chips
+// SECTION 1: Always Have — shows saved staples as removable amber chips
 function renderAlwaysChips() {
-  const el   = document.getElementById('alwaysChips');
-  const wrap = document.getElementById('alwaysClearWrap');
+  const el    = document.getElementById('alwaysChips');
+  const wrap  = document.getElementById('alwaysClearWrap');
+  const count = document.getElementById('alwaysCount');
   if (!el) return;
+  if (count) count.textContent = staples.length ? `(${staples.length})` : '';
   if (!staples.length) {
-    el.innerHTML = '<span style="color:#4b7a52;font-size:.82rem">None selected yet — click an ingredient from the list below to save it here permanently.</span>';
+    el.innerHTML = '<span style="color:#92400e;font-size:.82rem;font-style:italic">Nothing saved yet — tap ⭐ next to any ingredient in the list below.</span>';
     if (wrap) wrap.style.display = 'none';
     return;
   }
@@ -2319,41 +2334,48 @@ function renderAlwaysChips() {
   }).join('');
 }
 
-// SECTION 2: Today — shows today-only ingredients as removable chips
+// SECTION 2: Today — shows today-only ingredients as removable green chips
 function renderTodayChips() {
-  const el   = document.getElementById('todayChips');
-  const wrap = document.getElementById('todayClearWrap');
+  const el    = document.getElementById('todayChips');
+  const wrap  = document.getElementById('todayClearWrap');
+  const count = document.getElementById('todayCount');
   if (!el) return;
   const qaAllItems = new Set(QA_ITEMS.flatMap(g => g.items.map(i => i.toLowerCase())));
   const todayQA = ingredients.filter(i => qaAllItems.has(i.toLowerCase()));
+  if (count) count.textContent = todayQA.length ? `(${todayQA.length})` : '';
   if (!todayQA.length) {
-    el.innerHTML = '<span style="color:#4b7a52;font-size:.82rem">None selected yet — click an ingredient from the list below to add it for today.</span>';
+    el.innerHTML = '<span style="color:#166534;font-size:.82rem;font-style:italic">Nothing added yet — tap any ingredient in the list below.</span>';
     if (wrap) wrap.style.display = 'none';
     return;
   }
   if (wrap) wrap.style.display = 'block';
   el.innerHTML = todayQA.map(i => {
     const esc = i.replace(/'/g, "\\'");
-    return `<span class="always-chip" style="background:#0e3a1a;border-color:#86efac;"><span style="margin-right:4px">🥦</span>${i}<button class="x" onclick="removeFromToday('${esc}')">×</button></span>`;
+    return `<span class="today-chip">✓ ${i}<button class="x" onclick="removeFromToday('${esc}')">×</button></span>`;
   }).join('');
 }
 
-// SECTION 3: Not Selected — shows all QA items not in Always Have or Today
+// SECTION 3: Not Selected — full list minus Always Have and Today, with ⭐ to save
 function renderNotSelChips() {
-  const el = document.getElementById('notSelChips');
+  const el    = document.getElementById('notSelChips');
+  const count = document.getElementById('notSelCount');
   if (!el) return;
   const stapleSet = new Set(staples.map(s => s.toLowerCase()));
   const todaySet  = new Set(ingredients.map(i => i.toLowerCase()));
-  el.innerHTML = QA_ITEMS.map(group => {
+  let total = 0;
+  const html = QA_ITEMS.map(group => {
     const chips = group.items
       .filter(item => !stapleSet.has(item.toLowerCase()) && !todaySet.has(item.toLowerCase()))
       .map(item => {
+        total++;
         const esc = item.replace(/'/g, "\\'");
         return `<span class="chip-wrap"><span class="qa-chip" onclick="addToToday('${esc}')">${item}</span><button class="chip-star" onclick="addToAlways('${esc}')" title="Save to Always Have">⭐</button></span>`;
       }).join('');
     if (!chips) return '';
     return `<div class="qa-cat-label">${group.cat}</div><div>${chips}</div>`;
   }).join('');
+  if (count) count.textContent = total ? `(${total})` : '(none left)';
+  el.innerHTML = html || '<span style="color:#1e3a5f;font-size:.82rem;font-style:italic">All ingredients have been selected above.</span>';
 }
 
 // SECTION 4: Custom typed ingredients
