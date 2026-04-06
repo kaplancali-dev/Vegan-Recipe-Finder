@@ -100,6 +100,9 @@ header p{color:#86efac;font-size:0.93rem;margin-top:6px}
 .tag button{background:none;border:none;color:#86efac;cursor:pointer;font-size:0.9rem;padding:0;line-height:1;transition:color .1s}
 .tag button:hover{color:#f87171}
 .tag.is-staple{background:#1a2a0e;border-color:#2d5a33;color:#86efac;opacity:.75}
+.custom-tag{padding-right:2px}
+.custom-staple-btn{background:none;border:none;cursor:pointer;font-size:0.85rem;padding:0 2px;line-height:1;opacity:0.6;transition:opacity .15s}
+.custom-staple-btn:hover,.custom-staple-btn.on{opacity:1}
 /* ── SMALL BUTTONS ── */
 .btn-sm-green{background:#16a34a;color:#fff;border:none;border-radius:8px;padding:5px 13px;font-size:0.79rem;font-weight:700;cursor:pointer;white-space:nowrap}
 .btn-sm-green:hover{background:#15803d}
@@ -2389,7 +2392,11 @@ function renderCustomIngTags() {
   el.innerHTML = custom.length
     ? custom.map(ing => {
         const esc = ing.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
-        return `<span class="tag">${ing}<button onclick="removeCustomIng('${esc}')">×</button></span>`;
+        const isStaple = staples.some(s => s.toLowerCase() === ing.toLowerCase());
+        const starBtn = isStaple
+          ? `<button class="custom-staple-btn on" title="Remove from staples" onclick="removeFromAlways('${esc}')">⭐</button>`
+          : `<button class="custom-staple-btn" title="Save as staple" onclick="addToAlways('${esc}')">☆</button>`;
+        return `<span class="tag custom-tag">${ing}${starBtn}<button onclick="removeCustomIng('${esc}')">×</button></span>`;
       }).join('')
     : '';
 }
@@ -2483,15 +2490,21 @@ function updateFindBtn() {
 const INGREDIENT_ALIASES = {
   'plant-based milk (any)': ['almond milk','oat milk','soy milk','cashew milk','coconut milk','rice milk','hemp milk','macadamia milk','plant milk','nondairy milk','non-dairy milk'],
   'any cooking oil':        ['coconut oil','olive oil','avocado oil','vegetable oil','canola oil','sunflower oil','grapeseed oil','light oil','neutral oil'],
+  'nut butter (any)':       ['peanut butter','almond butter','sunflower butter','cashew butter','hazelnut butter','walnut butter','pecan butter','macadamia butter','mixed nut butter','seed butter'],
+  'pasta (any)':            ['pasta','gluten-free pasta','spaghetti','penne','fusilli','farfalle','rigatoni','linguine','fettuccine','tagliatelle','orzo','macaroni','rotini','angel hair','lasagna noodles','noodles'],
 };
 // One-way substitutions: if user HAS the left item, it also covers the right items in recipes
 const INGREDIENT_SUBS = {
-  'olive oil':   ['coconut oil','avocado oil','vegetable oil','light oil','neutral oil'],
-  'coconut oil': ['olive oil','vegetable oil','light oil'],
-  'almond milk': ['oat milk','soy milk','cashew milk','plant milk','plant-based milk','nondairy milk'],
-  'oat milk':    ['almond milk','soy milk','cashew milk','plant milk','plant-based milk'],
-  'soy milk':    ['almond milk','oat milk','cashew milk','plant milk','plant-based milk'],
-  'cashew milk': ['almond milk','oat milk','plant milk','plant-based milk'],
+  'olive oil':      ['coconut oil','avocado oil','vegetable oil','light oil','neutral oil'],
+  'coconut oil':    ['olive oil','vegetable oil','light oil'],
+  'almond milk':    ['oat milk','soy milk','cashew milk','plant milk','plant-based milk','nondairy milk'],
+  'oat milk':       ['almond milk','soy milk','cashew milk','plant milk','plant-based milk'],
+  'soy milk':       ['almond milk','oat milk','cashew milk','plant milk','plant-based milk'],
+  'cashew milk':    ['almond milk','oat milk','plant milk','plant-based milk'],
+  'peanut butter':  ['almond butter','sunflower butter','cashew butter','nut butter'],
+  'almond butter':  ['peanut butter','sunflower butter','cashew butter','nut butter'],
+  'sunflower butter': ['peanut butter','almond butter','cashew butter','nut butter'],
+  'cashew butter':  ['peanut butter','almond butter','sunflower butter','nut butter'],
 };
 
 function expandWithAliases(ings) {
@@ -2997,12 +3010,12 @@ function recipeHasAllergen(r, key) {
 
 // ── QUICK ADD ─────────────────────────────────────────────────────────────────
 const QA_ITEMS = [
-  {cat:'🫘 Proteins & Legumes', items:['chickpeas','black beans','lentils','kidney beans','navy beans','pinto beans','white beans','tofu','tempeh','edamame','hemp seeds','chia seeds','flax seeds','pumpkin seeds','sunflower seeds','peanut butter','tahini','cashews','protein powder']},
-  {cat:'🌾 Grains & Starches',  items:['rice','quinoa','oats','sweet potatoes','potatoes','corn tortillas','polenta','buckwheat','almond flour','coconut flour','oat flour','tapioca flour','brown rice flour','arrowroot powder']},
-  {cat:'🥦 Vegetables',         items:['garlic','onions','spinach','kale','carrots','broccoli','cauliflower','bell peppers','mushrooms','tomatoes','avocado','zucchini','corn','cucumber','green onions']},
+  {cat:'🫘 Proteins & Legumes', items:['chickpeas','black beans','lentils','kidney beans','navy beans','pinto beans','white beans','tofu','tempeh','edamame','hemp seeds','chia seeds','flax seeds','pumpkin seeds','sunflower seeds','tahini','cashews','protein powder']},
+  {cat:'🌾 Grains & Starches',  items:['pasta (any)','rice','quinoa','oats','sweet potatoes','potatoes','corn tortillas','polenta','buckwheat','almond flour','coconut flour','oat flour','tapioca flour','brown rice flour','arrowroot powder']},
+  {cat:'🥦 Vegetables',         items:['garlic','onions','spinach','kale','carrots','broccoli','cauliflower','bell peppers','mushrooms','tomatoes','crushed tomatoes','avocado','zucchini','corn','cucumber','green onions']},
   {cat:'🍋 Fruits',             items:['lemon','lime','banana','blueberries','mango','apple','dates']},
-  {cat:'🥜 Nuts & Nut Butters', items:['almonds','walnuts','almond butter','pecans','brazil nuts','macadamia nuts','hazelnuts','pistachio']},
-  {cat:'🥛 Plant-Based Milks',  items:['plant-based milk (any)','almond milk','oat milk','soy milk','cashew milk','coconut milk','rice milk','hemp milk']},
+  {cat:'🥜 Nuts & Nut Butters', items:['nut butter (any)','almonds','walnuts','peanut butter','almond butter','sunflower butter','cashew butter','pecans','brazil nuts','macadamia nuts','hazelnuts','pistachio']},
+  {cat:'🥛 Plant-Based Milks',  items:['plant-based milk (any)']},
   {cat:'🫙 Pantry & Oils',      items:['any cooking oil','olive oil','coconut oil','avocado oil','sesame oil','diced tomatoes','vegetable broth','tamari','maple syrup','apple cider vinegar','nutritional yeast','coconut aminos','rice vinegar','dijon mustard','tomato paste','agave']},
   {cat:'🌿 Spices & Herbs',     items:['turmeric','cumin','smoked paprika','cinnamon','chili powder','ginger','curry powder','black pepper','garlic powder','onion powder','oregano','basil','thyme','coriander','cayenne','cardamom','bay leaves','five spice','nutmeg','sea salt']},
   {cat:'🍨 Dessert Pantry',     items:['vanilla extract','vanilla','cocoa powder','dark chocolate chips','dark chocolate','coconut cream','coconut sugar','vegan butter','flax egg','baking soda','baking powder','cornstarch','shredded coconut','medjool dates']},
