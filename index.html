@@ -516,7 +516,6 @@ header p{color:#86efac;font-size:0.93rem;margin-top:6px}
             <input class="cm-custom-input" id="cmCustomInput" type="text" placeholder="Add another ingredient…" onkeydown="if(event.key==='Enter')cmAddCustom()">
             <button class="btn-sm-green" onclick="cmAddCustom()">+ Add</button>
           </div>
-          <button class="cm-btn-run" onclick="runCanMake()">🧑‍🍳 Find What I Can Make</button>
         </div>
       </div>
       <!-- RIGHT: RESULTS -->
@@ -3044,6 +3043,7 @@ function initCanMake() {
     cmInited = true;
   }
   renderCMChips();
+  runCanMake();
 }
 
 function renderCMChips() {
@@ -3067,6 +3067,7 @@ function toggleCMItem(item) {
   if (cmSelected.has(key)) cmSelected.delete(key);
   else cmSelected.add(key);
   renderCMChips();
+  runCanMake();
 }
 
 function cmLoadStaples() {
@@ -3139,7 +3140,7 @@ function cmRenderGroup(recipes, matchGroup) {
 
 function runCanMake() {
   if (!cmSelected.size) {
-    document.getElementById('cmResultsCount').textContent = 'Please select at least one ingredient first.';
+    document.getElementById('cmResultsCount').textContent = 'Select ingredients on the left to see matching recipes.';
     document.getElementById('cmResults').innerHTML = '';
     return;
   }
