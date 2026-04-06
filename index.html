@@ -3033,6 +3033,7 @@ function setCMType(type) {
   document.querySelectorAll('.cm-type-btn').forEach(b => b.classList.remove('on'));
   const btn = document.getElementById('cmtype-' + type);
   if (btn) btn.classList.add('on');
+  runCanMake();
 }
 
 function initCanMake() {
