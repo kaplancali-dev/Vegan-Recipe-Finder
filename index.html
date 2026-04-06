@@ -2665,7 +2665,18 @@ function toggleFav(id) {
     if (r) favorites.push({ id: r.id, title: r.title, site: r.site, url: r.url });
   }
   saveFavs();
-  render();
+  // Update just the affected button(s) in-place — no full re-render, no scroll jump
+  const isFav = favorites.some(f => f.id === id);
+  document.querySelectorAll(`.btn-fav[onclick*="toggleFav(${id})"]`).forEach(btn => {
+    btn.classList.toggle('on', isFav);
+    // Favorites tab button shows only the heart icon; others show text too
+    if (btn.title === 'Remove from favorites' || btn.closest('#favsList')) {
+      btn.textContent = '❤️';
+    } else {
+      btn.textContent = isFav ? '❤️ Saved' : '🤍 Save';
+    }
+  });
+  if (document.getElementById('panel-favorites').classList.contains('on')) renderFavs();
 }
 
 function renderFavs() {
