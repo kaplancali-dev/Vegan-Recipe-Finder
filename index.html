@@ -495,6 +495,18 @@ header p{color:#86efac;font-size:0.93rem;margin-top:6px}
 
   <!-- ══════ FAVORITES PANEL ══════ -->
   <div class="panel" id="panel-favorites">
+    <div class="card" style="margin-bottom:12px;background:#1a2a1a;border:1px solid #2e4a2e;">
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+        <div style="font-size:1.1rem;font-weight:700;color:#86efac;flex:1 1 200px;">💾 Backup Your Data</div>
+        <button onclick="exportData()" style="background:#166534;color:#fff;border:none;border-radius:8px;padding:8px 16px;font-size:.9rem;cursor:pointer;font-weight:600;">⬇️ Export Backup</button>
+        <button onclick="document.getElementById('importFileInput').click()" style="background:#1e3a5f;color:#fff;border:none;border-radius:8px;padding:8px 16px;font-size:.9rem;cursor:pointer;font-weight:600;">⬆️ Import Backup</button>
+        <input type="file" id="importFileInput" accept=".json" style="display:none" onchange="importData(event)">
+      </div>
+      <div style="margin-top:10px;font-size:.82rem;color:#86efac;line-height:1.6;opacity:.85;">
+        <strong>How to use:</strong> Click <em>Export Backup</em> to download a file with all your saved favorites, notes, staples, and shopping list. Store it somewhere safe (Downloads, Google Drive, etc.). If you ever lose your data, click <em>Import Backup</em> and select that file to restore everything instantly.
+        <br><strong>Tip:</strong> Export a fresh backup anytime you've saved new recipes or added notes.
+      </div>
+    </div>
     <div class="card">
       <div class="card-title">❤️ Saved Recipes</div>
       <div id="favsList"><div class="empty"><div class="e-icon">❤️</div><p>No saved recipes yet.<br>Heart a recipe to save it here.</p></div></div>
@@ -2650,6 +2662,51 @@ let instructions = _lsGet('vrf_instr', '{}');
 let _instrCurrentId = null;
 
 function saveInstrData() { _lsSet('vrf_instr', instructions); }
+
+// ── BACKUP: Export & Import ───────────────────────────────────────────────────
+function exportData() {
+  const backup = {
+    version: 1,
+    exportedAt: new Date().toISOString(),
+    vrf_favs:    _lsGet('vrf_favs',    '[]'),
+    vrf_instr:   _lsGet('vrf_instr',   '{}'),
+    vrf_staples: _lsGet('vrf_staples', '[]'),
+    vrf_shop:    _lsGet('vrf_shop',    '[]'),
+    vrf_ings:    _lsGet('vrf_ings',    '[]'),
+  };
+  const blob = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  const date = new Date().toISOString().slice(0,10);
+  a.href     = url;
+  a.download = `vegan-recipes-backup-${date}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function importData(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      const backup = JSON.parse(e.target.result);
+      if (!backup.version) throw new Error('Not a valid backup file.');
+      if (backup.vrf_favs    !== undefined) { _lsSet('vrf_favs',    backup.vrf_favs);    favorites    = backup.vrf_favs; }
+      if (backup.vrf_instr   !== undefined) { _lsSet('vrf_instr',   backup.vrf_instr);   instructions = backup.vrf_instr; }
+      if (backup.vrf_staples !== undefined) { _lsSet('vrf_staples', backup.vrf_staples); staples      = backup.vrf_staples; }
+      if (backup.vrf_shop    !== undefined) { _lsSet('vrf_shop',    backup.vrf_shop);    shopList     = backup.vrf_shop; }
+      if (backup.vrf_ings    !== undefined) { _lsSet('vrf_ings',    backup.vrf_ings);    ingredients  = backup.vrf_ings; }
+      renderFavs();
+      render();
+      alert('✅ Backup restored successfully!\n\nYour favorites, notes, staples, and shopping list have been loaded.');
+    } catch(err) {
+      alert('❌ Could not import backup.\n\nMake sure you selected a valid Vegan Recipe Finder backup file.');
+    }
+    event.target.value = ''; // reset input so same file can be re-imported
+  };
+  reader.readAsText(file);
+}
 
 function openInstrModal(id) {
   _instrCurrentId = id;
