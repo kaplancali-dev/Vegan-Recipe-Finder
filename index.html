@@ -623,7 +623,10 @@ header p{color:#86efac;font-size:0.93rem;margin-top:6px}
         </div>
         <!-- Generated code display -->
         <div id="syncCodeWrap" style="display:none;margin-bottom:10px;">
-          <div style="font-size:.8rem;color:#86efac;opacity:.8;margin-bottom:5px;">Copy this code and paste it on your other device:</div>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;">
+            <div style="font-size:.8rem;color:#86efac;opacity:.8;">Copy this code and paste it on your other device:</div>
+            <button onclick="document.getElementById('syncCodeWrap').style.display='none'" style="background:none;border:none;color:#86efac;opacity:.6;font-size:1.1rem;cursor:pointer;padding:0 2px;line-height:1;" title="Dismiss">✕</button>
+          </div>
           <textarea id="syncCodeOut" readonly style="width:100%;height:80px;background:#0a130b;color:#86efac;border:1px solid #2e4a2e;border-radius:8px;padding:8px;font-size:.72rem;font-family:monospace;resize:none;box-sizing:border-box"></textarea>
           <button onclick="copySyncCode()" id="syncCopyBtn" style="margin-top:6px;background:#14532d;color:#fff;border:none;border-radius:8px;padding:6px 14px;font-size:.85rem;cursor:pointer;">📋 Copy Code</button>
         </div>
