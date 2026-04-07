@@ -3340,6 +3340,20 @@ function cmAddMissingToShop(id, items) {
 renderAllIngPanels();
 updateFindBtn();
 findRecipes();
+
+// ── SERVICE WORKER (auto-update) ─────────────────────────────────────────────
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./sw.js').then(reg => {
+    reg.addEventListener('updatefound', () => {
+      const newWorker = reg.installing;
+      newWorker.addEventListener('statechange', () => {
+        if (newWorker.state === 'activated' && navigator.serviceWorker.controller) {
+          showToast('✅ App updated! Pull down to refresh.', 4000);
+        }
+      });
+    });
+  });
+}
 </script>
 </body>
 </html>
