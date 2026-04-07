@@ -2,13 +2,16 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>🌿 Vegan Recipe Finder</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Vegan Recipes">
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{background:#0a130b;color:#e8f5e9;font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh;padding:0 0 60px}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{background:#0a130b;color:#e8f5e9;font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh;padding:0 0 max(60px,calc(40px + env(safe-area-inset-bottom)))}
 a{color:inherit;text-decoration:none}
-.app{max-width:1100px;margin:0 auto;padding:18px}
+.app{max-width:1100px;margin:0 auto;padding:18px;padding-left:max(18px,env(safe-area-inset-left));padding-right:max(18px,env(safe-area-inset-right))}
 header{text-align:center;padding:24px 0 18px}
 header h1{font-size:2rem;color:#4ade80;letter-spacing:1px}
 header p{color:#86efac;font-size:0.93rem;margin-top:6px}
@@ -21,7 +24,69 @@ header p{color:#86efac;font-size:0.93rem;margin-top:6px}
 .panel.on{display:block}
 /* ── LAYOUT ── */
 .layout{display:grid;grid-template-columns:320px 1fr;gap:16px;align-items:start}
-@media(max-width:780px){.layout{grid-template-columns:1fr}}
+@media(max-width:780px){
+  /* Layout */
+  .layout{grid-template-columns:1fr}
+  .cm-layout{grid-template-columns:1fr}
+  body{font-size:15px}
+
+  /* Header */
+  h1{font-size:1.5rem}
+  .tagline{font-size:0.85rem}
+
+  /* Tab bar — scrollable row on small screens */
+  .tab-bar{
+    display:flex;flex-direction:row;overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;gap:4px;padding:6px 8px;
+  }
+  .tab-bar::-webkit-scrollbar{display:none}
+  .tab-btn{
+    flex:0 0 auto;font-size:0.8rem;padding:8px 12px;
+    white-space:nowrap;border-radius:10px;min-height:44px;
+  }
+
+  /* Cards */
+  .card{padding:12px 10px;border-radius:12px}
+
+  /* Filter chips */
+  .fc{font-size:0.78rem;padding:6px 10px;min-height:36px}
+  .filter-chips{gap:5px}
+
+  /* Ingredient chips */
+  .chip-row{gap:5px}
+  .staple-chip{font-size:0.78rem;padding:5px 10px;min-height:36px}
+
+  /* Recipe cards */
+  .recipe-card{padding:12px 10px}
+  .recipe-title{font-size:0.95rem}
+
+  /* Buttons — minimum 44px touch targets */
+  .btn-sm-green,.btn-sm-danger,.btn-save-staple{
+    min-height:40px;padding:8px 14px;font-size:0.82rem;
+  }
+
+  /* Modal */
+  .modal-box{width:95vw;max-height:88vh;padding:16px 12px;border-radius:16px}
+  .modal-box h2{font-size:1.1rem}
+
+  /* Shopping list */
+  .shop-item{font-size:0.9rem}
+
+  /* Name search input */
+  #nameSearchInput{font-size:16px} /* prevent iOS zoom on focus */
+  #qaCustomInput{font-size:16px}   /* prevent iOS zoom on focus */
+}
+
+/* ── iPhone SE / small phones (≤390px) ── */
+@media(max-width:390px){
+  body{padding:6px}
+  .tab-btn{font-size:0.75rem;padding:7px 9px}
+  .card{padding:10px 8px}
+  .fc{font-size:0.74rem;padding:5px 8px}
+  .recipe-title{font-size:0.88rem}
+  h1{font-size:1.3rem}
+}
 /* ── CARDS ── */
 .card{background:#0f1f12;border:1px solid #1a3a1f;border-radius:14px;padding:18px;margin-bottom:14px}
 .card-title{font-size:0.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#4ade80;margin-bottom:12px}
@@ -230,7 +295,7 @@ header p{color:#86efac;font-size:0.93rem;margin-top:6px}
 .cm-type-btn:hover{border-color:#4ade80;color:#4ade80;background:#0f1f12}
 .cm-type-btn.on{background:#14532d;border-color:#4ade80;color:#fff;box-shadow:0 0 0 2px #4ade8033}
 .cm-layout{display:grid;grid-template-columns:320px 1fr;gap:16px;align-items:start}
-@media(max-width:780px){.cm-layout{grid-template-columns:1fr}}
+
 /* ── SHOPPING LIST ── */
 .shop-actions{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
 .btn-copy-list{background:#16a34a;color:#fff;border:none;border-radius:8px;padding:7px 15px;font-size:0.82rem;font-weight:700;cursor:pointer}
@@ -442,8 +507,6 @@ header p{color:#86efac;font-size:0.93rem;margin-top:6px}
             <input type="checkbox" id="strictToggle" onchange="strictMode=this.checked">
             <span>🎯 Only show recipes I can make right now (100% match)</span>
           </label>
-
-          <button class="btn-find" id="btnFind" onclick="findRecipes(true)" disabled>🌿 Find Vegan Recipes</button>
         </div>
       </div>
 
@@ -2482,7 +2545,8 @@ function onNameSearch(val) {
 }
 
 function updateFindBtn() {
-  document.getElementById('btnFind').disabled = !staples.length && !ingredients.length && !nameSearch;
+  const btn = document.getElementById('btnFind');
+  if (btn) btn.disabled = !staples.length && !ingredients.length && !nameSearch;
 }
 
 // ── INGREDIENT ALIASES ────────────────────────────────────────────────────────
