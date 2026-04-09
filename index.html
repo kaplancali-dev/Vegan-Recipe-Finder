@@ -2733,10 +2733,7 @@ function searchUrl(r) {
   // YouTube channel — search YouTube directly
   if (r.url && r.url.includes('youtube'))
     return 'https://www.youtube.com/results?search_query=' + encodeURIComponent('vegan ' + r.title);
-  // Direct recipe URL — go straight to the page
-  if (r.url && r.url.split('/').length > 4)
-    return r.url;
-  // Homepage-only URL — site-specific Google search so results stay on the right blog
+  // Site-specific Google search — keeps results on the right blog at the top
   if (r.url) {
     try {
       const domain = new URL(r.url).hostname;
