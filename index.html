@@ -492,6 +492,7 @@ header p{color:#86efac;font-size:0.93rem;margin-top:6px}
               <button class="fc" onclick="pickFilter(this,'site','Green Kitchen Stories')">Green Kitchen Stories</button>
               <button class="fc" onclick="pickFilter(this,'site','EpicMintLeaves')">EpicMintLeaves</button>
               <button class="fc" onclick="pickFilter(this,'site','Vegan Richa')">Vegan Richa</button>
+              <button class="fc" onclick="pickFilter(this,'site','Indian Veggie Delight')">Indian Veggie Delight</button>
             </div>
           </div>
 
@@ -891,9 +892,9 @@ const RECIPES = [
 {id:84,title:"Sweet Potato Toast",site:"Cooking For Peanuts",url:"https://cookingforpeanuts.com",
  cats:["Breakfast","Snacks","Quick Meals"],time:15,servings:2,
  ing:["sweet potato","avocado","nutritional yeast","everything bagel seasoning","lemon","hemp seeds","cucumber","tomatoes"],nut:{cal:295,pro:7.2,carb:59.8,fat:8.9,fib:10.8}},
-{id:86,title:"Creamy Avocado Pasta",site:"Cooking For Peanuts",url:"https://cookingforpeanuts.com",
+{id:86,title:"Creamy Avocado Pasta",site:"Indian Veggie Delight",url:"https://www.indianveggiedelight.com/creamy-avocado-pasta/",
  cats:["Dinner","Pasta & Noodles","Quick Meals"],time:20,servings:4,
- ing:["gluten-free pasta","avocado","garlic","lemon","basil","nutritional yeast","olive oil","cherry tomatoes","salt","pepper"],nut:{cal:413,pro:8.4,carb:44.2,fat:18.2,fib:6.6}},
+ ing:["pasta (any)","avocado","garlic","spinach","green chili","lemon","salt","black pepper"],nut:{cal:413,pro:8.4,carb:44.2,fat:18.2,fib:6.6}},
 {id:87,title:"Veggie Stir-Fry with Tofu",site:"Cooking For Peanuts",url:"https://cookingforpeanuts.com",
  cats:["Dinner","High-Protein","Quick Meals"],time:25,servings:4,
  ing:["tofu","broccoli","snap peas","carrots","bell pepper","garlic","ginger","tamari","sesame oil","cornstarch","brown rice"],nut:{cal:402,pro:16.4,carb:49.4,fat:11.0,fib:6.1}},
@@ -2291,6 +2292,37 @@ const RECIPES = [
 {id:977,title:"10-Ingredient Creamy Vegan Pantry Pasta",site:"Rainbow Plant Life",url:"https://rainbowplantlife.com",
  cats:["Dinner","Pasta & Noodles","Quick Meals"],time:30,servings:4,
  ing:["pasta (any)","chickpeas","crushed tomatoes","coconut milk","garlic","onion","olive oil","smoked paprika","nutritional yeast","salt"],nut:{cal:482,pro:16.4,carb:72,fat:14.2,fib:9.6}},
+// ── SANDWICHES ───────────────────────────────────────────────────────────────
+{id:978,title:"Smoky Tempeh BLT Sandwich",site:"Minimalist Baker",url:"https://minimalistbaker.com",
+ cats:["Lunch","Quick Meals","High-Protein","Meat Alternatives"],time:20,servings:2,
+ ing:["tempeh","tamari","smoked paprika","maple syrup","avocado","tomatoes","lettuce","vegan butter","bread","garlic powder"],nut:{cal:412,pro:22.4,carb:38,fat:18.6,fib:7.2}},
+{id:979,title:"Chickpea Salad Sandwich",site:"Oh She Glows",url:"https://ohsheglows.com",
+ cats:["Lunch","Quick Meals","High-Protein"],time:15,servings:4,
+ ing:["chickpeas","dijon mustard","apple cider vinegar","celery","onion","garlic powder","smoked paprika","avocado","bread","salt","black pepper"],nut:{cal:368,pro:14.8,carb:52,fat:11.4,fib:9.6}},
+{id:980,title:"Pulled Jackfruit Sandwich",site:"Rainbow Plant Life",url:"https://rainbowplantlife.com",
+ cats:["Lunch","Dinner","Meat Alternatives"],time:35,servings:4,
+ ing:["jackfruit","tomato paste","maple syrup","apple cider vinegar","smoked paprika","garlic","onion","tamari","bread","coleslaw"],nut:{cal:334,pro:8.2,carb:62,fat:5.4,fib:6.8}},
+{id:981,title:"Crispy Tofu Sandwich",site:"Minimalist Baker",url:"https://minimalistbaker.com",
+ cats:["Lunch","High-Protein","Quick Meals"],time:25,servings:2,
+ ing:["tofu","tamari","garlic powder","smoked paprika","cornstarch","avocado","tomatoes","lettuce","bread","sriracha","maple syrup"],nut:{cal:446,pro:24.6,carb:44,fat:16.8,fib:6.4}},
+{id:982,title:"White Bean & Roasted Veggie Sandwich",site:"Oh She Glows",url:"https://ohsheglows.com",
+ cats:["Lunch","High-Protein"],time:30,servings:2,
+ ing:["white beans","zucchini","bell peppers","olive oil","garlic","dijon mustard","lemon","spinach","bread","salt","black pepper"],nut:{cal:392,pro:18.4,carb:58,fat:9.6,fib:11.2}},
+{id:983,title:"Lentil Sloppy Joe Sandwich",site:"Minimalist Baker",url:"https://minimalistbaker.com",
+ cats:["Lunch","Dinner","High-Protein"],time:30,servings:4,
+ ing:["lentils","crushed tomatoes","onion","garlic","bell peppers","maple syrup","apple cider vinegar","smoked paprika","tamari","bread"],nut:{cal:358,pro:16.8,carb:60,fat:4.2,fib:12.4}},
+{id:984,title:"Avocado Hummus Veggie Sandwich",site:"Minimalist Baker",url:"https://minimalistbaker.com",
+ cats:["Lunch","Quick Meals"],time:10,servings:2,
+ ing:["avocado","chickpeas","tahini","lemon","garlic","cucumber","tomatoes","spinach","bread","salt","smoked paprika"],nut:{cal:428,pro:12.6,carb:48,fat:22.4,fib:10.8}},
+{id:985,title:"Black Bean & Corn Torta Sandwich",site:"Rainbow Plant Life",url:"https://rainbowplantlife.com",
+ cats:["Lunch","Dinner","Mexican","High-Protein"],time:25,servings:2,
+ ing:["black beans","corn","avocado","jalapeño","lime","garlic","cumin","smoked paprika","bread","cilantro","onion"],nut:{cal:472,pro:18.2,carb:68,fat:14.6,fib:14.4}},
+{id:986,title:"Smoky Mushroom & Walnut Sandwich",site:"Vegan Richa",url:"https://www.veganricha.com",
+ cats:["Lunch","Meat Alternatives"],time:25,servings:2,
+ ing:["mushrooms","walnuts","tamari","smoked paprika","garlic","onion","tomatoes","avocado","bread","dijon mustard"],nut:{cal:396,pro:12.4,carb:42,fat:20.8,fib:7.6}},
+{id:987,title:"Buffalo Cauliflower Sandwich",site:"Oh She Glows",url:"https://ohsheglows.com",
+ cats:["Lunch","Dinner","Quick Meals"],time:30,servings:2,
+ ing:["cauliflower","hot sauce","garlic powder","smoked paprika","cornstarch","avocado","lettuce","tomatoes","bread","maple syrup","olive oil"],nut:{cal:362,pro:9.8,carb:54,fat:13.4,fib:8.2}},
 ]; // end RECIPES
 
 // ── STATE ─────────────────────────────────────────────────────────────────────
@@ -2698,11 +2730,21 @@ function pillClass(pct) {
 }
 
 function searchUrl(r) {
-  // EpicMintLeaves = YouTube channel search
+  // YouTube channel — search YouTube directly
   if (r.url && r.url.includes('youtube'))
     return 'https://www.youtube.com/results?search_query=' + encodeURIComponent('vegan ' + r.title);
-  // Google search including the site name so that blog's version surfaces first
-  return 'https://www.google.com/search?q=' + encodeURIComponent('vegan ' + r.title + ' ' + (r.site || ''));
+  // Direct recipe URL — go straight to the page
+  if (r.url && r.url.split('/').length > 4)
+    return r.url;
+  // Homepage-only URL — site-specific Google search so results stay on the right blog
+  if (r.url) {
+    try {
+      const domain = new URL(r.url).hostname;
+      return 'https://www.google.com/search?q=' + encodeURIComponent('site:' + domain + ' ' + r.title);
+    } catch(e) {}
+  }
+  // Fallback — general Google search with site name
+  return 'https://www.google.com/search?q=' + encodeURIComponent(r.title + ' ' + (r.site || '') + ' vegan recipe');
 }
 
 function siteHomeUrl(r) {
