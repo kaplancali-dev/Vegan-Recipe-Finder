@@ -421,10 +421,10 @@ header p{color:#86efac;font-size:0.93rem;margin-top:6px}
         <!-- SECTION 1: INGREDIENTS I ALWAYS HAVE -->
         <div class="qa-card qa-card-always">
           <button class="qa-toggle qa-toggle-always open" id="alwaysToggle" onclick="toggleAlwaysPanel()">
-            <span>⭐ Ingredients I Always Have <span id="alwaysCount" style="font-weight:400;opacity:.7;font-size:.8rem"></span></span><span class="arrow">▼</span>
+            <span>⭐ Always Have <span style="font-weight:400;font-size:.75rem;opacity:.6">— saved permanently</span> <span id="alwaysCount" style="font-weight:400;opacity:.7;font-size:.8rem"></span></span><span class="arrow">▼</span>
           </button>
           <div class="qa-body open" id="alwaysBody">
-            <p style="font-size:.8rem;color:#fbbf24;opacity:.7;margin-bottom:10px;line-height:1.5">Saved permanently. Tap <strong>⭐</strong> next to any ingredient below to add it here. It will always be here when you return.</p>
+            <p style="font-size:.8rem;color:#fbbf24;opacity:.7;margin-bottom:10px;line-height:1.5">Tap <strong>⭐</strong> next to any ingredient in the list below to save it here permanently — it will always be here when you return.</p>
             <div id="alwaysChips"><span style="color:#92400e;font-size:.82rem;font-style:italic">Nothing saved yet — tap ⭐ next to any ingredient in the list below.</span></div>
             <div id="alwaysClearWrap" style="display:none;margin-top:10px">
               <button class="btn-sm-danger" onclick="alwaysClearAll()">Remove All</button>
@@ -435,10 +435,10 @@ header p{color:#86efac;font-size:0.93rem;margin-top:6px}
         <!-- SECTION 2: ADDITIONAL INGREDIENTS I HAVE TODAY -->
         <div class="qa-card qa-card-today">
           <button class="qa-toggle qa-toggle-today open" id="todayToggle" onclick="toggleTodayPanel()">
-            <span>🌿 Additional Ingredients I Have Today <span id="todayCount" style="font-weight:400;opacity:.7;font-size:.8rem"></span></span><span class="arrow">▼</span>
+            <span>🌿 Have Today <span style="font-weight:400;font-size:.75rem;opacity:.6">— cleared next visit</span> <span id="todayCount" style="font-weight:400;opacity:.7;font-size:.8rem"></span></span><span class="arrow">▼</span>
           </button>
           <div class="qa-body open" id="todayBody">
-            <p style="font-size:.8rem;color:#4ade80;opacity:.7;margin-bottom:10px;line-height:1.5">For today only. Tap any ingredient in the list below to add it here. Won't be here next time you open the app.</p>
+            <p style="font-size:.8rem;color:#4ade80;opacity:.7;margin-bottom:10px;line-height:1.5">Tap any ingredient in the list below to add it here for today only. Won't be here next visit — tap <strong>⭐</strong> instead to save it permanently.</p>
             <div id="todayChips"><span style="color:#166534;font-size:.82rem;font-style:italic">Nothing added yet — tap any ingredient in the list below.</span></div>
             <div id="todayClearWrap" style="display:none;margin-top:10px">
               <button class="btn-sm-danger" onclick="todayClearAll()">Remove All</button>
@@ -452,7 +452,7 @@ header p{color:#86efac;font-size:0.93rem;margin-top:6px}
             <span>📋 Ingredients Not Selected <span id="notSelCount" style="font-weight:400;opacity:.7;font-size:.8rem"></span></span><span class="arrow">▼</span>
           </button>
           <div class="qa-body open" id="notSelBody">
-            <p style="font-size:.8rem;color:#93c5fd;opacity:.7;margin-bottom:10px;line-height:1.5">Tap an ingredient to add to <strong style="color:#4ade80">Today</strong>. Tap <strong style="color:#fbbf24">⭐</strong> to save it to <strong style="color:#fbbf24">Always Have</strong>.</p>
+            <p style="font-size:.8rem;color:#93c5fd;opacity:.8;margin-bottom:10px;line-height:1.6">Tap the <strong style="color:#4ade80">ingredient name</strong> → adds it for <strong style="color:#4ade80">today only</strong><br>Tap the <strong style="color:#fbbf24">⭐</strong> beside it → saves it to <strong style="color:#fbbf24">Always Have</strong> permanently</p>
             <div class="qa-actions">
               <button class="btn-sm-green" onclick="notSelSelectAllToday()">Add All to Today</button>
               <button class="btn-sm-green" style="background:#78350f" onclick="notSelSelectAllAlways()">⭐ Add All to Always Have</button>
