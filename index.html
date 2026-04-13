@@ -353,6 +353,7 @@ header p{color:#86efac;font-size:0.93rem;margin-top:6px}
     </button>
     <button class="tab-btn" onclick="showTab('favorites')">❤️ Favorites</button>
     <button class="tab-btn" onclick="showTab('shopping')">🛒 Shopping List</button>
+          <button class="tab-btn" onclick="showTab('mealplan')">📅 Meal Plan</button>
   </div>
 
   <!-- ══════ SEARCH PANEL ══════ -->
@@ -362,7 +363,8 @@ header p{color:#86efac;font-size:0.93rem;margin-top:6px}
       <div>
         <!-- CATEGORY FILTER -->
         <div class="card">
-          <div class="filter-label" style="margin-bottom:10px">Category <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#4b7a52">(optional)</span></div>
+          <div <button class="fc" style="background:#16a34a;color:#fff;font-weight:700;margin-bottom:16px;width:100%" onclick="openAddRecipeModal()">➕ Add Recipe</button>
+          class="filter-label" style="margin-bottom:10px">Category <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#4b7a52">(optional)</span></div>
           <div class="filter-chips" id="catGrid">
             <button class="fc on" id="catAllBtn" onclick="pickFilter(this,'cat','')">🍽️ All</button>
             <button class="fc" onclick="pickFilter(this,'cat','Breakfast')">🧇 Breakfast</button>
@@ -405,6 +407,15 @@ header p{color:#86efac;font-size:0.93rem;margin-top:6px}
             <span class="allergy-chip" onclick="toggleAllergy(this,'corn')">🌽 Corn</span>
             <span class="allergy-chip" onclick="toggleAllergy(this,'mushroom')">🍄 Mushrooms</span>
             <span class="allergy-chip" onclick="toggleAllergy(this,'nightshade')">🍅 Nightshades</span>
+          </div>
+
+          <!-- SPECIAL FILTERS -->
+          <div class="filter-label" style="margin-top:10px">Special <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#4b7a52">(optional)</span></div>
+          <div class="filter-chips" style="margin-bottom:14px;margin-top:7px">
+            <button class="fc" id="filterOilFree" onclick="toggleSpecialFilter(this,'oilFree')">🫒 Oil-Free</button>
+            <button class="fc" id="filterOnePot" onclick="toggleSpecialFilter(this,'onePot')">🥘 One-Pot</button>
+            <button class="fc" id="filterQuick" onclick="toggleSpecialFilter(this,'quick')">⚡ Under 20 Min</button>
+            <button class="fc" id="filterHighProtein" onclick="toggleSpecialFilter(this,'highProtein')">💪 High-Protein</button>
           </div>
           <!-- RECIPE NAME SEARCH -->
           <div class="filter-label" style="margin-bottom:7px">Recipe Name</div>
@@ -496,12 +507,7 @@ header p{color:#86efac;font-size:0.93rem;margin-top:6px}
             </div>
           </div>
 
-          <!-- STRICT MODE -->
-          <label class="strict-toggle">
-            <input type="checkbox" id="strictToggle" onchange="strictMode=this.checked">
-            <span>🎯 Only show recipes I can make right now (100% match)</span>
-          </label>
-        </div>
+          </div>
       </div>
 
       <!-- RIGHT COLUMN: RESULTS -->
@@ -653,6 +659,122 @@ header p{color:#86efac;font-size:0.93rem;margin-top:6px}
 
 <script>
 // ── DATA ──────────────────────────────────────────────────────────────────────
+const SHOP_CATEGORIES = {
+  '🥦 Produce': ['garlic','onion','onions','spinach','kale','carrots','broccoli','cauliflower','bell peppers','mushrooms','tomatoes','avocado','zucchini','corn','cucumber','green onions','ginger','lemon','lime','banana','blueberries','mango','apple','dates','scallions','cilantro','parsley','basil','jalapeño','eggplant','sweet potato','potatoes','beets','celery','lettuce','cabbage','bok choy','edamame','cherry tomatoes','crushed tomatoes','diced tomatoes','green chili','baby spinach'],
+  '🫘 Proteins & Legumes': ['chickpeas','black beans','lentils','kidney beans','navy beans','pinto beans','white beans','tofu','tempeh','edamame','protein powder','red lentils','green lentils','jackfruit'],
+  '🌾 Grains & Pasta': ['rice','quinoa','oats','rolled oats','pasta','gluten-free pasta','pasta (any)','brown rice','corn tortillas','polenta','buckwheat','bread','noodles','spaghetti','penne','macaroni'],
+  '🥜 Nuts & Seeds': ['almonds','walnuts','cashews','pecans','hemp seeds','chia seeds','flax seeds','pumpkin seeds','sunflower seeds','sesame seeds','tahini','nut butter (any)','peanut butter','almond butter'],
+  '🥛 Dairy Alternatives': ['plant-based milk (any)','almond milk','oat milk','soy milk','coconut milk','coconut cream','vegan butter','cashew cream'],
+  '🫙 Pantry & Oils': ['olive oil','coconut oil','sesame oil','any cooking oil','vegetable broth','tamari','soy sauce / tamari','maple syrup','apple cider vinegar','rice vinegar','dijon mustard','tomato paste','agave','coconut aminos','miso','hot sauce','sriracha'],
+  '🌿 Spices & Herbs': ['turmeric','cumin','smoked paprika','cinnamon','chili powder','curry powder','black pepper','garlic powder','onion powder','oregano','thyme','coriander','cayenne','cardamom','bay leaves','five spice','nutmeg','sea salt','salt','pepper','ginger powder'],
+  '🍨 Baking & Sweets': ['vanilla extract','cocoa powder','dark chocolate chips','dark chocolate','coconut sugar','flax egg','baking soda','baking powder','cornstarch','shredded coconut','medjool dates','maple syrup','brown sugar','sugar','flour','almond flour','oat flour'],
+};
+
+
+function getCategoryForItem(item) {
+  const lower = item.toLowerCase();
+  for (const [category, items] of Object.entries(SHOP_CATEGORIES)) {
+    if (items.some(i => lower.includes(i) || i.includes(lower))) {
+      return category;
+    }
+  }
+  return '📦 Other';
+}
+
+function renderCategorizedShoppingList() {
+  if (!shoppingList || shoppingList.length === 0) {
+    const panel = document.getElementById('panel-shopping');
+    if (panel) panel.innerHTML = '<div class="card"><div style="color:#4b7a52;text-align:center">Shopping list is empty</div></div>';
+    return;
+  }
+  
+  // Group items by category
+  const grouped = {};
+  shoppingList.forEach(item => {
+    const cat = getCategoryForItem(item.name);
+    if (!grouped[cat]) grouped[cat] = [];
+    grouped[cat].push(item);
+  });
+  
+  // Sort categories and items
+  const sortedCats = Object.keys(grouped).sort();
+  
+  let html = '<div class="card" style="padding:16px">';
+  html += '<div style="font-size:1.1rem;font-weight:700;margin-bottom:16px;color:#86efac">🛒 Shopping List</div>';
+  
+  sortedCats.forEach(cat => {
+    html += `<div style="margin-bottom:16px">
+      <div style="font-weight:700;color:#4ade80;margin-bottom:8px;font-size:0.95rem">${cat}</div>
+      <div style="display:flex;flex-direction:column;gap:6px">`;
+    
+    const unchecked = grouped[cat].filter(i => !i.checked);
+    const checked = grouped[cat].filter(i => i.checked);
+    
+    unchecked.forEach(item => {
+      html += `<div style="display:flex;align-items:center;gap:10px;padding:8px;background:#0a130b;border-radius:6px;cursor:pointer" onclick="toggleShoppingItem(${item.id})">
+        <input type="checkbox" style="cursor:pointer" ${item.checked ? 'checked' : ''}>
+        <span style="color:#e8f5e9;flex:1">${item.name}</span>
+        <button style="background:none;border:none;color:#ff6b6b;cursor:pointer" onclick="event.stopPropagation();removeFromShop(${item.id})">✕</button>
+      </div>`;
+    });
+    
+    if (checked.length > 0) {
+      html += '<div style="border-top:1px solid #2d5a33;margin-top:8px;padding-top:8px">';
+      checked.forEach(item => {
+        html += `<div style="display:flex;align-items:center;gap:10px;padding:8px;background:#0a130b;border-radius:6px;cursor:pointer;opacity:0.6" onclick="toggleShoppingItem(${item.id})">
+          <input type="checkbox" checked style="cursor:pointer">
+          <span style="color:#4b7a52;flex:1;text-decoration:line-through">${item.name}</span>
+          <button style="background:none;border:none;color:#ff6b6b;cursor:pointer" onclick="event.stopPropagation();removeFromShop(${item.id})">✕</button>
+        </div>`;
+      });
+      html += '</div>';
+    }
+    
+    html += '</div></div>';
+  });
+  
+  html += '<div style="margin-top:20px;display:flex;gap:10px">';
+  html += '<button style="flex:1;background:#14532d;border:1px solid #2d5a33;color:#86efac;border-radius:8px;padding:10px;cursor:pointer" onclick="document.getElementById('panel-shopping').innerHTML='';shoppingList=[]">Clear</button>';
+  html += '<button style="flex:1;background:#16a34a;border:none;color:#fff;border-radius:8px;padding:10px;cursor:pointer;font-weight:700" onclick="printShoppingList()">🖨️ Print</button>';
+  html += '</div></div>';
+  
+  const panel = document.getElementById('panel-shopping');
+  if (panel) panel.innerHTML = html;
+}
+
+function toggleShoppingItem(id) {
+  const item = shoppingList.find(i => i.id === id);
+  if (item) {
+    item.checked = !item.checked;
+    renderCategorizedShoppingList();
+  }
+}
+
+function printShoppingList() {
+  const grouped = {};
+  shoppingList.forEach(item => {
+    const cat = getCategoryForItem(item.name);
+    if (!grouped[cat]) grouped[cat] = [];
+    grouped[cat].push(item);
+  });
+  
+  const w = window.open();
+  w.document.write('<pre style="font-family:monospace;font-size:14px;line-height:1.6">');
+  w.document.write('SHOPPING LIST\n\n');
+  
+  Object.keys(grouped).sort().forEach(cat => {
+    w.document.write(`${cat}\n`);
+    grouped[cat].forEach(item => {
+      w.document.write(`  ${item.checked ? '✓' : '☐'} ${item.name}\n`);
+    });
+    w.document.write('\n');
+  });
+  
+  w.document.write('</pre>');
+  w.print();
+  w.close();
+}
+
 const RECIPES = [
 {id:3,title:"Overnight Oats",site:"Minimalist Baker",url:"https://minimalistbaker.com",
  cats:["Breakfast","Quick Meals"],time:10,servings:2,
@@ -2355,8 +2477,6 @@ let selectedCats = [];
 let selectedSite = '';
 let maxTime      = 0;
 let nameSearch   = '';
-let strictMode   = false;
-
 function saveIngs()    { _lsSet('vrf_ings', ingredients); }
 function saveStaples() { _lsSet('vrf_staples', staples); }
 function saveFavs()    { _lsSet('vrf_favs', favorites); }
@@ -2435,6 +2555,8 @@ function toggleCustomPanel() {
 
 // ── RENDER ALL FOUR SECTIONS ──────────────────────────────────────────────────
 function renderAllIngPanels() {
+loadCustomRecipes();
+initMealPlanner();
   renderAlwaysChips();
   renderTodayChips();
   renderNotSelChips();
@@ -2527,38 +2649,68 @@ function addToAlways(item) {
   if (!staples.find(s => s.toLowerCase() === item.toLowerCase())) staples.push(item);
   ingredients = ingredients.filter(i => i.toLowerCase() !== item.toLowerCase());
   saveStaples(); saveIngs();
-  renderAllIngPanels(); updateFindBtn(); findRecipes();
+  renderAllIngPanels();
+// Restore allergy chip visual state
+activeAllergies.forEach(key => {
+  const btn = document.querySelector(`[onclick*="toggleAllergy"][onclick*="${key}"]`);
+  if (btn) btn.classList.add('on');
+}); updateFindBtn(); findRecipes();
 }
 
 function removeFromAlways(item) {
   staples = staples.filter(s => s.toLowerCase() !== item.toLowerCase());
   saveStaples();
-  renderAllIngPanels(); updateFindBtn(); findRecipes();
+  renderAllIngPanels();
+// Restore allergy chip visual state
+activeAllergies.forEach(key => {
+  const btn = document.querySelector(`[onclick*="toggleAllergy"][onclick*="${key}"]`);
+  if (btn) btn.classList.add('on');
+}); updateFindBtn(); findRecipes();
 }
 
 function alwaysClearAll() {
   staples = [];
   saveStaples();
-  renderAllIngPanels(); updateFindBtn(); findRecipes();
+  renderAllIngPanels();
+// Restore allergy chip visual state
+activeAllergies.forEach(key => {
+  const btn = document.querySelector(`[onclick*="toggleAllergy"][onclick*="${key}"]`);
+  if (btn) btn.classList.add('on');
+}); updateFindBtn(); findRecipes();
 }
 
 function addToToday(item) {
   if (!ingredients.find(i => i.toLowerCase() === item.toLowerCase())) ingredients.push(item);
   saveIngs();
-  renderAllIngPanels(); updateFindBtn(); findRecipes();
+  renderAllIngPanels();
+// Restore allergy chip visual state
+activeAllergies.forEach(key => {
+  const btn = document.querySelector(`[onclick*="toggleAllergy"][onclick*="${key}"]`);
+  if (btn) btn.classList.add('on');
+}); updateFindBtn(); findRecipes();
 }
 
 function removeFromToday(item) {
   ingredients = ingredients.filter(i => i.toLowerCase() !== item.toLowerCase());
   saveIngs();
-  renderAllIngPanels(); updateFindBtn(); findRecipes();
+  renderAllIngPanels();
+// Restore allergy chip visual state
+activeAllergies.forEach(key => {
+  const btn = document.querySelector(`[onclick*="toggleAllergy"][onclick*="${key}"]`);
+  if (btn) btn.classList.add('on');
+}); updateFindBtn(); findRecipes();
 }
 
 function todayClearAll() {
   const qaAllItems = new Set(QA_ITEMS.flatMap(g => g.items.map(i => i.toLowerCase())));
   ingredients = ingredients.filter(i => !qaAllItems.has(i.toLowerCase()));
   saveIngs();
-  renderAllIngPanels(); updateFindBtn(); findRecipes();
+  renderAllIngPanels();
+// Restore allergy chip visual state
+activeAllergies.forEach(key => {
+  const btn = document.querySelector(`[onclick*="toggleAllergy"][onclick*="${key}"]`);
+  if (btn) btn.classList.add('on');
+}); updateFindBtn(); findRecipes();
 }
 
 function notSelSelectAllToday() {
@@ -2568,7 +2720,12 @@ function notSelSelectAllToday() {
     if (!stapleSet.has(i.toLowerCase()) && !todaySet.has(i.toLowerCase())) ingredients.push(i);
   }));
   saveIngs();
-  renderAllIngPanels(); updateFindBtn(); findRecipes();
+  renderAllIngPanels();
+// Restore allergy chip visual state
+activeAllergies.forEach(key => {
+  const btn = document.querySelector(`[onclick*="toggleAllergy"][onclick*="${key}"]`);
+  if (btn) btn.classList.add('on');
+}); updateFindBtn(); findRecipes();
 }
 
 function notSelSelectAllAlways() {
@@ -2581,13 +2738,23 @@ function notSelSelectAllAlways() {
     return !qaAllItems.has(i.toLowerCase());
   });
   saveStaples(); saveIngs();
-  renderAllIngPanels(); updateFindBtn(); findRecipes();
+  renderAllIngPanels();
+// Restore allergy chip visual state
+activeAllergies.forEach(key => {
+  const btn = document.querySelector(`[onclick*="toggleAllergy"][onclick*="${key}"]`);
+  if (btn) btn.classList.add('on');
+}); updateFindBtn(); findRecipes();
 }
 
 function removeCustomIng(val) {
   ingredients = ingredients.filter(i => i !== val);
   saveIngs();
-  renderAllIngPanels(); updateFindBtn(); findRecipes();
+  renderAllIngPanels();
+// Restore allergy chip visual state
+activeAllergies.forEach(key => {
+  const btn = document.querySelector(`[onclick*="toggleAllergy"][onclick*="${key}"]`);
+  if (btn) btn.classList.add('on');
+}); updateFindBtn(); findRecipes();
 }
 
 // ── CUSTOM INGREDIENT INPUT ───────────────────────────────────────────────────
@@ -2615,6 +2782,12 @@ const INGREDIENT_ALIASES = {
   'nut butter (any)':       ['peanut butter','almond butter','sunflower butter','cashew butter','hazelnut butter','walnut butter','pecan butter','macadamia butter','mixed nut butter','seed butter'],
   'pasta (any)':            ['pasta','gluten-free pasta','spaghetti','penne','fusilli','farfalle','rigatoni','linguine','fettuccine','tagliatelle','orzo','macaroni','rotini','angel hair','lasagna noodles','noodles'],
   'soy sauce / tamari':     ['soy sauce','tamari','coconut aminos','liquid aminos','aminos'],
+,
+  'sweetener (any)': ['maple syrup','agave','coconut sugar','brown sugar','sugar','date syrup'],
+  'leafy greens (any)': ['spinach','kale','chard','arugula','collard greens','beet greens','bok choy','baby spinach'],
+  'vinegar (any)': ['apple cider vinegar','rice vinegar','white vinegar','red wine vinegar','balsamic vinegar'],
+  'flour (any)': ['flour','all-purpose flour','oat flour','almond flour','spelt flour','buckwheat flour','rice flour','coconut flour'],
+  'fresh herbs (any)': ['cilantro','parsley','basil','mint','dill','thyme','rosemary','oregano','chives'],
 };
 // One-way substitutions: if user HAS the left item, it also covers the right items in recipes
 const INGREDIENT_SUBS = {
@@ -2628,6 +2801,24 @@ const INGREDIENT_SUBS = {
   'almond butter':  ['peanut butter','sunflower butter','cashew butter','nut butter'],
   'sunflower butter': ['peanut butter','almond butter','cashew butter','nut butter'],
   'cashew butter':  ['peanut butter','almond butter','sunflower butter','nut butter'],
+,
+  'maple syrup': ['agave','coconut sugar','brown sugar','date syrup'],
+  'agave': ['maple syrup','coconut sugar'],
+  'spinach': ['kale','chard','baby spinach','arugula','collard greens'],
+  'kale': ['spinach','chard','collard greens','baby spinach'],
+  'apple cider vinegar': ['rice vinegar','white vinegar','lemon juice'],
+  'rice vinegar': ['apple cider vinegar','white vinegar'],
+  'flour': ['oat flour','almond flour','spelt flour','rice flour'],
+  'almond flour': ['oat flour','coconut flour','rice flour'],
+  'cornstarch': ['arrowroot powder','tapioca flour'],
+  'arrowroot powder': ['cornstarch','tapioca flour'],
+  'vegetable broth': ['water','mushroom broth','miso water'],
+  'coconut cream': ['cashew cream','coconut milk'],
+  'lemon': ['lime','apple cider vinegar'],
+  'lime': ['lemon'],
+  'cilantro': ['parsley','basil'],
+  'fresh ginger': ['ginger','ginger powder'],
+  'ginger': ['fresh ginger','ginger powder'],
 };
 
 function expandWithAliases(ings) {
@@ -2797,6 +2988,7 @@ function recipeCard(r) {
     </button>
     <button class="btn-sm btn-shop" onclick="addToShop(${r.id})">🛒 Add Missing</button>
     <button class="btn-sm btn-notes${instrNotes ? ' on' : ''}" onclick="openInstrModal(${r.id})">📝 ${instrNotes ? 'View Notes' : 'Add Notes'}</button>
+<button class="btn-sm" style="background:#1a3a1f;border:1px solid #2d5a33;color:#86efac" onclick="openHandsFree(${r.id})">👁️ Cook</button>
   </div>
   ${instrNotes ? `<div class="saved-instructions-label">📝 Saved Notes</div><div class="saved-instructions" onclick="openInstrModal(${r.id})">${instrNotes.substring(0,200)}${instrNotes.length>200?'…':''}</div>` : ''}
 </div>`;
@@ -2847,6 +3039,15 @@ function renderFavs() {
           ${notes ? `<button class="btn-sm btn-link" onclick="favCopyNotes(${f.id})" title="Copy notes to clipboard">📋 Copy</button>` : ''}
           ${notes ? `<button class="btn-sm btn-link" onclick="favPrintNotes(${f.id})" title="Print notes">🖨️ Print</button>` : ''}
           <button class="btn-sm btn-fav on" onclick="toggleFav(${f.id});renderFavs()" title="Remove from favorites">❤️</button>
+          <button class="btn-sm btn-shop" onclick="addToShop(${f.id});showToast('🔁 Added missing items to shopping list!')">🔁 Make Again</button>
+        </div>
+      </div>
+
+      <div id="panel-mealplan" style="display:none">
+        <div class="card">
+          <div style="font-size:1.1rem;font-weight:700;margin-bottom:16px;color:#86efac">📅 7-Day Meal Planner</div>
+          <div id="mealPlannerGrid"></div>
+          <button style="width:100%;margin-top:20px;background:#16a34a;border:none;color:#fff;border-radius:8px;padding:12px;font-weight:700;cursor:pointer;font-size:0.95rem" onclick="generateMealPlanShoppingList()">🛒 Generate Shopping List</button>
         </div>
       </div>
       ${notes ? `<div class="saved-instructions-label">📝 Saved Notes</div><div class="saved-instructions" onclick="openInstrModal(${f.id})">${notes.substring(0,200)}${notes.length>200?'…':''}</div>` : ''}
@@ -2970,6 +3171,11 @@ function importSyncCode() {
     if (data.h !== undefined) { _lsSet('vrf_shop',    data.h); shopList      = data.h; }
     if (data.i !== undefined) { _lsSet('vrf_ings',    data.i); ingredients   = data.i; }
     renderFavs(); render(); renderAllIngPanels();
+// Restore allergy chip visual state
+activeAllergies.forEach(key => {
+  const btn = document.querySelector(`[onclick*="toggleAllergy"][onclick*="${key}"]`);
+  if (btn) btn.classList.add('on');
+});
     document.getElementById('syncCodeIn').value = '';
     document.getElementById('syncImportWrap').style.display = 'none';
     alert('✅ Sync complete!\n\nYour favorites, notes, staples, and shopping list have been loaded on this device.');
@@ -3035,6 +3241,55 @@ function openInstrModal(id) {
   document.getElementById('instrModal').classList.add('open');
   setTimeout(() => document.getElementById('instrTextarea').focus(), 100);
 }
+
+
+function openHandsFree(id) {
+  const r = RECIPES.find(r => r.id === id);
+  const notes = instructions[id] || '';
+  if (!r) return;
+  
+  // Request wake lock
+  if ('wakeLock' in navigator) {
+    navigator.wakeLock.request('screen').catch(() => {});
+  }
+  
+  // Split notes into steps or use ingredients as steps
+  const steps = notes 
+    ? notes.split(/\n+/).filter(s => s.trim())
+    : r.ing.map((ing, i) => `${i+1}. ${ing}`);
+  
+  let currentStep = 0;
+  
+  const overlay = document.createElement('div');
+  overlay.id = 'handsFreeOverlay';
+  overlay.style.cssText = 'position:fixed;inset:0;background:#0a130b;z-index:10000;display:flex;flex-direction:column;padding:env(safe-area-inset-top,20px) 24px env(safe-area-inset-bottom,20px);color:#e8f5e9;';
+  
+  function renderStep() {
+    overlay.innerHTML = `
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
+        <div style="font-size:1rem;color:#4ade80;font-weight:700">${r.title}</div>
+        <button onclick="document.getElementById('handsFreeOverlay').remove()" style="background:none;border:1px solid #2d5a33;color:#86efac;border-radius:8px;padding:6px 14px;font-size:0.9rem;cursor:pointer">✕ Exit</button>
+      </div>
+      <div style="flex:1;display:flex;align-items:center;justify-content:center;text-align:center">
+        <div style="font-size:clamp(1.4rem,5vw,2.2rem);line-height:1.5;color:#e8f5e9;max-width:700px">${steps[currentStep] || 'Done! Enjoy your meal 🌱'}</div>
+      </div>
+      <div style="text-align:center;color:#4b7a52;margin-bottom:16px;font-size:0.85rem">Step ${currentStep+1} of ${steps.length}</div>
+      <div style="display:flex;gap:12px;justify-content:center">
+        <button onclick="void(0)" id="hfPrev" style="flex:1;max-width:160px;background:#14532d;border:none;color:#fff;border-radius:12px;padding:16px;font-size:1.1rem;cursor:pointer" ${currentStep===0?'disabled style="opacity:0.3"':''}>← Back</button>
+        <button id="hfNext" style="flex:1;max-width:160px;background:#16a34a;border:none;color:#fff;border-radius:12px;padding:16px;font-size:1.1rem;font-weight:700;cursor:pointer">${currentStep >= steps.length-1 ? '✅ Done' : 'Next →'}</button>
+      </div>
+    `;
+    document.getElementById('hfPrev').onclick = () => { if(currentStep>0){currentStep--;renderStep();} };
+    document.getElementById('hfNext').onclick = () => { 
+      if(currentStep < steps.length-1){currentStep++;renderStep();}
+      else{overlay.remove();}
+    };
+  }
+  
+  renderStep();
+  document.body.appendChild(overlay);
+}
+
 
 function closeInstrModal() {
   document.getElementById('instrModal').classList.remove('open');
@@ -3112,7 +3367,7 @@ function toggleIntro() {
 }
 
 // ── ALLERGY FILTERS ────────────────────────────────────────────────────────────
-let activeAllergies = new Set();
+let activeAllergies = new Set(_lsGet('vrf_allergies', '[]'));
 
 const ALLERGY_KEYWORDS = {
   'peanut':     ['peanut','peanut butter'],
@@ -3132,8 +3387,273 @@ function toggleAllergy(btn, key) {
     activeAllergies.add(key);
     btn.classList.add('on');
   }
+  _lsSet('vrf_allergies', Array.from(activeAllergies));
   findRecipes();
 }
+
+
+let specialFilters = new Set();
+function toggleSpecialFilter(btn, key) {
+  if (specialFilters.has(key)) { specialFilters.delete(key); btn.classList.remove('on'); }
+  else { specialFilters.add(key); btn.classList.add('on'); }
+  findRecipes();
+}
+
+
+
+// Custom recipe builder
+let customRecipeIdCounter = 9000;
+
+function openAddRecipeModal() {
+  const modal = document.createElement('div');
+  modal.id = 'addRecipeModal';
+  modal.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;z-index:5000;';
+  
+  modal.innerHTML = `
+    <div style="background:#1a3a1f;border:1px solid #2d5a33;border-radius:16px;padding:24px;max-width:500px;width:90%;max-height:90vh;overflow-y:auto;color:#e8f5e9">
+      <div style="font-size:1.3rem;font-weight:700;margin-bottom:20px;color:#86efac">➕ Add Custom Recipe</div>
+      
+      <div style="margin-bottom:16px">
+        <label style="display:block;font-size:0.9rem;color:#4b7a52;margin-bottom:6px">Recipe Title *</label>
+        <input type="text" id="recipeTitle" placeholder="e.g., My Favorite Pasta" style="width:100%;padding:10px;background:#0a130b;border:1px solid #2d5a33;border-radius:8px;color:#e8f5e9;box-sizing:border-box">
+      </div>
+      
+      <div style="margin-bottom:16px">
+        <label style="display:block;font-size:0.9rem;color:#4b7a52;margin-bottom:6px">Website/Source</label>
+        <input type="text" id="recipeSource" placeholder="e.g., minimalistbaker.com" style="width:100%;padding:10px;background:#0a130b;border:1px solid #2d5a33;border-radius:8px;color:#e8f5e9;box-sizing:border-box">
+      </div>
+      
+      <div style="margin-bottom:16px">
+        <label style="display:block;font-size:0.9rem;color:#4b7a52;margin-bottom:6px">Cook Time (minutes) *</label>
+        <input type="number" id="recipeTime" placeholder="30" min="1" style="width:100%;padding:10px;background:#0a130b;border:1px solid #2d5a33;border-radius:8px;color:#e8f5e9;box-sizing:border-box">
+      </div>
+      
+      <div style="margin-bottom:16px">
+        <label style="display:block;font-size:0.9rem;color:#4b7a52;margin-bottom:6px">Servings</label>
+        <input type="number" id="recipeServings" placeholder="4" min="1" style="width:100%;padding:10px;background:#0a130b;border:1px solid #2d5a33;border-radius:8px;color:#e8f5e9;box-sizing:border-box">
+      </div>
+      
+      <div style="margin-bottom:16px">
+        <label style="display:block;font-size:0.9rem;color:#4b7a52;margin-bottom:6px">Ingredients * (one per line)</label>
+        <textarea id="recipeIngredients" placeholder="garlic&#10;onion&#10;spinach" style="width:100%;padding:10px;background:#0a130b;border:1px solid #2d5a33;border-radius:8px;color:#e8f5e9;box-sizing:border-box;min-height:120px;font-family:monospace"></textarea>
+      </div>
+      
+      <div style="margin-bottom:20px">
+        <label style="display:block;font-size:0.9rem;color:#4b7a52;margin-bottom:6px">Notes/Instructions</label>
+        <textarea id="recipeNotes" placeholder="1. Sauté garlic and onions...\n2. Add spinach..." style="width:100%;padding:10px;background:#0a130b;border:1px solid #2d5a33;border-radius:8px;color:#e8f5e9;box-sizing:border-box;min-height:120px;font-family:monospace"></textarea>
+      </div>
+      
+      <div style="display:flex;gap:12px">
+        <button onclick="document.getElementById('addRecipeModal').remove()" style="flex:1;background:#14532d;border:1px solid #2d5a33;color:#86efac;border-radius:8px;padding:12px;font-weight:700;cursor:pointer">Cancel</button>
+        <button onclick="saveCustomRecipe()" style="flex:1;background:#16a34a;border:none;color:#fff;border-radius:8px;padding:12px;font-weight:700;cursor:pointer">Save Recipe</button>
+      </div>
+    </div>
+  `;
+  
+  document.body.appendChild(modal);
+}
+
+function saveCustomRecipe() {
+  const title = document.getElementById('recipeTitle').value.trim();
+  const source = document.getElementById('recipeSource').value.trim();
+  const time = parseInt(document.getElementById('recipeTime').value) || 0;
+  const servings = parseInt(document.getElementById('recipeServings').value) || 4;
+  const ingText = document.getElementById('recipeIngredients').value.trim();
+  const notes = document.getElementById('recipeNotes').value.trim();
+  
+  if (!title || !ingText) {
+    showToast('⚠️ Please fill in title and ingredients');
+    return;
+  }
+  
+  const ingredients = ingText.split('\n').map(i => i.trim()).filter(i => i);
+  
+  const recipe = {
+    id: customRecipeIdCounter++,
+    title: title,
+    ing: ingredients,
+    time: time,
+    servs: servings,
+    src: source || 'Custom Recipe',
+    cats: []
+  };
+  
+  RECIPES.push(recipe);
+  
+  // Save to localStorage
+  const custom = _lsGet('vrf_custom_recipes', '[]');
+  custom.push(recipe);
+  _lsSet('vrf_custom_recipes', custom);
+  
+  if (notes) {
+    instructions[recipe.id] = notes;
+    _lsSet('vrf_instructions', instructions);
+  }
+  
+  document.getElementById('addRecipeModal').remove();
+  showToast('✅ Recipe added!');
+  findRecipes();
+}
+
+function loadCustomRecipes() {
+  const custom = _lsGet('vrf_custom_recipes', '[]');
+  if (Array.isArray(custom) && custom.length > 0) {
+    custom.forEach(r => {
+      if (r.id >= 9000) {
+        customRecipeIdCounter = Math.max(customRecipeIdCounter, r.id + 1);
+        RECIPES.push(r);
+      }
+    });
+  }
+  
+  // Load custom instructions
+  const instr = _lsGet('vrf_instructions', '{}');
+  if (typeof instr === 'object' && instr !== null) {
+    Object.assign(instructions, instr);
+  }
+}
+
+// Meal Planner
+let mealPlan = _lsGet('vrf_mealplan', {});
+const DAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+const MEAL_TYPES = ['Breakfast', 'Lunch/Dinner', 'Snack/Dessert'];
+
+function initMealPlanner() {
+  if (typeof mealPlan !== 'object' || mealPlan === null) {
+    mealPlan = {};
+  }
+  DAYS.forEach(day => {
+    if (!mealPlan[day]) {
+      mealPlan[day] = { 'Breakfast': null, 'Lunch/Dinner': null, 'Snack/Dessert': null };
+    }
+  });
+  renderMealPlanner();
+}
+
+function renderMealPlanner() {
+  const grid = document.getElementById('mealPlannerGrid');
+  if (!grid) return;
+  
+  let html = '';
+  
+  DAYS.forEach(day => {
+    html += `<div style="background:#0a130b;border:1px solid #2d5a33;border-radius:8px;padding:12px;margin-bottom:12px">
+      <div style="font-weight:700;color:#4ade80;margin-bottom:10px">${day}</div>`;
+    
+    MEAL_TYPES.forEach(mealType => {
+      const recipeId = mealPlan[day] && mealPlan[day][mealType];
+      const recipe = recipeId ? RECIPES.find(r => r.id === recipeId) : null;
+      
+      html += `<div style="margin-bottom:8px;display:flex;align-items:center;justify-content:space-between">
+        <div style="font-size:0.85rem;color:#4b7a52;min-width:100px">${mealType}:</div>
+        <div style="flex:1;margin-left:8px">`;
+      
+      if (recipe) {
+        html += `<div style="background:#14532d;border:1px solid #2d5a33;border-radius:6px;padding:8px;font-size:0.9rem;color:#e8f5e9;display:flex;justify-content:space-between;align-items:center">
+          <span>${recipe.title}</span>
+          <button onclick="removeMealPlan('${day}','${mealType}')" style="background:none;border:none;color:#ff6b6b;cursor:pointer;padding:0;font-size:0.9rem">✕</button>
+        </div>`;
+      } else {
+        html += `<button class="btn-sm" style="background:#16a34a;color:#fff;font-size:0.85rem;padding:6px 12px" onclick="openMealSearch('${day}','${mealType}')">+ Add</button>`;
+      }
+      
+      html += `</div>`;
+    });
+    
+    html += `</div>`;
+  });
+  
+  grid.innerHTML = html;
+}
+
+function openMealSearch(day, mealType) {
+  const modal = document.createElement('div');
+  modal.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;z-index:5000';
+  
+  modal.innerHTML = `
+    <div style="background:#1a3a1f;border:1px solid #2d5a33;border-radius:16px;padding:20px;max-width:400px;width:90%;color:#e8f5e9">
+      <div style="font-weight:700;margin-bottom:16px;color:#86efac">Search Recipes</div>
+      <input type="text" id="mealSearchInput" placeholder="Type recipe name..." style="width:100%;padding:10px;background:#0a130b;border:1px solid #2d5a33;border-radius:8px;color:#e8f5e9;box-sizing:border-box;margin-bottom:12px">
+      <div id="mealSearchResults" style="max-height:300px;overflow-y:auto;margin-bottom:12px"></div>
+      <button onclick="this.parentElement.parentElement.remove()" style="width:100%;background:#14532d;border:1px solid #2d5a33;color:#86efac;border-radius:8px;padding:10px;cursor:pointer">Cancel</button>
+    </div>
+  `;
+  
+  document.body.appendChild(modal);
+  
+  const input = document.getElementById('mealSearchInput');
+  const resultsDiv = document.getElementById('mealSearchResults');
+  
+  input.addEventListener('input', (e) => {
+    const query = e.target.value.toLowerCase();
+    const results = RECIPES.filter(r => r.title.toLowerCase().includes(query)).slice(0, 10);
+    
+    resultsDiv.innerHTML = results.map(r => `
+      <div style="background:#0a130b;border:1px solid #2d5a33;border-radius:6px;padding:10px;margin-bottom:8px;cursor:pointer;display:flex;justify-content:space-between;align-items:center" onclick="assignMealRecipe('${day}','${mealType}',${r.id});modal.remove()">
+        <span>${r.title}</span>
+        <span style="font-size:0.8rem;color:#4b7a52">${r.time || '?'} min</span>
+      </div>
+    `).join('');
+  });
+  
+  input.focus();
+}
+
+function assignMealRecipe(day, mealType, recipeId) {
+  if (!mealPlan[day]) mealPlan[day] = {};
+  mealPlan[day][mealType] = recipeId;
+  _lsSet('vrf_mealplan', mealPlan);
+  renderMealPlanner();
+  // Close modal - find and remove it
+  const modal = document.querySelector('[style*="position:fixed"][style*="rgba(0,0,0,0.5)"]');
+  if (modal) modal.remove();
+}
+
+function removeMealPlan(day, mealType) {
+  if (mealPlan[day]) {
+    mealPlan[day][mealType] = null;
+    _lsSet('vrf_mealplan', mealPlan);
+    renderMealPlanner();
+  }
+}
+
+function generateMealPlanShoppingList() {
+  const neededItems = new Set();
+  
+  // Collect all assigned recipes
+  const allRecipes = new Set();
+  Object.values(mealPlan).forEach(dayMeals => {
+    Object.values(dayMeals).forEach(recipeId => {
+      if (recipeId) allRecipes.add(recipeId);
+    });
+  });
+  
+  if (allRecipes.size === 0) {
+    showToast('⚠️ No recipes assigned yet');
+    return;
+  }
+  
+  // Get missing ingredients
+  allRecipes.forEach(recipeId => {
+    const recipe = RECIPES.find(r => r.id === recipeId);
+    if (recipe) {
+      recipe.ing.forEach(ing => {
+        if (!staples.some(s => s.toLowerCase() === ing.toLowerCase()) && 
+            !ingredients.some(s => s.toLowerCase() === ing.toLowerCase())) {
+          neededItems.add(ing);
+        }
+      });
+    }
+  });
+  
+  // Add to shopping list
+  neededItems.forEach(item => addToShop(-1, item));
+  
+  showToast('✅ Shopping list updated from your meal plan!');
+}
+
+
+
 
 function recipeHasAllergen(r, key) {
   const keywords = ALLERGY_KEYWORDS[key] || [key];
@@ -3164,6 +3684,11 @@ function qaAddCustom() {
   }
   input.value = '';
   renderAllIngPanels();
+// Restore allergy chip visual state
+activeAllergies.forEach(key => {
+  const btn = document.querySelector(`[onclick*="toggleAllergy"][onclick*="${key}"]`);
+  if (btn) btn.classList.add('on');
+});
   updateFindBtn();
   findRecipes();
 }
@@ -3385,6 +3910,11 @@ function cmAddMissingToShop(id, items) {
 
 // ── INIT ──────────────────────────────────────────────────────────────────────
 renderAllIngPanels();
+// Restore allergy chip visual state
+activeAllergies.forEach(key => {
+  const btn = document.querySelector(`[onclick*="toggleAllergy"][onclick*="${key}"]`);
+  if (btn) btn.classList.add('on');
+});
 updateFindBtn();
 findRecipes();
 
@@ -3403,4 +3933,5 @@ if ('serviceWorker' in navigator) {
 }
 </script>
 </body>
+</script>
 </html>
