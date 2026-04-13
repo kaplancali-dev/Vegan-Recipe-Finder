@@ -2816,7 +2816,6 @@ function toggleCustomPanel() {
 
 // ── RENDER ALL FOUR SECTIONS ──────────────────────────────────────────────────
 function renderAllIngPanels() {
-loadCustomRecipes();
   renderAlwaysChips();
   renderTodayChips();
   renderNotSelChips();
@@ -2929,6 +2928,7 @@ activeAllergies.forEach(key => {
 }
 
 function alwaysClearAll() {
+  if (!confirm('Remove all saved ingredients from Always Have? This cannot be undone.')) return;
   staples = [];
   saveStaples();
   renderAllIngPanels();
@@ -3990,6 +3990,7 @@ function cmAddMissingToShop(id, items) {
 }
 
 // ── INIT ──────────────────────────────────────────────────────────────────────
+loadCustomRecipes();
 renderAllIngPanels();
 // Restore allergy chip visual state
 activeAllergies.forEach(key => {
