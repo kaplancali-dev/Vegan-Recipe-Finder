@@ -734,7 +734,7 @@ function renderCategorizedShoppingList() {
   });
   
   html += '<div style="margin-top:20px;display:flex;gap:10px">';
-  html += '<button style="flex:1;background:#14532d;border:1px solid #2d5a33;color:#86efac;border-radius:8px;padding:10px;cursor:pointer" onclick="document.getElementById('panel-shopping').innerHTML='';shoppingList=[]">Clear</button>';
+  html += '<button style="flex:1;background:#14532d;border:1px solid #2d5a33;color:#86efac;border-radius:8px;padding:10px;cursor:pointer" onclick="document.getElementById(\'panel-shopping\').innerHTML=\'\';shoppingList=[]">Clear</button>';
   html += '<button style="flex:1;background:#16a34a;border:none;color:#fff;border-radius:8px;padding:10px;cursor:pointer;font-weight:700" onclick="printShoppingList()">🖨️ Print</button>';
   html += '</div></div>';
   
@@ -2782,7 +2782,6 @@ const INGREDIENT_ALIASES = {
   'nut butter (any)':       ['peanut butter','almond butter','sunflower butter','cashew butter','hazelnut butter','walnut butter','pecan butter','macadamia butter','mixed nut butter','seed butter'],
   'pasta (any)':            ['pasta','gluten-free pasta','spaghetti','penne','fusilli','farfalle','rigatoni','linguine','fettuccine','tagliatelle','orzo','macaroni','rotini','angel hair','lasagna noodles','noodles'],
   'soy sauce / tamari':     ['soy sauce','tamari','coconut aminos','liquid aminos','aminos'],
-,
   'sweetener (any)': ['maple syrup','agave','coconut sugar','brown sugar','sugar','date syrup'],
   'leafy greens (any)': ['spinach','kale','chard','arugula','collard greens','beet greens','bok choy','baby spinach'],
   'vinegar (any)': ['apple cider vinegar','rice vinegar','white vinegar','red wine vinegar','balsamic vinegar'],
@@ -2801,7 +2800,6 @@ const INGREDIENT_SUBS = {
   'almond butter':  ['peanut butter','sunflower butter','cashew butter','nut butter'],
   'sunflower butter': ['peanut butter','almond butter','cashew butter','nut butter'],
   'cashew butter':  ['peanut butter','almond butter','sunflower butter','nut butter'],
-,
   'maple syrup': ['agave','coconut sugar','brown sugar','date syrup'],
   'agave': ['maple syrup','coconut sugar'],
   'spinach': ['kale','chard','baby spinach','arugula','collard greens'],
