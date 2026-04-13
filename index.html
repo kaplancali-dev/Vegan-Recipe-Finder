@@ -2865,8 +2865,6 @@ function findRecipes(scrollToResults = false) {
     return { ...r, have, need, haveNames, needNames, pct, userHave: userHave.length };
   });
 
-  if (strictMode) results = results.filter(r => r.pct === 100);
-
   visible = PAGE;
   if (!ingredients.length) {
     sortKey = 'alpha';
@@ -3512,7 +3510,7 @@ function loadCustomRecipes() {
 }
 
 // Meal Planner
-let mealPlan = _lsGet('vrf_mealplan', {});
+let mealPlan = _lsGet('vrf_mealplan', '{}');
 const DAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 const MEAL_TYPES = ['Breakfast', 'Lunch/Dinner', 'Snack/Dessert'];
 
