@@ -2864,13 +2864,8 @@ function findRecipes(scrollToResults = false) {
   });
 
   visible = PAGE;
-  if (!ingredients.length) {
-    sortKey = 'alpha';
-    setSortUI('s-alpha');
-  } else {
-    sortKey = 'match';
-    setSortUI('s-match');
-  }
+  sortKey = 'match';
+  setSortUI('s-match');
   applySort();
   render();
 }
