@@ -453,10 +453,7 @@ header p{color:#86efac;font-size:0.93rem;margin-top:6px}
           </button>
           <div class="qa-body open" id="notSelBody">
             <p style="font-size:.8rem;color:#93c5fd;opacity:.8;margin-bottom:10px;line-height:1.6">Tap the <strong style="color:#4ade80">ingredient name</strong> → adds it for <strong style="color:#4ade80">today only</strong><br>Tap the <strong style="color:#fbbf24">⭐</strong> beside it → saves it to <strong style="color:#fbbf24">Always Have</strong> permanently</p>
-            <div class="qa-actions">
-              <button class="btn-sm-green" onclick="notSelSelectAllToday()">Add All to Today</button>
-              <button class="btn-sm-green" style="background:#78350f" onclick="notSelSelectAllAlways()">⭐ Add All to Always Have</button>
-            </div>
+
             <div id="notSelChips"></div>
           </div>
         </div>
@@ -2856,38 +2853,6 @@ activeAllergies.forEach(key => {
 }); updateFindBtn(); findRecipes();
 }
 
-function notSelSelectAllToday() {
-  const stapleSet  = new Set(staples.map(s => s.toLowerCase()));
-  const todaySet   = new Set(ingredients.map(i => i.toLowerCase()));
-  QA_ITEMS.forEach(g => g.items.forEach(i => {
-    if (!stapleSet.has(i.toLowerCase()) && !todaySet.has(i.toLowerCase())) ingredients.push(i);
-  }));
-  saveIngs();
-  renderAllIngPanels();
-// Restore allergy chip visual state
-activeAllergies.forEach(key => {
-  const btn = document.querySelector(`[onclick*="toggleAllergy"][onclick*="${key}"]`);
-  if (btn) btn.classList.add('on');
-}); updateFindBtn(); findRecipes();
-}
-
-function notSelSelectAllAlways() {
-  const stapleSet = new Set(staples.map(s => s.toLowerCase()));
-  QA_ITEMS.forEach(g => g.items.forEach(i => {
-    if (!stapleSet.has(i.toLowerCase())) staples.push(i);
-  }));
-  ingredients = ingredients.filter(i => {
-    const qaAllItems = new Set(QA_ITEMS.flatMap(g => g.items.map(x => x.toLowerCase())));
-    return !qaAllItems.has(i.toLowerCase());
-  });
-  saveStaples(); saveIngs();
-  renderAllIngPanels();
-// Restore allergy chip visual state
-activeAllergies.forEach(key => {
-  const btn = document.querySelector(`[onclick*="toggleAllergy"][onclick*="${key}"]`);
-  if (btn) btn.classList.add('on');
-}); updateFindBtn(); findRecipes();
-}
 
 function removeCustomIng(val) {
   ingredients = ingredients.filter(i => i !== val);
