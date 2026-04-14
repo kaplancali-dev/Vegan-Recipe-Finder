@@ -3618,14 +3618,18 @@ function pillClass(pct) {
 }
 
 function searchUrl(r) {
-  // Always Google search — no unverified URLs
-  return 'https://www.google.com/search?q=' + encodeURIComponent('vegan ' + r.title + ' recipe');
+  // When we have a direct URL, use it; otherwise do a targeted Google search
+  if (r.url) return r.url;
+  const q = r.site && r.site !== 'Original Recipe'
+    ? r.title + ' ' + r.site + ' vegan recipe'
+    : 'vegan ' + r.title + ' recipe';
+  return 'https://www.google.com/search?q=' + encodeURIComponent(q);
 }
 
 function siteHomeUrl(r) {
+  // Show globe only when we have a direct recipe URL — goes straight to the recipe
   if (!r.url) return null;
-  // Return clean homepage URL
-  try { return new URL(r.url).origin; } catch(e) { return r.url; }
+  return r.url;
 }
 
 function recipeCard(r) {
