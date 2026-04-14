@@ -324,8 +324,7 @@ header p{color:#86efac;font-size:0.93rem;margin-top:6px}
 
       <!-- Hero opener -->
       <div style="text-align:center;padding:10px 0 18px">
-        <p style="font-size:1.15rem;line-height:1.7;color:#d1fae5;margin:0">You open your fridge and pantry. You see ingredients.<br>But the real question is always the same:</p>
-        <p style="font-size:1.35rem;font-weight:700;color:#4ade80;margin:10px 0 6px;font-style:italic">"What can I actually make right now?"</p>
+        <p style="font-size:1.15rem;line-height:1.7;color:#d1fae5;margin:0">You open your fridge and pantry. You see ingredients.<br>But the real question is always the same: <span style="font-weight:700;color:#4ade80;font-style:italic">"What can I actually make right now?"</span></p>
         <p style="font-size:1rem;color:#86efac;margin:0"><strong style="color:#4ade80">HARVEST</strong> was built to answer that—instantly.</p>
       </div>
 
@@ -4379,8 +4378,14 @@ function pillClass(pct) {
 }
 
 function searchUrl(r) {
-  // Link directly to the recipe URL if available
-  if (r.url) return r.url;
+  // Use site: search so the result is always correct even if the slug changed
+  if (r.url) {
+    try {
+      const domain = new URL(r.url).hostname;
+      const q = 'site:' + domain + ' ' + r.title;
+      return 'https://www.google.com/search?q=' + encodeURIComponent(q);
+    } catch(e) {}
+  }
   const q = r.site && r.site !== 'Original Recipe'
     ? r.title + ' ' + r.site + ' vegan recipe'
     : 'vegan ' + r.title + ' recipe';
