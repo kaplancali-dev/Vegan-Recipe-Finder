@@ -294,7 +294,8 @@ header p{color:#86efac;font-size:0.93rem;margin-top:6px}
 .cm-type-btn{padding:9px 16px;border:2px solid #1a3a1f;border-radius:10px;background:#0a130b;color:#86efac;font-size:0.88rem;font-weight:700;cursor:pointer;transition:all .15s}
 .cm-type-btn:hover{border-color:#4ade80;color:#4ade80;background:#0f1f12}
 .cm-type-btn.on{background:#14532d;border-color:#4ade80;color:#fff;box-shadow:0 0 0 2px #4ade8033}
-.cm-layout{display:grid;grid-template-columns:320px 1fr;gap:16px;align-items:start}
+.cm-layout{display:grid;grid-template-columns:1fr;gap:16px;align-items:start}
+@media(min-width:781px){.cm-layout{grid-template-columns:320px 1fr}}
 
 /* ── SHOPPING LIST ── */
 .shop-actions{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
