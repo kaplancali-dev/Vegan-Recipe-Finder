@@ -3709,6 +3709,7 @@ function showTab(name) {
   if (name === 'favorites') renderFavs();
   if (name === 'shopping')  renderShop();
   if (name === 'canmake')   initCanMake();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 // ── FILTERS ───────────────────────────────────────────────────────────────────
@@ -4880,12 +4881,9 @@ function runCanMake() {
   if (!total) html = `<div class="empty"><div class="e-icon">🥦</div><p>No recipes found within 2 missing ingredients.<br>Try selecting more pantry items.</p></div>`;
 
   document.getElementById('cmResults').innerHTML = html;
-  // On mobile (single-column), auto-scroll to results so user sees them
-  if (window.innerWidth < 768 && html) {
-    setTimeout(() => {
-      const el = document.getElementById('cmResults');
-      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 100);
+  // On mobile, scroll to top so user sees the full panel from the beginning
+  if (window.innerWidth < 768) {
+    setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 100);
   }
 }
 
