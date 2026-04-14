@@ -3624,8 +3624,14 @@ function pillClass(pct) {
 }
 
 function searchUrl(r) {
-  // When we have a direct URL, use it; otherwise do a targeted Google search
-  if (r.url) return r.url;
+  // Use site: search so the result is always correct even if the slug changed
+  if (r.url) {
+    try {
+      const domain = new URL(r.url).hostname;
+      const q = 'site:' + domain + ' ' + r.title;
+      return 'https://www.google.com/search?q=' + encodeURIComponent(q);
+    } catch(e) {}
+  }
   const q = r.site && r.site !== 'Original Recipe'
     ? r.title + ' ' + r.site + ' vegan recipe'
     : 'vegan ' + r.title + ' recipe';
