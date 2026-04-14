@@ -577,6 +577,13 @@ header p{color:#86efac;font-size:0.93rem;margin-top:6px}
             <button class="fc"    id="cmtime-60" onclick="setCMTime(this,60)">≤ 60 min</button>
           </div>
         </div>
+        <!-- RECIPE NAME SEARCH -->
+        <div class="card" style="margin-bottom:12px">
+          <div class="filter-label">Recipe Name <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#4b7a52">(optional)</span></div>
+          <input class="name-search-input" id="cmNameInput" type="text" style="margin-top:7px"
+            placeholder="Type to filter results… e.g. curry, tacos"
+            oninput="cmNameFilter=this.value.trim().toLowerCase();runCanMake()">
+        </div>
         <!-- ALLERGIES -->
         <div class="card" style="margin-bottom:12px">
           <div class="filter-label">Allergies &amp; Dietary Needs <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#ef4444;font-size:0.75rem">— excludes matching recipes</span></div>
@@ -4245,6 +4252,7 @@ let cmCustomItems = [];
 let cmInited = false;
 let cmMaxTime = 0;
 let cmAllergies = new Set();
+let cmNameFilter = '';
 let cmTypeFilter = 'all';
 
 function setCMTime(btn, val) {
@@ -4392,7 +4400,8 @@ function runCanMake() {
     return r.missing <= maxMissing;
   }).filter(r => cmTypeFilter === 'all' || cmMealType(r) === cmTypeFilter)
     .filter(r => !cmMaxTime || !r.time || r.time <= cmMaxTime)
-    .filter(r => !cmAllergies.size || ![...cmAllergies].some(key => recipeHasAllergen(r, key)));
+    .filter(r => !cmAllergies.size || ![...cmAllergies].some(key => recipeHasAllergen(r, key)))
+    .filter(r => !cmNameFilter || r.title.toLowerCase().includes(cmNameFilter));
 
   const g0 = scored.filter(r => r.missing === 0).sort((a,b) => a.title.localeCompare(b.title));
   const g1 = scored.filter(r => r.missing === 1).sort((a,b) => a.title.localeCompare(b.title));
