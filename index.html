@@ -3675,6 +3675,18 @@ function showToast(msg, duration = 2000) {
 }
 let ingredients = _lsGet('vrf_ings', '[]');
 let staples     = _lsGet('vrf_staples', '[]');
+const GF_SWAPS = {
+  'soy sauce':'tamari','flour tortillas':'corn tortillas','noodles':'rice noodles',
+  'ramen noodles':'rice ramen noodles','pasta':'gluten-free pasta','elbow macaroni':'gluten-free pasta',
+  'penne pasta':'gluten-free penne','spaghetti':'gluten-free spaghetti','linguine':'gluten-free linguine',
+  'jumbo pasta shells':'gluten-free pasta shells','egg noodles':'rice noodles',
+  'breadcrumbs':'gluten-free breadcrumbs','panko breadcrumbs':'gluten-free panko',
+  'all-purpose flour':'gluten-free flour','bread flour':'gluten-free flour','spelt flour':'gluten-free flour',
+  'burger buns':'GF burger buns','baguette':'GF baguette','sourdough bread':'GF sourdough bread',
+  'thick bread':'GF bread','pita bread':'GF pita','gyoza wrappers':'rice paper wrappers',
+  'dumpling wrappers':'rice paper wrappers','ladyfinger biscuits':'GF ladyfingers',
+  'phyllo dough':'GF phyllo dough','seitan':'extra firm tofu','couscous':'quinoa','barley':'brown rice',
+};
 let favorites   = _lsGet('vrf_favs', '[]');
 let shopList    = _lsGet('vrf_shop', '[]');
 let results     = [];
@@ -4126,37 +4138,7 @@ function recipeCard(r) {
   const needShow = r.needNames ? r.needNames.slice(0, 6) : [];
   const moreNeed = r.needNames && r.needNames.length > 6 ? ` <span style="color:#4b7a52;font-size:0.68rem">+${r.needNames.length-6} more</span>` : '';
 
-  // GF swap map: original ingredient → GF substitute
-  const GF_SWAPS = {
-    'soy sauce':        'tamari',
-    'flour tortillas':  'corn tortillas',
-    'noodles':          'rice noodles',
-    'ramen noodles':    'rice ramen noodles',
-    'pasta':            'gluten-free pasta',
-    'elbow macaroni':   'gluten-free pasta',
-    'penne pasta':      'gluten-free penne',
-    'spaghetti':        'gluten-free spaghetti',
-    'linguine':         'gluten-free linguine',
-    'jumbo pasta shells':'gluten-free pasta shells',
-    'egg noodles':      'rice noodles',
-    'breadcrumbs':      'gluten-free breadcrumbs',
-    'panko breadcrumbs':'gluten-free panko',
-    'all-purpose flour':'gluten-free flour',
-    'bread flour':      'gluten-free flour',
-    'spelt flour':      'gluten-free flour',
-    'burger buns':      'GF burger buns',
-    'baguette':         'GF baguette',
-    'sourdough bread':  'GF sourdough bread',
-    'thick bread':      'GF bread',
-    'pita bread':       'GF pita',
-    'gyoza wrappers':   'rice paper wrappers',
-    'dumpling wrappers':'rice paper wrappers',
-    'ladyfinger biscuits':'GF ladyfingers',
-    'phyllo dough':     'GF phyllo dough',
-    'seitan':           'extra firm tofu',
-    'couscous':         'quinoa',
-    'barley':           'brown rice',
-  };
+  // GF_SWAPS is global
 
   function renderIngChip(ing, cls) {
     const sub = GF_SWAPS[ing.toLowerCase()];
@@ -4913,7 +4895,11 @@ function runCanMake() {
 function cmCard(r, group) {
   const isFav = favorites.some(f => f.id === r.id);
   const instrNotes = instructions[r.id] || '';
-  const missingChips = r.needNames.map(i => `<span class="cm-missing-chip">${i}</span>`).join('');
+  const missingChips = r.needNames.map(i => {
+    const sub = GF_SWAPS[i.toLowerCase()];
+    if (sub) return `<span class="cm-missing-chip" style="background:#3a2800;border:1px solid #a16207;color:#fde68a" title="Use ${sub} instead"><s style="opacity:0.55;font-size:0.85em">${i}</s>&nbsp;→&nbsp;<strong>${sub}</strong></span>`;
+    return `<span class="cm-missing-chip">${i}</span>`;
+  }).join('');
   return `<div class="cm-r-card g${group}">
   <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
     <div>
