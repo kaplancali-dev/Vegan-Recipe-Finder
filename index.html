@@ -566,6 +566,30 @@ header p{color:#86efac;font-size:0.93rem;margin-top:6px}
           </div>
         </div>
 
+        <!-- MAX COOK TIME -->
+        <div class="card" style="margin-bottom:12px">
+          <div class="filter-label">Max Cook Time <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#4b7a52">(optional)</span></div>
+          <div class="filter-chips" style="margin-top:7px">
+            <button class="fc on" id="cmtime-0"  onclick="setCMTime(this,0)">⏱ Any</button>
+            <button class="fc"    id="cmtime-15" onclick="setCMTime(this,15)">≤ 15 min</button>
+            <button class="fc"    id="cmtime-30" onclick="setCMTime(this,30)">≤ 30 min</button>
+            <button class="fc"    id="cmtime-45" onclick="setCMTime(this,45)">≤ 45 min</button>
+            <button class="fc"    id="cmtime-60" onclick="setCMTime(this,60)">≤ 60 min</button>
+          </div>
+        </div>
+        <!-- ALLERGIES -->
+        <div class="card" style="margin-bottom:12px">
+          <div class="filter-label">Allergies &amp; Dietary Needs <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#ef4444;font-size:0.75rem">— excludes matching recipes</span></div>
+          <div class="filter-chips" id="cmAllergyGrid" style="margin-top:7px">
+            <span class="allergy-chip" onclick="toggleCMAllergy(this,'peanut')">🥜 Peanuts</span>
+            <span class="allergy-chip" onclick="toggleCMAllergy(this,'tree nut')">🌰 Tree Nuts</span>
+            <span class="allergy-chip" onclick="toggleCMAllergy(this,'soy')">🫘 Soy</span>
+            <span class="allergy-chip" onclick="toggleCMAllergy(this,'coconut')">🥥 Coconut</span>
+            <span class="allergy-chip" onclick="toggleCMAllergy(this,'corn')">🌽 Corn</span>
+            <span class="allergy-chip" onclick="toggleCMAllergy(this,'mushroom')">🍄 Mushrooms</span>
+            <span class="allergy-chip" onclick="toggleCMAllergy(this,'nightshade')">🍅 Nightshades</span>
+          </div>
+        </div>
         <div class="card">
           <div class="section-top">
             <div class="card-title" style="margin-bottom:0">🧺 What's in your kitchen?</div>
@@ -4219,7 +4243,22 @@ activeAllergies.forEach(key => {
 let cmSelected = new Set();
 let cmCustomItems = [];
 let cmInited = false;
+let cmMaxTime = 0;
+let cmAllergies = new Set();
 let cmTypeFilter = 'all';
+
+function setCMTime(btn, val) {
+  cmMaxTime = val;
+  document.querySelectorAll('[id^="cmtime-"]').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+  if (cmSelected.size) runCanMake();
+}
+
+function toggleCMAllergy(chip, key) {
+  if (cmAllergies.has(key)) { cmAllergies.delete(key); chip.classList.remove('on'); }
+  else { cmAllergies.add(key); chip.classList.add('on'); }
+  if (cmSelected.size) runCanMake();
+}
 
 function setCMType(type) {
   cmTypeFilter = type;
@@ -4351,7 +4390,22 @@ function runCanMake() {
   }).filter(r => {
     const maxMissing = (cmTypeFilter === 'dessert' || (cmTypeFilter === 'all' && cmMealType(r) === 'dessert')) ? 3 : 2;
     return r.missing <= maxMissing;
-  }).filter(r => cmTypeFilter === 'all' || cmMealType(r) === cmTypeFilter);
+  }).filter(r => cmTypeFilter === 'all' || cmMealType(r) === cmTypeFilter)
+    .filter(r => !cmMaxTime || !r.time || r.time <= cmMaxTime)
+    .filter(r => {
+      if (!cmAllergies.size) return true;
+      const ings = r.ing.map(i => i.toLowerCase()).join(' ');
+      for (const a of cmAllergies) {
+        if (a === 'peanut'     && /peanut/.test(ings))                           return false;
+        if (a === 'tree nut'   && /(almond|cashew|walnut|pecan|pistachio|hazelnut|pine nut|macadamia)/.test(ings)) return false;
+        if (a === 'soy'        && /(soy|tofu|tempeh|edamame|miso)/.test(ings)) return false;
+        if (a === 'coconut'    && /coconut/.test(ings))                           return false;
+        if (a === 'corn'       && /corn/.test(ings))                          return false;
+        if (a === 'mushroom'   && /mushroom/.test(ings))                          return false;
+        if (a === 'nightshade' && /(tomato|pepper|eggplant|potato|paprika|chili|jalape)/.test(ings)) return false;
+      }
+      return true;
+    });
 
   const g0 = scored.filter(r => r.missing === 0).sort((a,b) => a.title.localeCompare(b.title));
   const g1 = scored.filter(r => r.missing === 1).sort((a,b) => a.title.localeCompare(b.title));
