@@ -4392,20 +4392,7 @@ function runCanMake() {
     return r.missing <= maxMissing;
   }).filter(r => cmTypeFilter === 'all' || cmMealType(r) === cmTypeFilter)
     .filter(r => !cmMaxTime || !r.time || r.time <= cmMaxTime)
-    .filter(r => {
-      if (!cmAllergies.size) return true;
-      const ings = r.ing.map(i => i.toLowerCase()).join(' ');
-      for (const a of cmAllergies) {
-        if (a === 'peanut'     && /peanut/.test(ings))                           return false;
-        if (a === 'tree nut'   && /(almond|cashew|walnut|pecan|pistachio|hazelnut|pine nut|macadamia)/.test(ings)) return false;
-        if (a === 'soy'        && /(soy|tofu|tempeh|edamame|miso)/.test(ings)) return false;
-        if (a === 'coconut'    && /coconut/.test(ings))                           return false;
-        if (a === 'corn'       && /corn/.test(ings))                          return false;
-        if (a === 'mushroom'   && /mushroom/.test(ings))                          return false;
-        if (a === 'nightshade' && /(tomato|pepper|eggplant|potato|paprika|chili|jalape)/.test(ings)) return false;
-      }
-      return true;
-    });
+    .filter(r => !cmAllergies.size || ![...cmAllergies].some(key => recipeHasAllergen(r, key)));
 
   const g0 = scored.filter(r => r.missing === 0).sort((a,b) => a.title.localeCompare(b.title));
   const g1 = scored.filter(r => r.missing === 1).sort((a,b) => a.title.localeCompare(b.title));
