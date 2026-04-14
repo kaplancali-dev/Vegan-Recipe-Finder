@@ -585,7 +585,7 @@ header p{color:#86efac;font-size:0.93rem;margin-top:6px}
       <div>
         <div class="card">
           <div class="results-header">
-            <div class="results-count" id="cmResultsCount" style="color:#86efac;font-size:0.82rem">Select ingredients and tap the button →</div>
+            <div class="results-count" id="cmResultsCount" style="color:#86efac;font-size:0.82rem">Select ingredients above to see matching recipes</div>
           </div>
           <div id="cmResults"></div>
         </div>
@@ -4306,7 +4306,7 @@ function cmClearAll() {
   cmSelected.clear();
   renderCMChips();
   document.getElementById('cmResults').innerHTML = '';
-  document.getElementById('cmResultsCount').textContent = 'Select ingredients and tap the button →';
+  document.getElementById('cmResultsCount').textContent = 'Select ingredients above to see matching recipes';
 }
 
 function updateCMCount() {
@@ -4361,7 +4361,7 @@ function cmRenderGroup(recipes, matchGroup) {
 
 function runCanMake() {
   if (!cmSelected.size) {
-    document.getElementById('cmResultsCount').textContent = 'Select ingredients on the left to see matching recipes.';
+    document.getElementById('cmResultsCount').textContent = 'Select ingredients to see matching recipes.';
     document.getElementById('cmResults').innerHTML = '';
     return;
   }
@@ -4409,6 +4409,13 @@ function runCanMake() {
   if (!total) html = `<div class="empty"><div class="e-icon">🥦</div><p>No recipes found within 2 missing ingredients.<br>Try selecting more pantry items.</p></div>`;
 
   document.getElementById('cmResults').innerHTML = html;
+  // On mobile (single-column), auto-scroll to results so user sees them
+  if (window.innerWidth < 768 && html) {
+    setTimeout(() => {
+      const el = document.getElementById('cmResults');
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
+  }
 }
 
 function cmCard(r, group) {
