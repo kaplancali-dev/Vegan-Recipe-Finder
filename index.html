@@ -4142,7 +4142,10 @@ function findRecipes(scrollToResults = false) {
   const userNorm = expandWithAliases(ingredients);
 
   let pool = RECIPES;
-  if (selectedCats.length) pool = pool.filter(r => r.cats && selectedCats.every(c => c.includes('|') ? c.split('|').some(s => r.cats.includes(s.trim())) : r.cats.includes(c)));
+  if (selectedCats.length) pool = pool.filter(r => r.cats && selectedCats.every(c => {
+    if (c === 'High-Protein') return r.nut && r.nut.pro >= 15;
+    return c.includes('|') ? c.split('|').some(s => r.cats.includes(s.trim())) : r.cats.includes(c);
+  }));
   if (selectedSite) pool = pool.filter(r => r.site === selectedSite);
   if (maxTime > 0)  pool = pool.filter(r => r.time && r.time <= maxTime);
   if (nameSearch)   pool = pool.filter(r => { const t = r.title.toLowerCase(); return nameSearch.toLowerCase().split(/\s+/).every(w => { const s = stem(w); return t.includes(w) || t.includes(s); }); });
