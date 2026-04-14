@@ -428,7 +428,7 @@ header p{color:#86efac;font-size:0.93rem;margin-top:6px}
         </svg>
         <div class="intro-section-title">Clean, Flexible, Intentional</div>
       </div>
-      <p style="color:#d1fae5;margin:4px 0 6px">100% plant-based, sourced from trusted chefs, filterable by allergen, cuisine, mood, or time. Some recipes use soy sauce or flour tortillas — ingredients that contain gluten. Rather than exclude those recipes, we fix them: <s style="opacity:0.6">soy sauce</s> <span style="color:#fde68a">→ <strong>tamari</strong></span>, <s style="opacity:0.6">flour tortillas</s> <span style="color:#fde68a">→ <strong>corn tortillas</strong></span>. One simple swap keeps the recipe — and makes it fully gluten-free.</p>
+      <p style="color:#d1fae5;margin:4px 0 6px">100% plant-based, sourced from trusted chefs, filterable by allergen, cuisine, mood, or time. Some recipes use soy sauce or flour tortillas — ingredients that contain gluten. Rather than exclude those recipes, we fix them: <span style="color:#fde68a"><s>soy sauce</s> → <strong>tamari</strong></span>, <span style="color:#fde68a"><s>flour tortillas</s> → <strong>corn tortillas</strong></span>. One simple swap keeps the recipe — and makes it fully gluten-free.</p>
 
       <!-- ③ BUILT AROUND YOU -->
       <div class="intro-section">
@@ -4340,7 +4340,7 @@ function findRecipes(scrollToResults = false) {
 }
 
 function applySort() {
-  if (sortKey === 'match') results.sort((a, b) => b.pct - a.pct || b.userHave - a.userHave);
+  if (sortKey === 'match') results.sort((a, b) => b.pct - a.pct || b.userHave - a.userHave || a.title.localeCompare(b.title));
   else if (sortKey === 'time') results.sort((a, b) => (a.time || 999) - (b.time || 999));
   else if (sortKey === 'serv') results.sort((a, b) => (b.servings || 0) - (a.servings || 0));
   else if (sortKey === 'alpha') results.sort((a, b) => a.title.localeCompare(b.title));
@@ -4379,14 +4379,8 @@ function pillClass(pct) {
 }
 
 function searchUrl(r) {
-  // Use site: search so the result is always correct even if the slug changed
-  if (r.url) {
-    try {
-      const domain = new URL(r.url).hostname;
-      const q = 'site:' + domain + ' ' + r.title;
-      return 'https://www.google.com/search?q=' + encodeURIComponent(q);
-    } catch(e) {}
-  }
+  // Link directly to the recipe URL if available
+  if (r.url) return r.url;
   const q = r.site && r.site !== 'Original Recipe'
     ? r.title + ' ' + r.site + ' vegan recipe'
     : 'vegan ' + r.title + ' recipe';
