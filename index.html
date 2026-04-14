@@ -3673,7 +3673,6 @@ function recipeCard(r) {
   ${needChips ? `<div class="chip-label-sm" style="margin-top:4px">You need</div><div class="chips">${needChips}</div>` : ''}
   <div class="r-actions">
     <a href="${searchUrl(r)}" target="_blank" rel="noopener"><button class="btn-sm btn-link">🔍 Find Recipe</button></a>
-    ${siteHomeUrl(r) ? `<a href="${siteHomeUrl(r)}" target="_blank" rel="noopener" title="Visit ${r.site}"><button class="btn-sm btn-link" style="padding:5px 9px">🌐</button></a>` : ''}
     <button class="btn-sm btn-fav${isFav ? ' on' : ''}" onclick="toggleFav(${r.id})">
       ${isFav ? '❤️ Saved' : '🤍 Save'}
     </button>
