@@ -3684,7 +3684,6 @@ function recipeCard(r) {
     </button>
     <button class="btn-sm btn-shop" onclick="addToShop(${r.id})">🛒 Add Missing</button>
     <button class="btn-sm btn-notes${instrNotes ? ' on' : ''}" onclick="openInstrModal(${r.id})">📝 ${instrNotes ? 'View Notes' : 'Add Notes'}</button>
-<button class="btn-sm" style="background:#1a3a1f;border:1px solid #2d5a33;color:#86efac" onclick="openHandsFree(${r.id})">👁️ Cook</button>
   </div>
   ${instrNotes ? `<div class="saved-instructions-label">📝 Saved Notes</div><div class="saved-instructions" onclick="openInstrModal(${r.id})">${instrNotes.substring(0,200)}${instrNotes.length>200?'…':''}</div>` : ''}
 </div>`;
@@ -3932,53 +3931,6 @@ function openInstrModal(id) {
   setTimeout(() => document.getElementById('instrTextarea').focus(), 100);
 }
 
-
-function openHandsFree(id) {
-  const r = RECIPES.find(r => r.id === id);
-  const notes = instructions[id] || '';
-  if (!r) return;
-  
-  // Request wake lock
-  if ('wakeLock' in navigator) {
-    navigator.wakeLock.request('screen').catch(() => {});
-  }
-  
-  // Split notes into steps or use ingredients as steps
-  const steps = notes 
-    ? notes.split(/\n+/).filter(s => s.trim())
-    : r.ing.map((ing, i) => `${i+1}. ${ing}`);
-  
-  let currentStep = 0;
-  
-  const overlay = document.createElement('div');
-  overlay.id = 'handsFreeOverlay';
-  overlay.style.cssText = 'position:fixed;inset:0;background:#0a130b;z-index:10000;display:flex;flex-direction:column;padding:env(safe-area-inset-top,20px) 24px env(safe-area-inset-bottom,20px);color:#e8f5e9;';
-  
-  function renderStep() {
-    overlay.innerHTML = `
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
-        <div style="font-size:1rem;color:#4ade80;font-weight:700">${r.title}</div>
-        <button onclick="document.getElementById('handsFreeOverlay').remove()" style="background:none;border:1px solid #2d5a33;color:#86efac;border-radius:8px;padding:6px 14px;font-size:0.9rem;cursor:pointer">✕ Exit</button>
-      </div>
-      <div style="flex:1;display:flex;align-items:center;justify-content:center;text-align:center">
-        <div style="font-size:clamp(1.4rem,5vw,2.2rem);line-height:1.5;color:#e8f5e9;max-width:700px">${steps[currentStep] || 'Done! Enjoy your meal 🌱'}</div>
-      </div>
-      <div style="text-align:center;color:#4b7a52;margin-bottom:16px;font-size:0.85rem">Step ${currentStep+1} of ${steps.length}</div>
-      <div style="display:flex;gap:12px;justify-content:center">
-        <button onclick="void(0)" id="hfPrev" style="flex:1;max-width:160px;background:#14532d;border:none;color:#fff;border-radius:12px;padding:16px;font-size:1.1rem;cursor:pointer" ${currentStep===0?'disabled style="opacity:0.3"':''}>← Back</button>
-        <button id="hfNext" style="flex:1;max-width:160px;background:#16a34a;border:none;color:#fff;border-radius:12px;padding:16px;font-size:1.1rem;font-weight:700;cursor:pointer">${currentStep >= steps.length-1 ? '✅ Done' : 'Next →'}</button>
-      </div>
-    `;
-    document.getElementById('hfPrev').onclick = () => { if(currentStep>0){currentStep--;renderStep();} };
-    document.getElementById('hfNext').onclick = () => { 
-      if(currentStep < steps.length-1){currentStep++;renderStep();}
-      else{overlay.remove();}
-    };
-  }
-  
-  renderStep();
-  document.body.appendChild(overlay);
-}
 
 
 function closeInstrModal() {
