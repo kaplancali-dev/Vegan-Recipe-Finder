@@ -21,6 +21,7 @@ UNIT_WORDS = [
     "ml", "milliliter", "milliliters", "liter", "liters", "l",
     "pint", "pints", "quart", "quarts", "qt", "qts",
     "pinch", "pinches", "dash", "dashes", "handful", "handfuls",
+    "drop", "drops", "splash", "splashes", "sprinkle", "sprinkles",
     "bunch", "bunches", "clove", "cloves", "sprig", "sprigs",
     "slice", "slices", "piece", "pieces", "stick", "sticks",
     "can", "cans", "package", "packages", "pkg", "pkgs",
@@ -37,6 +38,7 @@ DESCRIPTORS = [
     "whole", "fresh", "frozen", "dried", "raw", "cooked",
     "additive-free", "organic", "unsalted", "unsweetened",
     "ripe", "firm", "soft",
+    "any", "some", "fat-reduced", "low-fat", "reduced-fat",
     "of",
 ]
 DESC_PAT = r"(?:" + "|".join(DESCRIPTORS) + r")"
@@ -80,15 +82,18 @@ def main():
         local_changed = False
         seen = set()
         for it in items:
-            c = clean(it)
-            if c and len(c) > 1 and c not in seen:
-                new_items.append(c)
-                seen.add(c)
-                if c != it:
-                    local_changed = True
-                    changed += 1
-            elif c != it:
+            # split on " or " (case-insensitive) — turn "X or Y" into two ingredients
+            pieces = re.split(r"\s+or\s+", it, flags=re.IGNORECASE)
+            if len(pieces) > 1:
                 local_changed = True
+            for piece in pieces:
+                c = clean(piece)
+                if c and len(c) > 1 and c not in seen:
+                    new_items.append(c)
+                    seen.add(c)
+                    if c != it:
+                        local_changed = True
+                        changed += 1
         if local_changed:
             changed_entries += 1
         return "ing:[" + ",".join(f'"{x}"' for x in new_items) + "]"
