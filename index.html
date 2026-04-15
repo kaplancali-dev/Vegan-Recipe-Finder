@@ -309,6 +309,7 @@ header p{color:#86efac;font-size:0.93rem;margin-top:6px}
 .shop-item.checked{text-decoration:line-through;color:#4b7a52}
 .shop-source{font-size:0.7rem;color:#4b7a52;margin-left:auto}
 .shop-empty{text-align:center;color:#4b7a52;padding:28px 0;font-size:0.9rem}
+.cart{filter:invert(1) hue-rotate(180deg) brightness(2) contrast(1.1);display:inline-block}
 </style>
 </head>
 <body>
@@ -445,7 +446,7 @@ header p{color:#86efac;font-size:0.93rem;margin-top:6px}
             <line x1="50" y1="60" x2="56" y2="72" stroke="white" stroke-width="7" stroke-linecap="round"/>
           </g>
         </svg>
-        <div style="flex:1;color:#d1fae5;margin:0;font-size:1.15rem;line-height:1.7"><span class="intro-section-title">Built Around You —</span> ⭐ Save <strong>Staples</strong> &nbsp;❤️ Save favorites &nbsp;<span style="filter:invert(1) hue-rotate(180deg) brightness(2)">🛒</span> Create shopping list &nbsp;📝 Add notes</div></div>
+        <div style="flex:1;color:#d1fae5;margin:0;font-size:1.15rem;line-height:1.7"><span class="intro-section-title">Built Around You —</span> ⭐ Save <strong>Staples</strong> &nbsp;❤️ Save favorites &nbsp;<span class="cart">🛒</span> Create shopping list &nbsp;📝 Add notes</div></div>
 
       <!-- ④ BROWSE WITH CLARITY -->
       <div class="intro-section">
@@ -509,7 +510,7 @@ header p{color:#86efac;font-size:0.93rem;margin-top:6px}
       <span style="font-size:0.7rem;font-weight:400;opacity:0.7;letter-spacing:0">missing 3 or fewer ingredients</span>
     </button>
     <button class="tab-btn" onclick="showTab('favorites')">❤️ Favorites</button>
-    <button class="tab-btn" onclick="showTab('shopping')">🛒 Shopping List</button>
+    <button class="tab-btn" onclick="showTab('shopping')"><span class="cart">🛒</span> Shopping List</button>
   </div>
 
   <!-- ══════ SEARCH PANEL ══════ -->
@@ -837,12 +838,12 @@ header p{color:#86efac;font-size:0.93rem;margin-top:6px}
   <!-- ══════ SHOPPING LIST PANEL ══════ -->
   <div class="panel" id="panel-shopping">
     <div class="card">
-      <div class="card-title">🛒 Shopping List</div>
+      <div class="card-title"><span class="cart">🛒</span> Shopping List</div>
       <div class="shop-actions">
         <button class="btn-copy-list" onclick="copyShopList()">📋 Copy List</button>
         <button class="btn-clear-list" onclick="clearShop()">🗑️ Clear List</button>
       </div>
-      <div id="shopList"><div class="shop-empty">Your shopping list is empty.<br>Click "🛒 Add Missing" on a recipe to add ingredients.</div></div>
+      <div id="shopList"><div class="shop-empty">Your shopping list is empty.<br>Click "<span class="cart">🛒</span> Add Missing" on a recipe to add ingredients.</div></div>
     </div>
   </div>
 </div>
@@ -890,7 +891,7 @@ function renderCategorizedShoppingList() {
   const sortedCats = Object.keys(grouped).sort();
   
   let html = '<div class="card" style="padding:16px">';
-  html += '<div style="font-size:1.1rem;font-weight:700;margin-bottom:16px;color:#86efac">🛒 Shopping List</div>';
+  html += '<div style="font-size:1.1rem;font-weight:700;margin-bottom:16px;color:#86efac"><span class="cart">🛒</span> Shopping List</div>';
   
   sortedCats.forEach(cat => {
     html += `<div style="margin-bottom:16px">
@@ -3542,7 +3543,7 @@ function recipeCard(r) {
     <button class="btn-sm btn-fav${isFav ? ' on' : ''}" onclick="toggleFav(${r.id})">
       ${isFav ? '❤️ Saved' : '🤍 Save'}
     </button>
-    <button class="btn-sm btn-shop" onclick="addToShop(${r.id})">🛒 Add Missing</button>
+    <button class="btn-sm btn-shop" onclick="addToShop(${r.id})"><span class="cart">🛒</span> Add Missing</button>
     <button class="btn-sm btn-notes${instrNotes ? ' on' : ''}" onclick="openInstrModal(${r.id})">📝 ${instrNotes ? 'View Notes' : 'Add Notes'}</button>
   </div>
   ${instrNotes ? `<div class="saved-instructions-label">📝 Saved Notes</div><div class="saved-instructions" onclick="openInstrModal(${r.id})">${instrNotes.substring(0,200)}${instrNotes.length>200?'…':''}</div>` : ''}
@@ -3646,7 +3647,7 @@ function addToShop(id) {
 function renderShop() {
   const el = document.getElementById('shopList');
   if (!shopList.length) {
-    el.innerHTML = `<div class="shop-empty">Your shopping list is empty.<br>Click "🛒 Add Missing" on a recipe to add ingredients.</div>`;
+    el.innerHTML = `<div class="shop-empty">Your shopping list is empty.<br>Click "<span class="cart">🛒</span> Add Missing" on a recipe to add ingredients.</div>`;
     return;
   }
   el.innerHTML = shopList.map((item, i) => `
@@ -4275,7 +4276,7 @@ function cmCard(r, group) {
   <div class="cm-actions">
     <a href="${searchUrl(r)}" target="_blank" rel="noopener"><button class="btn-sm btn-link">🔍 Find Recipe</button></a>
     <button class="btn-sm btn-fav${isFav?' on':''}" onclick="toggleFav(${r.id});runCanMake()">${isFav?'❤️ Saved':'🤍 Save'}</button>
-    ${r.needNames.length ? `<button class="btn-sm btn-shop" onclick="cmAddMissingToShop(${r.id},[${r.needNames.map(n=>`'${n.replace(/'/g,"\\'")}' `).join(',')}])">🛒 Add Missing to List</button>` : ''}
+    ${r.needNames.length ? `<button class="btn-sm btn-shop" onclick="cmAddMissingToShop(${r.id},[${r.needNames.map(n=>`'${n.replace(/'/g,"\\'")}' `).join(',')}])"><span class="cart">🛒</span> Add Missing to List</button>` : ''}
     <button class="btn-sm btn-notes${instrNotes ? ' on' : ''}" onclick="openInstrModal(${r.id})">📝 ${instrNotes ? 'View Notes' : 'Add Notes'}</button>
   </div>
   ${instrNotes ? `<div class="saved-instructions-label">📝 Saved Notes</div><div class="saved-instructions" onclick="openInstrModal(${r.id})">${instrNotes.substring(0,200)}${instrNotes.length>200?'…':''}</div>` : ''}
@@ -4290,7 +4291,7 @@ function cmAddMissingToShop(id, items) {
   const btn = event.target;
   btn.textContent = '✅ Added!';
   btn.disabled = true;
-  setTimeout(() => { btn.textContent = '🛒 Add Missing to List'; btn.disabled = false; }, 2000);
+  setTimeout(() => { btn.textContent = '<span class="cart">🛒</span> Add Missing to List'; btn.disabled = false; }, 2000);
 }
 
 // ── INIT ──────────────────────────────────────────────────────────────────────
