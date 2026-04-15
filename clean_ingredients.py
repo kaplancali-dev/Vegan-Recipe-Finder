@@ -43,8 +43,34 @@ DESCRIPTORS = [
 ]
 DESC_PAT = r"(?:" + "|".join(DESCRIPTORS) + r")"
 
+PROSE_WORDS = {
+    "are","is","was","were","be","been",
+    "can","could","will","would","should","may","might",
+    "work","works","working",
+    "also","instead","alternative","alternatives","option","options","prefer",
+    "omit","add","use","uses","using","put","like","such",
+    "if","but","because","since",
+    "you","your","i","we","they",
+}
+
+def looks_like_prose(s: str) -> bool:
+    words = s.lower().split()
+    if len(words) > 5:
+        return True
+    if "," in s and len(words) > 3:
+        return True
+    if any(w.strip(",.").lower() in PROSE_WORDS for w in words):
+        return True
+    return False
+
 def clean(name: str) -> str:
     s = name.strip()
+    # truncate at first colon or em-dash (ingredient notes / prose after the name)
+    s = re.split(r"\s*[:—–]\s*", s, maxsplit=1)[0]
+    # drop anything absurdly long (prose, not an ingredient)
+    if len(s) > 60:
+        # take just the first few words
+        s = " ".join(s.split()[:4])
     # remove parentheticals anywhere
     s = re.sub(r"\s*\([^)]*\)", "", s)
     # strip leading numbers, fractions, vulgar fractions, ranges, hyphens
@@ -88,7 +114,7 @@ def main():
                 local_changed = True
             for piece in pieces:
                 c = clean(piece)
-                if c and len(c) > 1 and c not in seen:
+                if c and len(c) > 1 and c not in seen and not looks_like_prose(c):
                     new_items.append(c)
                     seen.add(c)
                     if c != it:
