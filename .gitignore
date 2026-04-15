@@ -6,3 +6,4 @@ harvest_progress.backup.json
 harvest_failed.json
 index_corrected.html
 recipe_audit.csv
+*.bak
