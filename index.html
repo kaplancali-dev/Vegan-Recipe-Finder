@@ -420,7 +420,7 @@ header p{color:#86efac;font-size:0.93rem;margin-top:6px}
           <line x1="88" y1="90" x2="97" y2="92" stroke="white" stroke-width="7" stroke-linecap="round"/>
           <line x1="2" y1="93" x2="98" y2="93" stroke="#166534" stroke-width="1" opacity=".5"/>
         </svg>
-        <div style="flex:1;color:#d1fae5;margin:0;font-size:1.15rem;line-height:1.7"><span class="intro-section-title">Clean, Flexible, Intentional —</span> 100% plant-based, sourced from trusted chefs, filterable by allergen, cuisine, mood, or time. Some recipes use soy sauce or flour tortillas — ingredients that contain gluten. Rather than exclude those recipes, we fix them: <span style="color:#fde68a"><s>soy sauce</s> → <strong>tamari</strong></span>, <span style="color:#fde68a"><s>flour tortillas</s> → <strong>corn tortillas</strong></span>. One simple swap keeps the recipe — and makes it fully gluten-free.</div></div>
+        <div style="flex:1;color:#d1fae5;margin:0;font-size:1.15rem;line-height:1.7"><span class="intro-section-title">Clean, Flexible, Intentional —</span> 100% plant-based, sourced from trusted chefs, filterable by allergen, cuisine, mood, or time. Some recipes include ingredients that aren't strictly vegan or gluten-free. Rather than exclude them, we annotate simple swaps: <span style="color:#fde68a"><s>soy sauce</s> → <strong>tamari</strong></span>, <span style="color:#fde68a"><s>flour tortillas</s> → <strong>corn tortillas</strong></span>, <span style="color:#fde68a"><s>egg</s> → <strong>flax egg</strong></span>, <span style="color:#fde68a"><s>butter</s> → <strong>vegan butter</strong></span>, <span style="color:#fde68a"><s>dairy milk</s> → <strong>plant-based milk</strong></span>, <span style="color:#fde68a"><s>cheese</s> → <strong>vegan cheese</strong></span>. One simple swap per ingredient keeps every recipe fully plant-based and gluten-free.</div></div>
 
       <!-- ③ BUILT AROUND YOU -->
       <div class="intro-section">
@@ -3002,6 +3002,37 @@ const GF_SWAPS = {
   'dumpling wrappers':'rice paper wrappers','ladyfinger biscuits':'GF ladyfingers',
   'phyllo dough':'GF phyllo dough','seitan':'extra firm tofu','couscous':'quinoa','barley':'brown rice',
 };
+// Vegan swaps: [vegan_term, original_term] — most specific first
+const VEGAN_SWAPS = [
+  ['vegan monterey jack cheese','monterey jack cheese'],
+  ['vegan provolone cheese','provolone cheese'],
+  ['vegan goat cheese','goat cheese'],
+  ['vegan cream cheese','cream cheese'],
+  ['vegan sour cream','sour cream'],
+  ['plant-based buttermilk','buttermilk'],
+  ['plant-based yogurt','yogurt'],
+  ['plant-based cream','cream'],
+  ['plant-based milk','milk'],
+  ['vegan parmesan','parmesan'],
+  ['vegan mozzarella','mozzarella'],
+  ['vegan ricotta','ricotta'],
+  ['vegan cheddar','cheddar'],
+  ['vegan feta','feta'],
+  ['vegan butter','butter'],
+  ['vegan cheese','cheese'],
+  ['flax egg','egg'],
+  ['aquafaba','egg whites'],
+];
+function applyVeganSwapMarkup(text) {
+  for (const [neu, orig] of VEGAN_SWAPS) {
+    const re = new RegExp('\\b' + neu.replace(/[-]/g,'\\-') + '\\b', 'i');
+    if (re.test(text)) {
+      const replacement = '<s style="opacity:0.55;font-size:0.85em">' + orig + '</s>&nbsp;→&nbsp;<strong>' + neu + '</strong>';
+      return { swapped: true, html: text.replace(re, replacement), orig, neu };
+    }
+  }
+  return { swapped: false, html: text };
+}
 let favorites   = _lsGet('vrf_favs', '[]');
 let shopList    = _lsGet('vrf_shop', '[]');
 let results     = [];
@@ -3465,6 +3496,10 @@ function recipeCard(r) {
       return `<span class="${cls}" style="background:#3a2800;border:1px solid #a16207;color:#fde68a;position:relative" title="Use ${sub} instead">` +
         `<s style="opacity:0.55;font-size:0.85em">${ing}</s>&nbsp;→&nbsp;<strong>${sub}</strong>` +
         `</span>`;
+    }
+    const vegan = applyVeganSwapMarkup(ing);
+    if (vegan.swapped) {
+      return `<span class="${cls}" style="background:#3a2800;border:1px solid #a16207;color:#fde68a" title="Vegan swap: ${vegan.orig} → ${vegan.neu}">${vegan.html}</span>`;
     }
     return `<span class="${cls}">${ing}</span>`;
   }
@@ -4214,6 +4249,8 @@ function cmCard(r, group) {
   const missingChips = r.needNames.map(i => {
     const sub = GF_SWAPS[i.toLowerCase()];
     if (sub) return `<span class="cm-missing-chip" style="background:#3a2800;border:1px solid #a16207;color:#fde68a" title="Use ${sub} instead"><s style="opacity:0.55;font-size:0.85em">${i}</s>&nbsp;→&nbsp;<strong>${sub}</strong></span>`;
+    const vegan = applyVeganSwapMarkup(i);
+    if (vegan.swapped) return `<span class="cm-missing-chip" style="background:#3a2800;border:1px solid #a16207;color:#fde68a" title="Vegan swap: ${vegan.orig} → ${vegan.neu}">${vegan.html}</span>`;
     return `<span class="cm-missing-chip">${i}</span>`;
   }).join('');
   return `<div class="cm-r-card g${group}">
