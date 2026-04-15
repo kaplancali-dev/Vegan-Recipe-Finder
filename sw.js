@@ -1,5 +1,5 @@
 // 🌿 Vegan Recipe Finder — Service Worker
-const VERSION = "vrf-20260416ad";
+const VERSION = "vrf-20260416ae";
 
 self.addEventListener("install", e => {
   self.skipWaiting(); // activate immediately
