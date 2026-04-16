@@ -229,9 +229,10 @@
     body.filters-open .filters-backdrop{opacity:1;pointer-events:auto}
 
     /* Close button (top-left, visible only when drawer is open) */
+    /* top: respect iPhone safe-area (notch / Dynamic Island) so the X is always tappable */
     body.filters-open .drawer-close{
       display:flex;align-items:center;justify-content:center;
-      position:fixed;top:10px;left:min(88vw,360px);
+      position:fixed;top:max(10px, calc(env(safe-area-inset-top) + 8px));left:min(88vw,360px);
       transform:translateX(-52px);
       width:40px;height:40px;border-radius:50%;
       background:var(--card);border:1px solid var(--border);
