@@ -188,21 +188,32 @@
   .filters-backdrop{display:none}
   .drawer-close{display:none}
   @media (max-width:780px){
-    /* Trigger button */
+    /* Trigger button — styled as a green CTA so it's the obvious next step */
     .filters-trigger{
       display:flex;align-items:center;gap:10px;
-      width:100%;padding:12px 16px;margin-bottom:12px;
-      background:var(--card);border:1px solid var(--border);border-radius:12px;
-      color:var(--ink);cursor:pointer;
-      font:600 14px/1 -apple-system,BlinkMacSystemFont,system-ui,sans-serif;
-      box-shadow:var(--shadow);
+      width:100%;padding:14px 16px;margin-bottom:12px;
+      background:var(--green);border:1.5px solid #1e5a3a;border-radius:12px;
+      color:#fff;cursor:pointer;
+      font:700 14.5px/1 -apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+      box-shadow:0 2px 8px rgba(45,122,79,.28);
       position:sticky;top:8px;z-index:30;
+      transition:transform .12s ease;
     }
-    .filters-trigger .ft-icon{font-size:16px}
-    .filters-trigger .ft-label{flex:1;text-align:left}
+    .filters-trigger:active{transform:scale(.985)}
+    .filters-trigger .ft-icon{font-size:18px}
+    .filters-trigger .ft-label{flex:1;text-align:left;letter-spacing:.1px}
+    .filters-trigger .ft-arrow{font-size:18px;font-weight:800;opacity:.9;margin-left:2px}
+    /* Soft pulse to draw the eye until the user opens the drawer once */
+    .filters-trigger.pulse-attention{
+      animation:filtersPulse 2.2s ease-in-out infinite;
+    }
+    @keyframes filtersPulse{
+      0%,100%{box-shadow:0 2px 8px rgba(45,122,79,.28)}
+      50%{box-shadow:0 2px 22px rgba(74,222,128,.7), 0 0 0 4px rgba(74,222,128,.18)}
+    }
     .filter-count{
-      background:var(--green);color:#fff;border-radius:12px;
-      padding:3px 9px;font-size:12px;font-weight:700;line-height:1.2;
+      background:#fff;color:#1e5a3a;border-radius:12px;
+      padding:3px 9px;font-size:12px;font-weight:800;line-height:1.2;
     }
     .filter-count:empty{display:none}
 
@@ -639,6 +650,16 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
 .cm-chip{display:inline-flex;align-items:center;background:#faf7f2;border:1.5px solid #f3ede3;border-radius:99px;padding:5px 12px;font-size:0.8rem;color:#2d7a4f;cursor:pointer;transition:all .13s;white-space:nowrap}
 .cm-chip:hover{border-color:#2d7a4f;background:#ffffff;color:#2d7a4f}
 .cm-chip.on{background:#1e5a3a;color:#2d7a4f;border-color:#2d7a4f;box-shadow:0 0 0 2px #4ade8033}
+/* New chip-with-star pattern for "What can I make now" — mirrors the chip-wrap/chip-star pattern from Browse All */
+.cm-chip-wrap{display:inline-flex;align-items:center;background:#faf7f2;border:1.5px solid #f3ede3;border-radius:99px;font-size:0.8rem;transition:border-color .13s,background .13s;white-space:nowrap}
+.cm-chip-wrap:hover{border-color:#2d7a4f;background:#ffffff}
+.cm-chip-wrap.on{background:#e8f3ec;border-color:#2d7a4f;box-shadow:0 0 0 2px #4ade8033}
+.cm-chip-body{display:inline-flex;align-items:center;padding:5px 6px 5px 12px;color:#2d7a4f;cursor:pointer;border-radius:99px 0 0 99px}
+.cm-chip-wrap.on .cm-chip-body{color:#1a2e24;font-weight:600}
+.cm-chip-star{background:none;border:none;cursor:pointer;font-size:0.95rem;padding:4px 10px 4px 4px;line-height:1;color:#cbb88c;opacity:.65;transition:all .15s;border-radius:0 99px 99px 0}
+.cm-chip-star:hover{opacity:1;color:#2d7a4f;background:#f0fdf4}
+.cm-chip-star.on{color:#2d7a4f;opacity:1;text-shadow:0 0 4px rgba(45,122,79,.25)}
+.cm-chip-star.on:hover{color:#1e5a3a;background:#fef3c7}
 .cm-cat-label{font-size:0.72rem;font-weight:700;color:#2d7a4f;text-transform:uppercase;letter-spacing:.06em;margin:12px 0 5px;padding-left:2px}
 .cm-add-row{display:flex;gap:6px;margin-top:10px}
 .cm-custom-input{flex:1;padding:7px 11px;border:1.5px solid #e8e3d8;border-radius:10px;background:#faf7f2;color:#e8f3ec;font-size:0.83rem;outline:none}
@@ -781,8 +802,9 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
     <!-- Mobile-only filter trigger -->
     <button type="button" class="filters-trigger" onclick="openFiltersDrawer()" aria-label="Open filters">
       <span class="ft-icon">🧺</span>
-      <span class="ft-label">Filters &amp; Ingredients</span>
+      <span class="ft-label">Tap to set Filters &amp; Ingredients</span>
       <span class="filter-count" id="filterCountBadge"></span>
+      <span class="ft-arrow" aria-hidden="true">›</span>
     </button>
     <div class="filters-backdrop" id="filtersBackdrop" onclick="closeFiltersDrawer()" aria-hidden="true"></div>
     <button type="button" class="drawer-close" onclick="closeFiltersDrawer()" aria-label="Close filters">✕</button>
@@ -1091,7 +1113,7 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
             <div class="card-title" style="margin-bottom:0">🧺 What's in your kitchen?</div>
             <span class="cm-selected-count" id="cmCount">0 selected</span>
           </div>
-          <p style="font-size:0.8rem;color:#4b7a52;margin-bottom:10px">These are carried over from your staple selections in <strong>Browse All Recipes</strong>. Tap any ingredient there to add or remove it.</p>
+          <p style="font-size:0.8rem;color:#4b7a52;margin-bottom:10px">Tap any ingredient to use it for this match. Tap the <strong style="color:#2d7a4f">★</strong> beside it to save it permanently as a kitchen staple.</p>
           <div id="cmChips"></div>
           <div class="cm-add-row">
             <input class="cm-custom-input" id="cmCustomInput" type="text" placeholder="Add another ingredient…" onkeydown="if(event.key==='Enter')cmAddCustom()">
@@ -4836,6 +4858,14 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeInstrMo
 // ── MOBILE FILTERS DRAWER ────────────────────────────────────────────────────
 function openFiltersDrawer(){
   document.body.classList.add('filters-open');
+  // First open → mark used and stop the pulse animation permanently
+  try {
+    if (!localStorage.getItem('vrf_filters_used')) {
+      localStorage.setItem('vrf_filters_used', '1');
+    }
+  } catch(e) {}
+  const trigger = document.querySelector('.filters-trigger');
+  if (trigger) trigger.classList.remove('pulse-attention');
 }
 function closeFiltersDrawer(){
   document.body.classList.remove('filters-open');
@@ -4863,6 +4893,14 @@ document.addEventListener('DOMContentLoaded', () => {
   if (typeof initHome === 'function') initHome();
   // Initialize Pantry Power widget in the hero
   if (typeof updatePantryPower === 'function') updatePantryPower();
+  // Pulse the mobile Filters & Ingredients trigger until the user has opened
+  // the drawer at least once, so newcomers don't scroll right past it.
+  try {
+    if (!localStorage.getItem('vrf_filters_used')) {
+      const trigger = document.querySelector('.filters-trigger');
+      if (trigger) trigger.classList.add('pulse-attention');
+    }
+  } catch(e){}
 });
 // Close on Escape
 document.addEventListener('keydown', e => {
@@ -5138,11 +5176,16 @@ function renderCMChips() {
   if (cmCustomItems.length) allGroups.push({cat:'✏️ Custom', items: cmCustomItems});
   const el = document.getElementById('cmChips');
   if (!el) return;
+  const stapleSet = new Set((staples || []).map(s => (s || '').toLowerCase()));
   el.innerHTML = allGroups.map(group => {
     const chips = group.items.map(item => {
-      const on = cmSelected.has(item.toLowerCase()) ? ' on' : '';
+      const key = item.toLowerCase();
+      const on = cmSelected.has(key) ? ' on' : '';
+      const isStaple = stapleSet.has(key);
+      const starOn = isStaple ? ' on' : '';
+      const starTitle = isStaple ? 'Saved as a staple — tap to remove' : 'Save as a permanent staple';
       const esc = item.replace(/'/g,"\\'");
-      return `<span class="cm-chip${on}" onclick="toggleCMItem('${esc}')">${item}</span>`;
+      return `<span class="cm-chip-wrap${on}"><span class="cm-chip-body" onclick="toggleCMItem('${esc}')">${item}</span><button type="button" class="cm-chip-star${starOn}" onclick="toggleCMStaple('${esc}', event)" title="${starTitle}" aria-label="${starTitle}">★</button></span>`;
     }).join('');
     return `<div class="cm-cat-label">${group.cat}</div><div class="cm-ing-grid">${chips}</div>`;
   }).join('');
@@ -5153,6 +5196,24 @@ function toggleCMItem(item) {
   const key = item.toLowerCase();
   if (cmSelected.has(key)) cmSelected.delete(key);
   else cmSelected.add(key);
+  renderCMChips();
+  runCanMake();
+}
+
+// Tap the ★ on a canmake chip to save/unsave it as a permanent staple.
+// Saving also auto-selects it for the current session (a staple is
+// definitionally "in your kitchen"); unsaving leaves the current
+// selection alone in case the user still wants it for this match.
+function toggleCMStaple(item, ev) {
+  if (ev) { ev.stopPropagation(); ev.preventDefault(); }
+  const key = item.toLowerCase();
+  const isStaple = (staples || []).some(s => s.toLowerCase() === key);
+  if (isStaple) {
+    if (typeof removeFromAlways === 'function') removeFromAlways(item);
+  } else {
+    if (typeof addToAlways === 'function') addToAlways(item);
+    cmSelected.add(key);
+  }
   renderCMChips();
   runCanMake();
 }
