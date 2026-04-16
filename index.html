@@ -336,15 +336,15 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
 .allergy-chip.on{background:#fff4e6;border-color:#d97706;color:#fff;box-shadow:0 0 0 2px #f8717144}
 /* ── QUICK ADD ── */
 .qa-card{border-radius:14px;margin-bottom:12px;overflow:hidden;border:1.5px solid #f3ede3}
-.qa-card-always{background:#1a1400;border-color:#fff4e6}
-.qa-card-today{background:#071a0d;border-color:#276a44}
-.qa-card-notsel{background:#0d1117;border-color:#1e3a5f}
-.qa-card-custom{background:#111318;border-color:#2d3748}
+.qa-card-always{background:#fff9ec;border-color:#f0d9a8}
+.qa-card-today{background:#f1f9f2;border-color:#cfe6d4}
+.qa-card-notsel{background:#ffffff;border-color:#e8e3d8}
+.qa-card-custom{background:#faf7f2;border-color:#e8e3d8}
 .qa-toggle{width:100%;background:none;border:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;padding:13px 18px;font-size:0.9rem;font-weight:700;text-align:left;letter-spacing:.01em}
-.qa-toggle-always{color:#d97706}
+.qa-toggle-always{color:#2d7a4f}
 .qa-toggle-today{color:#2d7a4f}
-.qa-toggle-notsel{color:#93c5fd}
-.qa-toggle-custom{color:#a78bfa}
+.qa-toggle-notsel{color:#1e5a3a}
+.qa-toggle-custom{color:#4a5d52}
 .qa-toggle:hover{opacity:.85}
 .qa-toggle .arrow{font-size:0.75rem;opacity:.7}
 .qa-body{display:none;padding:0 14px 14px}
@@ -355,16 +355,17 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
 .qa-chip:hover{background:#1e5a3a;border-color:#2d7a4f}
 .qa-chip.sel{background:#1e5a3a;border-color:#2d7a4f;color:#fff;box-shadow:0 0 0 2px #2d7a4f33}
 .qa-chip.on{background:#1e5a3a;border-color:#2d7a4f;color:#fff;box-shadow:0 0 0 2px #2d7a4f33}
-.chip-wrap{display:inline-flex;align-items:center;margin:2px 2px 2px 0;border-radius:99px;background:#0d1a0f;border:1.5px solid #e8e3d8;transition:border-color .12s}
+.chip-wrap{display:inline-flex;align-items:center;margin:2px 2px 2px 0;border-radius:99px;background:#ffffff;border:1.5px solid #e8e3d8;transition:border-color .12s}
 .chip-wrap:hover{border-color:#2d7a4f}
 .chip-wrap .qa-chip{border:none;background:none;margin:0;border-radius:0;padding:5px 8px 5px 12px;font-size:.82rem}
 .chip-wrap .qa-chip.on{background:none;box-shadow:none;color:#2d7a4f;font-weight:600}
-.chip-star{background:none;border:none;cursor:pointer;font-size:1rem;padding:4px 10px 4px 2px;line-height:1;color:#fff4e6;opacity:.6;transition:all .15s;border-radius:0 99px 99px 0}
-.chip-star:hover{opacity:1;color:#d97706;background:#fff4e6}
-.always-chip{display:inline-flex;align-items:center;gap:6px;background:#fff4e6;border:1.5px solid #d97706;border-radius:99px;padding:5px 12px;font-size:0.82rem;color:#fef3c7;margin:2px 3px 2px 0;font-weight:600}
-.always-chip .x{background:none;border:none;cursor:pointer;color:#d97706;font-size:1rem;line-height:1;padding:0 0 0 4px;opacity:.7;transition:all .12s}
-.always-chip .x:hover{color:#d97706;opacity:1}
-.today-chip{display:inline-flex;align-items:center;gap:6px;background:#052e16;border:1.5px solid #2d7a4f;border-radius:99px;padding:5px 12px;font-size:0.82rem;color:#dcfce7;margin:2px 3px 2px 0;font-weight:600}
+.chip-star{background:none;border:none;cursor:pointer;font-size:1.05rem;padding:4px 10px 4px 2px;line-height:1;color:#2d7a4f;opacity:.6;transition:all .15s;border-radius:0 99px 99px 0}
+.chip-star:hover{opacity:1;color:#1e5a3a;background:#e8f3ec}
+.always-chip{display:inline-flex;align-items:center;gap:6px;background:#ffffff;border:1.5px solid #2d7a4f;border-radius:99px;padding:5px 12px;font-size:0.82rem;color:#1e5a3a;margin:2px 3px 2px 0;font-weight:600}
+.always-chip .chip-mark{color:#2d7a4f;font-size:.95rem;line-height:1}
+.always-chip .x{background:none;border:none;cursor:pointer;color:#8b9a92;font-size:1rem;line-height:1;padding:0 0 0 4px;opacity:.8;transition:all .12s}
+.always-chip .x:hover{color:#c53030;opacity:1}
+.today-chip{display:inline-flex;align-items:center;gap:6px;background:#e8f3ec;border:1.5px solid #2d7a4f;border-radius:99px;padding:5px 12px;font-size:0.82rem;color:#1e5a3a;margin:2px 3px 2px 0;font-weight:600}
 .today-chip .x{background:none;border:none;cursor:pointer;color:#2d7a4f;font-size:1rem;line-height:1;padding:0 0 0 4px;opacity:.7;transition:all .12s}
 .today-chip .x:hover{color:#d97706;opacity:1}
 .qa-add-row{display:flex;gap:6px;margin-top:11px}
@@ -385,7 +386,7 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
 .tag button:hover{color:#d97706}
 .tag.is-staple{background:#1a2a0e;border-color:#e8e3d8;color:#2d7a4f;opacity:.75}
 .custom-tag{padding-right:2px}
-.custom-staple-btn{background:none;border:none;cursor:pointer;font-size:0.85rem;padding:0 2px;line-height:1;opacity:0.6;transition:opacity .15s}
+.custom-staple-btn{background:none;border:none;cursor:pointer;font-size:0.95rem;padding:0 2px;line-height:1;color:#2d7a4f;opacity:0.6;transition:opacity .15s}
 .custom-staple-btn:hover,.custom-staple-btn.on{opacity:1}
 /* ── SMALL BUTTONS ── */
 .btn-sm-green{background:#2d7a4f;color:#fff;border:none;border-radius:8px;padding:5px 13px;font-size:0.79rem;font-weight:700;cursor:pointer;white-space:nowrap}
@@ -845,11 +846,11 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
         <!-- SECTION 1: INGREDIENTS I ALWAYS HAVE -->
         <div class="qa-card qa-card-always">
           <button class="qa-toggle qa-toggle-always open" id="alwaysToggle" onclick="toggleAlwaysPanel()">
-            <span>⭐ Always Have <span style="font-weight:400;font-size:.75rem;opacity:.6">— saved permanently</span> <span id="alwaysCount" style="font-weight:400;opacity:.7;font-size:.8rem"></span></span><span class="arrow">▼</span>
+            <span><span style="color:#2d7a4f">★</span> Always Have <span style="font-weight:400;font-size:.75rem;opacity:.6">— saved permanently</span> <span id="alwaysCount" style="font-weight:400;opacity:.7;font-size:.8rem"></span></span><span class="arrow">▼</span>
           </button>
           <div class="qa-body open" id="alwaysBody">
-            <p style="font-size:.8rem;color:#fbbf24;opacity:.7;margin-bottom:10px;line-height:1.5">Tap <strong>⭐</strong> next to any ingredient in the list below to save it here permanently — it will always be here when you return.</p>
-            <div id="alwaysChips"><span style="color:#92400e;font-size:.82rem;font-style:italic">Nothing saved yet — tap ⭐ next to any ingredient in the list below.</span></div>
+            <p style="font-size:.8rem;color:#4a5d52;margin-bottom:10px;line-height:1.5">Tap <strong style="color:#2d7a4f">★</strong> next to any ingredient in the list below to save it here permanently — it will always be here when you return.</p>
+            <div id="alwaysChips"><span style="color:#4a5d52;font-size:.82rem;font-style:italic">Nothing saved yet — tap <span style="color:#2d7a4f">★</span> next to any ingredient in the list below.</span></div>
             <div id="alwaysClearWrap" style="display:none;margin-top:10px">
               <button class="btn-sm-danger" onclick="alwaysClearAll()">Remove All</button>
             </div>
@@ -862,8 +863,8 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
             <span>🌿 Have Today <span style="font-weight:400;font-size:.75rem;opacity:.6">— cleared next visit</span> <span id="todayCount" style="font-weight:400;opacity:.7;font-size:.8rem"></span></span><span class="arrow">▼</span>
           </button>
           <div class="qa-body open" id="todayBody">
-            <p style="font-size:.8rem;color:#4ade80;opacity:.7;margin-bottom:10px;line-height:1.5">Tap any ingredient in the list below to add it here for today only. Won't be here next visit — tap <strong>⭐</strong> instead to save it permanently.</p>
-            <div id="todayChips"><span style="color:#166534;font-size:.82rem;font-style:italic">Nothing added yet — tap any ingredient in the list below.</span></div>
+            <p style="font-size:.8rem;color:#1e5a3a;margin-bottom:10px;line-height:1.5">Tap any ingredient in the list below to add it here for today only. Won't be here next visit — tap <strong style="color:#2d7a4f">★</strong> instead to save it permanently.</p>
+            <div id="todayChips"><span style="color:#1e5a3a;font-size:.82rem;font-style:italic">Nothing added yet — tap any ingredient in the list below.</span></div>
             <div id="todayClearWrap" style="display:none;margin-top:10px">
               <button class="btn-sm-danger" onclick="todayClearAll()">Remove All</button>
             </div>
@@ -876,7 +877,7 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
             <span>📋 Ingredients Not Selected <span id="notSelCount" style="font-weight:400;opacity:.7;font-size:.8rem"></span></span><span class="arrow">▼</span>
           </button>
           <div class="qa-body open" id="notSelBody">
-            <p style="font-size:.8rem;color:#93c5fd;opacity:.8;margin-bottom:10px;line-height:1.6">Tap the <strong style="color:#4ade80">ingredient name</strong> → adds it for <strong style="color:#4ade80">today only</strong><br>Tap the <strong style="color:#fbbf24">⭐</strong> beside it → saves it to <strong style="color:#fbbf24">Always Have</strong> permanently</p>
+            <p style="font-size:.8rem;color:#4a5d52;margin-bottom:10px;line-height:1.6">Tap the <strong style="color:#1e5a3a">ingredient name</strong> → adds it for <strong style="color:#1e5a3a">today only</strong><br>Tap the <strong style="color:#2d7a4f">★</strong> beside it → saves it to <strong style="color:#1e5a3a">Always Have</strong> permanently</p>
 
             <div id="notSelChips"></div>
           </div>
@@ -3701,14 +3702,14 @@ function renderAlwaysChips() {
   if (!el) return;
   if (count) count.textContent = staples.length ? `(${staples.length})` : '';
   if (!staples.length) {
-    el.innerHTML = '<span style="color:#92400e;font-size:.82rem;font-style:italic">Nothing saved yet — tap ⭐ next to any ingredient in the list below.</span>';
+    el.innerHTML = '<span style="color:#4a5d52;font-size:.82rem;font-style:italic">Nothing saved yet — tap <span style="color:#2d7a4f">★</span> next to any ingredient in the list below.</span>';
     if (wrap) wrap.style.display = 'none';
     return;
   }
   if (wrap) wrap.style.display = 'block';
   el.innerHTML = staples.map(s => {
     const esc = s.replace(/'/g, "\\'");
-    return `<span class="always-chip">⭐ ${s}<button class="x" onclick="removeFromAlways('${esc}')">×</button></span>`;
+    return `<span class="always-chip"><span class="chip-mark">★</span>${s}<button class="x" onclick="removeFromAlways('${esc}')">×</button></span>`;
   }).join('');
 }
 
@@ -3747,7 +3748,7 @@ function renderNotSelChips() {
       .map(item => {
         total++;
         const esc = item.replace(/'/g, "\\'");
-        return `<span class="chip-wrap"><span class="qa-chip" onclick="addToToday('${esc}')">${item}</span><button class="chip-star" onclick="addToAlways('${esc}')" title="Save to Always Have">⭐</button></span>`;
+        return `<span class="chip-wrap"><span class="qa-chip" onclick="addToToday('${esc}')">${item}</span><button class="chip-star" onclick="addToAlways('${esc}')" title="Save to Always Have">★</button></span>`;
       }).join('');
     if (!chips) return '';
     return `<div class="qa-cat-label">${group.cat}</div><div>${chips}</div>`;
@@ -3767,7 +3768,7 @@ function renderCustomIngTags() {
         const esc = ing.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
         const isStaple = staples.some(s => s.toLowerCase() === ing.toLowerCase());
         const starBtn = isStaple
-          ? `<button class="custom-staple-btn on" title="Remove from staples" onclick="removeFromAlways('${esc}')">⭐</button>`
+          ? `<button class="custom-staple-btn on" title="Remove from staples" onclick="removeFromAlways('${esc}')">★</button>`
           : `<button class="custom-staple-btn" title="Save as staple" onclick="addToAlways('${esc}')">☆</button>`;
         return `<span class="tag custom-tag">${ing}${starBtn}<button onclick="removeCustomIng('${esc}')">×</button></span>`;
       }).join('')
