@@ -1217,6 +1217,37 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
           </div>
         </div>
 
+        <!-- CUISINE / CATEGORY -->
+        <div class="card" style="margin-bottom:12px">
+          <div class="filter-label">Category <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#4b7a52">(optional)</span></div>
+          <div class="filter-chips" id="cmCatGrid" style="margin-top:7px">
+            <button class="fc on" onclick="pickCMCat(this,'')">🍽️ All</button>
+            <button class="fc" onclick="pickCMCat(this,'Breakfast')">🧇 Breakfast</button>
+            <button class="fc" onclick="pickCMCat(this,'Lunch|Dinner')">🍢 Lunch / Dinner</button>
+            <button class="fc" onclick="pickCMCat(this,'Soups &amp; Stews')">🍲 Soups</button>
+            <button class="fc" onclick="pickCMCat(this,'Salads')">🥗 Salads</button>
+            <button class="fc" onclick="pickCMCat(this,'Pasta &amp; Noodles')">🍝 Pasta</button>
+            <button class="fc" onclick="pickCMCat(this,'High-Protein')">🏋️ High-Protein</button>
+            <button class="fc" onclick="pickCMCat(this,'Snacks')">🥨 Snacks</button>
+            <button class="fc" onclick="pickCMCat(this,'Desserts')">🍨 Desserts</button>
+            <button class="fc" onclick="pickCMCat(this,'Sauces &amp; Dips')">🫙 Sauces &amp; Dips</button>
+            <button class="fc" onclick="pickCMCat(this,'Japanese')">🍱 Japanese 🇯🇵</button>
+            <button class="fc" onclick="pickCMCat(this,'Mexican')">🌮 🇲🇽 Mexican</button>
+            <button class="fc" onclick="pickCMCat(this,'Chinese')">🥡 🇨🇳 Chinese</button>
+            <button class="fc" onclick="pickCMCat(this,'Thai')">🍜 🇹🇭 Thai</button>
+            <button class="fc" onclick="pickCMCat(this,'Vietnamese')">🍜 🇻🇳 Vietnamese</button>
+            <button class="fc" onclick="pickCMCat(this,'Indian')">🍛 🇮🇳 Indian</button>
+            <button class="fc" onclick="pickCMCat(this,'Korean')">🥢 🇰🇷 Korean</button>
+            <button class="fc" onclick="pickCMCat(this,'Italian')">🍝 🇮🇹 Italian</button>
+            <button class="fc" onclick="pickCMCat(this,'Mediterranean')">🫒 Mediterranean</button>
+            <button class="fc" onclick="pickCMCat(this,'Middle Eastern')">🧆 Middle Eastern</button>
+            <button class="fc" onclick="pickCMCat(this,'Southern')">🌽 Southern</button>
+            <button class="fc" onclick="pickCMCat(this,'GF Bread')">🍞 GF Bread</button>
+            <button class="fc" onclick="pickCMCat(this,'One-Pot')">🥘 One-Pot</button>
+            <button class="fc" onclick="pickCMCat(this,'Instant Pot')">⚡ Instant Pot</button>
+          </div>
+        </div>
+
         <!-- MAX COOK TIME -->
         <div class="card" style="margin-bottom:12px">
           <div class="filter-label">Max Cook Time <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#4b7a52">(optional)</span></div>
@@ -3920,6 +3951,14 @@ let cmMaxTime = 0;
 let cmAllergies = new Set();
 let cmNameFilter = '';
 let cmTypeFilter = 'all';
+let cmCatFilter = '';
+
+function pickCMCat(btn, val) {
+  cmCatFilter = val;
+  document.querySelectorAll('#cmCatGrid .fc').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+  if (cmSelected.size) runCanMake();
+}
 
 function setCMTime(btn, val) {
   cmMaxTime = val;
@@ -4090,7 +4129,8 @@ function runCanMake() {
   }).filter(r => cmTypeFilter === 'all' || cmMealType(r) === cmTypeFilter)
     .filter(r => !cmMaxTime || !r.time || r.time <= cmMaxTime)
     .filter(r => !cmAllergies.size || ![...cmAllergies].some(key => recipeHasAllergen(r, key)))
-    .filter(r => !cmNameFilter || r.title.toLowerCase().includes(cmNameFilter));
+    .filter(r => !cmNameFilter || r.title.toLowerCase().includes(cmNameFilter))
+    .filter(r => !cmCatFilter || cmCatFilter.split('|').some(c => r.cats && r.cats.includes(c)));
 
   const g0 = scored.filter(r => r.missing === 0).sort((a,b) => a.title.localeCompare(b.title));
   const g1 = scored.filter(r => r.missing === 1).sort((a,b) => a.title.localeCompare(b.title));
