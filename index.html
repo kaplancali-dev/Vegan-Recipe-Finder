@@ -4452,12 +4452,14 @@ findRecipes();
 
 // ── SERVICE WORKER (auto-update) ─────────────────────────────────────────────
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('./sw.js').then(reg => {
+  navigator.serviceWorker.register('./sw.js', { updateViaCache: 'none' }).then(reg => {
+    // Check for updates every 60 seconds
+    setInterval(() => reg.update(), 60000);
     reg.addEventListener('updatefound', () => {
       const newWorker = reg.installing;
       newWorker.addEventListener('statechange', () => {
         if (newWorker.state === 'activated' && navigator.serviceWorker.controller) {
-          showToast('✅ App updated! Pull down to refresh.', 4000);
+          window.location.reload();
         }
       });
     });
