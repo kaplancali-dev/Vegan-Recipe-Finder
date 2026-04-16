@@ -101,32 +101,88 @@
   }
   .intro-hero-sub strong{color:var(--ink);font-weight:700}
   .swap-tag{background:var(--accent-soft);color:var(--accent);padding:1px 8px;border-radius:6px;font-weight:600;font-size:13px}
-  .intro-toggle-btn{
-    display:inline-flex;align-items:center;gap:6px;
-    background:transparent;border:1px solid var(--border);
-    color:var(--green);font:600 13px/1 -apple-system,system-ui,sans-serif;
-    padding:9px 14px;border-radius:20px;cursor:pointer;transition:all .15s;
+
+  /* ── HERO SPLIT LAYOUT ───────────────────────────────────────── */
+  .intro-hero-grid{display:grid;grid-template-columns:1.35fr 1fr;gap:32px;align-items:center}
+  .intro-hero-copy{min-width:0}
+  @media (max-width:780px){
+    .intro-hero-grid{grid-template-columns:1fr;gap:22px}
   }
-  .intro-toggle-btn:hover{background:var(--green-soft);border-color:var(--green)}
-  .intro-toggle-btn .arrow{transition:transform .2s;font-size:11px}
-  .intro-toggle-btn.open .arrow{transform:rotate(180deg)}
-  /* Make expanded body readable on light bg */
-  .intro-card-light .intro-body{
-    padding:16px 28px 24px;
-    color:var(--ink-soft) !important;
-    font-size:14px;line-height:1.65;
-    border-top:1px solid var(--border);
-    background:var(--card);
+
+  /* ── PANTRY POWER WIDGET ─────────────────────────────────────── */
+  .pantry-power{
+    background:linear-gradient(155deg,#ffffff 0%,#f4f9f1 100%);
+    border:1px solid #d4e6d8;
+    border-radius:14px;
+    padding:18px 20px 16px;
+    box-shadow:0 1px 3px rgba(45,122,79,.06);
+    position:relative;
+    overflow:hidden;
   }
-  .intro-card-light .intro-body p,
-  .intro-card-light .intro-body div,
-  .intro-card-light .intro-body span{color:var(--ink-soft) !important}
-  .intro-card-light .intro-body .intro-section-title,
-  .intro-card-light .intro-body strong{color:var(--green) !important}
-  .intro-card-light .intro-body s{opacity:.55}
-  /* Swap highlight color inside intro body */
-  .intro-card-light .intro-body [style*="#fde68a"],
-  .intro-card-light .intro-body span[style*="fde68a"]{color:var(--accent) !important}
+  .pantry-power::before{
+    content:"";position:absolute;top:-30px;right:-30px;
+    width:120px;height:120px;border-radius:50%;
+    background:radial-gradient(circle,rgba(45,122,79,.08) 0%,transparent 70%);
+    pointer-events:none;
+  }
+  .pp-eyebrow{
+    font-size:10px;font-weight:800;letter-spacing:.14em;
+    color:#2d7a4f;opacity:.85;margin-bottom:6px;
+    font-family:-apple-system,system-ui,sans-serif;
+  }
+  .pp-number-row{display:flex;align-items:baseline;gap:10px;margin-bottom:4px}
+  .pp-number{
+    font-family:Georgia,serif;font-size:46px;line-height:1;font-weight:700;
+    color:#1e5a3a;letter-spacing:-1.5px;
+    transition:color .3s;
+  }
+  .pp-unit{
+    font-family:-apple-system,system-ui,sans-serif;
+    font-size:13px;font-weight:600;color:#4a5d52;letter-spacing:.01em;
+  }
+  .pp-near{
+    font-size:12.5px;color:#5a6f63;margin:0 0 12px;line-height:1.4;
+    font-family:-apple-system,system-ui,sans-serif;
+  }
+  .pp-near strong{color:#2d7a4f;font-weight:700}
+  .pp-bar{
+    height:6px;background:#e8e3d8;border-radius:99px;overflow:hidden;margin-bottom:6px;
+  }
+  .pp-bar-fill{
+    height:100%;
+    background:linear-gradient(90deg,#4ade80 0%,#2d7a4f 100%);
+    border-radius:99px;
+    transition:width .8s cubic-bezier(.16,1,.3,1);
+    min-width:0;
+  }
+  .pp-bar-meta{
+    font-size:11px;color:#7a8a80;margin-bottom:14px;
+    font-family:-apple-system,system-ui,sans-serif;letter-spacing:.01em;
+  }
+  .pp-cta{
+    display:flex;align-items:center;justify-content:center;gap:8px;
+    width:100%;padding:11px 14px;
+    background:#2d7a4f;color:#fff;border:none;border-radius:10px;
+    font-size:14px;font-weight:700;letter-spacing:.01em;cursor:pointer;
+    box-shadow:0 1px 3px rgba(30,90,58,.25);
+    transition:all .15s;
+    font-family:-apple-system,system-ui,sans-serif;
+  }
+  .pp-cta:hover{background:#1e5a3a;box-shadow:0 2px 6px rgba(30,90,58,.35);transform:translateY(-1px)}
+  .pp-cta-icon{font-size:14px;line-height:1}
+  .pp-hint{
+    margin-top:10px;font-size:11.5px;color:#7a8a80;text-align:center;
+    font-style:italic;font-family:Georgia,serif;line-height:1.4;
+  }
+  /* Celebration state — when user is well-stocked */
+  .pantry-power.pp-celebrate{
+    background:linear-gradient(155deg,#f0fdf4 0%,#dcfce7 100%);
+    border-color:#86efac;
+  }
+  .pantry-power.pp-celebrate .pp-number{color:#15803d}
+  .pantry-power.pp-celebrate .pp-cta{background:#fff;color:#1e5a3a;border:1.5px solid #2d7a4f;box-shadow:none}
+  .pantry-power.pp-celebrate .pp-cta:hover{background:#f0fdf4}
+
   /* ── Mobile filters drawer ─────────────────────────────────── */
   .filters-trigger{display:none}
   .filters-backdrop{display:none}
@@ -321,16 +377,6 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
 .staple-chip .x:hover{color:#d97706}
 /* ── INTRO PANEL ── */
 .intro-card{background:#0a1a0f;border:1px solid #f3ede3;border-radius:14px;margin-bottom:16px;overflow:hidden}
-.intro-toggle{width:100%;background:none;border:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;padding:13px 18px;color:#2d7a4f;font-size:0.9rem;font-weight:700;text-align:left}
-.intro-toggle:hover{background:#14532d22}
-.intro-toggle .arrow{transition:transform .2s;font-size:0.75rem;color:#8b9a92}
-.intro-toggle.open .arrow{transform:rotate(180deg)}
-.intro-body{display:none;padding:4px 20px 18px;color:#2d7a4f;font-size:0.84rem;line-height:1.7}
-.intro-body.open{display:block}
-.intro-body h3{color:#2d7a4f;font-size:0.82rem;font-weight:700;margin:12px 0 6px;text-transform:uppercase;letter-spacing:.05em}
-.intro-body ol{padding-left:18px;margin:0;display:flex;flex-direction:column;gap:4px}
-.intro-body p{margin:6px 0}
-.intro-sign{color:#2d7a4f;font-weight:700;margin-top:10px}
 /* ── ALLERGY FILTER ── */
 .allergy-chip{display:inline-flex;align-items:center;background:#1a0a0a;border:1.5px solid #3a1a1a;border-radius:99px;padding:5px 12px;font-size:0.8rem;color:#fca5a5;cursor:pointer;transition:all .12s;margin:2px 3px 2px 0}
 .allergy-chip:hover{background:#2a1010;border-color:#d97706}
@@ -606,7 +652,7 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
 .cm-r-card.g0{border-left:4px solid #2d7a4f}
 .cm-r-card.g1{border-left:4px solid #eab308}
 .cm-r-card.g2{border-left:4px solid #ef4444}
-.cm-r-title{font-size:0.95rem;font-weight:700;color:#e8f3ec;margin-bottom:2px}
+.cm-r-title{font-size:0.95rem;font-weight:700;color:#1a2e24;margin-bottom:2px}
 .cm-r-meta{font-size:0.74rem;color:#8b9a92;display:flex;gap:10px;flex-wrap:wrap;margin-bottom:7px}
 .cm-missing-label{font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#d97706;margin-bottom:4px}
 .cm-missing-chips{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:6px}
@@ -650,199 +696,37 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
 
   <!-- INTRO PANEL -->
   <div class="intro-card intro-card-light">
-    <!-- Always-visible magazine hero -->
+    <!-- Always-visible magazine hero (split layout) -->
     <div class="intro-hero">
-      <h2 class="intro-hero-title">What can I make right now?</h2>
-      <p class="intro-hero-sub">
-        HARVEST matches your <strong>kitchen staples</strong> against
-        <strong>over 1,000 plant-based recipes</strong> from top chefs —
-        applying smart <span class="swap-tag">vegan &amp; gluten-free swaps</span>,
-        filtering out your <strong>allergens</strong>, and auto-generating a
-        <strong>shopping list</strong> for anything you're missing.
-      </p>
-      <button type="button" class="intro-toggle-btn" id="introToggle" onclick="toggleIntro()">
-        <span class="label">How HARVEST works</span>
-        <span class="arrow">▾</span>
-      </button>
-    </div>
-    <div class="intro-body" id="introBody">
-
-      <!-- Hero opener -->
-      <div style="text-align:left;padding:10px 0 18px">
-        <p style="font-size:1.15rem;line-height:1.7;color:#ffffff;margin:0">You open your fridge and pantry. You see ingredients, but the real question is always the same:<br><span style="font-weight:700;font-style:italic">"What can I actually make right now?"</span> <strong style="color:#4ade80">HARVEST</strong> was built to answer that, instantly.</p>
+      <div class="intro-hero-grid">
+        <!-- LEFT: copy -->
+        <div class="intro-hero-copy">
+          <h2 class="intro-hero-title">What can I make right now?</h2>
+          <p class="intro-hero-sub">
+            HARVEST matches your <strong>kitchen staples</strong> against
+            <strong>over 1,000 plant-based recipes</strong> from top chefs —
+            applying smart <span class="swap-tag">vegan &amp; gluten-free swaps</span>,
+            filtering out your <strong>allergens</strong>, and auto-generating a
+            <strong>shopping list</strong> for anything you're missing.
+          </p>
+        </div>
+        <!-- RIGHT: Pantry Power widget -->
+        <aside class="pantry-power" id="pantryPower" aria-label="Pantry Power">
+          <div class="pp-eyebrow">PANTRY POWER</div>
+          <div class="pp-number-row">
+            <span class="pp-number" id="ppNumber">0</span>
+            <span class="pp-unit" id="ppUnit">recipes ready</span>
+          </div>
+          <div class="pp-near" id="ppNear">+ 0 more you're 1 ingredient away from</div>
+          <div class="pp-bar"><div class="pp-bar-fill" id="ppBarFill" style="width:0%"></div></div>
+          <div class="pp-bar-meta"><span id="ppPctLabel">0% of 1,000+ recipes unlocked</span></div>
+          <button type="button" class="pp-cta" id="ppCta" onclick="goToStaples()">
+            <span class="pp-cta-icon">★</span>
+            <span class="pp-cta-label" id="ppCtaLabel">Set up my pantry (2 min)</span>
+          </button>
+          <div class="pp-hint" id="ppHint">Watch this number climb as you check off staples</div>
+        </aside>
       </div>
-      <p style="color:#d1fae5;line-height:1.7;font-size:1.15rem"><strong style="color:#4ade80">HARVEST</strong> connects your kitchen to a curated world of top, nutrition-focused plant-based chefs—bringing you over 1,000 recipes designed to be simple, flexible, and deeply satisfying.</p>
-
-      <!-- closing tagline -->
-
-      <!-- ── ANIMATED SECTION ICONS ── -->
-      <style>
-        .intro-section{display:flex;align-items:flex-start;gap:10px;margin:14px 0 6px}
-        .intro-section-title{font-weight:800;color:#4ade80;text-transform:uppercase;letter-spacing:0.05em;margin:0}
-        /* Shared animation keyframes */
-        @keyframes lockOpen{0%,30%{transform:rotate(0deg)}60%,100%{transform:rotate(-40deg)}}
-        @keyframes keySlide{0%,40%{transform:translateX(20px) rotate(-20deg);opacity:0}70%,100%{transform:translateX(0) rotate(0deg);opacity:1}}
-        @keyframes glowPulse{0%,100%{opacity:.4}50%{opacity:1}}
-        @keyframes w2LeftArm{0%,15%{transform:rotate(60deg)}70%,100%{transform:rotate(0deg)}}
-        @keyframes w2RightArm{0%,15%{transform:rotate(-60deg)}70%,100%{transform:rotate(0deg)}}
-        @keyframes w2FrontKnee{0%,15%{transform:rotate(-30deg)}70%,100%{transform:rotate(0deg)}}
-        @keyframes breathe{0%,100%{transform:scaleY(1)}50%{transform:scaleY(1.03)}}
-        @keyframes orbit{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
-        @keyframes orbitRev{from{transform:rotate(0deg)}to{transform:rotate(-360deg)}}
-        @keyframes centerPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
-        @keyframes eyeOpen{0%,10%{clip-path:inset(46% 0 46% 0)}40%,90%{clip-path:inset(10% 0 10% 0)}95%,100%{clip-path:inset(46% 0 46% 0)}}
-        @keyframes leafGrow{0%,20%{transform:scaleY(0);opacity:0}60%,85%{transform:scaleY(1);opacity:1}95%,100%{transform:scaleY(0);opacity:0}}
-        @keyframes lashWave{0%,100%{transform:translateY(0)}50%{transform:translateY(-2px)}}
-        @keyframes liftToChin{0%,10%{transform:rotate(0deg)}35%,65%{transform:rotate(125deg)}90%,100%{transform:rotate(0deg)}}
-        @keyframes headPonder{0%,25%{transform:rotate(0deg) translateX(0)}40%,65%{transform:rotate(6deg) translateX(2px)}85%,100%{transform:rotate(0deg) translateX(0)}}
-        @keyframes thinkBubble{0%,30%{opacity:0;transform:translateY(0) scale(.4)}50%{opacity:1;transform:translateY(-8px) scale(1)}75%{opacity:0;transform:translateY(-20px) scale(1.1)}100%{opacity:0}}
-        @keyframes headTiltUp{0%,100%{transform:rotate(0deg)}40%,60%{transform:rotate(-12deg)}}
-        @keyframes qFloat{0%{opacity:0;transform:translateY(0)}20%{opacity:1}70%{opacity:0;transform:translateY(-18px)}100%{opacity:0;transform:translateY(-22px)}}
-        @keyframes flicker{0%{transform:scaleX(1) scaleY(1) translateY(0)}20%{transform:scaleX(.96) scaleY(1.04) translateY(-2px)}40%{transform:scaleX(1.04) scaleY(.97) translateY(1px)}60%{transform:scaleX(.97) scaleY(1.05) translateY(-2px)}80%{transform:scaleX(1.03) scaleY(.98) translateY(0)}100%{transform:scaleX(1) scaleY(1) translateY(0)}}
-        @keyframes heartbeat{0%,100%{transform:scale(1)}15%{transform:scale(1.18)}30%{transform:scale(1)}45%{transform:scale(1.12)}60%{transform:scale(1)}}
-        @keyframes innerFlame{0%,100%{transform:scaleX(1) scaleY(1)}30%{transform:scaleX(.9) scaleY(1.06)}70%{transform:scaleX(1.08) scaleY(.94)}}
-        @keyframes sparkFloat{0%,100%{opacity:0;transform:translateY(0)}20%{opacity:.8}60%{opacity:0;transform:translateY(-12px)}}
-        @keyframes streakFade{0%,100%{opacity:.15}50%{opacity:.45}}
-        @keyframes runBob{0%,50%,100%{transform:translateY(0)}25%,75%{transform:translateY(-2px)}}
-        @keyframes runFrontLeg{0%{transform:rotate(0deg)}25%{transform:rotate(28deg)}50%{transform:rotate(0deg)}75%{transform:rotate(-28deg)}100%{transform:rotate(0deg)}}
-        @keyframes runBackLeg{0%{transform:rotate(0deg)}25%{transform:rotate(-28deg)}50%{transform:rotate(0deg)}75%{transform:rotate(28deg)}100%{transform:rotate(0deg)}}
-        @keyframes runFrontArm{0%{transform:rotate(0deg)}25%{transform:rotate(-32deg)}50%{transform:rotate(0deg)}75%{transform:rotate(32deg)}100%{transform:rotate(0deg)}}
-        @keyframes runBackArm{0%{transform:rotate(0deg)}25%{transform:rotate(32deg)}50%{transform:rotate(0deg)}75%{transform:rotate(-32deg)}100%{transform:rotate(0deg)}}
-      </style>
-
-      <!-- ① YOUR KITCHEN, UNLOCKED -->
-      <div class="intro-section">
-        <svg width="48" height="48" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="50" cy="58" r="28" fill="#0f3020" style="animation:glowPulse 3s ease-in-out infinite"/>
-          <rect x="24" y="48" width="36" height="30" rx="6" fill="#166534" stroke="white" stroke-width="2"/>
-          <circle cx="42" cy="62" r="5" fill="#0a1a0f" stroke="white" stroke-width="1"/>
-          <rect x="39.5" y="62" width="5" height="8" rx="2" fill="#0a1a0f" stroke="white" stroke-width="1"/>
-          <g style="transform-origin:28px 52px;animation:lockOpen 3s ease-in-out infinite">
-            <path d="M28 52 C28 38 56 38 56 52" stroke="white" stroke-width="4" stroke-linecap="round" fill="none"/>
-          </g>
-          <g style="transform-origin:50px 50px;animation:keySlide 3s ease-in-out infinite">
-            <circle cx="20" cy="25" r="8" fill="none" stroke="#f97316" stroke-width="3"/>
-            <line x1="20" y1="17" x2="20" y2="33" stroke="#0a1a0f" stroke-width="2"/>
-            <line x1="12" y1="25" x2="28" y2="25" stroke="#0a1a0f" stroke-width="2"/>
-            <line x1="28" y1="25" x2="46" y2="25" stroke="#f97316" stroke-width="3" stroke-linecap="round"/>
-            <line x1="36" y1="25" x2="36" y2="31" stroke="#f97316" stroke-width="2.5" stroke-linecap="round"/>
-            <line x1="42" y1="25" x2="42" y2="29" stroke="#f97316" stroke-width="2.5" stroke-linecap="round"/>
-          </g>
-          <g style="animation:glowPulse 3s ease-in-out infinite;animation-delay:1.5s">
-            <circle cx="68" cy="40" r="2" fill="white" opacity=".7"/>
-            <circle cx="74" cy="32" r="1.5" fill="white" opacity=".5"/>
-            <circle cx="62" cy="30" r="1.5" fill="white" opacity=".4"/>
-          </g>
-        </svg>
-        <div style="flex:1;color:#d1fae5;margin:0;font-size:1.15rem;line-height:1.7"><span class="intro-section-title">Your Kitchen, Unlocked —</span> Tell <strong style="color:#4ade80">HARVEST</strong> what's in your kitchen and instantly see what you can make — plus a smart shopping list for anything missing.</div></div>
-
-      <!-- ② CLEAN, FLEXIBLE, INTENTIONAL -->
-      <div class="intro-section">
-        <svg width="36" height="36" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <ellipse cx="50" cy="55" rx="46" ry="42" fill="#040e07"/>
-          <circle cx="42" cy="10" r="8" fill="white"/>
-          <line x1="42" y1="18" x2="43" y2="24" stroke="white" stroke-width="7" stroke-linecap="round"/>
-          <g style="transform-origin:50px 50px;animation:breathe 4s ease-in-out infinite">
-            <line x1="43" y1="24" x2="43" y2="58" stroke="white" stroke-width="13" stroke-linecap="round"/>
-          </g>
-          <line x1="30" y1="58" x2="58" y2="58" stroke="white" stroke-width="11" stroke-linecap="round"/>
-          <g style="transform-origin:38px 32px;animation:w2LeftArm 4s ease-in-out infinite">
-            <line x1="38" y1="32" x2="4" y2="32" stroke="white" stroke-width="8" stroke-linecap="round"/>
-            <circle cx="3" cy="32" r="4.5" fill="white"/>
-          </g>
-          <g style="transform-origin:62px 32px;animation:w2RightArm 4s ease-in-out infinite">
-            <line x1="62" y1="32" x2="96" y2="32" stroke="white" stroke-width="8" stroke-linecap="round"/>
-            <circle cx="97" cy="32" r="4.5" fill="white"/>
-          </g>
-          <g style="transform-origin:34px 58px;animation:w2FrontKnee 4s ease-in-out infinite">
-            <line x1="30" y1="58" x2="10" y2="63" stroke="white" stroke-width="11" stroke-linecap="round"/>
-            <line x1="10" y1="63" x2="10" y2="90" stroke="white" stroke-width="9" stroke-linecap="round"/>
-            <line x1="10" y1="90" x2="3" y2="92" stroke="white" stroke-width="7" stroke-linecap="round"/>
-            <circle cx="10" cy="63" r="6" fill="#1e5c35" stroke="white" stroke-width="1.5"/>
-          </g>
-          <line x1="58" y1="58" x2="88" y2="90" stroke="white" stroke-width="11" stroke-linecap="round"/>
-          <line x1="88" y1="90" x2="97" y2="92" stroke="white" stroke-width="7" stroke-linecap="round"/>
-          <line x1="2" y1="93" x2="98" y2="93" stroke="#166534" stroke-width="1" opacity=".5"/>
-        </svg>
-        <div style="flex:1;color:#d1fae5;margin:0;font-size:1.15rem;line-height:1.7"><span class="intro-section-title">Clean, Flexible, Intentional —</span> 100% plant-based, sourced from trusted chefs, filterable by allergen, cuisine, mood, or time. Some recipes include ingredients that aren't strictly vegan or gluten-free. Rather than exclude them, we annotate simple swaps: <span style="color:#fde68a"><s>soy sauce</s> → <strong>tamari</strong></span>, <span style="color:#fde68a"><s>flour tortillas</s> → <strong>corn tortillas</strong></span>, <span style="color:#fde68a"><s>egg</s> → <strong>flax egg</strong></span>, <span style="color:#fde68a"><s>butter</s> → <strong>vegan butter</strong></span>, <span style="color:#fde68a"><s>dairy milk</s> → <strong>plant-based milk</strong></span>, <span style="color:#fde68a"><s>cheese</s> → <strong>vegan cheese</strong></span>. One simple swap per ingredient keeps every recipe fully plant-based and gluten-free.</div></div>
-
-      <!-- ③ BUILT AROUND YOU -->
-      <div class="intro-section">
-        <svg width="36" height="36" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="50" cy="50" r="38" stroke="#166534" stroke-width="1" stroke-dasharray="3 4" fill="none" opacity=".5"/>
-          <circle cx="50" cy="50" r="26" stroke="#1a4a2a" stroke-width="1" stroke-dasharray="2 3" fill="none" opacity=".4"/>
-          <g style="transform-origin:50px 50px;animation:orbit 8s linear infinite">
-            <g transform="translate(47,8)"><ellipse cx="3" cy="5" rx="3" ry="5" fill="#f97316"/><path d="M1 1 Q3 -3 5 1" fill="white"/></g>
-            <g transform="translate(84,47)"><ellipse cx="3" cy="3" rx="5" ry="3.5" fill="#fde047"/></g>
-            <g transform="translate(47,84)"><circle cx="3" cy="3" r="4.5" fill="#ef4444"/><path d="M1 0 Q3 -3 5 0" fill="white"/></g>
-            <g transform="translate(6,47)"><ellipse cx="3" cy="4" rx="3.5" ry="5" fill="#d1fae5"/><line x1="3" y1="-1" x2="3" y2="-4" stroke="white" stroke-width="1.5"/></g>
-          </g>
-          <g style="transform-origin:50px 50px;animation:orbitRev 12s linear infinite">
-            <g transform="translate(62,24)"><path d="M3 8 Q-1 4 1 0 Q5 4 3 8Z" fill="white"/></g>
-            <g transform="translate(22,62)"><path d="M3 8 Q0 5 1 2 Q4 0 6 3 Q6 6 3 8Z" fill="#ef4444"/></g>
-          </g>
-          <g style="transform-origin:50px 55px;animation:centerPulse 3s ease-in-out infinite">
-            <circle cx="50" cy="34" r="7" fill="white"/>
-            <line x1="50" y1="41" x2="50" y2="60" stroke="white" stroke-width="9" stroke-linecap="round"/>
-            <line x1="50" y1="47" x2="38" y2="54" stroke="white" stroke-width="6" stroke-linecap="round"/>
-            <line x1="50" y1="47" x2="62" y2="54" stroke="white" stroke-width="6" stroke-linecap="round"/>
-            <line x1="50" y1="60" x2="44" y2="72" stroke="white" stroke-width="7" stroke-linecap="round"/>
-            <line x1="50" y1="60" x2="56" y2="72" stroke="white" stroke-width="7" stroke-linecap="round"/>
-          </g>
-        </svg>
-        <div style="flex:1;color:#d1fae5;margin:0;font-size:1.15rem;line-height:1.7"><span class="intro-section-title">Built Around You —</span> ⭐ Save <strong>Staples</strong> &nbsp;❤️ Save favorites &nbsp;<span class="cart">🛒</span> Create shopping list &nbsp;📝 Add notes</div></div>
-
-      <!-- ④ BROWSE WITH CLARITY -->
-      <div class="intro-section">
-        <svg width="36" height="36" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M10 50 Q30 20 50 20 Q70 20 90 50 Q70 80 50 80 Q30 80 10 50Z" fill="#0d2a18" stroke="white" stroke-width="2"/>
-          <g style="animation:eyeOpen 4s ease-in-out infinite">
-            <circle cx="50" cy="50" r="18" fill="white" style="animation:glowPulse 4s ease-in-out infinite"/>
-            <g style="transform-origin:50px 50px;animation:leafGrow 4s ease-in-out infinite">
-              <path d="M50 36 Q58 44 50 64 Q42 44 50 36Z" fill="#166534"/>
-              <line x1="50" y1="36" x2="50" y2="64" stroke="white" stroke-width="1.2" stroke-linecap="round"/>
-            </g>
-            <circle cx="50" cy="50" r="6" fill="#0d2a18"/>
-            <circle cx="53" cy="47" r="2" fill="white" opacity=".7"/>
-          </g>
-          <g style="animation:lashWave 4s ease-in-out infinite">
-            <line x1="28" y1="32" x2="24" y2="26" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
-            <line x1="36" y1="26" x2="34" y2="20" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
-            <line x1="50" y1="22" x2="50" y2="16" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
-            <line x1="64" y1="26" x2="66" y2="20" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
-            <line x1="72" y1="32" x2="76" y2="26" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
-          </g>
-        </svg>
-        <div style="flex:1;color:#d1fae5;margin:0;font-size:1.15rem;line-height:1.7"><span class="intro-section-title">Browse with Clarity —</span> Search by dish, ingredient, or mood. See nutrition per serving. Open recipes from the original creators.</div></div>
-
-      <!-- ⑤ WHAT CAN I MAKE RIGHT NOW? -->
-      <div class="intro-section">
-        <svg width="44" height="44" viewBox="0 0 110 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <!-- head tilts up -->
-          <g style="transform-origin:40px 55px;animation:headTiltUp 3s ease-in-out infinite">
-            <circle cx="40" cy="55" r="30" fill="#166534" stroke="white" stroke-width="2.5"/>
-            <!-- eyes -->
-            <circle cx="31" cy="52" r="4.5" fill="white"/>
-            <circle cx="49" cy="52" r="4.5" fill="white"/>
-            <circle cx="31" cy="52" r="2" fill="#166534"/>
-            <circle cx="49" cy="52" r="2" fill="#166534"/>
-            <!-- smile -->
-            <path d="M31 63 Q40 70 49 63" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-            <!-- raised eyebrows -->
-            <path d="M27 43 Q31 39 35 42" stroke="white" stroke-width="2" stroke-linecap="round" fill="none"/>
-            <path d="M45 42 Q49 38 53 41" stroke="white" stroke-width="2" stroke-linecap="round" fill="none"/>
-          </g>
-          <!-- question marks floating up - large and bold -->
-          <g style="animation:qFloat 3s ease-in-out infinite;animation-delay:0s">
-            <text x="72" y="68" font-size="26" fill="white" font-weight="900" font-family="Arial,sans-serif">?</text>
-          </g>
-          <g style="animation:qFloat 3s ease-in-out infinite;animation-delay:0.9s">
-            <text x="82" y="44" font-size="18" fill="white" font-weight="900" font-family="Arial,sans-serif" opacity=".8">?</text>
-          </g>
-        </svg>
-        <div style="flex:1;color:#d1fae5;margin:0;font-size:1.15rem;line-height:1.7"><span class="intro-section-title">What Can I Make Right Now? —</span> See recipes with 3 or fewer missing ingredients (Staples included).<br>🟢 Make Now · 🟡 Missing 1 · 🔴 Missing 2–3</div></div>
-
-
     </div>
   </div>
 
@@ -1197,7 +1081,7 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
       <div>
         <div class="card">
           <div class="results-header">
-            <div class="results-count" id="cmResultsCount" style="color:#86efac;font-size:0.82rem">Select ingredients above to see matching recipes</div>
+            <div class="results-count" id="cmResultsCount" style="color:#1e5a3a;font-size:0.82rem;font-weight:600">Select ingredients above to see matching recipes</div>
           </div>
           <div id="cmResults"></div>
         </div>
@@ -3764,7 +3648,7 @@ let selectedSite = '';
 let maxTime      = 0;
 let nameSearch   = '';
 function saveIngs()    { _lsSet('vrf_ings', ingredients); }
-function saveStaples() { _lsSet('vrf_staples', staples); }
+function saveStaples() { _lsSet('vrf_staples', staples); if (typeof updatePantryPower === 'function') updatePantryPower(); }
 function saveFavs()    { _lsSet('vrf_favs', favorites); }
 function saveShop()    { _lsSet('vrf_shop', shopList); }
 
@@ -4030,6 +3914,126 @@ activeAllergies.forEach(key => {
   const btn = document.querySelector(`[onclick*="toggleAllergy"][onclick*="${key}"]`);
   if (btn) btn.classList.add('on');
 }); updateFindBtn(); findRecipes();
+}
+
+// ── PANTRY POWER WIDGET ──────────────────────────────────────────────────────
+// Computes how many recipes the user can make from staples alone, plus
+// how many they're "almost there" on (1 ingredient away).
+function computePantryPower() {
+  if (!Array.isArray(RECIPES) || RECIPES.length === 0) {
+    return { ready: 0, oneAway: 0, total: 0, pct: 0 };
+  }
+  const allIngs = (typeof expandWithAliases === 'function')
+    ? expandWithAliases([...staples])
+    : staples.map(s => (s || '').toLowerCase());
+  let ready = 0, oneAway = 0;
+  for (const r of RECIPES) {
+    if (!r.ing || !r.ing.length) continue;
+    const rIngs = r.ing.map(norm);
+    let haveCount = 0;
+    for (const ri of rIngs) {
+      if (allIngs.some(ai => ri.includes(ai) || ai.includes(ri))) haveCount++;
+    }
+    const missing = rIngs.length - haveCount;
+    if (missing === 0) ready++;
+    else if (missing === 1) oneAway++;
+  }
+  const total = RECIPES.length;
+  const pct = total ? (ready / total) * 100 : 0;
+  return { ready, oneAway, total, pct };
+}
+
+// Animate a number from current → target over ~600ms
+function animateNumber(el, target) {
+  if (!el) return;
+  const start = parseInt(el.textContent.replace(/[^\d]/g,''), 10) || 0;
+  if (start === target) { el.textContent = target.toLocaleString(); return; }
+  const startTime = performance.now();
+  const dur = 600;
+  function step(now) {
+    const t = Math.min(1, (now - startTime) / dur);
+    const eased = 1 - Math.pow(1 - t, 3); // ease-out cubic
+    const val = Math.round(start + (target - start) * eased);
+    el.textContent = val.toLocaleString();
+    if (t < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
+function updatePantryPower() {
+  const widget = document.getElementById('pantryPower');
+  if (!widget) return; // hero not in DOM yet
+  const { ready, oneAway, total, pct } = computePantryPower();
+
+  const numEl  = document.getElementById('ppNumber');
+  const unitEl = document.getElementById('ppUnit');
+  const nearEl = document.getElementById('ppNear');
+  const fillEl = document.getElementById('ppBarFill');
+  const pctEl  = document.getElementById('ppPctLabel');
+  const ctaLab = document.getElementById('ppCtaLabel');
+  const hintEl = document.getElementById('ppHint');
+
+  // The big number = recipes ready
+  if (numEl) animateNumber(numEl, ready);
+  if (unitEl) unitEl.textContent = ready === 1 ? 'recipe ready to cook' : 'recipes ready to cook';
+
+  // "Almost there" sub-line
+  if (nearEl) {
+    if (oneAway > 0) {
+      nearEl.innerHTML = `+ <strong>${oneAway.toLocaleString()}</strong> more you're just 1 ingredient away from`;
+      nearEl.style.display = '';
+    } else if (staples.length === 0) {
+      nearEl.innerHTML = `Add your kitchen staples to unlock <strong>1,000+ recipes</strong>`;
+      nearEl.style.display = '';
+    } else {
+      nearEl.style.display = 'none';
+    }
+  }
+
+  // Progress bar
+  const pctRounded = Math.max(0, Math.min(100, Math.round(pct)));
+  // Visual bar: floor at 1.5% so empty state still shows a sliver
+  const visual = staples.length === 0 ? 0 : Math.max(1.5, pctRounded);
+  if (fillEl) fillEl.style.width = visual + '%';
+  if (pctEl) {
+    const totalLabel = total >= 1000 ? '1,000+' : total.toLocaleString();
+    pctEl.textContent = `${pctRounded}% of ${totalLabel} recipes unlocked`;
+  }
+
+  // State-based CTA + hint copy + celebration class
+  const stapleCount = staples.length;
+  widget.classList.remove('pp-celebrate');
+  if (stapleCount === 0) {
+    if (ctaLab) ctaLab.textContent = 'Set up my pantry (2 min)';
+    if (hintEl) hintEl.textContent = 'Add your first staple below to start unlocking recipes.';
+  } else if (pctRounded < 25) {
+    if (ctaLab) ctaLab.textContent = 'Add more staples';
+    if (hintEl) hintEl.textContent = 'Adding more staples below increases this number.';
+  } else if (pctRounded < 60) {
+    if (ctaLab) ctaLab.textContent = 'Add more staples';
+    if (hintEl) hintEl.textContent = 'Keep adding staples below — each one unlocks more.';
+  } else {
+    widget.classList.add('pp-celebrate');
+    if (ctaLab) ctaLab.textContent = 'Refine my pantry';
+    if (hintEl) hintEl.textContent = 'Your pantry is well-stocked — add a few more below to fill in the rest \uD83C\uDF31';
+  }
+}
+
+// CTA: switch to the "What can I make" tab and scroll to the staples panel
+function goToStaples() {
+  if (typeof showTab === 'function') showTab('canmake');
+  setTimeout(() => {
+    const target = document.getElementById('alwaysToggle');
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      // Open the panel if collapsed
+      const body = document.getElementById('alwaysBody');
+      if (body && !body.classList.contains('open')) {
+        target.classList.add('open');
+        body.classList.add('open');
+      }
+    }
+  }, 80);
 }
 
 function addToToday(item) {
@@ -4794,6 +4798,8 @@ document.addEventListener('DOMContentLoaded', () => {
   } catch(e){}
   // Initialize home panel on first load (it's the default tab)
   if (typeof initHome === 'function') initHome();
+  // Initialize Pantry Power widget in the hero
+  if (typeof updatePantryPower === 'function') updatePantryPower();
 });
 // Close on Escape
 document.addEventListener('keydown', e => {
@@ -4839,30 +4845,6 @@ document.addEventListener('input', e => {
 });
 // Initial count on load
 setTimeout(updateFilterCount, 100);
-
-// ── INTRO TOGGLE ──────────────────────────────────────────────────────────────
-function toggleIntro() {
-  const body = document.getElementById('introBody');
-  const btn  = document.getElementById('introToggle');
-  const open = body.classList.toggle('open');
-  btn.classList.toggle('open', open);
-  btn.querySelector('.label').textContent = open ? 'Hide details' : 'How HARVEST works';
-  try { localStorage.setItem('vrf_intro_open', open ? '1' : '0'); } catch(e) {}
-}
-// Restore user's preference on load (default: collapsed)
-(function(){
-  try{
-    if (localStorage.getItem('vrf_intro_open') === '1') {
-      const body = document.getElementById('introBody');
-      const btn  = document.getElementById('introToggle');
-      if (body && btn) {
-        body.classList.add('open');
-        btn.classList.add('open');
-        btn.querySelector('.label').textContent = 'Hide details';
-      }
-    }
-  }catch(e){}
-})();
 
 // ── ALLERGY FILTERS ────────────────────────────────────────────────────────────
 let activeAllergies = new Set(_lsGet('vrf_allergies', '[]'));
@@ -5253,7 +5235,7 @@ function cmCard(r, group) {
   <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
     <div>
       <div class="cm-r-title">${r.title}</div>
-      <div style="font-size:0.74rem;color:#86efac;margin-bottom:4px">${r.site}</div>
+      <div style="font-size:0.74rem;color:#4a5d52;margin-bottom:4px">${r.site}</div>
     </div>
     ${group === 0 ? '<span style="font-size:1.1rem">✅</span>' : ''}
   </div>
