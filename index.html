@@ -1017,6 +1017,27 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
     </div>
   </div>
 
+  <!-- ══════ FIND RECIPE EXPLAINER MODAL (one-time) ══════ -->
+  <div class="modal-overlay" id="findExplainerModal" onclick="if(event.target===this)closeFindExplainer()">
+    <div class="modal-box" style="max-width:460px">
+      <div class="modal-header">
+        <div class="modal-title">How HARVEST opens recipes</div>
+        <button class="modal-close" onclick="closeFindExplainer()" aria-label="Close">✕</button>
+      </div>
+      <div class="modal-body" style="gap:14px">
+        <div style="font-size:0.95rem;color:#1a2e24;line-height:1.55">
+          Tap <strong style="color:#2d7a4f">Find Recipe</strong> and HARVEST opens a Google search for that exact recipe. Just <strong style="color:#2d7a4f">tap the top result</strong> to view the full recipe on the chef's site.
+        </div>
+        <div style="background:#f4f9f1;border:1px solid #d4e6d8;border-radius:10px;padding:12px 14px;font-size:0.85rem;color:#4a5d52;line-height:1.5">
+          <span style="font-weight:700;color:#2d7a4f">Why?</span> Recipes belong to the creators who wrote them. HARVEST matches them to your pantry but doesn't host them.
+        </div>
+      </div>
+      <div class="modal-footer" style="justify-content:center">
+        <button class="btn-sm-green" onclick="dismissFindExplainer()" style="padding:11px 22px;font-size:0.92rem;font-weight:700">Got it — open the search</button>
+      </div>
+    </div>
+  </div>
+
   <!-- ══════ WHAT CAN I MAKE PANEL ══════ -->
   <div class="panel" id="panel-canmake">
     <div class="cm-layout">
@@ -4273,6 +4294,40 @@ function searchUrl(r) {
   return 'https://www.google.com/search?q=' + encodeURIComponent(q);
 }
 
+// ── ONE-TIME EXPLAINER FOR "FIND RECIPE" → GOOGLE FLOW ───────────────────────
+let _pendingSearchUrl = null;
+function openRecipeSearch(url) {
+  if (!url) return;
+  // If user has already seen the explainer, go straight to Google
+  try {
+    if (localStorage.getItem('vrf_find_explained') === '1') {
+      window.open(url, '_blank', 'noopener');
+      return;
+    }
+  } catch(e) {
+    // localStorage blocked — fall through and show modal anyway
+  }
+  // First time: show modal and stash URL until they confirm
+  _pendingSearchUrl = url;
+  const modal = document.getElementById('findExplainerModal');
+  if (modal) modal.classList.add('open');
+  else window.open(url, '_blank', 'noopener'); // safety fallback
+}
+function dismissFindExplainer() {
+  try { localStorage.setItem('vrf_find_explained', '1'); } catch(e){}
+  const modal = document.getElementById('findExplainerModal');
+  if (modal) modal.classList.remove('open');
+  const url = _pendingSearchUrl;
+  _pendingSearchUrl = null;
+  if (url) window.open(url, '_blank', 'noopener');
+}
+function closeFindExplainer() {
+  // Closed via X or backdrop click — DON'T set the flag and DON'T navigate
+  const modal = document.getElementById('findExplainerModal');
+  if (modal) modal.classList.remove('open');
+  _pendingSearchUrl = null;
+}
+
 function siteHomeUrl(r) {
   // Show globe only when we have a direct recipe URL — goes straight to the recipe
   if (!r.url) return null;
@@ -4341,7 +4396,7 @@ function recipeCard(r) {
   ${needChips ? `<div class="chip-label-sm" style="margin-top:4px">You need</div><div class="chips">${needChips}</div>` : ''}
   ${swapNote}
   <div class="r-actions" onclick="event.stopPropagation()">
-    <a href="${searchUrl(r)}" target="_blank" rel="noopener"><button class="btn-sm btn-link">🔍 Find Recipe</button></a>
+    <button class="btn-sm btn-link" onclick="openRecipeSearch('${searchUrl(r)}')">🔍 Find Recipe</button>
     <button class="btn-sm btn-fav${isFav ? ' on' : ''}" onclick="toggleFav(${r.id})">
       ${isFav ? '❤️ Saved' : '🤍 Save'}
     </button>
@@ -4426,9 +4481,7 @@ function openDetail(id) {
   const isFav = favorites.some(f => f.id === id);
   const instrNotes = instructions[id] || '';
   document.getElementById('detailActions').innerHTML = `
-    <a href="${searchUrl(r)}" target="_blank" rel="noopener" style="flex:1;min-width:140px;text-decoration:none">
-      <button class="btn-detail btn-detail-primary" style="width:100%">🔍 Find Full Recipe</button>
-    </a>
+    <button class="btn-detail btn-detail-primary" style="flex:1;min-width:140px" onclick="openRecipeSearch('${searchUrl(r)}')">🔍 Find Full Recipe</button>
     <button class="btn-detail btn-detail-secondary" onclick="toggleFav(${id});openDetail(${id})">
       ${isFav ? '❤️ Saved' : '🤍 Save'}
     </button>
@@ -4499,7 +4552,7 @@ function renderFavs() {
           <div class="fav-site">${f.site}</div>
         </div>
         <div style="display:flex;gap:6px;flex-shrink:0;flex-wrap:wrap;justify-content:flex-end">
-          <a href="${searchUrl(f)}" target="_blank"><button class="btn-sm btn-link" title="Find Recipe">🔗 Find</button></a>
+          <button class="btn-sm btn-link" title="Find Recipe" onclick="openRecipeSearch('${searchUrl(f)}')">🔗 Find</button>
           <button class="btn-sm btn-notes${notes ? ' on' : ''}" onclick="openInstrModal(${f.id})" title="${notes ? 'View Notes' : 'Add Notes'}">📝 ${notes ? 'View Notes' : 'Add Notes'}</button>
           ${notes ? `<button class="btn-sm btn-link" onclick="favCopyNotes(${f.id})" title="Copy notes to clipboard">📋 Copy</button>` : ''}
           ${notes ? `<button class="btn-sm btn-link" onclick="favPrintNotes(${f.id})" title="Print notes">🖨️ Print</button>` : ''}
@@ -5253,7 +5306,7 @@ function cmCard(r, group) {
   </div>` : ''}
   ${missingChips ? `<div class="cm-missing-label">Still need</div><div class="cm-missing-chips">${missingChips}</div>` : ''}
   <div class="cm-actions">
-    <a href="${searchUrl(r)}" target="_blank" rel="noopener"><button class="btn-sm btn-link">🔍 Find Recipe</button></a>
+    <button class="btn-sm btn-link" onclick="openRecipeSearch('${searchUrl(r)}')">🔍 Find Recipe</button>
     <button class="btn-sm btn-fav${isFav?' on':''}" onclick="toggleFav(${r.id});runCanMake()">${isFav?'❤️ Saved':'🤍 Save'}</button>
     ${r.needNames.length ? `<button class="btn-sm btn-shop" onclick="cmAddMissingToShop(${r.id},[${r.needNames.map(n=>`'${n.replace(/'/g,"\\'")}' `).join(',')}])"><span class="cart">🛒</span> Add Missing to List</button>` : ''}
     <button class="btn-sm btn-notes${instrNotes ? ' on' : ''}" onclick="openInstrModal(${r.id})">📝 ${instrNotes ? 'View Notes' : 'Add Notes'}</button>
