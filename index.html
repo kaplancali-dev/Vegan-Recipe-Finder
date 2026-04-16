@@ -2712,7 +2712,7 @@ function updatePantryPower() {
   const projEl = document.getElementById('ppProjection');
   if (projEl) {
     if (staples.length > 0 && projectionGain > 0 && pctRounded < 60) {
-      projEl.textContent = `Adding ~${projectionCount} more staples could match ~${simReady.toLocaleString()} recipes with 100% of ingredients needed!`;
+      projEl.textContent = `Adding ~${projectionCount} more staples could match ~${projectionGain.toLocaleString()} more recipes with 100% of ingredients needed!`;
       projEl.style.display = '';
     } else if (staples.length === 0) {
       projEl.textContent = '';
