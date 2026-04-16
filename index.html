@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>HARVEST — Vegan Recipe Finder</title>
+<title>HARVEST — Eat More Plants!</title>
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="HARVEST">
@@ -3399,7 +3399,7 @@ function importData(event) {
       render();
       alert('✅ Backup restored successfully!\n\nYour favorites, notes, staples, and shopping list have been loaded.');
     } catch(err) {
-      alert('❌ Could not import backup.\n\nMake sure you selected a valid Vegan Recipe Finder backup file.');
+      alert('❌ Could not import backup.\n\nMake sure you selected a valid HARVEST backup file.');
     }
     event.target.value = ''; // reset input so same file can be re-imported
   };
@@ -3479,7 +3479,7 @@ function printInstr() {
   ${nut}
   <hr>
   <div class="notes">${notes}</div>
-  <div class="footer">Printed from 🌿 Vegan Recipe Finder</div>
+  <div class="footer">Printed from 🌿 HARVEST</div>
   <script>window.onload=()=>{window.print()}<\/script>
   </body></html>`);
   win.document.close();
