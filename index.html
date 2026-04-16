@@ -74,7 +74,7 @@
   /* Tab navigation bar */
   .tab-bar,.tabs{background:var(--card) !important;border-bottom:1px solid var(--border) !important}
   .tab-btn,.tab{color:var(--ink-soft) !important}
-  .tab-btn.on,.tab.on{color:var(--green) !important;border-color:var(--green) !important}
+  .tab-btn.on,.tab.on{color:#fff !important;border-color:var(--green) !important}
   /* Sidebar / filter rail */
   .sidebar,.side,.filter-rail,.panel{background:var(--card) !important;border:1px solid var(--border) !important}
   /* Scrollbar */
@@ -235,9 +235,10 @@ header{text-align:center;padding:24px 0 18px}
 header h1{font-size:2rem;color:#2d7a4f;letter-spacing:1px}
 header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
 /* ── TABS ── */
-.tab-bar{display:flex;gap:5px;margin-bottom:16px;background:#ffffff;border-radius:12px;padding:5px;border:1px solid #f3ede3}
-.tab-btn{flex:1;padding:9px 8px;border:none;border-radius:9px;font-size:0.85rem;font-weight:700;cursor:pointer;background:none;color:#2d7a4f;transition:all 0.15s}
-.tab-btn.on{background:#1e5a3a;color:#fff;box-shadow:0 1px 4px rgba(0,0,0,0.3)}
+.tab-bar{display:flex;gap:5px;margin-bottom:16px;background:#faf7f2;border-radius:12px;padding:5px;border:1px solid #e8e3d8}
+.tab-btn{flex:1;padding:9px 8px;border:none;border-radius:9px;font-size:0.85rem;font-weight:600;cursor:pointer;background:none;color:#4a5d52;transition:all 0.15s}
+.tab-btn:hover{background:#e8f3ec;color:#1e5a3a}
+.tab-btn.on{background:#2d7a4f;color:#fff;box-shadow:0 1px 4px rgba(26,46,36,.15)}
 /* ── PANELS ── */
 .panel{display:none}
 .panel.on{display:block}
@@ -409,7 +410,7 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
 .filter-chips{display:flex;flex-wrap:wrap;gap:5px}
 .fc{background:#faf7f2;border:1.5px solid #f3ede3;border-radius:99px;padding:5px 12px;font-size:0.78rem;font-weight:600;color:#2d7a4f;cursor:pointer;transition:all .13s;white-space:nowrap}
 .fc:hover{border-color:#2d7a4f;background:#ffffff;color:#2d7a4f}
-.fc.on{background:#1e5a3a;color:#2d7a4f;border-color:#2d7a4f}
+.fc.on{background:#1e5a3a;color:#ffffff;border-color:#2d7a4f}
 /* ── NAME SEARCH ── */
 .name-search-input{width:100%;padding:9px 13px;border:1.5px solid #276a44;border-radius:10px;font-size:0.88rem;outline:none;background:#faf7f2;color:#e8f3ec;transition:border-color .16s}
 .name-search-input::placeholder{color:#8b9a92}
