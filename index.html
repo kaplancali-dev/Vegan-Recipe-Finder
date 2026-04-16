@@ -4121,10 +4121,6 @@ function runCanMake() {
   if (!total) html = `<div class="empty"><div class="e-icon">🥦</div><p>No recipes found within 2 missing ingredients.<br>Try selecting more pantry items.</p></div>`;
 
   document.getElementById('cmResults').innerHTML = html;
-  // On mobile, scroll to top so user sees the full panel from the beginning
-  if (window.innerWidth < 768) {
-    setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 100);
-  }
 }
 
 function cmCard(r, group) {
