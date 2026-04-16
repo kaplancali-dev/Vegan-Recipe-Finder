@@ -833,7 +833,8 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
           </div>
           <div class="pp-near" id="ppNear">+ 0 more you're 1 ingredient away from</div>
           <div class="pp-bar"><div class="pp-bar-fill" id="ppBarFill" style="width:0%"></div></div>
-          <div class="pp-bar-meta"><span id="ppPctLabel">0% of 1,000+ recipes unlocked</span></div>
+          <div class="pp-bar-meta"><span id="ppPctLabel">0 of 799 recipes ready</span></div>
+          <div class="pp-projection" id="ppProjection" style="font-size:.82rem;color:#5a7a5a;margin-top:6px;font-style:italic;line-height:1.4"></div>
           <button type="button" class="pp-cta" id="ppCta" onclick="goToStaples()">
             <span class="pp-cta-icon">★</span>
             <span class="pp-cta-label" id="ppCtaLabel">Set up my pantry (2 min)</span>
@@ -2617,7 +2618,39 @@ function computePantryPower() {
   }
   const total = RECIPES.length;
   const pct = total ? (ready / total) * 100 : 0;
-  return { ready, oneAway, total, pct };
+
+  // ── Projection: find the most impactful staples to add ──
+  // Count how often each missing ingredient appears across all non-ready recipes
+  const missingFreq = {};
+  for (const r of RECIPES) {
+    if (!r.ing || !r.ing.length) continue;
+    const rIngs = r.ing.map(norm);
+    const missing = rIngs.filter(ri => !allIngs.some(ai => ri.includes(ai) || ai.includes(ri)));
+    if (missing.length > 0 && missing.length <= 5) {
+      for (const m of missing) {
+        missingFreq[m] = (missingFreq[m] || 0) + 1;
+      }
+    }
+  }
+  // Pick the top 15 most impactful ingredients to suggest adding
+  const topMissing = Object.entries(missingFreq)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 15)
+    .map(e => e[0]);
+
+  // Simulate: how many recipes would be ready if user added these 15?
+  const simIngs = [...allIngs, ...topMissing];
+  let simReady = 0;
+  for (const r of RECIPES) {
+    if (!r.ing || !r.ing.length) continue;
+    const rIngs = r.ing.map(norm);
+    const simMissing = rIngs.filter(ri => !simIngs.some(ai => ri.includes(ai) || ai.includes(ri)));
+    if (simMissing.length === 0) simReady++;
+  }
+  const projectionGain = simReady - ready;
+  const projectionCount = topMissing.length;
+
+  return { ready, oneAway, total, pct, projectionGain, projectionCount, simReady };
 }
 
 // Animate a number from current → target over ~600ms
@@ -2640,7 +2673,7 @@ function animateNumber(el, target) {
 function updatePantryPower() {
   const widget = document.getElementById('pantryPower');
   if (!widget) return; // hero not in DOM yet
-  const { ready, oneAway, total, pct } = computePantryPower();
+  const { ready, oneAway, total, pct, projectionGain, projectionCount, simReady } = computePantryPower();
 
   const numEl  = document.getElementById('ppNumber');
   const unitEl = document.getElementById('ppUnit');
@@ -2660,7 +2693,7 @@ function updatePantryPower() {
       nearEl.innerHTML = `+ <strong>${oneAway.toLocaleString()}</strong> more you're just 1 ingredient away from`;
       nearEl.style.display = '';
     } else if (staples.length === 0) {
-      nearEl.innerHTML = `Add your kitchen staples to unlock <strong>1,000+ recipes</strong>`;
+      nearEl.innerHTML = `Add your kitchen staples to discover <strong>${RECIPES.length.toLocaleString()} recipes</strong>`;
       nearEl.style.display = '';
     } else {
       nearEl.style.display = 'none';
@@ -2673,8 +2706,21 @@ function updatePantryPower() {
   const visual = staples.length === 0 ? 0 : Math.max(1.5, pctRounded);
   if (fillEl) fillEl.style.width = visual + '%';
   if (pctEl) {
-    const totalLabel = total >= 1000 ? '1,000+' : total.toLocaleString();
-    pctEl.textContent = `${pctRounded}% of ${totalLabel} recipes unlocked`;
+    pctEl.textContent = `${ready.toLocaleString()} of ${total.toLocaleString()} recipes ready`;
+  }
+  // Projection line
+  const projEl = document.getElementById('ppProjection');
+  if (projEl) {
+    if (staples.length > 0 && projectionGain > 0 && pctRounded < 60) {
+      projEl.textContent = `Adding ~${projectionCount} more staples could unlock ~${simReady.toLocaleString()} recipes!`;
+      projEl.style.display = '';
+    } else if (staples.length === 0) {
+      projEl.textContent = '';
+      projEl.style.display = 'none';
+    } else {
+      projEl.textContent = '';
+      projEl.style.display = 'none';
+    }
   }
 
   // State-based CTA + hint copy + celebration class
@@ -2682,13 +2728,13 @@ function updatePantryPower() {
   widget.classList.remove('pp-celebrate');
   if (stapleCount === 0) {
     if (ctaLab) ctaLab.textContent = 'Set up my pantry (2 min)';
-    if (hintEl) hintEl.textContent = 'Add your first staple below to start unlocking recipes.';
+    if (hintEl) hintEl.textContent = 'Add your first staple below to start matching recipes.';
   } else if (pctRounded < 25) {
     if (ctaLab) ctaLab.textContent = 'Add more staples';
     if (hintEl) hintEl.textContent = 'Adding more staples below increases this number.';
   } else if (pctRounded < 60) {
     if (ctaLab) ctaLab.textContent = 'Add more staples';
-    if (hintEl) hintEl.textContent = 'Keep adding staples below — each one unlocks more.';
+    if (hintEl) hintEl.textContent = 'Keep adding staples — each one matches more recipes.';
   } else {
     widget.classList.add('pp-celebrate');
     if (ctaLab) ctaLab.textContent = 'Refine my pantry';
