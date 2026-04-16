@@ -2642,7 +2642,7 @@ function computePantryPower() {
 
   // Simulate: how many recipes would be ready if user added these staples?
   const simIngs = [...allIngs, ...topMissing];
-  let simReady = 0, simNinety = 0;
+  let simReady = 0, simNinety = 0, simEighty = 0;
   for (const r of RECIPES) {
     if (!r.ing || !r.ing.length) continue;
     const rIngs = r.ing.map(norm);
@@ -2650,9 +2650,10 @@ function computePantryPower() {
     const pctMatch = haveCount / rIngs.length;
     if (pctMatch >= 1) simReady++;
     else if (pctMatch >= 0.9) simNinety++;
+    else if (pctMatch >= 0.8) simEighty++;
   }
 
-  return { ready, oneAway, total, pct, simReady, simNinety, topMissing, currentNinety };
+  return { ready, oneAway, total, pct, simReady, simNinety, simEighty, topMissing, currentNinety };
 }
 
 // Animate a number from current → target over ~600ms
@@ -2675,7 +2676,7 @@ function animateNumber(el, target) {
 function updatePantryPower() {
   const widget = document.getElementById('pantryPower');
   if (!widget) return; // hero not in DOM yet
-  const { ready, oneAway, total, pct, simReady, simNinety, topMissing, currentNinety } = computePantryPower();
+  const { ready, oneAway, total, pct, simReady, simNinety, simEighty, topMissing, currentNinety } = computePantryPower();
 
   const numEl  = document.getElementById('ppNumber');
   const unitEl = document.getElementById('ppUnit');
@@ -2714,7 +2715,8 @@ function updatePantryPower() {
   const projEl = document.getElementById('ppProjection');
   if (projEl) {
     if (staples.length > 0 && simReady > ready && currentNinety < 200) {
-      projEl.textContent = `Adding ${topMissing.length} more staples matches ${simReady.toLocaleString()} recipes at 100% and ${(simReady + simNinety).toLocaleString()} recipes at 90% of ingredients needed!`;
+      const total80 = simReady + simNinety + simEighty;
+      projEl.textContent = `Adding ${topMissing.length} more staples matches ${simReady.toLocaleString()} recipes at 100%, ${(simReady + simNinety).toLocaleString()} at 90%, and ${total80.toLocaleString()} at 80% of ingredients needed!`;
       projEl.style.display = '';
     } else if (staples.length === 0) {
       projEl.textContent = '';
