@@ -109,6 +109,7 @@
   /* ── HERO SPLIT LAYOUT ───────────────────────────────────────── */
   .intro-hero-grid{display:grid;grid-template-columns:1.35fr 1fr;gap:32px;align-items:center}
   .intro-hero-copy{min-width:0}
+  .hero-img{width:100%;max-height:300px;object-fit:cover;border-radius:12px;margin-bottom:16px;box-shadow:0 4px 16px rgba(0,0,0,.1)}
   @media (max-width:780px){
     .intro-hero-grid{grid-template-columns:1fr;gap:22px}
   }
@@ -813,8 +814,9 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
     <!-- Always-visible magazine hero (split layout) -->
     <div class="intro-hero">
       <div class="intro-hero-grid">
-        <!-- LEFT: copy -->
+        <!-- LEFT: copy + hero image -->
         <div class="intro-hero-copy">
+          <img src="hero-image.png" alt="Woman looking into a fridge full of fresh vegetables" class="hero-img">
           <h2 class="intro-hero-title">"What can I make with this?"</h2>
           <p class="intro-hero-sub">
             You open the fridge and think, <em>"What can I make with this?"</em>
