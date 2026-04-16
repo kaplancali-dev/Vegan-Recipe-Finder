@@ -1174,7 +1174,7 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
 <script>
 // ── DATA ──────────────────────────────────────────────────────────────────────
 const SHOP_CATEGORIES = {
-  '🥦 Produce': ['garlic','onion','onions','spinach','kale','carrots','broccoli','cauliflower','bell peppers','mushrooms','tomatoes','avocado','zucchini','corn','cucumber','green onions','ginger','lemon','lime','banana','blueberries','mango','apple','dates','scallions','cilantro','parsley','basil','jalapeño','eggplant','sweet potato','potatoes','beets','celery','lettuce','cabbage','bok choy','edamame','cherry tomatoes','crushed tomatoes','diced tomatoes','green chili','baby spinach'],
+  '🥦 Produce': ['garlic','onion','onions','spinach','baby spinach','kale','arugula','carrots','broccoli','cauliflower','bell peppers','mushrooms','tomatoes','avocado','zucchini','corn','cucumber','green onions','ginger','lemon','lime','banana','blueberries','mango','apple','dates','scallions','cilantro','parsley','basil','jalapeño','eggplant','sweet potato','potatoes','beets','celery','lettuce','romaine','iceberg','butter lettuce','red leaf lettuce','green leaf lettuce','mixed greens','cabbage','bok choy','edamame','cherry tomatoes','crushed tomatoes','diced tomatoes','green chili'],
   '🫘 Proteins & Legumes': ['chickpeas','black beans','lentils','kidney beans','navy beans','pinto beans','white beans','tofu','tempeh','edamame','protein powder','red lentils','green lentils','jackfruit'],
   '🌾 Grains & Pasta': ['rice','quinoa','oats','rolled oats','pasta','gluten-free pasta','pasta (any)','brown rice','corn tortillas','polenta','buckwheat','bread','noodles','spaghetti','penne','macaroni'],
   '🥜 Nuts & Seeds': ['almonds','walnuts','cashews','pecans','hemp seeds','chia seeds','flax seeds','pumpkin seeds','sunflower seeds','sesame seeds','tahini','nut butter (any)','peanut butter','almond butter'],
@@ -4130,6 +4130,7 @@ const INGREDIENT_ALIASES = {
   'soy sauce / tamari':     ['soy sauce','tamari','coconut aminos','liquid aminos','aminos'],
   'sweetener (any)': ['maple syrup','agave','coconut sugar','brown sugar','sugar','date syrup'],
   'leafy greens (any)': ['spinach','kale','chard','arugula','collard greens','beet greens','bok choy','baby spinach'],
+  'lettuce (any)': ['lettuce','romaine','romaine lettuce','iceberg','iceberg lettuce','butter lettuce','bibb lettuce','red leaf lettuce','green leaf lettuce','mixed greens','spring mix','mesclun','mixed salad greens'],
   'vinegar (any)': ['apple cider vinegar','rice vinegar','white vinegar','red wine vinegar','balsamic vinegar'],
   'flour (any)': ['flour','all-purpose flour','oat flour','almond flour','spelt flour','buckwheat flour','rice flour','coconut flour'],
   'fresh herbs (any)': ['cilantro','parsley','basil','mint','dill','thyme','rosemary','oregano','chives'],
@@ -4161,6 +4162,14 @@ const INGREDIENT_SUBS = {
   'lemon': ['lime','apple cider vinegar'],
   'lime': ['lemon'],
   'cilantro': ['parsley','basil'],
+  'lettuce':            ['romaine','iceberg','butter lettuce','bibb lettuce','red leaf lettuce','green leaf lettuce','mixed greens','spring mix'],
+  'romaine':            ['lettuce','iceberg','butter lettuce','green leaf lettuce','red leaf lettuce','mixed greens'],
+  'iceberg':            ['lettuce','romaine','butter lettuce','green leaf lettuce','red leaf lettuce'],
+  'butter lettuce':     ['lettuce','romaine','iceberg','bibb lettuce','green leaf lettuce','red leaf lettuce'],
+  'red leaf lettuce':   ['lettuce','romaine','iceberg','green leaf lettuce','butter lettuce','mixed greens'],
+  'green leaf lettuce': ['lettuce','romaine','iceberg','red leaf lettuce','butter lettuce','mixed greens'],
+  'mixed greens':       ['lettuce','romaine','spring mix','mesclun','arugula','spinach','baby spinach'],
+  'arugula':            ['spinach','baby spinach','mixed greens','lettuce'],
   'fresh ginger': ['ginger','ginger powder'],
   'ginger': ['fresh ginger','ginger powder'],
 };
