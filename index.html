@@ -2638,19 +2638,19 @@ function computePantryPower() {
     .slice(0, 40)
     .map(e => e[0]);
 
-  // Simulate: how many recipes would be ready if user added these 15?
+  // Simulate: how many recipes would be ready if user added these staples?
   const simIngs = [...allIngs, ...topMissing];
-  let simReady = 0;
+  let simReady = 0, simNinety = 0;
   for (const r of RECIPES) {
     if (!r.ing || !r.ing.length) continue;
     const rIngs = r.ing.map(norm);
-    const simMissing = rIngs.filter(ri => !simIngs.some(ai => ri.includes(ai) || ai.includes(ri)));
-    if (simMissing.length === 0) simReady++;
+    const haveCount = rIngs.filter(ri => simIngs.some(ai => ri.includes(ai) || ai.includes(ri))).length;
+    const pctMatch = haveCount / rIngs.length;
+    if (pctMatch >= 1) simReady++;
+    else if (pctMatch >= 0.9) simNinety++;
   }
-  const projectionGain = simReady - ready;
-  const projectionCount = topMissing.length;
 
-  return { ready, oneAway, total, pct, projectionGain, projectionCount, simReady };
+  return { ready, oneAway, total, pct, simReady, simNinety };
 }
 
 // Animate a number from current → target over ~600ms
@@ -2673,7 +2673,7 @@ function animateNumber(el, target) {
 function updatePantryPower() {
   const widget = document.getElementById('pantryPower');
   if (!widget) return; // hero not in DOM yet
-  const { ready, oneAway, total, pct, projectionGain, projectionCount, simReady } = computePantryPower();
+  const { ready, oneAway, total, pct, simReady, simNinety } = computePantryPower();
 
   const numEl  = document.getElementById('ppNumber');
   const unitEl = document.getElementById('ppUnit');
@@ -2711,8 +2711,8 @@ function updatePantryPower() {
   // Projection line
   const projEl = document.getElementById('ppProjection');
   if (projEl) {
-    if (staples.length > 0 && projectionGain > 0 && pctRounded < 60) {
-      projEl.textContent = `A well-stocked pantry could match ~${simReady.toLocaleString()} recipes with 100% of ingredients needed!`;
+    if (staples.length > 0 && simReady > ready && pctRounded < 60) {
+      projEl.textContent = `A well-stocked pantry could match ~${simReady.toLocaleString()} recipes at 100% and ~${(simReady + simNinety).toLocaleString()} at 90%+ of ingredients needed!`;
       projEl.style.display = '';
     } else if (staples.length === 0) {
       projEl.textContent = '';
