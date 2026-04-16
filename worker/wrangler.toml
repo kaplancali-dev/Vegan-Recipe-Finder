@@ -1,0 +1,11 @@
+name = "harvest-pantry-scan"
+main = "src/index.js"
+compatibility_date = "2024-01-01"
+
+[[kv_namespaces]]
+binding = "RATE_STORE"
+id = "b842c93a668849c7854bfb209e2e6316"
+
+[vars]
+ALLOWED_ORIGIN = "https://kaplancali-dev.github.io"
+DAILY_LIMIT = 10

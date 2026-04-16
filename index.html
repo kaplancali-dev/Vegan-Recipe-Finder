@@ -318,17 +318,6 @@
   .scan-section{margin-bottom:18px}
   .scan-section-label{font-size:11px;font-weight:700;letter-spacing:.12em;color:var(--green);margin-bottom:8px;text-transform:uppercase}
 
-  /* API key config */
-  .scan-api-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:8px}
-  .scan-api-row select,.scan-api-row input{
-    font-size:13px;padding:8px 10px;border-radius:8px;
-    border:1px solid var(--border);background:#fff;color:var(--ink);
-    font-family:-apple-system,system-ui,sans-serif;
-  }
-  .scan-api-row select{flex:0 0 auto;min-width:120px}
-  .scan-api-row input{flex:1;min-width:180px}
-  .scan-api-hint{font-size:11.5px;color:var(--muted);line-height:1.4;margin-bottom:4px}
-
   /* Photo slots */
   .scan-photos{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
   @media(max-width:500px){.scan-photos{grid-template-columns:1fr}}
@@ -861,19 +850,6 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
       <button class="scan-close" onclick="closeScanModal()">&times;</button>
       <div class="scan-title">Scan My Pantry</div>
       <div class="scan-sub">Take photos of your cupboard, spice drawer, and refrigerator. AI will identify your ingredients and add them to your kitchen staples.</div>
-
-      <!-- API key config -->
-      <div class="scan-section" id="scanApiSection">
-        <div class="scan-section-label">AI Provider</div>
-        <div class="scan-api-row">
-          <select id="scanApiProvider" onchange="saveScanApiConfig()">
-            <option value="claude">Claude (Anthropic)</option>
-            <option value="openai">OpenAI</option>
-          </select>
-          <input type="password" id="scanApiKey" placeholder="Paste your API key here…" oninput="saveScanApiConfig()">
-        </div>
-        <div class="scan-api-hint">Your key is stored locally on this device only. It is never shared or sent anywhere except directly to the AI provider you select.</div>
-      </div>
 
       <!-- Photo slots -->
       <div class="scan-section">
@@ -4051,6 +4027,7 @@ function cmAddMissingToShop(id, items) {
 }
 
 // ── SCAN MY PANTRY ────────────────────────────────────────────────────────────
+const SCAN_WORKER_URL = 'https://harvest-pantry-scan.kaplancali.workers.dev';
 const SCAN_PHOTOS = [null, null, null]; // base64 data for each slot
 const SCAN_SLOT_LABELS = ['Cupboard', 'Spice Drawer', 'Refrigerator'];
 let _scanActiveSlot = 0;
@@ -4060,25 +4037,12 @@ function openScanModal() {
   const overlay = document.getElementById('scanOverlay');
   overlay.classList.add('open');
   document.body.style.overflow = 'hidden';
-  // Restore saved API config
-  const provider = localStorage.getItem('vrf_scan_provider') || 'claude';
-  const key = localStorage.getItem('vrf_scan_key') || '';
-  document.getElementById('scanApiProvider').value = provider;
-  document.getElementById('scanApiKey').value = key;
   updateScanBtn();
 }
 
 function closeScanModal() {
   document.getElementById('scanOverlay').classList.remove('open');
   document.body.style.overflow = '';
-}
-
-function saveScanApiConfig() {
-  const provider = document.getElementById('scanApiProvider').value;
-  const key = document.getElementById('scanApiKey').value.trim();
-  localStorage.setItem('vrf_scan_provider', provider);
-  if (key) localStorage.setItem('vrf_scan_key', key);
-  updateScanBtn();
 }
 
 function triggerScanPhoto(slot) {
@@ -4133,13 +4097,9 @@ function resetScanSlot(slot) {
 function updateScanBtn() {
   const btn = document.getElementById('scanGoBtn');
   const label = document.getElementById('scanBtnLabel');
-  const hasKey = !!document.getElementById('scanApiKey').value.trim();
   const hasPhotos = SCAN_PHOTOS.some(p => p !== null);
   const photoCount = SCAN_PHOTOS.filter(p => p !== null).length;
-  if (!hasKey) {
-    btn.disabled = true;
-    label.textContent = 'Enter your API key above';
-  } else if (!hasPhotos) {
+  if (!hasPhotos) {
     btn.disabled = true;
     label.textContent = 'Add at least 1 photo to scan';
   } else {
@@ -4149,10 +4109,8 @@ function updateScanBtn() {
 }
 
 async function runPantryScan() {
-  const provider = document.getElementById('scanApiProvider').value;
-  const apiKey = document.getElementById('scanApiKey').value.trim();
   const photos = SCAN_PHOTOS.filter(p => p !== null);
-  if (!apiKey || !photos.length) return;
+  if (!photos.length) return;
 
   const btn = document.getElementById('scanGoBtn');
   const label = document.getElementById('scanBtnLabel');
@@ -4164,37 +4122,29 @@ async function runPantryScan() {
   // Build known ingredient set for matching
   const knownIngs = new Set();
   QA_ITEMS.forEach(g => g.items.forEach(i => knownIngs.add(i.toLowerCase())));
-  // Also include all unique ingredients from RECIPES
   RECIPES.forEach(r => (r.ing || []).forEach(i => knownIngs.add(i.toLowerCase())));
-
-  const prompt = `You are a kitchen ingredient identifier. Look at each photo carefully and list EVERY food ingredient, spice, condiment, oil, sauce, flour, grain, bean, nut, seed, fruit, and vegetable you can see.
-
-Return ONLY a JSON array of strings — one entry per ingredient, lowercase, singular form when sensible. Use short common names.
-
-Example: ["chickpeas","cumin","olive oil","garlic","rice","soy sauce","maple syrup","smoked paprika"]
-
-Rules:
-- List individual items, not brands or containers
-- If you see a spice rack, list each visible spice
-- Combine obvious duplicates
-- Include pantry staples like salt, pepper, oils
-- Do NOT include non-food items
-- Return ONLY the JSON array, nothing else`;
 
   try {
     let allItems = [];
-    // Process each photo — send individually with slot labels
+    // Send each photo to the worker
     for (let i = 0; i < SCAN_PHOTOS.length; i++) {
       if (!SCAN_PHOTOS[i]) continue;
-      const base64Data = SCAN_PHOTOS[i].split(',')[1]; // strip data:image/...;base64,
+      const base64Data = SCAN_PHOTOS[i].split(',')[1];
       const mediaType = SCAN_PHOTOS[i].match(/data:([^;]+);/)?.[1] || 'image/jpeg';
-      let items;
-      if (provider === 'claude') {
-        items = await scanWithClaude(apiKey, base64Data, mediaType, prompt, SCAN_SLOT_LABELS[i]);
-      } else {
-        items = await scanWithOpenAI(apiKey, SCAN_PHOTOS[i], prompt, SCAN_SLOT_LABELS[i]);
+
+      const resp = await fetch(SCAN_WORKER_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ image: base64Data, mediaType, slotLabel: SCAN_SLOT_LABELS[i] })
+      });
+
+      const data = await resp.json();
+      if (!resp.ok) {
+        throw new Error(data.message || data.error || `Scan failed (${resp.status})`);
       }
-      items.forEach(item => allItems.push({ name: item.toLowerCase().trim(), source: SCAN_SLOT_LABELS[i] }));
+      (data.ingredients || []).forEach(item =>
+        allItems.push({ name: item.toLowerCase().trim(), source: SCAN_SLOT_LABELS[i] })
+      );
     }
 
     // Deduplicate
@@ -4207,75 +4157,16 @@ Rules:
         [...knownIngs].some(k => item.name.includes(k) || k.includes(item.name));
       deduped.push({ ...item, known, checked: true });
     }
-    // Sort: known first, then alphabetical
     deduped.sort((a,b) => (b.known - a.known) || a.name.localeCompare(b.name));
 
     _scanDetected = deduped;
     renderScanResults(deduped);
   } catch (err) {
-    errEl.textContent = 'Scan failed: ' + (err.message || 'Unknown error. Check your API key and try again.');
+    errEl.textContent = 'Scan failed: ' + (err.message || 'Something went wrong. Please try again.');
     errEl.style.display = 'block';
   } finally {
     updateScanBtn();
   }
-}
-
-async function scanWithClaude(apiKey, base64Data, mediaType, prompt, slotLabel) {
-  const resp = await fetch('https://api.anthropic.com/v1/messages', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'x-api-key': apiKey,
-      'anthropic-version': '2023-06-01',
-      'anthropic-dangerous-direct-browser-access': 'true'
-    },
-    body: JSON.stringify({
-      model: 'claude-sonnet-4-20250514',
-      max_tokens: 1024,
-      messages: [{
-        role: 'user',
-        content: [
-          { type: 'image', source: { type: 'base64', media_type: mediaType, data: base64Data } },
-          { type: 'text', text: `This photo is of my ${slotLabel.toLowerCase()}. ${prompt}` }
-        ]
-      }]
-    })
-  });
-  if (!resp.ok) {
-    const errBody = await resp.text();
-    throw new Error(`Claude API error ${resp.status}: ${errBody.slice(0,200)}`);
-  }
-  const data = await resp.json();
-  const text = data.content?.[0]?.text || '[]';
-  return JSON.parse(text.match(/\[[\s\S]*\]/)?.[0] || '[]');
-}
-
-async function scanWithOpenAI(apiKey, dataUrl, prompt, slotLabel) {
-  const resp = await fetch('https://api.openai.com/v1/chat/completions', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + apiKey
-    },
-    body: JSON.stringify({
-      model: 'gpt-4o-mini',
-      max_tokens: 1024,
-      messages: [{
-        role: 'user',
-        content: [
-          { type: 'image_url', image_url: { url: dataUrl, detail: 'high' } },
-          { type: 'text', text: `This photo is of my ${slotLabel.toLowerCase()}. ${prompt}` }
-        ]
-      }]
-    })
-  });
-  if (!resp.ok) {
-    const errBody = await resp.text();
-    throw new Error(`OpenAI API error ${resp.status}: ${errBody.slice(0,200)}`);
-  }
-  const data = await resp.json();
-  const text = data.choices?.[0]?.message?.content || '[]';
-  return JSON.parse(text.match(/\[[\s\S]*\]/)?.[0] || '[]');
 }
 
 function renderScanResults(items) {
