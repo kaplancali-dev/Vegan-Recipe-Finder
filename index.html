@@ -2626,7 +2626,7 @@ function computePantryPower() {
     if (!r.ing || !r.ing.length) continue;
     const rIngs = r.ing.map(norm);
     const missing = rIngs.filter(ri => !allIngs.some(ai => ri.includes(ai) || ai.includes(ri)));
-    if (missing.length > 0 && missing.length <= 5) {
+    if (missing.length > 0) {
       for (const m of missing) {
         missingFreq[m] = (missingFreq[m] || 0) + 1;
       }
