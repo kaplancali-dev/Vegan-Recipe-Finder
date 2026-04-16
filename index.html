@@ -2626,16 +2626,16 @@ function computePantryPower() {
     if (!r.ing || !r.ing.length) continue;
     const rIngs = r.ing.map(norm);
     const missing = rIngs.filter(ri => !allIngs.some(ai => ri.includes(ai) || ai.includes(ri)));
-    if (missing.length > 0) {
+    if (missing.length > 0 && missing.length <= 8) {
       for (const m of missing) {
         missingFreq[m] = (missingFreq[m] || 0) + 1;
       }
     }
   }
-  // Pick the top 15 most impactful ingredients to suggest adding
+  // Pick the top 40 most impactful ingredients to suggest adding
   const topMissing = Object.entries(missingFreq)
     .sort((a, b) => b[1] - a[1])
-    .slice(0, 15)
+    .slice(0, 40)
     .map(e => e[0]);
 
   // Simulate: how many recipes would be ready if user added these 15?
@@ -2712,7 +2712,7 @@ function updatePantryPower() {
   const projEl = document.getElementById('ppProjection');
   if (projEl) {
     if (staples.length > 0 && projectionGain > 0 && pctRounded < 60) {
-      projEl.textContent = `Adding ~${projectionCount} more staples could match ~${projectionGain.toLocaleString()} more recipes with 100% of ingredients needed!`;
+      projEl.textContent = `A well-stocked pantry could match ~${simReady.toLocaleString()} recipes with 100% of ingredients needed!`;
       projEl.style.display = '';
     } else if (staples.length === 0) {
       projEl.textContent = '';
