@@ -2604,7 +2604,7 @@ function computePantryPower() {
   const allIngs = (typeof expandWithAliases === 'function')
     ? expandWithAliases([...staples])
     : staples.map(s => (s || '').toLowerCase());
-  let ready = 0, oneAway = 0;
+  let ready = 0, oneAway = 0, currentNinety = 0;
   for (const r of RECIPES) {
     if (!r.ing || !r.ing.length) continue;
     const rIngs = r.ing.map(norm);
@@ -2613,7 +2613,9 @@ function computePantryPower() {
       if (allIngs.some(ai => ri.includes(ai) || ai.includes(ri))) haveCount++;
     }
     const missing = rIngs.length - haveCount;
-    if (missing === 0) ready++;
+    const matchPct = haveCount / rIngs.length;
+    if (missing === 0) { ready++; currentNinety++; }
+    else if (matchPct >= 0.9) { currentNinety++; if (missing === 1) oneAway++; }
     else if (missing === 1) oneAway++;
   }
   const total = RECIPES.length;
@@ -2632,10 +2634,10 @@ function computePantryPower() {
       }
     }
   }
-  // Pick the top 40 most impactful ingredients to suggest adding
+  // Pick the top 10 most impactful ingredients to suggest adding
   const topMissing = Object.entries(missingFreq)
     .sort((a, b) => b[1] - a[1])
-    .slice(0, 40)
+    .slice(0, 10)
     .map(e => e[0]);
 
   // Simulate: how many recipes would be ready if user added these staples?
@@ -2650,7 +2652,7 @@ function computePantryPower() {
     else if (pctMatch >= 0.9) simNinety++;
   }
 
-  return { ready, oneAway, total, pct, simReady, simNinety };
+  return { ready, oneAway, total, pct, simReady, simNinety, topMissing, currentNinety };
 }
 
 // Animate a number from current → target over ~600ms
@@ -2673,7 +2675,7 @@ function animateNumber(el, target) {
 function updatePantryPower() {
   const widget = document.getElementById('pantryPower');
   if (!widget) return; // hero not in DOM yet
-  const { ready, oneAway, total, pct, simReady, simNinety } = computePantryPower();
+  const { ready, oneAway, total, pct, simReady, simNinety, topMissing, currentNinety } = computePantryPower();
 
   const numEl  = document.getElementById('ppNumber');
   const unitEl = document.getElementById('ppUnit');
@@ -2711,8 +2713,8 @@ function updatePantryPower() {
   // Projection line
   const projEl = document.getElementById('ppProjection');
   if (projEl) {
-    if (staples.length > 0 && simReady > ready && pctRounded < 60) {
-      projEl.textContent = `A well-stocked pantry could match ~${simReady.toLocaleString()} recipes at 100% and ~${(simReady + simNinety).toLocaleString()} at 90%+ of ingredients needed!`;
+    if (staples.length > 0 && simReady > ready && currentNinety < 200) {
+      projEl.textContent = `Adding ${topMissing.length} more staples matches ${simReady.toLocaleString()} recipes at 100% and ${(simReady + simNinety).toLocaleString()} recipes at 90% of ingredients needed!`;
       projEl.style.display = '';
     } else if (staples.length === 0) {
       projEl.textContent = '';
