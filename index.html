@@ -2431,7 +2431,7 @@ function showTab(name) {
   if (name === 'favorites') renderFavs();
   if (name === 'shopping')  renderShop();
   if (name === 'canmake')   initCanMake();
-  if (name !== 'search') window.scrollTo({ top: 0, behavior: 'smooth' });
+  if (name !== 'search' && name !== 'canmake') window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 // ── HOME PANEL ────────────────────────────────────────────────────────────────
