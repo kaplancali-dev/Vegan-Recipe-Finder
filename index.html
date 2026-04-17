@@ -947,6 +947,12 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
       </div>
       <div class="featured-grid" id="homeFeatured"></div>
     </section>
+
+    <div style="text-align:center;padding:18px 16px 8px;">
+      <button onclick="showTab('favorites');setTimeout(()=>{const el=document.getElementById('syncCodeWrap')||document.querySelector('[onclick*=generateSyncCode]');if(el)el.scrollIntoView({behavior:'smooth',block:'center'});},300)" style="background:none;border:1.5px solid #d4e6d8;border-radius:10px;padding:10px 20px;color:#2d7a4f;font-size:.85rem;cursor:pointer;font-weight:600;display:inline-flex;align-items:center;gap:8px;transition:all .15s;">
+        📲 Using multiple devices? <span style="text-decoration:underline">Sync your data</span>
+      </button>
+    </div>
   </div>
 
   <!-- ══════ SEARCH PANEL ══════ -->
