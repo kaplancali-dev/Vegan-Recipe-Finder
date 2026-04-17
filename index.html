@@ -1412,14 +1412,14 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
 <script>
 // ── DATA ──────────────────────────────────────────────────────────────────────
 const SHOP_CATEGORIES = {
-  '🥦 Produce': ['garlic','onion','onions','spinach','baby spinach','kale','arugula','carrots','broccoli','cauliflower','bell peppers','mushrooms','tomatoes','avocado','zucchini','corn','cucumber','green onions','ginger','lemon','lime','banana','blueberries','mango','apple','dates','scallions','cilantro','parsley','basil','jalapeño','eggplant','sweet potato','potatoes','beets','celery','lettuce','romaine','iceberg','butter lettuce','red leaf lettuce','green leaf lettuce','mixed greens','cabbage','bok choy','edamame','cherry tomatoes','crushed tomatoes','diced tomatoes','green chili'],
+  '🥦 Produce': ['garlic','onion','onions','spinach','baby spinach','kale','arugula','carrots','broccoli','cauliflower','bell peppers','mushrooms (any)','tomatoes','avocado','zucchini','corn','cucumber','green onions','ginger','lemon','lime','banana','berries (any)','mango','apple','dates','scallions','cilantro','parsley','basil','jalapeño','eggplant','sweet potato','potatoes','beets','celery','lettuce','romaine','iceberg','butter lettuce','red leaf lettuce','green leaf lettuce','mixed greens','cabbage','bok choy','edamame','cherry tomatoes','crushed tomatoes','diced tomatoes','green chili'],
   '🫘 Proteins & Legumes': ['chickpeas','black beans','lentils','kidney beans','navy beans','pinto beans','white beans','tofu','tempeh','edamame','protein powder','red lentils','green lentils','jackfruit'],
-  '🌾 Grains & Pasta': ['rice','quinoa','oats','rolled oats','pasta','gluten-free pasta','pasta (any)','brown rice','corn tortillas','polenta','buckwheat','bread','noodles','spaghetti','penne','macaroni'],
+  '🌾 Grains & Pasta': ['rice (any)','quinoa','oats','rolled oats','pasta','gluten-free pasta','pasta (any)','brown rice','corn tortillas','polenta','buckwheat','bread','noodles','spaghetti','penne','macaroni'],
   '🥜 Nuts & Seeds': ['almonds','walnuts','cashews','pecans','hemp seeds','chia seeds','flax seeds','pumpkin seeds','sunflower seeds','sesame seeds','tahini','nut butter (any)','peanut butter','almond butter'],
   '🥛 Dairy Alternatives': ['plant-based milk (any)','almond milk','oat milk','soy milk','coconut milk','coconut cream','vegan butter','cashew cream'],
   '🫙 Pantry & Oils': ['olive oil','coconut oil','sesame oil','any cooking oil','vegetable broth','tamari','soy sauce / tamari','maple syrup','apple cider vinegar','rice vinegar','dijon mustard','tomato paste','agave','coconut aminos','miso','hot sauce','sriracha'],
   '🌿 Spices & Herbs': ['turmeric','cumin','smoked paprika','cinnamon','chili powder','curry powder','black pepper','garlic powder','onion powder','oregano','thyme','coriander','cayenne','cardamom','bay leaves','five spice','nutmeg','sea salt','salt','pepper','ginger powder'],
-  '🍨 Baking & Sweets': ['vanilla extract','cocoa powder','chocolate chips','natural sweetener','coconut sugar','flax egg','baking soda','baking powder','cornstarch','shredded coconut','medjool dates','maple syrup','brown sugar','sugar','flour','almond flour','oat flour'],
+  '🍨 Baking & Sweets': ['vanilla extract','cocoa powder','chocolate chips (any)','natural sweetener (any)','coconut sugar','flax egg','baking soda','baking powder','cornstarch','shredded coconut','medjool dates','maple syrup','brown sugar','sugar','flour','almond flour','oat flour'],
 };
 
 
@@ -3019,15 +3019,15 @@ const INGREDIENT_ALIASES = {
   'vinegar (any)': ['apple cider vinegar','rice vinegar','white vinegar','red wine vinegar','balsamic vinegar'],
   'flour (any)': ['flour','all-purpose flour','oat flour','almond flour','spelt flour','buckwheat flour','rice flour','coconut flour'],
   'fresh herbs (any)': ['cilantro','parsley','basil','mint','dill','thyme','rosemary','oregano','chives'],
-  'mushrooms': ['shiitake mushrooms','shiitake mushroom','shiitake','oyster mushrooms','oyster mushroom','cremini mushrooms','cremini mushroom','cremini','portobello mushrooms','portobello mushroom','portobello','portobellos','button mushrooms','button mushroom','king oyster mushrooms','king oyster mushroom','enoki mushrooms','enoki mushroom','enoki','maitake mushrooms','maitake mushroom','chanterelle mushrooms','chanterelle mushroom','baby bella mushrooms','baby bella','white mushrooms','mixed mushrooms','sliced mushrooms','chopped mushrooms','diced mushrooms','mushroom'],
-  'rice': ['brown rice','white rice','jasmine rice','basmati rice','wild rice','long grain rice','short grain rice','sushi rice','sticky rice','arborio rice','rice'],
-  'berries': ['blueberries','strawberries','raspberries','blackberries','mixed berries','cranberries','boysenberries','berries','fresh berries','frozen berries'],
+  'mushrooms (any)': ['mushrooms','shiitake mushrooms','shiitake mushroom','shiitake','oyster mushrooms','oyster mushroom','cremini mushrooms','cremini mushroom','cremini','portobello mushrooms','portobello mushroom','portobello','portobellos','button mushrooms','button mushroom','king oyster mushrooms','king oyster mushroom','enoki mushrooms','enoki mushroom','enoki','maitake mushrooms','maitake mushroom','chanterelle mushrooms','chanterelle mushroom','baby bella mushrooms','baby bella','white mushrooms','mixed mushrooms','sliced mushrooms','chopped mushrooms','diced mushrooms','mushroom'],
+  'rice (any)': ['rice','brown rice','white rice','jasmine rice','basmati rice','wild rice','long grain rice','short grain rice','sushi rice','sticky rice','arborio rice'],
+  'berries (any)': ['berries','blueberries','strawberries','raspberries','blackberries','mixed berries','cranberries','boysenberries','fresh berries','frozen berries'],
   'chili oil': ['chili oil','chilli oil','hot oil'],
   'coconut milk': ['coconut milk','coconut cream','full-fat coconut milk','light coconut milk'],
   'gochujang': ['gochujang','korean chili paste'],
-  'chocolate chips': ['dark chocolate chips','vegan chocolate chips','semi-sweet chocolate chips','milk chocolate chips','dark-chocolate chips','chocolate chips','mini chocolate chips'],
+  'chocolate chips (any)': ['chocolate chips','dark chocolate chips','vegan chocolate chips','semi-sweet chocolate chips','milk chocolate chips','dark-chocolate chips','mini chocolate chips'],
   'dark chocolate': ['dark chocolate','roughly chopped dark chocolate','semi-sweet chocolate','bittersweet chocolate','vegan chocolate'],
-  'natural sweetener': ['agave','agave nectar','agave syrup','monk fruit','monk fruit sweetener','allulose','stevia','date syrup','coconut sugar','maple syrup','maple','brown sugar','sugar','sweetener','coconut nectar','raw sugar','cane sugar'],
+  'natural sweetener (any)': ['agave','agave nectar','agave syrup','monk fruit','monk fruit sweetener','allulose','stevia','date syrup','coconut sugar','maple syrup','maple','brown sugar','sugar','sweetener','coconut nectar','raw sugar','cane sugar'],
 };
 // One-way substitutions: if user HAS the left item, it also covers the right items in recipes
 const INGREDIENT_SUBS = {
@@ -3043,7 +3043,7 @@ const INGREDIENT_SUBS = {
   'cashew butter':  ['peanut butter','almond butter','sunflower butter','nut butter'],
   'maple syrup': ['agave','agave nectar','agave syrup','coconut sugar','brown sugar','date syrup','monk fruit','allulose','stevia','sweetener','maple','sugar','coconut nectar'],
   'agave': ['maple syrup','maple','coconut sugar','brown sugar','date syrup','monk fruit','allulose','stevia','sweetener','agave nectar','agave syrup','sugar','coconut nectar'],
-  'natural sweetener': ['maple syrup','maple','agave','agave nectar','agave syrup','coconut sugar','brown sugar','date syrup','monk fruit','allulose','stevia','sweetener','sugar','coconut nectar','raw sugar','cane sugar'],
+  'natural sweetener (any)': ['maple syrup','maple','agave','agave nectar','agave syrup','coconut sugar','brown sugar','date syrup','monk fruit','allulose','stevia','sweetener','sugar','coconut nectar','raw sugar','cane sugar'],
   'spinach': ['kale','chard','baby spinach','arugula','collard greens'],
   'kale': ['spinach','chard','collard greens','baby spinach'],
   'apple cider vinegar': ['rice vinegar','white vinegar','lemon juice'],
@@ -3067,9 +3067,9 @@ const INGREDIENT_SUBS = {
   'arugula':            ['spinach','baby spinach','mixed greens','lettuce'],
   'fresh ginger': ['ginger','ginger powder'],
   'ginger': ['fresh ginger','ginger powder'],
-  'chocolate chips': ['dark chocolate chips','dark chocolate','semi-sweet chocolate chips','vegan chocolate chips','bittersweet chocolate','chocolate'],
+  'chocolate chips (any)': ['dark chocolate chips','dark chocolate','semi-sweet chocolate chips','vegan chocolate chips','bittersweet chocolate','chocolate','chocolate chips'],
   'dark chocolate': ['chocolate chips','dark chocolate chips','semi-sweet chocolate','bittersweet chocolate','vegan chocolate','chocolate'],
-  'rice': ['brown rice','white rice','jasmine rice','basmati rice','wild rice','arborio rice','sushi rice'],
+  'rice (any)': ['rice','brown rice','white rice','jasmine rice','basmati rice','wild rice','arborio rice','sushi rice'],
   'brown rice': ['rice','white rice','jasmine rice','basmati rice','wild rice'],
 };
 
@@ -3982,14 +3982,14 @@ function recipeHasAllergen(r, key) {
 // ── QUICK ADD ─────────────────────────────────────────────────────────────────
 const QA_ITEMS = [
   {cat:'🫘 Proteins & Legumes', items:['chickpeas','black beans','lentils','kidney beans','navy beans','pinto beans','white beans','tofu','tempeh','edamame','hemp seeds','chia seeds','flax seeds','pumpkin seeds','sunflower seeds','tahini','cashews','protein powder']},
-  {cat:'🌾 Grains & Starches',  items:['pasta (any)','rice','quinoa','oats','sweet potatoes','potatoes','corn tortillas','polenta','buckwheat','almond flour','coconut flour','oat flour','tapioca flour','brown rice flour','arrowroot powder','rice noodles','nori','pita bread','breadcrumbs']},
-  {cat:'🥦 Vegetables',         items:['garlic','onions','spinach','kale','carrots','broccoli','cauliflower','bell peppers','mushrooms','tomatoes','crushed tomatoes','avocado','zucchini','corn','cucumber','green onions','eggplant','cabbage','bean sprouts','bamboo shoots','shallots']},
-  {cat:'🍋 Fruits',             items:['lemon','lime','banana','blueberries','mango','apple','dates']},
+  {cat:'🌾 Grains & Starches',  items:['pasta (any)','rice (any)','quinoa','oats','sweet potatoes','potatoes','corn tortillas','polenta','buckwheat','almond flour','coconut flour','oat flour','tapioca flour','brown rice flour','arrowroot powder','rice noodles','nori','pita bread','breadcrumbs']},
+  {cat:'🥦 Vegetables',         items:['garlic','onions','spinach','kale','carrots','broccoli','cauliflower','bell peppers','mushrooms (any)','tomatoes','crushed tomatoes','avocado','zucchini','corn','cucumber','green onions','eggplant','cabbage','bean sprouts','bamboo shoots','shallots']},
+  {cat:'🍋 Fruits',             items:['lemon','lime','banana','berries (any)','mango','apple','dates']},
   {cat:'🥜 Nuts & Nut Butters', items:['nut butter (any)','almonds','walnuts','pecans','brazil nuts','macadamia nuts','hazelnuts','pistachio']},
   {cat:'🥛 Plant-Based Milks',  items:['plant-based milk (any)']},
   {cat:'🫙 Pantry & Oils',      items:['any cooking oil','olive oil','coconut oil','avocado oil','sesame oil','chili oil','diced tomatoes','vegetable broth','soy sauce / tamari','coconut milk','miso paste','maple syrup','apple cider vinegar','nutritional yeast','rice vinegar','dijon mustard','tomato paste','agave','tamarind paste','gochujang']},
   {cat:'🌿 Spices & Herbs',     items:['turmeric','cumin','smoked paprika','cinnamon','chili powder','ginger','curry powder','black pepper','garlic powder','onion powder','oregano','basil','thyme','coriander','cayenne','cardamom','bay leaves','five spice','nutmeg','sea salt','garam masala','lemongrass','star anise','dill','mint','rosemary','red pepper flakes','sumac']},
-  {cat:'🍨 Dessert Pantry',     items:['vanilla extract','vanilla','cocoa powder','chocolate chips','coconut cream','coconut sugar','vegan butter','flax egg','baking soda','baking powder','cornstarch','shredded coconut','medjool dates']},
+  {cat:'🍨 Dessert Pantry',     items:['vanilla extract','vanilla','cocoa powder','chocolate chips (any)','coconut cream','coconut sugar','vegan butter','flax egg','baking soda','baking powder','cornstarch','shredded coconut','medjool dates']},
 ];
 
 function qaAddCustom() {
