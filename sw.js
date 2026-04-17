@@ -1,5 +1,5 @@
 // 🌿 HARVEST — Service Worker
-const VERSION = "vrf-20260417m";
+const VERSION = "vrf-20260417n";
 
 self.addEventListener("install", e => {
   self.skipWaiting(); // activate immediately
