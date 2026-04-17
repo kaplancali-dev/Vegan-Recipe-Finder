@@ -1419,7 +1419,7 @@ const SHOP_CATEGORIES = {
   '🥛 Dairy Alternatives': ['plant-based milk (any)','almond milk','oat milk','soy milk','coconut milk','coconut cream','vegan butter','cashew cream'],
   '🫙 Pantry & Oils': ['olive oil','coconut oil','sesame oil','any cooking oil','vegetable broth','tamari','soy sauce / tamari','maple syrup','apple cider vinegar','rice vinegar','dijon mustard','tomato paste','agave','coconut aminos','miso','hot sauce','sriracha'],
   '🌿 Spices & Herbs': ['turmeric','cumin','smoked paprika','cinnamon','chili powder','curry powder','black pepper','garlic powder','onion powder','oregano','thyme','coriander','cayenne','cardamom','bay leaves','five spice','nutmeg','sea salt','salt','pepper','ginger powder'],
-  '🍨 Baking & Sweets': ['vanilla extract','cocoa powder','chocolate chips','coconut sugar','flax egg','baking soda','baking powder','cornstarch','shredded coconut','medjool dates','maple syrup','brown sugar','sugar','flour','almond flour','oat flour'],
+  '🍨 Baking & Sweets': ['vanilla extract','cocoa powder','chocolate chips','natural sweetener','coconut sugar','flax egg','baking soda','baking powder','cornstarch','shredded coconut','medjool dates','maple syrup','brown sugar','sugar','flour','almond flour','oat flour'],
 };
 
 
@@ -3025,6 +3025,7 @@ const INGREDIENT_ALIASES = {
   'gochujang': ['gochujang','korean chili paste'],
   'chocolate chips': ['dark chocolate chips','vegan chocolate chips','semi-sweet chocolate chips','milk chocolate chips','dark-chocolate chips','chocolate chips','mini chocolate chips'],
   'dark chocolate': ['dark chocolate','roughly chopped dark chocolate','semi-sweet chocolate','bittersweet chocolate','vegan chocolate'],
+  'natural sweetener': ['agave','agave nectar','agave syrup','monk fruit','monk fruit sweetener','allulose','stevia','date syrup','coconut sugar','maple syrup','maple','brown sugar','sugar','sweetener','coconut nectar','raw sugar','cane sugar'],
 };
 // One-way substitutions: if user HAS the left item, it also covers the right items in recipes
 const INGREDIENT_SUBS = {
@@ -3038,8 +3039,9 @@ const INGREDIENT_SUBS = {
   'almond butter':  ['peanut butter','sunflower butter','cashew butter','nut butter'],
   'sunflower butter': ['peanut butter','almond butter','cashew butter','nut butter'],
   'cashew butter':  ['peanut butter','almond butter','sunflower butter','nut butter'],
-  'maple syrup': ['agave','coconut sugar','brown sugar','date syrup'],
-  'agave': ['maple syrup','coconut sugar'],
+  'maple syrup': ['agave','agave nectar','agave syrup','coconut sugar','brown sugar','date syrup','monk fruit','allulose','stevia','sweetener','maple','sugar','coconut nectar'],
+  'agave': ['maple syrup','maple','coconut sugar','brown sugar','date syrup','monk fruit','allulose','stevia','sweetener','agave nectar','agave syrup','sugar','coconut nectar'],
+  'natural sweetener': ['maple syrup','maple','agave','agave nectar','agave syrup','coconut sugar','brown sugar','date syrup','monk fruit','allulose','stevia','sweetener','sugar','coconut nectar','raw sugar','cane sugar'],
   'spinach': ['kale','chard','baby spinach','arugula','collard greens'],
   'kale': ['spinach','chard','collard greens','baby spinach'],
   'apple cider vinegar': ['rice vinegar','white vinegar','lemon juice'],
