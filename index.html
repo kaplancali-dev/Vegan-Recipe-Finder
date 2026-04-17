@@ -2888,7 +2888,7 @@ function updatePantryPower() {
     if (staples.length > 0 && topMissing.length > 0) {
       const total80 = simReady + simNinety + simEighty;
       if (total80 > currentEighty) {
-        projEl.textContent = `Adding ${topMissing.length} more staples unlocks ${(total80 - currentEighty).toLocaleString()} more recipes!`;
+        projEl.textContent = `Adding ${topMissing.length} more staples would enable you to make an additional ${(total80 - currentEighty).toLocaleString()} recipes!`;
         projEl.style.display = '';
       } else {
         projEl.style.display = 'none';
