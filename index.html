@@ -1268,16 +1268,57 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
             <span class="allergy-chip" onclick="toggleCMAllergy(this,'nightshade')">🍅 Nightshades</span>
           </div>
         </div>
-        <div class="card">
-          <div class="section-top">
-            <div class="card-title" style="margin-bottom:0">🧺 What's in your kitchen?</div>
-            <span class="cm-selected-count" id="cmCount">0 selected</span>
+        <!-- SECTION 1: INGREDIENTS I ALWAYS HAVE (CM) -->
+        <div class="qa-card qa-card-always">
+          <button class="qa-toggle qa-toggle-always open" id="cmAlwaysToggle" onclick="toggleCMAlwaysPanel()">
+            <span><span style="color:#2d7a4f">★</span> Always Have <span style="font-weight:400;font-size:.75rem;opacity:.6">— saved permanently</span> <span id="cmAlwaysCount" style="font-weight:400;opacity:.7;font-size:.8rem"></span></span><span class="arrow">▼</span>
+          </button>
+          <div class="qa-body open" id="cmAlwaysBody">
+            <p style="font-size:.8rem;color:#4a5d52;margin-bottom:10px;line-height:1.5">Tap <strong style="color:#2d7a4f">★</strong> next to any ingredient in the list below to save it here permanently — it will always be here when you return.</p>
+            <div id="cmAlwaysChips"><span style="color:#4a5d52;font-size:.82rem;font-style:italic">Nothing saved yet — tap <span style="color:#2d7a4f">★</span> next to any ingredient in the list below.</span></div>
+            <div id="cmAlwaysClearWrap" style="display:none;margin-top:10px">
+              <button class="btn-sm-danger" onclick="alwaysClearAll()">Remove All</button>
+            </div>
           </div>
-          <p style="font-size:0.8rem;color:#4b7a52;margin-bottom:10px">Tap any ingredient to use it for this match. Tap the <strong style="color:#2d7a4f">★</strong> beside it to save it permanently as a kitchen staple.</p>
-          <div id="cmChips"></div>
-          <div class="cm-add-row">
-            <input class="cm-custom-input" id="cmCustomInput" type="text" placeholder="Add another ingredient…" onkeydown="if(event.key==='Enter')cmAddCustom()">
-            <button class="btn-sm-green" onclick="cmAddCustom()">+ Add</button>
+        </div>
+
+        <!-- SECTION 2: ADDITIONAL INGREDIENTS I HAVE TODAY (CM) -->
+        <div class="qa-card qa-card-today">
+          <button class="qa-toggle qa-toggle-today open" id="cmTodayToggle" onclick="toggleCMTodayPanel()">
+            <span>🌿 Have Today <span style="font-weight:400;font-size:.75rem;opacity:.6">— cleared next visit</span> <span id="cmTodayCount" style="font-weight:400;opacity:.7;font-size:.8rem"></span></span><span class="arrow">▼</span>
+          </button>
+          <div class="qa-body open" id="cmTodayBody">
+            <p style="font-size:.8rem;color:#1e5a3a;margin-bottom:10px;line-height:1.5">Tap any ingredient in the list below to add it here for today only. Won't be here next visit — tap <strong style="color:#2d7a4f">★</strong> instead to save it permanently.</p>
+            <div id="cmTodayChips"><span style="color:#1e5a3a;font-size:.82rem;font-style:italic">Nothing added yet — tap any ingredient in the list below.</span></div>
+            <div id="cmTodayClearWrap" style="display:none;margin-top:10px">
+              <button class="btn-sm-danger" onclick="todayClearAll()">Remove All</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION 3: INGREDIENTS NOT SELECTED (CM) -->
+        <div class="qa-card qa-card-notsel">
+          <button class="qa-toggle qa-toggle-notsel open" id="cmNotSelToggle" onclick="toggleCMNotSelPanel()">
+            <span>📋 Ingredients Not Selected <span id="cmNotSelCount" style="font-weight:400;opacity:.7;font-size:.8rem"></span></span><span class="arrow">▼</span>
+          </button>
+          <div class="qa-body open" id="cmNotSelBody">
+            <p style="font-size:.8rem;color:#4a5d52;margin-bottom:10px;line-height:1.6">Tap the <strong style="color:#1e5a3a">ingredient name</strong> → adds it for <strong style="color:#1e5a3a">today only</strong><br>Tap the <strong style="color:#2d7a4f">★</strong> beside it → saves it to <strong style="color:#1e5a3a">Always Have</strong> permanently</p>
+            <div id="cmNotSelChips"></div>
+          </div>
+        </div>
+
+        <!-- SECTION 4: ADD INGREDIENTS NOT LISTED (CM) -->
+        <div class="qa-card qa-card-custom">
+          <button class="qa-toggle qa-toggle-custom open" id="cmCustomToggle" onclick="toggleCMCustomPanel()">
+            <span>✏️ Add Ingredients Not Listed</span><span class="arrow">▼</span>
+          </button>
+          <div class="qa-body open" id="cmCustomBody">
+            <p style="font-size:.8rem;color:#a78bfa;opacity:.7;margin-bottom:10px;line-height:1.5">Type any ingredient not in the list above and press Enter or tap + Add.</p>
+            <div class="qa-add-row">
+              <input class="qa-custom-input" id="cmCustomInput" type="text" placeholder="e.g. jackfruit, miso paste…" onkeydown="if(event.key==='Enter')cmAddCustom()">
+              <button class="btn-sm-green" onclick="cmAddCustom()">+ Add</button>
+            </div>
+            <div class="tags" id="cmCustomIngTags"></div>
           </div>
         </div>
       </div>
@@ -2584,6 +2625,8 @@ function renderAllIngPanels() {
   renderTodayChips();
   renderNotSelChips();
   renderCustomIngTags();
+  // Also sync the CM (What Can I Make) ingredient panels
+  renderCMIngPanels();
 }
 
 // SECTION 1: Always Have — shows saved staples as removable amber chips
@@ -2678,6 +2721,7 @@ activeAllergies.forEach(key => {
   const btn = document.querySelector(`[onclick*="toggleAllergy"][onclick*="${key}"]`);
   if (btn) btn.classList.add('on');
 }); updateFindBtn(); findRecipes();
+  if (cmInited) { syncCMSelected(); runCanMake(); }
 }
 
 function removeFromAlways(item) {
@@ -2689,6 +2733,7 @@ activeAllergies.forEach(key => {
   const btn = document.querySelector(`[onclick*="toggleAllergy"][onclick*="${key}"]`);
   if (btn) btn.classList.add('on');
 }); updateFindBtn(); findRecipes();
+  if (cmInited) { syncCMSelected(); runCanMake(); }
 }
 
 function alwaysClearAll() {
@@ -2701,6 +2746,7 @@ activeAllergies.forEach(key => {
   const btn = document.querySelector(`[onclick*="toggleAllergy"][onclick*="${key}"]`);
   if (btn) btn.classList.add('on');
 }); updateFindBtn(); findRecipes();
+  if (cmInited) { syncCMSelected(); runCanMake(); }
 }
 
 // ── PANTRY POWER WIDGET ──────────────────────────────────────────────────────
@@ -2887,6 +2933,7 @@ activeAllergies.forEach(key => {
   const btn = document.querySelector(`[onclick*="toggleAllergy"][onclick*="${key}"]`);
   if (btn) btn.classList.add('on');
 }); updateFindBtn(); findRecipes();
+  if (cmInited) { syncCMSelected(); runCanMake(); }
 }
 
 function removeFromToday(item) {
@@ -2898,6 +2945,7 @@ activeAllergies.forEach(key => {
   const btn = document.querySelector(`[onclick*="toggleAllergy"][onclick*="${key}"]`);
   if (btn) btn.classList.add('on');
 }); updateFindBtn(); findRecipes();
+  if (cmInited) { syncCMSelected(); runCanMake(); }
 }
 
 function todayClearAll() {
@@ -2910,6 +2958,7 @@ activeAllergies.forEach(key => {
   const btn = document.querySelector(`[onclick*="toggleAllergy"][onclick*="${key}"]`);
   if (btn) btn.classList.add('on');
 }); updateFindBtn(); findRecipes();
+  if (cmInited) { syncCMSelected(); runCanMake(); }
 }
 
 
@@ -2922,6 +2971,7 @@ activeAllergies.forEach(key => {
   const btn = document.querySelector(`[onclick*="toggleAllergy"][onclick*="${key}"]`);
   if (btn) btn.classList.add('on');
 }); updateFindBtn(); findRecipes();
+  if (cmInited) { syncCMSelected(); runCanMake(); }
 }
 
 // ── CUSTOM INGREDIENT INPUT ───────────────────────────────────────────────────
@@ -3930,6 +3980,7 @@ activeAllergies.forEach(key => {
 });
   updateFindBtn();
   findRecipes();
+  if (cmInited) { syncCMSelected(); runCanMake(); }
 }
 
 // ── WHAT CAN I MAKE ───────────────────────────────────────────────────────────
@@ -3972,83 +4023,147 @@ function setCMType(type) {
 
 function initCanMake() {
   if (!cmInited) {
-    // Pre-load saved staples and today's ingredients on first open
-    staples.forEach(s => cmSelected.add(s.toLowerCase()));
-    ingredients.forEach(i => cmSelected.add(i.toLowerCase()));
+    // Sync cmSelected from staples + ingredients + custom items
+    syncCMSelected();
     cmInited = true;
   }
-  renderCMChips();
+  renderCMIngPanels();
   runCanMake();
 }
 
-function renderCMChips() {
-  const allGroups = [...QA_ITEMS];
-  if (cmCustomItems.length) allGroups.push({cat:'✏️ Custom', items: cmCustomItems});
-  const el = document.getElementById('cmChips');
-  if (!el) return;
-  const stapleSet = new Set((staples || []).map(s => (s || '').toLowerCase()));
-  el.innerHTML = allGroups.map(group => {
-    const chips = group.items.map(item => {
-      const key = item.toLowerCase();
-      const on = cmSelected.has(key) ? ' on' : '';
-      const isStaple = stapleSet.has(key);
-      const starOn = isStaple ? ' on' : '';
-      const starTitle = isStaple ? 'Saved as a staple — tap to remove' : 'Save as a permanent staple';
-      const esc = item.replace(/'/g,"\\'");
-      return `<span class="cm-chip-wrap${on}"><span class="cm-chip-body" onclick="toggleCMItem('${esc}')">${item}</span><button type="button" class="cm-chip-star${starOn}" onclick="toggleCMStaple('${esc}', event)" title="${starTitle}" aria-label="${starTitle}">★</button></span>`;
-    }).join('');
-    return `<div class="cm-cat-label">${group.cat}</div><div class="cm-ing-grid">${chips}</div>`;
-  }).join('');
-  updateCMCount();
-}
-
-function toggleCMItem(item) {
-  const key = item.toLowerCase();
-  if (cmSelected.has(key)) cmSelected.delete(key);
-  else cmSelected.add(key);
-  renderCMChips();
-  runCanMake();
-}
-
-// Tap the ★ on a canmake chip to save/unsave it as a permanent staple.
-// Saving also auto-selects it for the current session (a staple is
-// definitionally "in your kitchen"); unsaving leaves the current
-// selection alone in case the user still wants it for this match.
-function toggleCMStaple(item, ev) {
-  if (ev) { ev.stopPropagation(); ev.preventDefault(); }
-  const key = item.toLowerCase();
-  const isStaple = (staples || []).some(s => s.toLowerCase() === key);
-  if (isStaple) {
-    if (typeof removeFromAlways === 'function') removeFromAlways(item);
-  } else {
-    if (typeof addToAlways === 'function') addToAlways(item);
-    cmSelected.add(key);
-  }
-  renderCMChips();
-  runCanMake();
-}
-
-function cmLoadStaples() {
-  staples.forEach(s => cmSelected.add(s.toLowerCase()));
-  renderCMChips();
-}
-
-function cmSelectAll() {
-  QA_ITEMS.forEach(g => g.items.forEach(i => cmSelected.add(i.toLowerCase())));
-  cmCustomItems.forEach(i => cmSelected.add(i.toLowerCase()));
-  renderCMChips();
-}
-
-function cmClearAll() {
+// Keep cmSelected in sync with the shared staples/ingredients data
+function syncCMSelected() {
   cmSelected.clear();
-  renderCMChips();
-  document.getElementById('cmResults').innerHTML = '';
-  document.getElementById('cmResultsCount').textContent = 'Select ingredients above to see matching recipes';
+  staples.forEach(s => cmSelected.add(s.toLowerCase()));
+  ingredients.forEach(i => cmSelected.add(i.toLowerCase()));
+  cmCustomItems.forEach(i => cmSelected.add(i.toLowerCase()));
 }
 
-function updateCMCount() {
-  const el = document.getElementById('cmCount');
-  if (el) el.textContent = cmSelected.size + ' selected';
+// Render the three-panel layout in What Can I Make (mirrors Browse All)
+function renderCMIngPanels() {
+  renderCMAlwaysChips();
+  renderCMTodayChips();
+  renderCMNotSelChips();
+  renderCMCustomIngTags();
+  syncCMSelected();
+}
+
+let cmAlwaysOpen = true, cmTodayOpen = true, cmNotSelOpen = true, cmCustomOpen = true;
+
+function toggleCMAlwaysPanel() {
+  cmAlwaysOpen = !cmAlwaysOpen;
+  document.getElementById('cmAlwaysBody').classList.toggle('open', cmAlwaysOpen);
+  document.getElementById('cmAlwaysToggle').classList.toggle('open', cmAlwaysOpen);
+  document.querySelector('#cmAlwaysToggle .arrow').textContent = cmAlwaysOpen ? '▲' : '▼';
+}
+function toggleCMTodayPanel() {
+  cmTodayOpen = !cmTodayOpen;
+  document.getElementById('cmTodayBody').classList.toggle('open', cmTodayOpen);
+  document.getElementById('cmTodayToggle').classList.toggle('open', cmTodayOpen);
+  document.querySelector('#cmTodayToggle .arrow').textContent = cmTodayOpen ? '▲' : '▼';
+}
+function toggleCMNotSelPanel() {
+  cmNotSelOpen = !cmNotSelOpen;
+  document.getElementById('cmNotSelBody').classList.toggle('open', cmNotSelOpen);
+  document.getElementById('cmNotSelToggle').classList.toggle('open', cmNotSelOpen);
+  document.querySelector('#cmNotSelToggle .arrow').textContent = cmNotSelOpen ? '▲' : '▼';
+}
+function toggleCMCustomPanel() {
+  cmCustomOpen = !cmCustomOpen;
+  document.getElementById('cmCustomBody').classList.toggle('open', cmCustomOpen);
+  document.getElementById('cmCustomToggle').classList.toggle('open', cmCustomOpen);
+  document.querySelector('#cmCustomToggle .arrow').textContent = cmCustomOpen ? '▲' : '▼';
+}
+
+function renderCMAlwaysChips() {
+  const el = document.getElementById('cmAlwaysChips');
+  const wrap = document.getElementById('cmAlwaysClearWrap');
+  const count = document.getElementById('cmAlwaysCount');
+  if (!el) return;
+  if (count) count.textContent = staples.length ? `(${staples.length})` : '';
+  if (!staples.length) {
+    el.innerHTML = '<span style="color:#4a5d52;font-size:.82rem;font-style:italic">Nothing saved yet — tap <span style="color:#2d7a4f">★</span> next to any ingredient in the list below.</span>';
+    if (wrap) wrap.style.display = 'none';
+    return;
+  }
+  if (wrap) wrap.style.display = 'block';
+  el.innerHTML = staples.map(s => {
+    const esc = s.replace(/'/g, "\\'");
+    return `<span class="always-chip"><span class="chip-mark">★</span>${s}<button class="x" onclick="removeFromAlways('${esc}')">×</button></span>`;
+  }).join('');
+}
+
+function renderCMTodayChips() {
+  const el = document.getElementById('cmTodayChips');
+  const wrap = document.getElementById('cmTodayClearWrap');
+  const count = document.getElementById('cmTodayCount');
+  if (!el) return;
+  const qaAllItems = new Set(QA_ITEMS.flatMap(g => g.items.map(i => i.toLowerCase())));
+  const todayQA = ingredients.filter(i => qaAllItems.has(i.toLowerCase()));
+  if (count) count.textContent = todayQA.length ? `(${todayQA.length})` : '';
+  if (!todayQA.length) {
+    el.innerHTML = '<span style="color:#166534;font-size:.82rem;font-style:italic">Nothing added yet — tap any ingredient in the list below.</span>';
+    if (wrap) wrap.style.display = 'none';
+    return;
+  }
+  if (wrap) wrap.style.display = 'block';
+  el.innerHTML = todayQA.map(i => {
+    const esc = i.replace(/'/g, "\\'");
+    return `<span class="today-chip">✓ ${i}<button class="x" onclick="removeFromToday('${esc}')">×</button></span>`;
+  }).join('');
+}
+
+function renderCMNotSelChips() {
+  const el = document.getElementById('cmNotSelChips');
+  const count = document.getElementById('cmNotSelCount');
+  if (!el) return;
+  const stapleSet = new Set(staples.map(s => s.toLowerCase()));
+  const todaySet = new Set(ingredients.map(i => i.toLowerCase()));
+  let total = 0;
+  const html = QA_ITEMS.map(group => {
+    const chips = group.items
+      .filter(item => !stapleSet.has(item.toLowerCase()) && !todaySet.has(item.toLowerCase()))
+      .map(item => {
+        total++;
+        const esc = item.replace(/'/g, "\\'");
+        return `<span class="chip-wrap"><span class="qa-chip" onclick="addToToday('${esc}')">${item}</span><button class="chip-star" onclick="addToAlways('${esc}')" title="Save to Always Have">★</button></span>`;
+      }).join('');
+    if (!chips) return '';
+    return `<div class="qa-cat-label">${group.cat}</div><div>${chips}</div>`;
+  }).join('');
+  if (count) count.textContent = total ? `(${total})` : '(none left)';
+  el.innerHTML = html || '<span style="color:#1e3a5f;font-size:.82rem;font-style:italic">All ingredients have been selected above.</span>';
+}
+
+function renderCMCustomIngTags() {
+  const el = document.getElementById('cmCustomIngTags');
+  if (!el) return;
+  const qaAllItems = new Set(QA_ITEMS.flatMap(g => g.items.map(i => i.toLowerCase())));
+  const custom = ingredients.filter(i => !qaAllItems.has(i.toLowerCase()));
+  // Also include cmCustomItems not already in ingredients
+  const allCustom = [...custom];
+  cmCustomItems.forEach(c => {
+    if (!allCustom.some(x => x.toLowerCase() === c.toLowerCase())) allCustom.push(c);
+  });
+  el.innerHTML = allCustom.length
+    ? allCustom.map(ing => {
+        const esc = ing.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+        const isStaple = staples.some(s => s.toLowerCase() === ing.toLowerCase());
+        const starBtn = isStaple
+          ? `<button class="custom-staple-btn on" title="Remove from staples" onclick="removeFromAlways('${esc}')">★</button>`
+          : `<button class="custom-staple-btn" title="Save as staple" onclick="addToAlways('${esc}')">☆</button>`;
+        return `<span class="tag custom-tag">${ing}${starBtn}<button onclick="removeCMCustomIng('${esc}')">×</button></span>`;
+      }).join('')
+    : '';
+}
+
+function removeCMCustomIng(val) {
+  cmCustomItems = cmCustomItems.filter(i => i.toLowerCase() !== val.toLowerCase());
+  ingredients = ingredients.filter(i => i.toLowerCase() !== val.toLowerCase());
+  saveIngs();
+  renderAllIngPanels();
+  syncCMSelected();
+  runCanMake();
 }
 
 function cmAddCustom() {
@@ -4056,9 +4171,15 @@ function cmAddCustom() {
   const val = input.value.trim().toLowerCase();
   if (!val) return;
   if (!cmCustomItems.includes(val)) cmCustomItems.push(val);
+  // Also add to ingredients so it's shared with Browse All
+  if (!ingredients.find(i => i.toLowerCase() === val) && !staples.find(s => s.toLowerCase() === val)) {
+    ingredients.push(val);
+    saveIngs();
+  }
   cmSelected.add(val);
   input.value = '';
-  renderCMChips();
+  renderAllIngPanels();
+  runCanMake();
 }
 
 // Assign a meal-type bucket to a recipe
@@ -4428,8 +4549,8 @@ function confirmScanResults(target) {
   if (typeof renderAllIngPanels === 'function') renderAllIngPanels();
   if (typeof updatePantryPower === 'function') updatePantryPower();
   if (typeof initCanMake === 'function' && document.getElementById('panel-canmake').classList.contains('on')) {
-    checked.forEach(i => cmSelected.add(i.name));
-    renderCMChips();
+    syncCMSelected();
+    renderCMIngPanels();
     runCanMake();
   }
   closeScanModal();
