@@ -1353,40 +1353,38 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
   <!-- ══════ FAVORITES PANEL ══════ -->
   <div class="panel" id="panel-favorites">
     <div class="card" style="margin-bottom:12px;background:#1a2a1a;border:1px solid #2e4a2e;">
-      <div style="font-size:1.1rem;font-weight:700;color:#86efac;margin-bottom:10px;">💾 Backup &amp; Sync</div>
+      <div style="font-size:1.1rem;font-weight:700;color:#86efac;margin-bottom:14px;">📲 Sync Between Devices</div>
 
-      <!-- File backup row -->
-      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px;">
-        <button onclick="exportData()" style="background:#166534;color:#fff;border:none;border-radius:8px;padding:8px 16px;font-size:.9rem;cursor:pointer;font-weight:600;">⬇️ Export Backup</button>
-        <button onclick="document.getElementById('importFileInput').click()" style="background:#1e3a5f;color:#fff;border:none;border-radius:8px;padding:8px 16px;font-size:.9rem;cursor:pointer;font-weight:600;">⬆️ Import Backup</button>
-        <input type="file" id="importFileInput" accept=".json" style="display:none" onchange="importData(event)">
-      </div>
-      <div style="font-size:.8rem;color:#86efac;opacity:.8;line-height:1.5;margin-bottom:14px;">
-        <strong>File backup:</strong> Export saves a file with all your favorites, notes, staples, and shopping list. Import restores it. Keep a copy in Downloads, iCloud, or Google Drive.
+      <!-- HOW IT WORKS -->
+      <div style="font-size:.85rem;color:#86efac;line-height:1.7;margin-bottom:16px;">
+        <div style="font-weight:700;margin-bottom:8px;">Laptop → iPhone:</div>
+        <div style="padding-left:4px;">1. On your <strong>laptop</strong>, tap <strong>Send My Data</strong> below, then <strong>Copy Code</strong></div>
+        <div style="padding-left:4px;">2. On your <strong>iPhone</strong>, open HARVEST → Favorites → tap <strong>Receive Data</strong></div>
+        <div style="padding-left:4px;">3. Paste the code and tap <strong>Apply</strong></div>
+        <div style="font-weight:700;margin-top:12px;margin-bottom:8px;">iPhone → Laptop:</div>
+        <div style="padding-left:4px;">1. On your <strong>iPhone</strong>, tap <strong>Send My Data</strong> below, then <strong>Copy Code</strong></div>
+        <div style="padding-left:4px;">2. On your <strong>laptop</strong>, open HARVEST → Favorites → tap <strong>Receive Data</strong></div>
+        <div style="padding-left:4px;">3. Paste the code and tap <strong>Apply</strong></div>
       </div>
 
-      <!-- Sync code row -->
-      <div style="border-top:1px solid #2e4a2e;padding-top:12px;">
-        <div style="font-size:.95rem;font-weight:700;color:#86efac;margin-bottom:6px;">📲 Sync Between Devices</div>
-        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;">
-          <button onclick="generateSyncCode()" style="background:#166534;color:#fff;border:none;border-radius:8px;padding:8px 16px;font-size:.9rem;cursor:pointer;font-weight:600;">🔑 Generate Sync Code</button>
-          <button onclick="document.getElementById('syncImportWrap').style.display=document.getElementById('syncImportWrap').style.display==='none'?'block':'none'" style="background:#1e3a5f;color:#fff;border:none;border-radius:8px;padding:8px 16px;font-size:.9rem;cursor:pointer;font-weight:600;">📋 Import from Code</button>
-        </div>
-        <!-- Generated code display -->
-        <div id="syncCodeWrap" style="display:none;margin-bottom:10px;">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;">
-            <div style="font-size:.8rem;color:#86efac;opacity:.8;">Copy this code and paste it on your other device:</div>
-            <button onclick="document.getElementById('syncCodeWrap').style.display='none'" style="background:none;border:none;color:#86efac;opacity:.6;font-size:1.1rem;cursor:pointer;padding:0 2px;line-height:1;" title="Dismiss">✕</button>
-          </div>
-          <textarea id="syncCodeOut" readonly style="width:100%;height:80px;background:#0a130b;color:#86efac;border:1px solid #2e4a2e;border-radius:8px;padding:8px;font-size:.72rem;font-family:monospace;resize:none;box-sizing:border-box"></textarea>
-          <button onclick="copySyncCode()" id="syncCopyBtn" style="margin-top:6px;background:#14532d;color:#fff;border:none;border-radius:8px;padding:6px 14px;font-size:.85rem;cursor:pointer;">📋 Copy Code</button>
-        </div>
-        <!-- Import code input -->
-        <div id="syncImportWrap" style="display:none;">
-          <div style="font-size:.8rem;color:#86efac;opacity:.8;margin-bottom:5px;">Paste your sync code here:</div>
-          <textarea id="syncCodeIn" style="width:100%;height:80px;background:#0a130b;color:#86efac;border:1px solid #2e4a2e;border-radius:8px;padding:8px;font-size:.72rem;font-family:monospace;resize:none;box-sizing:border-box" placeholder="Paste sync code here…"></textarea>
-          <button onclick="importSyncCode()" style="margin-top:6px;background:#166534;color:#fff;border:none;border-radius:8px;padding:6px 14px;font-size:.85rem;cursor:pointer;">✅ Apply Sync Code</button>
-        </div>
+      <!-- Buttons -->
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;">
+        <button onclick="generateSyncCode()" style="background:#166534;color:#fff;border:none;border-radius:10px;padding:10px 18px;font-size:.95rem;cursor:pointer;font-weight:700;">📤 Send My Data</button>
+        <button onclick="document.getElementById('syncImportWrap').style.display=document.getElementById('syncImportWrap').style.display==='none'?'block':'none'" style="background:#1e3a5f;color:#fff;border:none;border-radius:10px;padding:10px 18px;font-size:.95rem;cursor:pointer;font-weight:700;">📥 Receive Data</button>
+      </div>
+
+      <!-- Generated code display -->
+      <div id="syncCodeWrap" style="display:none;margin-bottom:10px;">
+        <div style="font-size:.82rem;color:#86efac;opacity:.9;margin-bottom:5px;">Copy this code and paste it on your other device:</div>
+        <textarea id="syncCodeOut" readonly style="width:100%;height:80px;background:#0a130b;color:#86efac;border:1px solid #2e4a2e;border-radius:8px;padding:8px;font-size:.72rem;font-family:monospace;resize:none;box-sizing:border-box"></textarea>
+        <button onclick="copySyncCode()" id="syncCopyBtn" style="margin-top:6px;background:#14532d;color:#fff;border:none;border-radius:8px;padding:8px 16px;font-size:.9rem;cursor:pointer;font-weight:600;">📋 Copy Code</button>
+      </div>
+
+      <!-- Import code input -->
+      <div id="syncImportWrap" style="display:none;">
+        <div style="font-size:.82rem;color:#86efac;opacity:.9;margin-bottom:5px;">Paste the code from your other device:</div>
+        <textarea id="syncCodeIn" style="width:100%;height:80px;background:#0a130b;color:#86efac;border:1px solid #2e4a2e;border-radius:8px;padding:8px;font-size:.72rem;font-family:monospace;resize:none;box-sizing:border-box" placeholder="Paste sync code here…"></textarea>
+        <button onclick="importSyncCode()" style="margin-top:6px;background:#166534;color:#fff;border:none;border-radius:8px;padding:8px 16px;font-size:.9rem;cursor:pointer;font-weight:600;">✅ Apply</button>
       </div>
     </div>
     <div class="card">
