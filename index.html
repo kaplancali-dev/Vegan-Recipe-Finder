@@ -3541,13 +3541,14 @@ function renderMealPlan() {
     </div>`).join('');
 
   // Build merged shopping list — ingredients needed across all planned recipes
-  const allIngs = expandWithAliases([...staples, ...ingredients, ...(typeof cmCustomItems !== 'undefined' ? cmCustomItems : [])]);
+  const allIngsArr = expandWithAliases([...staples, ...ingredients, ...(typeof cmCustomItems !== 'undefined' ? cmCustomItems : [])]);
+  const allIngs = new Set(allIngsArr);
   const needed = {};
   plannedRecipes.forEach(r => {
     if (!r.ing) return;
     r.ing.forEach(ing => {
       const n = norm(ing);
-      const have = allIngs.has(n) || [...allIngs].some(ai => n.includes(ai) || ai.includes(n));
+      const have = allIngs.has(n) || allIngsArr.some(ai => n.includes(ai) || ai.includes(n));
       if (!have) needed[n] = (needed[n] || 0) + 1;
     });
   });
@@ -3570,14 +3571,15 @@ function renderMealPlan() {
 }
 
 function copyMealPlanShopList() {
-  const allIngs = expandWithAliases([...staples, ...ingredients, ...(typeof cmCustomItems !== 'undefined' ? cmCustomItems : [])]);
+  const allIngsArr = expandWithAliases([...staples, ...ingredients, ...(typeof cmCustomItems !== 'undefined' ? cmCustomItems : [])]);
+  const allIngs = new Set(allIngsArr);
   const needed = {};
   mealPlan.forEach(id => {
     const r = RECIPES.find(r => r.id === id);
     if (!r || !r.ing) return;
     r.ing.forEach(ing => {
       const n = norm(ing);
-      const have = allIngs.has(n) || [...allIngs].some(ai => n.includes(ai) || ai.includes(n));
+      const have = allIngs.has(n) || allIngsArr.some(ai => n.includes(ai) || ai.includes(n));
       if (!have) needed[n] = true;
     });
   });
@@ -3589,14 +3591,15 @@ function copyMealPlanShopList() {
 }
 
 function addMealPlanToShop() {
-  const allIngs = expandWithAliases([...staples, ...ingredients, ...(typeof cmCustomItems !== 'undefined' ? cmCustomItems : [])]);
+  const allIngsArr = expandWithAliases([...staples, ...ingredients, ...(typeof cmCustomItems !== 'undefined' ? cmCustomItems : [])]);
+  const allIngs = new Set(allIngsArr);
   const needed = {};
   mealPlan.forEach(id => {
     const r = RECIPES.find(r => r.id === id);
     if (!r || !r.ing) return;
     r.ing.forEach(ing => {
       const n = norm(ing);
-      const have = allIngs.has(n) || [...allIngs].some(ai => n.includes(ai) || ai.includes(n));
+      const have = allIngs.has(n) || allIngsArr.some(ai => n.includes(ai) || ai.includes(n));
       if (!have) needed[n] = true;
     });
   });
