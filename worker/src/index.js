@@ -3,7 +3,7 @@
  *
  * Proxies image-to-ingredient requests to Claude's vision API.
  * - Hides the Anthropic API key from the client
- * - Rate-limits per IP (configurable DAILY_LIMIT, default 10)
+ * - Rate-limits per IP (10 scans per week)
  * - CORS-locked to ALLOWED_ORIGIN
  *
  * Secrets (set via `wrangler secret put`):
@@ -19,8 +19,9 @@ Example: ["chickpeas","cumin","olive oil","garlic","rice","soy sauce","maple syr
 Rules:
 - List individual items, not brands or containers
 - If you see a spice rack, list each visible spice
-- Combine obvious duplicates
+- Aggressively deduplicate: use the MOST SPECIFIC name and list each ingredient only once (e.g. "black pepper" not both "pepper" and "black pepper", "orange juice" not both "juice" and "orange juice", "cereal" once not "frosted flakes" + "cereal")
 - Include pantry staples like salt, pepper, oils
+- Only list ingredients you can clearly identify — skip blurry or uncertain labels
 - Do NOT include non-food items
 - Return ONLY the JSON array, nothing else`;
 
@@ -50,25 +51,27 @@ export default {
       return jsonResponse({ error: "Method not allowed" }, 405, corsHeaders);
     }
 
-    // ── Rate limiting (simple per-IP daily counter) ─────────────
+    // ── Rate limiting (10 scans per week per IP) ────────────────
     const ip = request.headers.get("CF-Connecting-IP") || "unknown";
-    const today = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
-    const rateKey = `rate:${ip}:${today}`;
-    const dailyLimit = parseInt(env.DAILY_LIMIT) || 10;
+    const now = new Date();
+    const weekStart = new Date(now);
+    weekStart.setDate(now.getDate() - now.getDay()); // Sunday
+    const weekKey = `rate:${ip}:${weekStart.toISOString().slice(0, 10)}`;
+    const weeklyLimit = 10;
 
     // Use Cloudflare KV if available, otherwise skip rate limiting
     if (env.RATE_STORE) {
-      const current = parseInt(await env.RATE_STORE.get(rateKey)) || 0;
-      if (current >= dailyLimit) {
+      const current = parseInt(await env.RATE_STORE.get(weekKey)) || 0;
+      if (current >= weeklyLimit) {
         return jsonResponse({
-          error: "Daily scan limit reached",
-          message: `You can scan up to ${dailyLimit} times per day. Try again tomorrow!`,
-          limit: dailyLimit,
+          error: "Weekly scan limit reached",
+          message: `You can scan up to ${weeklyLimit} times per week. Your limit resets on Sunday!`,
+          limit: weeklyLimit,
           used: current
         }, 429, corsHeaders);
       }
-      // Increment counter (TTL = 48 hours to auto-clean)
-      await env.RATE_STORE.put(rateKey, String(current + 1), { expirationTtl: 172800 });
+      // Increment counter (TTL = 8 days to auto-clean)
+      await env.RATE_STORE.put(weekKey, String(current + 1), { expirationTtl: 691200 });
     }
 
     // ── Parse request ───────────────────────────────────────────

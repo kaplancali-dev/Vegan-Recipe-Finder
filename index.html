@@ -1419,7 +1419,7 @@ const SHOP_CATEGORIES = {
   '🥛 Dairy Alternatives': ['plant-based milk (any)','almond milk','oat milk','soy milk','coconut milk','coconut cream','vegan butter','cashew cream'],
   '🫙 Pantry & Oils': ['olive oil','coconut oil','sesame oil','any cooking oil','vegetable broth','tamari','soy sauce / tamari','maple syrup','apple cider vinegar','rice vinegar','dijon mustard','tomato paste','agave','coconut aminos','miso','hot sauce','sriracha'],
   '🌿 Spices & Herbs': ['turmeric','cumin','smoked paprika','cinnamon','chili powder','curry powder','black pepper','garlic powder','onion powder','oregano','thyme','coriander','cayenne','cardamom','bay leaves','five spice','nutmeg','sea salt','salt','pepper','ginger powder'],
-  '🍨 Baking & Sweets': ['vanilla extract','cocoa powder','dark chocolate chips','dark chocolate','coconut sugar','flax egg','baking soda','baking powder','cornstarch','shredded coconut','medjool dates','maple syrup','brown sugar','sugar','flour','almond flour','oat flour'],
+  '🍨 Baking & Sweets': ['vanilla extract','cocoa powder','chocolate chips','dark chocolate','coconut sugar','flax egg','baking soda','baking powder','cornstarch','shredded coconut','medjool dates','maple syrup','brown sugar','sugar','flour','almond flour','oat flour'],
 };
 
 
@@ -3023,6 +3023,8 @@ const INGREDIENT_ALIASES = {
   'chili oil': ['chili oil','chilli oil','hot oil'],
   'coconut milk': ['coconut milk','coconut cream','full-fat coconut milk','light coconut milk'],
   'gochujang': ['gochujang','korean chili paste'],
+  'chocolate chips': ['dark chocolate chips','vegan chocolate chips','semi-sweet chocolate chips','milk chocolate chips','dark-chocolate chips','chocolate chips','mini chocolate chips'],
+  'dark chocolate': ['dark chocolate','roughly chopped dark chocolate','semi-sweet chocolate','bittersweet chocolate','vegan chocolate'],
 };
 // One-way substitutions: if user HAS the left item, it also covers the right items in recipes
 const INGREDIENT_SUBS = {
@@ -3061,6 +3063,8 @@ const INGREDIENT_SUBS = {
   'arugula':            ['spinach','baby spinach','mixed greens','lettuce'],
   'fresh ginger': ['ginger','ginger powder'],
   'ginger': ['fresh ginger','ginger powder'],
+  'chocolate chips': ['dark chocolate chips','dark chocolate','semi-sweet chocolate chips','vegan chocolate chips','bittersweet chocolate','chocolate'],
+  'dark chocolate': ['chocolate chips','dark chocolate chips','semi-sweet chocolate','bittersweet chocolate','vegan chocolate','chocolate'],
 };
 
 function expandWithAliases(ings) {
@@ -3979,7 +3983,7 @@ const QA_ITEMS = [
   {cat:'🥛 Plant-Based Milks',  items:['plant-based milk (any)']},
   {cat:'🫙 Pantry & Oils',      items:['any cooking oil','olive oil','coconut oil','avocado oil','sesame oil','chili oil','diced tomatoes','vegetable broth','soy sauce / tamari','coconut milk','miso paste','maple syrup','apple cider vinegar','nutritional yeast','rice vinegar','dijon mustard','tomato paste','agave','tamarind paste','gochujang']},
   {cat:'🌿 Spices & Herbs',     items:['turmeric','cumin','smoked paprika','cinnamon','chili powder','ginger','curry powder','black pepper','garlic powder','onion powder','oregano','basil','thyme','coriander','cayenne','cardamom','bay leaves','five spice','nutmeg','sea salt','garam masala','lemongrass','star anise','dill','mint','rosemary','red pepper flakes','sumac']},
-  {cat:'🍨 Dessert Pantry',     items:['vanilla extract','vanilla','cocoa powder','dark chocolate chips','dark chocolate','coconut cream','coconut sugar','vegan butter','flax egg','baking soda','baking powder','cornstarch','shredded coconut','medjool dates']},
+  {cat:'🍨 Dessert Pantry',     items:['vanilla extract','vanilla','cocoa powder','chocolate chips','dark chocolate','coconut cream','coconut sugar','vegan butter','flax egg','baking soda','baking powder','cornstarch','shredded coconut','medjool dates']},
 ];
 
 function qaAddCustom() {

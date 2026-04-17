@@ -7,5 +7,4 @@ binding = "RATE_STORE"
 id = "b842c93a668849c7854bfb209e2e6316"
 
 [vars]
-ALLOWED_ORIGIN = "https://kaplancali-dev.github.io"
-DAILY_LIMIT = 10
+ALLOWED_ORIGIN = "https://kaplancali-dev.github.io,https://myharvestvegan.com"
