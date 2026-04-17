@@ -2863,7 +2863,7 @@ function updatePantryPower() {
   // Sub-line — explain the 80% threshold simply
   if (nearEl) {
     if (staples.length > 0 && currentEighty > 0) {
-      nearEl.innerHTML = `You have 80%+ of the ingredients for these — the rest are usually optional or easy to sub.`;
+      nearEl.innerHTML = `You have at least 80% of the ingredients necessary to make <strong>${currentEighty.toLocaleString()}</strong> recipes — the remaining 20% are usually optional or easy to sub.`;
       nearEl.style.display = '';
     } else if (staples.length === 0) {
       nearEl.innerHTML = `Add your kitchen staples to discover <strong>${RECIPES.length.toLocaleString()} recipes</strong>`;
