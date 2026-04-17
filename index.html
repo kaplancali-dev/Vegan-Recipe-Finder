@@ -2507,6 +2507,7 @@ function showTab(name) {
   if (name === 'shopping')  renderShop();
   if (name === 'canmake')   initCanMake();
   if (name !== 'search' && name !== 'canmake') window.scrollTo({ top: 0, behavior: 'smooth' });
+  try { localStorage.setItem('vrf_active_tab', name); } catch(e){}
 }
 
 // ── HOME PANEL ────────────────────────────────────────────────────────────────
@@ -3754,8 +3755,13 @@ document.addEventListener('DOMContentLoaded', () => {
       if (btn) btn.setAttribute('aria-expanded', 'true');
     }
   } catch(e){}
-  // Initialize home panel on first load (it's the default tab)
-  if (typeof initHome === 'function') initHome();
+  // Restore last active tab, or default to home
+  const savedTab = localStorage.getItem('vrf_active_tab');
+  if (savedTab && ['home','search','canmake','favorites','shopping'].includes(savedTab)) {
+    showTab(savedTab);
+  } else {
+    if (typeof initHome === 'function') initHome();
+  }
   // Initialize Pantry Power widget in the hero
   if (typeof updatePantryPower === 'function') updatePantryPower();
   // Pulse the mobile Filters & Ingredients trigger until the user has opened
