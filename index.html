@@ -2680,6 +2680,20 @@ const PERISHABLES = [
   {cat:'🌿 Fresh Herbs', items:['cilantro','parsley','basil','mint','dill','rosemary','thyme','chives']},
   {cat:'🍓 Fruits', items:['berries (any)','lemon','lime','mango','banana','apple','oranges','peaches','pears','grapes']},
 ];
+// Flat lookup of all perishable names
+const PERISHABLE_SET = new Set(PERISHABLES.flatMap(g => g.items.map(i => i.toLowerCase())));
+
+// Auto-migrate: move any perishable items out of Always Have → Fresh This Week (today)
+function migratePerishablesToToday() {
+  const toMove = staples.filter(s => PERISHABLE_SET.has(s.toLowerCase()));
+  if (!toMove.length) return;
+  toMove.forEach(item => {
+    staples = staples.filter(s => s.toLowerCase() !== item.toLowerCase());
+    if (!ingredients.find(i => i.toLowerCase() === item.toLowerCase())) ingredients.push(item);
+  });
+  saveStaples(); saveIngs();
+}
+migratePerishablesToToday();
 
 // SECTION 1: Always Have — shows saved staples as removable amber chips
 function renderAlwaysChips() {
@@ -2799,6 +2813,12 @@ function renderCustomIngTags() {
 
 // ── ACTIONS ───────────────────────────────────────────────────────────────────
 function addToAlways(item) {
+  // Perishable items belong in Fresh This Week, not Always Have
+  if (PERISHABLE_SET.has(item.toLowerCase())) {
+    addToToday(item);
+    showToast('🥬 Added to Fresh This Week — perishables go here!');
+    return;
+  }
   if (!staples.find(s => s.toLowerCase() === item.toLowerCase())) staples.push(item);
   ingredients = ingredients.filter(i => i.toLowerCase() !== item.toLowerCase());
   saveStaples(); saveIngs();
