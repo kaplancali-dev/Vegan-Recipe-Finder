@@ -558,13 +558,7 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
 .btn-save-staple:hover{background:#1e5a3a}
 /* ── FILTER CHIPS ── */
 .filter-section{margin-top:14px}
-.creator-section{margin-top:14px}
-.creator-toggle{width:100%;display:flex;align-items:center;justify-content:space-between;gap:8px;background:transparent;border:0;padding:8px 0;cursor:pointer;font-family:inherit;color:var(--ink);text-align:left}
-.creator-toggle-label{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--green-deep)}
-.creator-chevron{display:inline-block;transition:transform .2s ease;color:var(--ink-soft);font-size:.9rem}
-.creator-section.open .creator-chevron{transform:rotate(180deg)}
-.creator-chips{display:none;margin-top:8px}
-.creator-section.open .creator-chips{display:flex}
+
 .filter-label{font-size:0.73rem;font-weight:700;color:#2d7a4f;text-transform:uppercase;letter-spacing:.05em;margin-bottom:7px}
 .filter-chips{display:flex;flex-wrap:wrap;gap:5px}
 .fc{background:#faf7f2;border:1.5px solid #f3ede3;border-radius:99px;padding:5px 12px;font-size:0.78rem;font-weight:600;color:#2d7a4f;cursor:pointer;transition:all .13s;white-space:nowrap}
@@ -1107,40 +1101,7 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
         <!-- FILTERS + FIND -->
         <div class="card">
 
-          <!-- CREATOR FILTER (collapsible) -->
-          <div class="filter-section creator-section" id="creatorSection">
-            <button type="button" class="creator-toggle" onclick="toggleCreatorSection()" aria-expanded="false" id="creatorToggle">
-              <span class="creator-toggle-label">Browse by creator <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#4b7a52">(optional)</span></span>
-              <span class="creator-chevron" aria-hidden="true">▾</span>
-            </button>
-            <div class="filter-chips creator-chips" id="siteGrid">
-              <button class="fc on" onclick="pickFilter(this,'site','')">🌐 All</button>
-              <button class="fc" onclick="pickFilter(this,'site','Minimalist Baker')">Minimalist Baker</button>
-              <button class="fc" onclick="pickFilter(this,'site','Oh She Glows')">Oh She Glows</button>
-              <button class="fc" onclick="pickFilter(this,'site','Rainbow Plant Life')">Rainbow Plant Life</button>
-              <button class="fc" onclick="pickFilter(this,'site','Sweet Potato Soul')">Sweet Potato Soul</button>
-              <button class="fc" onclick="pickFilter(this,'site','NutriPlanet')">NutriPlanet</button>
-              <button class="fc" onclick="pickFilter(this,'site','FitGreenMind')">FitGreenMind</button>
-              <button class="fc" onclick="pickFilter(this,'site','The Full Helping')">The Full Helping</button>
-              <button class="fc" onclick="pickFilter(this,'site','Cooking For Peanuts')">Cooking For Peanuts</button>
-              <button class="fc" onclick="pickFilter(this,'site','Green Kitchen Stories')">Green Kitchen Stories</button>
-              <button class="fc" onclick="pickFilter(this,'site','Vegan Richa')">Vegan Richa</button>
-              <button class="fc" onclick="pickFilter(this,'site','Loving It Vegan')">Loving It Vegan</button>
-              <button class="fc" onclick="pickFilter(this,'site','Nora Cooks')">Nora Cooks</button>
-              <button class="fc" onclick="pickFilter(this,'site','Connoisseur Us Veg')">Connoisseur Us Veg</button>
-              <button class="fc" onclick="pickFilter(this,'site','Pickled Plum')">Pickled Plum</button>
-              <button class="fc" onclick="pickFilter(this,'site','The Viet Vegan')">The Viet Vegan</button>
-              <button class="fc" onclick="pickFilter(this,'site','Cookie and Kate')">Cookie and Kate</button>
-              <button class="fc" onclick="pickFilter(this,'site','Love and Lemons')">Love and Lemons</button>
-              <button class="fc" onclick="pickFilter(this,'site','The First Mess')">The First Mess</button>
-              <button class="fc" onclick="pickFilter(this,'site','Lazy Cat Kitchen')">Lazy Cat Kitchen</button>
-              <button class="fc" onclick="pickFilter(this,'site','Delish Knowledge')">Delish Knowledge</button>
-              <button class="fc" onclick="pickFilter(this,'site','Simple Vegan Blog')">Simple Vegan Blog</button>
-              <button class="fc" onclick="pickFilter(this,'site','The Vegan 8')">The Vegan 8</button>
-              <button class="fc" onclick="pickFilter(this,'site','Feasting At Home')">Feasting At Home</button>
-              <button class="fc" onclick="pickFilter(this,'site','Budget Bytes')">Budget Bytes</button>
-            </div>
-          </div>
+          <p style="font-size:.78rem;color:#6b8f7b;text-align:center;margin:8px 0 4px;line-height:1.4;">Curated from the world's top nutrition-focused, plant-based chefs and creators.</p>
 
           </div>
       </div>
@@ -3828,24 +3789,8 @@ function closeFiltersDrawer(){
   document.body.classList.remove('filters-open');
 }
 // ── CREATOR SECTION (collapsible) ────────────────────────────────────────────
-function toggleCreatorSection(){
-  const sec = document.getElementById('creatorSection');
-  const btn = document.getElementById('creatorToggle');
-  if (!sec) return;
-  const open = sec.classList.toggle('open');
-  if (btn) btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-  try { localStorage.setItem('vrf_creators_open', open ? '1' : '0'); } catch(e){}
-}
 // Restore state on load
 document.addEventListener('DOMContentLoaded', () => {
-  try {
-    if (localStorage.getItem('vrf_creators_open') === '1') {
-      const sec = document.getElementById('creatorSection');
-      const btn = document.getElementById('creatorToggle');
-      if (sec) sec.classList.add('open');
-      if (btn) btn.setAttribute('aria-expanded', 'true');
-    }
-  } catch(e){}
   // Restore last active tab, or default to home
   const savedTab = localStorage.getItem('vrf_active_tab');
   if (savedTab && ['home','search','canmake','favorites','shopping'].includes(savedTab)) {
