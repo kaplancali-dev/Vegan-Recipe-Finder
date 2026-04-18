@@ -1054,11 +1054,12 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
             <span>🥬 Fresh This Week <span style="font-weight:400;font-size:.75rem;opacity:.6">— use it before it spoils</span> <span id="todayCount" style="font-weight:400;opacity:.7;font-size:.8rem"></span></span><span class="arrow">▼</span>
           </button>
           <div class="qa-body open" id="todayBody">
-            <p style="font-size:.8rem;color:#1e5a3a;margin-bottom:10px;line-height:1.5">Fresh greens, herbs, berries, avocados — items that spoil within days. Designed to reduce food waste by matching you to recipes that use them up. Tap any ingredient below to add it here.</p>
-            <div id="todayChips"><span style="color:#1e5a3a;font-size:.82rem;font-style:italic">Nothing added yet — tap any ingredient in the list below.</span></div>
+            <p style="font-size:.8rem;color:#1e5a3a;margin-bottom:10px;line-height:1.5">Fresh produce that spoils within days. Designed to reduce food waste by matching you to recipes that use them up. Tap what you bought this week:</p>
+            <div id="todayChips"><span style="color:#1e5a3a;font-size:.82rem;font-style:italic">Nothing added yet — tap items below.</span></div>
             <div id="todayClearWrap" style="display:none;margin-top:10px">
               <button class="btn-sm-danger" onclick="todayClearAll()">Remove All</button>
             </div>
+            <div id="perishableGrid" style="margin-top:12px;"></div>
           </div>
         </div>
 
@@ -1303,11 +1304,12 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
             <span>🥬 Fresh This Week <span style="font-weight:400;font-size:.75rem;opacity:.6">— use it before it spoils</span> <span id="cmTodayCount" style="font-weight:400;opacity:.7;font-size:.8rem"></span></span><span class="arrow">▼</span>
           </button>
           <div class="qa-body open" id="cmTodayBody">
-            <p style="font-size:.8rem;color:#1e5a3a;margin-bottom:10px;line-height:1.5">Fresh greens, herbs, berries, avocados — items that spoil within days. Designed to reduce food waste by matching you to recipes that use them up. Tap any ingredient below to add it here.</p>
-            <div id="cmTodayChips"><span style="color:#1e5a3a;font-size:.82rem;font-style:italic">Nothing added yet — tap any ingredient in the list below.</span></div>
+            <p style="font-size:.8rem;color:#1e5a3a;margin-bottom:10px;line-height:1.5">Fresh produce that spoils within days. Designed to reduce food waste by matching you to recipes that use them up. Tap what you bought this week:</p>
+            <div id="cmTodayChips"><span style="color:#1e5a3a;font-size:.82rem;font-style:italic">Nothing added yet — tap items below.</span></div>
             <div id="cmTodayClearWrap" style="display:none;margin-top:10px">
               <button class="btn-sm-danger" onclick="todayClearAll()">Remove All</button>
             </div>
+            <div id="cmPerishableGrid" style="margin-top:12px;"></div>
           </div>
         </div>
 
@@ -2663,11 +2665,21 @@ function toggleCustomPanel() {
 function renderAllIngPanels() {
   renderAlwaysChips();
   renderTodayChips();
+  renderPerishableGrid();
   renderNotSelChips();
   renderCustomIngTags();
   // Also sync the CM (What Can I Make) ingredient panels
   renderCMIngPanels();
 }
+
+// Perishable items for Fresh This Week section
+const PERISHABLES = [
+  {cat:'🥬 Leafy Greens', items:['spinach','baby spinach','kale','arugula','mixed greens','romaine','bok choy','collard greens','chard']},
+  {cat:'🥒 Vegetables', items:['cucumber','avocado','bell peppers (any)','tomatoes','cherry tomatoes','zucchini','broccoli','cauliflower','asparagus','celery','carrots','red cabbage','green beans','corn','eggplant','mushrooms (any)','bean sprouts','snap peas']},
+  {cat:'🧅 Onions', items:['red onion','yellow onion','white onion','spring onion','scallions','shallots']},
+  {cat:'🌿 Fresh Herbs', items:['cilantro','parsley','basil','mint','dill','rosemary','thyme','chives']},
+  {cat:'🍓 Fruits', items:['berries (any)','lemon','lime','mango','banana','apple','oranges','peaches','pears','grapes']},
+];
 
 // SECTION 1: Always Have — shows saved staples as removable amber chips
 function renderAlwaysChips() {
@@ -2707,6 +2719,41 @@ function renderTodayChips() {
     const esc = i.replace(/'/g, "\\'");
     return `<span class="today-chip">✓ ${i}<button class="x" onclick="removeFromToday('${esc}')">×</button></span>`;
   }).join('');
+}
+
+// Perishable grid — shows tappable produce items not yet in Today
+function renderPerishableGrid() {
+  const el = document.getElementById('perishableGrid');
+  if (!el) return;
+  const todaySet = new Set(ingredients.map(i => i.toLowerCase()));
+  const html = PERISHABLES.map(group => {
+    const chips = group.items
+      .filter(item => !todaySet.has(item.toLowerCase()))
+      .map(item => {
+        const esc = item.replace(/'/g, "\\'");
+        return `<span class="qa-chip" onclick="addToToday('${esc}')" style="cursor:pointer">${item}</span>`;
+      }).join('');
+    if (!chips) return '';
+    return `<div class="qa-cat-label">${group.cat}</div><div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:8px;">${chips}</div>`;
+  }).join('');
+  el.innerHTML = html || '<span style="color:#1e5a3a;font-size:.82rem;font-style:italic">All perishables added!</span>';
+}
+
+function renderCMPerishableGrid() {
+  const el = document.getElementById('cmPerishableGrid');
+  if (!el) return;
+  const todaySet = new Set(ingredients.map(i => i.toLowerCase()));
+  const html = PERISHABLES.map(group => {
+    const chips = group.items
+      .filter(item => !todaySet.has(item.toLowerCase()))
+      .map(item => {
+        const esc = item.replace(/'/g, "\\'");
+        return `<span class="qa-chip" onclick="addToToday('${esc}')" style="cursor:pointer">${item}</span>`;
+      }).join('');
+    if (!chips) return '';
+    return `<div class="qa-cat-label">${group.cat}</div><div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:8px;">${chips}</div>`;
+  }).join('');
+  el.innerHTML = html || '<span style="color:#1e5a3a;font-size:.82rem;font-style:italic">All perishables added!</span>';
 }
 
 // SECTION 3: Not Selected — full list minus Always Have and Today, with ⭐ to save
@@ -4211,6 +4258,7 @@ function syncCMSelected() {
 function renderCMIngPanels() {
   renderCMAlwaysChips();
   renderCMTodayChips();
+  renderCMPerishableGrid();
   renderCMNotSelChips();
   renderCMCustomIngTags();
   syncCMSelected();
