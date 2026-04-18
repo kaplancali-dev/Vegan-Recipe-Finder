@@ -3166,7 +3166,13 @@ function render() {
     return;
   }
 
-  count.textContent = `${results.length} recipe${results.length !== 1 ? 's' : ''} found`;
+  const numStr = String(results.length);
+  const numColors = ['#38a169','#d69e2e','#805ad5'];
+  const numWeights = [600, 700, 800];
+  const coloredNum = numStr.split('').map((d, i) =>
+    `<span style="color:${numColors[i % 3]};font-weight:${numWeights[i % 3]}">${d}</span>`
+  ).join('');
+  count.innerHTML = `${coloredNum} recipe${results.length !== 1 ? 's' : ''} found`;
   // Mirror result count into mobile drawer's "Show N recipes" button
   const drawerCount = document.getElementById('drawerResultCount');
   if (drawerCount) {
