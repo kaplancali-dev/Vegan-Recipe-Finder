@@ -947,7 +947,7 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
     <button class="tab-btn" onclick="showTab('search')">🔍 Browse All Recipes</button>
     <button class="tab-btn" onclick="showTab('canmake')" style="display:flex;flex-direction:column;align-items:center;gap:2px;line-height:1.2">
       <span>🧑‍🍳 What Can I Make Now</span>
-      <span style="font-size:0.7rem;font-weight:400;opacity:0.7;letter-spacing:0">missing 3 or fewer ingredients</span>
+      <span style="font-size:0.7rem;font-weight:400;opacity:0.7;letter-spacing:0">no more than 2 missing</span>
     </button>
     <button class="tab-btn" onclick="showTab('favorites')">❤️ Favorites</button>
     <button class="tab-btn" onclick="showTab('shopping')"><span class="cart">🛒</span> Shopping List</button>
@@ -4360,8 +4360,7 @@ function runCanMake() {
     const missing = needList.length;
     return { ...r, haveNames, needNames, missing };
   }).filter(r => {
-    const maxMissing = (cmTypeFilter === 'dessert' || (cmTypeFilter === 'all' && cmMealType(r) === 'dessert')) ? 3 : 2;
-    if (r.missing > maxMissing) return false;
+    if (r.missing > 2) return false;
     if (cmTypeFilter !== 'all' && cmMealType(r) !== cmTypeFilter) return false;
     if (cmMaxTime && r.time && r.time > cmMaxTime) return false;
     if (cmAllergies.size && [...cmAllergies].some(key => recipeHasAllergen(r, key))) return false;
@@ -4373,9 +4372,8 @@ function runCanMake() {
   const g0 = scored.filter(r => r.missing === 0).sort((a,b) => a.title.localeCompare(b.title));
   const g1 = scored.filter(r => r.missing === 1).sort((a,b) => a.title.localeCompare(b.title));
   const g2 = scored.filter(r => r.missing === 2).sort((a,b) => a.title.localeCompare(b.title));
-  const g3 = scored.filter(r => r.missing === 3).sort((a,b) => a.title.localeCompare(b.title));
 
-  const total = g0.length + g1.length + g2.length + g3.length;
+  const total = g0.length + g1.length + g2.length;
   document.getElementById('cmResultsCount').textContent =
     total ? `${total} recipe${total!==1?'s':''} found — at least ${g0.length} you can make right now!` : 'No matches found. Try selecting more ingredients.';
 
@@ -4385,16 +4383,12 @@ function runCanMake() {
     html += cmRenderGroup(g0, 0);
   }
   if (g1.length) {
-    html += `<div class="cm-group-header"><span style="font-size:1rem">🟡</span><span class="cm-group-label">Missing 1 Ingredient</span><span class="cm-group-count">${g1.length} recipe${g1.length!==1?'s':''}</span></div>`;
+    html += `<div class="cm-group-header"><span style="font-size:1rem">🟡</span><span class="cm-group-label">Just 1 Away</span><span class="cm-group-count">${g1.length} recipe${g1.length!==1?'s':''}</span></div>`;
     html += cmRenderGroup(g1, 1);
   }
   if (g2.length) {
-    html += `<div class="cm-group-header"><span style="font-size:1rem">🔴</span><span class="cm-group-label">Missing 2 Ingredients</span><span class="cm-group-count">${g2.length} recipe${g2.length!==1?'s':''}</span></div>`;
+    html += `<div class="cm-group-header"><span style="font-size:1rem">🟣</span><span class="cm-group-label">Missing 2</span><span class="cm-group-count">${g2.length} recipe${g2.length!==1?'s':''}</span></div>`;
     html += cmRenderGroup(g2, 2);
-  }
-  if (g3.length) {
-    html += `<div class="cm-group-header"><span style="font-size:1rem">🔴</span><span class="cm-group-label">Missing 3 Ingredients</span><span class="cm-group-count">${g3.length} recipe${g3.length!==1?'s':''}</span></div>`;
-    html += cmRenderGroup(g3, 2);
   }
   if (!total) html = `<div class="empty"><div class="e-icon">🥦</div><p>No recipes found within 2 missing ingredients.<br>Try selecting more pantry items.</p></div>`;
 
