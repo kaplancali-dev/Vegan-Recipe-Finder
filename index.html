@@ -4111,12 +4111,13 @@ function getMealPlanShoppingList() {
 function renderPerishableGridImpl(elId) {
   const el = document.getElementById(elId);
   if (!el) return;
-  const todaySet = new Set(ingredients.map(i => i.toLowerCase()));
+  const todaySet  = new Set(ingredients.map(i => i.toLowerCase()));
+  const stapleSet = new Set(staples.map(s => s.toLowerCase()));
   const html = PERISHABLES.map(group => {
     const chips = group.items
-      .filter(item => !todaySet.has(item.toLowerCase()))
+      .filter(item => !todaySet.has(item.toLowerCase()) && !stapleSet.has(item.toLowerCase()))
       .map(item => {
-        return `<span class="qa-chip" onclick="addToToday('${escQ(item)}')" style="cursor:pointer">${item}</span>`;
+        return `<span class="chip-wrap"><span class="qa-chip" onclick="addToToday('${escQ(item)}')">${item}</span><button class="chip-star" onclick="addToAlways('${escQ(item)}')" title="Save to Always Have">★</button></span>`;
       }).join('');
     if (!chips) return '';
     return `<div class="qa-cat-label">${group.cat}</div><div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:8px;">${chips}</div>`;
