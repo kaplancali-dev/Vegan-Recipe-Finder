@@ -2844,19 +2844,19 @@ function computePantryPower() {
   return { ready, oneAway, total, pct, simReady, simNinety, simEighty, topMissing, currentNinety, currentEighty };
 }
 
-// Animate a number from current → target over ~600ms
+// Animate a number from current → target over ~600ms, end with colored digits
 function animateNumber(el, target) {
   if (!el) return;
   const start = parseInt(el.textContent.replace(/[^\d]/g,''), 10) || 0;
-  if (start === target) { el.textContent = target.toLocaleString(); return; }
+  if (start === target) { el.innerHTML = colorDigits(target); return; }
   const startTime = performance.now();
   const dur = 600;
   function step(now) {
     const t = Math.min(1, (now - startTime) / dur);
     const eased = 1 - Math.pow(1 - t, 3); // ease-out cubic
     const val = Math.round(start + (target - start) * eased);
-    el.textContent = val.toLocaleString();
-    if (t < 1) requestAnimationFrame(step);
+    if (t < 1) { el.textContent = val.toLocaleString(); requestAnimationFrame(step); }
+    else { el.innerHTML = colorDigits(target); }
   }
   requestAnimationFrame(step);
 }
@@ -2881,7 +2881,7 @@ function updatePantryPower() {
   // Sub-line — explain the 80% threshold simply
   if (nearEl) {
     if (staples.length > 0 && currentEighty > 0) {
-      nearEl.innerHTML = `You have at least 80% of the ingredients necessary to make <strong>${currentEighty.toLocaleString()}</strong> recipes — the remaining 20% are usually optional or easy to sub.`;
+      nearEl.innerHTML = `You have at least 80% of the ingredients necessary to make <strong>${colorDigits(currentEighty)}</strong> recipes — the remaining 20% are usually optional or easy to sub.`;
       nearEl.style.display = '';
     } else if (staples.length === 0) {
       nearEl.innerHTML = `Add your kitchen staples to discover <strong>${RECIPES.length.toLocaleString()} recipes</strong>`;
@@ -3166,13 +3166,7 @@ function render() {
     return;
   }
 
-  const numStr = String(results.length);
-  const numColors = ['#38a169','#d69e2e','#805ad5'];
-  const numWeights = [600, 700, 800];
-  const coloredNum = numStr.split('').map((d, i) =>
-    `<span style="color:${numColors[i % 3]};font-weight:${numWeights[i % 3]}">${d}</span>`
-  ).join('');
-  count.innerHTML = `${coloredNum} recipe${results.length !== 1 ? 's' : ''} found`;
+  count.innerHTML = `${colorDigits(results.length)} recipe${results.length !== 1 ? 's' : ''} found`;
   // Mirror result count into mobile drawer's "Show N recipes" button
   const drawerCount = document.getElementById('drawerResultCount');
   if (drawerCount) {
@@ -4060,6 +4054,12 @@ const QA_ALL_ITEMS = new Set(QA_ITEMS.flatMap(g => g.items.map(i => i.toLowerCas
 // ── SHARED HELPERS ───────────────────────────────────────────────────────────
 function escQ(s) { return s.replace(/\\/g,'\\\\').replace(/'/g,"\\'"); }
 
+// Shared: color each digit green/yellow/purple with increasing weight
+function colorDigits(n) {
+  const s = String(n), c = ['#38a169','#d69e2e','#805ad5'], w = [600,700,800];
+  return s.split('').map((d,i) => `<span style="color:${c[i%3]};font-weight:${w[i%3]}">${d}</span>`).join('');
+}
+
 function restoreAllergyUI() {
   activeAllergies.forEach(key => {
     const btn = document.querySelector(`[onclick*="toggleAllergy"][onclick*="${key}"]`);
@@ -4380,8 +4380,8 @@ function runCanMake() {
   const g2 = scored.filter(r => r.missing === 2).sort((a,b) => a.title.localeCompare(b.title));
 
   const total = g0.length + g1.length + g2.length;
-  document.getElementById('cmResultsCount').textContent =
-    total ? `${total} recipe${total!==1?'s':''} found — at least ${g0.length} you can make right now!` : 'No matches found. Try selecting more ingredients.';
+  document.getElementById('cmResultsCount').innerHTML =
+    total ? `${colorDigits(total)} recipe${total!==1?'s':''} found — at least ${g0.length} you can make right now!` : 'No matches found. Try selecting more ingredients.';
 
   let html = '';
   if (g0.length) {
