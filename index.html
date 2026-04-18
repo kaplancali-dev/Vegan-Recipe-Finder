@@ -4367,7 +4367,7 @@ function runCanMake() {
 
   const total = g0.length + g1.length + g2.length + g3.length;
   document.getElementById('cmResultsCount').textContent =
-    total ? `${total} recipe${total!==1?'s':''} found — ${g0.length} you can make right now!` : 'No matches found. Try selecting more ingredients.';
+    total ? `${total} recipe${total!==1?'s':''} found — at least ${g0.length} you can make right now!` : 'No matches found. Try selecting more ingredients.';
 
   let html = '';
   if (g0.length) {
