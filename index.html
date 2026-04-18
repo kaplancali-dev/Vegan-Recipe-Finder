@@ -2562,7 +2562,7 @@ function renderHomeCategories() {
   const el = document.getElementById('homeCatTiles');
   if (!el) return;
   el.innerHTML = HOME_CATS.map(c =>
-    `<button class="cat-tile" onclick="goToCategoryFromHome('${c.val.replace(/'/g,"\\'")}')">
+    `<button class="cat-tile" onclick="goToCategoryFromHome('${escQ(c.val)}')">
        <span class="ct-emoji">${c.emoji}</span>
        <span class="ct-label">${c.label}</span>
      </button>`
@@ -2709,8 +2709,7 @@ function renderAlwaysChips() {
   }
   if (wrap) wrap.style.display = 'block';
   el.innerHTML = staples.map(s => {
-    const esc = s.replace(/'/g, "\\'");
-    return `<span class="always-chip"><span class="chip-mark">★</span>${s}<button class="x" onclick="removeFromAlways('${esc}')">×</button></span>`;
+    return `<span class="always-chip"><span class="chip-mark">★</span>${s}<button class="x" onclick="removeFromAlways('${escQ(s)}')">×</button></span>`;
   }).join('');
 }
 
@@ -2720,8 +2719,7 @@ function renderTodayChips() {
   const wrap  = document.getElementById('todayClearWrap');
   const count = document.getElementById('todayCount');
   if (!el) return;
-  const qaAllItems = new Set(QA_ITEMS.flatMap(g => g.items.map(i => i.toLowerCase())));
-  const todayQA = ingredients.filter(i => qaAllItems.has(i.toLowerCase()));
+  const todayQA = ingredients.filter(i => QA_ALL_ITEMS.has(i.toLowerCase()));
   if (count) count.textContent = todayQA.length ? `(${todayQA.length})` : '';
   if (!todayQA.length) {
     el.innerHTML = '<span style="color:#166534;font-size:.82rem;font-style:italic">Nothing added yet — tap any ingredient in the list below.</span>';
@@ -2730,45 +2728,13 @@ function renderTodayChips() {
   }
   if (wrap) wrap.style.display = 'block';
   el.innerHTML = todayQA.map(i => {
-    const esc = i.replace(/'/g, "\\'");
-    return `<span class="today-chip">✓ ${i}<button class="x" onclick="removeFromToday('${esc}')">×</button></span>`;
+    return `<span class="today-chip">✓ ${i}<button class="x" onclick="removeFromToday('${escQ(i)}')">×</button></span>`;
   }).join('');
 }
 
 // Perishable grid — shows tappable produce items not yet in Today
-function renderPerishableGrid() {
-  const el = document.getElementById('perishableGrid');
-  if (!el) return;
-  const todaySet = new Set(ingredients.map(i => i.toLowerCase()));
-  const html = PERISHABLES.map(group => {
-    const chips = group.items
-      .filter(item => !todaySet.has(item.toLowerCase()))
-      .map(item => {
-        const esc = item.replace(/'/g, "\\'");
-        return `<span class="qa-chip" onclick="addToToday('${esc}')" style="cursor:pointer">${item}</span>`;
-      }).join('');
-    if (!chips) return '';
-    return `<div class="qa-cat-label">${group.cat}</div><div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:8px;">${chips}</div>`;
-  }).join('');
-  el.innerHTML = html || '<span style="color:#1e5a3a;font-size:.82rem;font-style:italic">All perishables added!</span>';
-}
-
-function renderCMPerishableGrid() {
-  const el = document.getElementById('cmPerishableGrid');
-  if (!el) return;
-  const todaySet = new Set(ingredients.map(i => i.toLowerCase()));
-  const html = PERISHABLES.map(group => {
-    const chips = group.items
-      .filter(item => !todaySet.has(item.toLowerCase()))
-      .map(item => {
-        const esc = item.replace(/'/g, "\\'");
-        return `<span class="qa-chip" onclick="addToToday('${esc}')" style="cursor:pointer">${item}</span>`;
-      }).join('');
-    if (!chips) return '';
-    return `<div class="qa-cat-label">${group.cat}</div><div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:8px;">${chips}</div>`;
-  }).join('');
-  el.innerHTML = html || '<span style="color:#1e5a3a;font-size:.82rem;font-style:italic">All perishables added!</span>';
-}
+function renderPerishableGrid() { renderPerishableGridImpl('perishableGrid'); }
+function renderCMPerishableGrid() { renderPerishableGridImpl('cmPerishableGrid'); }
 
 // SECTION 3: Not Selected — full list minus Always Have and Today, with ⭐ to save
 function renderNotSelChips() {
@@ -2783,8 +2749,7 @@ function renderNotSelChips() {
       .filter(item => !stapleSet.has(item.toLowerCase()) && !todaySet.has(item.toLowerCase()))
       .map(item => {
         total++;
-        const esc = item.replace(/'/g, "\\'");
-        return `<span class="chip-wrap"><span class="qa-chip" onclick="addToToday('${esc}')">${item}</span><button class="chip-star" onclick="addToAlways('${esc}')" title="Save to Always Have">★</button></span>`;
+        return `<span class="chip-wrap"><span class="qa-chip" onclick="addToToday('${escQ(item)}')">${item}</span><button class="chip-star" onclick="addToAlways('${escQ(item)}')" title="Save to Always Have">★</button></span>`;
       }).join('');
     if (!chips) return '';
     return `<div class="qa-cat-label">${group.cat}</div><div>${chips}</div>`;
@@ -2797,11 +2762,10 @@ function renderNotSelChips() {
 function renderCustomIngTags() {
   const el = document.getElementById('customIngTags');
   if (!el) return;
-  const qaAllItems = new Set(QA_ITEMS.flatMap(g => g.items.map(i => i.toLowerCase())));
-  const custom = ingredients.filter(i => !qaAllItems.has(i.toLowerCase()));
+  const custom = ingredients.filter(i => !QA_ALL_ITEMS.has(i.toLowerCase()));
   el.innerHTML = custom.length
     ? custom.map(ing => {
-        const esc = ing.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+        const esc = escQ(ing);
         const isStaple = staples.some(s => s.toLowerCase() === ing.toLowerCase());
         const starBtn = isStaple
           ? `<button class="custom-staple-btn on" title="Remove from staples" onclick="removeFromAlways('${esc}')">★</button>`
@@ -2822,38 +2786,20 @@ function addToAlways(item) {
   if (!staples.find(s => s.toLowerCase() === item.toLowerCase())) staples.push(item);
   ingredients = ingredients.filter(i => i.toLowerCase() !== item.toLowerCase());
   saveStaples(); saveIngs();
-  renderAllIngPanels();
-// Restore allergy chip visual state
-activeAllergies.forEach(key => {
-  const btn = document.querySelector(`[onclick*="toggleAllergy"][onclick*="${key}"]`);
-  if (btn) btn.classList.add('on');
-}); updateFindBtn(); findRecipes();
-  if (cmInited) { syncCMSelected(); runCanMake(); }
+  afterIngChange();
 }
 
 function removeFromAlways(item) {
   staples = staples.filter(s => s.toLowerCase() !== item.toLowerCase());
   saveStaples();
-  renderAllIngPanels();
-// Restore allergy chip visual state
-activeAllergies.forEach(key => {
-  const btn = document.querySelector(`[onclick*="toggleAllergy"][onclick*="${key}"]`);
-  if (btn) btn.classList.add('on');
-}); updateFindBtn(); findRecipes();
-  if (cmInited) { syncCMSelected(); runCanMake(); }
+  afterIngChange();
 }
 
 function alwaysClearAll() {
   if (!confirm('Remove all saved ingredients from Always Have? This cannot be undone.')) return;
   staples = [];
   saveStaples();
-  renderAllIngPanels();
-// Restore allergy chip visual state
-activeAllergies.forEach(key => {
-  const btn = document.querySelector(`[onclick*="toggleAllergy"][onclick*="${key}"]`);
-  if (btn) btn.classList.add('on');
-}); updateFindBtn(); findRecipes();
-  if (cmInited) { syncCMSelected(); runCanMake(); }
+  afterIngChange();
 }
 
 // ── PANTRY POWER WIDGET ──────────────────────────────────────────────────────
@@ -3033,51 +2979,25 @@ function goToStaples() {
 function addToToday(item) {
   if (!ingredients.find(i => i.toLowerCase() === item.toLowerCase())) ingredients.push(item);
   saveIngs();
-  renderAllIngPanels();
-// Restore allergy chip visual state
-activeAllergies.forEach(key => {
-  const btn = document.querySelector(`[onclick*="toggleAllergy"][onclick*="${key}"]`);
-  if (btn) btn.classList.add('on');
-}); updateFindBtn(); findRecipes();
-  if (cmInited) { syncCMSelected(); runCanMake(); }
+  afterIngChange();
 }
 
 function removeFromToday(item) {
   ingredients = ingredients.filter(i => i.toLowerCase() !== item.toLowerCase());
   saveIngs();
-  renderAllIngPanels();
-// Restore allergy chip visual state
-activeAllergies.forEach(key => {
-  const btn = document.querySelector(`[onclick*="toggleAllergy"][onclick*="${key}"]`);
-  if (btn) btn.classList.add('on');
-}); updateFindBtn(); findRecipes();
-  if (cmInited) { syncCMSelected(); runCanMake(); }
+  afterIngChange();
 }
 
 function todayClearAll() {
-  const qaAllItems = new Set(QA_ITEMS.flatMap(g => g.items.map(i => i.toLowerCase())));
-  ingredients = ingredients.filter(i => !qaAllItems.has(i.toLowerCase()));
+  ingredients = ingredients.filter(i => !QA_ALL_ITEMS.has(i.toLowerCase()));
   saveIngs();
-  renderAllIngPanels();
-// Restore allergy chip visual state
-activeAllergies.forEach(key => {
-  const btn = document.querySelector(`[onclick*="toggleAllergy"][onclick*="${key}"]`);
-  if (btn) btn.classList.add('on');
-}); updateFindBtn(); findRecipes();
-  if (cmInited) { syncCMSelected(); runCanMake(); }
+  afterIngChange();
 }
-
 
 function removeCustomIng(val) {
   ingredients = ingredients.filter(i => i !== val);
   saveIngs();
-  renderAllIngPanels();
-// Restore allergy chip visual state
-activeAllergies.forEach(key => {
-  const btn = document.querySelector(`[onclick*="toggleAllergy"][onclick*="${key}"]`);
-  if (btn) btn.classList.add('on');
-}); updateFindBtn(); findRecipes();
-  if (cmInited) { syncCMSelected(); runCanMake(); }
+  afterIngChange();
 }
 
 // ── CUSTOM INGREDIENT INPUT ───────────────────────────────────────────────────
@@ -3608,19 +3528,8 @@ function renderMealPlan() {
       <button onclick="toggleMealPlan(${r.id})" style="background:none;border:none;cursor:pointer;font-size:1rem;color:#b55;" title="Remove">✕</button>
     </div>`).join('');
 
-  // Build merged shopping list — ingredients needed across all planned recipes
-  const allIngsArr = expandWithAliases([...staples, ...ingredients, ...(typeof cmCustomItems !== 'undefined' ? cmCustomItems : [])]);
-  const allIngs = new Set(allIngsArr);
-  const needed = {};
-  plannedRecipes.forEach(r => {
-    if (!r.ing) return;
-    r.ing.forEach(ing => {
-      const n = norm(ing);
-      const have = allIngs.has(n) || allIngsArr.some(ai => n.includes(ai) || ai.includes(n));
-      if (!have) needed[n] = (needed[n] || 0) + 1;
-    });
-  });
-  const needList = Object.keys(needed).sort();
+  // Build merged shopping list using shared helper
+  const needList = getMealPlanShoppingList();
 
   if (needList.length === 0) {
     shopEl.innerHTML = `<div style="text-align:center;padding:12px;color:#2d7a4f;font-weight:600;font-size:.9rem;">🎉 You have everything you need! No shopping required.</div>`;
@@ -3639,19 +3548,7 @@ function renderMealPlan() {
 }
 
 function copyMealPlanShopList() {
-  const allIngsArr = expandWithAliases([...staples, ...ingredients, ...(typeof cmCustomItems !== 'undefined' ? cmCustomItems : [])]);
-  const allIngs = new Set(allIngsArr);
-  const needed = {};
-  mealPlan.forEach(id => {
-    const r = RECIPES.find(r => r.id === id);
-    if (!r || !r.ing) return;
-    r.ing.forEach(ing => {
-      const n = norm(ing);
-      const have = allIngs.has(n) || allIngsArr.some(ai => n.includes(ai) || ai.includes(n));
-      if (!have) needed[n] = true;
-    });
-  });
-  const list = Object.keys(needed).sort().join('\n');
+  const list = getMealPlanShoppingList().join('\n');
   navigator.clipboard.writeText(list).then(() => {
     const btn = document.querySelector('.btn-mp-copy');
     if (btn) { btn.textContent = '✅ Copied!'; setTimeout(() => btn.textContent = '📋 Copy List', 2000); }
@@ -3659,19 +3556,7 @@ function copyMealPlanShopList() {
 }
 
 function addMealPlanToShop() {
-  const allIngsArr = expandWithAliases([...staples, ...ingredients, ...(typeof cmCustomItems !== 'undefined' ? cmCustomItems : [])]);
-  const allIngs = new Set(allIngsArr);
-  const needed = {};
-  mealPlan.forEach(id => {
-    const r = RECIPES.find(r => r.id === id);
-    if (!r || !r.ing) return;
-    r.ing.forEach(ing => {
-      const n = norm(ing);
-      const have = allIngs.has(n) || allIngsArr.some(ai => n.includes(ai) || ai.includes(n));
-      if (!have) needed[n] = true;
-    });
-  });
-  Object.keys(needed).forEach(ing => {
+  getMealPlanShoppingList().forEach(ing => {
     if (!shopList.includes(ing)) shopList.push(ing);
   });
   saveShop();
@@ -3796,11 +3681,7 @@ function importSyncCode() {
     if (data.i !== undefined) { _lsSet('vrf_ings',    data.i); ingredients   = data.i; }
     if (data.m !== undefined) { _lsSet('vrf_meal',    data.m); mealPlan     = data.m; }
     renderFavs(); renderMealPlan(); render(); renderAllIngPanels();
-// Restore allergy chip visual state
-activeAllergies.forEach(key => {
-  const btn = document.querySelector(`[onclick*="toggleAllergy"][onclick*="${key}"]`);
-  if (btn) btn.classList.add('on');
-});
+    restoreAllergyUI();
     document.getElementById('syncCodeIn').value = '';
     document.getElementById('syncImportWrap').style.display = 'none';
     alert('✅ Sync complete!\n\nYour favorites, notes, staples, and shopping list have been loaded on this device.');
@@ -4197,6 +4078,57 @@ const QA_ITEMS = [
   {cat:'🌿 Spices & Herbs',     items:['turmeric','cumin','smoked paprika','cinnamon','chili powder','ginger','curry powder','black pepper','garlic powder','onion powder','oregano','basil','thyme','coriander','cayenne','cardamom','bay leaves','five spice','nutmeg','sea salt','garam masala','lemongrass','star anise','dill','mint','rosemary','red pepper flakes','sumac']},
   {cat:'🍨 Dessert Pantry',     items:['vanilla extract','vanilla','cocoa powder','chocolate chips (any)','coconut cream','coconut sugar','vegan butter','flax egg','baking soda','baking powder','cornstarch','shredded coconut','medjool dates']},
 ];
+// Cached flat Set of all QA ingredient names (built once, used everywhere)
+const QA_ALL_ITEMS = new Set(QA_ITEMS.flatMap(g => g.items.map(i => i.toLowerCase())));
+
+// ── SHARED HELPERS ───────────────────────────────────────────────────────────
+function escQ(s) { return s.replace(/\\/g,'\\\\').replace(/'/g,"\\'"); }
+
+function restoreAllergyUI() {
+  activeAllergies.forEach(key => {
+    const btn = document.querySelector(`[onclick*="toggleAllergy"][onclick*="${key}"]`);
+    if (btn) btn.classList.add('on');
+  });
+}
+
+function afterIngChange() {
+  renderAllIngPanels();
+  restoreAllergyUI();
+  updateFindBtn(); findRecipes();
+  if (cmInited) { syncCMSelected(); runCanMake(); }
+}
+
+function getMealPlanShoppingList() {
+  const allIngsArr = expandWithAliases([...staples, ...ingredients, ...(typeof cmCustomItems !== 'undefined' ? cmCustomItems : [])]);
+  const allIngs = new Set(allIngsArr);
+  const needed = {};
+  mealPlan.forEach(id => {
+    const r = RECIPES.find(x => x.id === id);
+    if (!r || !r.ing) return;
+    r.ing.forEach(ing => {
+      const n = norm(ing);
+      const have = allIngs.has(n) || allIngsArr.some(ai => n.includes(ai) || ai.includes(n));
+      if (!have) needed[n] = (needed[n] || 0) + 1;
+    });
+  });
+  return Object.keys(needed).sort();
+}
+
+function renderPerishableGridImpl(elId) {
+  const el = document.getElementById(elId);
+  if (!el) return;
+  const todaySet = new Set(ingredients.map(i => i.toLowerCase()));
+  const html = PERISHABLES.map(group => {
+    const chips = group.items
+      .filter(item => !todaySet.has(item.toLowerCase()))
+      .map(item => {
+        return `<span class="qa-chip" onclick="addToToday('${escQ(item)}')" style="cursor:pointer">${item}</span>`;
+      }).join('');
+    if (!chips) return '';
+    return `<div class="qa-cat-label">${group.cat}</div><div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:8px;">${chips}</div>`;
+  }).join('');
+  el.innerHTML = html || '<span style="color:#1e5a3a;font-size:.82rem;font-style:italic">All perishables added!</span>';
+}
 
 function qaAddCustom() {
   const input = document.getElementById('qaCustomInput');
@@ -4207,15 +4139,7 @@ function qaAddCustom() {
     saveIngs();
   }
   input.value = '';
-  renderAllIngPanels();
-// Restore allergy chip visual state
-activeAllergies.forEach(key => {
-  const btn = document.querySelector(`[onclick*="toggleAllergy"][onclick*="${key}"]`);
-  if (btn) btn.classList.add('on');
-});
-  updateFindBtn();
-  findRecipes();
-  if (cmInited) { syncCMSelected(); runCanMake(); }
+  afterIngChange();
 }
 
 // ── WHAT CAN I MAKE ───────────────────────────────────────────────────────────
@@ -4324,8 +4248,7 @@ function renderCMAlwaysChips() {
   }
   if (wrap) wrap.style.display = 'block';
   el.innerHTML = staples.map(s => {
-    const esc = s.replace(/'/g, "\\'");
-    return `<span class="always-chip"><span class="chip-mark">★</span>${s}<button class="x" onclick="removeFromAlways('${esc}')">×</button></span>`;
+    return `<span class="always-chip"><span class="chip-mark">★</span>${s}<button class="x" onclick="removeFromAlways('${escQ(s)}')">×</button></span>`;
   }).join('');
 }
 
@@ -4334,8 +4257,7 @@ function renderCMTodayChips() {
   const wrap = document.getElementById('cmTodayClearWrap');
   const count = document.getElementById('cmTodayCount');
   if (!el) return;
-  const qaAllItems = new Set(QA_ITEMS.flatMap(g => g.items.map(i => i.toLowerCase())));
-  const todayQA = ingredients.filter(i => qaAllItems.has(i.toLowerCase()));
+  const todayQA = ingredients.filter(i => QA_ALL_ITEMS.has(i.toLowerCase()));
   if (count) count.textContent = todayQA.length ? `(${todayQA.length})` : '';
   if (!todayQA.length) {
     el.innerHTML = '<span style="color:#166534;font-size:.82rem;font-style:italic">Nothing added yet — tap any ingredient in the list below.</span>';
@@ -4344,8 +4266,7 @@ function renderCMTodayChips() {
   }
   if (wrap) wrap.style.display = 'block';
   el.innerHTML = todayQA.map(i => {
-    const esc = i.replace(/'/g, "\\'");
-    return `<span class="today-chip">✓ ${i}<button class="x" onclick="removeFromToday('${esc}')">×</button></span>`;
+    return `<span class="today-chip">✓ ${i}<button class="x" onclick="removeFromToday('${escQ(i)}')">×</button></span>`;
   }).join('');
 }
 
@@ -4361,8 +4282,7 @@ function renderCMNotSelChips() {
       .filter(item => !stapleSet.has(item.toLowerCase()) && !todaySet.has(item.toLowerCase()))
       .map(item => {
         total++;
-        const esc = item.replace(/'/g, "\\'");
-        return `<span class="chip-wrap"><span class="qa-chip" onclick="addToToday('${esc}')">${item}</span><button class="chip-star" onclick="addToAlways('${esc}')" title="Save to Always Have">★</button></span>`;
+        return `<span class="chip-wrap"><span class="qa-chip" onclick="addToToday('${escQ(item)}')">${item}</span><button class="chip-star" onclick="addToAlways('${escQ(item)}')" title="Save to Always Have">★</button></span>`;
       }).join('');
     if (!chips) return '';
     return `<div class="qa-cat-label">${group.cat}</div><div>${chips}</div>`;
@@ -4374,8 +4294,7 @@ function renderCMNotSelChips() {
 function renderCMCustomIngTags() {
   const el = document.getElementById('cmCustomIngTags');
   if (!el) return;
-  const qaAllItems = new Set(QA_ITEMS.flatMap(g => g.items.map(i => i.toLowerCase())));
-  const custom = ingredients.filter(i => !qaAllItems.has(i.toLowerCase()));
+  const custom = ingredients.filter(i => !QA_ALL_ITEMS.has(i.toLowerCase()));
   // Also include cmCustomItems not already in ingredients
   const allCustom = [...custom];
   cmCustomItems.forEach(c => {
@@ -4383,7 +4302,7 @@ function renderCMCustomIngTags() {
   });
   el.innerHTML = allCustom.length
     ? allCustom.map(ing => {
-        const esc = ing.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+        const esc = escQ(ing);
         const isStaple = staples.some(s => s.toLowerCase() === ing.toLowerCase());
         const starBtn = isStaple
           ? `<button class="custom-staple-btn on" title="Remove from staples" onclick="removeFromAlways('${esc}')">★</button>`
@@ -4471,12 +4390,14 @@ function runCanMake() {
     return { ...r, haveNames, needNames, missing };
   }).filter(r => {
     const maxMissing = (cmTypeFilter === 'dessert' || (cmTypeFilter === 'all' && cmMealType(r) === 'dessert')) ? 3 : 2;
-    return r.missing <= maxMissing;
-  }).filter(r => cmTypeFilter === 'all' || cmMealType(r) === cmTypeFilter)
-    .filter(r => !cmMaxTime || !r.time || r.time <= cmMaxTime)
-    .filter(r => !cmAllergies.size || ![...cmAllergies].some(key => recipeHasAllergen(r, key)))
-    .filter(r => !cmNameFilter || r.title.toLowerCase().includes(cmNameFilter))
-    .filter(r => !cmCatFilter || cmCatFilter.split('|').some(c => r.cats && r.cats.includes(c)));
+    if (r.missing > maxMissing) return false;
+    if (cmTypeFilter !== 'all' && cmMealType(r) !== cmTypeFilter) return false;
+    if (cmMaxTime && r.time && r.time > cmMaxTime) return false;
+    if (cmAllergies.size && [...cmAllergies].some(key => recipeHasAllergen(r, key))) return false;
+    if (cmNameFilter && !r.title.toLowerCase().includes(cmNameFilter)) return false;
+    if (cmCatFilter && !cmCatFilter.split('|').some(c => r.cats && r.cats.includes(c))) return false;
+    return true;
+  });
 
   const g0 = scored.filter(r => r.missing === 0).sort((a,b) => a.title.localeCompare(b.title));
   const g1 = scored.filter(r => r.missing === 1).sort((a,b) => a.title.localeCompare(b.title));
@@ -4545,7 +4466,7 @@ function cmCard(r, group) {
   <div class="cm-actions">
     <button class="btn-sm btn-link" onclick="openRecipeSearch('${searchUrl(r)}')">🔍 Find Recipe</button>
     <button class="btn-sm btn-fav${isFav?' on':''}" onclick="toggleFav(${r.id});runCanMake()">${isFav?'❤️ Saved':'🤍 Save'}</button>
-    ${r.needNames.length ? `<button class="btn-sm btn-shop" onclick="cmAddMissingToShop(${r.id},[${r.needNames.map(n=>`'${n.replace(/'/g,"\\'")}' `).join(',')}])"><span class="cart">🛒</span> Add Missing to List</button>` : ''}
+    ${r.needNames.length ? `<button class="btn-sm btn-shop" onclick="cmAddMissingToShop(${r.id},[${r.needNames.map(n=>`'${escQ(n)}' `).join(',')}])"><span class="cart">🛒</span> Add Missing to List</button>` : ''}
     <button class="btn-sm btn-notes${instrNotes ? ' on' : ''}" onclick="openInstrModal(${r.id})">📝 ${instrNotes ? 'View Notes' : 'Add Notes'}</button>
   </div>
   ${instrNotes ? `<div class="saved-instructions-label">📝 Saved Notes</div><div class="saved-instructions" onclick="openInstrModal(${r.id})">${instrNotes.substring(0,200)}${instrNotes.length>200?'…':''}</div>` : ''}
@@ -4801,11 +4722,7 @@ function confirmScanResults(target) {
 // ── INIT ──────────────────────────────────────────────────────────────────────
 loadCustomRecipes();
 renderAllIngPanels();
-// Restore allergy chip visual state
-activeAllergies.forEach(key => {
-  const btn = document.querySelector(`[onclick*="toggleAllergy"][onclick*="${key}"]`);
-  if (btn) btn.classList.add('on');
-});
+restoreAllergyUI();
 updateFindBtn();
 findRecipes();
 
