@@ -112,6 +112,18 @@
     font-family:-apple-system,system-ui,sans-serif;max-width:760px;text-align:justify;
   }
   .intro-hero-sub strong{color:var(--ink);font-weight:700}
+  @keyframes boldWave{
+    0%,100%{font-weight:300}
+    20%{font-weight:800}
+    40%{font-weight:300}
+  }
+  .clr-letter{display:inline-block;animation:boldWave 3s ease-in-out infinite}
+  .clr-letter:nth-child(1){animation-delay:0s}
+  .clr-letter:nth-child(2){animation-delay:0.3s}
+  .clr-letter:nth-child(3){animation-delay:0.6s}
+  .clr-letter:nth-child(4){animation-delay:0.9s}
+  .clr-letter:nth-child(5){animation-delay:1.2s}
+  .clr-letter:nth-child(6){animation-delay:1.5s}
   .swap-tag{background:var(--accent-soft);color:var(--accent);padding:1px 8px;border-radius:6px;font-weight:600;font-size:13px}
 
   /* ── HERO SPLIT LAYOUT ───────────────────────────────────────── */
@@ -842,7 +854,7 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
             filters out your <strong>allergens</strong>,
             and builds a <strong>shopping list</strong> for the rest.
           </p>
-          <p style="font-size:1.3em;text-align:center;margin:6px 0 0;font-style:italic;line-height:1.4;color:#2d4a35;">The more <span><span style="color:#e53e3e">c</span><span style="color:#dd6b20">o</span><span style="color:#d69e2e">l</span><span style="color:#38a169">o</span><span style="color:#3182ce">r</span><span style="color:#805ad5">s</span></span> on your plate, the more life in your years.™</p>
+          <p style="font-size:1.3em;text-align:center;margin:6px 0 0;font-style:italic;line-height:1.4;color:#2d4a35;">The more <span style="display:inline-flex"><span class="clr-letter" style="color:#e53e3e">c</span><span class="clr-letter" style="color:#dd6b20">o</span><span class="clr-letter" style="color:#d69e2e">l</span><span class="clr-letter" style="color:#38a169">o</span><span class="clr-letter" style="color:#3182ce">r</span><span class="clr-letter" style="color:#805ad5">s</span></span> on your plate, the more life in your years.™</p>
         </div>
         <!-- RIGHT: Pantry Power widget -->
         <aside class="pantry-power" id="pantryPower" aria-label="Pantry Power">
