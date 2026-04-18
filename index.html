@@ -1048,30 +1048,30 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
           </div>
         </div>
 
-        <!-- SECTION 1: INGREDIENTS I ALWAYS HAVE -->
-        <div class="qa-card qa-card-always">
-          <button class="qa-toggle qa-toggle-always open" id="alwaysToggle" onclick="toggleAlwaysPanel()">
-            <span><span style="color:#2d7a4f">★</span> Always Have <span style="font-weight:400;font-size:.75rem;opacity:.6">— saved permanently</span> <span id="alwaysCount" style="font-weight:400;opacity:.7;font-size:.8rem"></span></span><span class="arrow">▼</span>
+        <!-- SECTION 1: FRESH THIS WEEK (formerly Have Today) -->
+        <div class="qa-card qa-card-today">
+          <button class="qa-toggle qa-toggle-today open" id="todayToggle" onclick="toggleTodayPanel()">
+            <span>🥬 Fresh This Week <span style="font-weight:400;font-size:.75rem;opacity:.6">— use it before it spoils</span> <span id="todayCount" style="font-weight:400;opacity:.7;font-size:.8rem"></span></span><span class="arrow">▼</span>
           </button>
-          <div class="qa-body open" id="alwaysBody">
-            <p style="font-size:.8rem;color:#4a5d52;margin-bottom:10px;line-height:1.5">Tap <strong style="color:#2d7a4f">★</strong> next to any ingredient in the list below to save it here permanently — it will always be here when you return.</p>
-            <div id="alwaysChips"><span style="color:#4a5d52;font-size:.82rem;font-style:italic">Nothing saved yet — tap <span style="color:#2d7a4f">★</span> next to any ingredient in the list below.</span></div>
-            <div id="alwaysClearWrap" style="display:none;margin-top:10px">
-              <button class="btn-sm-danger" onclick="alwaysClearAll()">Remove All</button>
+          <div class="qa-body open" id="todayBody">
+            <p style="font-size:.8rem;color:#1e5a3a;margin-bottom:10px;line-height:1.5">Fresh greens, herbs, berries, avocados — items that spoil within days. Designed to reduce food waste by matching you to recipes that use them up. Tap any ingredient below to add it here.</p>
+            <div id="todayChips"><span style="color:#1e5a3a;font-size:.82rem;font-style:italic">Nothing added yet — tap any ingredient in the list below.</span></div>
+            <div id="todayClearWrap" style="display:none;margin-top:10px">
+              <button class="btn-sm-danger" onclick="todayClearAll()">Remove All</button>
             </div>
           </div>
         </div>
 
-        <!-- SECTION 2: ADDITIONAL INGREDIENTS I HAVE TODAY -->
-        <div class="qa-card qa-card-today">
-          <button class="qa-toggle qa-toggle-today open" id="todayToggle" onclick="toggleTodayPanel()">
-            <span>🌿 Have Today <span style="font-weight:400;font-size:.75rem;opacity:.6">— cleared next visit</span> <span id="todayCount" style="font-weight:400;opacity:.7;font-size:.8rem"></span></span><span class="arrow">▼</span>
+        <!-- SECTION 2: ALWAYS HAVE -->
+        <div class="qa-card qa-card-always">
+          <button class="qa-toggle qa-toggle-always open" id="alwaysToggle" onclick="toggleAlwaysPanel()">
+            <span><span style="color:#2d7a4f">★</span> Always Have <span style="font-weight:400;font-size:.75rem;opacity:.6">— pantry staples that last</span> <span id="alwaysCount" style="font-weight:400;opacity:.7;font-size:.8rem"></span></span><span class="arrow">▼</span>
           </button>
-          <div class="qa-body open" id="todayBody">
-            <p style="font-size:.8rem;color:#1e5a3a;margin-bottom:10px;line-height:1.5">Tap any ingredient in the list below to add it here for today only. Won't be here next visit — tap <strong style="color:#2d7a4f">★</strong> instead to save it permanently.</p>
-            <div id="todayChips"><span style="color:#1e5a3a;font-size:.82rem;font-style:italic">Nothing added yet — tap any ingredient in the list below.</span></div>
-            <div id="todayClearWrap" style="display:none;margin-top:10px">
-              <button class="btn-sm-danger" onclick="todayClearAll()">Remove All</button>
+          <div class="qa-body open" id="alwaysBody">
+            <p style="font-size:.8rem;color:#4a5d52;margin-bottom:10px;line-height:1.5">Oils, spices, grains, tofu, canned goods — items that last weeks or more. Tap <strong style="color:#2d7a4f">★</strong> next to any ingredient below to save it here permanently.</p>
+            <div id="alwaysChips"><span style="color:#4a5d52;font-size:.82rem;font-style:italic">Nothing saved yet — tap <span style="color:#2d7a4f">★</span> next to any ingredient in the list below.</span></div>
+            <div id="alwaysClearWrap" style="display:none;margin-top:10px">
+              <button class="btn-sm-danger" onclick="alwaysClearAll()">Remove All</button>
             </div>
           </div>
         </div>
@@ -1082,7 +1082,7 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
             <span>📋 Ingredients Not Selected <span id="notSelCount" style="font-weight:400;opacity:.7;font-size:.8rem"></span></span><span class="arrow">▼</span>
           </button>
           <div class="qa-body open" id="notSelBody">
-            <p style="font-size:.8rem;color:#4a5d52;margin-bottom:10px;line-height:1.6">Tap the <strong style="color:#1e5a3a">ingredient name</strong> → adds it for <strong style="color:#1e5a3a">today only</strong><br>Tap the <strong style="color:#2d7a4f">★</strong> beside it → saves it to <strong style="color:#1e5a3a">Always Have</strong> permanently</p>
+            <p style="font-size:.8rem;color:#4a5d52;margin-bottom:10px;line-height:1.6">Tap the <strong style="color:#1e5a3a">ingredient name</strong> → adds it to <strong style="color:#1e5a3a">Fresh This Week</strong><br>Tap the <strong style="color:#2d7a4f">★</strong> beside it → saves it to <strong style="color:#1e5a3a">Always Have</strong> permanently</p>
 
             <div id="notSelChips"></div>
           </div>
@@ -1297,30 +1297,30 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
             <span class="allergy-chip" onclick="toggleCMAllergy(this,'nightshade')">🍅 Nightshades</span>
           </div>
         </div>
-        <!-- SECTION 1: INGREDIENTS I ALWAYS HAVE (CM) -->
-        <div class="qa-card qa-card-always">
-          <button class="qa-toggle qa-toggle-always open" id="cmAlwaysToggle" onclick="toggleCMAlwaysPanel()">
-            <span><span style="color:#2d7a4f">★</span> Always Have <span style="font-weight:400;font-size:.75rem;opacity:.6">— saved permanently</span> <span id="cmAlwaysCount" style="font-weight:400;opacity:.7;font-size:.8rem"></span></span><span class="arrow">▼</span>
+        <!-- SECTION 1: FRESH THIS WEEK (CM) -->
+        <div class="qa-card qa-card-today">
+          <button class="qa-toggle qa-toggle-today open" id="cmTodayToggle" onclick="toggleCMTodayPanel()">
+            <span>🥬 Fresh This Week <span style="font-weight:400;font-size:.75rem;opacity:.6">— use it before it spoils</span> <span id="cmTodayCount" style="font-weight:400;opacity:.7;font-size:.8rem"></span></span><span class="arrow">▼</span>
           </button>
-          <div class="qa-body open" id="cmAlwaysBody">
-            <p style="font-size:.8rem;color:#4a5d52;margin-bottom:10px;line-height:1.5">Tap <strong style="color:#2d7a4f">★</strong> next to any ingredient in the list below to save it here permanently — it will always be here when you return.</p>
-            <div id="cmAlwaysChips"><span style="color:#4a5d52;font-size:.82rem;font-style:italic">Nothing saved yet — tap <span style="color:#2d7a4f">★</span> next to any ingredient in the list below.</span></div>
-            <div id="cmAlwaysClearWrap" style="display:none;margin-top:10px">
-              <button class="btn-sm-danger" onclick="alwaysClearAll()">Remove All</button>
+          <div class="qa-body open" id="cmTodayBody">
+            <p style="font-size:.8rem;color:#1e5a3a;margin-bottom:10px;line-height:1.5">Fresh greens, herbs, berries, avocados — items that spoil within days. Designed to reduce food waste by matching you to recipes that use them up. Tap any ingredient below to add it here.</p>
+            <div id="cmTodayChips"><span style="color:#1e5a3a;font-size:.82rem;font-style:italic">Nothing added yet — tap any ingredient in the list below.</span></div>
+            <div id="cmTodayClearWrap" style="display:none;margin-top:10px">
+              <button class="btn-sm-danger" onclick="todayClearAll()">Remove All</button>
             </div>
           </div>
         </div>
 
-        <!-- SECTION 2: ADDITIONAL INGREDIENTS I HAVE TODAY (CM) -->
-        <div class="qa-card qa-card-today">
-          <button class="qa-toggle qa-toggle-today open" id="cmTodayToggle" onclick="toggleCMTodayPanel()">
-            <span>🌿 Have Today <span style="font-weight:400;font-size:.75rem;opacity:.6">— cleared next visit</span> <span id="cmTodayCount" style="font-weight:400;opacity:.7;font-size:.8rem"></span></span><span class="arrow">▼</span>
+        <!-- SECTION 2: ALWAYS HAVE (CM) -->
+        <div class="qa-card qa-card-always">
+          <button class="qa-toggle qa-toggle-always open" id="cmAlwaysToggle" onclick="toggleCMAlwaysPanel()">
+            <span><span style="color:#2d7a4f">★</span> Always Have <span style="font-weight:400;font-size:.75rem;opacity:.6">— pantry staples that last</span> <span id="cmAlwaysCount" style="font-weight:400;opacity:.7;font-size:.8rem"></span></span><span class="arrow">▼</span>
           </button>
-          <div class="qa-body open" id="cmTodayBody">
-            <p style="font-size:.8rem;color:#1e5a3a;margin-bottom:10px;line-height:1.5">Tap any ingredient in the list below to add it here for today only. Won't be here next visit — tap <strong style="color:#2d7a4f">★</strong> instead to save it permanently.</p>
-            <div id="cmTodayChips"><span style="color:#1e5a3a;font-size:.82rem;font-style:italic">Nothing added yet — tap any ingredient in the list below.</span></div>
-            <div id="cmTodayClearWrap" style="display:none;margin-top:10px">
-              <button class="btn-sm-danger" onclick="todayClearAll()">Remove All</button>
+          <div class="qa-body open" id="cmAlwaysBody">
+            <p style="font-size:.8rem;color:#4a5d52;margin-bottom:10px;line-height:1.5">Oils, spices, grains, tofu, canned goods — items that last weeks or more. Tap <strong style="color:#2d7a4f">★</strong> next to any ingredient below to save it here permanently.</p>
+            <div id="cmAlwaysChips"><span style="color:#4a5d52;font-size:.82rem;font-style:italic">Nothing saved yet — tap <span style="color:#2d7a4f">★</span> next to any ingredient in the list below.</span></div>
+            <div id="cmAlwaysClearWrap" style="display:none;margin-top:10px">
+              <button class="btn-sm-danger" onclick="alwaysClearAll()">Remove All</button>
             </div>
           </div>
         </div>
@@ -1331,7 +1331,7 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
             <span>📋 Ingredients Not Selected <span id="cmNotSelCount" style="font-weight:400;opacity:.7;font-size:.8rem"></span></span><span class="arrow">▼</span>
           </button>
           <div class="qa-body open" id="cmNotSelBody">
-            <p style="font-size:.8rem;color:#4a5d52;margin-bottom:10px;line-height:1.6">Tap the <strong style="color:#1e5a3a">ingredient name</strong> → adds it for <strong style="color:#1e5a3a">today only</strong><br>Tap the <strong style="color:#2d7a4f">★</strong> beside it → saves it to <strong style="color:#1e5a3a">Always Have</strong> permanently</p>
+            <p style="font-size:.8rem;color:#4a5d52;margin-bottom:10px;line-height:1.6">Tap the <strong style="color:#1e5a3a">ingredient name</strong> → adds it to <strong style="color:#1e5a3a">Fresh This Week</strong><br>Tap the <strong style="color:#2d7a4f">★</strong> beside it → saves it to <strong style="color:#1e5a3a">Always Have</strong> permanently</p>
             <div id="cmNotSelChips"></div>
           </div>
         </div>
