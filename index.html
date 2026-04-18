@@ -1083,7 +1083,7 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
             <span>📋 Ingredients Not Selected <span id="notSelCount" style="font-weight:400;opacity:.7;font-size:.8rem"></span></span><span class="arrow">▼</span>
           </button>
           <div class="qa-body open" id="notSelBody">
-            <p style="font-size:.8rem;color:#4a5d52;margin-bottom:10px;line-height:1.6">Tap the <strong style="color:#1e5a3a">ingredient name</strong> → adds it to <strong style="color:#1e5a3a">Fresh This Week</strong><br>Tap the <strong style="color:#2d7a4f">★</strong> beside it → saves it to <strong style="color:#1e5a3a">Always Have</strong> permanently</p>
+            <p style="font-size:.8rem;color:#4a5d52;margin-bottom:10px;line-height:1.6">Tap the <strong style="color:#1e5a3a">ingredient name</strong> → adds it to <strong style="color:#1e5a3a">Fresh This Week</strong><br>Tap the <strong style="color:#2d7a4f">★</strong> beside it → saves it to <strong style="color:#1e5a3a">Always Have</strong> permanently<br><span style="font-size:.72rem;color:#6b8f7b">Always have a perishable like spinach or carrots? Star it! Tap the ★ again to remove it anytime.</span></p>
 
             <div id="notSelChips"></div>
           </div>
@@ -1333,7 +1333,7 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
             <span>📋 Ingredients Not Selected <span id="cmNotSelCount" style="font-weight:400;opacity:.7;font-size:.8rem"></span></span><span class="arrow">▼</span>
           </button>
           <div class="qa-body open" id="cmNotSelBody">
-            <p style="font-size:.8rem;color:#4a5d52;margin-bottom:10px;line-height:1.6">Tap the <strong style="color:#1e5a3a">ingredient name</strong> → adds it to <strong style="color:#1e5a3a">Fresh This Week</strong><br>Tap the <strong style="color:#2d7a4f">★</strong> beside it → saves it to <strong style="color:#1e5a3a">Always Have</strong> permanently</p>
+            <p style="font-size:.8rem;color:#4a5d52;margin-bottom:10px;line-height:1.6">Tap the <strong style="color:#1e5a3a">ingredient name</strong> → adds it to <strong style="color:#1e5a3a">Fresh This Week</strong><br>Tap the <strong style="color:#2d7a4f">★</strong> beside it → saves it to <strong style="color:#1e5a3a">Always Have</strong> permanently<br><span style="font-size:.72rem;color:#6b8f7b">Always have a perishable like spinach or carrots? Star it! Tap the ★ again to remove it anytime.</span></p>
             <div id="cmNotSelChips"></div>
           </div>
         </div>
@@ -2777,12 +2777,6 @@ function renderCustomIngTags() {
 
 // ── ACTIONS ───────────────────────────────────────────────────────────────────
 function addToAlways(item) {
-  // Perishable items belong in Fresh This Week, not Always Have
-  if (PERISHABLE_SET.has(item.toLowerCase())) {
-    addToToday(item);
-    showToast('🥬 Added to Fresh This Week — perishables go here!');
-    return;
-  }
   if (!staples.find(s => s.toLowerCase() === item.toLowerCase())) staples.push(item);
   ingredients = ingredients.filter(i => i.toLowerCase() !== item.toLowerCase());
   saveStaples(); saveIngs();
