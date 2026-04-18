@@ -2876,7 +2876,7 @@ function updatePantryPower() {
 
   // The big number = recipes you can likely cook (90%+ ingredients on hand)
   if (numEl) animateNumber(numEl, currentNinety);
-  if (unitEl) unitEl.textContent = currentNinety === 1 ? 'recipe you can cook' : 'recipes you can cook';
+  if (unitEl) unitEl.textContent = currentNinety === 1 ? 'recipe you can make' : 'recipes you can make';
 
   // Sub-line — explain the 90% threshold simply
   if (nearEl) {
