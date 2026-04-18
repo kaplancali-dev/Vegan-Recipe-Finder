@@ -2807,7 +2807,7 @@ function computePantryPower() {
     else if (missing === 1) oneAway++;
   }
   const total = RECIPES.length;
-  const pct = total ? (currentNinety / total) * 100 : 0;
+  const pct = total ? (currentEighty / total) * 100 : 0;
 
   // ── Projection: find the most impactful staples to add ──
   // Count how often each missing ingredient appears across all non-ready recipes
@@ -2874,14 +2874,14 @@ function updatePantryPower() {
   const ctaLab = document.getElementById('ppCtaLabel');
   const hintEl = document.getElementById('ppHint');
 
-  // The big number = recipes you can likely cook (90%+ ingredients on hand)
-  if (numEl) animateNumber(numEl, currentNinety);
-  if (unitEl) unitEl.textContent = currentNinety === 1 ? 'recipe you can make' : 'recipes you can make';
+  // The big number = recipes you can likely cook (80%+ ingredients on hand)
+  if (numEl) animateNumber(numEl, currentEighty);
+  if (unitEl) unitEl.textContent = currentEighty === 1 ? 'recipe you can make' : 'recipes you can make';
 
-  // Sub-line — explain the 90% threshold simply
+  // Sub-line — explain the 80% threshold simply
   if (nearEl) {
-    if (staples.length > 0 && currentNinety > 0) {
-      nearEl.innerHTML = `You have at least 90% of the ingredients necessary to make <strong>${colorDigits(currentNinety)}</strong> recipes — the remaining 10% are usually optional or easy to sub.`;
+    if (staples.length > 0 && currentEighty > 0) {
+      nearEl.innerHTML = `You have at least 80% of the ingredients necessary to make <strong>${colorDigits(currentEighty)}</strong> recipes — the remaining 20% are usually optional or easy to sub.`;
       nearEl.style.display = '';
     } else if (staples.length === 0) {
       nearEl.innerHTML = `Add your kitchen staples to discover <strong>${RECIPES.length.toLocaleString()} recipes</strong>`;
@@ -2898,15 +2898,15 @@ function updatePantryPower() {
   const visual = staples.length === 0 ? 0 : Math.max(1.5, pctRounded);
   if (fillEl) fillEl.style.width = visual + '%';
   if (pctEl) {
-    pctEl.textContent = `${currentNinety.toLocaleString()} of ${total.toLocaleString()} recipes`;
+    pctEl.textContent = `${currentEighty.toLocaleString()} of ${total.toLocaleString()} recipes`;
   }
   // Projection line
   const projEl = document.getElementById('ppProjection');
   if (projEl) {
     if (staples.length > 0 && topMissing.length > 0) {
-      const total90 = simReady + simNinety;
-      if (total90 > currentNinety) {
-        projEl.textContent = `Adding ${topMissing.length} more staples would enable you to make an additional ${(total90 - currentNinety).toLocaleString()} recipes!`;
+      const total80 = simReady + simNinety + simEighty;
+      if (total80 > currentEighty) {
+        projEl.textContent = `Adding ${topMissing.length} more staples would enable you to make an additional ${(total80 - currentEighty).toLocaleString()} recipes!`;
         projEl.style.display = '';
       } else {
         projEl.style.display = 'none';
