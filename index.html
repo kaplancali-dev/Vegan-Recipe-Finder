@@ -801,7 +801,10 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
 .cm-group-header:first-child{border-top:none;margin-top:0}
 .cm-group-label{font-size:0.82rem;font-weight:700;color:#2d7a4f}
 .cm-group-count{font-size:0.74rem;color:#8b9a92}
-.cm-r-card{background:#ffffff;border:1px solid #f3ede3;border-radius:12px;padding:13px 15px;margin-bottom:8px;animation:fadeUp .25s ease forwards}
+.cm-card-grid{display:grid;grid-template-columns:1fr;gap:10px}
+@media(min-width:900px){.cm-card-grid{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:600px) and (max-width:899px){.cm-card-grid{grid-template-columns:repeat(2,1fr)}}
+.cm-r-card{background:#ffffff;border:1px solid #f3ede3;border-radius:12px;padding:13px 15px;animation:fadeUp .25s ease forwards}
 .cm-r-card.g0{border-left:4px solid #38a169}
 .cm-r-card.g1{border-left:4px solid #d69e2e}
 .cm-r-card.g2{border-left:4px solid #805ad5}
@@ -4876,7 +4879,7 @@ function cmRenderGroup(recipes, matchGroup) {
       <span style="font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:${meta.color}">${meta.label}</span>
       <span style="font-size:0.72rem;color:#4b7a52">(${subset.length})</span>
     </div>`;
-    html += subset.map(r => cmCard(r, matchGroup)).join('');
+    html += `<div class="cm-card-grid">` + subset.map(r => cmCard(r, matchGroup)).join('') + `</div>`;
   });
   return html;
 }
