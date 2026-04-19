@@ -2791,8 +2791,8 @@ function computePantryPower() {
     return { ready: 0, oneAway: 0, total: 0, pct: 0 };
   }
   const allIngs = (typeof expandWithAliases === 'function')
-    ? expandWithAliases([...staples])
-    : staples.map(s => (s || '').toLowerCase());
+    ? expandWithAliases([...staples, ...ingredients])
+    : [...staples, ...ingredients].map(s => (s || '').toLowerCase());
   let ready = 0, oneAway = 0, currentNinety = 0, currentEighty = 0, canMakeNow = 0;
   for (const r of RECIPES) {
     if (!r.ing || !r.ing.length) continue;
