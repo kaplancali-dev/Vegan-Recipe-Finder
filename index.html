@@ -4447,12 +4447,27 @@ let cmMaxTime = 0;
 let cmAllergies = new Set();
 let cmNameFilter = '';
 let cmTypeFilter = 'all';
-let cmCatFilter = '';
+let cmSelectedCats = [];
 
 function pickCMCat(btn, val) {
-  cmCatFilter = val;
-  document.querySelectorAll('#cmCatGrid .fc').forEach(b => b.classList.remove('on'));
-  btn.classList.add('on');
+  if (val === '') {
+    // "All" — clear selections
+    cmSelectedCats = [];
+    document.querySelectorAll('#cmCatGrid .fc').forEach(b => b.classList.remove('on'));
+    btn.classList.add('on');
+  } else {
+    // Toggle this category
+    document.querySelector('#cmCatGrid .fc:first-child').classList.remove('on'); // remove "All"
+    const cats = val.split('|');
+    if (cats.some(c => cmSelectedCats.includes(c))) {
+      cmSelectedCats = cmSelectedCats.filter(c => !cats.includes(c));
+      btn.classList.remove('on');
+      if (!cmSelectedCats.length) document.querySelector('#cmCatGrid .fc:first-child').classList.add('on');
+    } else {
+      cmSelectedCats.push(...cats);
+      btn.classList.add('on');
+    }
+  }
   if (cmSelected.size) runCanMake();
 }
 
@@ -4692,7 +4707,7 @@ function runCanMake() {
     if (cmMaxTime && r.time && r.time > cmMaxTime) return false;
     if (cmAllergies.size && [...cmAllergies].some(key => recipeHasAllergen(r, key))) return false;
     if (cmNameFilter && !r.title.toLowerCase().includes(cmNameFilter)) return false;
-    if (cmCatFilter && !cmCatFilter.split('|').some(c => r.cats && r.cats.includes(c))) return false;
+    if (cmSelectedCats.length && !cmSelectedCats.some(c => r.cats && r.cats.includes(c))) return false;
     return true;
   });
 
