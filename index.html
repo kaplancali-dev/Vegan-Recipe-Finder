@@ -2803,7 +2803,7 @@ function computePantryPower() {
     }
     const missing = rIngs.length - haveCount;
     const matchPct = haveCount / rIngs.length;
-    if (missing <= 2) canMakeNow++;
+    if (missing <= 2 && matchPct >= 0.65) canMakeNow++;
     if (missing === 0) { ready++; currentNinety++; currentEighty++; }
     else if (matchPct >= 0.9) { currentNinety++; currentEighty++; if (missing === 1) oneAway++; }
     else if (matchPct >= 0.8) { currentEighty++; if (missing === 1) oneAway++; }
@@ -4374,9 +4374,10 @@ function runCanMake() {
     const haveNames = r.ing.filter(ing => haveList.includes(norm(ing)));
     const needNames = r.ing.filter(ing => needList.includes(norm(ing)));
     const missing = needList.length;
-    return { ...r, haveNames, needNames, missing };
+    const matchPct = rIngs.length ? haveList.length / rIngs.length : 0;
+    return { ...r, haveNames, needNames, missing, matchPct };
   }).filter(r => {
-    if (r.missing > 2) return false;
+    if (r.missing > 2 || r.matchPct < 0.65) return false;
     if (cmTypeFilter !== 'all' && cmMealType(r) !== cmTypeFilter) return false;
     if (cmMaxTime && r.time && r.time > cmMaxTime) return false;
     if (cmAllergies.size && [...cmAllergies].some(key => recipeHasAllergen(r, key))) return false;
