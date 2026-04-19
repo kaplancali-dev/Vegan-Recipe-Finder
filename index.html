@@ -860,6 +860,7 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
 .obd-dot{width:8px;height:8px;border-radius:50%;background:#d4d4d4;transition:background .2s}
 .obd-dot.on{background:#1e5a3a}
 </style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 </head>
 <body>
 <!-- ── ONBOARDING WALKTHROUGH ──────────────────────────────────────────── -->
@@ -1541,44 +1542,57 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
   <!-- ══════ FAVORITES PANEL ══════ -->
   <div class="panel" id="panel-favorites">
     <div class="card" style="margin-bottom:12px;background:#f4f9f1;border:1px solid #d4e6d8;">
-      <div style="font-size:1.1rem;font-weight:700;color:#1e5a3a;margin-bottom:14px;">📲 Sync Between Devices</div>
+      <div style="font-size:1.1rem;font-weight:700;color:#1e5a3a;margin-bottom:14px;">☁️ Cloud Sync</div>
 
-      <!-- HOW IT WORKS -->
-      <div style="font-size:.85rem;color:#2d4a35;line-height:1.7;margin-bottom:16px;">
-        <div style="font-weight:700;color:#1e5a3a;margin-bottom:8px;">Laptop → iPhone:</div>
-        <div style="padding-left:4px;">1. On your <strong>laptop</strong>, tap <strong>Send My Data</strong> below, then <strong>Copy Code</strong></div>
-        <div style="padding-left:4px;">2. Send the code to yourself (paste it into <strong>Notes</strong>, text it to yourself, or email it)</div>
-        <div style="padding-left:4px;">3. On your <strong>iPhone</strong>, open that note/text and <strong>copy</strong> the code</div>
-        <div style="padding-left:4px;">4. Open HARVEST → Favorites → tap <strong>Receive Data</strong> → paste the code → tap <strong>Apply</strong></div>
-        <div style="font-weight:700;color:#1e5a3a;margin-top:12px;margin-bottom:8px;">iPhone → Laptop:</div>
-        <div style="padding-left:4px;">1. On your <strong>iPhone</strong>, tap <strong>Send My Data</strong> below, then <strong>Copy Code</strong></div>
-        <div style="padding-left:4px;">2. Send the code to yourself (paste it into <strong>Notes</strong>, text it to yourself, or email it)</div>
-        <div style="padding-left:4px;">3. On your <strong>laptop</strong>, open that note/text and <strong>copy</strong> the code</div>
-        <div style="padding-left:4px;">4. Open HARVEST → Favorites → tap <strong>Receive Data</strong> → paste the code → tap <strong>Apply</strong></div>
+      <!-- LOGGED OUT STATE -->
+      <div id="syncLoggedOut">
+        <div style="font-size:.88rem;color:#2d4a35;line-height:1.6;margin-bottom:14px;">
+          Sign in to automatically sync your favorites, ingredients, staples, meal plan, and shopping list across all your devices. No password needed — we'll email you a magic link.
+        </div>
+        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+          <input type="email" id="syncEmail" placeholder="your@email.com" style="flex:1;min-width:180px;padding:10px 14px;border:1px solid #d4e6d8;border-radius:10px;font-size:.95rem;background:#fff;color:#1a2e24;box-sizing:border-box;">
+          <button onclick="cloudSignIn()" id="syncSignInBtn" style="background:#166534;color:#fff;border:none;border-radius:10px;padding:10px 18px;font-size:.95rem;cursor:pointer;font-weight:700;white-space:nowrap;">Sign In</button>
+        </div>
+        <div id="syncMagicMsg" style="display:none;margin-top:10px;padding:10px 14px;background:#e8f3ec;border-radius:8px;font-size:.85rem;color:#1e5a3a;line-height:1.5;"></div>
       </div>
 
-      <!-- Buttons -->
-      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;">
-        <button onclick="generateSyncCode()" style="background:#166534;color:#fff;border:none;border-radius:10px;padding:10px 18px;font-size:.95rem;cursor:pointer;font-weight:700;">📤 Send My Data</button>
-        <button onclick="document.getElementById('syncImportWrap').style.display=document.getElementById('syncImportWrap').style.display==='none'?'block':'none'" style="background:#1e3a5f;color:#fff;border:none;border-radius:10px;padding:10px 18px;font-size:.95rem;cursor:pointer;font-weight:700;">📥 Receive Data</button>
-      </div>
-
-      <!-- Generated code display -->
-      <div id="syncCodeWrap" style="display:none;margin-bottom:10px;">
-        <div style="font-size:.82rem;color:#2d4a35;margin-bottom:5px;">Copy this code and paste it on your other device:</div>
-        <textarea id="syncCodeOut" readonly style="width:100%;height:80px;background:#e8f3ec;color:#1a2e24;border:1px solid #d4e6d8;border-radius:8px;padding:8px;font-size:.72rem;font-family:monospace;resize:none;box-sizing:border-box"></textarea>
-        <div style="display:flex;gap:8px;margin-top:6px;">
-          <button onclick="copySyncCode()" id="syncCopyBtn" style="background:#2d7a4f;color:#fff;border:none;border-radius:8px;padding:8px 16px;font-size:.9rem;cursor:pointer;font-weight:600;">📋 Copy Code</button>
-          <button onclick="document.getElementById('syncCodeWrap').style.display='none'" style="background:#e8e3d8;color:#4a5d52;border:none;border-radius:8px;padding:8px 16px;font-size:.9rem;cursor:pointer;font-weight:600;">✕ Delete Code</button>
+      <!-- LOGGED IN STATE -->
+      <div id="syncLoggedIn" style="display:none;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+          <div style="width:36px;height:36px;border-radius:50%;background:#166534;color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.1rem;font-weight:700;" id="syncAvatar">?</div>
+          <div>
+            <div style="font-size:.9rem;font-weight:600;color:#1e5a3a;" id="syncUserEmail">—</div>
+            <div style="font-size:.78rem;color:#6b8f7b;" id="syncStatus">Synced</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <button onclick="cloudPull()" style="background:#2d7a4f;color:#fff;border:none;border-radius:10px;padding:9px 16px;font-size:.9rem;cursor:pointer;font-weight:600;">⬇ Pull from Cloud</button>
+          <button onclick="cloudPush()" style="background:#1e3a5f;color:#fff;border:none;border-radius:10px;padding:9px 16px;font-size:.9rem;cursor:pointer;font-weight:600;">⬆ Push to Cloud</button>
+          <button onclick="cloudSignOut()" style="background:#e8e3d8;color:#4a5d52;border:none;border-radius:10px;padding:9px 16px;font-size:.9rem;cursor:pointer;font-weight:600;">Sign Out</button>
         </div>
       </div>
 
-      <!-- Import code input -->
-      <div id="syncImportWrap" style="display:none;">
-        <div style="font-size:.82rem;color:#2d4a35;margin-bottom:5px;">Paste the code from your other device:</div>
-        <textarea id="syncCodeIn" style="width:100%;height:80px;background:#e8f3ec;color:#1a2e24;border:1px solid #d4e6d8;border-radius:8px;padding:8px;font-size:.72rem;font-family:monospace;resize:none;box-sizing:border-box" placeholder="Paste sync code here…"></textarea>
-        <button onclick="importSyncCode()" style="margin-top:6px;background:#2d7a4f;color:#fff;border:none;border-radius:8px;padding:8px 16px;font-size:.9rem;cursor:pointer;font-weight:600;">✅ Apply</button>
-      </div>
+      <!-- MANUAL SYNC FALLBACK (collapsed) -->
+      <details style="margin-top:14px;border-top:1px solid #d4e6d8;padding-top:10px;">
+        <summary style="font-size:.82rem;color:#6b8f7b;cursor:pointer;">Manual sync (no account needed)</summary>
+        <div style="margin-top:10px;">
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;">
+            <button onclick="generateSyncCode()" style="background:#166534;color:#fff;border:none;border-radius:10px;padding:10px 18px;font-size:.95rem;cursor:pointer;font-weight:700;">📤 Send My Data</button>
+            <button onclick="document.getElementById('syncImportWrap').style.display=document.getElementById('syncImportWrap').style.display==='none'?'block':'none'" style="background:#1e3a5f;color:#fff;border:none;border-radius:10px;padding:10px 18px;font-size:.95rem;cursor:pointer;font-weight:700;">📥 Receive Data</button>
+          </div>
+          <div id="syncCodeWrap" style="display:none;margin-bottom:10px;">
+            <textarea id="syncCodeOut" readonly style="width:100%;height:80px;background:#e8f3ec;color:#1a2e24;border:1px solid #d4e6d8;border-radius:8px;padding:8px;font-size:.72rem;font-family:monospace;resize:none;box-sizing:border-box"></textarea>
+            <div style="display:flex;gap:8px;margin-top:6px;">
+              <button onclick="copySyncCode()" id="syncCopyBtn" style="background:#2d7a4f;color:#fff;border:none;border-radius:8px;padding:8px 16px;font-size:.9rem;cursor:pointer;font-weight:600;">📋 Copy Code</button>
+              <button onclick="document.getElementById('syncCodeWrap').style.display='none'" style="background:#e8e3d8;color:#4a5d52;border:none;border-radius:8px;padding:8px 16px;font-size:.9rem;cursor:pointer;font-weight:600;">✕ Close</button>
+            </div>
+          </div>
+          <div id="syncImportWrap" style="display:none;">
+            <textarea id="syncCodeIn" style="width:100%;height:80px;background:#e8f3ec;color:#1a2e24;border:1px solid #d4e6d8;border-radius:8px;padding:8px;font-size:.72rem;font-family:monospace;resize:none;box-sizing:border-box" placeholder="Paste sync code here…"></textarea>
+            <button onclick="importSyncCode()" style="margin-top:6px;background:#2d7a4f;color:#fff;border:none;border-radius:8px;padding:8px 16px;font-size:.9rem;cursor:pointer;font-weight:600;">✅ Apply</button>
+          </div>
+        </div>
+      </details>
     </div>
     <div class="card" id="mealPlanCard" style="display:none;margin-bottom:12px;background:#f0f7ed;border:1px solid #c8dfc0;">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
@@ -2734,11 +2748,11 @@ let selectedCats = [];
 let selectedSite = '';
 let maxTime      = 0;
 let nameSearch   = '';
-function saveIngs()    { _lsSet('vrf_ings', ingredients); if (typeof updatePantryPower === 'function') updatePantryPower(); }
-function saveStaples() { _lsSet('vrf_staples', staples); if (typeof updatePantryPower === 'function') updatePantryPower(); }
-function saveFavs()    { _lsSet('vrf_favs', favorites); }
-function saveMealPlan(){ _lsSet('vrf_meal', mealPlan); }
-function saveShop()    { _lsSet('vrf_shop', shopList); }
+function saveIngs()    { _lsSet('vrf_ings', ingredients); if (typeof updatePantryPower === 'function') updatePantryPower(); _autoSync(); }
+function saveStaples() { _lsSet('vrf_staples', staples); if (typeof updatePantryPower === 'function') updatePantryPower(); _autoSync(); }
+function saveFavs()    { _lsSet('vrf_favs', favorites); _autoSync(); }
+function saveMealPlan(){ _lsSet('vrf_meal', mealPlan); _autoSync(); }
+function saveShop()    { _lsSet('vrf_shop', shopList); _autoSync(); }
 
 // ── TABS ──────────────────────────────────────────────────────────────────────
 function showTab(name) {
@@ -3872,9 +3886,190 @@ function clearShop() {
 let instructions = _lsGet('vrf_instr', '{}');
 let _instrCurrentId = null;
 
-function saveInstrData() { _lsSet('vrf_instr', instructions); }
+function saveInstrData() { _lsSet('vrf_instr', instructions); _autoSync(); }
 
-// ── SYNC CODE ─────────────────────────────────────────────────────────────────
+// ── SUPABASE CLOUD SYNC ──────────────────────────────────────────────────────
+const SUPABASE_URL  = 'https://zhncgdbhgkeiybdbzsql.supabase.co';
+const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpobmNnZGJoZ2tlaXliZGJ6c3FsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY2Mjc3MjcsImV4cCI6MjA5MjIwMzcyN30.6kVwmiSaFHWg1Qq1ZWj3HsMXt39GGk77O4Ma4KFim9M';
+
+let _sb = null;
+let _sbUser = null;
+let _syncDebounce = null;
+
+function sbClient() {
+  if (!_sb && typeof supabase !== 'undefined') {
+    _sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
+    // Listen for auth state changes (magic link callback, sign out, etc.)
+    _sb.auth.onAuthStateChange((event, session) => {
+      if (event === 'SIGNED_IN' && session?.user) {
+        _sbUser = session.user;
+        updateSyncUI();
+        cloudPull(); // auto-pull on sign-in
+      } else if (event === 'SIGNED_OUT') {
+        _sbUser = null;
+        updateSyncUI();
+      }
+    });
+    // Check for existing session
+    _sb.auth.getSession().then(({ data: { session } }) => {
+      if (session?.user) {
+        _sbUser = session.user;
+        updateSyncUI();
+      }
+    });
+  }
+  return _sb;
+}
+
+function updateSyncUI() {
+  const loggedOut = document.getElementById('syncLoggedOut');
+  const loggedIn  = document.getElementById('syncLoggedIn');
+  if (!loggedOut || !loggedIn) return;
+  if (_sbUser) {
+    loggedOut.style.display = 'none';
+    loggedIn.style.display  = 'block';
+    const email = _sbUser.email || '';
+    document.getElementById('syncUserEmail').textContent = email;
+    document.getElementById('syncAvatar').textContent = (email[0] || '?').toUpperCase();
+  } else {
+    loggedOut.style.display = 'block';
+    loggedIn.style.display  = 'none';
+  }
+}
+
+async function cloudSignIn() {
+  const sb = sbClient();
+  if (!sb) { showToast('⚠️ Sync service loading…', 2000); return; }
+  const emailEl = document.getElementById('syncEmail');
+  const email = emailEl.value.trim();
+  if (!email || !email.includes('@')) { showToast('Please enter a valid email'); return; }
+  const btn = document.getElementById('syncSignInBtn');
+  btn.textContent = 'Sending…';
+  btn.disabled = true;
+  const { error } = await sb.auth.signInWithOtp({
+    email,
+    options: { emailRedirectTo: window.location.origin + window.location.pathname }
+  });
+  btn.textContent = 'Sign In';
+  btn.disabled = false;
+  if (error) {
+    showToast('❌ ' + error.message, 3000);
+  } else {
+    const msg = document.getElementById('syncMagicMsg');
+    msg.innerHTML = '✅ <strong>Check your email!</strong> We sent a magic link to <strong>' + email + '</strong>. Click it to sign in — you can close this page or keep it open.';
+    msg.style.display = 'block';
+  }
+}
+
+async function cloudSignOut() {
+  const sb = sbClient();
+  if (!sb) return;
+  await sb.auth.signOut();
+  _sbUser = null;
+  updateSyncUI();
+  showToast('Signed out');
+}
+
+function _gatherAllData() {
+  return {
+    vrf_favs:           _lsGet('vrf_favs',           '[]'),
+    vrf_instr:          _lsGet('vrf_instr',          '{}'),
+    vrf_staples:        _lsGet('vrf_staples',        '[]'),
+    vrf_shop:           _lsGet('vrf_shop',           '[]'),
+    vrf_ings:           _lsGet('vrf_ings',           '[]'),
+    vrf_meal:           _lsGet('vrf_meal',           '[]'),
+    vrf_allergies:      _lsGet('vrf_allergies',      '[]'),
+    vrf_custom_recipes: _lsGet('vrf_custom_recipes', '[]'),
+    vrf_onboarded:      _lsGet('vrf_onboarded',      'false'),
+  };
+}
+
+function _applyAllData(data) {
+  if (!data) return;
+  if (data.vrf_favs    !== undefined) { _lsSet('vrf_favs',    data.vrf_favs);    favorites    = data.vrf_favs; }
+  if (data.vrf_instr   !== undefined) { _lsSet('vrf_instr',   data.vrf_instr);   instructions = data.vrf_instr; }
+  if (data.vrf_staples !== undefined) { _lsSet('vrf_staples', data.vrf_staples); staples      = data.vrf_staples; }
+  if (data.vrf_shop    !== undefined) { _lsSet('vrf_shop',    data.vrf_shop);    shopList     = data.vrf_shop; }
+  if (data.vrf_ings    !== undefined) { _lsSet('vrf_ings',    data.vrf_ings);    ingredients  = data.vrf_ings; }
+  if (data.vrf_meal    !== undefined) { _lsSet('vrf_meal',    data.vrf_meal);    mealPlan     = data.vrf_meal; }
+  if (data.vrf_allergies !== undefined) {
+    _lsSet('vrf_allergies', data.vrf_allergies);
+    activeAllergies = new Set(data.vrf_allergies);
+  }
+  if (data.vrf_custom_recipes !== undefined) {
+    _lsSet('vrf_custom_recipes', data.vrf_custom_recipes);
+    // Reload custom recipes into RECIPES array
+    const existingCustomIds = new Set(RECIPES.filter(r => r.id >= 9000).map(r => r.id));
+    data.vrf_custom_recipes.forEach(r => {
+      if (r.id >= 9000 && !existingCustomIds.has(r.id)) {
+        RECIPES.push(r);
+        customRecipeIdCounter = Math.max(customRecipeIdCounter, r.id + 1);
+      }
+    });
+  }
+  // Refresh all UI
+  try { renderFavs(); } catch(e) {}
+  try { renderMealPlan(); } catch(e) {}
+  try { render(); } catch(e) {}
+  try { renderAllIngPanels(); } catch(e) {}
+  try { restoreAllergyUI(); } catch(e) {}
+  try { if (typeof updatePantryPower === 'function') updatePantryPower(); } catch(e) {}
+}
+
+async function cloudPush() {
+  const sb = sbClient();
+  if (!sb || !_sbUser) { showToast('Sign in first to push data'); return; }
+  const statusEl = document.getElementById('syncStatus');
+  if (statusEl) statusEl.textContent = 'Pushing…';
+  const allData = _gatherAllData();
+  const { error } = await sb.from('user_data').upsert({
+    id: _sbUser.id,
+    data: allData,
+  });
+  if (error) {
+    showToast('❌ Push failed: ' + error.message, 3000);
+    if (statusEl) statusEl.textContent = 'Push failed';
+  } else {
+    showToast('☁️ Data pushed to cloud');
+    if (statusEl) statusEl.textContent = 'Synced just now';
+  }
+}
+
+async function cloudPull() {
+  const sb = sbClient();
+  if (!sb || !_sbUser) { showToast('Sign in first to pull data'); return; }
+  const statusEl = document.getElementById('syncStatus');
+  if (statusEl) statusEl.textContent = 'Pulling…';
+  const { data, error } = await sb.from('user_data').select('data').eq('id', _sbUser.id).maybeSingle();
+  if (error) {
+    showToast('❌ Pull failed: ' + error.message, 3000);
+    if (statusEl) statusEl.textContent = 'Pull failed';
+    return;
+  }
+  if (data && data.data) {
+    _applyAllData(data.data);
+    showToast('☁️ Data pulled from cloud');
+    if (statusEl) statusEl.textContent = 'Synced just now';
+  } else {
+    // No data in cloud yet — push current local data up
+    showToast('No cloud data found — uploading yours now');
+    await cloudPush();
+  }
+}
+
+// Debounced auto-push: called after any save when logged in
+function _autoSync() {
+  if (!_sbUser) return;
+  clearTimeout(_syncDebounce);
+  _syncDebounce = setTimeout(() => {
+    cloudPush().catch(() => {});
+  }, 3000); // wait 3s after last change, then push
+}
+
+// Initialize Supabase client on page load
+try { sbClient(); } catch(e) { console.warn('Supabase init deferred:', e); }
+
+// ── SYNC CODE (manual fallback) ───────────────────────────────────────────────
 function generateSyncCode() {
   const data = {
     v: 1,
@@ -4224,6 +4419,7 @@ function toggleAllergy(btn, key) {
     btn.classList.add('on');
   }
   _lsSet('vrf_allergies', Array.from(activeAllergies));
+  _autoSync();
   findRecipes();
 }
 
@@ -4310,10 +4506,11 @@ function saveCustomRecipe() {
   
   RECIPES.push(recipe);
   
-  // Save to localStorage
+  // Save to localStorage + cloud
   const custom = _lsGet('vrf_custom_recipes', '[]');
   custom.push(recipe);
   _lsSet('vrf_custom_recipes', custom);
+  _autoSync();
   
   if (notes) {
     instructions[recipe.id] = notes;
@@ -5045,5 +5242,4 @@ if ('serviceWorker' in navigator) {
 }
 </script>
 </body>
-</script>
 </html>
