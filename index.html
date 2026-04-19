@@ -2734,7 +2734,7 @@ let selectedCats = [];
 let selectedSite = '';
 let maxTime      = 0;
 let nameSearch   = '';
-function saveIngs()    { _lsSet('vrf_ings', ingredients); }
+function saveIngs()    { _lsSet('vrf_ings', ingredients); if (typeof updatePantryPower === 'function') updatePantryPower(); }
 function saveStaples() { _lsSet('vrf_staples', staples); if (typeof updatePantryPower === 'function') updatePantryPower(); }
 function saveFavs()    { _lsSet('vrf_favs', favorites); }
 function saveMealPlan(){ _lsSet('vrf_meal', mealPlan); }
