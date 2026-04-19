@@ -2521,6 +2521,7 @@ function showTab(name) {
   if (name === 'canmake')   initCanMake();
   if (name !== 'search' && name !== 'canmake') window.scrollTo({ top: 0, behavior: 'smooth' });
   try { localStorage.setItem('vrf_active_tab', name); } catch(e){}
+  if (typeof updatePantryPower === 'function') updatePantryPower();
 }
 
 // ── HOME PANEL ────────────────────────────────────────────────────────────────
@@ -2876,14 +2877,21 @@ function updatePantryPower() {
   const ctaLab = document.getElementById('ppCtaLabel');
   const hintEl = document.getElementById('ppHint');
 
-  // The big number = recipes you can likely cook (80%+ ingredients on hand)
-  if (numEl) animateNumber(numEl, currentEighty);
-  if (unitEl) unitEl.textContent = currentEighty === 1 ? 'recipe you can make' : 'recipes you can make';
+  // Determine which tab is active to show the right number
+  const activeTab = localStorage.getItem('vrf_active_tab') || 'home';
+  const onCanMake = activeTab === 'canmake';
+  const bigNum = onCanMake ? canMakeNow : currentEighty;
 
-  // Sub-line — explain the 80% threshold simply
+  if (numEl) animateNumber(numEl, bigNum);
+  if (unitEl) unitEl.textContent = bigNum === 1 ? 'recipe you can make' : 'recipes you can make';
+
   if (nearEl) {
-    if (staples.length > 0 && currentEighty > 0) {
-      nearEl.innerHTML = `You have at least 80% of the ingredients necessary to make <strong>${colorDigits(currentEighty)}</strong> recipes — the remaining 20% are usually optional or easy to sub.`;
+    if (staples.length > 0 && bigNum > 0) {
+      if (onCanMake) {
+        nearEl.innerHTML = `You have at least 90% of the ingredients necessary to make <strong>${colorDigits(canMakeNow)}</strong> recipes — no more than 2 ingredients away.`;
+      } else {
+        nearEl.innerHTML = `You have at least 80% of the ingredients necessary to make <strong>${colorDigits(currentEighty)}</strong> recipes — the remaining 20% are usually optional or easy to sub.`;
+      }
       nearEl.style.display = '';
     } else if (staples.length === 0) {
       nearEl.innerHTML = `Add your kitchen staples to discover <strong>${RECIPES.length.toLocaleString()} recipes</strong>`;
@@ -2894,11 +2902,14 @@ function updatePantryPower() {
     }
   }
 
-  // Can Make Right Now line (≤2 missing — matches the Can Make tab)
+  // Show the other count as a secondary line
   const cmEl = document.getElementById('ppCanMake');
   if (cmEl) {
-    if (staples.length > 0 && canMakeNow > 0) {
+    if (staples.length > 0 && canMakeNow > 0 && !onCanMake) {
       cmEl.innerHTML = `${colorDigits(canMakeNow)} recipe${canMakeNow !== 1 ? 's' : ''} you can make right now — no more than 2 ingredients away.`;
+      cmEl.style.display = '';
+    } else if (staples.length > 0 && currentEighty > 0 && onCanMake) {
+      cmEl.innerHTML = `${colorDigits(currentEighty)} recipe${currentEighty !== 1 ? 's' : ''} at 80% match on Browse All.`;
       cmEl.style.display = '';
     } else {
       cmEl.style.display = 'none';
