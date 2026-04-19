@@ -1,5 +1,7 @@
 // 🌿 HARVEST — Service Worker
-const VERSION = "vrf-20260419p";
+// VERSION is set automatically from a hash passed via the registration URL query string.
+// Fallback to a static version if no hash is provided.
+const VERSION = new URL(self.location).searchParams.get('v') || "vrf-auto";
 
 self.addEventListener("install", e => {
   self.skipWaiting();

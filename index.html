@@ -1134,6 +1134,11 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
     </div>
   </div>
 
+  <!-- OFFLINE INDICATOR -->
+  <div id="offlineBanner" style="display:none;background:#fef3c7;color:#92400e;text-align:center;padding:6px 12px;font-size:0.82rem;font-weight:600;border-radius:8px;margin:0 12px 8px">
+    📡 You're offline — your data is safe, sync will resume when you reconnect
+  </div>
+
   <!-- TABS -->
   <div class="tab-bar">
     <button class="tab-btn on" onclick="showTab('home')">🏠 Home</button>
@@ -1570,7 +1575,10 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
               <div style="font-size:.78rem;color:#6b8f7b;" id="syncStatus">Synced</div>
             </div>
           </div>
-          <button onclick="cloudSignOut()" style="background:none;border:1px solid #d4e6d8;border-radius:8px;padding:6px 14px;font-size:.8rem;color:#6b8f7b;cursor:pointer;">Sign Out</button>
+          <div style="display:flex;gap:6px;">
+            <button onclick="exportMyData()" style="background:none;border:1px solid #d4e6d8;border-radius:8px;padding:6px 10px;font-size:.78rem;color:#6b8f7b;cursor:pointer;" title="Download a backup of your data">💾 Backup</button>
+            <button onclick="cloudSignOut()" style="background:none;border:1px solid #d4e6d8;border-radius:8px;padding:6px 14px;font-size:.8rem;color:#6b8f7b;cursor:pointer;">Sign Out</button>
+          </div>
         </div>
       </div>
 
@@ -3967,6 +3975,22 @@ async function cloudSignOut() {
   showToast('Signed out');
 }
 
+function exportMyData() {
+  const data = _gatherAllData();
+  data._exported_at = new Date().toISOString();
+  data._email = _sbUser ? _sbUser.email : 'not signed in';
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `harvest-backup-${new Date().toISOString().slice(0,10)}.json`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  showToast('Backup downloaded ✅');
+}
+
 function _gatherAllData() {
   return {
     vrf_favs:           _lsGet('vrf_favs',           '[]'),
@@ -4071,6 +4095,59 @@ function _autoSync() {
 
 // Initialize Supabase client on page load
 try { sbClient(); } catch(e) { console.warn('Supabase init deferred:', e); }
+
+// ── ERROR MONITORING ─────────────────────────────────────────────────────────
+// Logs uncaught JS errors to Supabase so you can spot issues in the wild.
+// Table SQL (run once in Supabase SQL Editor):
+//   CREATE TABLE public.app_errors (
+//     id bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+//     message text, source text, line int, col int, stack text,
+//     user_agent text, url text, user_id uuid,
+//     created_at timestamptz DEFAULT now()
+//   );
+//   ALTER TABLE public.app_errors ENABLE ROW LEVEL SECURITY;
+//   CREATE POLICY "Anyone can insert errors" ON public.app_errors FOR INSERT WITH CHECK (true);
+//   CREATE POLICY "No public reads" ON public.app_errors FOR SELECT USING (false);
+let _errCount = 0;
+window.onerror = function(msg, source, line, col, err) {
+  if (_errCount++ > 5) return; // max 5 per session to avoid spam
+  try {
+    const sb = sbClient();
+    sb.from('app_errors').insert({
+      message: String(msg).slice(0, 500),
+      source: String(source || '').split('/').pop(),
+      line: line || 0, col: col || 0,
+      stack: (err && err.stack) ? err.stack.slice(0, 1000) : '',
+      user_agent: navigator.userAgent.slice(0, 200),
+      url: location.pathname,
+      user_id: _sbUser ? _sbUser.id : null
+    }).then(() => {});
+  } catch(e) {}
+};
+// ── OFFLINE INDICATOR ────────────────────────────────────────────────────────
+function _updateOnlineStatus() {
+  const banner = document.getElementById('offlineBanner');
+  if (banner) banner.style.display = navigator.onLine ? 'none' : 'block';
+}
+window.addEventListener('online', _updateOnlineStatus);
+window.addEventListener('offline', _updateOnlineStatus);
+_updateOnlineStatus();
+
+window.addEventListener('unhandledrejection', function(ev) {
+  if (_errCount++ > 5) return;
+  try {
+    const reason = ev.reason ? String(ev.reason).slice(0, 500) : 'unhandled promise rejection';
+    const sb = sbClient();
+    sb.from('app_errors').insert({
+      message: reason,
+      source: 'promise', line: 0, col: 0,
+      stack: (ev.reason && ev.reason.stack) ? ev.reason.stack.slice(0, 1000) : '',
+      user_agent: navigator.userAgent.slice(0, 200),
+      url: location.pathname,
+      user_id: _sbUser ? _sbUser.id : null
+    }).then(() => {});
+  } catch(e) {}
+});
 
 // ── SYNC CODE (manual fallback) ───────────────────────────────────────────────
 function generateSyncCode() {
@@ -5228,20 +5305,31 @@ restoreAllergyUI();
 updateFindBtn();
 findRecipes();
 
-// ── SERVICE WORKER (auto-update) ─────────────────────────────────────────────
+// ── SERVICE WORKER (auto-update with content hash) ──────────────────────────
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('./sw.js', { updateViaCache: 'none' }).then(reg => {
-    // Check for updates every 60 seconds
-    setInterval(() => reg.update(), 60000);
-    reg.addEventListener('updatefound', () => {
-      const newWorker = reg.installing;
-      newWorker.addEventListener('statechange', () => {
-        if (newWorker.state === 'activated' && navigator.serviceWorker.controller) {
-          window.location.reload();
-        }
+  // Generate a short hash from the page content so the SW version auto-updates
+  // whenever index.html changes — no manual version bumps needed.
+  (async () => {
+    try {
+      const html = document.documentElement.outerHTML;
+      const buf = await crypto.subtle.digest('SHA-1', new TextEncoder().encode(html));
+      const hash = Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('').slice(0,12);
+      const swUrl = `./sw.js?v=vrf-${hash}`;
+      const reg = await navigator.serviceWorker.register(swUrl, { updateViaCache: 'none' });
+      setInterval(() => reg.update(), 60000);
+      reg.addEventListener('updatefound', () => {
+        const newWorker = reg.installing;
+        newWorker.addEventListener('statechange', () => {
+          if (newWorker.state === 'activated' && navigator.serviceWorker.controller) {
+            window.location.reload();
+          }
+        });
       });
-    });
-  });
+    } catch(e) {
+      // Fallback: register without hash
+      navigator.serviceWorker.register('./sw.js', { updateViaCache: 'none' });
+    }
+  })();
 }
 </script>
 </body>
