@@ -2888,9 +2888,9 @@ function updatePantryPower() {
   if (nearEl) {
     if (staples.length > 0 && bigNum > 0) {
       if (onCanMake) {
-        nearEl.innerHTML = `You have at least 90% of the ingredients necessary to make <strong>${colorDigits(canMakeNow)}</strong> recipes — no more than 2 ingredients away.`;
+        nearEl.innerHTML = `You have at least 90% of the ingredients necessary to make <strong>${canMakeNow}</strong> recipes — no more than 2 ingredients away.`;
       } else {
-        nearEl.innerHTML = `You have at least 80% of the ingredients necessary to make <strong>${colorDigits(currentEighty)}</strong> recipes — the remaining 20% are usually optional or easy to sub.`;
+        nearEl.innerHTML = `You have at least 80% of the ingredients necessary to make <strong>${currentEighty}</strong> recipes — the remaining 20% are usually optional or easy to sub.`;
       }
       nearEl.style.display = '';
     } else if (staples.length === 0) {
