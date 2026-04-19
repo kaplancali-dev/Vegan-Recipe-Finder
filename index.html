@@ -2673,6 +2673,43 @@ function showToast(msg, duration = 2000) {
 }
 let ingredients = _lsGet('vrf_ings', '[]');
 let staples     = _lsGet('vrf_staples', '[]');
+
+// Self-healing image handler: tries fallback strategies before showing placeholder
+function handleImgError(img) {
+  const src = img.getAttribute('src') || '';
+  const tried = parseInt(img.dataset.retries || '0');
+
+  // Strategy 1: For Love and Lemons, try www ↔ cdn swap
+  if (tried === 0 && src.includes('loveandlemons.com')) {
+    img.dataset.retries = '1';
+    if (src.includes('cdn.loveandlemons.com')) {
+      img.src = src.replace('cdn.loveandlemons.com', 'www.loveandlemons.com').replace('/opengraph/', '/');
+    } else {
+      img.src = src.replace('www.loveandlemons.com', 'cdn.loveandlemons.com').replace('/uploads/', '/uploads/opengraph/');
+    }
+    return;
+  }
+
+  // Strategy 2: Try loading via Google's cache proxy (strips referrer issues)
+  if (tried <= 1 && !src.startsWith('https://images.weserv.nl/')) {
+    img.dataset.retries = '2';
+    img.src = 'https://images.weserv.nl/?url=' + encodeURIComponent(src.replace('https://images.weserv.nl/?url=', '')) + '&default=1';
+    return;
+  }
+
+  // Final fallback: show green leaf placeholder
+  img.onerror = null;
+  img.style.display = 'none';
+  const wrap = img.parentElement;
+  if (wrap) {
+    wrap.style.background = 'linear-gradient(135deg, #e8f3ec, #d4e6d8)';
+    wrap.style.display = 'flex';
+    wrap.style.alignItems = 'center';
+    wrap.style.justifyContent = 'center';
+    wrap.style.minHeight = '140px';
+    wrap.innerHTML = '<span style="color:#4b7a52;font-size:2.5rem">🌿</span>';
+  }
+}
 const GF_SWAPS = {
   'soy sauce':'tamari','flour tortillas':'corn tortillas','noodles':'rice noodles',
   'ramen noodles':'rice ramen noodles','pasta':'gluten-free pasta','elbow macaroni':'gluten-free pasta',
@@ -2789,7 +2826,7 @@ function renderHomeFeatured() {
   const shuffled = [...withImg].sort(() => Math.random() - 0.5).slice(0, 6);
   el.innerHTML = shuffled.map(r => `
     <div class="feat-card" onclick="openDetail(${r.id})">
-      <div class="feat-hero"><img loading="lazy" src="${r.img}" alt="" onerror="this.parentElement.style.display='none'"></div>
+      <div class="feat-hero"><img loading="lazy" referrerpolicy="no-referrer" src="${r.img}" alt="" onerror="handleImgError(this)"></div>
       <div class="feat-body">
         <div class="feat-title">${r.title}</div>
         <div class="feat-meta">
@@ -3507,7 +3544,7 @@ function recipeCard(r) {
   const needChips = needShow.map(i => renderIngChip(i, 'c-need')).join('') + moreNeed;
   const swapNote = '';
 
-  const hero = (SHOW_HERO && r.img) ? `<div class="hero-wrap"><img loading="lazy" decoding="async" src="${r.img}" alt="" onerror="this.onerror=null;this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#e8f3ec,#d4e6d8)';this.parentElement.style.display='flex';this.parentElement.style.alignItems='center';this.parentElement.style.justifyContent='center';this.parentElement.style.minHeight='140px';this.parentElement.innerHTML='<span style=\\'color:#4b7a52;font-size:2.5rem\\'>🌿</span>';"></div>` : '';
+  const hero = (SHOW_HERO && r.img) ? `<div class="hero-wrap"><img loading="lazy" decoding="async" referrerpolicy="no-referrer" src="${r.img}" alt="" onerror="handleImgError(this)"></div>` : '';
   const heroClass = (SHOW_HERO && r.img) ? ' has-hero' : '';
   return `<div class="r-card ${cls}${heroClass}" onclick="openDetail(${r.id})" style="cursor:pointer">
   ${hero}
