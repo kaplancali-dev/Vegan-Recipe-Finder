@@ -838,9 +838,149 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
   .r-card.has-hero .hero-wrap::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,transparent 55%,rgba(10,26,19,.85))}
   .r-card.has-hero .card-body{padding:14px 14px 12px}
 
+/* ── ONBOARDING WALKTHROUGH ─────────────────────────────────────────────── */
+.obd-overlay{position:fixed;inset:0;z-index:10000;background:rgba(10,26,19,.92);display:flex;align-items:center;justify-content:center;padding:16px;opacity:0;transition:opacity .3s}
+.obd-overlay.show{opacity:1}
+.obd-card{background:#faf7f2;border-radius:18px;max-width:460px;width:100%;max-height:90vh;overflow-y:auto;padding:28px 24px;text-align:center;box-shadow:0 8px 40px rgba(0,0,0,.4)}
+.obd-step{display:none}
+.obd-step.active{display:block}
+.obd-title{font-family:Georgia,serif;font-size:1.5rem;color:#1e5a3a;margin-bottom:6px}
+.obd-sub{font-size:.92rem;color:#4a5d52;line-height:1.5;margin-bottom:18px}
+.obd-cat-label{font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#2d7a4f;margin:12px 0 6px;text-align:left}
+.obd-chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:4px}
+.obd-chip{display:inline-flex;align-items:center;background:#fff;border:1.5px solid #e8e3d8;border-radius:99px;padding:6px 14px;font-size:.85rem;color:#2d7a4f;cursor:pointer;transition:all .12s;user-select:none}
+.obd-chip.on{background:#1e5a3a;color:#e8f3ec;border-color:#1e5a3a}
+.obd-chip.allergy-on{background:#7f1d1d;color:#fecaca;border-color:#991b1b}
+.obd-btn{display:inline-block;padding:13px 32px;border:none;border-radius:12px;font-size:1rem;font-weight:700;cursor:pointer;transition:all .15s;margin-top:16px}
+.obd-btn-primary{background:#1e5a3a;color:#e8f3ec}
+.obd-btn-primary:hover{background:#276a44}
+.obd-btn-skip{background:none;color:#4a5d52;font-size:.85rem;border:none;cursor:pointer;margin-top:10px;text-decoration:underline}
+.obd-counter{font-family:Georgia,serif;font-size:2.5rem;color:#1e5a3a;font-weight:700;margin:12px 0 4px}
+.obd-progress{display:flex;justify-content:center;gap:8px;margin-bottom:16px}
+.obd-dot{width:8px;height:8px;border-radius:50%;background:#d4d4d4;transition:background .2s}
+.obd-dot.on{background:#1e5a3a}
 </style>
 </head>
 <body>
+<!-- ── ONBOARDING WALKTHROUGH ──────────────────────────────────────────── -->
+<div class="obd-overlay" id="obdOverlay">
+  <div class="obd-card">
+    <div class="obd-progress" id="obdProgress">
+      <span class="obd-dot on"></span><span class="obd-dot"></span><span class="obd-dot"></span><span class="obd-dot"></span>
+    </div>
+
+    <!-- STEP 1: Welcome -->
+    <div class="obd-step active" id="obdStep1">
+      <div style="font-size:2.5rem;margin-bottom:8px">🌿</div>
+      <div class="obd-title">Welcome to HARVEST</div>
+      <div class="obd-sub">Tell us what's in your kitchen and we'll match you to plant-based recipes you can make right now.<br><br>This takes about 60 seconds.</div>
+      <button class="obd-btn obd-btn-primary" onclick="obdGo(2)">Let's go</button><br>
+      <button class="obd-btn-skip" onclick="obdSkip()">Skip — I'll explore on my own</button>
+    </div>
+
+    <!-- STEP 2: Staples -->
+    <div class="obd-step" id="obdStep2">
+      <div class="obd-title">What's always in your kitchen?</div>
+      <div class="obd-sub">Tap everything you usually have on hand. Don't overthink it — you can change these anytime.</div>
+      <div id="obdStaples">
+        <div class="obd-cat-label">🫘 Proteins</div>
+        <div class="obd-chips" data-cat="protein">
+          <span class="obd-chip" onclick="obdToggle(this)">chickpeas</span>
+          <span class="obd-chip" onclick="obdToggle(this)">black beans</span>
+          <span class="obd-chip" onclick="obdToggle(this)">lentils</span>
+          <span class="obd-chip" onclick="obdToggle(this)">tofu</span>
+          <span class="obd-chip" onclick="obdToggle(this)">tempeh</span>
+          <span class="obd-chip" onclick="obdToggle(this)">cashews</span>
+          <span class="obd-chip" onclick="obdToggle(this)">chia seeds</span>
+        </div>
+        <div class="obd-cat-label">🌾 Grains & Starches</div>
+        <div class="obd-chips" data-cat="grains">
+          <span class="obd-chip" onclick="obdToggle(this)">pasta (any)</span>
+          <span class="obd-chip" onclick="obdToggle(this)">rice (any)</span>
+          <span class="obd-chip" onclick="obdToggle(this)">quinoa</span>
+          <span class="obd-chip" onclick="obdToggle(this)">oats</span>
+          <span class="obd-chip" onclick="obdToggle(this)">potatoes</span>
+          <span class="obd-chip" onclick="obdToggle(this)">sweet potatoes</span>
+          <span class="obd-chip" onclick="obdToggle(this)">bread</span>
+        </div>
+        <div class="obd-cat-label">🥦 Vegetables</div>
+        <div class="obd-chips" data-cat="veg">
+          <span class="obd-chip" onclick="obdToggle(this)">garlic</span>
+          <span class="obd-chip" onclick="obdToggle(this)">onions</span>
+          <span class="obd-chip" onclick="obdToggle(this)">carrots</span>
+          <span class="obd-chip" onclick="obdToggle(this)">broccoli</span>
+          <span class="obd-chip" onclick="obdToggle(this)">spinach</span>
+          <span class="obd-chip" onclick="obdToggle(this)">tomatoes</span>
+          <span class="obd-chip" onclick="obdToggle(this)">bell peppers</span>
+          <span class="obd-chip" onclick="obdToggle(this)">mushrooms (any)</span>
+        </div>
+        <div class="obd-cat-label">🫙 Pantry Essentials</div>
+        <div class="obd-chips" data-cat="pantry">
+          <span class="obd-chip" onclick="obdToggle(this)">olive oil</span>
+          <span class="obd-chip" onclick="obdToggle(this)">any cooking oil</span>
+          <span class="obd-chip" onclick="obdToggle(this)">soy sauce / tamari</span>
+          <span class="obd-chip" onclick="obdToggle(this)">vegetable broth</span>
+          <span class="obd-chip" onclick="obdToggle(this)">coconut milk</span>
+          <span class="obd-chip" onclick="obdToggle(this)">maple syrup</span>
+          <span class="obd-chip" onclick="obdToggle(this)">canned tomatoes (any)</span>
+          <span class="obd-chip" onclick="obdToggle(this)">nutritional yeast</span>
+          <span class="obd-chip" onclick="obdToggle(this)">apple cider vinegar</span>
+          <span class="obd-chip" onclick="obdToggle(this)">tomato paste</span>
+        </div>
+        <div class="obd-cat-label">🌿 Spices & Herbs</div>
+        <div class="obd-chips" data-cat="spice">
+          <span class="obd-chip" onclick="obdToggle(this)">sea salt</span>
+          <span class="obd-chip" onclick="obdToggle(this)">black pepper</span>
+          <span class="obd-chip" onclick="obdToggle(this)">garlic powder</span>
+          <span class="obd-chip" onclick="obdToggle(this)">onion powder</span>
+          <span class="obd-chip" onclick="obdToggle(this)">cumin</span>
+          <span class="obd-chip" onclick="obdToggle(this)">smoked paprika</span>
+          <span class="obd-chip" onclick="obdToggle(this)">cinnamon</span>
+          <span class="obd-chip" onclick="obdToggle(this)">oregano</span>
+          <span class="obd-chip" onclick="obdToggle(this)">chili powder</span>
+          <span class="obd-chip" onclick="obdToggle(this)">turmeric</span>
+        </div>
+        <div class="obd-cat-label">🥜 Nuts & Milks</div>
+        <div class="obd-chips" data-cat="nuts">
+          <span class="obd-chip" onclick="obdToggle(this)">nut butter (any)</span>
+          <span class="obd-chip" onclick="obdToggle(this)">plant-based milk (any)</span>
+          <span class="obd-chip" onclick="obdToggle(this)">almonds</span>
+          <span class="obd-chip" onclick="obdToggle(this)">walnuts</span>
+        </div>
+      </div>
+      <div id="obdStapleCount" style="font-size:.85rem;color:#2d7a4f;margin-top:10px;font-weight:600"></div>
+      <button class="obd-btn obd-btn-primary" onclick="obdGo(3)">Next — Allergies</button><br>
+      <button class="obd-btn-skip" onclick="obdGo(4)">No allergies, skip ahead</button>
+    </div>
+
+    <!-- STEP 3: Allergies -->
+    <div class="obd-step" id="obdStep3">
+      <div class="obd-title">Any ingredients to avoid?</div>
+      <div class="obd-sub">We'll filter these out of every recipe. Tap any that apply — or skip if none.</div>
+      <div class="obd-chips" style="justify-content:center">
+        <span class="obd-chip" onclick="obdAllergyToggle(this,'peanut')">🥜 Peanuts</span>
+        <span class="obd-chip" onclick="obdAllergyToggle(this,'tree nut')">🌰 Tree Nuts</span>
+        <span class="obd-chip" onclick="obdAllergyToggle(this,'soy')">🫘 Soy</span>
+        <span class="obd-chip" onclick="obdAllergyToggle(this,'coconut')">🥥 Coconut</span>
+        <span class="obd-chip" onclick="obdAllergyToggle(this,'corn')">🌽 Corn</span>
+        <span class="obd-chip" onclick="obdAllergyToggle(this,'mushroom')">🍄 Mushrooms</span>
+        <span class="obd-chip" onclick="obdAllergyToggle(this,'nightshade')">🍅 Nightshades</span>
+      </div>
+      <button class="obd-btn obd-btn-primary" onclick="obdGo(4)">See my recipes</button>
+    </div>
+
+    <!-- STEP 4: Done! -->
+    <div class="obd-step" id="obdStep4">
+      <div style="font-size:2.5rem;margin-bottom:4px">🎉</div>
+      <div class="obd-title">You're all set!</div>
+      <div class="obd-counter" id="obdRecipeCount">0</div>
+      <div class="obd-sub">recipes you can make with what you have.</div>
+      <div style="font-size:.85rem;color:#5a7a5a;line-height:1.5;margin-bottom:12px">Add fresh items anytime under <strong>Fresh This Week</strong> to unlock even more. Your selections are saved automatically.</div>
+      <button class="obd-btn obd-btn-primary" onclick="obdDone()">Start cooking</button>
+    </div>
+  </div>
+</div>
+
 <div class="app">
   <header>
     <h1>🌿 HARVEST</h1>
@@ -3827,6 +3967,68 @@ function closeFiltersDrawer(){
   document.body.classList.remove('filters-open');
 }
 // ── CREATOR SECTION (collapsible) ────────────────────────────────────────────
+// ── ONBOARDING WALKTHROUGH ────────────────────────────────────────────────────
+const obdStaplesPicked = new Set();
+const obdAllergiesPicked = new Set();
+
+function obdToggle(el) {
+  const item = el.textContent.trim();
+  if (el.classList.toggle('on')) { obdStaplesPicked.add(item); }
+  else { obdStaplesPicked.delete(item); }
+  const countEl = document.getElementById('obdStapleCount');
+  if (countEl) countEl.textContent = obdStaplesPicked.size ? `${obdStaplesPicked.size} selected` : '';
+}
+
+function obdAllergyToggle(el, key) {
+  if (el.classList.toggle('allergy-on')) { obdAllergiesPicked.add(key); }
+  else { obdAllergiesPicked.delete(key); }
+}
+
+function obdGo(step) {
+  document.querySelectorAll('.obd-step').forEach(s => s.classList.remove('active'));
+  document.getElementById('obdStep' + step).classList.add('active');
+  const dots = document.querySelectorAll('.obd-dot');
+  dots.forEach((d, i) => d.classList.toggle('on', i < step));
+
+  // On step 4, apply selections and show the count
+  if (step === 4) {
+    // Save staples
+    obdStaplesPicked.forEach(item => {
+      if (!staples.find(s => s.toLowerCase() === item.toLowerCase())) staples.push(item);
+    });
+    saveStaples();
+    // Save allergies
+    obdAllergiesPicked.forEach(key => activeAllergies.add(key));
+    // Compute recipe count
+    if (typeof updatePantryPower === 'function') updatePantryPower();
+    if (typeof computePantryPower === 'function') {
+      const pp = computePantryPower();
+      const el = document.getElementById('obdRecipeCount');
+      if (el) el.innerHTML = colorDigits(pp.canMakeNow);
+    }
+  }
+  // Scroll card to top
+  document.querySelector('.obd-card').scrollTop = 0;
+}
+
+function obdSkip() {
+  try { localStorage.setItem('vrf_onboarded', '1'); } catch(e){}
+  const ov = document.getElementById('obdOverlay');
+  ov.style.opacity = '0';
+  setTimeout(() => ov.remove(), 300);
+}
+
+function obdDone() {
+  try { localStorage.setItem('vrf_onboarded', '1'); } catch(e){}
+  const ov = document.getElementById('obdOverlay');
+  ov.style.opacity = '0';
+  setTimeout(() => {
+    ov.remove();
+    afterIngChange();
+    showTab('home');
+  }, 300);
+}
+
 // Restore state on load
 document.addEventListener('DOMContentLoaded', () => {
   // Restore last active tab, or default to home
@@ -3846,6 +4048,17 @@ document.addEventListener('DOMContentLoaded', () => {
       if (trigger) trigger.classList.add('pulse-attention');
     }
   } catch(e){}
+  // Show onboarding walkthrough on first visit
+  const obdOverlay = document.getElementById('obdOverlay');
+  if (obdOverlay) {
+    const onboarded = localStorage.getItem('vrf_onboarded');
+    const hasStaples = staples.length > 0;
+    if (!onboarded && !hasStaples) {
+      requestAnimationFrame(() => obdOverlay.classList.add('show'));
+    } else {
+      obdOverlay.remove();
+    }
+  }
 });
 // Close on Escape
 document.addEventListener('keydown', e => {
