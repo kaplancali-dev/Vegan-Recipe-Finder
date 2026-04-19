@@ -4056,7 +4056,10 @@ const QA_ITEMS = [
   {cat:'🍨 Dessert Pantry',     items:['vanilla extract','vanilla','cocoa powder','chocolate chips (any)','coconut cream','coconut sugar','vegan butter','flax egg','baking soda','baking powder','cornstarch','shredded coconut','medjool dates']},
 ];
 // Cached flat Set of all QA ingredient names (built once, used everywhere)
-const QA_ALL_ITEMS = new Set(QA_ITEMS.flatMap(g => g.items.map(i => i.toLowerCase())));
+const QA_ALL_ITEMS = new Set([
+  ...QA_ITEMS.flatMap(g => g.items.map(i => i.toLowerCase())),
+  ...PERISHABLES.flatMap(g => g.items.map(i => i.toLowerCase()))
+]);
 
 // ── SHARED HELPERS ───────────────────────────────────────────────────────────
 function escQ(s) { return s.replace(/\\/g,'\\\\').replace(/'/g,"\\'"); }
