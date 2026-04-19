@@ -2674,26 +2674,42 @@ function showToast(msg, duration = 2000) {
 let ingredients = _lsGet('vrf_ings', '[]');
 let staples     = _lsGet('vrf_staples', '[]');
 
-// Self-healing image handler: tries fallback strategies before showing placeholder
+// Image proxy: routes all recipe images through weserv.nl to bypass hotlink protection
+function proxyImg(url) {
+  if (!url) return '';
+  // Already proxied or is a data URI
+  if (url.startsWith('https://images.weserv.nl/') || url.startsWith('data:')) return url;
+  return 'https://images.weserv.nl/?url=' + encodeURIComponent(url) + '&w=600&q=80';
+}
+
+// Self-healing image handler
 function handleImgError(img) {
   const src = img.getAttribute('src') || '';
+  const orig = img.dataset.orig || '';
   const tried = parseInt(img.dataset.retries || '0');
 
-  // Strategy 1: For Love and Lemons, try www ↔ cdn swap
-  if (tried === 0 && src.includes('loveandlemons.com')) {
+  // Strategy 1: If proxy failed, try direct URL (maybe proxy is down)
+  if (tried === 0 && src.includes('images.weserv.nl')) {
     img.dataset.retries = '1';
-    if (src.includes('cdn.loveandlemons.com')) {
-      img.src = src.replace('cdn.loveandlemons.com', 'www.loveandlemons.com').replace('/opengraph/', '/');
-    } else {
-      img.src = src.replace('www.loveandlemons.com', 'cdn.loveandlemons.com').replace('/uploads/', '/uploads/opengraph/');
+    // Extract original URL from proxy
+    const match = src.match(/url=([^&]+)/);
+    if (match) {
+      const directUrl = decodeURIComponent(match[1]);
+      img.dataset.orig = directUrl;
+      img.src = directUrl;
+      return;
     }
-    return;
   }
 
-  // Strategy 2: Try loading via Google's cache proxy (strips referrer issues)
-  if (tried <= 1 && !src.startsWith('https://images.weserv.nl/')) {
+  // Strategy 2: For Love and Lemons, try cdn ↔ www swap
+  if (tried <= 1 && (src.includes('loveandlemons.com') || orig.includes('loveandlemons.com'))) {
     img.dataset.retries = '2';
-    img.src = 'https://images.weserv.nl/?url=' + encodeURIComponent(src.replace('https://images.weserv.nl/?url=', '')) + '&default=1';
+    const base = orig || src;
+    if (base.includes('cdn.loveandlemons.com')) {
+      img.src = base.replace('cdn.loveandlemons.com', 'www.loveandlemons.com').replace('/opengraph/', '/');
+    } else {
+      img.src = base.replace('www.loveandlemons.com', 'cdn.loveandlemons.com').replace('/uploads/', '/uploads/opengraph/');
+    }
     return;
   }
 
@@ -2826,7 +2842,7 @@ function renderHomeFeatured() {
   const shuffled = [...withImg].sort(() => Math.random() - 0.5).slice(0, 6);
   el.innerHTML = shuffled.map(r => `
     <div class="feat-card" onclick="openDetail(${r.id})">
-      <div class="feat-hero"><img loading="lazy" referrerpolicy="no-referrer" src="${r.img}" alt="" onerror="handleImgError(this)"></div>
+      <div class="feat-hero"><img loading="lazy" referrerpolicy="no-referrer" src="${proxyImg(r.img)}" alt="" onerror="handleImgError(this)"></div>
       <div class="feat-body">
         <div class="feat-title">${r.title}</div>
         <div class="feat-meta">
@@ -3544,7 +3560,7 @@ function recipeCard(r) {
   const needChips = needShow.map(i => renderIngChip(i, 'c-need')).join('') + moreNeed;
   const swapNote = '';
 
-  const hero = (SHOW_HERO && r.img) ? `<div class="hero-wrap"><img loading="lazy" decoding="async" referrerpolicy="no-referrer" src="${r.img}" alt="" onerror="handleImgError(this)"></div>` : '';
+  const hero = (SHOW_HERO && r.img) ? `<div class="hero-wrap"><img loading="lazy" decoding="async" referrerpolicy="no-referrer" src="${proxyImg(r.img)}" alt="" onerror="handleImgError(this)"></div>` : '';
   const heroClass = (SHOW_HERO && r.img) ? ' has-hero' : '';
   return `<div class="r-card ${cls}${heroClass}" onclick="openDetail(${r.id})" style="cursor:pointer">
   ${hero}
@@ -3600,7 +3616,7 @@ function openDetail(id) {
 
   // Hero
   const heroEl = document.getElementById('detailHero');
-  heroEl.innerHTML = r.img ? `<img src="${r.img}" alt="" onerror="this.parentElement.innerHTML=''">` : '';
+  heroEl.innerHTML = r.img ? `<img src="${proxyImg(r.img)}" referrerpolicy="no-referrer" alt="" onerror="handleImgError(this)">` : '';
 
   // Title + site
   document.getElementById('detailTitle').textContent = r.title;
@@ -4960,7 +4976,7 @@ function cmCard(r, group) {
     if (vegan.swapped) return `<span class="cm-missing-chip" style="background:#3a2800;border:1px solid #a16207;color:#fde68a" title="Vegan swap: ${vegan.orig} → ${vegan.neu}">${vegan.html}</span>`;
     return `<span class="cm-missing-chip">${i}</span>`;
   }).join('');
-  const cmImg = r.img ? `<div style="margin-bottom:8px;border-radius:10px;overflow:hidden"><img loading="lazy" src="${r.img}" alt="" style="width:100%;height:160px;object-fit:cover;display:block" onerror="this.parentElement.style.display='none'"></div>` : '';
+  const cmImg = r.img ? `<div style="margin-bottom:8px;border-radius:10px;overflow:hidden"><img loading="lazy" referrerpolicy="no-referrer" src="${proxyImg(r.img)}" alt="" style="width:100%;height:160px;object-fit:cover;display:block" onerror="handleImgError(this)"></div>` : '';
   return `<div class="cm-r-card g${group}">
   ${cmImg}
   <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
