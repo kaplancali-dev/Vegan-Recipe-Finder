@@ -2674,41 +2674,32 @@ function showToast(msg, duration = 2000) {
 let ingredients = _lsGet('vrf_ings', '[]');
 let staples     = _lsGet('vrf_staples', '[]');
 
-// Image proxy: routes all recipe images through weserv.nl to bypass hotlink protection
+// Image loading: try direct first, proxy as fallback
 function proxyImg(url) {
   if (!url) return '';
-  // Already proxied or is a data URI
-  if (url.startsWith('https://images.weserv.nl/') || url.startsWith('data:')) return url;
-  return 'https://images.weserv.nl/?url=' + encodeURIComponent(url) + '&w=600&q=80';
+  return url; // Load direct first — proxy is fallback only
 }
 
-// Self-healing image handler
 function handleImgError(img) {
   const src = img.getAttribute('src') || '';
-  const orig = img.dataset.orig || '';
   const tried = parseInt(img.dataset.retries || '0');
 
-  // Strategy 1: If proxy failed, try direct URL (maybe proxy is down)
-  if (tried === 0 && src.includes('images.weserv.nl')) {
+  // Strategy 1: Try proxy (bypasses hotlink protection)
+  if (tried === 0 && !src.includes('images.weserv.nl')) {
     img.dataset.retries = '1';
-    // Extract original URL from proxy
-    const match = src.match(/url=([^&]+)/);
-    if (match) {
-      const directUrl = decodeURIComponent(match[1]);
-      img.dataset.orig = directUrl;
-      img.src = directUrl;
-      return;
-    }
+    img.dataset.orig = src;
+    img.src = 'https://images.weserv.nl/?url=' + encodeURIComponent(src) + '&w=600&q=80';
+    return;
   }
 
   // Strategy 2: For Love and Lemons, try cdn ↔ www swap
-  if (tried <= 1 && (src.includes('loveandlemons.com') || orig.includes('loveandlemons.com'))) {
+  const orig = img.dataset.orig || src;
+  if (tried <= 1 && orig.includes('loveandlemons.com')) {
     img.dataset.retries = '2';
-    const base = orig || src;
-    if (base.includes('cdn.loveandlemons.com')) {
-      img.src = base.replace('cdn.loveandlemons.com', 'www.loveandlemons.com').replace('/opengraph/', '/');
+    if (orig.includes('cdn.loveandlemons.com')) {
+      img.src = orig.replace('cdn.loveandlemons.com', 'www.loveandlemons.com').replace('/opengraph/', '/');
     } else {
-      img.src = base.replace('www.loveandlemons.com', 'cdn.loveandlemons.com').replace('/uploads/', '/uploads/opengraph/');
+      img.src = orig.replace('www.loveandlemons.com', 'cdn.loveandlemons.com').replace('/uploads/', '/uploads/opengraph/');
     }
     return;
   }
