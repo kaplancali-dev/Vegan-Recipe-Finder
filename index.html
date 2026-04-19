@@ -1225,9 +1225,9 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
           </div>
 
           <!-- RECIPE NAME SEARCH -->
-          <div class="filter-label" style="margin-top:14px;margin-bottom:7px">Recipe Name</div>
+          <div class="filter-label" style="margin-top:14px;margin-bottom:7px">Recipe Name or Ingredients</div>
           <input class="name-search-input" id="nameSearchInput" type="text"
-            placeholder="Type to search instantly… e.g. curry, stir fry, tacos"
+            placeholder="e.g. curry, stir fry, or kale cucumber carrots"
             oninput="onNameSearch(this.value)">
         </div>
 
@@ -1453,9 +1453,9 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
         </div>
         <!-- RECIPE NAME SEARCH -->
         <div class="card" style="margin-bottom:12px">
-          <div class="filter-label">Recipe Name <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#4b7a52">(optional)</span></div>
+          <div class="filter-label">Recipe Name or Ingredients <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#4b7a52">(optional)</span></div>
           <input class="name-search-input" id="cmNameInput" type="text" style="margin-top:7px"
-            placeholder="Type to filter results… e.g. curry, tacos"
+            placeholder="e.g. curry, tacos, or kale cucumber carrots"
             oninput="cmNameFilter=this.value.trim().toLowerCase();runCanMake()">
         </div>
         <!-- ALLERGIES -->
@@ -3364,7 +3364,7 @@ function findRecipes(scrollToResults = false) {
   }));
   if (selectedSite) pool = pool.filter(r => r.site === selectedSite);
   if (maxTime > 0)  pool = pool.filter(r => r.time && r.time <= maxTime);
-  if (nameSearch)   pool = pool.filter(r => { const t = r.title.toLowerCase(); return nameSearch.toLowerCase().split(/\s+/).every(w => { const s = stem(w); return t.includes(w) || t.includes(s); }); });
+  if (nameSearch)   pool = pool.filter(r => { const t = r.title.toLowerCase(); const ings = (r.ing||[]).join(' ').toLowerCase(); const words = nameSearch.toLowerCase().split(/\s+/); return words.every(w => { const s = stem(w); return t.includes(w) || t.includes(s) || ings.includes(w) || ings.includes(s); }); });
   if (activeAllergies.size) pool = pool.filter(r => ![...activeAllergies].some(key => recipeHasAllergen(r, key)));
 
   results = pool.map(r => {
@@ -4706,7 +4706,7 @@ function runCanMake() {
     if (cmTypeFilter !== 'all' && cmMealType(r) !== cmTypeFilter) return false;
     if (cmMaxTime && r.time && r.time > cmMaxTime) return false;
     if (cmAllergies.size && [...cmAllergies].some(key => recipeHasAllergen(r, key))) return false;
-    if (cmNameFilter && !r.title.toLowerCase().includes(cmNameFilter)) return false;
+    if (cmNameFilter) { const t = r.title.toLowerCase(); const ings = (r.ing||[]).join(' ').toLowerCase(); if (!cmNameFilter.split(/\s+/).every(w => t.includes(w) || ings.includes(w))) return false; }
     if (cmSelectedCats.length && !cmSelectedCats.some(c => r.cats && r.cats.includes(c))) return false;
     return true;
   });
