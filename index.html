@@ -2803,7 +2803,7 @@ function computePantryPower() {
     }
     const missing = rIngs.length - haveCount;
     const matchPct = haveCount / rIngs.length;
-    if (missing <= 2 && matchPct >= 0.9) canMakeNow++;
+    if (missing <= 2) canMakeNow++;
     if (missing === 0) { ready++; currentNinety++; currentEighty++; }
     else if (matchPct >= 0.9) { currentNinety++; currentEighty++; if (missing === 1) oneAway++; }
     else if (matchPct >= 0.8) { currentEighty++; if (missing === 1) oneAway++; }
