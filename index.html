@@ -3101,6 +3101,7 @@ function updatePantryPower() {
   const widget = document.getElementById('pantryPower');
   if (!widget) return; // hero not in DOM yet
   const { ready, oneAway, total, pct, simReady, simNinety, simEighty, topMissing, currentNinety, currentEighty, canMakeNow } = computePantryPower();
+  const pctRounded = Math.round(pct);
 
   const numEl  = document.getElementById('ppNumber');
   const unitEl = document.getElementById('ppUnit');
