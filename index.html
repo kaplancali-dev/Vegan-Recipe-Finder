@@ -1020,11 +1020,10 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
     <!-- STEP 4: Done! -->
     <div class="obd-step" id="obdStep4">
       <div style="font-size:2.5rem;margin-bottom:4px">🎉</div>
-      <div class="obd-title">You're all set!</div>
-      <div class="obd-counter" id="obdRecipeCount">0</div>
-      <div class="obd-sub">recipes you can make with what you have.</div>
-      <div style="font-size:.85rem;color:#5a7a5a;line-height:1.5;margin-bottom:12px">Add fresh items anytime under <strong>Fresh This Week</strong> to unlock even more. Your selections are saved automatically.</div>
-      <button class="obd-btn obd-btn-primary" onclick="obdDone()">Start cooking</button>
+      <div class="obd-title">Your pantry is ready!</div>
+      <div class="obd-sub" style="font-size:1rem">Your selections have been saved. HARVEST will now match you to recipes based on what you have.</div>
+      <div style="font-size:.85rem;color:#5a7a5a;line-height:1.5;margin-bottom:12px">Add fresh items anytime under <strong>Fresh This Week</strong> to unlock even more recipes.</div>
+      <button class="obd-btn obd-btn-primary" onclick="obdDone()">See my recipes</button>
     </div>
   </div>
 </div>
@@ -4038,34 +4037,13 @@ function obdGo(step) {
   const dots = document.querySelectorAll('.obd-dot');
   dots.forEach((d, i) => d.classList.toggle('on', i < step));
 
-  // On step 4, apply selections and show the count
+  // On step 4, save selections
   if (step === 4) {
-    // Save staples
     obdStaplesPicked.forEach(item => {
       if (!staples.find(s => s.toLowerCase() === item.toLowerCase())) staples.push(item);
     });
     saveStaples();
-    // Save allergies
     obdAllergiesPicked.forEach(key => activeAllergies.add(key));
-    // Compute recipe count directly to avoid any timing issues
-    setTimeout(() => {
-      const allIngs = (typeof expandWithAliases === 'function')
-        ? expandWithAliases([...staples, ...ingredients])
-        : [...staples, ...ingredients].map(s => s.toLowerCase());
-      let count = 0;
-      for (const r of RECIPES) {
-        if (!r.ing || !r.ing.length) continue;
-        const rIngs = r.ing.map(norm);
-        let haveCount = 0;
-        for (const ri of rIngs) {
-          if (allIngs.some(ai => ri.includes(ai) || ai.includes(ri))) haveCount++;
-        }
-        if (haveCount / rIngs.length >= 0.8) count++;
-      }
-      const el = document.getElementById('obdRecipeCount');
-      if (el) el.innerHTML = colorDigits(Math.max(count, obdStaplesPicked.size));
-      if (typeof updatePantryPower === 'function') updatePantryPower();
-    }, 100);
   }
   // Scroll card to top
   document.querySelector('.obd-card').scrollTop = 0;
@@ -4084,8 +4062,14 @@ function obdDone() {
   ov.style.opacity = '0';
   setTimeout(() => {
     ov.remove();
-    afterIngChange();
-    showTab('home');
+    // Fully reinitialize everything after onboarding
+    if (typeof renderAllIngPanels === 'function') renderAllIngPanels();
+    if (typeof restoreAllergyUI === 'function') restoreAllergyUI();
+    if (typeof updatePantryPower === 'function') updatePantryPower();
+    if (typeof updateFindBtn === 'function') updateFindBtn();
+    if (typeof findRecipes === 'function') findRecipes();
+    if (typeof syncCMSelected === 'function' && typeof cmInited !== 'undefined' && cmInited) { syncCMSelected(); runCanMake(); }
+    showTab('search');
   }, 300);
 }
 
