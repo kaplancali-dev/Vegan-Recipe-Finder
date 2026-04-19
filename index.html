@@ -3999,12 +3999,12 @@ function obdGo(step) {
     saveStaples();
     // Save allergies
     obdAllergiesPicked.forEach(key => activeAllergies.add(key));
-    // Compute recipe count
+    // Compute recipe count — show the Browse All number (80%+ match)
     if (typeof updatePantryPower === 'function') updatePantryPower();
     if (typeof computePantryPower === 'function') {
       const pp = computePantryPower();
       const el = document.getElementById('obdRecipeCount');
-      if (el) el.innerHTML = colorDigits(pp.canMakeNow);
+      if (el) el.innerHTML = colorDigits(pp.currentEighty);
     }
   }
   // Scroll card to top
