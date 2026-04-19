@@ -3989,6 +3989,12 @@ function _applyAllData(data) {
   try { renderAllIngPanels(); } catch(e) {}
   try { restoreAllergyUI(); } catch(e) {}
   try { if (typeof updatePantryPower === 'function') updatePantryPower(); } catch(e) {}
+  // Dismiss onboarding if user already has data
+  if (staples.length > 0 || (Array.isArray(data.vrf_staples) && data.vrf_staples.length > 0)) {
+    try { localStorage.setItem('vrf_onboarded', '1'); } catch(e) {}
+    const ov = document.getElementById('obdOverlay');
+    if (ov) { ov.classList.remove('show'); ov.style.opacity = '0'; setTimeout(() => { try { ov.remove(); } catch(e) {} }, 300); }
+  }
 }
 
 async function cloudPush() {
