@@ -874,6 +874,7 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
             <span class="pp-unit" id="ppUnit">recipes ready</span>
           </div>
           <div class="pp-near" id="ppNear">+ 0 more you're 1 ingredient away from</div>
+          <div id="ppCanMake" style="font-size:.88rem;color:#1e5a3a;margin:6px 0 2px;line-height:1.4"></div>
           <div class="pp-bar"><div class="pp-bar-fill" id="ppBarFill" style="width:0%"></div></div>
           <div class="pp-bar-meta"><span id="ppPctLabel">0 of 799 recipes ready</span></div>
           <div class="pp-projection" id="ppProjection" style="font-size:.82rem;color:#5a7a5a;margin-top:6px;font-style:italic;line-height:1.4"></div>
@@ -2791,7 +2792,7 @@ function computePantryPower() {
   const allIngs = (typeof expandWithAliases === 'function')
     ? expandWithAliases([...staples])
     : staples.map(s => (s || '').toLowerCase());
-  let ready = 0, oneAway = 0, currentNinety = 0, currentEighty = 0;
+  let ready = 0, oneAway = 0, currentNinety = 0, currentEighty = 0, canMakeNow = 0;
   for (const r of RECIPES) {
     if (!r.ing || !r.ing.length) continue;
     const rIngs = r.ing.map(norm);
@@ -2801,6 +2802,7 @@ function computePantryPower() {
     }
     const missing = rIngs.length - haveCount;
     const matchPct = haveCount / rIngs.length;
+    if (missing <= 2) canMakeNow++;
     if (missing === 0) { ready++; currentNinety++; currentEighty++; }
     else if (matchPct >= 0.9) { currentNinety++; currentEighty++; if (missing === 1) oneAway++; }
     else if (matchPct >= 0.8) { currentEighty++; if (missing === 1) oneAway++; }
@@ -2841,7 +2843,7 @@ function computePantryPower() {
     else if (pctMatch >= 0.8) simEighty++;
   }
 
-  return { ready, oneAway, total, pct, simReady, simNinety, simEighty, topMissing, currentNinety, currentEighty };
+  return { ready, oneAway, total, pct, simReady, simNinety, simEighty, topMissing, currentNinety, currentEighty, canMakeNow };
 }
 
 // Animate a number from current → target over ~600ms, end with colored digits
@@ -2864,7 +2866,7 @@ function animateNumber(el, target) {
 function updatePantryPower() {
   const widget = document.getElementById('pantryPower');
   if (!widget) return; // hero not in DOM yet
-  const { ready, oneAway, total, pct, simReady, simNinety, simEighty, topMissing, currentNinety, currentEighty } = computePantryPower();
+  const { ready, oneAway, total, pct, simReady, simNinety, simEighty, topMissing, currentNinety, currentEighty, canMakeNow } = computePantryPower();
 
   const numEl  = document.getElementById('ppNumber');
   const unitEl = document.getElementById('ppUnit');
@@ -2889,6 +2891,17 @@ function updatePantryPower() {
     } else {
       nearEl.innerHTML = `Keep adding staples to unlock recipes!`;
       nearEl.style.display = '';
+    }
+  }
+
+  // Can Make Right Now line (≤2 missing — matches the Can Make tab)
+  const cmEl = document.getElementById('ppCanMake');
+  if (cmEl) {
+    if (staples.length > 0 && canMakeNow > 0) {
+      cmEl.innerHTML = `${colorDigits(canMakeNow)} recipe${canMakeNow !== 1 ? 's' : ''} you can make right now — no more than 2 ingredients away.`;
+      cmEl.style.display = '';
+    } else {
+      cmEl.style.display = 'none';
     }
   }
 
