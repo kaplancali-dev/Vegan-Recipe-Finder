@@ -4061,10 +4061,10 @@ const QA_ALL_ITEMS = new Set(QA_ITEMS.flatMap(g => g.items.map(i => i.toLowerCas
 // ── SHARED HELPERS ───────────────────────────────────────────────────────────
 function escQ(s) { return s.replace(/\\/g,'\\\\').replace(/'/g,"\\'"); }
 
-// Shared: color each digit green/yellow/purple with increasing weight
+// Shared: color each digit green/yellow/purple with bold wave animation
 function colorDigits(n) {
-  const s = String(n), c = ['#38a169','#d69e2e','#805ad5'], w = [600,700,800];
-  return s.split('').map((d,i) => `<span style="color:${c[i%3]};font-weight:${w[i%3]}">${d}</span>`).join('');
+  const s = String(n), c = ['#38a169','#d69e2e','#805ad5'];
+  return s.split('').map((d,i) => `<span style="color:${c[i%3]};display:inline-block;animation:boldWave 3s ease-in-out infinite;animation-delay:${i*0.3}s">${d}</span>`).join('');
 }
 
 function restoreAllergyUI() {
