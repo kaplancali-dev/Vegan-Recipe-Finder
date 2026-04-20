@@ -1098,6 +1098,11 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
     📡 You're offline — your data is safe, sync will resume when you reconnect
   </div>
 
+  <!-- Pantry hero video (shown only on My Pantry tab) -->
+  <div id="pantryVideo" style="display:none;margin-bottom:0;border-radius:14px;overflow:hidden;padding:0 8px">
+    <video src="hero.mp4" autoplay loop muted playsinline style="width:100%;display:block;border-radius:14px"></video>
+  </div>
+
   <!-- TABS -->
   <div class="tab-bar" id="tabBar">
     <button class="tab-btn" onclick="showTab('pantry')">🥬 My Pantry</button>
@@ -1116,11 +1121,6 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
   <!-- ══════ MY PANTRY PANEL ══════ -->
   <div class="panel" id="panel-pantry">
     <div class="pantry-overview">
-      <!-- Hero video -->
-      <div style="margin-bottom:16px;border-radius:14px;overflow:hidden">
-        <video src="hero.mp4" autoplay loop muted playsinline style="width:100%;display:block;border-radius:14px"></video>
-      </div>
-
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:8px">
         <div>
           <h3 style="font-family:Georgia,serif;font-size:1.35rem;color:#1a2e24;margin:0;font-weight:700">My Pantry</h3>
@@ -2845,6 +2845,9 @@ function showTab(name) {
   const btns = document.querySelectorAll('.tab-btn');
   const idx = ['pantry','search','canmake','favorites','shopping'].indexOf(name);
   if (idx >= 0) btns[idx].classList.add('on');
+  // Show/hide pantry video
+  const pVid = document.getElementById('pantryVideo');
+  if (pVid) pVid.style.display = name === 'pantry' ? '' : 'none';
   if (name === 'pantry')    initPantry();
   if (name === 'favorites') { renderFavs(); renderMealPlan(); }
   if (name === 'shopping')  renderShop();
