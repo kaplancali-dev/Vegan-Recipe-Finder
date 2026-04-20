@@ -3495,54 +3495,23 @@ function pillClass(pct) {
   return pct >= 80 ? 'hi' : pct >= 50 ? 'md' : 'lo';
 }
 
-function searchUrl(r) {
-  // Use site: search so the result is always correct even if the slug changed
-  if (r.url) {
-    try {
-      const domain = new URL(r.url).hostname;
-      const q = 'site:' + domain + ' ' + r.title;
-      return 'https://www.google.com/search?q=' + encodeURIComponent(q);
-    } catch(e) {}
-  }
+function recipeUrl(r) {
+  // Direct link to recipe if available, otherwise Google search
+  if (r.url) return r.url;
   const q = r.site && r.site !== 'Original Recipe'
     ? r.title + ' ' + r.site + ' vegan recipe'
     : 'vegan ' + r.title + ' recipe';
   return 'https://www.google.com/search?q=' + encodeURIComponent(q);
 }
+// Keep old name as alias for any other references
+function searchUrl(r) { return recipeUrl(r); }
 
-// ── ONE-TIME EXPLAINER FOR "FIND RECIPE" → GOOGLE FLOW ───────────────────────
-let _pendingSearchUrl = null;
-function openRecipeSearch(url) {
+function openRecipeUrl(url) {
   if (!url) return;
-  // If user has already seen the explainer, go straight to Google
-  try {
-    if (localStorage.getItem('vrf_find_explained') === '1') {
-      window.open(url, '_blank', 'noopener');
-      return;
-    }
-  } catch(e) {
-    // localStorage blocked — fall through and show modal anyway
-  }
-  // First time: show modal and stash URL until they confirm
-  _pendingSearchUrl = url;
-  const modal = document.getElementById('findExplainerModal');
-  if (modal) modal.classList.add('open');
-  else window.open(url, '_blank', 'noopener'); // safety fallback
+  window.open(url, '_blank', 'noopener');
 }
-function dismissFindExplainer() {
-  try { localStorage.setItem('vrf_find_explained', '1'); } catch(e){}
-  const modal = document.getElementById('findExplainerModal');
-  if (modal) modal.classList.remove('open');
-  const url = _pendingSearchUrl;
-  _pendingSearchUrl = null;
-  if (url) window.open(url, '_blank', 'noopener');
-}
-function closeFindExplainer() {
-  // Closed via X or backdrop click — DON'T set the flag and DON'T navigate
-  const modal = document.getElementById('findExplainerModal');
-  if (modal) modal.classList.remove('open');
-  _pendingSearchUrl = null;
-}
+// Keep old name as alias
+function openRecipeSearch(url) { openRecipeUrl(url); }
 
 function siteHomeUrl(r) {
   // Show globe only when we have a direct recipe URL — goes straight to the recipe
@@ -3612,7 +3581,7 @@ function recipeCard(r) {
   ${needChips ? `<div class="chip-label-sm" style="margin-top:4px">You need</div><div class="chips">${needChips}</div>` : ''}
   ${swapNote}
   <div class="r-actions" onclick="event.stopPropagation()">
-    <button class="btn-sm btn-link" onclick="openRecipeSearch('${searchUrl(r)}')">🔍 Find Recipe</button>
+    <button class="btn-sm btn-link" onclick="openRecipeUrl('${recipeUrl(r)}')">📖 View Instructions</button>
     <button class="btn-sm btn-fav${isFav ? ' on' : ''}" onclick="toggleFav(${r.id})">
       ${isFav ? '❤️ Saved' : '🤍 Save'}
     </button>
@@ -3696,8 +3665,10 @@ function openDetail(id) {
   // Actions
   const isFav = favorites.some(f => f.id === id);
   const instrNotes = instructions[id] || '';
+  const recipeDomain = r.url ? new URL(r.url).hostname.replace('www.','') : '';
   document.getElementById('detailActions').innerHTML = `
-    <button class="btn-detail btn-detail-primary" style="flex:1;min-width:140px" onclick="openRecipeSearch('${searchUrl(r)}')">🔍 Find Full Recipe</button>
+    <button class="btn-detail btn-detail-primary" style="flex:1;min-width:140px" onclick="openRecipeUrl('${recipeUrl(r)}')">📖 View Full Instructions</button>
+    ${recipeDomain ? `<div style="text-align:center;font-size:0.72rem;color:#6b8f7b;margin:-4px 0 4px">Opens original recipe at ${recipeDomain}</div>` : ''}
     <button class="btn-detail btn-detail-secondary" onclick="toggleFav(${id});openDetail(${id})">
       ${isFav ? '❤️ Saved' : '🤍 Save'}
     </button>
@@ -3772,7 +3743,7 @@ function renderFavs() {
           <div class="fav-site">${f.site}</div>
         </div>
         <div style="display:flex;gap:6px;flex-shrink:0;flex-wrap:wrap;justify-content:flex-end">
-          <button class="btn-sm btn-link" title="Find Recipe" onclick="openRecipeSearch('${searchUrl(f)}')">🔗 Find</button>
+          <button class="btn-sm btn-link" title="View Instructions" onclick="openRecipeUrl('${recipeUrl(f)}')">📖 Instructions</button>
           <button class="btn-sm btn-notes${notes ? ' on' : ''}" onclick="openInstrModal(${f.id})" title="${notes ? 'View Notes' : 'Add Notes'}">📝 ${notes ? 'View Notes' : 'Add Notes'}</button>
           ${notes ? `<button class="btn-sm btn-link" onclick="favCopyNotes(${f.id})" title="Copy notes to clipboard">📋 Copy</button>` : ''}
           ${notes ? `<button class="btn-sm btn-link" onclick="favPrintNotes(${f.id})" title="Print notes">🖨️ Print</button>` : ''}
@@ -5087,7 +5058,7 @@ function cmCard(r, group) {
   </div>` : ''}
   ${missingChips ? `<div class="cm-missing-label">Still need</div><div class="cm-missing-chips">${missingChips}</div>` : ''}
   <div class="cm-actions">
-    <button class="btn-sm btn-link" onclick="openRecipeSearch('${searchUrl(r)}')">🔍 Find Recipe</button>
+    <button class="btn-sm btn-link" onclick="openRecipeUrl('${recipeUrl(r)}')">📖 View Instructions</button>
     <button class="btn-sm btn-fav${isFav?' on':''}" onclick="toggleFav(${r.id});runCanMake()">${isFav?'❤️ Saved':'🤍 Save'}</button>
     ${r.needNames.length ? `<button class="btn-sm btn-shop" onclick="cmAddMissingToShop(${r.id},[${r.needNames.map(n=>`'${escQ(n)}' `).join(',')}])"><span class="cart">🛒</span> Add Missing to List</button>` : ''}
     <button class="btn-sm btn-notes${instrNotes ? ' on' : ''}" onclick="openInstrModal(${r.id})">📝 ${instrNotes ? 'View Notes' : 'Add Notes'}</button>
