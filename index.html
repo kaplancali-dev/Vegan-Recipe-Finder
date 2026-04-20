@@ -1055,33 +1055,13 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
     <div class="scan-modal">
       <button class="scan-close" onclick="closeScanModal()">&times;</button>
       <div class="scan-title">Scan My Kitchen</div>
-      <div class="scan-sub">Take or upload photos of your cupboard, spice drawer, refrigerator, and groceries. AI will identify your ingredients and add them to your pantry.</div>
+      <div class="scan-sub">Take or upload photos of your refrigerator, pantry, spice drawer, and groceries. AI will identify your ingredients and add them to your pantry. Add as many photos as you need.</div>
 
       <!-- Photo slots -->
       <div class="scan-section">
-        <div class="scan-section-label">Photos (tap to add)</div>
-        <div class="scan-photos">
-          <div class="scan-slot" id="scanSlot0" onclick="triggerScanPhoto(0)">
-            <span class="scan-slot-icon">🥫</span>
-            <span class="scan-slot-label">Cupboard</span>
-            <span class="scan-slot-hint">Tap to add photo</span>
-          </div>
-          <div class="scan-slot" id="scanSlot1" onclick="triggerScanPhoto(1)">
-            <span class="scan-slot-icon">🌿</span>
-            <span class="scan-slot-label">Spice Drawer</span>
-            <span class="scan-slot-hint">Tap to add photo</span>
-          </div>
-          <div class="scan-slot" id="scanSlot2" onclick="triggerScanPhoto(2)">
-            <span class="scan-slot-icon">🥦</span>
-            <span class="scan-slot-label">Refrigerator</span>
-            <span class="scan-slot-hint">Tap to add photo</span>
-          </div>
-          <div class="scan-slot" id="scanSlot3" onclick="triggerScanPhoto(3)">
-            <span class="scan-slot-icon">🛒</span>
-            <span class="scan-slot-label">Groceries</span>
-            <span class="scan-slot-hint">Tap to add photo</span>
-          </div>
-        </div>
+        <div class="scan-section-label">Photos</div>
+        <div class="scan-photos" id="scanPhotosGrid"></div>
+        <button type="button" onclick="addScanSlot()" style="margin-top:10px;width:100%;padding:12px;background:#f4f9f1;border:2px dashed #b8d4c0;border-radius:12px;color:#2d7a4f;font-size:.9rem;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px" id="addSlotBtn">+ Add Another Photo</button>
         <input type="file" id="scanFileInput" accept="image/*" capture="environment" style="display:none" onchange="handleScanPhoto(event)">
       </div>
 
@@ -1156,7 +1136,7 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
           <span style="font-weight:700;color:#92400e;font-size:.95rem">Always Have</span>
           <span class="pantry-group-count" id="pantryAlwaysCount" style="color:#6b8f7b;font-size:.8rem"></span>
         </div>
-        <p style="font-size:.78rem;color:#6b8f7b;margin:0 0 8px;line-height:1.4">Tap any item to unstar it and send it back to the master list.</p>
+        <p style="font-size:.78rem;color:#6b8f7b;margin:0 0 8px;line-height:1.4">Tap ★ again to send it back to the master list.</p>
         <div id="pantryAlwaysGroups"></div>
       </div>
 
@@ -1176,7 +1156,7 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
           <span style="font-size:1.1rem">🛒</span>
           <span style="font-weight:700;color:#1e5a3a;font-size:.95rem">Add Fresh Produce</span>
         </div>
-        <p style="font-size:.8rem;color:#4a5d52;margin:0 0 10px;line-height:1.5">Tap to add to <strong style="color:#166534">Fresh This Week</strong>, or tap <strong style="color:#2d7a4f">★</strong> to save to <strong style="color:#92400e">Always Have</strong> permanently (until unstarred).<br>Tap again to send it back to the master list.</p>
+        <p style="font-size:.8rem;color:#4a5d52;margin:0 0 10px;line-height:1.5">Tap to add to <strong style="color:#166534">Fresh This Week</strong>, or tap <strong style="color:#2d7a4f">★</strong> to save to <strong style="color:#92400e">Always Have</strong> permanently (until unstarred).<br>Tap ★ again to send it back to the master list.</p>
         <div id="mpPerishableGrid"></div>
       </div>
 
@@ -1187,7 +1167,7 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
           <span style="font-weight:700;color:#4a5d52;font-size:.95rem">Ingredients Not Selected</span>
           <span id="mpNotSelCount" style="color:#6b8f7b;font-size:.8rem"></span>
         </div>
-        <p style="font-size:.8rem;color:#4a5d52;margin:0 0 10px;line-height:1.5">Tap the <strong style="color:#1e5a3a">ingredient name</strong> → adds it to <strong style="color:#166534">Fresh This Week</strong><br>Tap the <strong style="color:#2d7a4f">★</strong> beside it → saves it to <strong style="color:#92400e">Always Have</strong> permanently (until unstarred)<br>Tap again to send it back to the master list.</p>
+        <p style="font-size:.8rem;color:#4a5d52;margin:0 0 10px;line-height:1.5">Tap the <strong style="color:#1e5a3a">ingredient name</strong> → adds it to <strong style="color:#166534">Fresh This Week</strong><br>Tap the <strong style="color:#2d7a4f">★</strong> beside it → saves it to <strong style="color:#92400e">Always Have</strong> permanently (until unstarred)<br>Tap ★ again to send it back to the master list.</p>
         <div id="mpNotSelChips"></div>
       </div>
 
@@ -1333,7 +1313,7 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
             <span>🥬 Fresh This Week <span style="font-weight:400;font-size:.75rem;opacity:.6">— use it before it spoils</span> <span id="todayCount" style="font-weight:400;opacity:.7;font-size:.8rem"></span></span><span class="arrow">▼</span>
           </button>
           <div class="qa-body open" id="todayBody">
-            <p style="font-size:.8rem;color:#1e5a3a;margin-bottom:10px;line-height:1.5">Fresh produce that spoils within days. Designed to reduce food waste by matching you to recipes that use them up. Tap what you bought this week.<br>Tap the <strong style="color:#2d7a4f">★</strong> to save it to <strong style="color:#92400e">Always Have</strong> permanently (until unstarred). Tap again to send it back to the master list.</p>
+            <p style="font-size:.8rem;color:#1e5a3a;margin-bottom:10px;line-height:1.5">Fresh produce that spoils within days. Designed to reduce food waste by matching you to recipes that use them up. Tap what you bought this week.<br>Tap the <strong style="color:#2d7a4f">★</strong> to save it to <strong style="color:#92400e">Always Have</strong> permanently (until unstarred). Tap ★ again to send it back to the master list.</p>
             <div id="todayChips"><span style="color:#1e5a3a;font-size:.82rem;font-style:italic">Nothing added yet — tap items below.</span></div>
             <div id="todayClearWrap" style="display:none;margin-top:10px">
               <button class="btn-sm-danger" onclick="todayClearAll()">Remove All</button>
@@ -1348,7 +1328,7 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
             <span><span style="color:#2d7a4f">★</span> Always Have <span style="font-weight:400;font-size:.75rem;opacity:.6">— pantry staples that last</span> <span id="alwaysCount" style="font-weight:400;opacity:.7;font-size:.8rem"></span></span><span class="arrow">▼</span>
           </button>
           <div class="qa-body open" id="alwaysBody">
-            <p style="font-size:.8rem;color:#4a5d52;margin-bottom:10px;line-height:1.5">Oils, spices, grains, tofu, canned goods — items that last weeks or more. Tap <strong style="color:#2d7a4f">★</strong> next to any ingredient below to save it here permanently.<br>Tap again to send it back to the master list.</p>
+            <p style="font-size:.8rem;color:#4a5d52;margin-bottom:10px;line-height:1.5">Oils, spices, grains, tofu, canned goods — items that last weeks or more. Tap <strong style="color:#2d7a4f">★</strong> next to any ingredient below to save it here permanently.<br>Tap ★ again to send it back to the master list.</p>
             <div id="alwaysChips"><span style="color:#4a5d52;font-size:.82rem;font-style:italic">Nothing saved yet — tap <span style="color:#2d7a4f">★</span> next to any ingredient in the list below.</span></div>
             <div id="alwaysClearWrap" style="display:none;margin-top:10px">
               <button class="btn-sm-danger" onclick="alwaysClearAll()">Remove All</button>
@@ -1362,7 +1342,7 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
             <span>📋 Ingredients Not Selected <span id="notSelCount" style="font-weight:400;opacity:.7;font-size:.8rem"></span></span><span class="arrow">▼</span>
           </button>
           <div class="qa-body open" id="notSelBody">
-            <p style="font-size:.8rem;color:#4a5d52;margin-bottom:10px;line-height:1.6">Tap the <strong style="color:#1e5a3a">ingredient name</strong> → adds it to <strong style="color:#1e5a3a">Fresh This Week</strong><br>Tap the <strong style="color:#2d7a4f">★</strong> beside it → saves it to <strong style="color:#92400e">Always Have</strong> permanently (until unstarred)<br>Tap again to send it back to the master list.</p>
+            <p style="font-size:.8rem;color:#4a5d52;margin-bottom:10px;line-height:1.6">Tap the <strong style="color:#1e5a3a">ingredient name</strong> → adds it to <strong style="color:#1e5a3a">Fresh This Week</strong><br>Tap the <strong style="color:#2d7a4f">★</strong> beside it → saves it to <strong style="color:#92400e">Always Have</strong> permanently (until unstarred)<br>Tap ★ again to send it back to the master list.</p>
 
             <div id="notSelChips"></div>
           </div>
@@ -1563,7 +1543,7 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
             <span>🥬 Fresh This Week <span style="font-weight:400;font-size:.75rem;opacity:.6">— use it before it spoils</span> <span id="cmTodayCount" style="font-weight:400;opacity:.7;font-size:.8rem"></span></span><span class="arrow">▼</span>
           </button>
           <div class="qa-body open" id="cmTodayBody">
-            <p style="font-size:.8rem;color:#1e5a3a;margin-bottom:10px;line-height:1.5">Fresh produce that spoils within days. Designed to reduce food waste by matching you to recipes that use them up. Tap what you bought this week.<br>Tap the <strong style="color:#2d7a4f">★</strong> to save it to <strong style="color:#92400e">Always Have</strong> permanently (until unstarred). Tap again to send it back to the master list.</p>
+            <p style="font-size:.8rem;color:#1e5a3a;margin-bottom:10px;line-height:1.5">Fresh produce that spoils within days. Designed to reduce food waste by matching you to recipes that use them up. Tap what you bought this week.<br>Tap the <strong style="color:#2d7a4f">★</strong> to save it to <strong style="color:#92400e">Always Have</strong> permanently (until unstarred). Tap ★ again to send it back to the master list.</p>
             <div id="cmTodayChips"><span style="color:#1e5a3a;font-size:.82rem;font-style:italic">Nothing added yet — tap items below.</span></div>
             <div id="cmTodayClearWrap" style="display:none;margin-top:10px">
               <button class="btn-sm-danger" onclick="todayClearAll()">Remove All</button>
@@ -1578,7 +1558,7 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
             <span><span style="color:#2d7a4f">★</span> Always Have <span style="font-weight:400;font-size:.75rem;opacity:.6">— pantry staples that last</span> <span id="cmAlwaysCount" style="font-weight:400;opacity:.7;font-size:.8rem"></span></span><span class="arrow">▼</span>
           </button>
           <div class="qa-body open" id="cmAlwaysBody">
-            <p style="font-size:.8rem;color:#4a5d52;margin-bottom:10px;line-height:1.5">Oils, spices, grains, tofu, canned goods — items that last weeks or more. Tap <strong style="color:#2d7a4f">★</strong> next to any ingredient below to save it here permanently.<br>Tap again to send it back to the master list.</p>
+            <p style="font-size:.8rem;color:#4a5d52;margin-bottom:10px;line-height:1.5">Oils, spices, grains, tofu, canned goods — items that last weeks or more. Tap <strong style="color:#2d7a4f">★</strong> next to any ingredient below to save it here permanently.<br>Tap ★ again to send it back to the master list.</p>
             <div id="cmAlwaysChips"><span style="color:#4a5d52;font-size:.82rem;font-style:italic">Nothing saved yet — tap <span style="color:#2d7a4f">★</span> next to any ingredient in the list below.</span></div>
             <div id="cmAlwaysClearWrap" style="display:none;margin-top:10px">
               <button class="btn-sm-danger" onclick="alwaysClearAll()">Remove All</button>
@@ -1592,7 +1572,7 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
             <span>📋 Ingredients Not Selected <span id="cmNotSelCount" style="font-weight:400;opacity:.7;font-size:.8rem"></span></span><span class="arrow">▼</span>
           </button>
           <div class="qa-body open" id="cmNotSelBody">
-            <p style="font-size:.8rem;color:#4a5d52;margin-bottom:10px;line-height:1.6">Tap the <strong style="color:#1e5a3a">ingredient name</strong> → adds it to <strong style="color:#1e5a3a">Fresh This Week</strong><br>Tap the <strong style="color:#2d7a4f">★</strong> beside it → saves it to <strong style="color:#92400e">Always Have</strong> permanently (until unstarred)<br>Tap again to send it back to the master list.</p>
+            <p style="font-size:.8rem;color:#4a5d52;margin-bottom:10px;line-height:1.6">Tap the <strong style="color:#1e5a3a">ingredient name</strong> → adds it to <strong style="color:#1e5a3a">Fresh This Week</strong><br>Tap the <strong style="color:#2d7a4f">★</strong> beside it → saves it to <strong style="color:#92400e">Always Have</strong> permanently (until unstarred)<br>Tap ★ again to send it back to the master list.</p>
             <div id="cmNotSelChips"></div>
           </div>
         </div>
@@ -5331,17 +5311,25 @@ function cmAddMissingToShop(id, items) {
   setTimeout(() => { btn.textContent = '<span class="cart">🛒</span> Add Missing to List'; btn.disabled = false; }, 2000);
 }
 
-// ── SCAN MY PANTRY ────────────────────────────────────────────────────────────
+// ── SCAN MY KITCHEN ──────────────────────────────────────────────────────────
 const SCAN_WORKER_URL = 'https://harvest-pantry-scan.kaplancali.workers.dev';
-const SCAN_PHOTOS = [null, null, null, null]; // base64 data for each slot
-const SCAN_SLOT_LABELS = ['Cupboard', 'Spice Drawer', 'Refrigerator', 'Groceries'];
-let _scanActiveSlot = 0;
+const SCAN_PHOTOS = []; // dynamic array of {base64, label}
+let _scanActiveSlot = -1;
 let _scanDetected = []; // [{name, source, known}]
+
+function _scanInitSlots() {
+  const grid = document.getElementById('scanPhotosGrid');
+  if (!grid) return;
+  if (SCAN_PHOTOS.length === 0) {
+    grid.innerHTML = '<div style="text-align:center;padding:18px;color:#6b8f7b;font-size:.88rem;font-style:italic">Tap "Add Another Photo" below to get started</div>';
+  }
+}
 
 function openScanModal() {
   const overlay = document.getElementById('scanOverlay');
   overlay.classList.add('open');
   document.body.style.overflow = 'hidden';
+  _scanInitSlots();
   updateScanBtn();
 }
 
@@ -5350,12 +5338,15 @@ function closeScanModal() {
   document.body.style.overflow = '';
 }
 
+function addScanSlot() {
+  _scanActiveSlot = SCAN_PHOTOS.length;
+  SCAN_PHOTOS.push(null);
+  document.getElementById('scanFileInput').click();
+}
+
 function triggerScanPhoto(slot) {
-  // If slot already has photo, remove it
   if (SCAN_PHOTOS[slot]) {
-    SCAN_PHOTOS[slot] = null;
-    resetScanSlot(slot);
-    updateScanBtn();
+    removeScanPhoto(slot);
     return;
   }
   _scanActiveSlot = slot;
@@ -5364,52 +5355,58 @@ function triggerScanPhoto(slot) {
 
 function handleScanPhoto(event) {
   const file = event.target.files[0];
-  if (!file) return;
+  if (!file) {
+    // User cancelled — remove the empty slot we just added
+    if (_scanActiveSlot >= 0 && !SCAN_PHOTOS[_scanActiveSlot]) {
+      SCAN_PHOTOS.splice(_scanActiveSlot, 1);
+    }
+    return;
+  }
   const reader = new FileReader();
   reader.onload = function(e) {
     const base64 = e.target.result;
-    SCAN_PHOTOS[_scanActiveSlot] = base64;
-    const slot = document.getElementById('scanSlot' + _scanActiveSlot);
-    slot.classList.add('has-photo');
-    slot.innerHTML = `
-      <img src="${base64}" alt="${SCAN_SLOT_LABELS[_scanActiveSlot]}">
-      <button class="scan-slot-remove" onclick="event.stopPropagation();removeScanPhoto(${_scanActiveSlot})">&times;</button>
-      <span class="scan-slot-label">${SCAN_SLOT_LABELS[_scanActiveSlot]}</span>
-    `;
+    const photoNum = _scanActiveSlot + 1;
+    SCAN_PHOTOS[_scanActiveSlot] = { base64, label: 'Photo ' + photoNum };
+    renderScanSlots();
     updateScanBtn();
   };
   reader.readAsDataURL(file);
-  event.target.value = ''; // reset so same file can be re-selected
+  event.target.value = '';
 }
 
 function removeScanPhoto(slot) {
-  SCAN_PHOTOS[slot] = null;
-  resetScanSlot(slot);
+  SCAN_PHOTOS.splice(slot, 1);
+  renderScanSlots();
   updateScanBtn();
 }
 
-function resetScanSlot(slot) {
-  const icons = ['🥫','🌿','🥦','🛒'];
-  const el = document.getElementById('scanSlot' + slot);
-  el.classList.remove('has-photo');
-  el.innerHTML = `
-    <span class="scan-slot-icon">${icons[slot]}</span>
-    <span class="scan-slot-label">${SCAN_SLOT_LABELS[slot]}</span>
-    <span class="scan-slot-hint">Tap to add photo</span>
-  `;
+function renderScanSlots() {
+  const grid = document.getElementById('scanPhotosGrid');
+  if (!grid) return;
+  if (SCAN_PHOTOS.length === 0) {
+    _scanInitSlots();
+    return;
+  }
+  grid.innerHTML = SCAN_PHOTOS.map((p, i) => {
+    if (!p) return '';
+    return `<div class="scan-slot has-photo" onclick="triggerScanPhoto(${i})">
+      <img src="${p.base64}" alt="${p.label}">
+      <button class="scan-slot-remove" onclick="event.stopPropagation();removeScanPhoto(${i})">&times;</button>
+      <span class="scan-slot-label">${p.label}</span>
+    </div>`;
+  }).join('');
 }
 
 function updateScanBtn() {
   const btn = document.getElementById('scanGoBtn');
   const label = document.getElementById('scanBtnLabel');
-  const hasPhotos = SCAN_PHOTOS.some(p => p !== null);
   const photoCount = SCAN_PHOTOS.filter(p => p !== null).length;
-  if (!hasPhotos) {
+  if (photoCount === 0) {
     btn.disabled = true;
     label.textContent = 'Add at least 1 photo to scan';
   } else {
     btn.disabled = false;
-    label.textContent = `Scan ${photoCount} photo${photoCount > 1 ? 's' : ''} with AI`;
+    label.textContent = 'Scan ' + photoCount + ' photo' + (photoCount > 1 ? 's' : '') + ' with AI';
   }
 }
 
@@ -5433,14 +5430,16 @@ async function runPantryScan() {
     let allItems = [];
     // Send each photo to the worker
     for (let i = 0; i < SCAN_PHOTOS.length; i++) {
-      if (!SCAN_PHOTOS[i]) continue;
-      const base64Data = SCAN_PHOTOS[i].split(',')[1];
-      const mediaType = SCAN_PHOTOS[i].match(/data:([^;]+);/)?.[1] || 'image/jpeg';
+      const photo = SCAN_PHOTOS[i];
+      if (!photo) continue;
+      const base64Data = photo.base64.split(',')[1];
+      const mediaType = photo.base64.match(/data:([^;]+);/)?.[1] || 'image/jpeg';
+      const slotLabel = photo.label || ('Photo ' + (i + 1));
 
       const resp = await fetch(SCAN_WORKER_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ image: base64Data, mediaType, slotLabel: SCAN_SLOT_LABELS[i] })
+        body: JSON.stringify({ image: base64Data, mediaType, slotLabel })
       });
 
       const data = await resp.json();
@@ -5448,7 +5447,7 @@ async function runPantryScan() {
         throw new Error(data.message || data.error || `Scan failed (${resp.status})`);
       }
       (data.ingredients || []).forEach(item =>
-        allItems.push({ name: item.toLowerCase().trim(), source: SCAN_SLOT_LABELS[i] })
+        allItems.push({ name: item.toLowerCase().trim(), source: slotLabel })
       );
     }
 
@@ -5561,8 +5560,10 @@ function confirmScanResults(target) {
   }
   closeScanModal();
   // Reset scan state
-  for (let i = 0; i < 3; i++) { SCAN_PHOTOS[i] = null; resetScanSlot(i); }
+  SCAN_PHOTOS.length = 0;
   _scanDetected = [];
+  const scanGrid = document.getElementById('scanPhotosGrid');
+  if (scanGrid) scanGrid.innerHTML = '';
   document.getElementById('scanResults').style.display = 'none';
 }
 
