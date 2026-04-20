@@ -1116,6 +1116,10 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
   <!-- ══════ MY PANTRY PANEL ══════ -->
   <div class="panel" id="panel-pantry">
     <div class="pantry-overview">
+      <!-- Hero video -->
+      <div style="margin-bottom:16px;border-radius:14px;overflow:hidden">
+        <video src="hero.mp4" autoplay loop muted playsinline style="width:100%;display:block;border-radius:14px"></video>
+      </div>
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:8px">
         <div>
           <h3 style="font-family:Georgia,serif;font-size:1.35rem;color:#1a2e24;margin:0;font-weight:700">My Pantry</h3>
@@ -1135,6 +1139,7 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
           <span style="font-weight:700;color:#166534;font-size:.95rem">Fresh This Week</span>
           <span class="pantry-group-count" id="pantryFreshCount" style="color:#6b8f7b;font-size:.8rem"></span>
         </div>
+        <p style="font-size:.78rem;color:#6b8f7b;margin:0 0 8px;line-height:1.4">Tap any item to remove it. Tap <strong style="color:#2d7a4f">★</strong> to move it to <strong style="color:#92400e">Always Have</strong> permanently (until unstarred).</p>
         <div class="pantry-chips-full" id="pantryFreshChips" style="display:flex;flex-wrap:wrap;gap:6px"></div>
       </div>
 
@@ -1145,6 +1150,7 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
           <span style="font-weight:700;color:#92400e;font-size:.95rem">Always Have</span>
           <span class="pantry-group-count" id="pantryAlwaysCount" style="color:#6b8f7b;font-size:.8rem"></span>
         </div>
+        <p style="font-size:.78rem;color:#6b8f7b;margin:0 0 8px;line-height:1.4">Tap any item to unstar it and send it back to the master list.</p>
         <div id="pantryAlwaysGroups"></div>
       </div>
 
@@ -1164,7 +1170,7 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
           <span style="font-size:1.1rem">🛒</span>
           <span style="font-weight:700;color:#1e5a3a;font-size:.95rem">Add Fresh Produce</span>
         </div>
-        <p style="font-size:.8rem;color:#4a5d52;margin:0 0 10px;line-height:1.5">Tap to add to <strong style="color:#166534">Fresh This Week</strong>, or tap ★ to save to <strong style="color:#92400e">Always Have</strong>.</p>
+        <p style="font-size:.8rem;color:#4a5d52;margin:0 0 10px;line-height:1.5">Tap to add to <strong style="color:#166534">Fresh This Week</strong>, or tap <strong style="color:#2d7a4f">★</strong> to save to <strong style="color:#92400e">Always Have</strong> permanently (until unstarred).<br>Tap again to send it back to the master list.</p>
         <div id="mpPerishableGrid"></div>
       </div>
 
@@ -1175,7 +1181,7 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
           <span style="font-weight:700;color:#4a5d52;font-size:.95rem">Ingredients Not Selected</span>
           <span id="mpNotSelCount" style="color:#6b8f7b;font-size:.8rem"></span>
         </div>
-        <p style="font-size:.8rem;color:#4a5d52;margin:0 0 10px;line-height:1.5">Tap the <strong style="color:#1e5a3a">ingredient name</strong> → adds it to <strong style="color:#166534">Fresh This Week</strong><br>Tap the <strong style="color:#2d7a4f">★</strong> beside it → saves it to <strong style="color:#92400e">Always Have</strong> permanently (until unstarred)</p>
+        <p style="font-size:.8rem;color:#4a5d52;margin:0 0 10px;line-height:1.5">Tap the <strong style="color:#1e5a3a">ingredient name</strong> → adds it to <strong style="color:#166534">Fresh This Week</strong><br>Tap the <strong style="color:#2d7a4f">★</strong> beside it → saves it to <strong style="color:#92400e">Always Have</strong> permanently (until unstarred)<br>Tap again to send it back to the master list.</p>
         <div id="mpNotSelChips"></div>
       </div>
 
@@ -1321,7 +1327,7 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
             <span>🥬 Fresh This Week <span style="font-weight:400;font-size:.75rem;opacity:.6">— use it before it spoils</span> <span id="todayCount" style="font-weight:400;opacity:.7;font-size:.8rem"></span></span><span class="arrow">▼</span>
           </button>
           <div class="qa-body open" id="todayBody">
-            <p style="font-size:.8rem;color:#1e5a3a;margin-bottom:10px;line-height:1.5">Fresh produce that spoils within days. Designed to reduce food waste by matching you to recipes that use them up. Tap what you bought this week. Always have something like spinach or carrots? Tap the ★ to save it to Always Have.</p>
+            <p style="font-size:.8rem;color:#1e5a3a;margin-bottom:10px;line-height:1.5">Fresh produce that spoils within days. Designed to reduce food waste by matching you to recipes that use them up. Tap what you bought this week.<br>Tap the <strong style="color:#2d7a4f">★</strong> to save it to <strong style="color:#92400e">Always Have</strong> permanently (until unstarred). Tap again to send it back to the master list.</p>
             <div id="todayChips"><span style="color:#1e5a3a;font-size:.82rem;font-style:italic">Nothing added yet — tap items below.</span></div>
             <div id="todayClearWrap" style="display:none;margin-top:10px">
               <button class="btn-sm-danger" onclick="todayClearAll()">Remove All</button>
@@ -1336,7 +1342,7 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
             <span><span style="color:#2d7a4f">★</span> Always Have <span style="font-weight:400;font-size:.75rem;opacity:.6">— pantry staples that last</span> <span id="alwaysCount" style="font-weight:400;opacity:.7;font-size:.8rem"></span></span><span class="arrow">▼</span>
           </button>
           <div class="qa-body open" id="alwaysBody">
-            <p style="font-size:.8rem;color:#4a5d52;margin-bottom:10px;line-height:1.5">Oils, spices, grains, tofu, canned goods — items that last weeks or more. Tap <strong style="color:#2d7a4f">★</strong> next to any ingredient below to save it here permanently.</p>
+            <p style="font-size:.8rem;color:#4a5d52;margin-bottom:10px;line-height:1.5">Oils, spices, grains, tofu, canned goods — items that last weeks or more. Tap <strong style="color:#2d7a4f">★</strong> next to any ingredient below to save it here permanently.<br>Tap again to send it back to the master list.</p>
             <div id="alwaysChips"><span style="color:#4a5d52;font-size:.82rem;font-style:italic">Nothing saved yet — tap <span style="color:#2d7a4f">★</span> next to any ingredient in the list below.</span></div>
             <div id="alwaysClearWrap" style="display:none;margin-top:10px">
               <button class="btn-sm-danger" onclick="alwaysClearAll()">Remove All</button>
@@ -1350,7 +1356,7 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
             <span>📋 Ingredients Not Selected <span id="notSelCount" style="font-weight:400;opacity:.7;font-size:.8rem"></span></span><span class="arrow">▼</span>
           </button>
           <div class="qa-body open" id="notSelBody">
-            <p style="font-size:.8rem;color:#4a5d52;margin-bottom:10px;line-height:1.6">Tap the <strong style="color:#1e5a3a">ingredient name</strong> → adds it to <strong style="color:#1e5a3a">Fresh This Week</strong><br>Tap the <strong style="color:#2d7a4f">★</strong> beside it → saves it to <strong style="color:#1e5a3a">Always Have</strong> permanently<br><span style="font-size:.72rem;color:#6b8f7b">Always have a perishable like spinach or carrots? Star it! Tap the ★ again to remove it anytime.</span></p>
+            <p style="font-size:.8rem;color:#4a5d52;margin-bottom:10px;line-height:1.6">Tap the <strong style="color:#1e5a3a">ingredient name</strong> → adds it to <strong style="color:#1e5a3a">Fresh This Week</strong><br>Tap the <strong style="color:#2d7a4f">★</strong> beside it → saves it to <strong style="color:#92400e">Always Have</strong> permanently (until unstarred)<br>Tap again to send it back to the master list.</p>
 
             <div id="notSelChips"></div>
           </div>
@@ -1551,7 +1557,7 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
             <span>🥬 Fresh This Week <span style="font-weight:400;font-size:.75rem;opacity:.6">— use it before it spoils</span> <span id="cmTodayCount" style="font-weight:400;opacity:.7;font-size:.8rem"></span></span><span class="arrow">▼</span>
           </button>
           <div class="qa-body open" id="cmTodayBody">
-            <p style="font-size:.8rem;color:#1e5a3a;margin-bottom:10px;line-height:1.5">Fresh produce that spoils within days. Designed to reduce food waste by matching you to recipes that use them up. Tap what you bought this week. Always have something like spinach or carrots? Tap the ★ to save it to Always Have.</p>
+            <p style="font-size:.8rem;color:#1e5a3a;margin-bottom:10px;line-height:1.5">Fresh produce that spoils within days. Designed to reduce food waste by matching you to recipes that use them up. Tap what you bought this week.<br>Tap the <strong style="color:#2d7a4f">★</strong> to save it to <strong style="color:#92400e">Always Have</strong> permanently (until unstarred). Tap again to send it back to the master list.</p>
             <div id="cmTodayChips"><span style="color:#1e5a3a;font-size:.82rem;font-style:italic">Nothing added yet — tap items below.</span></div>
             <div id="cmTodayClearWrap" style="display:none;margin-top:10px">
               <button class="btn-sm-danger" onclick="todayClearAll()">Remove All</button>
@@ -1566,7 +1572,7 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
             <span><span style="color:#2d7a4f">★</span> Always Have <span style="font-weight:400;font-size:.75rem;opacity:.6">— pantry staples that last</span> <span id="cmAlwaysCount" style="font-weight:400;opacity:.7;font-size:.8rem"></span></span><span class="arrow">▼</span>
           </button>
           <div class="qa-body open" id="cmAlwaysBody">
-            <p style="font-size:.8rem;color:#4a5d52;margin-bottom:10px;line-height:1.5">Oils, spices, grains, tofu, canned goods — items that last weeks or more. Tap <strong style="color:#2d7a4f">★</strong> next to any ingredient below to save it here permanently.</p>
+            <p style="font-size:.8rem;color:#4a5d52;margin-bottom:10px;line-height:1.5">Oils, spices, grains, tofu, canned goods — items that last weeks or more. Tap <strong style="color:#2d7a4f">★</strong> next to any ingredient below to save it here permanently.<br>Tap again to send it back to the master list.</p>
             <div id="cmAlwaysChips"><span style="color:#4a5d52;font-size:.82rem;font-style:italic">Nothing saved yet — tap <span style="color:#2d7a4f">★</span> next to any ingredient in the list below.</span></div>
             <div id="cmAlwaysClearWrap" style="display:none;margin-top:10px">
               <button class="btn-sm-danger" onclick="alwaysClearAll()">Remove All</button>
@@ -1580,7 +1586,7 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
             <span>📋 Ingredients Not Selected <span id="cmNotSelCount" style="font-weight:400;opacity:.7;font-size:.8rem"></span></span><span class="arrow">▼</span>
           </button>
           <div class="qa-body open" id="cmNotSelBody">
-            <p style="font-size:.8rem;color:#4a5d52;margin-bottom:10px;line-height:1.6">Tap the <strong style="color:#1e5a3a">ingredient name</strong> → adds it to <strong style="color:#1e5a3a">Fresh This Week</strong><br>Tap the <strong style="color:#2d7a4f">★</strong> beside it → saves it to <strong style="color:#1e5a3a">Always Have</strong> permanently<br><span style="font-size:.72rem;color:#6b8f7b">Always have a perishable like spinach or carrots? Star it! Tap the ★ again to remove it anytime.</span></p>
+            <p style="font-size:.8rem;color:#4a5d52;margin-bottom:10px;line-height:1.6">Tap the <strong style="color:#1e5a3a">ingredient name</strong> → adds it to <strong style="color:#1e5a3a">Fresh This Week</strong><br>Tap the <strong style="color:#2d7a4f">★</strong> beside it → saves it to <strong style="color:#92400e">Always Have</strong> permanently (until unstarred)<br>Tap again to send it back to the master list.</p>
             <div id="cmNotSelChips"></div>
           </div>
         </div>
