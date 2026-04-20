@@ -1097,8 +1097,11 @@ body.hints-seen .hint-toggle{display:inline-flex}
   <!-- TABS -->
   <div class="tab-bar" id="tabBar">
     <button class="tab-btn" onclick="showTab('pantry')">🥬 My Pantry</button>
-    <button class="tab-btn on" onclick="showTab('search')">🔍 Browse</button>
-    <button class="tab-btn" onclick="showTab('canmake')">🧑‍🍳 Ready to Cook</button>
+    <button class="tab-btn on" onclick="showTab('search')">🔍 Browse All</button>
+    <button class="tab-btn" onclick="showTab('canmake')" style="display:flex;flex-direction:column;align-items:center;gap:2px;line-height:1.2">
+      <span>🧑‍🍳 Ready to Cook</span>
+      <span style="font-size:0.7rem;font-weight:400;opacity:0.7;letter-spacing:0">1 or fewer missing</span>
+    </button>
     <button class="tab-btn" onclick="showTab('favorites')">❤️ Favorites</button>
     <button class="tab-btn" onclick="showTab('shopping')"><span class="cart">🛒</span> Shopping List</button>
   </div>
