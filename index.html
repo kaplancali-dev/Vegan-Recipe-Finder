@@ -582,6 +582,11 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
 .filter-section{margin-top:14px}
 
 .filter-label{font-size:0.73rem;font-weight:700;color:#2d7a4f;text-transform:uppercase;letter-spacing:.05em;margin-bottom:7px}
+.filter-toggle{display:flex;justify-content:space-between;align-items:center;cursor:pointer;user-select:none}
+.filter-toggle .ft-chevron{font-size:.7rem;color:#6b8f7b;transition:transform .2s}
+.filter-toggle .ft-chevron.closed{transform:rotate(-90deg)}
+.filter-body{overflow:hidden;transition:max-height .25s ease,opacity .2s ease;max-height:500px;opacity:1}
+.filter-body.collapsed{max-height:0;opacity:0;margin:0 !important}
 .filter-chips{display:flex;flex-wrap:wrap;gap:5px}
 .fc{background:#faf7f2;border:1.5px solid #f3ede3;border-radius:99px;padding:5px 12px;font-size:0.78rem;font-weight:600;color:#2d7a4f;cursor:pointer;transition:all .13s;white-space:nowrap}
 .fc:hover{border-color:#2d7a4f;background:#ffffff;color:#2d7a4f}
@@ -1243,27 +1248,38 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
           </div>
         </div>
 
-        <!-- FILTERS CARD: TIME, ALLERGIES -->
-        <div class="card">
-          <!-- TIME FILTER -->
-          <div class="filter-label">Max Cook Time <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#4b7a52">(optional)</span></div>
-          <div class="filter-chips" id="timeGrid" style="margin-bottom:14px;margin-top:7px">
-            <button class="fc on" onclick="pickFilter(this,'time',0)">⏱ Any</button>
-            <button class="fc" onclick="pickFilter(this,'time',15)">≤ 15 min</button>
-            <button class="fc" onclick="pickFilter(this,'time',30)">≤ 30 min</button>
-            <button class="fc" onclick="pickFilter(this,'time',45)">≤ 45 min</button>
-            <button class="fc" onclick="pickFilter(this,'time',60)">≤ 60 min</button>
+        <!-- FILTERS CARD: TIME -->
+        <div class="card" style="margin-bottom:12px">
+          <div class="filter-toggle" onclick="toggleFilterSection(this)">
+            <div class="filter-label" style="margin:0">Max Cook Time <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#4b7a52">(optional)</span></div>
+            <span class="ft-chevron">▼</span>
           </div>
-          <!-- ALLERGY & DIETARY NEEDS FILTER -->
-          <div class="filter-label">Allergies &amp; Dietary Needs <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#ef4444;font-size:0.75rem">— excludes matching recipes</span></div>
-          <div class="filter-chips" id="allergyGrid" style="margin-bottom:14px;margin-top:7px">
-            <span class="allergy-chip" onclick="toggleAllergy(this,'peanut')">🥜 Peanuts</span>
-            <span class="allergy-chip" onclick="toggleAllergy(this,'tree nut')">🌰 Tree Nuts</span>
-            <span class="allergy-chip" onclick="toggleAllergy(this,'soy')">🫘 Soy</span>
-            <span class="allergy-chip" onclick="toggleAllergy(this,'coconut')">🥥 Coconut</span>
-            <span class="allergy-chip" onclick="toggleAllergy(this,'corn')">🌽 Corn</span>
-            <span class="allergy-chip" onclick="toggleAllergy(this,'mushroom')">🍄 Mushrooms</span>
-            <span class="allergy-chip" onclick="toggleAllergy(this,'nightshade')">🍅 Nightshades</span>
+          <div class="filter-body" style="margin-top:7px">
+            <div class="filter-chips" id="timeGrid">
+              <button class="fc on" onclick="pickFilter(this,'time',0)">⏱ Any</button>
+              <button class="fc" onclick="pickFilter(this,'time',15)">≤ 15 min</button>
+              <button class="fc" onclick="pickFilter(this,'time',30)">≤ 30 min</button>
+              <button class="fc" onclick="pickFilter(this,'time',45)">≤ 45 min</button>
+              <button class="fc" onclick="pickFilter(this,'time',60)">≤ 60 min</button>
+            </div>
+          </div>
+        </div>
+        <!-- ALLERGIES CARD -->
+        <div class="card" style="margin-bottom:12px">
+          <div class="filter-toggle" onclick="toggleFilterSection(this)">
+            <div class="filter-label" style="margin:0">Allergies &amp; Dietary Needs <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#ef4444;font-size:0.75rem">— excludes matching recipes</span></div>
+            <span class="ft-chevron">▼</span>
+          </div>
+          <div class="filter-body" style="margin-top:7px">
+            <div class="filter-chips" id="allergyGrid">
+              <span class="allergy-chip" onclick="toggleAllergy(this,'peanut')">🥜 Peanuts</span>
+              <span class="allergy-chip" onclick="toggleAllergy(this,'tree nut')">🌰 Tree Nuts</span>
+              <span class="allergy-chip" onclick="toggleAllergy(this,'soy')">🫘 Soy</span>
+              <span class="allergy-chip" onclick="toggleAllergy(this,'coconut')">🥥 Coconut</span>
+              <span class="allergy-chip" onclick="toggleAllergy(this,'corn')">🌽 Corn</span>
+              <span class="allergy-chip" onclick="toggleAllergy(this,'mushroom')">🍄 Mushrooms</span>
+              <span class="allergy-chip" onclick="toggleAllergy(this,'nightshade')">🍅 Nightshades</span>
+            </div>
           </div>
         </div>
 
@@ -1462,26 +1478,36 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
 
         <!-- MAX COOK TIME -->
         <div class="card" style="margin-bottom:12px">
-          <div class="filter-label">Max Cook Time <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#4b7a52">(optional)</span></div>
-          <div class="filter-chips" style="margin-top:7px">
-            <button class="fc on" id="cmtime-0"  onclick="setCMTime(this,0)">⏱ Any</button>
-            <button class="fc"    id="cmtime-15" onclick="setCMTime(this,15)">≤ 15 min</button>
-            <button class="fc"    id="cmtime-30" onclick="setCMTime(this,30)">≤ 30 min</button>
-            <button class="fc"    id="cmtime-45" onclick="setCMTime(this,45)">≤ 45 min</button>
-            <button class="fc"    id="cmtime-60" onclick="setCMTime(this,60)">≤ 60 min</button>
+          <div class="filter-toggle" onclick="toggleFilterSection(this)">
+            <div class="filter-label" style="margin:0">Max Cook Time <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#4b7a52">(optional)</span></div>
+            <span class="ft-chevron">▼</span>
+          </div>
+          <div class="filter-body" style="margin-top:7px">
+            <div class="filter-chips">
+              <button class="fc on" id="cmtime-0"  onclick="setCMTime(this,0)">⏱ Any</button>
+              <button class="fc"    id="cmtime-15" onclick="setCMTime(this,15)">≤ 15 min</button>
+              <button class="fc"    id="cmtime-30" onclick="setCMTime(this,30)">≤ 30 min</button>
+              <button class="fc"    id="cmtime-45" onclick="setCMTime(this,45)">≤ 45 min</button>
+              <button class="fc"    id="cmtime-60" onclick="setCMTime(this,60)">≤ 60 min</button>
+            </div>
           </div>
         </div>
         <!-- ALLERGIES -->
         <div class="card" style="margin-bottom:12px">
-          <div class="filter-label">Allergies &amp; Dietary Needs <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#ef4444;font-size:0.75rem">— excludes matching recipes</span></div>
-          <div class="filter-chips" id="cmAllergyGrid" style="margin-top:7px">
-            <span class="allergy-chip" onclick="toggleCMAllergy(this,'peanut')">🥜 Peanuts</span>
-            <span class="allergy-chip" onclick="toggleCMAllergy(this,'tree nut')">🌰 Tree Nuts</span>
-            <span class="allergy-chip" onclick="toggleCMAllergy(this,'soy')">🫘 Soy</span>
-            <span class="allergy-chip" onclick="toggleCMAllergy(this,'coconut')">🥥 Coconut</span>
-            <span class="allergy-chip" onclick="toggleCMAllergy(this,'corn')">🌽 Corn</span>
-            <span class="allergy-chip" onclick="toggleCMAllergy(this,'mushroom')">🍄 Mushrooms</span>
-            <span class="allergy-chip" onclick="toggleCMAllergy(this,'nightshade')">🍅 Nightshades</span>
+          <div class="filter-toggle" onclick="toggleFilterSection(this)">
+            <div class="filter-label" style="margin:0">Allergies &amp; Dietary Needs <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#ef4444;font-size:0.75rem">— excludes matching recipes</span></div>
+            <span class="ft-chevron">▼</span>
+          </div>
+          <div class="filter-body" style="margin-top:7px">
+            <div class="filter-chips" id="cmAllergyGrid">
+              <span class="allergy-chip" onclick="toggleCMAllergy(this,'peanut')">🥜 Peanuts</span>
+              <span class="allergy-chip" onclick="toggleCMAllergy(this,'tree nut')">🌰 Tree Nuts</span>
+              <span class="allergy-chip" onclick="toggleCMAllergy(this,'soy')">🫘 Soy</span>
+              <span class="allergy-chip" onclick="toggleCMAllergy(this,'coconut')">🥥 Coconut</span>
+              <span class="allergy-chip" onclick="toggleCMAllergy(this,'corn')">🌽 Corn</span>
+              <span class="allergy-chip" onclick="toggleCMAllergy(this,'mushroom')">🍄 Mushrooms</span>
+              <span class="allergy-chip" onclick="toggleCMAllergy(this,'nightshade')">🍅 Nightshades</span>
+            </div>
           </div>
         </div>
         <!-- SECTION 1: FRESH THIS WEEK (CM) -->
@@ -2884,6 +2910,13 @@ function toggleAlwaysPanel() {
   document.getElementById('alwaysToggle').classList.toggle('open', alwaysOpen);
   document.querySelector('#alwaysToggle .arrow').textContent = alwaysOpen ? '▲' : '▼';
 }
+function toggleFilterSection(toggleEl) {
+  const body = toggleEl.nextElementSibling;
+  const chevron = toggleEl.querySelector('.ft-chevron');
+  body.classList.toggle('collapsed');
+  chevron.classList.toggle('closed');
+}
+
 function toggleTodayPanel() {
   todayOpen = !todayOpen;
   document.getElementById('todayBody').classList.toggle('open', todayOpen);
