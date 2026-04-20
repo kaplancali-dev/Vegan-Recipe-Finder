@@ -3538,6 +3538,23 @@ function closeFindExplainer() {
 // Keep old name as alias
 function openRecipeSearch(url) { openRecipeUrl(url); }
 
+function reportBrokenLink(recipeId, recipeTitle, url) {
+  try {
+    const sb = sbClient();
+    sb.from('app_errors').insert({
+      message: 'Broken link report: ' + String(recipeTitle).slice(0, 200),
+      source: 'user_report',
+      line: recipeId || 0,
+      col: 0,
+      stack: String(url).slice(0, 1000),
+      user_agent: navigator.userAgent.slice(0, 200),
+      url: location.pathname,
+      user_id: _sbUser ? _sbUser.id : null
+    }).then(() => {});
+  } catch(e) {}
+  showToast('Thanks! We'll look into this link 🔧');
+}
+
 function siteHomeUrl(r) {
   // Show globe only when we have a direct recipe URL — goes straight to the recipe
   if (!r.url) return null;
@@ -3694,6 +3711,7 @@ function openDetail(id) {
   document.getElementById('detailActions').innerHTML = `
     <button class="btn-detail btn-detail-primary" style="flex:1;min-width:140px" onclick="openRecipeUrl('${recipeUrl(r)}')">📖 View Full Instructions</button>
     ${recipeDomain ? `<div style="text-align:center;font-size:0.72rem;color:#6b8f7b;margin:-4px 0 4px">Opens original recipe at ${recipeDomain}</div>` : ''}
+    <div style="text-align:center;margin:-2px 0 6px"><a href="javascript:void(0)" onclick="reportBrokenLink(${id},'${r.title.replace(/'/g,"\\'")}','${recipeUrl(r).replace(/'/g,"\\'")}')" style="font-size:0.68rem;color:#b0b0b0;text-decoration:none">🔗 Link not working? Report it</a></div>
     <button class="btn-detail btn-detail-secondary" onclick="toggleFav(${id});openDetail(${id})">
       ${isFav ? '❤️ Saved' : '🤍 Save'}
     </button>
