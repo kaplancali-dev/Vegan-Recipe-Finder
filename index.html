@@ -1419,6 +1419,14 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
     <div class="cm-layout">
       <!-- LEFT: INGREDIENT CHECKLIST -->
       <div>
+        <!-- RECIPE NAME SEARCH (perishables — most used, so first) -->
+        <div class="card" style="margin-bottom:12px">
+          <div class="filter-label">Use Your Perishables <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#4b7a52">(optional)</span></div>
+          <input class="name-search-input" id="cmNameInput" type="text" style="margin-top:7px"
+            placeholder="Recipe must include… e.g. kale, avocado, tacos"
+            oninput="cmNameFilter=this.value.trim().toLowerCase();runCanMake()">
+        </div>
+
         <!-- CUISINE / CATEGORY -->
         <div class="card" style="margin-bottom:12px">
           <div class="filter-label">Category <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#4b7a52">(optional)</span></div>
@@ -1460,13 +1468,6 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
             <button class="fc"    id="cmtime-45" onclick="setCMTime(this,45)">≤ 45 min</button>
             <button class="fc"    id="cmtime-60" onclick="setCMTime(this,60)">≤ 60 min</button>
           </div>
-        </div>
-        <!-- RECIPE NAME SEARCH -->
-        <div class="card" style="margin-bottom:12px">
-          <div class="filter-label">Use Your Perishables <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#4b7a52">(optional)</span></div>
-          <input class="name-search-input" id="cmNameInput" type="text" style="margin-top:7px"
-            placeholder="Recipe must include… e.g. kale, avocado, tacos"
-            oninput="cmNameFilter=this.value.trim().toLowerCase();runCanMake()">
         </div>
         <!-- ALLERGIES -->
         <div class="card" style="margin-bottom:12px">
