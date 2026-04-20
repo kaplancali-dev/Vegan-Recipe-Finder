@@ -1147,10 +1147,13 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
   <!-- TABS -->
   <div class="tab-bar">
     <button class="tab-btn on" onclick="showTab('home')">🏠 Home</button>
-    <button class="tab-btn" onclick="showTab('search')">🔍 Browse All Recipes</button>
+    <button class="tab-btn" onclick="showTab('search')" style="display:flex;flex-direction:column;align-items:center;gap:2px;line-height:1.2">
+      <span>🔍 Browse All Recipes</span>
+      <span style="font-size:0.7rem;font-weight:400;opacity:0.7;letter-spacing:0">against your pantry</span>
+    </button>
     <button class="tab-btn" onclick="showTab('canmake')" style="display:flex;flex-direction:column;align-items:center;gap:2px;line-height:1.2">
       <span>🧑‍🍳 What Can I Make Now</span>
-      <span style="font-size:0.7rem;font-weight:400;opacity:0.7;letter-spacing:0">no more than 1 missing</span>
+      <span style="font-size:0.7rem;font-weight:400;opacity:0.7;letter-spacing:0">missing 1 or fewer ingredients</span>
     </button>
     <button class="tab-btn" onclick="showTab('favorites')">❤️ Favorites</button>
     <button class="tab-btn" onclick="showTab('shopping')"><span class="cart">🛒</span> Shopping List</button>
