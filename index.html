@@ -1116,6 +1116,11 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
   <!-- ══════ MY PANTRY PANEL ══════ -->
   <div class="panel" id="panel-pantry">
     <div class="pantry-overview">
+      <!-- Hero video -->
+      <div style="margin-bottom:16px;border-radius:14px;overflow:hidden">
+        <video src="hero.mp4" autoplay loop muted playsinline style="width:100%;display:block;border-radius:14px"></video>
+      </div>
+
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:8px">
         <div>
           <h3 style="font-family:Georgia,serif;font-size:1.35rem;color:#1a2e24;margin:0;font-weight:700">My Pantry</h3>
@@ -1126,11 +1131,6 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
           <button type="button" onclick="openScanModal()" style="font-size:.8rem;padding:6px 14px;background:#fff;color:#2d7a4f;border:1.5px solid #2d7a4f;border-radius:8px;cursor:pointer;font-weight:600;font-family:inherit">📷 Scan Pantry</button>
           <button class="btn-sm-green" onclick="document.getElementById('mpPerishGroup').scrollIntoView({behavior:'smooth',block:'start'})" style="font-size:.8rem;padding:6px 14px">+ Add Items</button>
         </div>
-      </div>
-
-      <!-- Hero video -->
-      <div style="margin-bottom:16px;border-radius:14px;overflow:hidden">
-        <video src="hero.mp4" autoplay loop muted playsinline style="width:100%;display:block;border-radius:14px"></video>
       </div>
 
       <!-- Fresh This Week section -->
