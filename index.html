@@ -1237,7 +1237,7 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
         </div>
 
         <!-- FILTERS CARD: TIME -->
-        <div class="card" style="margin-bottom:12px">
+        <div class="card" style="margin-bottom:12px" data-filter-id="browse-time">
           <div class="filter-toggle" onclick="toggleFilterSection(this)">
             <div class="filter-label" style="margin:0">Max Cook Time <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#4b7a52">(optional)</span></div>
             <span class="ft-chevron">▼</span>
@@ -1253,7 +1253,7 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
           </div>
         </div>
         <!-- ALLERGIES CARD -->
-        <div class="card" style="margin-bottom:12px">
+        <div class="card" style="margin-bottom:12px" data-filter-id="browse-allergy">
           <div class="filter-toggle" onclick="toggleFilterSection(this)">
             <div class="filter-label" style="margin:0">Allergies &amp; Dietary Needs <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#ef4444;font-size:0.75rem">— excludes matching recipes</span></div>
             <span class="ft-chevron">▼</span>
@@ -1465,7 +1465,7 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
         </div>
 
         <!-- MAX COOK TIME -->
-        <div class="card" style="margin-bottom:12px">
+        <div class="card" style="margin-bottom:12px" data-filter-id="cm-time">
           <div class="filter-toggle" onclick="toggleFilterSection(this)">
             <div class="filter-label" style="margin:0">Max Cook Time <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#4b7a52">(optional)</span></div>
             <span class="ft-chevron">▼</span>
@@ -1481,7 +1481,7 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
           </div>
         </div>
         <!-- ALLERGIES -->
-        <div class="card" style="margin-bottom:12px">
+        <div class="card" style="margin-bottom:12px" data-filter-id="cm-allergy">
           <div class="filter-toggle" onclick="toggleFilterSection(this)">
             <div class="filter-label" style="margin:0">Allergies &amp; Dietary Needs <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#ef4444;font-size:0.75rem">— excludes matching recipes</span></div>
             <span class="ft-chevron">▼</span>
@@ -2903,7 +2903,27 @@ function toggleFilterSection(toggleEl) {
   const chevron = toggleEl.querySelector('.ft-chevron');
   body.classList.toggle('collapsed');
   chevron.classList.toggle('closed');
+  // Save collapsed state to localStorage
+  const key = toggleEl.closest('.card').dataset.filterId;
+  if (key) {
+    const collapsed = JSON.parse(localStorage.getItem('vrf_collapsed') || '{}');
+    collapsed[key] = body.classList.contains('collapsed');
+    localStorage.setItem('vrf_collapsed', JSON.stringify(collapsed));
+  }
 }
+// Restore collapsed filter states on load
+(function restoreCollapsedFilters() {
+  const collapsed = JSON.parse(localStorage.getItem('vrf_collapsed') || '{}');
+  document.querySelectorAll('.card[data-filter-id]').forEach(card => {
+    const key = card.dataset.filterId;
+    if (collapsed[key]) {
+      const body = card.querySelector('.filter-body');
+      const chevron = card.querySelector('.ft-chevron');
+      if (body) body.classList.add('collapsed');
+      if (chevron) chevron.classList.add('closed');
+    }
+  });
+})();
 
 function toggleTodayPanel() {
   todayOpen = !todayOpen;
