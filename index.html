@@ -1044,18 +1044,13 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
           <div class="pp-bar-meta"><span id="ppPctLabel">0 of 799 recipes ready</span></div>
           <div class="pp-projection" id="ppProjection" style="font-size:.82rem;color:#5a7a5a;margin-top:6px;font-style:italic;line-height:1.4"></div>
           <div class="pp-tip" id="ppTip" style="font-size:.78rem;color:#7a8a7a;margin-top:4px;line-height:1.4;display:none">Many missing ingredients are optional garnishes or easy to substitute — recipes at 80%+ are usually ready to cook!</div>
-          <!-- Staples CTA removed — onboarding guides new users, sidebar shows staples -->
-          <button type="button" class="pp-cta" style="margin-top:6px;background:#fff;color:var(--green);border:1.5px solid var(--green);box-shadow:none" onclick="openScanModal()">
-            <span class="pp-cta-icon">📷</span>
-            <span class="pp-cta-label">Scan My Pantry with AI</span>
-          </button>
           <div class="pp-hint" id="ppHint" style="display:none"></div>
           <button onclick="showTab('favorites');setTimeout(()=>{const el=document.getElementById('syncLoggedOut')||document.getElementById('syncLoggedIn');if(el)el.scrollIntoView({behavior:'smooth',block:'center'});},300)" style="margin-top:10px;background:none;border:1px solid #d4e6d8;border-radius:8px;padding:8px 12px;color:#2d7a4f;font-size:.8rem;cursor:pointer;font-weight:600;display:flex;align-items:center;justify-content:center;gap:6px;width:100%;transition:all .15s;">
             ☁️ <span style="text-decoration:underline">Cloud Sync</span> — sign in to sync your updates across all devices
           </button>
           <div style="margin-top:14px;padding:14px 16px;background:#f4f9f1;border:1px solid #d4e6d8;border-radius:12px;text-align:left;line-height:1.6;">
-            <div style="font-size:.95rem;font-weight:700;color:#1e5a3a;margin-bottom:6px;">📅 Weekly Meal Plan</div>
-            <div style="font-size:.85rem;color:#2d4a35;">Tap 🩶 Save on any recipe card, then go to <strong>Favorites</strong> and tap <strong>Plan</strong> to build your weekly meal plan. HARVEST will show you exactly what you need to buy.</div>
+            <div style="font-size:.95rem;font-weight:700;color:#1e5a3a;margin-bottom:6px;">📅 Meal Planner</div>
+            <div style="font-size:.85rem;color:#2d4a35;">Planning a <strong>weekly menu</strong>, <strong>dinner party</strong>, or <strong>celebration</strong>? Tap 🩶 Save on any recipe card, then go to <strong>Favorites</strong> and tap <strong>Plan</strong> to build your menu. HARVEST will generate a shopping list with exactly what you need to buy.</div>
           </div>
         </aside>
       </div>
@@ -1133,8 +1128,9 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
           <h3 style="font-family:Georgia,serif;font-size:1.35rem;color:#1a2e24;margin:0;font-weight:700">My Pantry</h3>
           <p style="font-size:.82rem;color:#6b8f7b;margin:4px 0 0">Everything you've told HARVEST you have on hand</p>
         </div>
-        <div style="display:flex;gap:8px;align-items:center">
+        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
           <span class="pantry-stat" id="pantryStatTotal" style="background:#f0fdf4;color:#166534;padding:5px 12px;border-radius:20px;font-size:.82rem;font-weight:600"></span>
+          <button type="button" onclick="openScanModal()" style="font-size:.8rem;padding:6px 14px;background:#fff;color:#2d7a4f;border:1.5px solid #2d7a4f;border-radius:8px;cursor:pointer;font-weight:600;font-family:inherit">📷 Scan Pantry</button>
           <button class="btn-sm-green" onclick="document.getElementById('mpPerishGroup').scrollIntoView({behavior:'smooth',block:'start'})" style="font-size:.8rem;padding:6px 14px">+ Add Items</button>
         </div>
       </div>
