@@ -1054,8 +1054,8 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
   <div class="scan-overlay" id="scanOverlay">
     <div class="scan-modal">
       <button class="scan-close" onclick="closeScanModal()">&times;</button>
-      <div class="scan-title">Scan My Pantry</div>
-      <div class="scan-sub">Take photos of your cupboard, spice drawer, and refrigerator. AI will identify your ingredients and add them to your kitchen staples.</div>
+      <div class="scan-title">Scan My Kitchen</div>
+      <div class="scan-sub">Take or upload photos of your cupboard, spice drawer, refrigerator, and groceries. AI will identify your ingredients and add them to your pantry.</div>
 
       <!-- Photo slots -->
       <div class="scan-section">
@@ -1074,6 +1074,11 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
           <div class="scan-slot" id="scanSlot2" onclick="triggerScanPhoto(2)">
             <span class="scan-slot-icon">🥦</span>
             <span class="scan-slot-label">Refrigerator</span>
+            <span class="scan-slot-hint">Tap to add photo</span>
+          </div>
+          <div class="scan-slot" id="scanSlot3" onclick="triggerScanPhoto(3)">
+            <span class="scan-slot-icon">🛒</span>
+            <span class="scan-slot-label">Groceries</span>
             <span class="scan-slot-hint">Tap to add photo</span>
           </div>
         </div>
@@ -1128,7 +1133,7 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
         </div>
         <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
           <span class="pantry-stat" id="pantryStatTotal" style="background:#f0fdf4;color:#166534;padding:5px 12px;border-radius:20px;font-size:.82rem;font-weight:600"></span>
-          <button type="button" onclick="openScanModal()" style="font-size:.8rem;padding:6px 14px;background:#fff;color:#2d7a4f;border:1.5px solid #2d7a4f;border-radius:8px;cursor:pointer;font-weight:600;font-family:inherit">📷 Scan Pantry</button>
+          <button type="button" onclick="openScanModal()" style="font-size:.8rem;padding:6px 14px;background:#fff;color:#2d7a4f;border:1.5px solid #2d7a4f;border-radius:8px;cursor:pointer;font-weight:600;font-family:inherit">📷 Scan My Kitchen</button>
           <button class="btn-sm-green" onclick="document.getElementById('mpPerishGroup').scrollIntoView({behavior:'smooth',block:'start'})" style="font-size:.8rem;padding:6px 14px">+ Add Items</button>
         </div>
       </div>
@@ -5328,8 +5333,8 @@ function cmAddMissingToShop(id, items) {
 
 // ── SCAN MY PANTRY ────────────────────────────────────────────────────────────
 const SCAN_WORKER_URL = 'https://harvest-pantry-scan.kaplancali.workers.dev';
-const SCAN_PHOTOS = [null, null, null]; // base64 data for each slot
-const SCAN_SLOT_LABELS = ['Cupboard', 'Spice Drawer', 'Refrigerator'];
+const SCAN_PHOTOS = [null, null, null, null]; // base64 data for each slot
+const SCAN_SLOT_LABELS = ['Cupboard', 'Spice Drawer', 'Refrigerator', 'Groceries'];
 let _scanActiveSlot = 0;
 let _scanDetected = []; // [{name, source, known}]
 
@@ -5384,7 +5389,7 @@ function removeScanPhoto(slot) {
 }
 
 function resetScanSlot(slot) {
-  const icons = ['🥫','🌿','🥦'];
+  const icons = ['🥫','🌿','🥦','🛒'];
   const el = document.getElementById('scanSlot' + slot);
   el.classList.remove('has-photo');
   el.innerHTML = `
