@@ -668,40 +668,9 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
 .home-cta-secondary:hover{background:#e8f3ec}
 .hcta-icon{font-size:1.15rem}
 
-.home-section{margin-bottom:32px}
-.home-section-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px}
-.home-section-title{font-family:Georgia,serif;font-size:1.35rem;color:#1a2e24;margin:0;font-weight:700}
-.home-shuffle{background:none;border:1px solid #e8e3d8;border-radius:99px;padding:6px 14px;font-size:.78rem;color:#4a5d52;cursor:pointer;font-family:inherit;transition:all .15s}
-.home-shuffle:hover{background:#f1f9f2;color:#1e5a3a;border-color:#2d7a4f}
-
-.cat-tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px}
-.cat-tile{background:#fff;border:1px solid #e8e3d8;border-radius:14px;padding:18px 10px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:6px;transition:all .15s;font-family:inherit}
-.cat-tile:hover{transform:translateY(-2px);border-color:#2d7a4f;box-shadow:0 4px 14px rgba(26,46,36,.08)}
-.cat-tile .ct-emoji{font-size:1.8rem}
-.cat-tile .ct-label{font-size:.85rem;font-weight:600;color:#1a2e24;text-align:center;line-height:1.2}
-
-.featured-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
-@media(max-width:1100px){.featured-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:640px){.featured-grid{grid-template-columns:1fr}}
-.feat-card{background:#fff;border:1px solid #e8e3d8;border-radius:14px;overflow:hidden;cursor:pointer;transition:all .2s;display:flex;flex-direction:column}
-.feat-card:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(26,46,36,.1)}
-.feat-hero{aspect-ratio:16/10;background:#f3ede3;overflow:hidden}
-.feat-hero img{width:100%;height:100%;object-fit:cover;display:block}
-.feat-body{padding:14px 16px}
-.feat-title{font-family:Georgia,serif;font-size:1rem;color:#1a2e24;font-weight:700;line-height:1.3;margin-bottom:6px}
-.feat-meta{display:flex;flex-wrap:wrap;gap:10px;font-size:.78rem;color:#8b9a92}
-.feat-site{color:#4a5d52}
-
-@media(max-width:640px){
-  .home-hero{padding:24px 18px}
-  .home-hero-title{font-size:1.6rem}
-  .home-hero-sub{font-size:.95rem}
-  .home-section-title{font-size:1.15rem}
-  .cat-tiles{grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:8px}
-  .cat-tile{padding:14px 6px}
-  .cat-tile .ct-emoji{font-size:1.5rem}
-  .cat-tile .ct-label{font-size:.78rem}
-}
+.pantry-overview{padding:8px 0}
+.pantry-group{background:#fff;border:1px solid #e8e3d8;border-radius:14px;padding:16px 18px}
+@media(max-width:640px){.pantry-group{padding:12px 14px}}
 
 /* ── RECIPE DETAIL PANEL ─────────────────────────────────────────────────── */
 .detail-overlay{display:none;position:fixed;inset:0;background:rgba(26,46,36,.45);z-index:999;justify-content:center;align-items:flex-end}
@@ -1143,8 +1112,8 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
 
   <!-- TABS -->
   <div class="tab-bar">
-    <button class="tab-btn on" onclick="showTab('home')">🏠 Home</button>
-    <button class="tab-btn" onclick="showTab('search')" style="display:flex;flex-direction:column;align-items:center;gap:2px;line-height:1.2">
+    <button class="tab-btn" onclick="showTab('pantry')">🥬 My Pantry</button>
+    <button class="tab-btn on" onclick="showTab('search')" style="display:flex;flex-direction:column;align-items:center;gap:2px;line-height:1.2">
       <span>🔍 Browse All Recipes</span>
       <span style="font-size:0.7rem;font-weight:400;opacity:0.7;letter-spacing:0">against your pantry</span>
     </button>
@@ -1156,23 +1125,58 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
     <button class="tab-btn" onclick="showTab('shopping')"><span class="cart">🛒</span> Shopping List</button>
   </div>
 
-  <!-- ══════ HOME PANEL ══════ -->
-  <div class="panel on" id="panel-home">
-    <section class="home-section">
-      <div class="home-section-head">
-        <h3 class="home-section-title">Browse by category</h3>
+  <!-- ══════ MY PANTRY PANEL ══════ -->
+  <div class="panel" id="panel-pantry">
+    <div class="pantry-overview">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:8px">
+        <div>
+          <h3 style="font-family:Georgia,serif;font-size:1.35rem;color:#1a2e24;margin:0;font-weight:700">My Pantry</h3>
+          <p style="font-size:.82rem;color:#6b8f7b;margin:4px 0 0">Everything you've told HARVEST you have on hand</p>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <span class="pantry-stat" id="pantryStatTotal" style="background:#f0fdf4;color:#166534;padding:5px 12px;border-radius:20px;font-size:.82rem;font-weight:600"></span>
+          <button class="btn-sm-green" onclick="showTab('search')" style="font-size:.8rem;padding:6px 14px">+ Add Items</button>
+        </div>
       </div>
-      <div class="cat-tiles" id="homeCatTiles"></div>
-    </section>
 
-    <section class="home-section">
-      <div class="home-section-head">
-        <h3 class="home-section-title">Featured recipes</h3>
-        <button class="home-shuffle" onclick="renderHomeFeatured()">↻ Shuffle</button>
+      <!-- Fresh This Week section -->
+      <div class="pantry-group" id="pantryFreshGroup" style="margin-bottom:18px">
+        <div class="pantry-group-header" style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+          <span style="font-size:1.1rem">🥬</span>
+          <span style="font-weight:700;color:#166534;font-size:.95rem">Fresh This Week</span>
+          <span class="pantry-group-count" id="pantryFreshCount" style="color:#6b8f7b;font-size:.8rem"></span>
+        </div>
+        <div class="pantry-chips-full" id="pantryFreshChips" style="display:flex;flex-wrap:wrap;gap:6px"></div>
       </div>
-      <div class="featured-grid" id="homeFeatured"></div>
-    </section>
 
+      <!-- Always Have section -->
+      <div class="pantry-group" id="pantryAlwaysGroup" style="margin-bottom:18px">
+        <div class="pantry-group-header" style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+          <span style="font-size:1.1rem">⭐</span>
+          <span style="font-weight:700;color:#92400e;font-size:.95rem">Always Have</span>
+          <span class="pantry-group-count" id="pantryAlwaysCount" style="color:#6b8f7b;font-size:.8rem"></span>
+        </div>
+        <div id="pantryAlwaysGroups"></div>
+      </div>
+
+      <!-- Custom Ingredients section -->
+      <div class="pantry-group" id="pantryCustomGroup" style="margin-bottom:18px;display:none">
+        <div class="pantry-group-header" style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+          <span style="font-size:1.1rem">✏️</span>
+          <span style="font-weight:700;color:#7c3aed;font-size:.95rem">Custom Ingredients</span>
+          <span class="pantry-group-count" id="pantryCustomCount" style="color:#6b8f7b;font-size:.8rem"></span>
+        </div>
+        <div class="pantry-chips-full" id="pantryCustomChips" style="display:flex;flex-wrap:wrap;gap:6px"></div>
+      </div>
+
+      <!-- Empty state -->
+      <div id="pantryEmptyState" style="display:none;text-align:center;padding:40px 20px">
+        <div style="font-size:2.5rem;margin-bottom:12px">🧺</div>
+        <div style="font-size:1.1rem;font-weight:600;color:#1a2e24;margin-bottom:8px">Your pantry is empty</div>
+        <div style="font-size:.88rem;color:#6b8f7b;margin-bottom:16px;line-height:1.5">Head to <strong>Browse All Recipes</strong> to select your ingredients.<br>They'll appear here so you can review everything at a glance.</div>
+        <button class="btn-sm-green" onclick="showTab('search')" style="font-size:.88rem;padding:10px 24px">Go to Browse All Recipes</button>
+      </div>
+    </div>
   </div>
 
   <!-- ══════ SEARCH PANEL ══════ -->
@@ -2782,9 +2786,9 @@ function showTab(name) {
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('on'));
   document.getElementById('panel-' + name).classList.add('on');
   const btns = document.querySelectorAll('.tab-btn');
-  const idx = ['home','search','canmake','favorites','shopping'].indexOf(name);
+  const idx = ['pantry','search','canmake','favorites','shopping'].indexOf(name);
   if (idx >= 0) btns[idx].classList.add('on');
-  if (name === 'home')      initHome();
+  if (name === 'pantry')    initPantry();
   if (name === 'favorites') { renderFavs(); renderMealPlan(); }
   if (name === 'shopping')  renderShop();
   if (name === 'canmake')   initCanMake();
@@ -2793,71 +2797,94 @@ function showTab(name) {
   if (typeof updatePantryPower === 'function') updatePantryPower();
 }
 
-// ── HOME PANEL ────────────────────────────────────────────────────────────────
-let HOME_CATS = [
-  {label:'Breakfast', emoji:'🧇', val:'Breakfast'},
-  {label:'Lunch / Dinner', emoji:'🍢', val:'Lunch|Dinner'},
-  {label:'Soups', emoji:'🍲', val:'Soups & Stews'},
-  {label:'Salads', emoji:'🥗', val:'Salads'},
-  {label:'Pasta', emoji:'🍝', val:'Pasta & Noodles'},
-  {label:'High-Protein', emoji:'🏋️', val:'High-Protein'},
-  {label:'Snacks', emoji:'🥨', val:'Snacks'},
-  {label:'Desserts', emoji:'🍨', val:'Desserts'},
-  {label:'Mexican', emoji:'🌮', val:'Mexican'},
-  {label:'Italian', emoji:'🍝', val:'Italian'},
-  {label:'Indian', emoji:'🍛', val:'Indian'},
-  {label:'Thai', emoji:'🍜', val:'Thai'}
-];
+// ── MY PANTRY PANEL ──────────────────────────────────────────────────────────
+function initPantry() {
+  const freshChips = document.getElementById('pantryFreshChips');
+  const freshCount = document.getElementById('pantryFreshCount');
+  const freshGroup = document.getElementById('pantryFreshGroup');
+  const alwaysGroups = document.getElementById('pantryAlwaysGroups');
+  const alwaysCount = document.getElementById('pantryAlwaysCount');
+  const alwaysGroup = document.getElementById('pantryAlwaysGroup');
+  const customChips = document.getElementById('pantryCustomChips');
+  const customCount = document.getElementById('pantryCustomCount');
+  const customGroup = document.getElementById('pantryCustomGroup');
+  const emptyState = document.getElementById('pantryEmptyState');
+  const statTotal = document.getElementById('pantryStatTotal');
 
-function initHome() {
-  renderHomeCategories();
-  renderHomeFeatured();
-}
+  if (!freshChips) return;
 
-function renderHomeCategories() {
-  const el = document.getElementById('homeCatTiles');
-  if (!el) return;
-  el.innerHTML = HOME_CATS.map(c =>
-    `<button class="cat-tile" onclick="goToCategoryFromHome('${escQ(c.val)}')">
-       <span class="ct-emoji">${c.emoji}</span>
-       <span class="ct-label">${c.label}</span>
-     </button>`
-  ).join('');
-}
+  // Fresh This Week items
+  const todayQA = ingredients.filter(i => QA_ALL_ITEMS.has(i.toLowerCase()));
+  if (freshCount) freshCount.textContent = todayQA.length ? `(${todayQA.length})` : '';
+  if (todayQA.length) {
+    freshGroup.style.display = '';
+    freshChips.innerHTML = todayQA.map(i =>
+      `<span style="display:inline-flex;align-items:center;gap:4px;background:#dcfce7;color:#166534;padding:4px 10px;border-radius:16px;font-size:.82rem;font-weight:500">✓ ${i}<button onclick="removeFromToday('${escQ(i)}');initPantry()" style="background:none;border:none;color:#166534;cursor:pointer;font-size:.85rem;padding:0 0 0 2px;line-height:1">×</button></span>`
+    ).join('');
+  } else {
+    freshGroup.style.display = 'none';
+  }
 
-function renderHomeFeatured() {
-  const el = document.getElementById('homeFeatured');
-  if (!el) return;
-  // Pick 6 random recipes that have images
-  const withImg = RECIPES.filter(r => r.img && r.img.length > 0);
-  const shuffled = [...withImg].sort(() => Math.random() - 0.5).slice(0, 6);
-  el.innerHTML = shuffled.map(r => `
-    <div class="feat-card" onclick="openDetail(${r.id})">
-      <div class="feat-hero"><img loading="lazy" referrerpolicy="no-referrer" src="${proxyImg(r.img)}" alt="" onerror="handleImgError(this)"></div>
-      <div class="feat-body">
-        <div class="feat-title">${r.title}</div>
-        <div class="feat-meta">
-          <span class="feat-site">${r.site || ''}</span>
-          ${r.time ? `<span class="feat-time">⏱ ${r.time} min</span>` : ''}
-        </div>
-      </div>
-    </div>
-  `).join('');
-}
-
-// Tap a category tile on home → jump to search with that category active
-function goToCategoryFromHome(catVal) {
-  showTab('search');
-  // Find and click the matching category chip
-  setTimeout(() => {
-    const allBtn = document.getElementById('catAllBtn');
-    if (allBtn) allBtn.classList.remove('on');
-    document.querySelectorAll('#catGrid .fc').forEach(b => {
-      const onclickAttr = b.getAttribute('onclick') || '';
-      if (onclickAttr.includes(`'cat','${catVal}'`)) b.click();
+  // Always Have — grouped by category
+  if (alwaysCount) alwaysCount.textContent = staples.length ? `(${staples.length})` : '';
+  if (staples.length) {
+    alwaysGroup.style.display = '';
+    const stapleSet = new Set(staples.map(s => s.toLowerCase()));
+    // Build grouped view using QA_ITEMS categories
+    const ALL_CATS = [...QA_ITEMS, ...PERISHABLES];
+    let groupHtml = '';
+    const assigned = new Set();
+    ALL_CATS.forEach(g => {
+      const matched = g.items.filter(i => stapleSet.has(i.toLowerCase()));
+      matched.forEach(i => assigned.add(i.toLowerCase()));
+      if (matched.length) {
+        groupHtml += `<div style="margin-bottom:12px">
+          <div style="font-size:.78rem;font-weight:600;color:#92400e;margin-bottom:6px">${g.cat}</div>
+          <div style="display:flex;flex-wrap:wrap;gap:5px">${matched.map(i =>
+            `<span style="display:inline-flex;align-items:center;gap:4px;background:#fef3c7;color:#92400e;padding:4px 10px;border-radius:16px;font-size:.82rem;font-weight:500">★ ${i}<button onclick="removeFromAlways('${escQ(i)}');initPantry()" style="background:none;border:none;color:#92400e;cursor:pointer;font-size:.85rem;padding:0 0 0 2px;line-height:1">×</button></span>`
+          ).join('')}</div></div>`;
+      }
     });
-  }, 50);
+    // Uncategorized staples
+    const uncat = staples.filter(s => !assigned.has(s.toLowerCase()));
+    if (uncat.length) {
+      groupHtml += `<div style="margin-bottom:12px">
+        <div style="font-size:.78rem;font-weight:600;color:#92400e;margin-bottom:6px">Other</div>
+        <div style="display:flex;flex-wrap:wrap;gap:5px">${uncat.map(i =>
+          `<span style="display:inline-flex;align-items:center;gap:4px;background:#fef3c7;color:#92400e;padding:4px 10px;border-radius:16px;font-size:.82rem;font-weight:500">★ ${i}<button onclick="removeFromAlways('${escQ(i)}');initPantry()" style="background:none;border:none;color:#92400e;cursor:pointer;font-size:.85rem;padding:0 0 0 2px;line-height:1">×</button></span>`
+        ).join('')}</div></div>`;
+    }
+    alwaysGroups.innerHTML = groupHtml;
+  } else {
+    alwaysGroup.style.display = 'none';
+  }
+
+  // Custom ingredients
+  const custom = ingredients.filter(i => !QA_ALL_ITEMS.has(i.toLowerCase()));
+  if (custom.length) {
+    customGroup.style.display = '';
+    if (customCount) customCount.textContent = `(${custom.length})`;
+    customChips.innerHTML = custom.map(i =>
+      `<span style="display:inline-flex;align-items:center;gap:4px;background:#ede9fe;color:#6d28d9;padding:4px 10px;border-radius:16px;font-size:.82rem;font-weight:500">✏️ ${i}<button onclick="removeFromToday('${escQ(i)}');initPantry()" style="background:none;border:none;color:#6d28d9;cursor:pointer;font-size:.85rem;padding:0 0 0 2px;line-height:1">×</button></span>`
+    ).join('');
+  } else {
+    customGroup.style.display = 'none';
+  }
+
+  // Total count + empty state
+  const total = todayQA.length + staples.length + custom.length;
+  if (statTotal) statTotal.textContent = `${total} item${total !== 1 ? 's' : ''} selected`;
+  if (emptyState) emptyState.style.display = total === 0 ? '' : 'none';
+  // Hide the overview content wrapper when empty
+  const overviewEl = document.querySelector('.pantry-overview');
+  if (overviewEl) {
+    const groups = overviewEl.querySelectorAll('.pantry-group');
+    groups.forEach(g => { if (total === 0) g.style.display = 'none'; });
+  }
 }
+
+// Keep old name as alias for any legacy references
+function initHome() { initPantry(); }
 
 // ── FILTERS ───────────────────────────────────────────────────────────────────
 function pickFilter(btn, type, val) {
@@ -3175,7 +3202,7 @@ function updatePantryPower() {
   const hintEl = document.getElementById('ppHint');
 
   // Determine which tab is active to show the right number
-  const activeTab = localStorage.getItem('vrf_active_tab') || 'home';
+  const activeTab = localStorage.getItem('vrf_active_tab') || 'search';
   const onCanMake = activeTab === 'canmake';
   const bigNum = onCanMake ? canMakeNow : currentEighty;
 
@@ -4461,12 +4488,14 @@ function obdDone() {
 
 // Restore state on load
 document.addEventListener('DOMContentLoaded', () => {
-  // Restore last active tab, or default to home
-  const savedTab = localStorage.getItem('vrf_active_tab');
-  if (savedTab && ['home','search','canmake','favorites','shopping'].includes(savedTab)) {
+  // Restore last active tab, or default to Browse All Recipes
+  let savedTab = localStorage.getItem('vrf_active_tab');
+  // Migrate old 'home' tab preference to 'pantry'
+  if (savedTab === 'home') savedTab = 'pantry';
+  if (savedTab && ['pantry','search','canmake','favorites','shopping'].includes(savedTab)) {
     showTab(savedTab);
   } else {
-    if (typeof initHome === 'function') initHome();
+    showTab('search');
   }
   // Initialize Pantry Power widget in the hero
   if (typeof updatePantryPower === 'function') updatePantryPower();
