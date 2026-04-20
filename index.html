@@ -1111,7 +1111,7 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
   </div>
 
   <!-- TABS -->
-  <div class="tab-bar">
+  <div class="tab-bar" id="tabBar">
     <button class="tab-btn" onclick="showTab('pantry')">🥬 My Pantry</button>
     <button class="tab-btn on" onclick="showTab('search')" style="display:flex;flex-direction:column;align-items:center;gap:2px;line-height:1.2">
       <span>🔍 Browse All Recipes</span>
@@ -1180,7 +1180,7 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
   </div>
 
   <!-- ══════ SEARCH PANEL ══════ -->
-  <div class="panel" id="panel-search">
+  <div class="panel on" id="panel-search">
     <!-- Mobile-only filter trigger -->
     <button type="button" class="filters-trigger" onclick="openFiltersDrawer()" aria-label="Open filters">
       <span class="ft-icon">🧺</span>
@@ -3579,7 +3579,7 @@ function reportBrokenLink(recipeId, recipeTitle, url) {
       user_id: _sbUser ? _sbUser.id : null
     }).then(() => {});
   } catch(e) {}
-  showToast('Thanks! We'll look into this link 🔧');
+  showToast("Thanks! We'll look into this link!");
 }
 
 function siteHomeUrl(r) {
@@ -4496,6 +4496,14 @@ document.addEventListener('DOMContentLoaded', () => {
     showTab(savedTab);
   } else {
     showTab('search');
+  }
+  // Scroll to tab bar so users see content immediately (skip the hero)
+  const activeTabName = savedTab || 'search';
+  if (activeTabName !== 'pantry') {
+    setTimeout(() => {
+      const tb = document.getElementById('tabBar');
+      if (tb) tb.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
   }
   // Initialize Pantry Power widget in the hero
   if (typeof updatePantryPower === 'function') updatePantryPower();
