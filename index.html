@@ -1204,6 +1204,14 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
     <div class="layout">
       <!-- LEFT COLUMN -->
       <div class="filters-col">
+        <!-- USE YOUR PERISHABLES (most used, so first) -->
+        <div class="card" style="margin-bottom:12px">
+          <div class="filter-label" style="margin-bottom:7px">Use Your Perishables <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#4b7a52">(optional)</span></div>
+          <input class="name-search-input" id="nameSearchInput" type="text"
+            placeholder="Recipe must include… e.g. kale, avocado, tacos"
+            oninput="onNameSearch(this.value)">
+        </div>
+
         <!-- CATEGORY FILTER -->
         <div class="card">
           <div class="filter-label" style="margin-bottom:10px">Category <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#4b7a52">(optional — you can pick more than one, e.g. Breakfast + Instant Pot)</span></div>
@@ -1233,12 +1241,6 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
             <button class="fc" onclick="pickFilter(this,'cat','One-Pot')">🥘 One-Pot</button>
             <button class="fc" onclick="pickFilter(this,'cat','Instant Pot')">⚡ Instant Pot</button>
           </div>
-
-          <!-- RECIPE NAME SEARCH -->
-          <div class="filter-label" style="margin-top:14px;margin-bottom:7px">Use Your Perishables</div>
-          <input class="name-search-input" id="nameSearchInput" type="text"
-            placeholder="Recipe must include… e.g. kale, avocado, tacos"
-            oninput="onNameSearch(this.value)">
         </div>
 
         <!-- FILTERS CARD: TIME, ALLERGIES -->
