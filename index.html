@@ -1192,6 +1192,48 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
         </div>
       </div>
 
+      <!-- Cloud Sync -->
+      <div class="pantry-group" style="margin-bottom:18px;background:#f4f9f1;border:1px solid #d4e6d8">
+        <div style="font-size:1.1rem;font-weight:700;color:#1e5a3a;margin-bottom:10px;">☁️ Sync Across All Devices</div>
+
+        <!-- LOGGED OUT STATE -->
+        <div id="syncLoggedOut">
+          <div style="font-size:.85rem;color:#2d4a35;line-height:1.5;margin-bottom:12px;">
+            Sign in to keep your pantry, favorites, and meal plan in sync across your phone, tablet, and laptop.
+          </div>
+          <div id="syncEmailStep" style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+            <input type="email" id="syncEmail" placeholder="your@email.com" style="flex:1;min-width:180px;padding:10px 14px;border:1px solid #d4e6d8;border-radius:10px;font-size:.95rem;background:#fff;color:#1a2e24;box-sizing:border-box;">
+            <button onclick="cloudSignIn()" id="syncSignInBtn" style="background:#166534;color:#fff;border:none;border-radius:10px;padding:10px 18px;font-size:.95rem;cursor:pointer;font-weight:700;white-space:nowrap;">Sign In</button>
+          </div>
+          <div id="syncCodeStep" style="display:none;margin-top:10px;">
+            <div style="font-size:.85rem;color:#2d4a35;margin-bottom:8px;" id="syncCodeLabel">Enter the code we sent to your email:</div>
+            <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+              <input type="text" id="syncOtpCode" placeholder="12345678" maxlength="8" inputmode="numeric" pattern="[0-9]*" autocomplete="one-time-code" style="width:150px;padding:10px 14px;border:1px solid #d4e6d8;border-radius:10px;font-size:1.1rem;background:#fff;color:#1a2e24;text-align:center;letter-spacing:3px;font-weight:700;box-sizing:border-box;">
+              <button onclick="cloudVerifyOtp()" id="syncVerifyBtn" style="background:#166534;color:#fff;border:none;border-radius:10px;padding:10px 18px;font-size:.95rem;cursor:pointer;font-weight:700;white-space:nowrap;">Verify</button>
+            </div>
+            <div style="margin-top:8px"><a onclick="cloudSignInReset()" style="font-size:.78rem;color:#6b8f7b;cursor:pointer;text-decoration:underline;">Use a different email</a></div>
+          </div>
+          <div id="syncMagicMsg" style="display:none;margin-top:10px;padding:10px 14px;background:#e8f3ec;border-radius:8px;font-size:.85rem;color:#1e5a3a;line-height:1.5;"></div>
+        </div>
+
+        <!-- LOGGED IN STATE -->
+        <div id="syncLoggedIn" style="display:none;">
+          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <div style="width:36px;height:36px;border-radius:50%;background:#166534;color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.1rem;font-weight:700;" id="syncAvatar">?</div>
+              <div>
+                <div style="font-size:.9rem;font-weight:600;color:#1e5a3a;" id="syncUserEmail">—</div>
+                <div style="font-size:.78rem;color:#6b8f7b;" id="syncStatus">Synced</div>
+              </div>
+            </div>
+            <div style="display:flex;gap:6px;">
+              <button onclick="exportMyData()" style="background:none;border:1px solid #d4e6d8;border-radius:8px;padding:6px 10px;font-size:.78rem;color:#6b8f7b;cursor:pointer;" title="Download a backup of your data">💾 Backup</button>
+            </div>
+          </div>
+          <div style="text-align:right;margin-top:8px"><a onclick="cloudSignOut()" style="font-size:.7rem;color:#b0b0b0;cursor:pointer;text-decoration:none">sign out</a></div>
+        </div>
+      </div>
+
       <!-- Fresh This Week section -->
       <div class="pantry-group" id="pantryFreshGroup" style="margin-bottom:18px">
         <div class="pantry-group-header" style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
@@ -1266,47 +1308,6 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
         <div style="font-size:.88rem;color:#6b8f7b;margin-bottom:16px;line-height:1.5">Select ingredients below to start building your pantry.<br>HARVEST will match you to recipes based on what you have.</div>
       </div>
 
-      <!-- Cloud Sync -->
-      <div class="pantry-group" style="margin-top:18px;background:#f4f9f1;border:1px solid #d4e6d8">
-        <div style="font-size:1.1rem;font-weight:700;color:#1e5a3a;margin-bottom:14px;">☁️ Sync Across All Devices</div>
-
-        <!-- LOGGED OUT STATE -->
-        <div id="syncLoggedOut">
-          <div style="font-size:.88rem;color:#2d4a35;line-height:1.6;margin-bottom:14px;">
-            Sign in to automatically sync your favorites, ingredients, staples, meal plan, and shopping list across all your devices. No password needed — we'll email you a code.
-          </div>
-          <div id="syncEmailStep" style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
-            <input type="email" id="syncEmail" placeholder="your@email.com" style="flex:1;min-width:180px;padding:10px 14px;border:1px solid #d4e6d8;border-radius:10px;font-size:.95rem;background:#fff;color:#1a2e24;box-sizing:border-box;">
-            <button onclick="cloudSignIn()" id="syncSignInBtn" style="background:#166534;color:#fff;border:none;border-radius:10px;padding:10px 18px;font-size:.95rem;cursor:pointer;font-weight:700;white-space:nowrap;">Sign In</button>
-          </div>
-          <div id="syncCodeStep" style="display:none;margin-top:10px;">
-            <div style="font-size:.85rem;color:#2d4a35;margin-bottom:8px;" id="syncCodeLabel">Enter the code we sent to your email:</div>
-            <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
-              <input type="text" id="syncOtpCode" placeholder="12345678" maxlength="8" inputmode="numeric" pattern="[0-9]*" autocomplete="one-time-code" style="width:150px;padding:10px 14px;border:1px solid #d4e6d8;border-radius:10px;font-size:1.1rem;background:#fff;color:#1a2e24;text-align:center;letter-spacing:3px;font-weight:700;box-sizing:border-box;">
-              <button onclick="cloudVerifyOtp()" id="syncVerifyBtn" style="background:#166534;color:#fff;border:none;border-radius:10px;padding:10px 18px;font-size:.95rem;cursor:pointer;font-weight:700;white-space:nowrap;">Verify</button>
-            </div>
-            <div style="margin-top:8px"><a onclick="cloudSignInReset()" style="font-size:.78rem;color:#6b8f7b;cursor:pointer;text-decoration:underline;">Use a different email</a></div>
-          </div>
-          <div id="syncMagicMsg" style="display:none;margin-top:10px;padding:10px 14px;background:#e8f3ec;border-radius:8px;font-size:.85rem;color:#1e5a3a;line-height:1.5;"></div>
-        </div>
-
-        <!-- LOGGED IN STATE -->
-        <div id="syncLoggedIn" style="display:none;">
-          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
-            <div style="display:flex;align-items:center;gap:10px;">
-              <div style="width:36px;height:36px;border-radius:50%;background:#166534;color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.1rem;font-weight:700;" id="syncAvatar">?</div>
-              <div>
-                <div style="font-size:.9rem;font-weight:600;color:#1e5a3a;" id="syncUserEmail">—</div>
-                <div style="font-size:.78rem;color:#6b8f7b;" id="syncStatus">Synced</div>
-              </div>
-            </div>
-            <div style="display:flex;gap:6px;">
-              <button onclick="exportMyData()" style="background:none;border:1px solid #d4e6d8;border-radius:8px;padding:6px 10px;font-size:.78rem;color:#6b8f7b;cursor:pointer;" title="Download a backup of your data">💾 Backup</button>
-            </div>
-          </div>
-          <div style="text-align:right;margin-top:8px"><a onclick="cloudSignOut()" style="font-size:.7rem;color:#b0b0b0;cursor:pointer;text-decoration:none">sign out</a></div>
-        </div>
-      </div>
     </div>
   </div>
 
