@@ -1273,11 +1273,19 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
         <!-- LOGGED OUT STATE -->
         <div id="syncLoggedOut">
           <div style="font-size:.88rem;color:#2d4a35;line-height:1.6;margin-bottom:14px;">
-            Sign in to automatically sync your favorites, ingredients, staples, meal plan, and shopping list across all your devices. No password needed — we'll email you a magic link.
+            Sign in to automatically sync your favorites, ingredients, staples, meal plan, and shopping list across all your devices. No password needed — we'll email you a 6-digit code.
           </div>
-          <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+          <div id="syncEmailStep" style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
             <input type="email" id="syncEmail" placeholder="your@email.com" style="flex:1;min-width:180px;padding:10px 14px;border:1px solid #d4e6d8;border-radius:10px;font-size:.95rem;background:#fff;color:#1a2e24;box-sizing:border-box;">
             <button onclick="cloudSignIn()" id="syncSignInBtn" style="background:#166534;color:#fff;border:none;border-radius:10px;padding:10px 18px;font-size:.95rem;cursor:pointer;font-weight:700;white-space:nowrap;">Sign In</button>
+          </div>
+          <div id="syncCodeStep" style="display:none;margin-top:10px;">
+            <div style="font-size:.85rem;color:#2d4a35;margin-bottom:8px;" id="syncCodeLabel">Enter the 6-digit code we sent to your email:</div>
+            <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+              <input type="text" id="syncOtpCode" placeholder="123456" maxlength="6" inputmode="numeric" pattern="[0-9]*" autocomplete="one-time-code" style="width:120px;padding:10px 14px;border:1px solid #d4e6d8;border-radius:10px;font-size:1.1rem;background:#fff;color:#1a2e24;text-align:center;letter-spacing:4px;font-weight:700;box-sizing:border-box;">
+              <button onclick="cloudVerifyOtp()" id="syncVerifyBtn" style="background:#166534;color:#fff;border:none;border-radius:10px;padding:10px 18px;font-size:.95rem;cursor:pointer;font-weight:700;white-space:nowrap;">Verify</button>
+            </div>
+            <div style="margin-top:8px"><a onclick="cloudSignInReset()" style="font-size:.78rem;color:#6b8f7b;cursor:pointer;text-decoration:underline;">Use a different email</a></div>
           </div>
           <div id="syncMagicMsg" style="display:none;margin-top:10px;padding:10px 14px;background:#e8f3ec;border-radius:8px;font-size:.85rem;color:#1e5a3a;line-height:1.5;"></div>
         </div>
@@ -4264,28 +4272,58 @@ function updateSyncUI() {
   }
 }
 
+let _otpEmail = '';
+
 async function cloudSignIn() {
   const sb = sbClient();
   if (!sb) { showToast('⚠️ Sync service loading…', 2000); return; }
   const emailEl = document.getElementById('syncEmail');
   const email = emailEl.value.trim();
   if (!email || !email.includes('@')) { showToast('Please enter a valid email'); return; }
+  _otpEmail = email;
   const btn = document.getElementById('syncSignInBtn');
   btn.textContent = 'Sending…';
   btn.disabled = true;
-  const { error } = await sb.auth.signInWithOtp({
-    email,
-    options: { emailRedirectTo: window.location.origin + window.location.pathname }
-  });
+  const { error } = await sb.auth.signInWithOtp({ email });
   btn.textContent = 'Sign In';
   btn.disabled = false;
   if (error) {
     showToast('❌ ' + error.message, 3000);
   } else {
-    const msg = document.getElementById('syncMagicMsg');
-    msg.innerHTML = '✅ <strong>Check your email!</strong> We sent a magic link to <strong>' + email + '</strong>. Click it to sign in — you can close this page or keep it open.';
-    msg.style.display = 'block';
+    document.getElementById('syncEmailStep').style.display = 'none';
+    document.getElementById('syncCodeStep').style.display = 'block';
+    document.getElementById('syncCodeLabel').textContent = 'Enter the 6-digit code we sent to ' + email + ':';
+    document.getElementById('syncOtpCode').value = '';
+    document.getElementById('syncOtpCode').focus();
   }
+}
+
+async function cloudVerifyOtp() {
+  const sb = sbClient();
+  if (!sb) { showToast('⚠️ Sync service loading…', 2000); return; }
+  const code = (document.getElementById('syncOtpCode').value || '').trim();
+  if (!code || code.length !== 6) { showToast('Please enter the 6-digit code'); return; }
+  const btn = document.getElementById('syncVerifyBtn');
+  btn.textContent = 'Verifying…';
+  btn.disabled = true;
+  const { data, error } = await sb.auth.verifyOtp({ email: _otpEmail, token: code, type: 'email' });
+  btn.textContent = 'Verify';
+  btn.disabled = false;
+  if (error) {
+    showToast('❌ ' + error.message, 3000);
+  } else {
+    _sbUser = data.user || data.session?.user || null;
+    updateSyncUI();
+    showToast('✅ Signed in!');
+    cloudSignInReset();
+    if (typeof cloudPull === 'function') cloudPull();
+  }
+}
+
+function cloudSignInReset() {
+  document.getElementById('syncEmailStep').style.display = 'flex';
+  document.getElementById('syncCodeStep').style.display = 'none';
+  document.getElementById('syncOtpCode').value = '';
 }
 
 async function cloudSignOut() {
