@@ -1180,17 +1180,6 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
   <!-- ══════ MY PANTRY PANEL ══════ -->
   <div class="panel" id="panel-pantry">
     <div class="pantry-overview">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:8px">
-        <div>
-          <h3 style="font-family:Georgia,serif;font-size:1.35rem;color:#1a2e24;margin:0;font-weight:700">My Pantry</h3>
-          <p style="font-size:.82rem;color:#6b8f7b;margin:4px 0 0">Everything you've told HARVEST you have on hand</p>
-        </div>
-        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
-          <span class="pantry-stat" id="pantryStatTotal" style="background:#f0fdf4;color:#166534;padding:5px 12px;border-radius:20px;font-size:.82rem;font-weight:600"></span>
-          <button type="button" onclick="openScanModal()" style="font-size:.8rem;padding:6px 14px;background:#fff;color:#2d7a4f;border:1.5px solid #2d7a4f;border-radius:8px;cursor:pointer;font-weight:600;font-family:inherit">📷 Scan My Kitchen</button>
-          <button class="btn-sm-green" onclick="document.getElementById('mpPerishGroup').scrollIntoView({behavior:'smooth',block:'start'})" style="font-size:.8rem;padding:6px 14px">+ Add Items</button>
-        </div>
-      </div>
 
       <!-- Cloud Sync -->
       <div class="pantry-group" style="margin-bottom:18px;background:#f4f9f1;border:1px solid #d4e6d8">
@@ -1231,6 +1220,18 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
             </div>
           </div>
           <div style="text-align:right;margin-top:8px"><a onclick="cloudSignOut()" style="font-size:.7rem;color:#b0b0b0;cursor:pointer;text-decoration:none">sign out</a></div>
+        </div>
+      </div>
+
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:8px">
+        <div>
+          <h3 style="font-family:Georgia,serif;font-size:1.35rem;color:#1a2e24;margin:0;font-weight:700">My Pantry</h3>
+          <p style="font-size:.82rem;color:#6b8f7b;margin:4px 0 0">Everything you've told HARVEST you have on hand</p>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+          <span class="pantry-stat" id="pantryStatTotal" style="background:#f0fdf4;color:#166534;padding:5px 12px;border-radius:20px;font-size:.82rem;font-weight:600"></span>
+          <button type="button" onclick="openScanModal()" style="font-size:.8rem;padding:6px 14px;background:#fff;color:#2d7a4f;border:1.5px solid #2d7a4f;border-radius:8px;cursor:pointer;font-weight:600;font-family:inherit">📷 Scan My Kitchen</button>
+          <button class="btn-sm-green" onclick="document.getElementById('mpPerishGroup').scrollIntoView({behavior:'smooth',block:'start'})" style="font-size:.8rem;padding:6px 14px">+ Add Items</button>
         </div>
       </div>
 
