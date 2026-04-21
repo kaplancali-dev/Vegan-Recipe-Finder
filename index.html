@@ -4297,12 +4297,22 @@ function showOtpStep(email) {
   }
 })();
 
+function showSyncMsg(msg, isError) {
+  const el = document.getElementById('syncMagicMsg');
+  if (!el) return;
+  el.textContent = msg;
+  el.style.display = 'block';
+  el.style.background = isError ? '#fef2f2' : '#e8f3ec';
+  el.style.color = isError ? '#991b1b' : '#1e5a3a';
+  if (!isError) setTimeout(() => { el.style.display = 'none'; }, 4000);
+}
+
 async function cloudSignIn() {
   const sb = sbClient();
-  if (!sb) { showToast('⚠️ Sync service loading…', 2000); return; }
+  if (!sb) { showSyncMsg('Sync service loading — please try again in a moment.', true); return; }
   const emailEl = document.getElementById('syncEmail');
   const email = emailEl.value.trim();
-  if (!email || !email.includes('@')) { showToast('Please enter a valid email'); return; }
+  if (!email || !email.includes('@')) { showSyncMsg('Please enter a valid email address.', true); return; }
   _otpEmail = email;
   localStorage.setItem('_otpEmail', email);
   const btn = document.getElementById('syncSignInBtn');
@@ -4312,18 +4322,19 @@ async function cloudSignIn() {
   btn.textContent = 'Sign In';
   btn.disabled = false;
   if (error) {
-    showToast('❌ ' + error.message, 3000);
+    showSyncMsg(error.message, true);
     localStorage.removeItem('_otpEmail');
   } else {
+    document.getElementById('syncMagicMsg').style.display = 'none';
     showOtpStep(email);
   }
 }
 
 async function cloudVerifyOtp() {
   const sb = sbClient();
-  if (!sb) { showToast('⚠️ Sync service loading…', 2000); return; }
+  if (!sb) { showSyncMsg('Sync service loading — please try again in a moment.', true); return; }
   const code = (document.getElementById('syncOtpCode').value || '').trim();
-  if (!code || code.length < 6) { showToast('Please enter the code from your email'); return; }
+  if (!code || code.length < 6) { showSyncMsg('Please enter the code from your email.', true); return; }
   const btn = document.getElementById('syncVerifyBtn');
   btn.textContent = 'Verifying…';
   btn.disabled = true;
@@ -4331,12 +4342,12 @@ async function cloudVerifyOtp() {
   btn.textContent = 'Verify';
   btn.disabled = false;
   if (error) {
-    showToast('❌ ' + error.message, 3000);
+    showSyncMsg(error.message, true);
   } else {
     _sbUser = data.user || data.session?.user || null;
     localStorage.removeItem('_otpEmail');
     updateSyncUI();
-    showToast('✅ Signed in!');
+    showSyncMsg('Signed in!', false);
     cloudSignInReset();
     if (typeof cloudPull === 'function') cloudPull();
   }
