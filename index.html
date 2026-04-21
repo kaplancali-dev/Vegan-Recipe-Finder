@@ -4272,7 +4272,27 @@ function updateSyncUI() {
   }
 }
 
-let _otpEmail = '';
+let _otpEmail = localStorage.getItem('_otpEmail') || '';
+
+function showOtpStep(email) {
+  document.getElementById('syncEmailStep').style.display = 'none';
+  document.getElementById('syncCodeStep').style.display = 'block';
+  document.getElementById('syncCodeLabel').textContent = 'Enter the 6-digit code we sent to ' + email + ':';
+  document.getElementById('syncOtpCode').value = '';
+}
+
+// On load: restore code-entry step if user switched to email and came back
+(function restoreOtpStep() {
+  if (_otpEmail) {
+    // Wait for DOM
+    const ready = () => {
+      if (document.getElementById('syncCodeStep')) showOtpStep(_otpEmail);
+      else setTimeout(ready, 100);
+    };
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', ready);
+    else ready();
+  }
+})();
 
 async function cloudSignIn() {
   const sb = sbClient();
@@ -4281,6 +4301,7 @@ async function cloudSignIn() {
   const email = emailEl.value.trim();
   if (!email || !email.includes('@')) { showToast('Please enter a valid email'); return; }
   _otpEmail = email;
+  localStorage.setItem('_otpEmail', email);
   const btn = document.getElementById('syncSignInBtn');
   btn.textContent = 'Sending…';
   btn.disabled = true;
@@ -4289,12 +4310,9 @@ async function cloudSignIn() {
   btn.disabled = false;
   if (error) {
     showToast('❌ ' + error.message, 3000);
+    localStorage.removeItem('_otpEmail');
   } else {
-    document.getElementById('syncEmailStep').style.display = 'none';
-    document.getElementById('syncCodeStep').style.display = 'block';
-    document.getElementById('syncCodeLabel').textContent = 'Enter the 6-digit code we sent to ' + email + ':';
-    document.getElementById('syncOtpCode').value = '';
-    document.getElementById('syncOtpCode').focus();
+    showOtpStep(email);
   }
 }
 
@@ -4313,6 +4331,7 @@ async function cloudVerifyOtp() {
     showToast('❌ ' + error.message, 3000);
   } else {
     _sbUser = data.user || data.session?.user || null;
+    localStorage.removeItem('_otpEmail');
     updateSyncUI();
     showToast('✅ Signed in!');
     cloudSignInReset();
@@ -4321,6 +4340,8 @@ async function cloudVerifyOtp() {
 }
 
 function cloudSignInReset() {
+  localStorage.removeItem('_otpEmail');
+  _otpEmail = '';
   document.getElementById('syncEmailStep').style.display = 'flex';
   document.getElementById('syncCodeStep').style.display = 'none';
   document.getElementById('syncOtpCode').value = '';
