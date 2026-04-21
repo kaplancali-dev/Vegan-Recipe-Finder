@@ -1207,8 +1207,7 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
 
         <!-- LOGGED IN STATE -->
         <div id="syncLoggedIn" style="display:none;">
-          <div style="font-size:.84rem;color:#2d4a35;line-height:1.5;margin-bottom:12px;">Switching devices? Just sign in with the same email on your other phone, tablet, or laptop and everything will be there — your pantry, favorites, meal plan, and shopping list.</div>
-          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
+          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px;margin-bottom:8px;">
             <div style="display:flex;align-items:center;gap:10px;">
               <div style="width:36px;height:36px;border-radius:50%;background:#166534;color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.1rem;font-weight:700;" id="syncAvatar">?</div>
               <div>
@@ -1216,11 +1215,12 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
                 <div style="font-size:.78rem;color:#6b8f7b;" id="syncStatus">Synced</div>
               </div>
             </div>
-            <div style="display:flex;gap:6px;">
+            <div style="display:flex;gap:6px;align-items:center;">
               <button onclick="exportMyData()" style="background:none;border:1px solid #d4e6d8;border-radius:8px;padding:6px 10px;font-size:.78rem;color:#6b8f7b;cursor:pointer;" title="Download a backup of your data">💾 Backup</button>
+              <a onclick="cloudSignOut()" style="font-size:.72rem;color:#b0b0b0;cursor:pointer;text-decoration:none;margin-left:4px;">sign out</a>
             </div>
           </div>
-          <div style="text-align:right;margin-top:8px"><a onclick="cloudSignOut()" style="font-size:.7rem;color:#b0b0b0;cursor:pointer;text-decoration:none">sign out</a></div>
+          <div style="font-size:.92rem;color:#2d4a35;line-height:1.5;">Switching devices? Just sign in with the same email on your other phone, tablet, or laptop and everything will be there — your pantry, favorites, meal plan, and shopping list.</div>
         </div>
       </div>
 
