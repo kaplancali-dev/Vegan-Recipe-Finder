@@ -1,8 +1,8 @@
 /**
  * ReadyToCook — shows recipes the user can make right now.
  *
- * Filters to recipes with >=80% pantry match, sorted by
- * match percentage descending.
+ * Filters to recipes missing 1 or fewer ingredients (matching v1 behavior),
+ * sorted by match percentage descending.
  */
 
 import { subscribe, getRef } from '../state/store.js';
@@ -15,8 +15,8 @@ import { openDetail } from './RecipeDetail.js';
 /** @type {Array} Full recipe list */
 let _recipes = [];
 
-/** Minimum match percentage to show in Ready to Cook */
-const MIN_MATCH = 80;
+/** Maximum number of missing ingredients to show in Ready to Make */
+const MAX_MISSING = 1;
 
 /**
  * Initialize the Ready to Cook tab.
@@ -62,8 +62,8 @@ function renderReadyList() {
     allergies: allergies.length ? new Set(allergies) : undefined,
   });
 
-  // Filter to >=80% match
-  const ready = allResults.filter(r => r.pct >= MIN_MATCH);
+  // Filter to recipes missing 1 or fewer ingredients (matches v1 behavior)
+  const ready = allResults.filter(r => (r.needNames?.length ?? 0) <= MAX_MISSING);
 
   if (badge) {
     badge.textContent = ready.length > 0 ? String(ready.length) : '';
@@ -74,7 +74,7 @@ function renderReadyList() {
     if (emptyEl) {
       emptyEl.hidden = false;
       emptyEl.innerHTML = ings.length || staples.length
-        ? '<p>No recipes at 80%+ match yet. Add more ingredients to your pantry!</p>'
+        ? '<p>No recipes with 1 or fewer missing ingredients yet. Add more to your pantry!</p>'
         : '<p>Add ingredients to your pantry to see what you can make!</p>';
     }
     return;
