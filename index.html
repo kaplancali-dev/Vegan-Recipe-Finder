@@ -2982,9 +2982,16 @@ function showTab(name) {
   const btns = document.querySelectorAll('.tab-btn');
   const idx = ['pantry','search','canmake','favorites','shopping'].indexOf(name);
   if (idx >= 0) btns[idx].classList.add('on');
-  // Show/hide pantry video
+  // Show/hide elements that sit above tabs (only visible on My Pantry)
   const pVid = document.getElementById('pantryVideo');
   if (pVid) pVid.style.display = name === 'pantry' ? '' : 'none';
+  const iCard = document.getElementById('introCard');
+  if (iCard) {
+    // Returning users: introCard already hidden by DOMContentLoaded, keep it hidden
+    // New users: show on pantry tab only, hide on all other tabs
+    const isOnboarded = localStorage.getItem('vrf_onboarded') === '1';
+    iCard.style.display = (!isOnboarded && name === 'pantry') ? '' : 'none';
+  }
   if (name === 'pantry')    initPantry();
   if (name === 'favorites') { renderFavs(); renderMealPlan(); }
   if (name === 'shopping')  renderShop();
