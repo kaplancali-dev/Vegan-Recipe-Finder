@@ -106,6 +106,7 @@ input, select, textarea {
   align-items: center;
   justify-content: center;
   position: relative;
+  padding-right: 80px; /* space for PWA buttons */
 }
 
 .header-center {
@@ -199,6 +200,14 @@ input, select, textarea {
   gap: 2px;
   line-height: 1.2;
   position: relative;
+}
+
+.tab-btn .tab-short { display: none; }
+.tab-btn .tab-full { display: inline; }
+
+@media (max-width: 520px) {
+  .tab-btn .tab-short { display: inline; }
+  .tab-btn .tab-full { display: none; }
 }
 
 .tab-btn:hover {
@@ -1709,10 +1718,27 @@ input, select, textarea {
 }
 
 /* ── Responsive ──────────────────────────────────────────────── */
+@media (max-width: 520px) {
+  .tab-btn {
+    font-size: 0.78rem;
+    padding: 8px 6px;
+  }
+
+  .pwa-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 1.05rem;
+  }
+
+  .header-inner {
+    padding-right: 72px;
+  }
+}
+
 @media (max-width: 400px) {
   .tab-btn {
-    font-size: 0.75rem;
-    padding: 7px 6px;
+    font-size: 0.72rem;
+    padding: 7px 4px;
   }
 
   .qa-grid {

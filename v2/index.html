@@ -45,10 +45,10 @@
 
     <!-- Tab navigation bar (WAI-ARIA tabs pattern) -->
     <nav id="tabBar" class="tab-bar" role="tablist" aria-label="Main navigation">
-      <button class="tab-btn" data-tab="pantry" role="tab" aria-selected="false" aria-controls="tab-pantry" id="btn-pantry">🥬 My Pantry</button>
-      <button class="tab-btn on" data-tab="browse" role="tab" aria-selected="true" aria-controls="tab-browse" id="btn-browse">🔍 Browse All</button>
+      <button class="tab-btn" data-tab="pantry" role="tab" aria-selected="false" aria-controls="tab-pantry" id="btn-pantry"><span class="tab-full">🥬 My Pantry</span><span class="tab-short">🥬 Pantry</span></button>
+      <button class="tab-btn on" data-tab="browse" role="tab" aria-selected="true" aria-controls="tab-browse" id="btn-browse"><span class="tab-full">🔍 Browse All</span><span class="tab-short">🔍 Browse</span></button>
       <button class="tab-btn" data-tab="canmake" role="tab" aria-selected="false" aria-controls="tab-canmake" id="btn-canmake">
-        <span>🍳 Ready to Make Now</span>
+        <span class="tab-full">🍳 Ready to Make</span><span class="tab-short">🍳 Ready</span>
         <span id="readyCount" class="badge"></span>
       </button>
       <button class="tab-btn" data-tab="favorites" role="tab" aria-selected="false" aria-controls="tab-favorites" id="btn-favorites">❤️ Faves</button>
