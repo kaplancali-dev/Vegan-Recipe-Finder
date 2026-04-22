@@ -42,15 +42,10 @@ export function initPantry(recipes) {
   });
 }
 
-/* ── Hero Section ────────────────────────────────────────────── */
+/* ── Hero Section (no-op — intro card is always visible now) ─ */
 
 function checkHero() {
-  const hero = $('#hero');
-  if (!hero) return;
-  const onboarded = get('onboarded');
-  const ings = getRef('ingredients');
-  // Show hero only for brand-new users with no ingredients
-  hero.hidden = onboarded || ings.length > 0;
+  // Intro hero card is always visible (matches v1 behavior)
 }
 
 /* ── Ingredient Input ────────────────────────────────────────── */
@@ -331,7 +326,7 @@ function showQAPopup(category, anchorEl) {
 function renderPantryPower() {
   const bar = $('#ppBar');
   const stats = $('#ppStats');
-  if (!bar || !stats) return;
+  if (!bar) return;
 
   const ings = getRef('ingredients');
   const staples = getRef('staples');
@@ -342,5 +337,14 @@ function renderPantryPower() {
     : 0;
 
   bar.style.width = `${pct}%`;
-  stats.textContent = `${power.canMakeNow} ready · ${power.eightyPercent} almost · ${power.totalRecipes} total`;
+
+  // Update new PP widget elements if present
+  const ppNumber = $('#ppNumber');
+  const ppUnit = $('#ppUnit');
+  const ppNear = $('#ppNear');
+
+  if (ppNumber) ppNumber.textContent = power.canMakeNow;
+  if (ppUnit) ppUnit.textContent = power.canMakeNow === 1 ? 'recipe ready' : 'recipes ready';
+  if (ppNear) ppNear.textContent = `+ ${power.eightyPercent - power.canMakeNow} more you're 1 ingredient away from`;
+  if (stats) stats.textContent = `${power.canMakeNow} of ${power.totalRecipes} recipes ready`;
 }

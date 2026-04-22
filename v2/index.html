@@ -58,19 +58,39 @@
 
     <!-- MY PANTRY TAB -->
     <section id="tab-pantry" class="tab-panel" role="tabpanel" aria-labelledby="btn-pantry" hidden>
-      <!-- Hero (first-visit only) -->
-      <div id="hero" class="hero" hidden>
-        <h2>What's in your kitchen?</h2>
-        <p>Add your ingredients below and we'll find recipes you can make right now.</p>
-      </div>
-
-      <!-- Pantry Power bar -->
-      <div id="pantryPower" class="pantry-power card">
-        <div class="pp-header">
-          <span class="pp-label">Pantry Power</span>
-          <span id="ppStats" class="pp-stats"></span>
+      <!-- Intro hero card (always visible — matches v1) -->
+      <div class="intro-card" id="introCard">
+        <div class="intro-hero">
+          <div class="intro-hero-grid">
+            <div class="intro-hero-copy">
+              <video src="/hero.mp4" class="hero-img" autoplay loop muted playsinline></video>
+              <h2 class="intro-hero-title">"What can I make with this?"</h2>
+              <p class="intro-hero-sub">
+                You open the fridge and think, <em>"What can I make with this?"</em>
+                <strong>HARVEST</strong> knows. It matches your ingredients to
+                <strong>plant-based recipes</strong> from the world's top nutrition-focused chefs and creators,
+                prioritizes your <strong>perishables</strong> so nothing goes to waste,
+                filters out your <strong>allergens</strong>,
+                and builds a <strong>shopping list</strong> for the rest &#8212;
+                whether you're cooking for yourself on a Tuesday or feeding a table full of friends, HARVEST makes the process both fun and easy.
+              </p>
+              <p class="intro-hero-sub" style="margin-top:8px;">
+                Every recipe is <strong>gluten-free</strong> by default. When a recipe calls for something like soy sauce or flour tortillas, HARVEST highlights the swap right on the card &#8212; tamari, corn tortillas &#8212; so you never have to think about it.
+              </p>
+              <p class="intro-tagline">The more <span class="clr-letters"><span class="clr-letter" style="color:#e53e3e">c</span><span class="clr-letter" style="color:#dd6b20">o</span><span class="clr-letter" style="color:#d69e2e">l</span><span class="clr-letter" style="color:#38a169">o</span><span class="clr-letter" style="color:#3182ce">r</span><span class="clr-letter" style="color:#805ad5">s</span></span> on your plate, the more life in your years.&trade;</p>
+            </div>
+            <aside class="pp-widget" id="pantryPower" aria-label="Pantry Power">
+              <div class="pp-eyebrow">PANTRY POWER</div>
+              <div class="pp-number-row">
+                <span class="pp-number" id="ppNumber">0</span>
+                <span class="pp-unit" id="ppUnit">recipes ready</span>
+              </div>
+              <div class="pp-near" id="ppNear">+ 0 more you're 1 ingredient away from</div>
+              <div class="pp-bar"><div class="pp-bar-fill" id="ppBar"></div></div>
+              <div class="pp-bar-meta"><span id="ppStats">0 of 919 recipes ready</span></div>
+            </aside>
+          </div>
         </div>
-        <div class="bar-bg"><div id="ppBar" class="bar-fill"></div></div>
       </div>
 
       <!-- Ingredient entry -->
