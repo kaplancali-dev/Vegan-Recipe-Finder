@@ -8,12 +8,14 @@
 import { get, set, subscribe, getRef } from '../state/store.js';
 import { findRecipes, sortResults, expandWithAliases } from '../services/matching.js';
 import { ALLERGY_KEYWORDS } from '../data/aliases.js';
-import { autoSync } from '../services/sync.js';
 import { escHTML } from '../utils/text.js';
+import { $, $$ } from '../utils/dom.js';
+import { toggleFavorite } from '../actions/favorites.js';
 import { renderCardList } from './RecipeCard.js';
 import { openDetail } from './RecipeDetail.js';
 
-const $ = (sel) => document.querySelector(sel);
+/** How many recipes to show per page */
+const PAGE_SIZE = 50;
 
 /** @type {Array} Full recipe list */
 let _recipes = [];
@@ -25,6 +27,12 @@ let _maxTime = 120;
 let _nameSearch = '';
 let _sortKey = 'match';
 let _allergies = new Set();
+
+/** Pagination: how many results currently visible */
+let _visibleCount = PAGE_SIZE;
+
+/** Cached full result set (before pagination) */
+let _lastResults = [];
 
 /** Debounce timer for search input */
 let _searchTimer = null;
@@ -210,13 +218,22 @@ function wireControls() {
 
 /**
  * Run the matching engine and render results.
+ * Resets pagination when filters/ingredients change.
  */
 function renderResults() {
+  _visibleCount = PAGE_SIZE; // Reset pagination on any filter change
+  _runRender();
+}
+
+/**
+ * Internal render that respects current _visibleCount.
+ */
+function _runRender() {
   const ings = getRef('ingredients');
   const staples = getRef('staples');
   const favs = new Set(getRef('favorites'));
 
-  const results = findRecipes({
+  let results = findRecipes({
     recipes: _recipes,
     ingredients: ings,
     staples,
@@ -227,10 +244,12 @@ function renderResults() {
     allergies: _allergies.size ? _allergies : undefined,
   });
 
-  // Apply sort
+  // Apply sort (sortResults returns a new array)
   if (_sortKey !== 'match') {
-    sortResults(results, _sortKey);
+    results = sortResults(results, _sortKey);
   }
+
+  _lastResults = results;
 
   // Render count
   const meta = $('#resultsMeta');
@@ -241,7 +260,7 @@ function renderResults() {
   // Render active filter tags
   renderActiveFilters();
 
-  // Render cards
+  // Render cards (paginated)
   const list = $('#recipeList');
   if (!list) return;
 
@@ -250,10 +269,21 @@ function renderResults() {
     return;
   }
 
-  list.innerHTML = renderCardList(results, favs);
+  const visible = results.slice(0, _visibleCount);
+  const hasMore = results.length > _visibleCount;
 
-  // Event delegation for card clicks and favorite buttons
+  list.innerHTML = renderCardList(visible, favs) +
+    (hasMore ? `<button class="btn btn-outline load-more-btn" id="loadMoreBtn">Show more (${results.length - _visibleCount} remaining)</button>` : '');
+
+  // Event delegation for card clicks, favorite buttons, and load more
   list.onclick = (e) => {
+    // Load more button
+    if (e.target.id === 'loadMoreBtn') {
+      _visibleCount += PAGE_SIZE;
+      _runRender();
+      return;
+    }
+
     // Favorite button
     const favBtn = e.target.closest('.fav-btn');
     if (favBtn) {
@@ -270,23 +300,6 @@ function renderResults() {
       openDetail(id);
     }
   };
-}
-
-/**
- * Toggle a recipe's favorite status.
- * @param {number} id
- */
-function toggleFavorite(id) {
-  const favs = get('favorites');
-  const favSet = new Set(favs);
-  if (favSet.has(id)) {
-    favSet.delete(id);
-  } else {
-    favSet.add(id);
-  }
-  set('favorites', [...favSet]);
-
-  autoSync();
 }
 
 /**

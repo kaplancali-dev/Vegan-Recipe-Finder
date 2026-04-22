@@ -8,8 +8,8 @@
 import './styles/theme.css';
 import { loadState, get, set, subscribe } from './state/store.js';
 import { sbClient, onStatusChange, onAuthChange, logError } from './services/sync.js';
-import { escHTML } from './utils/text.js';
 import { showToast } from './utils/toast.js';
+import { $, $$ } from './utils/dom.js';
 import recipes from './data/recipes.json';
 import { initBrowse } from './components/Browse.js';
 import { initPantry } from './components/Pantry.js';
@@ -22,9 +22,6 @@ import { initSyncPanel } from './components/SyncPanel.js';
 /* ── Boot sequence ───────────────────────────────────────────── */
 
 loadState();
-
-const $ = (sel) => document.querySelector(sel);
-const $$ = (sel) => document.querySelectorAll(sel);
 
 /* ── Tab system ──────────────────────────────────────────────── */
 
@@ -50,10 +47,16 @@ export function showTab(tabKey) {
   const panel = $(`#${TAB_MAP[tabKey]}`);
   if (panel) panel.hidden = false;
 
-  // Update tab buttons
-  $$('.tab-btn').forEach(b => b.classList.remove('on'));
+  // Update tab buttons (visual + ARIA)
+  $$('[role="tab"]').forEach(b => {
+    b.classList.remove('on');
+    b.setAttribute('aria-selected', 'false');
+  });
   const activeBtn = $(`.tab-btn[data-tab="${tabKey}"]`);
-  if (activeBtn) activeBtn.classList.add('on');
+  if (activeBtn) {
+    activeBtn.classList.add('on');
+    activeBtn.setAttribute('aria-selected', 'true');
+  }
 
   // Persist active tab
   set('activeTab', tabKey);

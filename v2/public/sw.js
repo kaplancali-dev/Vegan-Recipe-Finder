@@ -5,7 +5,7 @@
  * Version is bumped manually or via build script.
  */
 
-const CACHE_VERSION = 'harvest-v2.27.0';
+const CACHE_VERSION = 'harvest-v2.28.0';
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 

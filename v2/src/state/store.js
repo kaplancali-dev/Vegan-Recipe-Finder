@@ -15,6 +15,7 @@ const STORAGE_KEYS = {
   shopList:     'vrf_shop',
   instructions: 'vrf_instr',
   allergies:    'vrf_allergies',
+  shopChecked:  'vrf_shop_checked',
   activeTab:    'vrf_active_tab',
   onboarded:    'vrf_onboarded',
 };
@@ -33,6 +34,7 @@ const state = {
   shopList:     [],
   instructions: {},
   allergies:    [],
+  shopChecked:  [],
   activeTab:    'search',
   onboarded:    false,
 };
@@ -79,6 +81,7 @@ export function loadState() {
   state.shopList     = lsGet(STORAGE_KEYS.shopList, []);
   state.instructions = lsGet(STORAGE_KEYS.instructions, {});
   state.allergies    = lsGet(STORAGE_KEYS.allergies, []);
+  state.shopChecked  = lsGet(STORAGE_KEYS.shopChecked, []);
   state.activeTab    = lsGet(STORAGE_KEYS.activeTab, 'search') || 'search';
   state.onboarded    = lsGet(STORAGE_KEYS.onboarded, false) || localStorage.getItem('vrf_onboarded') === '1';
 }
@@ -164,17 +167,41 @@ export function gatherAllData() {
 }
 
 /**
+ * Validate that a value matches the expected type for a state key.
+ * Returns the value if valid, or the fallback if not.
+ * @param {string} key - State key name
+ * @param {*} value - Value to validate
+ * @returns {*} Validated value or safe fallback
+ */
+function validateValue(key, value) {
+  switch (key) {
+    case 'favorites':
+    case 'ingredients':
+    case 'staples':
+    case 'shopList':
+    case 'allergies':
+    case 'mealPlan':
+      return Array.isArray(value) ? value : undefined;
+    case 'instructions':
+      return (value !== null && typeof value === 'object' && !Array.isArray(value)) ? value : undefined;
+    default:
+      return value;
+  }
+}
+
+/**
  * Apply a full data object from cloud sync, updating state + localStorage.
+ * Validates each field before applying to prevent malformed data from corrupting state.
  * @param {Object} data
  */
 export function applyAllData(data) {
-  if (data.vrf_favs      !== undefined) set('favorites',    data.vrf_favs);
-  if (data.vrf_instr     !== undefined) set('instructions', data.vrf_instr);
-  if (data.vrf_staples   !== undefined) set('staples',      data.vrf_staples);
-  if (data.vrf_shop      !== undefined) set('shopList',     data.vrf_shop);
-  if (data.vrf_ings      !== undefined) set('ingredients',  data.vrf_ings);
-  if (data.vrf_meal      !== undefined) set('mealPlan',     data.vrf_meal);
-  if (data.vrf_allergies !== undefined) set('allergies',    data.vrf_allergies);
+  if (data.vrf_favs      !== undefined) { const v = validateValue('favorites', data.vrf_favs);      if (v !== undefined) set('favorites', v); }
+  if (data.vrf_instr     !== undefined) { const v = validateValue('instructions', data.vrf_instr);  if (v !== undefined) set('instructions', v); }
+  if (data.vrf_staples   !== undefined) { const v = validateValue('staples', data.vrf_staples);     if (v !== undefined) set('staples', v); }
+  if (data.vrf_shop      !== undefined) { const v = validateValue('shopList', data.vrf_shop);       if (v !== undefined) set('shopList', v); }
+  if (data.vrf_ings      !== undefined) { const v = validateValue('ingredients', data.vrf_ings);    if (v !== undefined) set('ingredients', v); }
+  if (data.vrf_meal      !== undefined) { const v = validateValue('mealPlan', data.vrf_meal);       if (v !== undefined) set('mealPlan', v); }
+  if (data.vrf_allergies !== undefined) { const v = validateValue('allergies', data.vrf_allergies);  if (v !== undefined) set('allergies', v); }
 }
 
 /**
@@ -188,6 +215,7 @@ export function resetState() {
   state.shopList     = [];
   state.instructions = {};
   state.allergies    = [];
+  state.shopChecked  = [];
   state.activeTab    = 'search';
   state.onboarded    = false;
   listeners.clear();

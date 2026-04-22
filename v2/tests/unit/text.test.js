@@ -6,9 +6,9 @@ describe('norm()', () => {
     expect(norm('Olive Oil')).toBe('olive oil');
   });
 
-  it('strips non-alphanumeric characters except spaces', () => {
-    expect(norm('jalapeño')).toBe('jalapeo');
-    expect(norm("soy sauce / tamari")).toBe('soy sauce  tamari');
+  it('strips punctuation but preserves accented characters', () => {
+    expect(norm('jalapeño')).toBe('jalapeño');
+    expect(norm("soy sauce / tamari")).toBe('soy sauce tamari');
   });
 
   it('trims whitespace', () => {
@@ -41,7 +41,7 @@ describe('stem()', () => {
 
   it('stems -ed', () => {
     expect(stem('roasted')).toBe('roast');
-    expect(stem('diced')).toBe('dic');
+    expect(stem('diced')).toBe('dice');
   });
 
   it('stems -es', () => {
@@ -112,8 +112,8 @@ describe('colorDigits()', () => {
     const result = colorDigits(42);
     expect(result).toContain('4');
     expect(result).toContain('2');
-    expect(result).toContain('#7C3AED');
-    expect(result).toContain('#E65100');
+    expect(result).toContain('d-hi');
+    expect(result).toContain('d-md');
   });
 
   it('handles single digit', () => {

@@ -254,20 +254,27 @@ describe('findRecipes()', () => {
 describe('sortResults()', () => {
   it('sorts by time ascending', () => {
     const results = findRecipes({ recipes: RECIPES, ingredients: [], staples: [] });
-    sortResults(results, 'time');
-    expect(results[0].time).toBe(15);
+    const sorted = sortResults(results, 'time');
+    expect(sorted[0].time).toBe(15);
   });
 
   it('sorts alphabetically', () => {
     const results = findRecipes({ recipes: RECIPES, ingredients: [], staples: [] });
-    sortResults(results, 'alpha');
-    expect(results[0].title).toBe('Pasta Salad');
+    const sorted = sortResults(results, 'alpha');
+    expect(sorted[0].title).toBe('Pasta Salad');
   });
 
   it('sorts by servings descending', () => {
     const results = findRecipes({ recipes: RECIPES, ingredients: [], staples: [] });
-    sortResults(results, 'serv');
-    expect(results[0].servings).toBe(4);
+    const sorted = sortResults(results, 'serv');
+    expect(sorted[0].servings).toBe(4);
+  });
+
+  it('does not mutate the original array', () => {
+    const results = findRecipes({ recipes: RECIPES, ingredients: [], staples: [] });
+    const firstId = results[0].id;
+    sortResults(results, 'alpha');
+    expect(results[0].id).toBe(firstId);
   });
 });
 

@@ -19,8 +19,11 @@ import {
 } from '../services/sync.js';
 import { escHTML } from '../utils/text.js';
 import { showToast } from '../utils/toast.js';
+import { $ } from '../utils/dom.js';
 
-const $ = (sel) => document.querySelector(sel);
+/** OTP rate-limit: minimum 30s between sends */
+let _lastOtpSend = 0;
+const OTP_COOLDOWN_MS = 30_000;
 
 /**
  * Initialize the sync panel UI.
@@ -184,8 +187,17 @@ function wireOtpFlow(container) {
         return;
       }
 
+      // Rate limit: 30s cooldown
+      const now = Date.now();
+      if (now - _lastOtpSend < OTP_COOLDOWN_MS) {
+        const wait = Math.ceil((OTP_COOLDOWN_MS - (now - _lastOtpSend)) / 1000);
+        showToast(`Please wait ${wait}s before requesting another code`);
+        return;
+      }
+
       sendBtn.disabled = true;
       sendBtn.textContent = 'Sending…';
+      _lastOtpSend = Date.now();
 
       const { error } = await sendOtp(email);
       if (error) {
@@ -275,9 +287,23 @@ function wireSyncCodes(container) {
           <p style="font-size:0.82rem;color:var(--ink-soft);margin-bottom:10px">
             Copy this code and paste it on another device to transfer your data.
           </p>
-          <textarea class="text-input" rows="4" style="width:100%;font-family:monospace;font-size:0.75rem" readonly onclick="this.select()">${escHTML(code)}</textarea>
-          <button class="btn btn-primary btn-sm mt-8" onclick="navigator.clipboard.writeText(this.previousElementSibling.value);this.textContent='Copied!'">Copy to Clipboard</button>
+          <textarea id="syncCodeText" class="text-input" rows="4" style="width:100%;font-family:monospace;font-size:0.75rem" readonly>${escHTML(code)}</textarea>
+          <button id="syncCodeCopyBtn" class="btn btn-primary btn-sm mt-8">Copy to Clipboard</button>
         `;
+        // Wire events without inline handlers
+        const textarea = body.querySelector('#syncCodeText');
+        const copyBtn = body.querySelector('#syncCodeCopyBtn');
+        if (textarea) textarea.addEventListener('click', () => textarea.select());
+        if (copyBtn) {
+          copyBtn.addEventListener('click', () => {
+            navigator.clipboard.writeText(textarea.value).then(() => {
+              copyBtn.textContent = 'Copied!';
+            });
+          });
+        }
+        // Wire close button
+        const closeBtn = document.getElementById('syncCodeClose');
+        if (closeBtn) closeBtn.addEventListener('click', () => { modal.hidden = true; });
         modal.hidden = false;
       } else {
         // Fallback: copy to clipboard

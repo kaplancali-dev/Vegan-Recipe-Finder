@@ -3,17 +3,31 @@
  *
  * Renders the shopping list with check/uncheck items,
  * clear all functionality, and auto-persistence.
+ * Checked state persists to localStorage via shopChecked state key.
  */
 
 import { get, set, subscribe, getRef } from '../state/store.js';
 import { autoSync } from '../services/sync.js';
 import { escHTML, norm } from '../utils/text.js';
 import { showToast } from '../utils/toast.js';
+import { $ } from '../utils/dom.js';
 
-const $ = (sel) => document.querySelector(sel);
+/**
+ * Get the checked set from persisted state.
+ * @returns {Set<string>}
+ */
+function getCheckedSet() {
+  const arr = getRef('shopChecked');
+  return new Set(Array.isArray(arr) ? arr : []);
+}
 
-/** Track checked (purchased) items locally — stored as part of shopList state */
-let _checked = new Set();
+/**
+ * Persist the checked set to state.
+ * @param {Set<string>} checked
+ */
+function saveChecked(checked) {
+  set('shopChecked', [...checked]);
+}
 
 /**
  * Initialize the Shopping List tab.
@@ -23,6 +37,7 @@ export function initShopping() {
   renderShopList();
 
   subscribe('shopList', renderShopList);
+  subscribe('shopChecked', renderShopList);
 }
 
 /**
@@ -36,7 +51,7 @@ function wireControls() {
     const items = getRef('shopList');
     if (!items.length) return;
     set('shopList', []);
-    _checked.clear();
+    set('shopChecked', []);
     autoSync();
     showToast('Shopping list cleared');
   });
@@ -60,22 +75,26 @@ function renderShopList() {
 
   if (emptyEl) emptyEl.hidden = true;
 
+  const checked = getCheckedSet();
+
   // Clean checked set — remove items no longer in list
   const itemSet = new Set(items.map(norm));
-  for (const c of _checked) {
-    if (!itemSet.has(c)) _checked.delete(c);
+  let needsClean = false;
+  for (const c of checked) {
+    if (!itemSet.has(c)) { checked.delete(c); needsClean = true; }
   }
+  if (needsClean) saveChecked(checked);
 
   // Group items: unchecked first, then checked
-  const unchecked = items.filter(i => !_checked.has(norm(i)));
-  const checked = items.filter(i => _checked.has(norm(i)));
-  const ordered = [...unchecked, ...checked];
+  const unchecked = items.filter(i => !checked.has(norm(i)));
+  const checkedItems = items.filter(i => checked.has(norm(i)));
+  const ordered = [...unchecked, ...checkedItems];
 
   container.innerHTML = ordered.map(item => {
-    const isChecked = _checked.has(norm(item));
+    const isChecked = checked.has(norm(item));
     return `
       <div class="shop-item${isChecked ? ' done' : ''}" data-shop-item="${escHTML(item)}">
-        <div class="shop-check">${isChecked ? '��' : ''}</div>
+        <div class="shop-check">${isChecked ? '✓' : ''}</div>
         <span>${escHTML(item)}</span>
         <button class="icon-btn" data-remove-shop="${escHTML(item)}" aria-label="Remove" style="margin-left:auto;font-size:0.8rem;opacity:0.5">&times;</button>
       </div>
@@ -84,36 +103,31 @@ function renderShopList() {
 
   // Event delegation
   container.onclick = (e) => {
-    // Remove button
     const removeBtn = e.target.closest('[data-remove-shop]');
     if (removeBtn) {
       e.stopPropagation();
-      const item = removeBtn.dataset.removeShop;
-      removeItem(item);
+      removeItem(removeBtn.dataset.removeShop);
       return;
     }
 
-    // Toggle check
     const row = e.target.closest('.shop-item');
-    if (row) {
-      const item = row.dataset.shopItem;
-      toggleCheck(item);
-    }
+    if (row) toggleCheck(row.dataset.shopItem);
   };
 }
 
 /**
- * Toggle an item's checked state.
+ * Toggle an item's checked state (persisted).
  * @param {string} item
  */
 function toggleCheck(item) {
+  const checked = getCheckedSet();
   const n = norm(item);
-  if (_checked.has(n)) {
-    _checked.delete(n);
+  if (checked.has(n)) {
+    checked.delete(n);
   } else {
-    _checked.add(n);
+    checked.add(n);
   }
-  renderShopList();
+  saveChecked(checked);
 }
 
 /**
@@ -124,8 +138,15 @@ function removeItem(item) {
   const current = get('shopList');
   const n = norm(item);
   const updated = current.filter(i => norm(i) !== n);
-  _checked.delete(n);
   set('shopList', updated);
+
+  // Also remove from checked
+  const checked = getCheckedSet();
+  if (checked.has(n)) {
+    checked.delete(n);
+    saveChecked(checked);
+  }
+
   autoSync();
 }
 

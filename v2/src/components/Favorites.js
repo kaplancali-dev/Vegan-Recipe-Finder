@@ -10,10 +10,10 @@ import { autoSync } from '../services/sync.js';
 import { findRecipes, sortResults } from '../services/matching.js';
 import { escHTML } from '../utils/text.js';
 import { showToast } from '../utils/toast.js';
+import { $ } from '../utils/dom.js';
+import { toggleFavorite } from '../actions/favorites.js';
 import { renderCardList } from './RecipeCard.js';
 import { openDetail } from './RecipeDetail.js';
-
-const $ = (sel) => document.querySelector(sel);
 
 const DAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
@@ -82,22 +82,6 @@ function renderFavList() {
       openDetail(id);
     }
   };
-}
-
-/**
- * Toggle favorite status.
- * @param {number} id
- */
-function toggleFavorite(id) {
-  const favs = get('favorites');
-  const favSet = new Set(favs);
-  if (favSet.has(id)) {
-    favSet.delete(id);
-  } else {
-    favSet.add(id);
-  }
-  set('favorites', [...favSet]);
-  autoSync();
 }
 
 /* ── Meal Planner ────────────────────────────────────────────── */

@@ -3,19 +3,29 @@
  *
  * Pure functions that take data in and return results out.
  * No DOM access, no global state, no side effects.
+ * Includes memoization for expensive alias expansion.
  */
 
 import { norm, stem } from '../utils/text.js';
 import { INGREDIENT_ALIASES, INGREDIENT_SUBS, ALLERGY_KEYWORDS } from '../data/aliases.js';
 
+/** Memoization cache for expandWithAliases */
+const _aliasCache = new Map();
+const ALIAS_CACHE_MAX = 64;
+
 /**
  * Expand a user's ingredient list with all aliases and substitutions.
  * e.g., ["olive oil"] → ["olive oil", "coconut oil", "avocado oil", ...]
+ * Results are memoized by sorted input key.
  *
  * @param {string[]} ings - Raw ingredient names from user
  * @returns {string[]} Expanded list of normalized ingredient names
  */
 export function expandWithAliases(ings) {
+  // Build cache key from sorted normalized ingredients
+  const cacheKey = ings.map(norm).sort().join('\0');
+  if (_aliasCache.has(cacheKey)) return _aliasCache.get(cacheKey);
+
   const result = new Set(ings.map(norm));
 
   ings.forEach(ing => {
@@ -32,7 +42,20 @@ export function expandWithAliases(ings) {
     });
   });
 
-  return [...result];
+  const expanded = [...result];
+
+  // Evict oldest entries if cache is full
+  if (_aliasCache.size >= ALIAS_CACHE_MAX) _aliasCache.delete(_aliasCache.keys().next().value);
+  _aliasCache.set(cacheKey, expanded);
+
+  return expanded;
+}
+
+/**
+ * Clear the alias expansion cache (useful for testing).
+ */
+export function clearAliasCache() {
+  _aliasCache.clear();
 }
 
 /**
@@ -145,23 +168,25 @@ export function findRecipes({
 
 /**
  * Sort results by a given key.
+ * Returns a new sorted array (does not mutate the input).
  *
  * @param {Object[]} results
  * @param {'match'|'time'|'serv'|'alpha'} sortKey
- * @returns {Object[]} Sorted array (mutates in place for performance)
+ * @returns {Object[]} New sorted array
  */
 export function sortResults(results, sortKey) {
+  const copy = [...results];
   switch (sortKey) {
     case 'match':
-      return results.sort((a, b) => b.pct - a.pct || b.userHave - a.userHave || a.title.localeCompare(b.title));
+      return copy.sort((a, b) => b.pct - a.pct || b.userHave - a.userHave || a.title.localeCompare(b.title));
     case 'time':
-      return results.sort((a, b) => (a.time || 999) - (b.time || 999));
+      return copy.sort((a, b) => (a.time || 999) - (b.time || 999));
     case 'serv':
-      return results.sort((a, b) => (b.servings || 0) - (a.servings || 0));
+      return copy.sort((a, b) => (b.servings || 0) - (a.servings || 0));
     case 'alpha':
-      return results.sort((a, b) => a.title.localeCompare(b.title));
+      return copy.sort((a, b) => a.title.localeCompare(b.title));
     default:
-      return results;
+      return copy;
   }
 }
 

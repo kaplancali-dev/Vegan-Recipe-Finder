@@ -188,12 +188,64 @@ export function openDetail(id) {
 
   _overlay.hidden = false;
   document.body.style.overflow = 'hidden';
+
+  // Focus the close button for accessibility
+  _closeBtn?.focus();
+
+  // Set up focus trap
+  _trapFocus(_overlay);
+}
+
+/** Store the element that had focus before modal opened */
+let _previousFocus = null;
+
+/**
+ * Trap focus within an element (modal).
+ * @param {Element} container
+ */
+function _trapFocus(container) {
+  _previousFocus = document.activeElement;
+
+  const onKeyDown = (e) => {
+    if (e.key !== 'Tab') return;
+    const focusable = container.querySelectorAll(
+      'a[href], button:not([disabled]), textarea, input:not([disabled]), select, [tabindex]:not([tabindex="-1"])'
+    );
+    if (!focusable.length) return;
+
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
+    }
+  };
+
+  container._focusTrapHandler = onKeyDown;
+  container.addEventListener('keydown', onKeyDown);
 }
 
 /**
  * Close the recipe detail modal.
  */
 export function closeDetail() {
-  if (_overlay) _overlay.hidden = true;
+  if (_overlay) {
+    // Remove focus trap
+    if (_overlay._focusTrapHandler) {
+      _overlay.removeEventListener('keydown', _overlay._focusTrapHandler);
+      delete _overlay._focusTrapHandler;
+    }
+    _overlay.hidden = true;
+  }
   document.body.style.overflow = '';
+
+  // Restore focus to the element that triggered the modal
+  if (_previousFocus && typeof _previousFocus.focus === 'function') {
+    _previousFocus.focus();
+  }
+  _previousFocus = null;
 }

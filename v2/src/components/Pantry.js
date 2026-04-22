@@ -11,8 +11,7 @@ import { computePantryPower } from '../services/matching.js';
 import { QA_ITEMS, PERISHABLES } from '../data/aliases.js';
 import { escHTML, norm } from '../utils/text.js';
 import { showToast } from '../utils/toast.js';
-
-const $ = (sel) => document.querySelector(sel);
+import { $ } from '../utils/dom.js';
 
 /** @type {Array} Full recipe list */
 let _recipes = [];
