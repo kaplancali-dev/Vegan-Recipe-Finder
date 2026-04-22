@@ -53,24 +53,31 @@ export function renderCard(result, opts = {}) {
   const timeStr = r.time ? `⏱ ${r.time} min` : '';
   const servStr = r.servings ? `🍽 ${r.servings} serv` : '';
 
+  const imgHtml = r.img
+    ? `<img class="r-card-img" loading="lazy" decoding="async" src="${escHTML(r.img)}" alt="${escHTML(r.title)}">`
+    : '';
+
   return `
-    <article class="r-card" data-recipe-id="${r.id}">
-      <div class="r-card-top">
-        <div>
-          <div class="r-title">${escHTML(r.title)}</div>
-          <div class="r-site">${escHTML(r.site || '')}</div>
+    <article class="r-card${r.img ? ' has-img' : ''}" data-recipe-id="${r.id}">
+      ${imgHtml}
+      <div class="r-card-body">
+        <div class="r-card-top">
+          <div>
+            <div class="r-title">${escHTML(r.title)}</div>
+            <div class="r-site">${escHTML(r.site || '')}</div>
+          </div>
+          <div class="r-actions">
+            ${matchPill}
+            <button class="icon-btn fav-btn" data-fav-id="${r.id}" aria-label="Toggle favorite" title="Toggle favorite">${favIcon}</button>
+          </div>
         </div>
-        <div class="r-actions">
-          ${matchPill}
-          <button class="icon-btn fav-btn" data-fav-id="${r.id}" aria-label="Toggle favorite" title="Toggle favorite">${favIcon}</button>
+        <div class="r-meta">
+          ${timeStr ? `<span>${timeStr}</span>` : ''}
+          ${servStr ? `<span>${servStr}</span>` : ''}
+          <span>${r.have ?? 0}/${r.ing?.length ?? 0} ingredients</span>
         </div>
+        ${showMatch ? `<div class="bar-bg"><div class="bar-fill ${barTier(r.pct)}" style="width:${r.pct ?? 0}%"></div></div>` : ''}
       </div>
-      <div class="r-meta">
-        ${timeStr ? `<span>${timeStr}</span>` : ''}
-        ${servStr ? `<span>${servStr}</span>` : ''}
-        <span>${r.have ?? 0}/${r.ing?.length ?? 0} ingredients</span>
-      </div>
-      ${showMatch ? `<div class="bar-bg"><div class="bar-fill ${barTier(r.pct)}" style="width:${r.pct ?? 0}%"></div></div>` : ''}
     </article>
   `;
 }
