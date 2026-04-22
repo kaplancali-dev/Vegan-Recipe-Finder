@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>HARVEST — Eat More Plants!</title>
+<meta name="description" content="Match your ingredients to plant-based recipes from the world's top nutrition-focused chefs. Prioritizes perishables, filters allergens, and builds your shopping list.">
+<meta property="og:title" content="HARVEST — Eat More Plants!">
+<meta property="og:description" content="You open the fridge and think, 'What can I make with this?' HARVEST knows.">
+<meta property="og:image" content="https://myharvestvegan.com/hero-image4.png">
+<meta property="og:url" content="https://myharvestvegan.com">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="HARVEST — Eat More Plants!">
+<meta name="twitter:description" content="Match your ingredients to plant-based recipes. Prioritizes perishables, filters allergens, builds your shopping list.">
+<meta name="twitter:image" content="https://myharvestvegan.com/hero-image4.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="HARVEST">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" href="favicon.png">
+<meta name="theme-color" content="#2d7a4f">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; img-src 'self' https: data:; connect-src 'self' https://*.supabase.co https://www.google-analytics.com; font-src 'self'; frame-src 'none';">
+</head>
+<body>
+
+  <!-- ── APP SHELL ──────────────────────────────────────────── -->
+  <div id="app">
+
+    <!-- Toast notification -->
+    <div id="toast" class="toast" aria-live="polite"></div>
+
+    <!-- Top header bar -->
+    <header id="header" class="header">
+      <div class="header-inner">
+        <h1 class="logo">HARVEST</h1>
+        <div class="header-actions">
+          <button id="syncBtn" class="icon-btn" aria-label="Cloud sync" title="Cloud sync">☁️</button>
+          <span id="syncStatus" class="sync-status"></span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Tab navigation bar -->
+    <nav id="tabBar" class="tab-bar" aria-label="Main navigation">
+      <button class="tab-btn" data-tab="pantry">🥬 My Pantry</button>
+      <button class="tab-btn on" data-tab="browse">🔍 Browse</button>
+      <button class="tab-btn" data-tab="canmake">
+        <span>🍳 Ready</span>
+        <span id="readyCount" class="badge"></span>
+      </button>
+      <button class="tab-btn" data-tab="favorites">❤️ Faves</button>
+      <button class="tab-btn" data-tab="shopping">🛒 Shop</button>
+    </nav>
+
+    <!-- ── TAB PANELS ─────────────────────────────────────── -->
+
+    <!-- MY PANTRY TAB -->
+    <section id="tab-pantry" class="tab-panel" hidden>
+      <!-- Hero (first-visit only) -->
+      <div id="hero" class="hero" hidden>
+        <h2>What's in your kitchen?</h2>
+        <p>Add your ingredients below and we'll find recipes you can make right now.</p>
+      </div>
+
+      <!-- Pantry Power bar -->
+      <div id="pantryPower" class="pantry-power card">
+        <div class="pp-header">
+          <span class="pp-label">Pantry Power</span>
+          <span id="ppStats" class="pp-stats"></span>
+        </div>
+        <div class="bar-bg"><div id="ppBar" class="bar-fill"></div></div>
+      </div>
+
+      <!-- Ingredient entry -->
+      <div class="card">
+        <label for="ingInput" class="card-title">Add Ingredients</label>
+        <div class="input-row">
+          <input id="ingInput" type="text" class="text-input" placeholder="e.g. tofu, rice, garlic" autocomplete="off">
+          <button id="ingAddBtn" class="btn btn-primary">Add</button>
+        </div>
+        <div id="ingChips" class="chip-wrap"></div>
+      </div>
+
+      <!-- Staples section -->
+      <div class="card">
+        <h3 class="card-title">Staples <span class="muted">(always on hand)</span></h3>
+        <div id="stapleChips" class="chip-wrap"></div>
+        <button id="addStaplesBtn" class="btn btn-outline btn-sm">+ Add staples</button>
+      </div>
+
+      <!-- Quick Actions section -->
+      <div id="quickActions" class="card">
+        <h3 class="card-title">Quick Actions</h3>
+        <div class="qa-grid" id="qaGrid"></div>
+      </div>
+
+      <!-- Cloud sync panel -->
+      <div id="syncPanel" class="card sync-card" hidden>
+        <h3 class="card-title">☁️ Cloud Sync</h3>
+        <div id="syncContent"></div>
+      </div>
+    </section>
+
+    <!-- BROWSE TAB -->
+    <section id="tab-browse" class="tab-panel">
+      <!-- Filter bar -->
+      <div class="filter-bar card">
+        <div class="input-row">
+          <input id="nameSearch" type="text" class="text-input" placeholder="Search recipes…" autocomplete="off">
+          <button id="filterToggle" class="btn btn-outline">Filters</button>
+        </div>
+        <div id="activeFilters" class="active-filters"></div>
+      </div>
+
+      <!-- Filter drawer (hidden by default) -->
+      <div id="filterDrawer" class="filter-drawer" hidden>
+        <div class="filter-section">
+          <h4>Categories</h4>
+          <div id="catFilters" class="filter-chips"></div>
+        </div>
+        <div class="filter-section">
+          <h4>Max Cook Time</h4>
+          <div class="time-slider-row">
+            <input id="timeSlider" type="range" min="0" max="120" step="5" value="120" class="slider">
+            <span id="timeLabel" class="time-label">Any</span>
+          </div>
+        </div>
+        <div class="filter-section">
+          <h4>Allergens to Exclude</h4>
+          <div id="allergyFilters" class="filter-chips"></div>
+        </div>
+        <div class="filter-section">
+          <h4>Source</h4>
+          <select id="siteFilter" class="select-input">
+            <option value="">All sources</option>
+          </select>
+        </div>
+        <div class="filter-section">
+          <h4>Sort By</h4>
+          <div class="sort-btns">
+            <button class="sort-btn on" data-sort="match">Best Match</button>
+            <button class="sort-btn" data-sort="time">Quickest</button>
+            <button class="sort-btn" data-sort="alpha">A–Z</button>
+            <button class="sort-btn" data-sort="serv">Servings</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Results count -->
+      <div id="resultsMeta" class="results-meta"></div>
+
+      <!-- Recipe cards list -->
+      <div id="recipeList" class="recipe-list"></div>
+    </section>
+
+    <!-- READY TO COOK TAB -->
+    <section id="tab-canmake" class="tab-panel" hidden>
+      <div class="section-intro">
+        <h2>Ready to Cook</h2>
+        <p>Recipes you can make with what's in your pantry right now.</p>
+      </div>
+      <div id="canMakeList" class="recipe-list"></div>
+      <div id="canMakeEmpty" class="empty-state" hidden>
+        <p>Add ingredients to your pantry to see what you can make!</p>
+      </div>
+    </section>
+
+    <!-- FAVORITES TAB -->
+    <section id="tab-favorites" class="tab-panel" hidden>
+      <div class="section-intro">
+        <h2>Favorites</h2>
+        <p>Your saved recipes and meal plan.</p>
+      </div>
+
+      <!-- Meal planner -->
+      <div id="mealPlanner" class="card">
+        <h3 class="card-title">📅 Meal Plan</h3>
+        <div id="mealSlots" class="meal-slots"></div>
+      </div>
+
+      <!-- Favorites list -->
+      <div id="favList" class="recipe-list"></div>
+      <div id="favEmpty" class="empty-state" hidden>
+        <p>Tap the ❤️ on any recipe to save it here.</p>
+      </div>
+    </section>
+
+    <!-- SHOPPING LIST TAB -->
+    <section id="tab-shopping" class="tab-panel" hidden>
+      <div class="section-intro">
+        <div class="section-intro-row">
+          <h2>Shopping List</h2>
+          <button id="clearShopBtn" class="btn btn-outline btn-sm">Clear All</button>
+        </div>
+      </div>
+      <div id="shopList" class="shop-list"></div>
+      <div id="shopEmpty" class="empty-state" hidden>
+        <p>Missing ingredients from your recipes will appear here.</p>
+      </div>
+    </section>
+
+    <!-- ── RECIPE DETAIL MODAL ────────────────────────────── -->
+    <div id="recipeModal" class="modal-overlay" hidden>
+      <div class="modal">
+        <div class="modal-header">
+          <h2 id="modalTitle" class="modal-title"></h2>
+          <button id="modalClose" class="modal-close" aria-label="Close">&times;</button>
+        </div>
+        <div id="modalBody" class="modal-body"></div>
+      </div>
+    </div>
+
+    <!-- ── SYNC CODE MODAL ────────────────────────────────── -->
+    <div id="syncCodeModal" class="modal-overlay" hidden>
+      <div class="modal modal-sm">
+        <div class="modal-header">
+          <h2 class="modal-title">Sync Code</h2>
+          <button class="modal-close" aria-label="Close" onclick="document.getElementById('syncCodeModal').hidden=true">&times;</button>
+        </div>
+        <div id="syncCodeBody" class="modal-body"></div>
+      </div>
+    </div>
+
+  </div><!-- #app -->
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

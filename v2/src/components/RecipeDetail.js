@@ -1,0 +1,199 @@
+/**
+ * RecipeDetail — modal component that shows full recipe details.
+ *
+ * Renders ingredients (highlighted have/missing), nutrition grid,
+ * action buttons (favorite, add missing to shopping list, view recipe).
+ */
+
+import { escHTML } from '../utils/text.js';
+import { get, set } from '../state/store.js';
+import { autoSync, reportBrokenLink } from '../services/sync.js';
+import { ingredientMatches, expandWithAliases } from '../services/matching.js';
+
+/** @type {Array} Full recipe list — set by init */
+let _recipes = [];
+
+/** DOM references (cached after init) */
+let _overlay, _title, _body, _closeBtn;
+
+/**
+ * Initialize the recipe detail modal.
+ * @param {Array} recipes - Full recipe array
+ */
+export function initRecipeDetail(recipes) {
+  _recipes = recipes;
+  _overlay = document.getElementById('recipeModal');
+  _title = document.getElementById('modalTitle');
+  _body = document.getElementById('modalBody');
+  _closeBtn = document.getElementById('modalClose');
+
+  if (!_overlay) return;
+
+  // Close button
+  _closeBtn?.addEventListener('click', closeDetail);
+
+  // Click outside to close
+  _overlay.addEventListener('click', (e) => {
+    if (e.target === _overlay) closeDetail();
+  });
+
+  // Escape key to close
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !_overlay.hidden) closeDetail();
+  });
+}
+
+/**
+ * Open the recipe detail modal for a given recipe ID.
+ * @param {number} id - Recipe ID
+ */
+export function openDetail(id) {
+  const recipe = _recipes.find(r => r.id === id);
+  if (!recipe || !_overlay) return;
+
+  const ings = get('ingredients');
+  const staples = get('staples');
+  const userIngs = expandWithAliases([...ings, ...staples]);
+  const favs = new Set(get('favorites'));
+  const isFav = favs.has(id);
+  const instructions = get('instructions');
+  const notes = instructions[id] || '';
+
+  // Categorize ingredients
+  const ingList = (recipe.ing || []).map(ing => {
+    const have = ingredientMatches(ing, userIngs);
+    return { name: ing, have };
+  });
+
+  const haveCount = ingList.filter(i => i.have).length;
+  const pct = ingList.length ? Math.round(haveCount / ingList.length * 100) : 0;
+
+  // Nutrition
+  const nut = recipe.nut || {};
+  const nutHtml = `
+    <div class="nut-grid">
+      <div class="nut-cell"><span class="nut-val">${nut.cal ?? '—'}</span>cal</div>
+      <div class="nut-cell"><span class="nut-val">${nut.pro ?? '—'}g</span>protein</div>
+      <div class="nut-cell"><span class="nut-val">${nut.carb ?? '—'}g</span>carbs</div>
+      <div class="nut-cell"><span class="nut-val">${nut.fat ?? '—'}g</span>fat</div>
+      <div class="nut-cell"><span class="nut-val">${nut.fib ?? '—'}g</span>fiber</div>
+    </div>
+  `;
+
+  // Ingredient list HTML
+  const ingHtml = ingList.map(i => `
+    <li class="detail-ing ${i.have ? 'have' : 'missing'}">
+      ${i.have ? '✓' : '○'} ${escHTML(i.name)}
+    </li>
+  `).join('');
+
+  // Missing ingredients for shopping list button
+  const missingIngs = ingList.filter(i => !i.have).map(i => i.name);
+
+  // Build body
+  _title.textContent = recipe.title;
+  _body.innerHTML = `
+    <div class="detail-section">
+      <div class="r-site">${escHTML(recipe.site || '')}</div>
+      <div class="r-meta" style="margin-top:6px">
+        ${recipe.time ? `<span>⏱ ${recipe.time} min</span>` : ''}
+        ${recipe.servings ? `<span>🍽 ${recipe.servings} servings</span>` : ''}
+        <span>${haveCount}/${ingList.length} ingredients (${pct}%)</span>
+      </div>
+    </div>
+
+    <div class="detail-section">
+      <h4>Ingredients</h4>
+      <ul class="detail-ing-list">${ingHtml}</ul>
+    </div>
+
+    <div class="detail-section">
+      <h4>Nutrition (per serving)</h4>
+      ${nutHtml}
+    </div>
+
+    <div class="detail-section">
+      <h4>Notes</h4>
+      <textarea id="detailNotes" class="text-input" rows="3" placeholder="Add your notes…"
+        style="width:100%;resize:vertical">${escHTML(notes)}</textarea>
+    </div>
+
+    <div class="detail-actions">
+      ${recipe.url ? `<a href="${escHTML(recipe.url)}" target="_blank" rel="noopener" class="detail-link">View Recipe ↗</a>` : ''}
+      <button class="btn btn-primary" id="detailFavBtn">${isFav ? '❤️ Unfavorite' : '🤍 Favorite'}</button>
+      ${missingIngs.length ? `<button class="btn btn-outline" id="detailShopBtn">🛒 Add ${missingIngs.length} to list</button>` : ''}
+      ${recipe.url ? `<button class="btn btn-outline btn-sm" id="detailReportBtn">🔗 Report broken link</button>` : ''}
+    </div>
+  `;
+
+  // Wire detail action buttons
+  const favBtn = document.getElementById('detailFavBtn');
+  if (favBtn) {
+    favBtn.addEventListener('click', () => {
+      const currentFavs = get('favorites');
+      const currentSet = new Set(currentFavs);
+      if (currentSet.has(id)) {
+        currentSet.delete(id);
+      } else {
+        currentSet.add(id);
+      }
+      set('favorites', [...currentSet]);
+      autoSync();
+      // Re-render the detail to update button
+      openDetail(id);
+    });
+  }
+
+  const shopBtn = document.getElementById('detailShopBtn');
+  if (shopBtn) {
+    shopBtn.addEventListener('click', () => {
+      const currentShop = get('shopList');
+      const shopSet = new Set(currentShop);
+      missingIngs.forEach(ing => shopSet.add(ing));
+      set('shopList', [...shopSet]);
+      autoSync();
+      shopBtn.textContent = '✓ Added!';
+      shopBtn.disabled = true;
+    });
+  }
+
+  const reportBtn = document.getElementById('detailReportBtn');
+  if (reportBtn) {
+    reportBtn.addEventListener('click', () => {
+      reportBrokenLink(recipe.id, recipe.title, recipe.url || '');
+      reportBtn.textContent = '✓ Reported';
+      reportBtn.disabled = true;
+    });
+  }
+
+  // Notes auto-save
+  const notesEl = document.getElementById('detailNotes');
+  if (notesEl) {
+    let noteTimer;
+    notesEl.addEventListener('input', () => {
+      clearTimeout(noteTimer);
+      noteTimer = setTimeout(() => {
+        const allNotes = get('instructions');
+        const val = notesEl.value.trim();
+        if (val) {
+          allNotes[id] = val;
+        } else {
+          delete allNotes[id];
+        }
+        set('instructions', allNotes);
+        autoSync();
+      }, 800);
+    });
+  }
+
+  _overlay.hidden = false;
+  document.body.style.overflow = 'hidden';
+}
+
+/**
+ * Close the recipe detail modal.
+ */
+export function closeDetail() {
+  if (_overlay) _overlay.hidden = true;
+  document.body.style.overflow = '';
+}
