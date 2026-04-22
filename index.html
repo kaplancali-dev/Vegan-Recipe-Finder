@@ -5861,31 +5861,11 @@ restoreAllergyUI();
 updateFindBtn();
 findRecipes();
 
-// ── SERVICE WORKER (auto-update with content hash) ──────────────────────────
+// ── SERVICE WORKER ──────────────────────────────────────────────────────────
 if ('serviceWorker' in navigator) {
-  // Generate a short hash from the page content so the SW version auto-updates
-  // whenever index.html changes — no manual version bumps needed.
-  (async () => {
-    try {
-      const html = document.documentElement.outerHTML;
-      const buf = await crypto.subtle.digest('SHA-1', new TextEncoder().encode(html));
-      const hash = Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('').slice(0,12);
-      const swUrl = `./sw.js?v=vrf-${hash}`;
-      const reg = await navigator.serviceWorker.register(swUrl, { updateViaCache: 'none' });
-      setInterval(() => reg.update(), 60000);
-      reg.addEventListener('updatefound', () => {
-        const newWorker = reg.installing;
-        newWorker.addEventListener('statechange', () => {
-          if (newWorker.state === 'activated' && navigator.serviceWorker.controller) {
-            window.location.reload();
-          }
-        });
-      });
-    } catch(e) {
-      // Fallback: register without hash
-      navigator.serviceWorker.register('./sw.js', { updateViaCache: 'none' });
-    }
-  })();
+  navigator.serviceWorker.register('./sw.js', { updateViaCache: 'none' })
+    .then(reg => { setInterval(() => reg.update(), 60000); })
+    .catch(() => {});
 }
 </script>
 
@@ -5898,7 +5878,7 @@ if ('serviceWorker' in navigator) {
   <button onclick="if(navigator.share)navigator.share({title:'HARVEST',url:location.href}).catch(()=>{})" style="background:none;border:none;padding:8px 16px;cursor:pointer;">
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#007AFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v7a2 2 0 002 2h12a2 2 0 002-2v-7"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
   </button>
-  <button onclick="caches.keys().then(k=>Promise.all(k.map(c=>caches.delete(c)))).then(()=>location.reload())" style="background:none;border:none;padding:8px 16px;cursor:pointer;">
+  <button onclick="location.reload()" style="background:none;border:none;padding:8px 16px;cursor:pointer;">
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#007AFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"/></svg>
   </button>
 </div>
