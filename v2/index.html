@@ -96,6 +96,7 @@
       <!-- Ingredient entry -->
       <div class="card">
         <label for="ingInput" class="card-title">Add Ingredients</label>
+        <p class="pantry-hint">Type what's in your fridge &amp; pantry, separated by commas. Tap ⭐ on any ingredient to make it a permanent <strong>staple</strong> (always on hand). Tap &times; to remove.</p>
         <div class="input-row">
           <input id="ingInput" type="text" class="text-input" placeholder="e.g. tofu, rice, garlic" autocomplete="off">
           <button id="ingAddBtn" class="btn btn-primary">Add</button>
@@ -114,6 +115,75 @@
       <div id="quickActions" class="card">
         <h3 class="card-title">Quick Actions</h3>
         <div class="qa-grid" id="qaGrid"></div>
+      </div>
+
+      <!-- User Guide -->
+      <div class="card user-guide">
+        <h3 class="card-title guide-toggle" id="guideToggle">📖 How HARVEST Works <span class="guide-arrow">▾</span></h3>
+        <div class="guide-body" id="guideBody">
+
+          <p class="guide-intro">You open your fridge and pantry. You see ingredients. But the real question is always the same: <em class="guide-highlight">"What can I actually make right now?"</em></p>
+          <p class="guide-text"><strong class="guide-brand">HARVEST</strong> was built to answer that — instantly.</p>
+
+          <p class="guide-text">Created by an experienced food creator, this app turns what you already have into real, nourishing meals you'll actually crave. No more scrolling endlessly. No more wasted ingredients. No more guesswork.</p>
+          <p class="guide-text">Instead, <strong class="guide-brand">HARVEST</strong> connects your kitchen to a curated world of top, nutrition-focused plant-based chefs — bringing you over 1,000 recipes designed to be simple, flexible, and deeply satisfying.</p>
+
+          <p class="guide-tagline">The goal isn't just to cook more — it's to make cooking feel effortless again. ❤️</p>
+
+          <!-- ① YOUR KITCHEN, UNLOCKED -->
+          <div class="guide-section">
+            <div class="guide-section-header">
+              <svg width="36" height="36" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="50" cy="58" r="28" fill="var(--green-soft)" style="animation:guideGlow 3s ease-in-out infinite"/>
+                <rect x="24" y="48" width="36" height="30" rx="6" fill="var(--green)" stroke="white" stroke-width="2"/>
+                <circle cx="42" cy="62" r="5" fill="var(--green-deep)" stroke="white" stroke-width="1"/>
+                <rect x="39.5" y="62" width="5" height="8" rx="2" fill="var(--green-deep)" stroke="white" stroke-width="1"/>
+                <g style="transform-origin:28px 52px;animation:guideLock 3s ease-in-out infinite">
+                  <path d="M28 52 C28 38 56 38 56 52" stroke="white" stroke-width="4" stroke-linecap="round" fill="none"/>
+                </g>
+              </svg>
+              <h4 class="guide-section-title">Your Kitchen, Unlocked</h4>
+            </div>
+            <p class="guide-text">Tell <strong class="guide-brand">HARVEST</strong> what's in your kitchen and instantly see what you can make — plus a smart shopping list for anything missing.</p>
+          </div>
+
+          <!-- ② CLEAN, FLEXIBLE, INTENTIONAL -->
+          <div class="guide-section">
+            <div class="guide-section-header">
+              <span style="font-size:1.5rem">🌱</span>
+              <h4 class="guide-section-title">Clean, Flexible, Intentional</h4>
+            </div>
+            <p class="guide-text">100% plant-based, sourced from trusted chefs, filterable by allergen, cuisine, mood, or time. Some recipes use soy sauce or flour tortillas — ingredients that contain gluten. Rather than exclude those recipes, we fix them: <span class="guide-swap"><s>soy sauce</s> → <strong>tamari</strong></span>, <span class="guide-swap"><s>flour tortillas</s> → <strong>corn tortillas</strong></span>. One simple swap keeps the recipe — and makes it fully gluten-free.</p>
+          </div>
+
+          <!-- ③ BUILT AROUND YOU -->
+          <div class="guide-section">
+            <div class="guide-section-header">
+              <span style="font-size:1.5rem">💚</span>
+              <h4 class="guide-section-title">Built Around You</h4>
+            </div>
+            <p class="guide-text">⭐ Save <strong>Staples</strong> (ingredients you always have) &nbsp;❤️ Collect favorites &nbsp;📝 Add notes &nbsp;— HARVEST learns your kitchen and evolves with you.</p>
+          </div>
+
+          <!-- ④ BROWSE WITH CLARITY -->
+          <div class="guide-section">
+            <div class="guide-section-header">
+              <span style="font-size:1.5rem">👁️</span>
+              <h4 class="guide-section-title">Browse with Clarity</h4>
+            </div>
+            <p class="guide-text">Search by dish, ingredient, or mood. See nutrition per serving. Open recipes from the original creators. No clutter — just signal.</p>
+          </div>
+
+          <!-- ⑤ WHAT CAN I MAKE RIGHT NOW? -->
+          <div class="guide-section">
+            <div class="guide-section-header">
+              <span style="font-size:1.5rem">🤔</span>
+              <h4 class="guide-section-title">What Can I Make Right Now?</h4>
+            </div>
+            <p class="guide-text">See recipes with 3 or fewer missing ingredients (Staples included). 🟢 Make Now · 🟡 Missing 1 · 🔴 Missing 2–3 · Tap 🛒 for an instant shopping list.</p>
+          </div>
+
+        </div>
       </div>
 
       <!-- Cloud sync panel -->

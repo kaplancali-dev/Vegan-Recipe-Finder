@@ -26,6 +26,7 @@ export function initPantry(recipes) {
   wireIngredientInput();
   wireQAGrid();
   wireStaples();
+  wireGuideToggle();
   renderIngChips();
   renderStapleChips();
   renderPantryPower();
@@ -46,6 +47,19 @@ export function initPantry(recipes) {
 
 function checkHero() {
   // Intro hero card is always visible (matches v1 behavior)
+}
+
+/* ── User Guide Toggle ──────────────────────────────────────── */
+
+function wireGuideToggle() {
+  const toggle = $('#guideToggle');
+  const body = $('#guideBody');
+  if (!toggle || !body) return;
+
+  toggle.addEventListener('click', () => {
+    const isHidden = body.classList.toggle('hidden');
+    toggle.classList.toggle('collapsed', isHidden);
+  });
 }
 
 /* ── Ingredient Input ────────────────────────────────────────── */
@@ -111,15 +125,15 @@ function renderIngChips() {
 
   const ings = getRef('ingredients');
   if (!ings.length) {
-    container.innerHTML = '<span class="muted" style="font-size:0.82rem">No ingredients added yet</span>';
+    container.innerHTML = '<span class="muted" style="font-size:0.82rem">No ingredients added yet — type above to get started!</span>';
     return;
   }
 
   container.innerHTML = ings.map((ing, i) =>
     `<span class="chip${isPerishable(ing) ? ' perishable' : ''}">
       ${escHTML(ing)}
+      <span class="chip-x chip-star" data-star-ing="${i}" title="Move to staples (always on hand)">⭐</span>
       <span class="chip-x" data-remove-ing="${i}" title="Remove">&times;</span>
-      <span class="chip-x" data-star-ing="${i}" title="Move to staples" style="font-size:0.75rem">⭐</span>
     </span>`
   ).join('');
 

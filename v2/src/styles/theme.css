@@ -997,6 +997,112 @@ input, select, textarea {
   letter-spacing: 0.01em;
 }
 
+/* ── Pantry Hint Text ───────────────────────────────────────── */
+.pantry-hint {
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+.pantry-hint strong {
+  color: var(--green);
+}
+
+/* ── Star icon in chips ─────────────────────────────────────── */
+.chip .chip-star {
+  font-size: 0.72rem;
+  opacity: 0.7;
+  cursor: pointer;
+  transition: opacity var(--transition), transform var(--transition);
+}
+.chip .chip-star:hover {
+  opacity: 1;
+  transform: scale(1.2);
+}
+
+/* ── User Guide ─────────────────────────────────────────────── */
+.user-guide {
+  border: 1px solid var(--green-soft);
+}
+.guide-toggle {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  user-select: none;
+}
+.guide-arrow {
+  font-size: 0.8rem;
+  transition: transform var(--transition);
+  color: var(--muted);
+}
+.guide-toggle.collapsed .guide-arrow {
+  transform: rotate(-90deg);
+}
+.guide-body {
+  padding-top: 12px;
+}
+.guide-body.hidden {
+  display: none;
+}
+.guide-intro {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--ink);
+  text-align: center;
+  margin-bottom: 8px;
+}
+.guide-highlight {
+  font-weight: 700;
+  color: var(--green);
+}
+.guide-text {
+  color: var(--ink-soft);
+  line-height: 1.7;
+  margin-bottom: 8px;
+  font-size: 0.92rem;
+}
+.guide-brand {
+  color: var(--green);
+}
+.guide-tagline {
+  text-align: center;
+  color: var(--green);
+  font-weight: 700;
+  font-style: italic;
+  font-size: 0.95rem;
+  margin: 14px 0 16px;
+}
+.guide-section {
+  margin-bottom: 14px;
+}
+.guide-section-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 4px;
+}
+.guide-section-title {
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: var(--green);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  margin: 0;
+}
+.guide-swap {
+  color: var(--accent);
+}
+
+@keyframes guideGlow {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+@keyframes guideLock {
+  0%, 30% { transform: rotate(0deg); }
+  60%, 100% { transform: rotate(-40deg); }
+}
+
 /* ── Old Pantry Power (kept for compat) ──────────────────────── */
 .pantry-power {
   background: var(--green-soft);
