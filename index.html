@@ -22,7 +22,7 @@
 <link rel="icon" type="image/png" href="favicon.png">
 <meta name="theme-color" content="#2d7a4f">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; img-src 'self' https: data:; connect-src 'self' https://*.supabase.co https://www.google-analytics.com; font-src 'self'; frame-src 'none';">
-  <script type="module" crossorigin src="/assets/index-CRrICKA2.js"></script>
+  <script type="module" crossorigin src="/assets/index-CuJSay9n.js"></script>
   <link rel="modulepreload" crossorigin href="/assets/supabase-DaN4is7k.js">
   <link rel="modulepreload" crossorigin href="/assets/recipes-BpSYmkTi.js">
   <link rel="stylesheet" crossorigin href="/assets/index-DDqlG-Qu.css">
@@ -49,9 +49,9 @@
     <!-- Tab navigation bar (WAI-ARIA tabs pattern) -->
     <nav id="tabBar" class="tab-bar" role="tablist" aria-label="Main navigation">
       <button class="tab-btn" data-tab="pantry" role="tab" aria-selected="false" aria-controls="tab-pantry" id="btn-pantry">🥬 My Pantry</button>
-      <button class="tab-btn on" data-tab="browse" role="tab" aria-selected="true" aria-controls="tab-browse" id="btn-browse">🔍 Browse</button>
+      <button class="tab-btn on" data-tab="browse" role="tab" aria-selected="true" aria-controls="tab-browse" id="btn-browse">🔍 Browse All</button>
       <button class="tab-btn" data-tab="canmake" role="tab" aria-selected="false" aria-controls="tab-canmake" id="btn-canmake">
-        <span>🍳 Ready</span>
+        <span>🍳 Ready to Make</span>
         <span id="readyCount" class="badge"></span>
       </button>
       <button class="tab-btn" data-tab="favorites" role="tab" aria-selected="false" aria-controls="tab-favorites" id="btn-favorites">❤️ Faves</button>
@@ -252,8 +252,8 @@
     <!-- READY TO COOK TAB -->
     <section id="tab-canmake" class="tab-panel" role="tabpanel" aria-labelledby="btn-canmake" hidden>
       <div class="section-intro">
-        <h2>Ready to Cook</h2>
-        <p>Recipes you can make with what's in your pantry right now.</p>
+        <h2>Ready to Make Now</h2>
+        <p>Recipes you can make right now — missing 1 or fewer ingredients.</p>
       </div>
       <div id="canMakeList" class="recipe-list"></div>
       <div id="canMakeEmpty" class="empty-state" hidden>
