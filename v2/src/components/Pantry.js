@@ -131,9 +131,9 @@ function renderIngChips() {
 
   container.innerHTML = ings.map((ing, i) =>
     `<span class="chip${isPerishable(ing) ? ' perishable' : ''}">
+      <span class="chip-action chip-promote" data-star-ing="${i}" title="Make this a staple (always on hand)">☆</span>
       ${escHTML(ing)}
-      <span class="chip-x chip-star" data-star-ing="${i}" title="Move to staples (always on hand)">⭐</span>
-      <span class="chip-x" data-remove-ing="${i}" title="Remove">&times;</span>
+      <span class="chip-action chip-remove" data-remove-ing="${i}" title="Remove">&times;</span>
     </span>`
   ).join('');
 
@@ -193,8 +193,9 @@ function renderStapleChips() {
 
   container.innerHTML = staples.map((s, i) =>
     `<span class="chip staple">
+      <span class="chip-staple-icon">★</span>
       ${escHTML(s)}
-      <span class="chip-x" data-remove-staple="${i}" title="Remove">&times;</span>
+      <span class="chip-action chip-remove" data-remove-staple="${i}" title="Remove staple">&times;</span>
     </span>`
   ).join('');
 

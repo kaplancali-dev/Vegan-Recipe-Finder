@@ -1008,16 +1008,44 @@ input, select, textarea {
   color: var(--green);
 }
 
-/* ── Star icon in chips ─────────────────────────────────────── */
-.chip .chip-star {
-  font-size: 0.72rem;
-  opacity: 0.7;
+/* ── Chip action icons (star & remove) ──────────────────────── */
+.chip-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
-  transition: opacity var(--transition), transform var(--transition);
+  line-height: 1;
+  transition: all var(--transition);
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  font-size: 0.85rem;
 }
-.chip .chip-star:hover {
+.chip-promote {
+  color: var(--accent);
+  font-size: 1rem;
+  opacity: 0.7;
+}
+.chip-promote:hover {
   opacity: 1;
-  transform: scale(1.2);
+  transform: scale(1.25);
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+.chip-remove {
+  opacity: 0.5;
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+}
+.chip-remove:hover {
+  opacity: 1;
+  color: var(--danger);
+  background: var(--danger-soft);
+}
+.chip-staple-icon {
+  color: var(--accent);
+  font-size: 0.8rem;
+  line-height: 1;
 }
 
 /* ── User Guide ─────────────────────────────────────────────── */
