@@ -26,6 +26,7 @@ export function initPantry(recipes) {
   wireIngredientInput();
   wireQAGrid();
   wireGuideToggle();
+  wireSectionToggles();
   renderIngChips();
   renderStapleChips();
   renderPantryPower();
@@ -59,6 +60,21 @@ function wireGuideToggle() {
   toggle.addEventListener('click', () => {
     const isHidden = body.classList.toggle('hidden');
     toggle.classList.toggle('collapsed', isHidden);
+  });
+}
+
+/* ── Collapsible Section Toggles ────────────────────────────── */
+
+function wireSectionToggles() {
+  document.querySelectorAll('.section-toggle').forEach(toggle => {
+    toggle.style.cursor = 'pointer';
+    toggle.addEventListener('click', () => {
+      const targetId = toggle.dataset.toggle;
+      const body = document.getElementById(targetId);
+      if (!body) return;
+      const isHidden = body.classList.toggle('hidden');
+      toggle.classList.toggle('collapsed', isHidden);
+    });
   });
 }
 
@@ -117,46 +133,23 @@ function wireIngredientInput() {
   });
 }
 
-/* ── Ingredient Chips (split into Perishables + Pantry) ──────── */
+/* ── Ingredient Chips (Perishables) ─────────────────────────── */
 
 function renderIngChips() {
-  const perishContainer = $('#perishChips');
-  const pantryContainer = $('#pantryChips');
-  if (!perishContainer || !pantryContainer) return;
+  const container = $('#perishChips');
+  if (!container) return;
 
   const ings = getRef('ingredients');
 
-  // Split ingredients into perishable vs shelf-stable
-  const perishable = [];
-  const shelfStable = [];
-  ings.forEach((ing, i) => {
-    if (isPerishable(ing)) {
-      perishable.push({ ing, idx: i });
-    } else {
-      shelfStable.push({ ing, idx: i });
-    }
-  });
-
-  // Render perishables
-  if (!perishable.length) {
-    perishContainer.innerHTML = '<span class="muted" style="font-size:0.82rem">No perishables — add fresh produce, herbs, or fruits above</span>';
+  if (!ings.length) {
+    container.innerHTML = '<span class="muted" style="font-size:0.82rem">No perishables — add fresh produce, herbs, or fruits above</span>';
   } else {
-    perishContainer.innerHTML = perishable.map(({ ing, idx }) =>
+    container.innerHTML = ings.map((ing, idx) =>
       `<span class="chip perishable">${escHTML(ing)} <span class="chip-x" data-remove-ing="${idx}" title="Remove">&times;</span></span>`
     ).join('');
   }
 
-  // Render shelf-stable pantry items
-  if (!shelfStable.length) {
-    pantryContainer.innerHTML = '<span class="muted" style="font-size:0.82rem">No pantry items added yet</span>';
-  } else {
-    pantryContainer.innerHTML = shelfStable.map(({ ing, idx }) =>
-      `<span class="chip">${escHTML(ing)} <span class="chip-x" data-remove-ing="${idx}" title="Remove">&times;</span></span>`
-    ).join('');
-  }
-
-  // Event delegation for both containers
-  const removeHandler = (e) => {
+  container.onclick = (e) => {
     const removeEl = e.target.closest('[data-remove-ing]');
     if (!removeEl) return;
     const idx = Number(removeEl.dataset.removeIng);
@@ -165,8 +158,6 @@ function renderIngChips() {
     set('ingredients', current);
     autoSync();
   };
-  perishContainer.onclick = removeHandler;
-  pantryContainer.onclick = removeHandler;
 }
 
 /**

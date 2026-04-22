@@ -20,10 +20,10 @@
 <link rel="icon" type="image/png" href="favicon.png">
 <meta name="theme-color" content="#2d7a4f">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; img-src 'self' https: data:; connect-src 'self' https://*.supabase.co https://www.google-analytics.com; font-src 'self'; frame-src 'none';">
-  <script type="module" crossorigin src="/assets/index-2jV23LZK.js"></script>
+  <script type="module" crossorigin src="/assets/index-WcbHVIzo.js"></script>
   <link rel="modulepreload" crossorigin href="/assets/supabase-DaN4is7k.js">
   <link rel="modulepreload" crossorigin href="/assets/recipes-BpSYmkTi.js">
-  <link rel="stylesheet" crossorigin href="/assets/index-DvE2kBgZ.css">
+  <link rel="stylesheet" crossorigin href="/assets/index-BygqGWiT.css">
 </head>
 <body>
 
@@ -97,28 +97,22 @@
         </div>
       </div>
 
-      <!-- Perishables section -->
+      <!-- Perishables section (collapsible) -->
       <div class="card">
-        <h3 class="card-title">🥬 Perishables <span class="muted">(use first — these go bad!)</span></h3>
-        <div id="perishChips" class="chip-wrap"></div>
+        <h3 class="card-title section-toggle" data-toggle="perishChips">🥬 Perishables <span class="muted">(use first — these go bad!)</span> <span class="guide-arrow">▾</span></h3>
+        <div id="perishChips" class="chip-wrap section-body"></div>
       </div>
 
-      <!-- Pantry Items section -->
+      <!-- Staples section (collapsible) -->
       <div class="card">
-        <h3 class="card-title">🥫 Pantry Items</h3>
-        <div id="pantryChips" class="chip-wrap"></div>
+        <h3 class="card-title section-toggle" data-toggle="stapleChips">📌 Staples <span class="muted">(always on hand)</span> <span class="guide-arrow">▾</span></h3>
+        <div id="stapleChips" class="chip-wrap section-body"></div>
       </div>
 
-      <!-- Staples section -->
-      <div class="card">
-        <h3 class="card-title">📌 Staples <span class="muted">(always on hand)</span></h3>
-        <div id="stapleChips" class="chip-wrap"></div>
-      </div>
-
-      <!-- Quick Actions section -->
+      <!-- Add Staples section (collapsible) -->
       <div id="quickActions" class="card">
-        <h3 class="card-title">📌 Add Staples</h3>
-        <div class="qa-grid" id="qaGrid"></div>
+        <h3 class="card-title section-toggle" data-toggle="qaGrid">📌 Add Staples <span class="guide-arrow">▾</span></h3>
+        <div class="qa-grid section-body" id="qaGrid"></div>
       </div>
 
       <!-- Quick Start / About -->

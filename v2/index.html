@@ -93,28 +93,22 @@
         </div>
       </div>
 
-      <!-- Perishables section -->
+      <!-- Perishables section (collapsible) -->
       <div class="card">
-        <h3 class="card-title">🥬 Perishables <span class="muted">(use first — these go bad!)</span></h3>
-        <div id="perishChips" class="chip-wrap"></div>
+        <h3 class="card-title section-toggle" data-toggle="perishChips">🥬 Perishables <span class="muted">(use first — these go bad!)</span> <span class="guide-arrow">▾</span></h3>
+        <div id="perishChips" class="chip-wrap section-body"></div>
       </div>
 
-      <!-- Pantry Items section -->
+      <!-- Staples section (collapsible) -->
       <div class="card">
-        <h3 class="card-title">🥫 Pantry Items</h3>
-        <div id="pantryChips" class="chip-wrap"></div>
+        <h3 class="card-title section-toggle" data-toggle="stapleChips">📌 Staples <span class="muted">(always on hand)</span> <span class="guide-arrow">▾</span></h3>
+        <div id="stapleChips" class="chip-wrap section-body"></div>
       </div>
 
-      <!-- Staples section -->
-      <div class="card">
-        <h3 class="card-title">📌 Staples <span class="muted">(always on hand)</span></h3>
-        <div id="stapleChips" class="chip-wrap"></div>
-      </div>
-
-      <!-- Quick Actions section -->
+      <!-- Add Staples section (collapsible) -->
       <div id="quickActions" class="card">
-        <h3 class="card-title">📌 Add Staples</h3>
-        <div class="qa-grid" id="qaGrid"></div>
+        <h3 class="card-title section-toggle" data-toggle="qaGrid">📌 Add Staples <span class="guide-arrow">▾</span></h3>
+        <div class="qa-grid section-body" id="qaGrid"></div>
       </div>
 
       <!-- Quick Start / About -->
