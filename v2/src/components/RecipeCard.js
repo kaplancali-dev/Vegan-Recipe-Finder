@@ -6,7 +6,7 @@
  * and action buttons. Parent handles click events via delegation.
  */
 
-import { escHTML, colorDigits } from '../utils/text.js';
+import { escHTML } from '../utils/text.js';
 
 /**
  * Return a CSS class for the match percentage tier.
@@ -48,7 +48,7 @@ export function renderCard(result, opts = {}) {
     : '';
 
   const matchPill = showMatch && r.pct !== undefined
-    ? `<span class="match-pill ${tier}">${colorDigits(r.pct)}%</span>`
+    ? `<span class="match-pill ${tier}">${r.pct}%</span>`
     : '';
 
   const timeStr = r.time ? `<span>⏱ ${r.time} min</span>` : '';
