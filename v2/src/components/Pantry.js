@@ -273,7 +273,7 @@ function showQAPopup(category, anchorEl) {
         const n = norm(item);
         const have = currentIngs.has(n) || currentStaples.has(n);
         return `<span class="chip${have ? ' staple' : ''}" data-qa-item="${escHTML(item)}" style="cursor:pointer">
-          ${have ? '✓' : '+'} ${escHTML(item)}
+          ${have ? '✓' : '+'} ${escHTML(item)}${have ? ' <span class="chip-x" data-qa-remove="' + escHTML(item) + '" title="Remove">×</span>' : ''}
         </span>`;
       }).join('')}
     </div>
@@ -281,6 +281,34 @@ function showQAPopup(category, anchorEl) {
   `;
 
   popup.addEventListener('click', (e) => {
+    // Remove button inside a chip
+    const removeBtn = e.target.closest('[data-qa-remove]');
+    if (removeBtn) {
+      e.stopPropagation();
+      const item = removeBtn.dataset.qaRemove;
+      const n = norm(item);
+      // Remove from staples
+      const staples = get('staples');
+      const sIdx = staples.findIndex(s => norm(s) === n);
+      if (sIdx !== -1) {
+        staples.splice(sIdx, 1);
+        set('staples', staples);
+        autoSync();
+      }
+      // Remove from ingredients
+      const ings = get('ingredients');
+      const iIdx = ings.findIndex(s => norm(s) === n);
+      if (iIdx !== -1) {
+        ings.splice(iIdx, 1);
+        set('ingredients', ings);
+        autoSync();
+      }
+      // Re-render popup in place
+      popup.remove();
+      showQAPopup(category, anchorEl);
+      return;
+    }
+
     const chip = e.target.closest('[data-qa-item]');
     if (chip) {
       const item = chip.dataset.qaItem;
@@ -291,7 +319,7 @@ function showQAPopup(category, anchorEl) {
         set('staples', staples);
         autoSync();
         chip.classList.add('staple');
-        chip.innerHTML = `✓ ${escHTML(item)}`;
+        chip.innerHTML = `✓ ${escHTML(item)} <span class="chip-x" data-qa-remove="${escHTML(item)}" title="Remove">×</span>`;
       }
       return;
     }
