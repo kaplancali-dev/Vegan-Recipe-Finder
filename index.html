@@ -4828,6 +4828,9 @@ function obdDone() {
   try { localStorage.setItem('vrf_onboarded', '1'); } catch(e){}
   const ov = document.getElementById('obdOverlay');
   ov.style.opacity = '0';
+  // Hide the intro hero card after onboarding completes
+  const introCard = document.getElementById('introCard');
+  if (introCard) introCard.style.display = 'none';
   setTimeout(() => {
     ov.remove();
     // Fully reinitialize everything after onboarding
