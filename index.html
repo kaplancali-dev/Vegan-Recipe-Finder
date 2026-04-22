@@ -22,12 +22,10 @@
 <meta name="twitter:title" content="HARVEST — Eat More Plants!">
 <meta name="twitter:description" content="Match your ingredients to plant-based recipes. Prioritizes perishables, filters allergens, builds your shopping list.">
 <meta name="twitter:image" content="https://myharvestvegan.com/hero-image4.png">
-<!-- disabled to preserve Safari toolbar on home screen -->
-<!-- <meta name="apple-mobile-web-app-capable" content="yes"> -->
+<meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="HARVEST">
-<!-- manifest disabled to preserve Safari toolbar on home screen -->
-<!-- <link rel="manifest" href="manifest.json"> -->
+<link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="favicon.png">
 <meta name="theme-color" content="#2d7a4f">
@@ -5859,6 +5857,35 @@ if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('./sw.js', { updateViaCache: 'none' });
     }
   })();
+}
+</script>
+
+<!-- PWA Bottom Toolbar (mimics Safari's native toolbar) -->
+<div id="pwaBottomBar" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;
+  background:rgba(248,248,248,0.95);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border-top:0.5px solid #c8c8c8;
+  padding:6px 0 calc(6px + env(safe-area-inset-bottom, 0px));
+  display:none;justify-content:space-around;align-items:center;">
+  <button onclick="history.back()" style="background:none;border:none;padding:8px 16px;cursor:pointer;">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#007AFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+  </button>
+  <button onclick="history.forward()" style="background:none;border:none;padding:8px 16px;cursor:pointer;">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#007AFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+  </button>
+  <button onclick="if(navigator.share)navigator.share({title:'HARVEST',url:location.href}).catch(()=>{})" style="background:none;border:none;padding:8px 16px;cursor:pointer;">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#007AFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v7a2 2 0 002 2h12a2 2 0 002-2v-7"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+  </button>
+  <button onclick="location.reload()" style="background:none;border:none;padding:8px 16px;cursor:pointer;">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#007AFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"/></svg>
+  </button>
+</div>
+<script>
+// Show bottom bar only in standalone PWA mode
+if (window.navigator.standalone || window.matchMedia('(display-mode: standalone)').matches) {
+  const bar = document.getElementById('pwaBottomBar');
+  if (bar) bar.style.display = 'flex';
+  // Add bottom padding to body so content isn't hidden behind the bar
+  document.body.style.paddingBottom = 'calc(56px + env(safe-area-inset-bottom, 0px))';
 }
 </script>
 </body>

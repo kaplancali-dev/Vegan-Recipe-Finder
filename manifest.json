@@ -2,7 +2,7 @@
   "name": "HARVEST — Eat More Plants!",
   "short_name": "HARVEST",
   "start_url": "./index.html",
-  "display": "browser",
+  "display": "standalone",
   "background_color": "#faf7f2",
   "theme_color": "#2d7a4f",
   "icons": [
