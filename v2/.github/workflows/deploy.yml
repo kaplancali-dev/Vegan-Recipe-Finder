@@ -1,0 +1,64 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: v2
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: v2/package-lock.json
+
+      - run: npm ci
+      - run: npm test
+      - run: npm run build
+
+      # Assemble deploy directory: v2 build output + root-level static assets
+      - name: Prepare deploy artifacts
+        run: |
+          mkdir -p deploy
+          cp -r dist/* deploy/
+          # Copy static assets from repo root that the app references
+          cp ../CNAME deploy/
+          cp ../apple-touch-icon.png deploy/
+          cp ../favicon.png deploy/
+          cp ../icon-192.png deploy/
+          cp ../icon-512.png deploy/
+          cp ../manifest.json deploy/
+          cp ../hero-image4.png deploy/ 2>/dev/null || true
+          cp ../hero.mp4 deploy/ 2>/dev/null || true
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: v2/deploy
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
