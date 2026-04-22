@@ -7,3 +7,16 @@ harvest_failed.json
 index_corrected.html
 recipe_audit.csv
 *.bak
+
+# Backups
+*.backup-*
+
+# Media & docs (keep in cloud storage, not Git)
+*.mp4
+*.mov
+*.docx
+
+# One-off utility scripts
+fetch-*.js
+header-mockup.html
+*-data.json
