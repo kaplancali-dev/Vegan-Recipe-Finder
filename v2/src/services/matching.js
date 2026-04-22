@@ -7,7 +7,25 @@
  */
 
 import { norm, stem } from '../utils/text.js';
-import { INGREDIENT_ALIASES, INGREDIENT_SUBS, ALLERGY_KEYWORDS } from '../data/aliases.js';
+import { INGREDIENT_ALIASES, INGREDIENT_SUBS, ALLERGY_KEYWORDS, PERISHABLES } from '../data/aliases.js';
+
+/** Flat set of all perishable ingredient names (normed) for fast lookup */
+const _perishableSet = new Set();
+PERISHABLES.forEach(cat => cat.items.forEach(item => _perishableSet.add(norm(item))));
+
+/**
+ * Check if an ingredient name matches a perishable.
+ * @param {string} normedIng - Already norm()'d ingredient name
+ * @returns {boolean}
+ */
+export function isPerishableIng(normedIng) {
+  if (_perishableSet.has(normedIng)) return true;
+  // Fuzzy: check if any perishable is a substring or vice versa
+  for (const p of _perishableSet) {
+    if (normedIng.includes(p) || p.includes(normedIng)) return true;
+  }
+  return false;
+}
 
 /** Memoization cache for expandWithAliases */
 const _aliasCache = new Map();
@@ -157,11 +175,14 @@ export function findRecipes({
     const haveNames = r.ing.filter(ing => have.includes(norm(ing)));
     const needNames = r.ing.filter(ing => need.includes(norm(ing)));
 
-    return { ...r, have, need, haveNames, needNames, pct, userHave: userHave.length };
+    // Count how many of the user's perishable ingredients this recipe uses
+    const perishHave = have.filter(h => isPerishableIng(h)).length;
+
+    return { ...r, have, need, haveNames, needNames, pct, userHave: userHave.length, perishHave };
   });
 
-  // Default sort: best match first
-  results.sort((a, b) => b.pct - a.pct || b.userHave - a.userHave || a.title.localeCompare(b.title));
+  // Default sort: best match first, then perishable priority, then alphabetical
+  results.sort((a, b) => b.pct - a.pct || b.perishHave - a.perishHave || b.userHave - a.userHave || a.title.localeCompare(b.title));
 
   return results;
 }
@@ -178,7 +199,7 @@ export function sortResults(results, sortKey) {
   const copy = [...results];
   switch (sortKey) {
     case 'match':
-      return copy.sort((a, b) => b.pct - a.pct || b.userHave - a.userHave || a.title.localeCompare(b.title));
+      return copy.sort((a, b) => b.pct - a.pct || b.perishHave - a.perishHave || b.userHave - a.userHave || a.title.localeCompare(b.title));
     case 'time':
       return copy.sort((a, b) => (a.time || 999) - (b.time || 999));
     case 'serv':
