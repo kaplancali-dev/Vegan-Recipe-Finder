@@ -51,8 +51,9 @@ function checkHero() {
 /* ── User Guide Toggle ──────────────────────────────────────── */
 
 function wireGuideToggle() {
-  const toggle = $('#guideToggle');
-  const body = $('#guideBody');
+  // About HARVEST collapsible section
+  const toggle = $('#aboutToggle');
+  const body = $('#aboutBody');
   if (!toggle || !body) return;
 
   toggle.addEventListener('click', () => {

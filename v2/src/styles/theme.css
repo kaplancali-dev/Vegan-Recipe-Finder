@@ -1089,6 +1089,55 @@ input, select, textarea {
 .guide-body.hidden {
   display: none;
 }
+
+/* ── About Section ─────────────────────────────────────────── */
+.about-section {
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+.about-section:last-of-type {
+  border-bottom: none;
+  margin-bottom: 8px;
+}
+.about-heading {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--green-deep);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 8px;
+}
+.about-text {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+.about-steps {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  padding-left: 20px;
+  margin: 0;
+}
+.about-steps li {
+  margin-bottom: 8px;
+}
+.about-tip {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  margin-top: 12px;
+  padding: 8px 12px;
+  background: var(--accent-soft);
+  border-radius: var(--radius);
+}
+.about-version {
+  text-align: center;
+  padding-top: 8px;
+  font-size: 0.8rem;
+}
+
 .guide-intro {
   font-size: 1rem;
   line-height: 1.7;

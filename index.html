@@ -20,10 +20,10 @@
 <link rel="icon" type="image/png" href="favicon.png">
 <meta name="theme-color" content="#2d7a4f">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; img-src 'self' https: data:; connect-src 'self' https://*.supabase.co https://www.google-analytics.com; font-src 'self'; frame-src 'none';">
-  <script type="module" crossorigin src="/assets/index-C1e_lTbJ.js"></script>
+  <script type="module" crossorigin src="/assets/index-2jV23LZK.js"></script>
   <link rel="modulepreload" crossorigin href="/assets/supabase-DaN4is7k.js">
   <link rel="modulepreload" crossorigin href="/assets/recipes-BpSYmkTi.js">
-  <link rel="stylesheet" crossorigin href="/assets/index-CQWr1Nv6.css">
+  <link rel="stylesheet" crossorigin href="/assets/index-DvE2kBgZ.css">
 </head>
 <body>
 
@@ -119,6 +119,46 @@
       <div id="quickActions" class="card">
         <h3 class="card-title">📌 Add Staples</h3>
         <div class="qa-grid" id="qaGrid"></div>
+      </div>
+
+      <!-- Quick Start / About -->
+      <div class="card about-card">
+        <h3 class="card-title guide-toggle" id="aboutToggle">ℹ️ About HARVEST <span class="guide-arrow">▾</span></h3>
+        <div class="guide-body hidden" id="aboutBody">
+
+          <div class="about-section">
+            <h4 class="about-heading">Quick Start</h4>
+            <ol class="about-steps">
+              <li><strong>Add your ingredients</strong> — type what's in your fridge and pantry above, separated by commas. Fresh produce is automatically grouped as perishables.</li>
+              <li><strong>Set your staples</strong> — tap the category buttons in "Add Staples" to save items you always have on hand (oils, spices, grains, etc.).</li>
+              <li><strong>Browse recipes</strong> — switch to "Browse All" to see every recipe ranked by how well it matches your pantry. Use filters to narrow by cuisine, cook time, or allergens.</li>
+              <li><strong>Ready to cook?</strong> — the "Ready to Make Now" tab shows only recipes you can make with 1 or fewer missing ingredients.</li>
+              <li><strong>Build a shopping list</strong> — tap the cart icon on any recipe card to add its missing ingredients to your shopping list.</li>
+            </ol>
+            <p class="about-tip">💡 For the best experience, use HARVEST on a larger screen (tablet or desktop) so you can see more recipes at once. Search works live across recipe names and ingredients.</p>
+          </div>
+
+          <div class="about-section">
+            <h4 class="about-heading">About Us</h4>
+            <p class="about-text">HARVEST was created by an experienced food creator who wanted a better way to answer the daily question: <em>"What can I actually make right now?"</em> Every recipe is 100% plant-based, sourced from trusted nutrition-focused chefs and creators. The goal isn't just to cook more — it's to make cooking feel effortless again.</p>
+          </div>
+
+          <div class="about-section">
+            <h4 class="about-heading">Feedback &amp; Contact</h4>
+            <p class="about-text">Have a suggestion, found a bug, or just want to say hi? We'd love to hear from you:<br>
+            📧 <a href="mailto:kaplancali@icloud.com" style="color:var(--green)">kaplancali@icloud.com</a></p>
+          </div>
+
+          <div class="about-section">
+            <h4 class="about-heading">Privacy Policy</h4>
+            <p class="about-text">HARVEST does not collect, sell, or share your personal data. Your ingredient lists, staples, favorites, and preferences are stored locally on your device. If you enable Cloud Sync, your data is stored securely in your own Supabase account and is never shared with third parties. We use basic analytics to understand how the app is used — no tracking, no ads, ever.</p>
+          </div>
+
+          <div class="about-version">
+            <span class="muted">HARVEST v2.27 · Made with 💚 and plants</span>
+          </div>
+
+        </div>
       </div>
 
       <!-- Cloud sync panel -->
