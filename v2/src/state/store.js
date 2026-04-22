@@ -35,7 +35,7 @@ const state = {
   instructions: {},
   allergies:    [],
   shopChecked:  [],
-  activeTab:    'search',
+  activeTab:    'browse',
   onboarded:    false,
 };
 
@@ -82,7 +82,7 @@ export function loadState() {
   state.instructions = lsGet(STORAGE_KEYS.instructions, {});
   state.allergies    = lsGet(STORAGE_KEYS.allergies, []);
   state.shopChecked  = lsGet(STORAGE_KEYS.shopChecked, []);
-  state.activeTab    = lsGet(STORAGE_KEYS.activeTab, 'search') || 'search';
+  state.activeTab    = localStorage.getItem(STORAGE_KEYS.activeTab) || 'browse';
   state.onboarded    = lsGet(STORAGE_KEYS.onboarded, false) || localStorage.getItem('vrf_onboarded') === '1';
 }
 
