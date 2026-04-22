@@ -1397,7 +1397,7 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
     <!-- Mobile-only filter trigger -->
     <button type="button" class="filters-trigger" onclick="openFiltersDrawer()" aria-label="Open filters">
       <span class="ft-icon">🧺</span>
-      <span class="ft-label">Tap Here to Choose Category &amp; Select Your Staples</span>
+      <span class="ft-label">Tap Here to Choose Category</span>
       <span class="filter-count" id="filterCountBadge"></span>
       <span class="ft-arrow" aria-hidden="true">›</span>
     </button>
@@ -1411,11 +1411,11 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
     <div class="layout">
       <!-- LEFT COLUMN -->
       <div class="filters-col">
-        <!-- USE YOUR PERISHABLES (most used, so first) -->
+        <!-- SEARCH -->
         <div class="card" style="margin-bottom:12px">
-          <div class="filter-label" style="margin-bottom:7px">Use Your Perishables <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#4b7a52">(optional)</span></div>
+          <div class="filter-label" style="margin-bottom:7px">Search <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#4b7a52">(optional)</span></div>
           <input class="name-search-input" id="nameSearchInput" type="text"
-            placeholder="Recipe must include… e.g. kale, avocado, tacos"
+            placeholder="Search by recipe name or ingredient… e.g. kale, tacos"
             oninput="onNameSearch(this.value)">
         </div>
 
@@ -1466,81 +1466,6 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
             </div>
           </div>
         </div>
-        <!-- ALLERGIES CARD -->
-        <div class="card" style="margin-bottom:12px" data-filter-id="browse-allergy">
-          <div class="filter-toggle" onclick="toggleFilterSection(this)">
-            <div class="filter-label" style="margin:0">Allergies &amp; Dietary Needs <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#ef4444;font-size:0.75rem">— excludes matching recipes</span></div>
-            <span class="ft-chevron">▼</span>
-          </div>
-          <div class="filter-body" style="margin-top:7px">
-            <div class="filter-chips" id="allergyGrid">
-              <span class="allergy-chip" onclick="toggleAllergy(this,'peanut')">🥜 Peanuts</span>
-              <span class="allergy-chip" onclick="toggleAllergy(this,'tree nut')">🌰 Tree Nuts</span>
-              <span class="allergy-chip" onclick="toggleAllergy(this,'soy')">🫘 Soy</span>
-              <span class="allergy-chip" onclick="toggleAllergy(this,'coconut')">🥥 Coconut</span>
-              <span class="allergy-chip" onclick="toggleAllergy(this,'corn')">🌽 Corn</span>
-              <span class="allergy-chip" onclick="toggleAllergy(this,'mushroom')">🍄 Mushrooms</span>
-              <span class="allergy-chip" onclick="toggleAllergy(this,'nightshade')">🍅 Nightshades</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- SECTION 1: FRESH THIS WEEK (formerly Have Today) -->
-        <div class="qa-card qa-card-today">
-          <button class="qa-toggle qa-toggle-today open" id="todayToggle" onclick="toggleTodayPanel()">
-            <span>🥬 Fresh This Week <span style="font-weight:400;font-size:.75rem;opacity:.6">— use it before it spoils</span> <span id="todayCount" style="font-weight:400;opacity:.7;font-size:.8rem"></span></span><span class="arrow">▼</span>
-          </button>
-          <div class="qa-body open" id="todayBody">
-            <p style="font-size:.8rem;color:#1e5a3a;margin-bottom:10px;line-height:1.5">Tap what you bought this week. Tap <strong>×</strong> to remove.</p>
-            <div id="todayChips"><span style="color:#1e5a3a;font-size:.82rem;font-style:italic">Nothing added yet — tap items below.</span></div>
-            <div id="todayClearWrap" style="display:none;margin-top:10px">
-              <button class="btn-sm-danger" onclick="todayClearAll()">Remove All</button>
-            </div>
-            <div id="perishableGrid" style="margin-top:12px;"></div>
-          </div>
-        </div>
-
-        <!-- SECTION 2: ALWAYS HAVE -->
-        <div class="qa-card qa-card-always">
-          <button class="qa-toggle qa-toggle-always open" id="alwaysToggle" onclick="toggleAlwaysPanel()">
-            <span><span style="color:#2d7a4f">★</span> Always Have <span style="font-weight:400;font-size:.75rem;opacity:.6">— pantry staples that last</span> <span id="alwaysCount" style="font-weight:400;opacity:.7;font-size:.8rem"></span></span><span class="arrow">▼</span>
-          </button>
-          <div class="qa-body open" id="alwaysBody">
-            <p style="font-size:.8rem;color:#4a5d52;margin-bottom:10px;line-height:1.5">Tap <strong>×</strong> to remove.</p>
-            <div id="alwaysChips"><span style="color:#4a5d52;font-size:.82rem;font-style:italic">Nothing saved yet — tap <span style="color:#2d7a4f">★</span> next to any ingredient in the list below.</span></div>
-            <div id="alwaysClearWrap" style="display:none;margin-top:10px">
-              <button class="btn-sm-danger" onclick="alwaysClearAll()">Remove All</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- SECTION 3: MASTER INGREDIENT LIST -->
-        <div class="qa-card qa-card-notsel">
-          <button class="qa-toggle qa-toggle-notsel open" id="notSelToggle" onclick="toggleNotSelPanel()">
-            <span>📋 Master Ingredient List <span id="notSelCount" style="font-weight:400;opacity:.7;font-size:.8rem"></span></span><span class="arrow">▼</span>
-          </button>
-          <div class="qa-body open" id="notSelBody">
-            <p style="font-size:.8rem;color:#4a5d52;margin-bottom:10px;line-height:1.5">Tap the <strong style="color:#1e5a3a">name</strong> to add to <strong style="color:#1e5a3a">Fresh This Week</strong>. Tap <strong style="color:#2d7a4f">★</strong> to save to <strong style="color:#92400e">Always Have</strong>.</p>
-
-            <div id="notSelChips"></div>
-          </div>
-        </div>
-
-        <!-- SECTION 4: ADD INGREDIENTS NOT LISTED -->
-        <div class="qa-card qa-card-custom">
-          <button class="qa-toggle qa-toggle-custom open" id="customToggle" onclick="toggleCustomPanel()">
-            <span>✏️ Add Ingredients Not Listed</span><span class="arrow">▼</span>
-          </button>
-          <div class="qa-body open" id="customBody">
-            <p style="font-size:.8rem;color:#a78bfa;opacity:.7;margin-bottom:10px;line-height:1.5">Type any ingredient not in the list above and press Enter or tap + Add.</p>
-            <div class="qa-add-row">
-              <input class="qa-custom-input" id="qaCustomInput" type="text" placeholder="e.g. jackfruit, miso paste…" onkeydown="if(event.key==='Enter')qaAddCustom()">
-              <button class="btn-sm-green" onclick="qaAddCustom()">+ Add</button>
-            </div>
-            <div class="tags" id="customIngTags"></div>
-          </div>
-        </div>
-
         <!-- FILTERS + FIND -->
         <div class="card">
 
