@@ -108,33 +108,42 @@ window.addEventListener('unhandledrejection', (e) => {
   });
 });
 
-/* ── PWA refresh / share buttons ─────────────────────────────── */
+/* ── PWA refresh / share buttons (standalone mode only) ──────── */
 
-const refreshBtn = $('#refreshBtn');
-if (refreshBtn) {
-  refreshBtn.addEventListener('click', () => location.reload());
-}
+const isStandalone = window.navigator.standalone === true
+  || window.matchMedia('(display-mode: standalone)').matches;
 
-const shareBtn = $('#shareBtn');
-if (shareBtn) {
-  shareBtn.addEventListener('click', async () => {
-    const shareData = {
-      title: 'HARVEST — Vegan Recipe Finder',
-      text: 'Find vegan recipes based on what\'s in your pantry!',
-      url: window.location.href,
-    };
-    if (navigator.share) {
-      try { await navigator.share(shareData); } catch {}
-    } else {
-      // Fallback: copy URL to clipboard
-      try {
-        await navigator.clipboard.writeText(window.location.href);
-        showToast('Link copied to clipboard!');
-      } catch {
-        showToast('Copy this URL to share: ' + window.location.href);
+if (isStandalone) {
+  const pwaActions = $('#pwaActions');
+  const headerInner = document.querySelector('.header-inner');
+  if (pwaActions) pwaActions.classList.add('pwa-visible');
+  if (headerInner) headerInner.classList.add('has-pwa');
+
+  const refreshBtn = $('#refreshBtn');
+  if (refreshBtn) {
+    refreshBtn.addEventListener('click', () => location.reload());
+  }
+
+  const shareBtn = $('#shareBtn');
+  if (shareBtn) {
+    shareBtn.addEventListener('click', async () => {
+      const shareData = {
+        title: 'HARVEST — Vegan Recipe Finder',
+        text: 'Find vegan recipes based on what\'s in your pantry!',
+        url: window.location.href,
+      };
+      if (navigator.share) {
+        try { await navigator.share(shareData); } catch {}
+      } else {
+        try {
+          await navigator.clipboard.writeText(window.location.href);
+          showToast('Link copied to clipboard!');
+        } catch {
+          showToast('Copy this URL to share: ' + window.location.href);
+        }
       }
-    }
-  });
+    });
+  }
 }
 
 /* ── Initialize components ───────────────────────────────────── */
