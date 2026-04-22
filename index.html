@@ -29,6 +29,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="favicon.png">
 <meta name="theme-color" content="#2d7a4f">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; img-src 'self' https: data:; connect-src 'self' https://*.supabase.co https://www.google-analytics.com https://api.openai.com; font-src 'self'; frame-src 'none';">
 <style>
   /* ── HARVEST LIGHT THEME (v1) ──────────────────────────────── */
   :root{
@@ -1711,122 +1712,6 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
 
 <script>
 // ── DATA ──────────────────────────────────────────────────────────────────────
-const SHOP_CATEGORIES = {
-  '🥦 Produce': ['garlic','onion','onions','spinach','baby spinach','kale','arugula','carrots','broccoli','cauliflower','bell peppers','mushrooms (any)','tomatoes','avocado','zucchini','corn','cucumber','green onions','ginger','lemon','lime','banana','berries (any)','mango','apple','dates','scallions','cilantro','parsley','basil','jalapeño','eggplant','sweet potato','potatoes','beets','celery','lettuce','romaine','iceberg','butter lettuce','red leaf lettuce','green leaf lettuce','mixed greens','cabbage','bok choy','edamame','cherry tomatoes','green chili'],
-  '🫘 Proteins & Legumes': ['chickpeas','black beans','lentils','kidney beans','navy beans','pinto beans','white beans','tofu','tempeh','edamame','protein powder','red lentils','green lentils','jackfruit'],
-  '🌾 Grains & Pasta': ['rice (any)','quinoa','oats','rolled oats','pasta','gluten-free pasta','pasta (any)','brown rice','corn tortillas','polenta','buckwheat','bread','noodles','spaghetti','penne','macaroni'],
-  '🥜 Nuts & Seeds': ['almonds','walnuts','cashews','pecans','hemp seeds','chia seeds','flax seeds','pumpkin seeds','sunflower seeds','sesame seeds','tahini','nut butter (any)','peanut butter','almond butter'],
-  '🥛 Dairy Alternatives': ['plant-based milk (any)','almond milk','oat milk','soy milk','coconut milk','coconut cream','vegan butter','cashew cream','vegan yogurt'],
-  '🫙 Pantry & Oils': ['olive oil','coconut oil','sesame oil','any cooking oil','vegetable broth','tamari','soy sauce / tamari','maple syrup','apple cider vinegar','rice vinegar','dijon mustard','tomato paste','canned tomatoes (any)','crushed tomatoes','diced tomatoes','tomato sauce','agave','coconut aminos','miso','hot sauce','sriracha'],
-  '🌿 Spices & Herbs': ['turmeric','cumin','smoked paprika','cinnamon','chili powder','curry powder','black pepper','garlic powder','onion powder','oregano','thyme','coriander','cayenne','cardamom','bay leaves','five spice','nutmeg','sea salt','salt','pepper','ginger powder'],
-  '🍨 Baking & Sweets': ['vanilla extract','cocoa powder','chocolate chips (any)','natural sweetener (any)','coconut sugar','flax egg','baking soda','baking powder','cornstarch','shredded coconut','medjool dates','maple syrup','brown sugar','sugar','flour','almond flour','oat flour'],
-};
-
-
-function getCategoryForItem(item) {
-  const lower = item.toLowerCase();
-  for (const [category, items] of Object.entries(SHOP_CATEGORIES)) {
-    if (items.some(i => lower.includes(i) || i.includes(lower))) {
-      return category;
-    }
-  }
-  return '📦 Other';
-}
-
-function renderCategorizedShoppingList() {
-  if (!shoppingList || shoppingList.length === 0) {
-    const panel = document.getElementById('panel-shopping');
-    if (panel) panel.innerHTML = '<div class="card"><div style="color:#4b7a52;text-align:center">Shopping list is empty</div></div>';
-    return;
-  }
-  
-  // Group items by category
-  const grouped = {};
-  shoppingList.forEach(item => {
-    const cat = getCategoryForItem(item.name);
-    if (!grouped[cat]) grouped[cat] = [];
-    grouped[cat].push(item);
-  });
-  
-  // Sort categories and items
-  const sortedCats = Object.keys(grouped).sort();
-  
-  let html = '<div class="card" style="padding:16px">';
-  html += '<div style="font-size:1.1rem;font-weight:700;margin-bottom:16px;color:#86efac"><span class="cart">🛒</span> Shopping List</div>';
-  
-  sortedCats.forEach(cat => {
-    html += `<div style="margin-bottom:16px">
-      <div style="font-weight:700;color:#4ade80;margin-bottom:8px;font-size:0.95rem">${cat}</div>
-      <div style="display:flex;flex-direction:column;gap:6px">`;
-    
-    const unchecked = grouped[cat].filter(i => !i.checked);
-    const checked = grouped[cat].filter(i => i.checked);
-    
-    unchecked.forEach(item => {
-      html += `<div style="display:flex;align-items:center;gap:10px;padding:8px;background:#0a130b;border-radius:6px;cursor:pointer" onclick="toggleShoppingItem(${item.id})">
-        <input type="checkbox" style="cursor:pointer" ${item.checked ? 'checked' : ''}>
-        <span style="color:#e8f5e9;flex:1">${item.name}</span>
-        <button style="background:none;border:none;color:#ff6b6b;cursor:pointer" onclick="event.stopPropagation();removeFromShop(${item.id})">✕</button>
-      </div>`;
-    });
-    
-    if (checked.length > 0) {
-      html += '<div style="border-top:1px solid #2d5a33;margin-top:8px;padding-top:8px">';
-      checked.forEach(item => {
-        html += `<div style="display:flex;align-items:center;gap:10px;padding:8px;background:#0a130b;border-radius:6px;cursor:pointer;opacity:0.6" onclick="toggleShoppingItem(${item.id})">
-          <input type="checkbox" checked style="cursor:pointer">
-          <span style="color:#4b7a52;flex:1;text-decoration:line-through">${item.name}</span>
-          <button style="background:none;border:none;color:#ff6b6b;cursor:pointer" onclick="event.stopPropagation();removeFromShop(${item.id})">✕</button>
-        </div>`;
-      });
-      html += '</div>';
-    }
-    
-    html += '</div></div>';
-  });
-  
-  html += '<div style="margin-top:20px;display:flex;gap:10px">';
-  html += '<button style="flex:1;background:#14532d;border:1px solid #2d5a33;color:#86efac;border-radius:8px;padding:10px;cursor:pointer" onclick="document.getElementById(\'panel-shopping\').innerHTML=\'\';shoppingList=[]">Clear</button>';
-  html += '<button style="flex:1;background:#16a34a;border:none;color:#fff;border-radius:8px;padding:10px;cursor:pointer;font-weight:700" onclick="printShoppingList()">🖨️ Print</button>';
-  html += '</div></div>';
-  
-  const panel = document.getElementById('panel-shopping');
-  if (panel) panel.innerHTML = html;
-}
-
-function toggleShoppingItem(id) {
-  const item = shoppingList.find(i => i.id === id);
-  if (item) {
-    item.checked = !item.checked;
-    renderCategorizedShoppingList();
-  }
-}
-
-function printShoppingList() {
-  const grouped = {};
-  shoppingList.forEach(item => {
-    const cat = getCategoryForItem(item.name);
-    if (!grouped[cat]) grouped[cat] = [];
-    grouped[cat].push(item);
-  });
-  
-  const w = window.open();
-  w.document.write('<pre style="font-family:monospace;font-size:14px;line-height:1.6">');
-  w.document.write('SHOPPING LIST\n\n');
-  
-  Object.keys(grouped).sort().forEach(cat => {
-    w.document.write(`${cat}\n`);
-    grouped[cat].forEach(item => {
-      w.document.write(`  ${item.checked ? '✓' : '☐'} ${item.name}\n`);
-    });
-    w.document.write('\n');
-  });
-  
-  w.document.write('</pre>');
-  w.print();
-  w.close();
-}
-
 const RECIPES = [{id:136,title:"Sweet Potato Black Bean Enchiladas",site:"Minimalist Baker",url:"https://minimalistbaker.com/sweet-potato-black-bean-enchiladas/",img:"https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/136.jpg",cats:["Dinner","Gluten-Free","Fall"],time:45,servings:4,ing:["black beans","cilantro","coconut","cumin","guacamole","kale","red enchilada sauce","salt","smoked paprika","sweet potatoes","water"],nut:{cal:230,pro:7.3,carb:44.9,fat:3,fib:10.4}},
 {id:138,title:"Crispy Baked Tofu",site:"Minimalist Baker",url:"https://minimalistbaker.com/italian-herb-crispy-baked-tofu/",img:"https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/138.jpg",cats:["Dinner","High-Protein","Quick Meals","Gluten-Free"],time:30,servings:3,ing:["balsamic vinegar","basil","extra-firm tofu","garlic","olive oil","oregano","salt","tamari","thyme","tomato paste"],nut:{cal:225,pro:14.5,carb:6.7,fat:17.2,fib:1.3}},
 {id:140,title:"Thai Green Curry with Tofu",site:"Minimalist Baker",url:"https://thehiddenveggies.com/thai-green-curry-with-tofu/",img:"https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/140.jpg",cats:["Dinner","One-Pot","Gluten-Free"],time:30,servings:4,ing:["basil","brown sugar","coconut milk","garlic","ginger","green curry paste","oil","rice","salt","tofu","vegetable broth","vegetables"],nut:{cal:481,pro:15,carb:53,fat:26,fib:8}},
@@ -1877,7 +1762,7 @@ const RECIPES = [{id:136,title:"Sweet Potato Black Bean Enchiladas",site:"Minima
 {id:230,title:"Green Pea Soup",site:"NutriPlanet",url:"https://www.foodnetwork.com/recipes/ellie-krieger/green-pea-soup-recipe-1945458",img:"https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/230.webp",cats:["Dinner","Soups & Stews","Quick Meals","One-Pot"],time:20,servings:4,ing:["black pepper","dried tarragon","olive oil","onion","peas","salt","vegan yogurt","vegetable broth"],nut:{cal:93,pro:0,carb:12,fat:2,fib:3}},
 {id:232,title:"Tofu and Vegetable Curry",site:"NutriPlanet",url:"https://www.ricardocuisine.com/en/recipes/10632-tofu-and-vegetable-curry",img:"https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/232.jpg",cats:["Dinner","High-Protein","One-Pot","Gluten-Free"],time:35,servings:4,ing:["cilantro","coconut milk","cornstarch","firm tofu","garam masala","garlic","ginger","plum tomatoes","red bell pepper","sweet potato","tomato paste","turmeric","vegetable oil"],nut:{cal:434,pro:17,carb:45.5,fat:18.7,fib:4.3}},
 {id:236,title:"Vegan Shepherd's Pie",site:"The Full Helping",url:"https://elavegan.com/vegan-shepherds-pie-gluten-free-recipe/",img:"https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/236.jpg",cats:["Dinner","High-Protein","Gluten-Free"],time:70,servings:6,ing:["balsamic vinegar","black pepper","carrots","celery","corn","garlic","lentils","nutmeg","onion","onion powder","peas","plant-based milk","potatoes","red wine","rosemary","soy sauce","sugar","thyme","tomato paste","vegan butter","vegetable broth","vegetable oil"],nut:{cal:458,pro:16,carb:66,fat:8,fib:13.5}},
-{id:237,title:"White Bean and Kale Soup",site:"The Full Helping",url:"https://www.tasteofhome.com/recipes/white-bean-and-kale-soup/",img:"https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/237.jpg",cats:["Dinner","Soups & Stews","High-Protein","One-Pot"],time:35,servings:4,ing:["black pepper","cannellini beans","carrot","celery rib","garlic","kale","olive oil","onion","parsley","red pepper flakes","rosemary","salt","vegan parmesan","vegetable broth"],nut:{cal:346,pro:16,carb:564,fat:61,fib:15}},
+{id:237,title:"White Bean and Kale Soup",site:"The Full Helping",url:"https://www.tasteofhome.com/recipes/white-bean-and-kale-soup/",img:"https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/237.jpg",cats:["Dinner","Soups & Stews","High-Protein","One-Pot"],time:35,servings:4,ing:["black pepper","cannellini beans","carrot","celery rib","garlic","kale","olive oil","onion","parsley","red pepper flakes","rosemary","salt","vegan parmesan","vegetable broth"],nut:{cal:346,pro:16,carb:56,fat:6,fib:15}},
 {id:239,title:"Vegan Lentil Tacos",site:"The Full Helping",url:"https://www.lavenderandmacarons.com/vegan-lentil-tacos/",img:"https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/239.jpg",cats:["Dinner","High-Protein","Gluten-Free"],time:30,servings:4,ing:["avocado","black pepper","brown lentils","cauliflower","cilantro","corn tortillas","cumin","garlic","garlic powder","jalapeño","limes","olive oil","onion","salt","tomato paste","vegetable broth"],nut:{cal:310,pro:7,carb:40,fat:16,fib:8}},
 {id:241,title:"Vegan Minestrone",site:"The Full Helping",url:"https://www.forksoverknives.com/recipes/vegan-soups-stews/minestrone-in-minutes/",img:"https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/241.webp",cats:["Dinner","Soups & Stews","High-Protein","One-Pot","Gluten-Free"],time:40,servings:6,ing:["basil","black pepper","cannellini beans","carrots","celery","diced tomatoes","garlic","onion","oregano","salt","vegetable broth","zucchini"],nut:{cal:230,pro:14,carb:45,fat:1,fib:12}},
 {id:243,title:"Sweet Potato Black Bean Burrito Bowl",site:"The Full Helping",url:"https://www.goodtasterecipes.com/sweet-potato-black-bean-burrito-bowl-meal-prep/",img:"https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/243.webp",cats:["Dinner","High-Protein","High-Fiber"],time:35,servings:4,ing:["avocado","black beans","brown rice","chili powder","cilantro","corn","cumin","garlic","lime","olive oil","oregano","red onion","salsa","salt","smoked paprika","sweet potatoes","vegan yogurt","vegetable broth"],nut:{cal:507,pro:18,carb:80,fat:9.5,fib:16}},
@@ -2710,21 +2595,21 @@ const RECIPES = [{id:136,title:"Sweet Potato Black Bean Enchiladas",site:"Minima
 ,
 {id:4089,title:"Avocado Toast with Tomatoes",site:"Minimalist Baker",url:"https://minimalistbaker.com/my-go-to-avocado-toast/",img:"https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/4089.jpg",cats:["Breakfast","Quick Meals","Beginner"],time:5,servings:1,ing:["avocado","bread","red pepper flake","vegan parmesan"],nut:{cal:290,pro:6,carb:30,fat:18,fib:8}},
 {id:4090,title:"Cucumber Avocado Salad",site:"Love and Lemons",url:"https://www.loveandlemons.com/cucumber-salad/",img:"https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/4090.jpg",cats:["Salads","Quick Meals","Gluten-Free","Beginner"],time:10,servings:2,ing:["avocado","cilantro","cucumber","lime","sesame seeds"],nut:{cal:195,pro:3,carb:12,fat:16,fib:6}},
-{id:4093,title:"Mango Banana Smoothie",site:"Rainbow Plant Life",url:"https://rainbowplantlife.com/5-ingredient-vegan-recipes/",img:"https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/4093.webp",cats:["Breakfast","Drinks","Quick Meals","Gluten-Free","Beginner"],time:5,servings:1,ing:["chickpeas","flour tortillas","hot sauce","nutritional yeast","salt"],nut:{cal:220,pro:3,carb:52,fat:2,fib:5}},
+{id:4093,title:"Mango Banana Smoothie",site:"Rainbow Plant Life",url:"https://rainbowplantlife.com/5-ingredient-vegan-recipes/",img:"https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/4093.webp",cats:["Breakfast","Drinks","Quick Meals","Gluten-Free","Beginner"],time:5,servings:1,ing:["banana","mango","plant-based milk","maple syrup","vanilla extract"],nut:{cal:220,pro:3,carb:52,fat:2,fib:5}},
 {id:4095,title:"Grilled Zucchini with Basil",site:"Love and Lemons",url:"https://www.loveandlemons.com/grilled-zucchini/",img:"https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/4095.jpg",cats:["Sides","Gluten-Free","Quick Meals","Beginner"],time:15,servings:3,ing:["basil","garlic","lemon","olive oil","zucchini"],nut:{cal:70,pro:2,carb:6,fat:5,fib:2}},
-{id:4097,title:"Crispy Roasted Cauliflower",site:"Rainbow Plant Life",url:"https://rainbowplantlife.com/5-ingredient-vegan-recipes/",img:"https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/4097.webp",cats:["Sides","Gluten-Free","Beginner","Quick Meals"],time:30,servings:3,ing:["chickpeas","flour tortillas","hot sauce","nutritional yeast","salt"],nut:{cal:110,pro:4,carb:12,fat:6,fib:4}},
+{id:4097,title:"Crispy Roasted Cauliflower",site:"Rainbow Plant Life",url:"https://rainbowplantlife.com/5-ingredient-vegan-recipes/",img:"https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/4097.webp",cats:["Sides","Gluten-Free","Beginner","Quick Meals"],time:30,servings:3,ing:["cauliflower","olive oil","garlic powder","salt","black pepper"],nut:{cal:110,pro:4,carb:12,fat:6,fib:4}},
 {id:4102,title:"Lemon Roasted Asparagus",site:"Love and Lemons",url:"https://www.loveandlemons.com/roasted-asparagus/",img:"https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/4102.jpg",cats:["Sides","Gluten-Free","Quick Meals","Beginner"],time:15,servings:3,ing:["asparagus","garlic","lemon","olive oil","salt"],nut:{cal:65,pro:3,carb:5,fat:5,fib:2}},
 {id:4103,title:"Bell Pepper Nachos",site:"Minimalist Baker",url:"https://minimalistbaker.com/simple-avocado-recipes-30-minutes-or-less/",img:"https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/4103.jpg",cats:["Snacks","Gluten-Free","Quick Meals","Beginner"],time:15,servings:2,ing:["avocado","bell peppers (any)","black beans","nutritional yeast","salsa"],nut:{cal:260,pro:11,carb:32,fat:12,fib:10}},
 {id:4105,title:"Simple Guacamole",site:"Cookie and Kate",url:"https://cookieandkate.com/perfect-guacamole/",img:"https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/4105.jpg",cats:["Sauces & Dips","Mexican","Gluten-Free","Quick Meals","Beginner"],time:10,servings:4,ing:["avocado","cilantro","lime","red onion","tomatoes"],nut:{cal:160,pro:2,carb:10,fat:14,fib:7}},
-{id:4106,title:"Banana Berry Smoothie Bowl",site:"Rainbow Plant Life",url:"https://rainbowplantlife.com/5-ingredient-vegan-recipes/",img:"https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/4106.webp",cats:["Breakfast","Gluten-Free","Quick Meals","Beginner"],time:5,servings:1,ing:["chickpeas","flour tortillas","hot sauce","nutritional yeast","salt"],nut:{cal:310,pro:6,carb:58,fat:8,fib:7}},
+{id:4106,title:"Banana Berry Smoothie Bowl",site:"Rainbow Plant Life",url:"https://rainbowplantlife.com/5-ingredient-vegan-recipes/",img:"https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/4106.webp",cats:["Breakfast","Gluten-Free","Quick Meals","Beginner"],time:5,servings:1,ing:["banana","mixed berries","granola","plant-based milk","peanut butter"],nut:{cal:310,pro:6,carb:58,fat:8,fib:7}},
 {id:4107,title:"Caprese Salad with Avocado",site:"Love and Lemons",url:"https://www.loveandlemons.com/avocado-caprese-salad/",img:"https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/4107.jpg",cats:["Salads","Gluten-Free","Quick Meals","Beginner"],time:10,servings:2,ing:["avocado","balsamic vinegar","basil","olive oil","tomatoes"],nut:{cal:200,pro:3,carb:10,fat:18,fib:5}},
-{id:4111,title:"Mushroom Toast",site:"Rainbow Plant Life",url:"https://rainbowplantlife.com/20-minute-vegan-meals/",img:"https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/4111.jpg",cats:["Breakfast","Lunch","Quick Meals","Beginner"],time:15,servings:2,ing:["agave","avocado oil","black pepper","carrots","cilantro","earth grown extra-firm tofu","lime juice","olive oil","peanut butter","red pepper flakes","salt","sesame oil","soy sauce","water"],nut:{cal:210,pro:7,carb:26,fat:9,fib:3}},
+{id:4111,title:"Mushroom Toast",site:"Rainbow Plant Life",url:"https://rainbowplantlife.com/20-minute-vegan-meals/",img:"https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/4111.jpg",cats:["Breakfast","Lunch","Quick Meals","Beginner"],time:15,servings:2,ing:["mushrooms","bread","garlic","olive oil","thyme","salt","black pepper"],nut:{cal:210,pro:7,carb:26,fat:9,fib:3}},
 {id:4112,title:"Fresh Peach Salsa",site:"Love and Lemons",url:"https://www.loveandlemons.com/peach-salsa/",img:"https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/4112.jpg",cats:["Sauces & Dips","Gluten-Free","Quick Meals","Beginner"],time:10,servings:4,ing:["cilantro","lime","peaches","red onion","tomatoes"],nut:{cal:45,pro:1,carb:11,fat:0,fib:2}},
 {id:4113,title:"Arugula Lemon Salad",site:"Minimalist Baker",url:"https://minimalistbaker.com/5-minute-green-salad-no-mix-tahini-dressing/",img:"https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/4113.jpg",cats:["Salads","Gluten-Free","Quick Meals","Beginner"],time:5,servings:2,ing:["avocado","dried cranberries","healthy sea salt black pepper","lemons","mixed greens","olive oil","radishes","red onion","sunflower seeds","tahini"],nut:{cal:140,pro:3,carb:5,fat:13,fib:1}},
 {id:4114,title:"Crispy Baked Kale Chips",site:"Minimalist Baker",url:"https://minimalistbaker.com/how-to-make-kale-chips/",img:"https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/4114.jpg",cats:["Snacks","Gluten-Free","Beginner"],time:20,servings:2,ing:["coconut","curly green","seasonings"],nut:{cal:120,pro:5,carb:10,fat:7,fib:2}},
 {id:4118,title:"Arugula Avocado Cherry Tomato Salad",site:"Love and Lemons",url:"https://www.loveandlemons.com/arugula-salad/",img:"https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/4118.jpg",cats:["Salads","Gluten-Free","Quick Meals","Beginner"],time:5,servings:2,ing:["arugula","avocado","balsamic vinegar","cherry tomatoes","olive oil"],nut:{cal:190,pro:3,carb:9,fat:17,fib:5}},
 {id:4119,title:"Mixed Greens with Tahini Dressing",site:"Minimalist Baker",url:"https://minimalistbaker.com/5-minute-green-salad-no-mix-tahini-dressing/",img:"https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/4119.jpg",cats:["Salads","Gluten-Free","Quick Meals","Beginner"],time:5,servings:2,ing:["avocado","dried cranberries","healthy sea salt black pepper","lemons","mixed greens","olive oil","radishes","red onion","sunflower seeds","tahini"],nut:{cal:155,pro:4,carb:8,fat:13,fib:2}},
-{id:4121,title:"Kale White Bean Soup",site:"Rainbow Plant Life",url:"https://rainbowplantlife.com/5-ingredient-vegan-recipes/",img:"https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/4121.webp",cats:["Soups & Stews","Gluten-Free","High-Protein","High-Fiber","Comfort Food"],time:25,servings:4,ing:["chickpeas","flour tortillas","hot sauce","nutritional yeast","salt"],nut:{cal:195,pro:11,carb:30,fat:2,fib:8}},
+{id:4121,title:"Kale White Bean Soup",site:"Rainbow Plant Life",url:"https://rainbowplantlife.com/5-ingredient-vegan-recipes/",img:"https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/4121.webp",cats:["Soups & Stews","Gluten-Free","High-Protein","High-Fiber","Comfort Food"],time:25,servings:4,ing:["kale","white beans","vegetable broth","garlic","olive oil"],nut:{cal:195,pro:11,carb:30,fat:2,fib:8}},
 {id:4122,title:"Spinach Mushroom Sauté",site:"Nora Cooks",url:"https://www.noracooks.com/easy-vegan-recipes/",img:"https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/4122.webp",cats:["Sides","Gluten-Free","Quick Meals","Beginner"],time:10,servings:2,ing:["garlic","lemon","mushrooms","olive oil","spinach"],nut:{cal:90,pro:4,carb:7,fat:6,fib:3}},
 {id:4124,title:"Arugula Peach Walnut Salad",site:"Love and Lemons",url:"https://www.loveandlemons.com/arugula-salad/",img:"https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/4124.jpg",cats:["Salads","Gluten-Free","Quick Meals"],time:10,servings:2,ing:["arugula","balsamic vinegar","olive oil","peaches","walnuts"],nut:{cal:200,pro:4,carb:14,fat:16,fib:3}},
 {id:4126,title:"Avocado Crema",site:"Minimalist Baker",url:"https://minimalistbaker.com/easy-vegan-avocado-crema/",img:"https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/4126.jpg",cats:["Sauces & Dips","Gluten-Free","Quick Meals","Beginner"],time:5,servings:4,ing:["black bean plantain enchilada bake","cashews","chipotle tofu chilaquiles","cilantro","garlic","lime juice","salt","small-medium ripe avocado","smoky bbq bean tacos","sweet potato black bean enchiladas","sweet potato black bean tamales","water"],nut:{cal:80,pro:1,carb:5,fat:7,fib:3}},
@@ -2922,7 +2807,7 @@ function initPantry() {
   if (todayQA.length) {
     freshGroup.style.display = '';
     freshChips.innerHTML = todayQA.map(i =>
-      `<span style="display:inline-flex;align-items:center;gap:4px;background:#dcfce7;color:#166534;padding:4px 10px;border-radius:16px;font-size:.82rem;font-weight:500">✓ ${i}<button onclick="removeFromToday('${escQ(i)}');initPantry()" style="background:none;border:none;color:#166534;cursor:pointer;font-size:.85rem;padding:0 0 0 2px;line-height:1">×</button></span>`
+      `<span style="display:inline-flex;align-items:center;gap:4px;background:#dcfce7;color:#166534;padding:4px 10px;border-radius:16px;font-size:.82rem;font-weight:500">✓ ${escHTML(i)}<button onclick="removeFromToday('${escQ(i)}');initPantry()" style="background:none;border:none;color:#166534;cursor:pointer;font-size:.85rem;padding:0 0 0 2px;line-height:1">×</button></span>`
     ).join('');
   } else {
     freshGroup.style.display = 'none';
@@ -2944,7 +2829,7 @@ function initPantry() {
         groupHtml += `<div style="margin-bottom:12px">
           <div style="font-size:.78rem;font-weight:600;color:#92400e;margin-bottom:6px">${g.cat}</div>
           <div style="display:flex;flex-wrap:wrap;gap:5px">${matched.map(i =>
-            `<span style="display:inline-flex;align-items:center;gap:4px;background:#fef3c7;color:#92400e;padding:4px 10px;border-radius:16px;font-size:.82rem;font-weight:500">★ ${i}<button onclick="removeFromAlways('${escQ(i)}');initPantry()" style="background:none;border:none;color:#92400e;cursor:pointer;font-size:.85rem;padding:0 0 0 2px;line-height:1">×</button></span>`
+            `<span style="display:inline-flex;align-items:center;gap:4px;background:#fef3c7;color:#92400e;padding:4px 10px;border-radius:16px;font-size:.82rem;font-weight:500">★ ${escHTML(i)}<button onclick="removeFromAlways('${escQ(i)}');initPantry()" style="background:none;border:none;color:#92400e;cursor:pointer;font-size:.85rem;padding:0 0 0 2px;line-height:1">×</button></span>`
           ).join('')}</div></div>`;
       }
     });
@@ -2968,7 +2853,7 @@ function initPantry() {
     customGroup.style.display = '';
     if (customCount) customCount.textContent = `(${custom.length})`;
     customChips.innerHTML = custom.map(i =>
-      `<span style="display:inline-flex;align-items:center;gap:4px;background:#ede9fe;color:#6d28d9;padding:4px 10px;border-radius:16px;font-size:.82rem;font-weight:500">✏️ ${i}<button onclick="removeFromToday('${escQ(i)}');initPantry()" style="background:none;border:none;color:#6d28d9;cursor:pointer;font-size:.85rem;padding:0 0 0 2px;line-height:1">×</button></span>`
+      `<span style="display:inline-flex;align-items:center;gap:4px;background:#ede9fe;color:#6d28d9;padding:4px 10px;border-radius:16px;font-size:.82rem;font-weight:500">✏️ ${escHTML(i)}<button onclick="removeFromToday('${escQ(i)}');initPantry()" style="background:none;border:none;color:#6d28d9;cursor:pointer;font-size:.85rem;padding:0 0 0 2px;line-height:1">×</button></span>`
     ).join('');
   } else {
     customGroup.style.display = 'none';
@@ -2998,7 +2883,7 @@ function renderMPNotSelChips() {
       .filter(item => !stapleSet.has(item.toLowerCase()) && !todaySet.has(item.toLowerCase()))
       .map(item => {
         total++;
-        return `<span class="chip-wrap"><span class="qa-chip" onclick="addToToday('${escQ(item)}')">${item}</span><button class="chip-star" onclick="addToAlways('${escQ(item)}')" title="Save to Always Have">★</button></span>`;
+        return `<span class="chip-wrap"><span class="qa-chip" onclick="addToToday('${escQ(item)}')">${escHTML(item)}</span><button class="chip-star" onclick="addToAlways('${escQ(item)}')" title="Save to Always Have">★</button></span>`;
       }).join('');
     if (!chips) return '';
     return `<div class="qa-cat-label">${group.cat}</div><div>${chips}</div>`;
@@ -3018,7 +2903,7 @@ function renderMPCustomIngTags() {
         const starBtn = isStaple
           ? `<button class="custom-staple-btn on" title="Remove from staples" onclick="removeFromAlways('${esc}')">★</button>`
           : `<button class="custom-staple-btn" title="Save as staple" onclick="addToAlways('${esc}')">☆</button>`;
-        return `<span class="tag custom-tag">${ing}${starBtn}<button onclick="removeCustomIng('${esc}')">×</button></span>`;
+        return `<span class="tag custom-tag">${escHTML(ing)}${starBtn}<button onclick="removeCustomIng('${esc}')">×</button></span>`;
       }).join('')
     : '';
 }
@@ -3590,8 +3475,6 @@ function recipeUrl(r) {
     : 'vegan ' + r.title + ' recipe';
   return 'https://www.google.com/search?q=' + encodeURIComponent(q);
 }
-// Keep old name as alias for any other references
-function searchUrl(r) { return recipeUrl(r); }
 
 let _pendingRecipeUrl = null;
 function openRecipeUrl(url) {
@@ -3622,8 +3505,6 @@ function closeFindExplainer() {
   if (modal) modal.classList.remove('open');
   _pendingRecipeUrl = null;
 }
-// Keep old name as alias
-function openRecipeSearch(url) { openRecipeUrl(url); }
 
 function reportBrokenLink(recipeId, recipeTitle, url) {
   try {
@@ -4008,7 +3889,7 @@ function renderShop() {
   el.innerHTML = shopList.map((item, i) => `
     <div class="shop-item" id="si-${i}">
       <input type="checkbox" onchange="checkShop(${i},this.checked)">
-      <span>${item}</span>
+      <span>${escHTML(item)}</span>
     </div>`).join('');
 }
 
@@ -4249,45 +4130,56 @@ function _applyAllData(data) {
   }
 }
 
+let _syncInProgress = false;
+
 async function cloudPush() {
+  if (_syncInProgress) return;
   const sb = sbClient();
   if (!sb || !_sbUser) { showToast('Sign in first to push data'); return; }
+  _syncInProgress = true;
   const statusEl = document.getElementById('syncStatus');
   if (statusEl) statusEl.textContent = 'Pushing…';
-  const allData = _gatherAllData();
-  const { error } = await sb.from('user_data').upsert({
-    id: _sbUser.id,
-    data: allData,
-  });
-  if (error) {
-    showToast('❌ Push failed: ' + error.message, 3000);
-    if (statusEl) statusEl.textContent = 'Push failed';
-  } else {
-    showToast('☁️ Data pushed to cloud');
-    if (statusEl) statusEl.textContent = 'Synced just now';
-  }
+  try {
+    const allData = _gatherAllData();
+    const { error } = await sb.from('user_data').upsert({
+      id: _sbUser.id,
+      data: allData,
+    });
+    if (error) {
+      showToast('❌ Push failed: ' + error.message, 3000);
+      if (statusEl) statusEl.textContent = 'Push failed';
+    } else {
+      showToast('☁️ Data pushed to cloud');
+      if (statusEl) statusEl.textContent = 'Synced just now';
+    }
+  } finally { _syncInProgress = false; }
 }
 
 async function cloudPull() {
+  if (_syncInProgress) return;
   const sb = sbClient();
   if (!sb || !_sbUser) { showToast('Sign in first to pull data'); return; }
+  _syncInProgress = true;
   const statusEl = document.getElementById('syncStatus');
   if (statusEl) statusEl.textContent = 'Pulling…';
-  const { data, error } = await sb.from('user_data').select('data').eq('id', _sbUser.id).maybeSingle();
-  if (error) {
-    showToast('❌ Pull failed: ' + error.message, 3000);
-    if (statusEl) statusEl.textContent = 'Pull failed';
-    return;
-  }
-  if (data && data.data) {
-    _applyAllData(data.data);
-    showToast('☁️ Data pulled from cloud');
-    if (statusEl) statusEl.textContent = 'Synced just now';
-  } else {
-    // No data in cloud yet — push current local data up
-    showToast('No cloud data found — uploading yours now');
-    await cloudPush();
-  }
+  try {
+    const { data, error } = await sb.from('user_data').select('data').eq('id', _sbUser.id).maybeSingle();
+    if (error) {
+      showToast('❌ Pull failed: ' + error.message, 3000);
+      if (statusEl) statusEl.textContent = 'Pull failed';
+      return;
+    }
+    if (data && data.data) {
+      _applyAllData(data.data);
+      showToast('☁️ Data pulled from cloud');
+      if (statusEl) statusEl.textContent = 'Synced just now';
+    } else {
+      // No data in cloud yet — push current local data up
+      showToast('No cloud data found — uploading yours now');
+      _syncInProgress = false; // allow the push to proceed
+      await cloudPush();
+    }
+  } finally { _syncInProgress = false; }
 }
 
 // Debounced auto-push: called after any save when logged in
@@ -4384,7 +4276,7 @@ function copySyncCode() {
 
 function importSyncCode() {
   const raw = document.getElementById('syncCodeIn').value.trim();
-  if (!raw) { alert('Please paste a sync code first.'); return; }
+  if (!raw) { showToast('⚠️ Please paste a sync code first.'); return; }
   try {
     const data = JSON.parse(decodeURIComponent(escape(atob(raw))));
     if (!data.v) throw new Error('Invalid code');
@@ -4397,56 +4289,10 @@ function importSyncCode() {
     renderFavs(); renderMealPlan(); render(); renderAllIngPanels();
     document.getElementById('syncCodeIn').value = '';
     document.getElementById('syncImportWrap').style.display = 'none';
-    alert('✅ Sync complete!\n\nYour favorites, notes, staples, and shopping list have been loaded on this device.');
+    showToast('✅ Sync complete! Data loaded on this device.', 3000);
   } catch(e) {
-    alert('❌ Invalid sync code. Make sure you copied the full code from your other device.');
+    showToast('❌ Invalid sync code. Check the code and try again.', 3000);
   }
-}
-
-// ── BACKUP: Export & Import ───────────────────────────────────────────────────
-function exportData() {
-  const backup = {
-    version: 1,
-    exportedAt: new Date().toISOString(),
-    vrf_favs:    _lsGet('vrf_favs',    '[]'),
-    vrf_instr:   _lsGet('vrf_instr',   '{}'),
-    vrf_staples: _lsGet('vrf_staples', '[]'),
-    vrf_shop:    _lsGet('vrf_shop',    '[]'),
-    vrf_ings:    _lsGet('vrf_ings',    '[]'),
-  };
-  const blob = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' });
-  const url  = URL.createObjectURL(blob);
-  const a    = document.createElement('a');
-  const date = new Date().toISOString().slice(0,10);
-  a.href     = url;
-  a.download = `vegan-recipes-backup-${date}.json`;
-  a.click();
-  URL.revokeObjectURL(url);
-}
-
-function importData(event) {
-  const file = event.target.files[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = function(e) {
-    try {
-      const backup = JSON.parse(e.target.result);
-      if (!backup.version) throw new Error('Not a valid backup file.');
-      if (backup.vrf_favs    !== undefined) { _lsSet('vrf_favs',    backup.vrf_favs);    favorites    = backup.vrf_favs; }
-      if (backup.vrf_instr   !== undefined) { _lsSet('vrf_instr',   backup.vrf_instr);   instructions = backup.vrf_instr; }
-      if (backup.vrf_staples !== undefined) { _lsSet('vrf_staples', backup.vrf_staples); staples      = backup.vrf_staples; }
-      if (backup.vrf_shop    !== undefined) { _lsSet('vrf_shop',    backup.vrf_shop);    shopList     = backup.vrf_shop; }
-      if (backup.vrf_ings    !== undefined) { _lsSet('vrf_ings',    backup.vrf_ings);    ingredients  = backup.vrf_ings; }
-      if (backup.vrf_meal    !== undefined) { _lsSet('vrf_meal',    backup.vrf_meal);    mealPlan     = backup.vrf_meal; }
-      renderFavs(); renderMealPlan();
-      render();
-      alert('✅ Backup restored successfully!\n\nYour favorites, notes, staples, and shopping list have been loaded.');
-    } catch(err) {
-      alert('❌ Could not import backup.\n\nMake sure you selected a valid HARVEST backup file.');
-    }
-    event.target.value = ''; // reset input so same file can be re-imported
-  };
-  reader.readAsText(file);
 }
 
 function openInstrModal(id) {
@@ -4498,7 +4344,7 @@ function printInstr() {
   const r = RECIPES.find(r => r.id === _instrCurrentId);
   const title = r ? r.title : 'Recipe';
   const site  = r ? r.site  : '';
-  const notes = (instructions[_instrCurrentId] || '').replace(/\n/g, '<br>');
+  const notes = escHTML(instructions[_instrCurrentId] || '').replace(/\n/g, '<br>');
   const meta  = r ? `⏱ ${r.time} min &nbsp;|&nbsp; 👤 ${r.servings} servings` : '';
   const nut   = r && r.nut ? `<p style="font-size:13px;color:#555">Cal: ${r.nut.cal} &nbsp;|&nbsp; Protein: ${r.nut.pro}g &nbsp;|&nbsp; Carbs: ${r.nut.carb}g &nbsp;|&nbsp; Fat: ${r.nut.fat}g &nbsp;|&nbsp; Fiber: ${r.nut.fib}g</p>` : '';
   const win = window.open('', '_blank');
@@ -4804,9 +4650,9 @@ function saveCustomRecipe() {
     title: title,
     ing: ingredients,
     time: time,
-    servs: servings,
-    src: source || 'Custom Recipe',
-    cats: [],time:30,
+    servings: servings,
+    site: source || 'Custom Recipe',
+    cats: [],
   };
   
   RECIPES.push(recipe);
@@ -4819,7 +4665,7 @@ function saveCustomRecipe() {
   
   if (notes) {
     instructions[recipe.id] = notes;
-    _lsSet('vrf_instructions', instructions);
+    saveInstrData();
   }
   
   document.getElementById('addRecipeModal').remove();
@@ -4838,11 +4684,8 @@ function loadCustomRecipes() {
     });
   }
   
-  // Load custom instructions
-  const instr = _lsGet('vrf_instructions', '{}');
-  if (typeof instr === 'object' && instr !== null) {
-    Object.assign(instructions, instr);
-  }
+  // Custom recipe notes are already in vrf_instr (loaded at startup into `instructions`)
+  // No separate load needed — saveCustomRecipe now uses saveInstrData() which writes to vrf_instr
 }
 
 // Meal Planner
@@ -4875,6 +4718,7 @@ const QA_ALL_ITEMS = new Set([
 
 // ── SHARED HELPERS ───────────────────────────────────────────────────────────
 function escQ(s) { return s.replace(/\\/g,'\\\\').replace(/'/g,"\\'"); }
+function escHTML(s) { const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
 
 // Shared: color each digit green/yellow/purple (static)
 function colorDigits(n) {
@@ -4914,7 +4758,7 @@ function renderPerishableGridImpl(elId) {
     const chips = group.items
       .filter(item => !todaySet.has(item.toLowerCase()) && !stapleSet.has(item.toLowerCase()))
       .map(item => {
-        return `<span class="chip-wrap"><span class="qa-chip" onclick="addToToday('${escQ(item)}')">${item}</span><button class="chip-star" onclick="addToAlways('${escQ(item)}')" title="Save to Always Have">★</button></span>`;
+        return `<span class="chip-wrap"><span class="qa-chip" onclick="addToToday('${escQ(item)}')">${escHTML(item)}</span><button class="chip-star" onclick="addToAlways('${escQ(item)}')" title="Save to Always Have">★</button></span>`;
       }).join('');
     if (!chips) return '';
     return `<div class="qa-cat-label">${group.cat}</div><div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:8px;">${chips}</div>`;
@@ -5309,8 +5153,8 @@ function renderScanResults(items) {
     knownItems.forEach((item, idx) => {
       html += `<div class="scan-result-item">
         <input type="checkbox" ${item.checked ? 'checked' : ''} onchange="_scanDetected[${items.indexOf(item)}].checked=this.checked">
-        <span class="sri-name">${item.name}</span>
-        <span class="sri-source">${item.source}</span>
+        <span class="sri-name">${escHTML(item.name)}</span>
+        <span class="sri-source">${escHTML(item.source)}</span>
       </div>`;
     });
     html += '</div>';
@@ -5322,8 +5166,8 @@ function renderScanResults(items) {
     newItems.forEach((item, idx) => {
       html += `<div class="scan-result-item sri-new">
         <input type="checkbox" ${item.checked ? 'checked' : ''} onchange="_scanDetected[${items.indexOf(item)}].checked=this.checked">
-        <span class="sri-name">${item.name}</span>
-        <span class="sri-source">${item.source}</span>
+        <span class="sri-name">${escHTML(item.name)}</span>
+        <span class="sri-source">${escHTML(item.source)}</span>
       </div>`;
     });
     html += '</div>';

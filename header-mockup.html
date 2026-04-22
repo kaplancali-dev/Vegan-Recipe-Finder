@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HARVEST Header Mockup</title>
+<style>
+  @keyframes boldWave {
+    0%, 100% { transform: scale(1); opacity: 0.85; }
+    50% { transform: scale(1.18); opacity: 1; }
+  }
+  .clr-letter { display: inline-block; animation: boldWave 3s ease-in-out infinite; }
+  .clr-letter:nth-child(1) { animation-delay: 0s; }
+  .clr-letter:nth-child(2) { animation-delay: 0.3s; }
+  .clr-letter:nth-child(3) { animation-delay: 0.6s; }
+  .clr-letter:nth-child(4) { animation-delay: 0.9s; }
+  .clr-letter:nth-child(5) { animation-delay: 1.2s; }
+  .clr-letter:nth-child(6) { animation-delay: 1.5s; }
+
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    background: #faf8f5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 60px 20px;
+    gap: 80px;
+  }
+
+  .mockup {
+    text-align: center;
+    max-width: 500px;
+    width: 100%;
+  }
+
+  .mockup-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #999;
+    margin-bottom: 24px;
+    font-weight: 600;
+  }
+
+  .header-box {
+    background: #faf8f5;
+    padding: 20px 16px 16px;
+    border-bottom: 1px solid #e8e4dd;
+  }
+
+  h1 {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #1e5a3a;
+    margin: 0;
+    letter-spacing: 0.04em;
+  }
+
+  .tagline {
+    font-family: Georgia, serif;
+    font-size: 1.25rem;
+    letter-spacing: 0.03em;
+    color: #4a5d52;
+    font-style: italic;
+    margin: 4px 0 0;
+  }
+
+  .colors-line {
+    font-size: 0.82rem;
+    color: #7a9a82;
+    font-style: italic;
+    margin: 6px 0 0;
+    letter-spacing: 0.01em;
+  }
+
+  .tab-bar {
+    display: flex;
+    background: #f5f2ed;
+    border-radius: 14px;
+    padding: 4px;
+    margin: 12px 8px 0;
+    gap: 2px;
+  }
+
+  .tab-btn {
+    flex: 1;
+    padding: 10px 4px;
+    border: none;
+    background: transparent;
+    border-radius: 10px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #4a5d52;
+    cursor: pointer;
+  }
+
+  .tab-btn.on {
+    background: #1e5a3a;
+    color: #fff;
+  }
+
+  .divider {
+    border: none;
+    border-top: 2px dashed #d4e6d8;
+    width: 100%;
+    max-width: 500px;
+  }
+
+  .winner {
+    background: #f0fdf4;
+    border: 2px solid #38a169;
+    border-radius: 16px;
+    padding: 4px;
+  }
+
+  .badge {
+    display: inline-block;
+    background: #38a169;
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+    letter-spacing: 0.05em;
+  }
+</style>
+</head>
+<body>
+
+  <div class="mockup">
+    <div class="badge">RECOMMENDED</div>
+    <div class="mockup-label">Option 1 — Under the tagline</div>
+    <div class="winner">
+      <div class="header-box">
+        <h1>🌿 HARVEST</h1>
+        <p class="tagline">Make more with what you have</p>
+        <p class="colors-line">The more
+          <span style="display:inline-flex">
+            <span class="clr-letter" style="color:#e53e3e">c</span>
+            <span class="clr-letter" style="color:#dd6b20">o</span>
+            <span class="clr-letter" style="color:#d69e2e">l</span>
+            <span class="clr-letter" style="color:#38a169">o</span>
+            <span class="clr-letter" style="color:#3182ce">r</span>
+            <span class="clr-letter" style="color:#805ad5">s</span>
+          </span> on your plate, the more life in your years.™
+        </p>
+      </div>
+      <div class="tab-bar">
+        <button class="tab-btn">🥬 My Pantry</button>
+        <button class="tab-btn on">🔍 Browse All</button>
+        <button class="tab-btn">🧑‍🍳 Ready to Make</button>
+        <button class="tab-btn">❤️ Favorites</button>
+        <button class="tab-btn">🛒 Shopping</button>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="mockup">
+    <div class="mockup-label">Option 2 — In My Pantry below video</div>
+    <div class="header-box">
+      <h1>🌿 HARVEST</h1>
+      <p class="tagline">Make more with what you have</p>
+    </div>
+    <div class="tab-bar">
+      <button class="tab-btn on">🥬 My Pantry</button>
+      <button class="tab-btn">🔍 Browse All</button>
+      <button class="tab-btn">🧑‍🍳 Ready to Make</button>
+      <button class="tab-btn">❤️ Favorites</button>
+      <button class="tab-btn">🛒 Shopping</button>
+    </div>
+    <div style="background:#eee;border-radius:12px;height:120px;margin:12px 8px;display:flex;align-items:center;justify-content:center;color:#999;font-size:0.85rem">[ hero video ]</div>
+    <p style="font-size:0.88rem;color:#7a9a82;font-style:italic;margin:0 8px 12px;text-align:center;">The more
+      <span style="display:inline-flex">
+        <span class="clr-letter" style="color:#e53e3e">c</span>
+        <span class="clr-letter" style="color:#dd6b20">o</span>
+        <span class="clr-letter" style="color:#d69e2e">l</span>
+        <span class="clr-letter" style="color:#38a169">o</span>
+        <span class="clr-letter" style="color:#3182ce">r</span>
+        <span class="clr-letter" style="color:#805ad5">s</span>
+      </span> on your plate, the more life in your years.™
+    </p>
+  </div>
+
+  <hr class="divider">
+
+  <div class="mockup">
+    <div class="mockup-label">Option 3 — Footer signature</div>
+    <div class="header-box">
+      <h1>🌿 HARVEST</h1>
+      <p class="tagline">Make more with what you have</p>
+    </div>
+    <div class="tab-bar">
+      <button class="tab-btn on">🔍 Browse All</button>
+      <button class="tab-btn">🥬 My Pantry</button>
+      <button class="tab-btn">🧑‍🍳 Ready to Make</button>
+      <button class="tab-btn">❤️ Favorites</button>
+      <button class="tab-btn">🛒 Shopping</button>
+    </div>
+    <div style="height:80px"></div>
+    <div style="text-align:center;padding:20px 16px;border-top:1px solid #e8e4dd;background:#faf8f5;">
+      <p style="font-size:0.82rem;color:#7a9a82;font-style:italic;margin:0;">The more
+        <span style="display:inline-flex">
+          <span class="clr-letter" style="color:#e53e3e">c</span>
+          <span class="clr-letter" style="color:#dd6b20">o</span>
+          <span class="clr-letter" style="color:#d69e2e">l</span>
+          <span class="clr-letter" style="color:#38a169">o</span>
+          <span class="clr-letter" style="color:#3182ce">r</span>
+          <span class="clr-letter" style="color:#805ad5">s</span>
+        </span> on your plate, the more life in your years.™
+      </p>
+    </div>
+  </div>
+
+</body>
+</html>
