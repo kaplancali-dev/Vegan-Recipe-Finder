@@ -273,7 +273,6 @@ function showQAPopup(category, anchorEl) {
 
   const popup = document.createElement('div');
   popup.className = 'qa-popup card';
-  popup.style.cssText = 'position:absolute;z-index:150;max-width:320px;left:50%;transform:translateX(-50%)';
 
   popup.innerHTML = `
     <h4 style="margin-bottom:8px;font-family:var(--font-sans)">${escHTML(category.cat)}</h4>

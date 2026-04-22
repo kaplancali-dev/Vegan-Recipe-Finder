@@ -1203,6 +1203,33 @@ input, select, textarea {
   margin-bottom: 4px;
 }
 
+.qa-btn.on {
+  border-color: var(--green);
+  background: var(--green-soft);
+  color: var(--green);
+}
+
+.qa-popup {
+  position: absolute;
+  z-index: 150;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 480px;
+}
+
+.qa-popup .chip-wrap {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+
+.qa-popup .chip-wrap .chip {
+  text-align: center;
+  justify-content: center;
+  font-size: 0.82rem;
+}
+
 /* ── Sync Card ───────────────────────────────────────────────── */
 .sync-card .sync-form {
   display: flex;
