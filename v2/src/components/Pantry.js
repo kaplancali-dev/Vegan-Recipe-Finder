@@ -231,7 +231,31 @@ function wireQAGrid() {
     const category = QA_ITEMS.find(c => c.cat === catLabel);
     if (!category) return;
 
-    // Show category items as a quick-add popup
+    // Single-item category: toggle directly, no popup needed
+    if (category.items.length === 1) {
+      const item = category.items[0];
+      const allNormed = new Set([...get('ingredients').map(norm), ...get('staples').map(norm)]);
+      if (!allNormed.has(norm(item))) {
+        const staples = get('staples');
+        staples.push(item);
+        set('staples', staples);
+        autoSync();
+        btn.classList.add('on');
+      } else {
+        // Already added — remove from staples
+        const staples = get('staples');
+        const idx = staples.findIndex(s => norm(s) === norm(item));
+        if (idx !== -1) {
+          staples.splice(idx, 1);
+          set('staples', staples);
+          autoSync();
+          btn.classList.remove('on');
+        }
+      }
+      return;
+    }
+
+    // Multi-item category: show quick-add popup
     showQAPopup(category, btn);
   });
 }
