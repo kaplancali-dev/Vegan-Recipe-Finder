@@ -13,6 +13,8 @@ import { $, $$ } from '../utils/dom.js';
 import { toggleFavorite } from '../actions/favorites.js';
 import { renderCardList } from './RecipeCard.js';
 import { openDetail } from './RecipeDetail.js';
+import { addToShopList } from './Shopping.js';
+import { showToast } from '../utils/toast.js';
 
 /** How many recipes to show per page */
 const PAGE_SIZE = 50;
@@ -326,19 +328,18 @@ function _runRender() {
       return;
     }
 
-    // Add Missing to shopping list button
-    const shopBtn = e.target.closest('.shop-btn');
-    if (shopBtn) {
+    // Make This button — add missing ingredients to shopping list
+    const makeBtn = e.target.closest('.make-btn');
+    if (makeBtn) {
       e.stopPropagation();
-      const id = Number(shopBtn.dataset.shopId);
+      const id = Number(makeBtn.dataset.makeId);
       const recipe = visible.find(r => r.id === id);
-      if (recipe && recipe.needNames) {
-        const currentShop = get('shopList') || [];
-        const shopSet = new Set(currentShop);
-        recipe.needNames.forEach(ing => shopSet.add(ing));
-        set('shopList', [...shopSet]);
-        shopBtn.textContent = '✓ Added!';
-        shopBtn.disabled = true;
+      if (recipe && recipe.needNames && recipe.needNames.length) {
+        addToShopList(recipe.needNames);
+        makeBtn.textContent = '✓ Added to Shop!';
+        makeBtn.disabled = true;
+      } else {
+        showToast('You have everything — ready to cook!');
       }
       return;
     }
