@@ -22,7 +22,7 @@
 <link rel="icon" type="image/png" href="favicon.png">
 <meta name="theme-color" content="#2d7a4f">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; img-src 'self' https: data:; connect-src 'self' https://*.supabase.co https://www.google-analytics.com; font-src 'self'; frame-src 'none';">
-  <script type="module" crossorigin src="/assets/index-P33KIZwq.js"></script>
+  <script type="module" crossorigin src="/assets/index-CDMTUxXL.js"></script>
   <link rel="modulepreload" crossorigin href="/assets/supabase-DaN4is7k.js">
   <link rel="modulepreload" crossorigin href="/assets/recipes-BpSYmkTi.js">
   <link rel="stylesheet" crossorigin href="/assets/index-DzpHrojy.css">
@@ -92,19 +92,30 @@
       <!-- Ingredient entry -->
       <div class="card">
         <label for="ingInput" class="card-title">Add Ingredients</label>
-        <p class="pantry-hint">Type what's in your fridge &amp; pantry, separated by commas. Tap ⭐ on any ingredient to make it a permanent <strong>staple</strong> (always on hand). Tap &times; to remove.</p>
+        <p class="pantry-hint">Type what's in your fridge &amp; pantry, separated by commas. Fresh produce is automatically grouped as <strong style="color:var(--perishable)">perishables</strong> so you use them first. Tap &times; to remove.</p>
         <div class="input-row">
           <input id="ingInput" type="text" class="text-input" placeholder="e.g. tofu, rice, garlic" autocomplete="off">
           <button id="ingAddBtn" class="btn btn-primary">Add</button>
         </div>
-        <div id="ingChips" class="chip-wrap"></div>
+      </div>
+
+      <!-- Perishables section -->
+      <div class="card">
+        <h3 class="card-title">🥬 Perishables <span class="muted">(use first — these go bad!)</span></h3>
+        <div id="perishChips" class="chip-wrap"></div>
+      </div>
+
+      <!-- Pantry Items section -->
+      <div class="card">
+        <h3 class="card-title">🥫 Pantry Items</h3>
+        <div id="pantryChips" class="chip-wrap"></div>
       </div>
 
       <!-- Staples section -->
       <div class="card">
-        <h3 class="card-title">Staples <span class="muted">(always on hand)</span></h3>
+        <h3 class="card-title">📌 Staples <span class="muted">(always on hand)</span></h3>
         <div id="stapleChips" class="chip-wrap"></div>
-        <button id="addStaplesBtn" class="btn btn-outline btn-sm">+ Add staples</button>
+        <button id="addStaplesBtn" class="btn btn-outline btn-sm">+ Add common staples</button>
       </div>
 
       <!-- Quick Actions section -->

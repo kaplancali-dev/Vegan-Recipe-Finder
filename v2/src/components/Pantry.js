@@ -117,54 +117,56 @@ function wireIngredientInput() {
   });
 }
 
-/* ── Ingredient Chips ────────────────────────────────────────── */
+/* ── Ingredient Chips (split into Perishables + Pantry) ──────── */
 
 function renderIngChips() {
-  const container = $('#ingChips');
-  if (!container) return;
+  const perishContainer = $('#perishChips');
+  const pantryContainer = $('#pantryChips');
+  if (!perishContainer || !pantryContainer) return;
 
   const ings = getRef('ingredients');
-  if (!ings.length) {
-    container.innerHTML = '<span class="muted" style="font-size:0.82rem">No ingredients added yet — type above to get started!</span>';
-    return;
+
+  // Split ingredients into perishable vs shelf-stable
+  const perishable = [];
+  const shelfStable = [];
+  ings.forEach((ing, i) => {
+    if (isPerishable(ing)) {
+      perishable.push({ ing, idx: i });
+    } else {
+      shelfStable.push({ ing, idx: i });
+    }
+  });
+
+  // Render perishables
+  if (!perishable.length) {
+    perishContainer.innerHTML = '<span class="muted" style="font-size:0.82rem">No perishables — add fresh produce, herbs, or fruits above</span>';
+  } else {
+    perishContainer.innerHTML = perishable.map(({ ing, idx }) =>
+      `<span class="chip perishable">${escHTML(ing)} <span class="chip-x" data-remove-ing="${idx}" title="Remove">&times;</span></span>`
+    ).join('');
   }
 
-  container.innerHTML = ings.map((ing, i) =>
-    `<span class="chip${isPerishable(ing) ? ' perishable' : ''}">
-      <span class="chip-action chip-promote" data-star-ing="${i}" title="Make this a staple (always on hand)">☆</span>
-      ${escHTML(ing)}
-      <span class="chip-action chip-remove" data-remove-ing="${i}" title="Remove">&times;</span>
-    </span>`
-  ).join('');
+  // Render shelf-stable pantry items
+  if (!shelfStable.length) {
+    pantryContainer.innerHTML = '<span class="muted" style="font-size:0.82rem">No pantry items added yet</span>';
+  } else {
+    pantryContainer.innerHTML = shelfStable.map(({ ing, idx }) =>
+      `<span class="chip">${escHTML(ing)} <span class="chip-x" data-remove-ing="${idx}" title="Remove">&times;</span></span>`
+    ).join('');
+  }
 
-  // Event delegation
-  container.onclick = (e) => {
+  // Event delegation for both containers
+  const removeHandler = (e) => {
     const removeEl = e.target.closest('[data-remove-ing]');
-    if (removeEl) {
-      const idx = Number(removeEl.dataset.removeIng);
-      const current = get('ingredients');
-      current.splice(idx, 1);
-      set('ingredients', current);
-      autoSync();
-      return;
-    }
-
-    const starEl = e.target.closest('[data-star-ing]');
-    if (starEl) {
-      const idx = Number(starEl.dataset.starIng);
-      const current = get('ingredients');
-      const item = current.splice(idx, 1)[0];
-      set('ingredients', current);
-
-      // Add to staples
-      const staples = get('staples');
-      if (!staples.map(norm).includes(norm(item))) {
-        staples.push(item);
-        set('staples', staples);
-      }
-      autoSync();
-    }
+    if (!removeEl) return;
+    const idx = Number(removeEl.dataset.removeIng);
+    const current = get('ingredients');
+    current.splice(idx, 1);
+    set('ingredients', current);
+    autoSync();
   };
+  perishContainer.onclick = removeHandler;
+  pantryContainer.onclick = removeHandler;
 }
 
 /**
@@ -193,9 +195,8 @@ function renderStapleChips() {
 
   container.innerHTML = staples.map((s, i) =>
     `<span class="chip staple">
-      <span class="chip-staple-icon">★</span>
       ${escHTML(s)}
-      <span class="chip-action chip-remove" data-remove-staple="${i}" title="Remove staple">&times;</span>
+      <span class="chip-x" data-remove-staple="${i}" title="Remove">&times;</span>
     </span>`
   ).join('');
 
