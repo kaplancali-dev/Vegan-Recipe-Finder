@@ -108,13 +108,13 @@ input, select, textarea {
 }
 
 .logo {
-  font-size: 1.35rem;
+  font-size: 2rem;
   font-weight: 800;
   color: var(--green);
   letter-spacing: 1.5px;
 }
 .logo-tagline {
-  font-size: 0.75rem;
+  font-size: 1rem;
   font-weight: 500;
   color: var(--ink-soft);
   letter-spacing: 0.3px;
