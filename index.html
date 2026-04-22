@@ -1092,18 +1092,6 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
     <p style="font-family:Georgia,serif;font-size:1.15rem;letter-spacing:.03em;color:#4a5d52;font-style:italic">Make more with what you have</p>
   </header>
 
-  <!-- PWA toolbar (only visible when running as home screen app) -->
-  <div id="pwaToolbar" style="display:none;justify-content:center;gap:28px;padding:6px 16px;background:#f4f9f1;border-bottom:1px solid #e0ebe3;">
-    <button onclick="history.back()" style="background:none;border:none;font-size:1.3rem;color:#5a7a5a;cursor:pointer;padding:4px 8px;" title="Back">◀</button>
-    <button onclick="navigator.share?navigator.share({title:'HARVEST',url:location.href}):void(0)" style="background:none;border:none;font-size:1.3rem;color:#5a7a5a;cursor:pointer;padding:4px 8px;" title="Share">⬆</button>
-    <button onclick="location.reload()" style="background:none;border:none;font-size:1.3rem;color:#5a7a5a;cursor:pointer;padding:4px 8px;" title="Refresh">⟳</button>
-  </div>
-  <script>
-    // Show toolbar only in standalone PWA mode
-    if (window.navigator.standalone || window.matchMedia('(display-mode: standalone)').matches) {
-      document.getElementById('pwaToolbar').style.display = 'flex';
-    }
-  </script>
 
   <!-- INTRO PANEL -->
   <div class="intro-card intro-card-light" id="introCard">
