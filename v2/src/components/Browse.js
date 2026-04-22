@@ -67,6 +67,30 @@ export function initBrowse(recipes) {
   });
 }
 
+/** Emoji icons for category chips (matches v1) */
+const CAT_ICONS = {
+  'Appetizers': '🥟', 'Asian': '🥢', 'Beginner': '👩‍🍳', 'Bread & Baking': '🍞',
+  'Breakfast': '🧇', 'Burgers & Patties': '🍔', 'Chinese': '🥡',
+  'Comfort Food': '🍲', 'Desserts': '🍨', 'Dinner': '🍽️', 'Drinks': '🥤',
+  'Fall': '🍂', 'GF Bread': '🍞', 'Game Day': '🏈', 'Gluten-Free': '🌾',
+  'Greek': '🇬🇷', 'High-Fiber': '🌿', 'High-Protein': '🏋️',
+  'Holiday & Festive': '🎄', 'Indian': '🍛', 'Instant Pot': '⚡',
+  'Italian': '🍝', 'Japanese': '🍱', 'Kid-Friendly': '👶', 'Korean': '🥢',
+  'Lunch': '🍢', 'Meal Prep': '📦', 'Meat Alternatives': '🌱',
+  'Mediterranean': '🫒', 'Mexican': '🌮', 'Middle Eastern': '🧆',
+  'One-Pot': '🥘', 'Pasta & Noodles': '🍝', 'Quick Meals': '⏱️',
+  'Raw': '🥬', 'Salads': '🥗', 'Sandwiches': '🥪',
+  'Sauces & Dips': '🫙', 'Sides': '🥦', 'Snacks': '🥨',
+  'Soups & Stews': '🍲', 'Southern': '🌽', 'Thai': '🍜',
+  'Vegan Bacon': '🥓', 'Vegan Cheese': '🧀', 'Vietnamese': '🍜',
+};
+
+/** Emoji icons for allergen chips */
+const ALLERGY_ICONS = {
+  'coconut': '🥥', 'corn': '🌽', 'mushroom': '🍄', 'nightshade': '🌶️',
+  'peanut': '🥜', 'soy': '🫘', 'tree nut': '🌰',
+};
+
 /**
  * Build category filter chips from unique recipe categories.
  */
@@ -83,9 +107,10 @@ function buildCategoryChips() {
   specialCats.forEach(c => cats.add(c));
 
   const sorted = [...cats].sort();
-  container.innerHTML = sorted.map(cat =>
-    `<button class="filter-chip" data-cat="${escHTML(cat)}">${escHTML(cat)}</button>`
-  ).join('');
+  container.innerHTML = sorted.map(cat => {
+    const icon = CAT_ICONS[cat] || '';
+    return `<button class="filter-chip" data-cat="${escHTML(cat)}">${icon ? icon + ' ' : ''}${escHTML(cat)}</button>`;
+  }).join('');
 
   container.addEventListener('click', (e) => {
     const chip = e.target.closest('.filter-chip');
@@ -110,9 +135,10 @@ function buildAllergyChips() {
   if (!container) return;
 
   const allergens = Object.keys(ALLERGY_KEYWORDS).sort();
-  container.innerHTML = allergens.map(key =>
-    `<button class="filter-chip${_allergies.has(key) ? ' on' : ''}" data-allergy="${escHTML(key)}">${escHTML(key)}</button>`
-  ).join('');
+  container.innerHTML = allergens.map(key => {
+    const icon = ALLERGY_ICONS[key] || '';
+    return `<button class="filter-chip${_allergies.has(key) ? ' on' : ''}" data-allergy="${escHTML(key)}">${icon ? icon + ' ' : ''}${escHTML(key)}</button>`;
+  }).join('');
 
   container.addEventListener('click', (e) => {
     const chip = e.target.closest('.filter-chip');
