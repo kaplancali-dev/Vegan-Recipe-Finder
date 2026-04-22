@@ -15,6 +15,7 @@ import { $ } from '../utils/dom.js';
 import { toggleFavorite } from '../actions/favorites.js';
 import { renderCardList } from './RecipeCard.js';
 import { openDetail } from './RecipeDetail.js';
+import { addToShopList } from './Shopping.js';
 
 /** Themed collection definitions */
 const COLLECTIONS = [
@@ -75,6 +76,8 @@ function renderCollections() {
 
 /**
  * Open a collection to view/manage its recipes.
+ * Shows missing ingredients per recipe and a "Shop for collection" button
+ * that adds all missing ingredients to the Shopping List.
  */
 function openCollection(key) {
   const def = COLLECTIONS.find(c => c.key === key);
@@ -94,7 +97,25 @@ function openCollection(key) {
   popup.className = 'collection-popup card';
   popup.style.cssText = 'position:fixed;bottom:0;left:0;right:0;z-index:180;max-height:70dvh;overflow-y:auto;border-radius:12px 12px 0 0;box-shadow:0 -4px 30px rgba(0,0,0,.15);padding:16px';
 
+  // Run matching engine on collection recipes to get missing ingredients
   const savedRecipes = items.map(id => _recipes.find(r => r.id === id)).filter(Boolean);
+  const ings = getRef('ingredients');
+  const staples = getRef('staples');
+  let matchedSaved = [];
+  if (savedRecipes.length) {
+    matchedSaved = findRecipes({
+      recipes: savedRecipes,
+      ingredients: ings,
+      staples,
+    });
+  }
+
+  // Collect all missing ingredients across the collection
+  const allMissing = new Set();
+  matchedSaved.forEach(r => {
+    if (r.needNames) r.needNames.forEach(n => allMissing.add(n));
+  });
+
   const availableToAdd = favRecipes.filter(r => !itemSet.has(r.id));
 
   popup.innerHTML = `
@@ -103,18 +124,31 @@ function openCollection(key) {
       <button class="icon-btn" data-coll-close aria-label="Close">&times;</button>
     </div>
 
-    ${savedRecipes.length ? `
+    ${matchedSaved.length ? `
       <div style="margin-bottom:16px">
         <p style="font-size:0.82rem;color:var(--ink-soft);margin-bottom:8px"><strong>In this collection:</strong></p>
         <div style="display:flex;flex-direction:column;gap:6px">
-          ${savedRecipes.map(r => `
-            <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 12px;background:var(--green-soft);border-radius:var(--radius)">
-              <span style="font-size:0.85rem;font-weight:600">${escHTML(r.title)}</span>
-              <button class="icon-btn" data-coll-remove="${r.id}" title="Remove" style="font-size:1rem">&times;</button>
-            </div>
-          `).join('')}
+          ${matchedSaved.map(r => {
+            const missing = r.needNames || [];
+            return `
+            <div style="padding:8px 12px;background:var(--green-soft);border-radius:var(--radius)">
+              <div style="display:flex;align-items:center;justify-content:space-between">
+                <span style="font-size:0.85rem;font-weight:600">${escHTML(r.title)}</span>
+                <button class="icon-btn" data-coll-remove="${r.id}" title="Remove" style="font-size:1rem">&times;</button>
+              </div>
+              ${missing.length ? `<div style="margin-top:4px;display:flex;flex-wrap:wrap;gap:3px">
+                ${missing.map(m => `<span style="font-size:0.72rem;padding:2px 6px;background:var(--accent-soft);color:var(--accent);border-radius:4px">need: ${escHTML(m)}</span>`).join('')}
+              </div>` : '<span style="font-size:0.72rem;color:var(--green);font-weight:600">✓ Ready to cook</span>'}
+            </div>`;
+          }).join('')}
         </div>
       </div>
+
+      ${allMissing.size ? `
+        <button class="btn btn-primary" data-coll-shop style="width:100%;margin-bottom:16px">
+          🛒 Add ${allMissing.size} missing ingredient${allMissing.size !== 1 ? 's' : ''} to Shopping List
+        </button>
+      ` : '<p style="font-size:0.85rem;color:var(--green);font-weight:600;text-align:center;margin-bottom:16px">✓ You have everything — ready to cook!</p>'}
     ` : '<p style="font-size:0.85rem;color:var(--muted);margin-bottom:16px">No recipes in this collection yet.</p>'}
 
     ${availableToAdd.length ? `
@@ -127,10 +161,17 @@ function openCollection(key) {
           </button>
         `).join('')}
       </div>
-    ` : (favIds.length ? '<p style="font-size:0.85rem;color:var(--muted)">All favorites already added to this collection.</p>' : '<p style="font-size:0.85rem;color:var(--muted)">Add some ❤️ favorites first, then organize them into collections.</p>')}
+    ` : (favIds.length && !savedRecipes.length ? '<p style="font-size:0.85rem;color:var(--muted)">Add some ❤️ favorites first, then organize them into collections.</p>' : '')}
   `;
 
   popup.addEventListener('click', (e) => {
+    // Shop for collection button
+    if (e.target.closest('[data-coll-shop]')) {
+      addToShopList([...allMissing]);
+      popup.remove();
+      return;
+    }
+
     const addBtn = e.target.closest('[data-coll-add]');
     if (addBtn) {
       const recipeId = Number(addBtn.dataset.collAdd);
@@ -139,7 +180,6 @@ function openCollection(key) {
       cols[key].push(recipeId);
       set('collections', cols);
       autoSync();
-      // Re-render the popup
       popup.remove();
       openCollection(key);
       return;
