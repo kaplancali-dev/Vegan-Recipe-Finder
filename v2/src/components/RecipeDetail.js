@@ -93,6 +93,7 @@ export function openDetail(id) {
   // Build body
   _title.textContent = recipe.title;
   _body.innerHTML = `
+    ${recipe.img ? `<img class="detail-img" loading="lazy" decoding="async" src="${escHTML(recipe.img)}" alt="${escHTML(recipe.title)}">` : ''}
     <div class="detail-section">
       <div class="r-site">${escHTML(recipe.site || '')}</div>
       <div class="r-meta" style="margin-top:6px">
