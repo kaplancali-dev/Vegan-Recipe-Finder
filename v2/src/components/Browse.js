@@ -218,7 +218,7 @@ function wireControls() {
   if (filterBtn && drawer) {
     filterBtn.addEventListener('click', () => {
       drawer.hidden = !drawer.hidden;
-      filterBtn.textContent = drawer.hidden ? 'Filters' : 'Close';
+      filterBtn.textContent = drawer.hidden ? 'Categories' : 'Close';
     });
   }
 

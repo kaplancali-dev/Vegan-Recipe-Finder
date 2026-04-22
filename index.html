@@ -20,7 +20,7 @@
 <link rel="icon" type="image/png" href="favicon.png">
 <meta name="theme-color" content="#2d7a4f">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; img-src 'self' https: data:; connect-src 'self' https://*.supabase.co https://www.google-analytics.com; font-src 'self'; frame-src 'none';">
-  <script type="module" crossorigin src="/assets/index-WcbHVIzo.js"></script>
+  <script type="module" crossorigin src="/assets/index-BMH5hYLY.js"></script>
   <link rel="modulepreload" crossorigin href="/assets/supabase-DaN4is7k.js">
   <link rel="modulepreload" crossorigin href="/assets/recipes-BpSYmkTi.js">
   <link rel="stylesheet" crossorigin href="/assets/index-BygqGWiT.css">
@@ -164,19 +164,19 @@
 
     <!-- BROWSE TAB -->
     <section id="tab-browse" class="tab-panel" role="tabpanel" aria-labelledby="btn-browse">
-      <!-- Filter bar -->
+      <!-- Search bar -->
       <div class="filter-bar card">
         <div class="input-row">
-          <input id="nameSearch" type="text" class="text-input" placeholder="Search recipes…" autocomplete="off">
-          <button id="filterToggle" class="btn btn-outline">Filters</button>
+          <input id="nameSearch" type="text" class="text-input" placeholder="Search by recipe name or ingredient…" autocomplete="off">
+          <button id="filterToggle" class="btn btn-outline">Categories</button>
         </div>
         <div id="activeFilters" class="active-filters"></div>
       </div>
 
-      <!-- Filter drawer (hidden by default) -->
+      <!-- Categories drawer (hidden by default) -->
       <div id="filterDrawer" class="filter-drawer" hidden>
         <div class="filter-section">
-          <h4>Categories</h4>
+          <h4>Categories <span class="muted" style="font-weight:normal;font-size:0.82rem">(select as many as you like)</span></h4>
           <div id="catFilters" class="filter-chips"></div>
         </div>
         <div class="filter-section">
@@ -219,6 +219,9 @@
       <div class="section-intro">
         <h2>Ready to Make Now</h2>
         <p>Recipes you can make right now — missing 1 ingredient or less. Recipes using your <strong style="color:var(--perishable)">perishables</strong> are prioritized so nothing goes to waste.</p>
+      </div>
+      <div class="filter-bar card">
+        <input id="readySearch" type="text" class="text-input" placeholder="Search by recipe name or ingredient…" autocomplete="off">
       </div>
       <div id="canMakeList" class="recipe-list"></div>
       <div id="canMakeEmpty" class="empty-state" hidden>

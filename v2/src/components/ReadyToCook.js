@@ -2,7 +2,7 @@
  * ReadyToCook — shows recipes the user can make right now.
  *
  * Filters to recipes missing 1 or fewer ingredients (matching v1 behavior),
- * sorted by match percentage descending.
+ * sorted by match percentage descending. Includes a search bar.
  */
 
 import { subscribe, getRef } from '../state/store.js';
@@ -11,12 +11,19 @@ import { $ } from '../utils/dom.js';
 import { toggleFavorite } from '../actions/favorites.js';
 import { renderCardList } from './RecipeCard.js';
 import { openDetail } from './RecipeDetail.js';
+import { stem } from '../utils/text.js';
 
 /** @type {Array} Full recipe list */
 let _recipes = [];
 
 /** Maximum number of missing ingredients to show in Ready to Make */
 const MAX_MISSING = 1;
+
+/** Search query for Ready tab */
+let _readySearch = '';
+
+/** Debounce timer */
+let _searchTimer = null;
 
 /**
  * Initialize the Ready to Cook tab.
@@ -25,12 +32,29 @@ const MAX_MISSING = 1;
 export function initReadyToCook(recipes) {
   _recipes = recipes;
 
+  wireReadySearch();
   renderReadyList();
 
   subscribe('ingredients', renderReadyList);
   subscribe('staples', renderReadyList);
   subscribe('favorites', renderReadyList);
   subscribe('allergies', renderReadyList);
+}
+
+/**
+ * Wire up the search input for the Ready tab.
+ */
+function wireReadySearch() {
+  const input = $('#readySearch');
+  if (!input) return;
+
+  input.addEventListener('input', () => {
+    clearTimeout(_searchTimer);
+    _searchTimer = setTimeout(() => {
+      _readySearch = input.value.trim();
+      renderReadyList();
+    }, 250);
+  });
 }
 
 /**
@@ -63,7 +87,20 @@ function renderReadyList() {
   });
 
   // Filter to recipes missing 1 or fewer ingredients (matches v1 behavior)
-  const ready = allResults.filter(r => (r.needNames?.length ?? 0) <= MAX_MISSING);
+  let ready = allResults.filter(r => (r.needNames?.length ?? 0) <= MAX_MISSING);
+
+  // Apply search filter if present
+  if (_readySearch) {
+    ready = ready.filter(r => {
+      const t = r.title.toLowerCase();
+      const ingStr = (r.ing || []).join(' ').toLowerCase();
+      const words = _readySearch.toLowerCase().split(/\s+/);
+      return words.every(w => {
+        const s = stem(w);
+        return t.includes(w) || t.includes(s) || ingStr.includes(w) || ingStr.includes(s);
+      });
+    });
+  }
 
   if (badge) {
     badge.textContent = ready.length > 0 ? String(ready.length) : '';
@@ -73,9 +110,11 @@ function renderReadyList() {
     container.innerHTML = '';
     if (emptyEl) {
       emptyEl.hidden = false;
-      emptyEl.innerHTML = ings.length || staples.length
-        ? '<p>No recipes with 1 or fewer missing ingredients yet. Add more to your pantry!</p>'
-        : '<p>Add ingredients to your pantry to see what you can make!</p>';
+      emptyEl.innerHTML = _readySearch
+        ? '<p>No matching recipes found. Try a different search term.</p>'
+        : ings.length || staples.length
+          ? '<p>No recipes with 1 or fewer missing ingredients yet. Add more to your pantry!</p>'
+          : '<p>Add ingredients to your pantry to see what you can make!</p>';
     }
     return;
   }
@@ -101,4 +140,3 @@ function renderReadyList() {
     }
   };
 }
-
