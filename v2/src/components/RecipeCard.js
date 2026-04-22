@@ -82,7 +82,8 @@ export function renderCard(result, opts = {}) {
     : '';
 
   // Action buttons
-  const favLabel = isFavorite ? '❤️ Saved' : '🤍 Save';
+  const favLabel = isFavorite ? '❤️ Favorited' : '🤍 Favorite';
+  const makeLabel = needNames.length ? '🍳 Make This' : '🍳 Ready to Cook!';
 
   return `
     <article class="r-card ${tier}${heroClass}" data-recipe-id="${r.id}">
@@ -107,8 +108,8 @@ export function renderCard(result, opts = {}) {
         ${needChips}
         <div class="r-actions">
           ${r.url ? `<a href="${escHTML(r.url)}" target="_blank" rel="noopener" class="btn-sm btn-link" data-external>📖 View Instructions</a>` : ''}
+          <button class="btn-sm btn-shop make-btn" data-make-id="${r.id}">${makeLabel}</button>
           <button class="btn-sm btn-fav fav-btn${isFavorite ? ' on' : ''}" data-fav-id="${r.id}" aria-label="Toggle favorite">${favLabel}</button>
-          ${needNames.length ? `<button class="btn-sm btn-shop shop-btn" data-shop-id="${r.id}">🛒 Add Missing</button>` : ''}
         </div>
       </div>
     </article>

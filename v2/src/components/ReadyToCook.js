@@ -11,6 +11,8 @@ import { $ } from '../utils/dom.js';
 import { toggleFavorite } from '../actions/favorites.js';
 import { renderCardList } from './RecipeCard.js';
 import { openDetail } from './RecipeDetail.js';
+import { addToShopList } from './Shopping.js';
+import { showToast } from '../utils/toast.js';
 import { stem, escHTML } from '../utils/text.js';
 
 /** @type {Array} Full recipe list */
@@ -269,11 +271,30 @@ function renderReadyList() {
 
   // Event delegation
   container.onclick = (e) => {
+    // External links
+    if (e.target.closest('[data-external]')) return;
+
     const favBtn = e.target.closest('.fav-btn');
     if (favBtn) {
       e.stopPropagation();
       const id = Number(favBtn.dataset.favId);
       toggleFavorite(id);
+      return;
+    }
+
+    // Make This button
+    const makeBtn = e.target.closest('.make-btn');
+    if (makeBtn) {
+      e.stopPropagation();
+      const id = Number(makeBtn.dataset.makeId);
+      const recipe = ready.find(r => r.id === id);
+      if (recipe && recipe.needNames && recipe.needNames.length) {
+        addToShopList(recipe.needNames);
+        makeBtn.textContent = '✓ Added to Shop!';
+        makeBtn.disabled = true;
+      } else {
+        showToast('You have everything — ready to cook!');
+      }
       return;
     }
 
