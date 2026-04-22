@@ -20,7 +20,7 @@
 <link rel="icon" type="image/png" href="favicon.png">
 <meta name="theme-color" content="#2d7a4f">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; img-src 'self' https: data:; connect-src 'self' https://*.supabase.co https://www.google-analytics.com; font-src 'self'; frame-src 'none';">
-  <script type="module" crossorigin src="/assets/index-D5ATLMbi.js"></script>
+  <script type="module" crossorigin src="/assets/index-DKbpkmL1.js"></script>
   <link rel="modulepreload" crossorigin href="/assets/supabase-DaN4is7k.js">
   <link rel="modulepreload" crossorigin href="/assets/recipes-BpSYmkTi.js">
   <link rel="stylesheet" crossorigin href="/assets/index-DGrJSC_q.css">
@@ -221,8 +221,28 @@
         <p>Recipes you can make right now — missing 1 ingredient or less. Recipes using your <strong style="color:var(--perishable)">perishables</strong> are prioritized so nothing goes to waste.</p>
       </div>
       <div class="filter-bar card">
-        <input id="readySearch" type="text" class="text-input" placeholder="Search by recipe name or ingredient…" autocomplete="off">
+        <div class="input-row">
+          <input id="readySearch" type="text" class="text-input" placeholder="Search by recipe name or ingredient…" autocomplete="off">
+          <button id="readyFilterToggle" class="btn btn-outline">Categories</button>
+        </div>
+        <div id="readyActiveFilters" class="active-filters"></div>
       </div>
+
+      <!-- Categories drawer for Ready tab -->
+      <div id="readyFilterDrawer" class="filter-drawer" hidden>
+        <div class="filter-section">
+          <h4>Categories <span class="muted" style="font-weight:normal;font-size:0.82rem">(select as many as you like)</span></h4>
+          <div id="readyCatFilters" class="filter-chips"></div>
+        </div>
+        <div class="filter-section">
+          <h4>Max Cook Time</h4>
+          <div class="time-slider-row">
+            <input id="readyTimeSlider" type="range" min="0" max="120" step="5" value="120" class="slider">
+            <span id="readyTimeLabel" class="time-label">Any</span>
+          </div>
+        </div>
+      </div>
+
       <div id="canMakeList" class="recipe-list"></div>
       <div id="canMakeEmpty" class="empty-state" hidden>
         <p>Add ingredients to your pantry to see what you can make!</p>
