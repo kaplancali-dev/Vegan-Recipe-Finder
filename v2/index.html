@@ -36,10 +36,6 @@
           <h1 class="logo">🌿 HARVEST</h1>
           <p class="logo-tagline">Eat More Plants!</p>
         </div>
-        <div class="header-actions">
-          <button id="syncBtn" class="icon-btn" aria-label="Cloud sync" title="Cloud sync">☁️</button>
-          <span id="syncStatus" class="sync-status"></span>
-        </div>
       </div>
     </header>
 
@@ -252,13 +248,13 @@
     <section id="tab-favorites" class="tab-panel" role="tabpanel" aria-labelledby="btn-favorites" hidden>
       <div class="section-intro">
         <h2>Favorites</h2>
-        <p>Your saved recipes and meal plan.</p>
+        <p>Your saved recipes and collections.</p>
       </div>
 
-      <!-- Meal planner -->
-      <div id="mealPlanner" class="card">
-        <h3 class="card-title">📅 Meal Plan</h3>
-        <div id="mealSlots" class="meal-slots"></div>
+      <!-- Collections -->
+      <div class="card">
+        <h3 class="card-title">📂 My Collections</h3>
+        <div id="collectionsGrid" class="collections-grid"></div>
       </div>
 
       <!-- Favorites list -->
