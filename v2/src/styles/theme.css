@@ -1086,8 +1086,22 @@ input, select, textarea {
 .guide-body {
   padding-top: 12px;
 }
-.guide-body.hidden {
+.guide-body.hidden,
+.section-body.hidden {
   display: none;
+}
+.section-toggle {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  user-select: none;
+}
+.section-toggle .guide-arrow {
+  margin-left: auto;
+}
+.section-toggle.collapsed .guide-arrow {
+  transform: rotate(-90deg);
 }
 
 /* ── About Section ─────────────────────────────────────────── */
