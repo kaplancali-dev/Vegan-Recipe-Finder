@@ -25,7 +25,6 @@ export function initPantry(recipes) {
 
   wireIngredientInput();
   wireQAGrid();
-  wireStaples();
   wireGuideToggle();
   renderIngChips();
   renderStapleChips();
@@ -211,37 +210,6 @@ function renderStapleChips() {
   };
 }
 
-function wireStaples() {
-  const btn = $('#addStaplesBtn');
-  if (!btn) return;
-
-  btn.addEventListener('click', () => {
-    // Show a common staples picker — reuse QA grid items
-    const commonStaples = [
-      'garlic', 'onions', 'salt', 'pepper', 'olive oil', 'soy sauce',
-      'rice', 'pasta', 'vegetable broth', 'flour', 'sugar', 'lemon juice',
-      'cumin', 'paprika', 'chili flakes', 'oregano', 'thyme', 'cinnamon',
-      'coconut oil', 'sesame oil', 'rice vinegar', 'maple syrup', 'nutritional yeast',
-    ];
-
-    const currentStaples = new Set(get('staples').map(norm));
-    const available = commonStaples.filter(s => !currentStaples.has(norm(s)));
-
-    if (!available.length) {
-      // Import showToast dynamically to avoid circular deps
-      showToast('All common staples already added!');
-      return;
-    }
-
-    // Simple prompt-style: add them all or pick from QA grid
-    const toAdd = available.slice(0, 12); // Add first 12 not already in staples
-    const staples = get('staples');
-    toAdd.forEach(s => staples.push(s));
-    set('staples', staples);
-    autoSync();
-    showToast(`Added ${toAdd.length} common staples`);
-  });
-}
 
 /* ── Quick Actions Grid ──────────────────────────────────────── */
 
@@ -301,11 +269,11 @@ function showQAPopup(category, anchorEl) {
     const chip = e.target.closest('[data-qa-item]');
     if (chip) {
       const item = chip.dataset.qaItem;
-      const ings = get('ingredients');
-      const allNormed = new Set([...ings.map(norm), ...get('staples').map(norm)]);
+      const allNormed = new Set([...get('ingredients').map(norm), ...get('staples').map(norm)]);
       if (!allNormed.has(norm(item))) {
-        ings.push(item);
-        set('ingredients', ings);
+        const staples = get('staples');
+        staples.push(item);
+        set('staples', staples);
         autoSync();
         chip.classList.add('staple');
         chip.innerHTML = `✓ ${escHTML(item)}`;
