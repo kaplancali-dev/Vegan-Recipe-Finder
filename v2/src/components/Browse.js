@@ -67,23 +67,36 @@ export function initBrowse(recipes) {
   });
 }
 
-/** Emoji icons for category chips (matches v1) */
-const CAT_ICONS = {
-  'Appetizers': '🥟', 'Asian': '🥢', 'Beginner': '👩‍🍳', 'Bread & Baking': '🍞',
-  'Breakfast': '🧇', 'Burgers & Patties': '🍔', 'Chinese': '🥡',
-  'Comfort Food': '🍲', 'Desserts': '🍨', 'Dinner': '🍽️', 'Drinks': '🥤',
-  'Fall': '🍂', 'GF Bread': '🍞', 'Game Day': '🏈', 'Gluten-Free': '🌾',
-  'Greek': '🇬🇷', 'High-Fiber': '🌿', 'High-Protein': '🏋️',
-  'Holiday & Festive': '🎄', 'Indian': '🍛', 'Instant Pot': '⚡',
-  'Italian': '🍝', 'Japanese': '🍱', 'Kid-Friendly': '👶', 'Korean': '🥢',
-  'Lunch': '🍢', 'Meal Prep': '📦', 'Meat Alternatives': '🌱',
-  'Mediterranean': '🫒', 'Mexican': '🌮', 'Middle Eastern': '🧆',
-  'One-Pot': '🥘', 'Pasta & Noodles': '🍝', 'Quick Meals': '⏱️',
-  'Raw': '🥬', 'Salads': '🥗', 'Sandwiches': '🥪',
-  'Sauces & Dips': '🫙', 'Sides': '🥦', 'Snacks': '🥨',
-  'Soups & Stews': '🍲', 'Southern': '🌽', 'Thai': '🍜',
-  'Vegan Bacon': '🥓', 'Vegan Cheese': '🧀', 'Vietnamese': '🍜',
-};
+/**
+ * Fixed category list matching v1. Order and labels match the original.
+ * 'Lunch|Dinner' is a combined filter — matches recipes with either tag.
+ */
+const V1_CATEGORIES = [
+  { label: 'Breakfast',        icon: '🧇' },
+  { label: 'Lunch / Dinner',   icon: '🍢', filter: 'Lunch|Dinner' },
+  { label: 'Soups & Stews',    icon: '🍲' },
+  { label: 'Salads',           icon: '🥗' },
+  { label: 'Pasta & Noodles',  icon: '🍝' },
+  { label: 'High-Protein',     icon: '🏋️' },
+  { label: 'Snacks',           icon: '🥨' },
+  { label: 'Desserts',         icon: '🍨' },
+  { label: 'Sauces & Dips',    icon: '🫙' },
+  { label: 'Game Day',         icon: '🏈' },
+  { label: 'Japanese',         icon: '🍱 🇯🇵' },
+  { label: 'Mexican',          icon: '🌮 🇲🇽' },
+  { label: 'Chinese',          icon: '🥡 🇨🇳' },
+  { label: 'Thai',             icon: '🍜 🇹🇭' },
+  { label: 'Vietnamese',       icon: '🍜 🇻🇳' },
+  { label: 'Indian',           icon: '🍛 🇮🇳' },
+  { label: 'Korean',           icon: '🥢 🇰🇷' },
+  { label: 'Italian',          icon: '🍝 🇮🇹' },
+  { label: 'Mediterranean',    icon: '🫒' },
+  { label: 'Middle Eastern',   icon: '🧆' },
+  { label: 'Southern',         icon: '🌽' },
+  { label: 'GF Bread',         icon: '🍞' },
+  { label: 'One-Pot',          icon: '🥘' },
+  { label: 'Instant Pot',      icon: '⚡' },
+];
 
 /** Emoji icons for allergen chips */
 const ALLERGY_ICONS = {
@@ -92,24 +105,15 @@ const ALLERGY_ICONS = {
 };
 
 /**
- * Build category filter chips from unique recipe categories.
+ * Build category filter chips from the fixed v1 category list.
  */
 function buildCategoryChips() {
   const container = $('#catFilters');
   if (!container) return;
 
-  // Collect unique categories
-  const cats = new Set();
-  _recipes.forEach(r => (r.cats || []).forEach(c => cats.add(c)));
-
-  // Add special computed categories
-  const specialCats = ['High-Protein', 'Quick Meals', 'Gluten-Free'];
-  specialCats.forEach(c => cats.add(c));
-
-  const sorted = [...cats].sort();
-  container.innerHTML = sorted.map(cat => {
-    const icon = CAT_ICONS[cat] || '';
-    return `<button class="filter-chip" data-cat="${escHTML(cat)}">${icon ? icon + ' ' : ''}${escHTML(cat)}</button>`;
+  container.innerHTML = V1_CATEGORIES.map(({ label, icon, filter }) => {
+    const catKey = filter || label;
+    return `<button class="filter-chip" data-cat="${escHTML(catKey)}">${icon} ${escHTML(label)}</button>`;
   }).join('');
 
   container.addEventListener('click', (e) => {
