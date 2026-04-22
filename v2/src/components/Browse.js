@@ -23,7 +23,7 @@ let _recipes = [];
 /** Current filter/sort state */
 let _selectedCats = new Set();
 let _selectedSite = '';
-let _maxTime = 120;
+let _maxTime = Infinity;
 let _nameSearch = '';
 let _sortKey = 'match';
 let _allergies = new Set();
