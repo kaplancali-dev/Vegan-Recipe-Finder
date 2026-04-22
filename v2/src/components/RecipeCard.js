@@ -6,7 +6,8 @@
  * and action buttons. Parent handles click events via delegation.
  */
 
-import { escHTML } from '../utils/text.js';
+import { escHTML, norm } from '../utils/text.js';
+import { isPerishableIng } from '../services/matching.js';
 
 /**
  * Return a CSS class for the match percentage tier.
@@ -21,10 +22,14 @@ function matchTier(pct) {
 
 /**
  * Render a single ingredient chip.
+ * Perishable "have" ingredients get a distinct visual style.
  * @param {string} name
  * @param {string} cls - 'c-have' or 'c-need'
  */
 function ingChip(name, cls) {
+  if (cls === 'c-have' && isPerishableIng(norm(name))) {
+    return `<span class="c-have c-perish">${escHTML(name)}</span>`;
+  }
   return `<span class="${cls}">${escHTML(name)}</span>`;
 }
 
