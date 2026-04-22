@@ -113,6 +113,13 @@ input, select, textarea {
   color: var(--green);
   letter-spacing: 1.5px;
 }
+.logo-tagline {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--ink-soft);
+  letter-spacing: 0.3px;
+  font-style: italic;
+}
 
 .header-actions {
   display: flex;
@@ -844,47 +851,46 @@ input, select, textarea {
 
 .intro-hero-grid {
   display: grid;
-  grid-template-columns: 1.35fr 1fr;
-  gap: 32px;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
   align-items: start;
 }
 
+.intro-hero-video { min-width: 0; }
 .intro-hero-copy { min-width: 0; }
 
 .hero-img {
   width: 100%;
-  max-height: 420px;
+  height: 100%;
+  min-height: 300px;
+  max-height: 500px;
   object-fit: cover;
   border-radius: 12px;
-  margin-bottom: 16px;
   box-shadow: 0 4px 16px rgba(0,0,0,.1);
 }
 
 .intro-hero-title {
   font-family: var(--font-serif);
-  font-size: 28px;
-  line-height: 1.15;
+  font-size: 24px;
+  line-height: 1.2;
   font-weight: 700;
   color: var(--ink);
-  margin: 0 0 10px;
+  margin: 14px 0 10px;
   letter-spacing: -0.5px;
-  text-align: center;
 }
 
 .intro-hero-sub {
-  margin: 0 0 14px;
+  margin: 0 0 10px;
   color: var(--ink-soft);
-  font-size: 19px;
+  font-size: 15px;
   line-height: 1.55;
   font-family: var(--font-sans);
-  max-width: 760px;
-  text-align: justify;
 }
 
 .intro-hero-sub strong { color: var(--ink); font-weight: 700; }
 
 .intro-tagline {
-  font-size: 1.3em;
+  font-size: 1.05em;
   text-align: center;
   margin: 6px 0 0;
   font-style: italic;
@@ -912,9 +918,10 @@ input, select, textarea {
 .clr-letter:nth-child(6) { animation-delay: 1.5s; }
 
 @media (max-width: 780px) {
-  .intro-hero-grid { grid-template-columns: 1fr; gap: 22px; }
-  .intro-hero-sub { font-size: 16px; }
-  .intro-hero-title { font-size: 24px; }
+  .intro-hero-grid { grid-template-columns: 1fr; gap: 18px; }
+  .intro-hero-video { max-height: 300px; overflow: hidden; border-radius: 12px; }
+  .intro-hero-sub { font-size: 14px; }
+  .intro-hero-title { font-size: 20px; }
 }
 
 /* ── Pantry Power Widget (sidebar in intro hero) ──────────── */

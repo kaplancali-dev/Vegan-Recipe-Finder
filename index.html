@@ -22,10 +22,10 @@
 <link rel="icon" type="image/png" href="favicon.png">
 <meta name="theme-color" content="#2d7a4f">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; img-src 'self' https: data:; connect-src 'self' https://*.supabase.co https://www.google-analytics.com; font-src 'self'; frame-src 'none';">
-  <script type="module" crossorigin src="/assets/index-BjreNwXA.js"></script>
+  <script type="module" crossorigin src="/assets/index-uEL_epEj.js"></script>
   <link rel="modulepreload" crossorigin href="/assets/supabase-DaN4is7k.js">
   <link rel="modulepreload" crossorigin href="/assets/recipes-BpSYmkTi.js">
-  <link rel="stylesheet" crossorigin href="/assets/index-xWrzqXzn.css">
+  <link rel="stylesheet" crossorigin href="/assets/index-DzpHrojy.css">
 </head>
 <body>
 
@@ -38,7 +38,7 @@
     <!-- Top header bar -->
     <header id="header" class="header">
       <div class="header-inner">
-        <h1 class="logo">HARVEST</h1>
+        <h1 class="logo">HARVEST <span class="logo-tagline">— Eat More Plants!</span></h1>
         <div class="header-actions">
           <button id="syncBtn" class="icon-btn" aria-label="Cloud sync" title="Cloud sync">☁️</button>
           <span id="syncStatus" class="sync-status"></span>
@@ -66,8 +66,20 @@
       <div class="intro-card" id="introCard">
         <div class="intro-hero">
           <div class="intro-hero-grid">
-            <div class="intro-hero-copy">
+            <div class="intro-hero-video">
               <video src="/hero.mp4" class="hero-img" autoplay loop muted playsinline></video>
+            </div>
+            <div class="intro-hero-copy">
+              <aside class="pp-widget" id="pantryPower" aria-label="Pantry Power">
+                <div class="pp-eyebrow">PANTRY POWER</div>
+                <div class="pp-number-row">
+                  <span class="pp-number" id="ppNumber">0</span>
+                  <span class="pp-unit" id="ppUnit">recipes ready</span>
+                </div>
+                <div class="pp-near" id="ppNear">+ 0 more you're 1 ingredient away from</div>
+                <div class="pp-bar"><div class="pp-bar-fill" id="ppBar"></div></div>
+                <div class="pp-bar-meta"><span id="ppStats">0 of 919 recipes ready</span></div>
+              </aside>
               <h2 class="intro-hero-title">"What can I make with this?"</h2>
               <p class="intro-hero-sub">
                 You open the fridge and think, <em>"What can I make with this?"</em>
@@ -83,16 +95,6 @@
               </p>
               <p class="intro-tagline">The more <span class="clr-letters"><span class="clr-letter" style="color:#e53e3e">c</span><span class="clr-letter" style="color:#dd6b20">o</span><span class="clr-letter" style="color:#d69e2e">l</span><span class="clr-letter" style="color:#38a169">o</span><span class="clr-letter" style="color:#3182ce">r</span><span class="clr-letter" style="color:#805ad5">s</span></span> on your plate, the more life in your years.&trade;</p>
             </div>
-            <aside class="pp-widget" id="pantryPower" aria-label="Pantry Power">
-              <div class="pp-eyebrow">PANTRY POWER</div>
-              <div class="pp-number-row">
-                <span class="pp-number" id="ppNumber">0</span>
-                <span class="pp-unit" id="ppUnit">recipes ready</span>
-              </div>
-              <div class="pp-near" id="ppNear">+ 0 more you're 1 ingredient away from</div>
-              <div class="pp-bar"><div class="pp-bar-fill" id="ppBar"></div></div>
-              <div class="pp-bar-meta"><span id="ppStats">0 of 919 recipes ready</span></div>
-            </aside>
           </div>
         </div>
       </div>
