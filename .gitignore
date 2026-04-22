@@ -1,11 +1,6 @@
 .DS_Store
 __pycache__/
 *.pyc
-harvest_progress.json
-harvest_progress.backup.json
-harvest_failed.json
-index_corrected.html
-recipe_audit.csv
 *.bak
 
 # Backups
@@ -16,8 +11,16 @@ recipe_audit.csv
 *.mov
 *.docx
 
-# One-off utility scripts
+# Legacy v1 files
+harvest_progress.json
+harvest_progress.backup.json
+harvest_failed.json
+index_corrected.html
+recipe_audit.csv
 fetch-*.js
 header-mockup.html
 *-data.json
+
+# v2 dev artifacts
 v2/node_modules/
+v2/dist/
