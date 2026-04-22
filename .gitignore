@@ -20,3 +20,4 @@ recipe_audit.csv
 fetch-*.js
 header-mockup.html
 *-data.json
+v2/node_modules/
