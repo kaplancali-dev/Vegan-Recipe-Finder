@@ -2,9 +2,18 @@ import { defineConfig } from 'vite';
 
 export default defineConfig({
   root: '.',
+  base: '/',
   build: {
     outDir: 'dist',
     emptyOutDir: true,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          recipes: ['./src/data/recipes.json'],
+          supabase: ['@supabase/supabase-js'],
+        },
+      },
+    },
   },
   test: {
     globals: true,

@@ -120,6 +120,16 @@ initSyncPanel();
 const savedTab = get('activeTab');
 showTab(TAB_MAP[savedTab] ? savedTab : 'browse');
 
+/* ── Service worker registration ─────────────────────────────── */
+
+if ('serviceWorker' in navigator && import.meta.env.PROD) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js').catch((err) => {
+      console.warn('SW registration failed:', err);
+    });
+  });
+}
+
 /* ── Expose for debugging ────────────────────────────────────── */
 
 if (import.meta.env.DEV) {
