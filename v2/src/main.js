@@ -14,6 +14,10 @@ import recipes from './data/recipes.json';
 import { initBrowse } from './components/Browse.js';
 import { initPantry } from './components/Pantry.js';
 import { initRecipeDetail } from './components/RecipeDetail.js';
+import { initShopping } from './components/Shopping.js';
+import { initFavorites } from './components/Favorites.js';
+import { initReadyToCook } from './components/ReadyToCook.js';
+import { initSyncPanel } from './components/SyncPanel.js';
 
 /* ── Boot sequence ───────────────────────────────────────────── */
 
@@ -106,6 +110,10 @@ window.addEventListener('unhandledrejection', (e) => {
 initRecipeDetail(recipes);
 initBrowse(recipes);
 initPantry(recipes);
+initShopping();
+initFavorites(recipes);
+initReadyToCook(recipes);
+initSyncPanel();
 
 /* ── Restore last active tab ─────────────────────────────────── */
 
