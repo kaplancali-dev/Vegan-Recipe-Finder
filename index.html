@@ -1580,7 +1580,7 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
     <!-- Mobile-only filter trigger for Can Make -->
     <button type="button" class="cm-filters-trigger" onclick="openCMFiltersDrawer()" aria-label="Open filters">
       <span class="ft-icon">🧺</span>
-      <span class="ft-label">Tap Here to Select Your Ingredients</span>
+      <span class="ft-label">Tap Here to Choose Category</span>
       <span class="ft-arrow" aria-hidden="true">›</span>
     </button>
     <div class="cm-filters-backdrop" id="cmFiltersBackdrop" onclick="closeCMFiltersDrawer()" aria-hidden="true"></div>
@@ -1592,11 +1592,11 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
     <div class="cm-layout">
       <!-- LEFT: INGREDIENT CHECKLIST -->
       <div class="cm-filters-col">
-        <!-- RECIPE NAME SEARCH (perishables — most used, so first) -->
+        <!-- SEARCH -->
         <div class="card" style="margin-bottom:12px">
-          <div class="filter-label">Use Your Perishables <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#4b7a52">(optional)</span></div>
+          <div class="filter-label">Search <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#4b7a52">(optional)</span></div>
           <input class="name-search-input" id="cmNameInput" type="text" style="margin-top:7px"
-            placeholder="Recipe must include… e.g. kale, avocado, tacos"
+            placeholder="Search by recipe name or ingredient… e.g. kale, tacos"
             oninput="cmNameFilter=this.value.trim().toLowerCase();runCanMake()">
         </div>
 
@@ -1645,78 +1645,6 @@ header p{color:#2d7a4f;font-size:0.93rem;margin-top:6px}
               <button class="fc"    id="cmtime-45" onclick="setCMTime(this,45)">≤ 45 min</button>
               <button class="fc"    id="cmtime-60" onclick="setCMTime(this,60)">≤ 60 min</button>
             </div>
-          </div>
-        </div>
-        <!-- ALLERGIES -->
-        <div class="card" style="margin-bottom:12px" data-filter-id="cm-allergy">
-          <div class="filter-toggle" onclick="toggleFilterSection(this)">
-            <div class="filter-label" style="margin:0">Allergies &amp; Dietary Needs <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#ef4444;font-size:0.75rem">— excludes matching recipes</span></div>
-            <span class="ft-chevron">▼</span>
-          </div>
-          <div class="filter-body" style="margin-top:7px">
-            <div class="filter-chips" id="cmAllergyGrid">
-              <span class="allergy-chip" onclick="toggleCMAllergy(this,'peanut')">🥜 Peanuts</span>
-              <span class="allergy-chip" onclick="toggleCMAllergy(this,'tree nut')">🌰 Tree Nuts</span>
-              <span class="allergy-chip" onclick="toggleCMAllergy(this,'soy')">🫘 Soy</span>
-              <span class="allergy-chip" onclick="toggleCMAllergy(this,'coconut')">🥥 Coconut</span>
-              <span class="allergy-chip" onclick="toggleCMAllergy(this,'corn')">🌽 Corn</span>
-              <span class="allergy-chip" onclick="toggleCMAllergy(this,'mushroom')">🍄 Mushrooms</span>
-              <span class="allergy-chip" onclick="toggleCMAllergy(this,'nightshade')">🍅 Nightshades</span>
-            </div>
-          </div>
-        </div>
-        <!-- SECTION 1: FRESH THIS WEEK (CM) -->
-        <div class="qa-card qa-card-today">
-          <button class="qa-toggle qa-toggle-today open" id="cmTodayToggle" onclick="toggleCMTodayPanel()">
-            <span>🥬 Fresh This Week <span style="font-weight:400;font-size:.75rem;opacity:.6">— use it before it spoils</span> <span id="cmTodayCount" style="font-weight:400;opacity:.7;font-size:.8rem"></span></span><span class="arrow">▼</span>
-          </button>
-          <div class="qa-body open" id="cmTodayBody">
-            <p style="font-size:.8rem;color:#1e5a3a;margin-bottom:10px;line-height:1.5">Tap what you bought this week. Tap <strong>×</strong> to remove.</p>
-            <div id="cmTodayChips"><span style="color:#1e5a3a;font-size:.82rem;font-style:italic">Nothing added yet — tap items below.</span></div>
-            <div id="cmTodayClearWrap" style="display:none;margin-top:10px">
-              <button class="btn-sm-danger" onclick="todayClearAll()">Remove All</button>
-            </div>
-            <div id="cmPerishableGrid" style="margin-top:12px;"></div>
-          </div>
-        </div>
-
-        <!-- SECTION 2: ALWAYS HAVE (CM) -->
-        <div class="qa-card qa-card-always">
-          <button class="qa-toggle qa-toggle-always open" id="cmAlwaysToggle" onclick="toggleCMAlwaysPanel()">
-            <span><span style="color:#2d7a4f">★</span> Always Have <span style="font-weight:400;font-size:.75rem;opacity:.6">— pantry staples that last</span> <span id="cmAlwaysCount" style="font-weight:400;opacity:.7;font-size:.8rem"></span></span><span class="arrow">▼</span>
-          </button>
-          <div class="qa-body open" id="cmAlwaysBody">
-            <p style="font-size:.8rem;color:#4a5d52;margin-bottom:10px;line-height:1.5">Tap <strong>×</strong> to remove.</p>
-            <div id="cmAlwaysChips"><span style="color:#4a5d52;font-size:.82rem;font-style:italic">Nothing saved yet — tap <span style="color:#2d7a4f">★</span> next to any ingredient in the list below.</span></div>
-            <div id="cmAlwaysClearWrap" style="display:none;margin-top:10px">
-              <button class="btn-sm-danger" onclick="alwaysClearAll()">Remove All</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- SECTION 3: MASTER INGREDIENT LIST (CM) -->
-        <div class="qa-card qa-card-notsel">
-          <button class="qa-toggle qa-toggle-notsel open" id="cmNotSelToggle" onclick="toggleCMNotSelPanel()">
-            <span>📋 Master Ingredient List <span id="cmNotSelCount" style="font-weight:400;opacity:.7;font-size:.8rem"></span></span><span class="arrow">▼</span>
-          </button>
-          <div class="qa-body open" id="cmNotSelBody">
-            <p style="font-size:.8rem;color:#4a5d52;margin-bottom:10px;line-height:1.5">Tap the <strong style="color:#1e5a3a">name</strong> to add to <strong style="color:#1e5a3a">Fresh This Week</strong>. Tap <strong style="color:#2d7a4f">★</strong> to save to <strong style="color:#92400e">Always Have</strong>.</p>
-            <div id="cmNotSelChips"></div>
-          </div>
-        </div>
-
-        <!-- SECTION 4: ADD INGREDIENTS NOT LISTED (CM) -->
-        <div class="qa-card qa-card-custom">
-          <button class="qa-toggle qa-toggle-custom open" id="cmCustomToggle" onclick="toggleCMCustomPanel()">
-            <span>✏️ Add Ingredients Not Listed</span><span class="arrow">▼</span>
-          </button>
-          <div class="qa-body open" id="cmCustomBody">
-            <p style="font-size:.8rem;color:#a78bfa;opacity:.7;margin-bottom:10px;line-height:1.5">Type any ingredient not in the list above and press Enter or tap + Add.</p>
-            <div class="qa-add-row">
-              <input class="qa-custom-input" id="cmCustomInput" type="text" placeholder="e.g. jackfruit, miso paste…" onkeydown="if(event.key==='Enter')cmAddCustom()">
-              <button class="btn-sm-green" onclick="cmAddCustom()">+ Add</button>
-            </div>
-            <div class="tags" id="cmCustomIngTags"></div>
           </div>
         </div>
       </div>
