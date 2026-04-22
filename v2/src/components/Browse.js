@@ -275,7 +275,7 @@ function _runRender() {
   list.innerHTML = renderCardList(visible, favs) +
     (hasMore ? `<button class="btn btn-outline load-more-btn" id="loadMoreBtn">Show more (${results.length - _visibleCount} remaining)</button>` : '');
 
-  // Event delegation for card clicks, favorite buttons, and load more
+  // Event delegation for card clicks, buttons, and load more
   list.onclick = (e) => {
     // Load more button
     if (e.target.id === 'loadMoreBtn') {
@@ -284,12 +284,32 @@ function _runRender() {
       return;
     }
 
+    // External links (View Instructions) — let them open normally
+    if (e.target.closest('[data-external]')) return;
+
     // Favorite button
     const favBtn = e.target.closest('.fav-btn');
     if (favBtn) {
       e.stopPropagation();
       const id = Number(favBtn.dataset.favId);
       toggleFavorite(id);
+      return;
+    }
+
+    // Add Missing to shopping list button
+    const shopBtn = e.target.closest('.shop-btn');
+    if (shopBtn) {
+      e.stopPropagation();
+      const id = Number(shopBtn.dataset.shopId);
+      const recipe = visible.find(r => r.id === id);
+      if (recipe && recipe.needNames) {
+        const currentShop = get('shopList') || [];
+        const shopSet = new Set(currentShop);
+        recipe.needNames.forEach(ing => shopSet.add(ing));
+        set('shopList', [...shopSet]);
+        shopBtn.textContent = '✓ Added!';
+        shopBtn.disabled = true;
+      }
       return;
     }
 
