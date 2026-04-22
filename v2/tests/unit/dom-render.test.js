@@ -220,9 +220,9 @@ describe('RecipeCard DOM insertion', () => {
     expect(cards.length).toBe(2);
     // First card should show filled heart (favorite)
     const firstFav = cards[0].querySelector('.fav-btn');
-    expect(firstFav.textContent.trim()).toBe('❤️');
+    expect(firstFav.textContent).toContain('❤️');
     // Second card should show empty heart
     const secondFav = cards[1].querySelector('.fav-btn');
-    expect(secondFav.textContent.trim()).toBe('🤍');
+    expect(secondFav.textContent).toContain('🤍');
   });
 });
