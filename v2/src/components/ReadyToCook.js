@@ -2,7 +2,7 @@
  * ReadyToCook — shows recipes the user can make right now.
  *
  * Filters to recipes missing 1 or fewer ingredients (matching v1 behavior),
- * sorted by match percentage descending. Includes a search bar.
+ * sorted by match percentage descending. Includes search bar and category filters.
  */
 
 import { subscribe, getRef } from '../state/store.js';
@@ -11,7 +11,7 @@ import { $ } from '../utils/dom.js';
 import { toggleFavorite } from '../actions/favorites.js';
 import { renderCardList } from './RecipeCard.js';
 import { openDetail } from './RecipeDetail.js';
-import { stem } from '../utils/text.js';
+import { stem, escHTML } from '../utils/text.js';
 
 /** @type {Array} Full recipe list */
 let _recipes = [];
@@ -22,8 +22,44 @@ const MAX_MISSING = 1;
 /** Search query for Ready tab */
 let _readySearch = '';
 
+/** Category filters for Ready tab */
+let _readyCats = new Set();
+
+/** Max cook time for Ready tab */
+let _readyMaxTime = Infinity;
+
 /** Debounce timer */
 let _searchTimer = null;
+
+/**
+ * Fixed category list (same as Browse).
+ */
+const V1_CATEGORIES = [
+  { label: 'Breakfast',        icon: '🧇' },
+  { label: 'Lunch / Dinner',   icon: '🍢', filter: 'Lunch|Dinner' },
+  { label: 'Soups & Stews',    icon: '🍲' },
+  { label: 'Salads',           icon: '🥗' },
+  { label: 'Pasta & Noodles',  icon: '🍝' },
+  { label: 'High-Protein',     icon: '🏋️' },
+  { label: 'Snacks',           icon: '🥨' },
+  { label: 'Desserts',         icon: '🍨' },
+  { label: 'Sauces & Dips',    icon: '🫙' },
+  { label: 'Game Day',         icon: '🏈' },
+  { label: 'Japanese',         icon: '🍱 🇯🇵' },
+  { label: 'Mexican',          icon: '🌮 🇲🇽' },
+  { label: 'Chinese',          icon: '🥡 🇨🇳' },
+  { label: 'Thai',             icon: '🍜 🇹🇭' },
+  { label: 'Vietnamese',       icon: '🍜 🇻🇳' },
+  { label: 'Indian',           icon: '🍛 🇮🇳' },
+  { label: 'Korean',           icon: '🥢 🇰🇷' },
+  { label: 'Italian',          icon: '🍝 🇮🇹' },
+  { label: 'Mediterranean',    icon: '🫒' },
+  { label: 'Middle Eastern',   icon: '🧆' },
+  { label: 'Southern',         icon: '🌽' },
+  { label: 'GF Bread',         icon: '🍞' },
+  { label: 'One-Pot',          icon: '🥘' },
+  { label: 'Instant Pot',      icon: '⚡' },
+];
 
 /**
  * Initialize the Ready to Cook tab.
@@ -33,6 +69,8 @@ export function initReadyToCook(recipes) {
   _recipes = recipes;
 
   wireReadySearch();
+  wireReadyFilters();
+  buildReadyCategoryChips();
   renderReadyList();
 
   subscribe('ingredients', renderReadyList);
@@ -55,6 +93,107 @@ function wireReadySearch() {
       renderReadyList();
     }, 250);
   });
+}
+
+/**
+ * Wire up filter toggle, time slider for Ready tab.
+ */
+function wireReadyFilters() {
+  // Filter toggle
+  const filterBtn = $('#readyFilterToggle');
+  const drawer = $('#readyFilterDrawer');
+  if (filterBtn && drawer) {
+    filterBtn.addEventListener('click', () => {
+      drawer.hidden = !drawer.hidden;
+      filterBtn.textContent = drawer.hidden ? 'Categories' : 'Close';
+    });
+  }
+
+  // Time slider
+  const slider = $('#readyTimeSlider');
+  const label = $('#readyTimeLabel');
+  if (slider && label) {
+    slider.addEventListener('input', () => {
+      const val = parseInt(slider.value, 10);
+      _readyMaxTime = val >= 120 ? Infinity : val;
+      label.textContent = val >= 120 ? 'Any' : `${val} min`;
+    });
+    slider.addEventListener('change', renderReadyList);
+  }
+}
+
+/**
+ * Build category filter chips for Ready tab.
+ */
+function buildReadyCategoryChips() {
+  const container = $('#readyCatFilters');
+  if (!container) return;
+
+  container.innerHTML = V1_CATEGORIES.map(({ label, icon, filter }) => {
+    const catKey = filter || label;
+    return `<button class="filter-chip" data-cat="${escHTML(catKey)}">${icon} ${escHTML(label)}</button>`;
+  }).join('');
+
+  container.addEventListener('click', (e) => {
+    const chip = e.target.closest('.filter-chip');
+    if (!chip) return;
+    const cat = chip.dataset.cat;
+    if (_readyCats.has(cat)) {
+      _readyCats.delete(cat);
+      chip.classList.remove('on');
+    } else {
+      _readyCats.add(cat);
+      chip.classList.add('on');
+    }
+    renderReadyList();
+  });
+}
+
+/**
+ * Render active filter tags for Ready tab.
+ */
+function renderReadyActiveFilters() {
+  const container = $('#readyActiveFilters');
+  if (!container) return;
+
+  const tags = [];
+
+  if (_readySearch) {
+    tags.push(`<span class="active-filter-tag" data-clear="search">"${escHTML(_readySearch)}" ×</span>`);
+  }
+
+  _readyCats.forEach(cat => {
+    tags.push(`<span class="active-filter-tag" data-clear-cat="${escHTML(cat)}">${escHTML(cat)} ×</span>`);
+  });
+
+  if (_readyMaxTime !== Infinity) {
+    tags.push(`<span class="active-filter-tag" data-clear="time">≤${_readyMaxTime}min ×</span>`);
+  }
+
+  container.innerHTML = tags.join('');
+
+  container.onclick = (e) => {
+    const tag = e.target.closest('.active-filter-tag');
+    if (!tag) return;
+
+    if (tag.dataset.clear === 'search') {
+      _readySearch = '';
+      const input = $('#readySearch');
+      if (input) input.value = '';
+    } else if (tag.dataset.clear === 'time') {
+      _readyMaxTime = Infinity;
+      const slider = $('#readyTimeSlider');
+      const label = $('#readyTimeLabel');
+      if (slider) slider.value = 120;
+      if (label) label.textContent = 'Any';
+    } else if (tag.dataset.clearCat) {
+      _readyCats.delete(tag.dataset.clearCat);
+      const chip = document.querySelector(`#readyCatFilters .filter-chip[data-cat="${tag.dataset.clearCat}"]`);
+      if (chip) chip.classList.remove('on');
+    }
+
+    renderReadyList();
+  };
 }
 
 /**
@@ -83,6 +222,8 @@ function renderReadyList() {
     recipes: _recipes,
     ingredients: ings,
     staples,
+    selectedCats: _readyCats.size ? [..._readyCats] : undefined,
+    maxTime: _readyMaxTime === Infinity ? undefined : _readyMaxTime,
     allergies: allergies.length ? new Set(allergies) : undefined,
   });
 
@@ -102,6 +243,9 @@ function renderReadyList() {
     });
   }
 
+  // Render active filter tags
+  renderReadyActiveFilters();
+
   if (badge) {
     badge.textContent = ready.length > 0 ? String(ready.length) : '';
   }
@@ -110,8 +254,8 @@ function renderReadyList() {
     container.innerHTML = '';
     if (emptyEl) {
       emptyEl.hidden = false;
-      emptyEl.innerHTML = _readySearch
-        ? '<p>No matching recipes found. Try a different search term.</p>'
+      emptyEl.innerHTML = (_readySearch || _readyCats.size || _readyMaxTime !== Infinity)
+        ? '<p>No matching recipes found. Try adjusting your filters.</p>'
         : ings.length || staples.length
           ? '<p>No recipes with 1 or fewer missing ingredients yet. Add more to your pantry!</p>'
           : '<p>Add ingredients to your pantry to see what you can make!</p>';
