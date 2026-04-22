@@ -818,7 +818,186 @@ input, select, textarea {
   color: var(--muted);
 }
 
-/* ── Pantry Power ────────────────────────────────────────────── */
+/* ── Intro Hero Card (My Pantry — matches v1) ───────────────── */
+.intro-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  margin-bottom: 18px;
+}
+
+.intro-hero {
+  padding: 26px 28px 20px;
+  background: linear-gradient(180deg, var(--green-soft), var(--card));
+}
+
+.intro-hero-grid {
+  display: grid;
+  grid-template-columns: 1.35fr 1fr;
+  gap: 32px;
+  align-items: start;
+}
+
+.intro-hero-copy { min-width: 0; }
+
+.hero-img {
+  width: 100%;
+  max-height: 420px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 16px rgba(0,0,0,.1);
+}
+
+.intro-hero-title {
+  font-family: var(--font-serif);
+  font-size: 28px;
+  line-height: 1.15;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 0 0 10px;
+  letter-spacing: -0.5px;
+  text-align: center;
+}
+
+.intro-hero-sub {
+  margin: 0 0 14px;
+  color: var(--ink-soft);
+  font-size: 19px;
+  line-height: 1.55;
+  font-family: var(--font-sans);
+  max-width: 760px;
+  text-align: justify;
+}
+
+.intro-hero-sub strong { color: var(--ink); font-weight: 700; }
+
+.intro-tagline {
+  font-size: 1.3em;
+  text-align: center;
+  margin: 6px 0 0;
+  font-style: italic;
+  line-height: 1.4;
+  color: var(--green-deep);
+}
+
+.clr-letters { display: inline-flex; }
+
+@keyframes boldWave {
+  0%, 100% { font-weight: 300; }
+  20% { font-weight: 800; }
+  40% { font-weight: 300; }
+}
+
+.clr-letter {
+  display: inline-block;
+  animation: boldWave 3s ease-in-out infinite;
+}
+.clr-letter:nth-child(1) { animation-delay: 0s; }
+.clr-letter:nth-child(2) { animation-delay: 0.3s; }
+.clr-letter:nth-child(3) { animation-delay: 0.6s; }
+.clr-letter:nth-child(4) { animation-delay: 0.9s; }
+.clr-letter:nth-child(5) { animation-delay: 1.2s; }
+.clr-letter:nth-child(6) { animation-delay: 1.5s; }
+
+@media (max-width: 780px) {
+  .intro-hero-grid { grid-template-columns: 1fr; gap: 22px; }
+  .intro-hero-sub { font-size: 16px; }
+  .intro-hero-title { font-size: 24px; }
+}
+
+/* ── Pantry Power Widget (sidebar in intro hero) ──────────── */
+.pp-widget {
+  background: linear-gradient(155deg, #ffffff 0%, #f4f9f1 100%);
+  border: 1px solid #d4e6d8;
+  border-radius: 14px;
+  padding: 18px 20px 16px;
+  box-shadow: 0 1px 3px rgba(45,122,79,.06);
+  position: relative;
+  overflow: hidden;
+}
+
+.pp-widget::before {
+  content: "";
+  position: absolute;
+  top: -30px; right: -30px;
+  width: 120px; height: 120px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(45,122,79,.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.pp-eyebrow {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  color: var(--green);
+  opacity: 0.85;
+  margin-bottom: 6px;
+  font-family: var(--font-sans);
+}
+
+.pp-number-row {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 4px;
+}
+
+.pp-number {
+  font-family: var(--font-serif);
+  font-size: 46px;
+  line-height: 1;
+  font-weight: 700;
+  color: var(--green-deep);
+  letter-spacing: -1.5px;
+  transition: color 0.3s;
+}
+
+.pp-unit {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink-soft);
+  letter-spacing: 0.01em;
+}
+
+.pp-near {
+  font-size: 12.5px;
+  color: var(--ink-soft);
+  margin: 0 0 12px;
+  line-height: 1.4;
+  font-family: var(--font-sans);
+}
+
+.pp-near strong { color: var(--green); font-weight: 700; }
+
+.pp-bar {
+  height: 6px;
+  background: var(--border);
+  border-radius: 99px;
+  overflow: hidden;
+  margin-bottom: 6px;
+}
+
+.pp-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #4ade80 0%, #2d7a4f 100%);
+  border-radius: 99px;
+  transition: width 0.8s cubic-bezier(.16,1,.3,1);
+  min-width: 0;
+}
+
+.pp-bar-meta {
+  font-size: 11px;
+  color: var(--muted);
+  font-family: var(--font-sans);
+  letter-spacing: 0.01em;
+}
+
+/* ── Old Pantry Power (kept for compat) ──────────────────────── */
 .pantry-power {
   background: var(--green-soft);
   border-color: var(--green);
