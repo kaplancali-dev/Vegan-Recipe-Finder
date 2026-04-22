@@ -106,7 +106,10 @@ input, select, textarea {
   align-items: center;
   justify-content: center;
   position: relative;
-  padding-right: 80px; /* space for PWA buttons */
+}
+
+.header-inner.has-pwa {
+  padding-right: 80px;
 }
 
 .header-center {
@@ -136,6 +139,14 @@ input, select, textarea {
   display: flex;
   align-items: center;
   gap: 6px;
+}
+
+/* Hidden by default — shown only in standalone/PWA mode via JS */
+.header-actions {
+  display: none;
+}
+.header-actions.pwa-visible {
+  display: flex;
 }
 
 .pwa-btn {
@@ -1730,7 +1741,7 @@ input, select, textarea {
     font-size: 1.05rem;
   }
 
-  .header-inner {
+  .header-inner.has-pwa {
     padding-right: 72px;
   }
 }
