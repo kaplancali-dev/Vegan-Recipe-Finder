@@ -5854,6 +5854,26 @@ function confirmScanResults(target) {
   document.getElementById('scanResults').style.display = 'none';
 }
 
+// ── SOFT REFRESH (avoids iOS PWA reload quirks) ──────────────────────────────
+function softRefresh() {
+  // Re-read all state from localStorage
+  ingredients = _lsGet('vrf_ings', '[]');
+  staples     = _lsGet('vrf_staples', '[]');
+  favorites   = _lsGet('vrf_favs', '[]');
+  mealPlan    = _lsGet('vrf_meal', '[]');
+  shopList    = _lsGet('vrf_shop', '[]');
+  activeAllergies = new Set(_lsGet('vrf_allergies', '[]'));
+  // Re-render everything
+  renderAllIngPanels();
+  restoreAllergyUI();
+  updateFindBtn();
+  findRecipes();
+  if (typeof updatePantryPower === 'function') updatePantryPower();
+  if (typeof renderShoppingList === 'function') renderShoppingList();
+  if (typeof renderFavorites === 'function') renderFavorites();
+  showToast('🔄 Refreshed!', 1500);
+}
+
 // ── INIT ──────────────────────────────────────────────────────────────────────
 loadCustomRecipes();
 renderAllIngPanels();
@@ -5880,7 +5900,7 @@ if ('serviceWorker' in navigator) {
   <button onclick="if(navigator.share)navigator.share({title:'HARVEST',url:location.href}).catch(()=>{})" style="background:none;border:none;padding:8px 16px;cursor:pointer;">
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#007AFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v7a2 2 0 002 2h12a2 2 0 002-2v-7"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
   </button>
-  <button onclick="(async function(){try{if('serviceWorker' in navigator){var r=await navigator.serviceWorker.getRegistrations();for(var i=0;i<r.length;i++)await r[i].unregister();var k=await caches.keys();for(var j=0;j<k.length;j++)await caches.delete(k[j])}}catch(e){}location.reload()})()" style="background:none;border:none;padding:8px 16px;cursor:pointer;">
+  <button onclick="softRefresh()" style="background:none;border:none;padding:8px 16px;cursor:pointer;">
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#007AFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"/></svg>
   </button>
 </div>
