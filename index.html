@@ -20,10 +20,10 @@
 <link rel="icon" type="image/png" href="favicon.png">
 <meta name="theme-color" content="#2d7a4f">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; img-src 'self' https: data:; connect-src 'self' https://*.supabase.co https://www.google-analytics.com; font-src 'self'; frame-src 'none';">
-  <script type="module" crossorigin src="/assets/index-Bv813pqv.js"></script>
+  <script type="module" crossorigin src="/assets/index-Dt4NtVEc.js"></script>
   <link rel="modulepreload" crossorigin href="/assets/supabase-DaN4is7k.js">
   <link rel="modulepreload" crossorigin href="/assets/recipes-BpSYmkTi.js">
-  <link rel="stylesheet" crossorigin href="/assets/index-CwfRZ49J.css">
+  <link rel="stylesheet" crossorigin href="/assets/index-BYoLsiAo.css">
 </head>
 <body>
 
@@ -39,10 +39,6 @@
         <div class="header-center">
           <h1 class="logo">🌿 HARVEST</h1>
           <p class="logo-tagline">Eat More Plants!</p>
-        </div>
-        <div class="header-actions">
-          <button id="syncBtn" class="icon-btn" aria-label="Cloud sync" title="Cloud sync">☁️</button>
-          <span id="syncStatus" class="sync-status"></span>
         </div>
       </div>
     </header>
@@ -256,13 +252,13 @@
     <section id="tab-favorites" class="tab-panel" role="tabpanel" aria-labelledby="btn-favorites" hidden>
       <div class="section-intro">
         <h2>Favorites</h2>
-        <p>Your saved recipes and meal plan.</p>
+        <p>Your saved recipes and collections.</p>
       </div>
 
-      <!-- Meal planner -->
-      <div id="mealPlanner" class="card">
-        <h3 class="card-title">📅 Meal Plan</h3>
-        <div id="mealSlots" class="meal-slots"></div>
+      <!-- Collections -->
+      <div class="card">
+        <h3 class="card-title">📂 My Collections</h3>
+        <div id="collectionsGrid" class="collections-grid"></div>
       </div>
 
       <!-- Favorites list -->

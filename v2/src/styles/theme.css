@@ -1392,6 +1392,48 @@ input, select, textarea {
   margin-bottom: 2px;
 }
 
+/* ── Collections Grid ───────────────────────────────────────── */
+.collections-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+.collection-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 14px 8px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--card);
+  cursor: pointer;
+  transition: all var(--transition);
+  text-align: center;
+}
+
+.collection-btn:hover {
+  border-color: var(--green);
+  background: var(--green-soft);
+}
+
+.collection-icon {
+  font-size: 1.4rem;
+  line-height: 1;
+}
+
+.collection-label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.collection-count {
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+
 /* ── Shopping List ───────────────────────────────────────────── */
 .shop-list {
   display: flex;

@@ -15,6 +15,7 @@ const STORAGE_KEYS = {
   shopList:     'vrf_shop',
   instructions: 'vrf_instr',
   allergies:    'vrf_allergies',
+  collections:  'vrf_collections',
   shopChecked:  'vrf_shop_checked',
   activeTab:    'vrf_active_tab',
   onboarded:    'vrf_onboarded',
@@ -34,6 +35,7 @@ const state = {
   shopList:     [],
   instructions: {},
   allergies:    [],
+  collections:  {},
   shopChecked:  [],
   activeTab:    'browse',
   onboarded:    false,
@@ -81,6 +83,7 @@ export function loadState() {
   state.shopList     = lsGet(STORAGE_KEYS.shopList, []);
   state.instructions = lsGet(STORAGE_KEYS.instructions, {});
   state.allergies    = lsGet(STORAGE_KEYS.allergies, []);
+  state.collections  = lsGet(STORAGE_KEYS.collections, {});
   state.shopChecked  = lsGet(STORAGE_KEYS.shopChecked, []);
   state.activeTab    = localStorage.getItem(STORAGE_KEYS.activeTab) || 'browse';
   state.onboarded    = lsGet(STORAGE_KEYS.onboarded, false) || localStorage.getItem('vrf_onboarded') === '1';
@@ -162,7 +165,8 @@ export function gatherAllData() {
     vrf_shop:      state.shopList,
     vrf_ings:      state.ingredients,
     vrf_meal:      state.mealPlan,
-    vrf_allergies: state.allergies,
+    vrf_allergies:   state.allergies,
+    vrf_collections: state.collections,
   };
 }
 
@@ -183,6 +187,7 @@ function validateValue(key, value) {
     case 'mealPlan':
       return Array.isArray(value) ? value : undefined;
     case 'instructions':
+    case 'collections':
       return (value !== null && typeof value === 'object' && !Array.isArray(value)) ? value : undefined;
     default:
       return value;
@@ -201,7 +206,8 @@ export function applyAllData(data) {
   if (data.vrf_shop      !== undefined) { const v = validateValue('shopList', data.vrf_shop);       if (v !== undefined) set('shopList', v); }
   if (data.vrf_ings      !== undefined) { const v = validateValue('ingredients', data.vrf_ings);    if (v !== undefined) set('ingredients', v); }
   if (data.vrf_meal      !== undefined) { const v = validateValue('mealPlan', data.vrf_meal);       if (v !== undefined) set('mealPlan', v); }
-  if (data.vrf_allergies !== undefined) { const v = validateValue('allergies', data.vrf_allergies);  if (v !== undefined) set('allergies', v); }
+  if (data.vrf_allergies    !== undefined) { const v = validateValue('allergies', data.vrf_allergies);       if (v !== undefined) set('allergies', v); }
+  if (data.vrf_collections !== undefined) { const v = validateValue('collections', data.vrf_collections); if (v !== undefined) set('collections', v); }
 }
 
 /**
