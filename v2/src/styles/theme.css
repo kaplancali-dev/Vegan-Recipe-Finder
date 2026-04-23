@@ -1600,6 +1600,23 @@ input, select, textarea {
   color: #fff;
 }
 
+.shop-recipe-fav-btn {
+  font-size: 0.72rem !important;
+  padding: 4px 10px !important;
+  background: var(--accent-soft);
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.shop-recipe-fav-btn:hover {
+  background: var(--accent);
+  color: #fff;
+}
+
 .shop-recipe-meta {
   margin-top: 2px;
 }

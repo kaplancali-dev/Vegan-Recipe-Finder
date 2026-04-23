@@ -13,6 +13,7 @@ import { findRecipes } from '../services/matching.js';
 import { escHTML, norm } from '../utils/text.js';
 import { showToast } from '../utils/toast.js';
 import { $ } from '../utils/dom.js';
+import { toggleFavorite } from '../actions/favorites.js';
 
 /** @type {Array} Full recipe list — set by initShopping */
 let _recipes = [];
@@ -49,6 +50,7 @@ export function initShopping(recipes) {
   subscribe('makelist', renderShopTab);
   subscribe('ingredients', renderShopTab);
   subscribe('staples', renderShopTab);
+  subscribe('favorites', renderShopTab);
 }
 
 /**
@@ -201,6 +203,7 @@ function renderShopTab() {
 
   const { recipeCards, manualItems } = _buildShopData();
   const checked = getCheckedSet();
+  const favSet = new Set(getRef('favorites'));
 
   // Clean checked set
   const allNorms = new Set(manualItems.map(norm));
@@ -225,12 +228,14 @@ function renderShopTab() {
   recipeCards.forEach(({ id, title, missing, totalIngs, haveCount }) => {
     const ready = !missing.length;
     const allChecked = missing.length > 0 && missing.every(i => checked.has(norm(i)));
+    const isFav = favSet.has(id);
 
     html += `<div class="shop-recipe-card${ready ? ' ready' : ''}${allChecked ? ' all-checked' : ''}" data-shop-recipe="${id}">
       <div class="shop-recipe-header">
         <div class="shop-recipe-title-row">
           <span class="shop-recipe-title">${escHTML(title)}</span>
           <div class="shop-recipe-actions">
+            ${!isFav ? `<button class="btn btn-sm shop-recipe-fav-btn" data-fav-recipe="${id}" title="Favorite">🤍 Favorite</button>` : ''}
             <button class="btn btn-sm shop-recipe-cook-btn" data-cook-recipe="${id}" title="I Made This">🍳 I Made This</button>
             ${!ready ? `<button class="icon-btn shop-recipe-notes-btn" data-notes-recipe="${id}" title="Send to Notes">📝</button>` : ''}
             <button class="icon-btn shop-recipe-delete-btn" data-delete-recipe="${id}" title="Remove recipe">&times;</button>
@@ -285,6 +290,15 @@ function renderShopTab() {
 
   // ── Event delegation ──
   container.onclick = (e) => {
+    // Favorite button
+    const favBtn = e.target.closest('[data-fav-recipe]');
+    if (favBtn) {
+      e.stopPropagation();
+      const id = Number(favBtn.dataset.favRecipe);
+      toggleFavorite(id);
+      return;
+    }
+
     // "I Made This" — log cook history and remove from make list
     const cookBtn = e.target.closest('[data-cook-recipe]');
     if (cookBtn) {
