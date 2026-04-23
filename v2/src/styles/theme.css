@@ -1729,18 +1729,18 @@ input, select, textarea {
   bottom: 80px;
   left: 50%;
   transform: translateX(-50%) translateY(20px);
-  background: var(--ink);
+  background: var(--green-deep);
   color: #fff;
-  padding: 10px 20px;
+  padding: 12px 24px;
   border-radius: 24px;
-  font-size: 0.85rem;
-  font-weight: 500;
+  font-size: 0.9rem;
+  font-weight: 600;
   z-index: 500;
   opacity: 0;
   pointer-events: none;
   transition: all 0.3s ease;
   white-space: nowrap;
-  box-shadow: 0 4px 20px rgba(0,0,0,.2);
+  box-shadow: 0 6px 24px rgba(0,0,0,.3);
 }
 
 .toast.show {
