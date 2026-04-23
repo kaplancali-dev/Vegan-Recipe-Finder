@@ -110,6 +110,7 @@ export function renderCard(result, opts = {}) {
           ${r.url ? `<a href="${escHTML(r.url)}" target="_blank" rel="noopener" class="btn-sm btn-link" data-external>📖 View Instructions</a>` : ''}
           <button class="btn-sm btn-shop make-btn${isOnMakeList ? ' on' : ''}" data-make-id="${r.id}">${makeLabel}</button>
           <button class="btn-sm btn-fav fav-btn${isFavorite ? ' on' : ''}" data-fav-id="${r.id}" aria-label="Toggle favorite">${favLabel}</button>
+          <button class="btn-sm btn-share share-btn" data-share-id="${r.id}" data-share-title="${escHTML(r.title)}" data-share-url="${escHTML(r.url || '')}">📤 Share</button>
         </div>
       </div>
     </article>

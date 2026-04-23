@@ -9,6 +9,7 @@ import { escHTML } from '../utils/text.js';
 import { get, set } from '../state/store.js';
 import { autoSync, reportBrokenLink } from '../services/sync.js';
 import { ingredientMatches, expandWithAliases } from '../services/matching.js';
+import { shareRecipe } from '../actions/share.js';
 
 /** @type {Array} Full recipe list — set by init */
 let _recipes = [];
@@ -162,19 +163,7 @@ export function openDetail(id) {
   const shareBtn = document.getElementById('detailShareBtn');
   if (shareBtn) {
     shareBtn.addEventListener('click', () => {
-      const title = recipe.title;
-      const recipeUrl = recipe.url || 'https://myharvestvegan.com';
-      const text = `Check out this vegan recipe: ${title}`;
-      const body = `${text}\n\n${recipeUrl}\n\nFound on HARVEST — myharvestvegan.com`;
-
-      if (navigator.share) {
-        navigator.share({ title, text: body, url: recipeUrl }).catch(() => {});
-      } else {
-        navigator.clipboard.writeText(body).then(() => {
-          shareBtn.textContent = '✓ Copied!';
-          setTimeout(() => { shareBtn.textContent = '📤 Share'; }, 2000);
-        }).catch(() => {});
-      }
+      shareRecipe(recipe.title, recipe.url);
     });
   }
 

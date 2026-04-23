@@ -11,6 +11,7 @@ import { findRecipes } from '../services/matching.js';
 import { escHTML } from '../utils/text.js';
 import { $, $$ } from '../utils/dom.js';
 import { toggleFavorite } from '../actions/favorites.js';
+import { handleShareClick } from '../actions/share.js';
 import { renderCardList } from './RecipeCard.js';
 import { openDetail } from './RecipeDetail.js';
 import { showToast } from '../utils/toast.js';
@@ -228,6 +229,9 @@ function _runRender() {
 
     // External links (View Instructions) — let them open normally
     if (e.target.closest('[data-external]')) return;
+
+    // Share button
+    if (handleShareClick(e)) return;
 
     // Favorite button
     const favBtn = e.target.closest('.fav-btn');
