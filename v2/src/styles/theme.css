@@ -108,10 +108,6 @@ input, select, textarea {
   position: relative;
 }
 
-.header-inner.has-pwa {
-  padding-right: 80px;
-}
-
 .header-center {
   text-align: center;
 }
@@ -141,34 +137,47 @@ input, select, textarea {
   gap: 6px;
 }
 
-/* Hidden by default — shown only in standalone/PWA mode via JS */
-.header-actions {
+/* ── PWA bottom toolbar (standalone mode only) ────────────────── */
+.pwa-toolbar {
   display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 150;
+  background: var(--card);
+  border-top: 1px solid var(--border);
+  padding: 8px 0 calc(8px + var(--safe-bottom));
+  justify-content: center;
+  gap: 40px;
 }
-.header-actions.pwa-visible {
+.pwa-toolbar.pwa-visible {
   display: flex;
 }
 
 .pwa-btn {
   background: none;
-  border: 1.5px solid var(--border);
-  border-radius: 50%;
-  width: 36px;
-  height: 36px;
-  font-size: 1.2rem;
-  color: var(--green);
-  cursor: pointer;
+  border: none;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  transition: all var(--transition);
-  padding: 0;
+  gap: 2px;
+  padding: 4px 12px;
+  cursor: pointer;
+  color: var(--green);
+  font-size: 1.4rem;
   line-height: 1;
+  transition: all var(--transition);
+}
+
+.pwa-btn span {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
 }
 
 .pwa-btn:hover {
-  background: var(--green-soft);
-  border-color: var(--green);
+  color: var(--green-deep);
 }
 
 .sync-status {
@@ -1476,6 +1485,20 @@ input, select, textarea {
   color: var(--muted);
 }
 
+/* ── Make List Items ─────────────────────────────────────────── */
+.make-recipe-item {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  background: var(--accent-soft);
+  border-radius: var(--radius-sm);
+  margin-bottom: 4px;
+}
+
+.make-recipe-item.ready {
+  background: var(--green-soft);
+}
+
 /* ── Shopping List ───────────────────────────────────────────── */
 .shop-list {
   display: flex;
@@ -1735,15 +1758,6 @@ input, select, textarea {
     padding: 8px 6px;
   }
 
-  .pwa-btn {
-    width: 32px;
-    height: 32px;
-    font-size: 1.05rem;
-  }
-
-  .header-inner.has-pwa {
-    padding-right: 72px;
-  }
 }
 
 @media (max-width: 400px) {

@@ -5,13 +5,13 @@
  * sorted by match percentage descending. Includes search bar and category filters.
  */
 
-import { subscribe, getRef } from '../state/store.js';
+import { get, set, subscribe, getRef } from '../state/store.js';
+import { autoSync } from '../services/sync.js';
 import { findRecipes } from '../services/matching.js';
 import { $ } from '../utils/dom.js';
 import { toggleFavorite } from '../actions/favorites.js';
 import { renderCardList } from './RecipeCard.js';
 import { openDetail } from './RecipeDetail.js';
-import { addToShopList } from './Shopping.js';
 import { showToast } from '../utils/toast.js';
 import { stem, escHTML } from '../utils/text.js';
 
@@ -78,6 +78,7 @@ export function initReadyToCook(recipes) {
   subscribe('ingredients', renderReadyList);
   subscribe('staples', renderReadyList);
   subscribe('favorites', renderReadyList);
+  subscribe('makelist', renderReadyList);
   subscribe('allergies', renderReadyList);
 }
 
@@ -267,7 +268,8 @@ function renderReadyList() {
 
   if (emptyEl) emptyEl.hidden = true;
 
-  container.innerHTML = renderCardList(ready, favs);
+  const makeIds = getRef('makelist');
+  container.innerHTML = renderCardList(ready, favs, { makelist: makeIds });
 
   // Event delegation
   container.onclick = (e) => {
@@ -282,19 +284,21 @@ function renderReadyList() {
       return;
     }
 
-    // Make This button
+    // Make This button — toggle on make list
     const makeBtn = e.target.closest('.make-btn');
     if (makeBtn) {
       e.stopPropagation();
       const id = Number(makeBtn.dataset.makeId);
-      const recipe = ready.find(r => r.id === id);
-      if (recipe && recipe.needNames && recipe.needNames.length) {
-        addToShopList(recipe.needNames);
-        makeBtn.textContent = '✓ Added to Shop!';
-        makeBtn.disabled = true;
+      const current = get('makelist');
+      if (current.includes(id)) {
+        set('makelist', current.filter(i => i !== id));
+        showToast('Removed from Make list');
       } else {
-        showToast('You have everything — ready to cook!');
+        current.push(id);
+        set('makelist', current);
+        showToast('Added to Make list — check Shop tab!');
       }
+      autoSync();
       return;
     }
 

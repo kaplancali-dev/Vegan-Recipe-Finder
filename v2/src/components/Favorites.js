@@ -46,6 +46,7 @@ export function initFavorites(recipes) {
   subscribe('collections', renderCollections);
   subscribe('ingredients', renderFavList);
   subscribe('staples', renderFavList);
+  subscribe('makelist', renderFavList);
 }
 
 /* ── Collections Grid ────────────────────────────────────────── */
@@ -245,7 +246,8 @@ function renderFavList() {
     staples,
   });
 
-  container.innerHTML = renderCardList(results, favSet, { showMatch: true });
+  const makeIds = getRef('makelist');
+  container.innerHTML = renderCardList(results, favSet, { showMatch: true, makelist: makeIds });
 
   container.onclick = (e) => {
     if (e.target.closest('[data-external]')) return;
@@ -258,19 +260,21 @@ function renderFavList() {
       return;
     }
 
-    // Make This button
+    // Make This button — toggle on make list
     const makeBtn = e.target.closest('.make-btn');
     if (makeBtn) {
       e.stopPropagation();
       const id = Number(makeBtn.dataset.makeId);
-      const recipe = results.find(r => r.id === id);
-      if (recipe && recipe.needNames && recipe.needNames.length) {
-        addToShopList(recipe.needNames);
-        makeBtn.textContent = '✓ Added to Shop!';
-        makeBtn.disabled = true;
+      const current = get('makelist');
+      if (current.includes(id)) {
+        set('makelist', current.filter(i => i !== id));
+        showToast('Removed from Make list');
       } else {
-        showToast('You have everything — ready to cook!');
+        current.push(id);
+        set('makelist', current);
+        showToast('Added to Make list — check Shop tab!');
       }
+      autoSync();
       return;
     }
 

@@ -6,6 +6,7 @@
  */
 
 import { get, set, subscribe, getRef } from '../state/store.js';
+import { autoSync } from '../services/sync.js';
 import { findRecipes, sortResults, expandWithAliases } from '../services/matching.js';
 import { ALLERGY_KEYWORDS } from '../data/aliases.js';
 import { escHTML } from '../utils/text.js';
@@ -13,7 +14,6 @@ import { $, $$ } from '../utils/dom.js';
 import { toggleFavorite } from '../actions/favorites.js';
 import { renderCardList } from './RecipeCard.js';
 import { openDetail } from './RecipeDetail.js';
-import { addToShopList } from './Shopping.js';
 import { showToast } from '../utils/toast.js';
 
 /** How many recipes to show per page */
@@ -62,6 +62,7 @@ export function initBrowse(recipes) {
   subscribe('ingredients', renderResults);
   subscribe('staples', renderResults);
   subscribe('favorites', renderResults);
+  subscribe('makelist', renderResults);
   subscribe('allergies', (val) => {
     _allergies = new Set(val);
     syncAllergyChips();
@@ -304,7 +305,8 @@ function _runRender() {
   const visible = results.slice(0, _visibleCount);
   const hasMore = results.length > _visibleCount;
 
-  list.innerHTML = renderCardList(visible, favs) +
+  const makeIds = getRef('makelist');
+  list.innerHTML = renderCardList(visible, favs, { makelist: makeIds }) +
     (hasMore ? `<button class="btn btn-outline load-more-btn" id="loadMoreBtn">Show more (${results.length - _visibleCount} remaining)</button>` : '');
 
   // Event delegation for card clicks, buttons, and load more
@@ -328,19 +330,21 @@ function _runRender() {
       return;
     }
 
-    // Make This button — add missing ingredients to shopping list
+    // Make This button — toggle on make list
     const makeBtn = e.target.closest('.make-btn');
     if (makeBtn) {
       e.stopPropagation();
       const id = Number(makeBtn.dataset.makeId);
-      const recipe = visible.find(r => r.id === id);
-      if (recipe && recipe.needNames && recipe.needNames.length) {
-        addToShopList(recipe.needNames);
-        makeBtn.textContent = '✓ Added to Shop!';
-        makeBtn.disabled = true;
+      const current = get('makelist');
+      if (current.includes(id)) {
+        set('makelist', current.filter(i => i !== id));
+        showToast('Removed from Make list');
       } else {
-        showToast('You have everything — ready to cook!');
+        current.push(id);
+        set('makelist', current);
+        showToast('Added to Make list — check Shop tab!');
       }
+      autoSync();
       return;
     }
 

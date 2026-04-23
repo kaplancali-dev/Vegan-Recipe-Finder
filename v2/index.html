@@ -36,10 +36,6 @@
           <h1 class="logo">🌿 HARVEST</h1>
           <p class="logo-tagline">Eat More Plants!</p>
         </div>
-        <div class="header-actions" id="pwaActions">
-          <button class="pwa-btn" id="refreshBtn" aria-label="Refresh" title="Refresh">↻</button>
-          <button class="pwa-btn" id="shareBtn" aria-label="Share" title="Share">⤴</button>
-        </div>
       </div>
     </header>
 
@@ -270,15 +266,20 @@
 
     <!-- SHOPPING LIST TAB -->
     <section id="tab-shopping" class="tab-panel" role="tabpanel" aria-labelledby="btn-shopping" hidden>
+      <div class="card" style="margin-bottom:14px">
+        <h3 class="card-title">📌 Recipes to Make</h3>
+        <div id="makeList"></div>
+      </div>
       <div class="section-intro">
         <div class="section-intro-row">
-          <h2>Shopping List</h2>
+          <h2>🛒 Shopping List</h2>
           <button id="clearShopBtn" class="btn btn-outline btn-sm">Clear All</button>
         </div>
+        <p style="font-size:0.82rem;color:var(--ink-soft);margin-top:2px">Missing ingredients from your recipes appear automatically.</p>
       </div>
       <div id="shopList" class="shop-list"></div>
       <div id="shopEmpty" class="empty-state" hidden>
-        <p>Missing ingredients from your recipes will appear here.</p>
+        <p>Tap "📌 Make This" on any recipe to build your shopping list!</p>
       </div>
     </section>
 
@@ -305,6 +306,12 @@
     </div>
 
   </div><!-- #app -->
+
+  <!-- PWA bottom toolbar (shown only in standalone/home screen mode) -->
+  <nav id="pwaToolbar" class="pwa-toolbar" aria-label="App controls">
+    <button class="pwa-btn" id="refreshBtn" aria-label="Refresh"><span style="font-size:1.4rem">↻</span><span>Refresh</span></button>
+    <button class="pwa-btn" id="shareBtn" aria-label="Share"><span style="font-size:1.4rem">⤴</span><span>Share</span></button>
+  </nav>
 
   <script type="module" src="/src/main.js"></script>
 </body>

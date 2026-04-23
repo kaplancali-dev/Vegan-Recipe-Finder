@@ -114,10 +114,8 @@ const isStandalone = window.navigator.standalone === true
   || window.matchMedia('(display-mode: standalone)').matches;
 
 if (isStandalone) {
-  const pwaActions = $('#pwaActions');
-  const headerInner = document.querySelector('.header-inner');
-  if (pwaActions) pwaActions.classList.add('pwa-visible');
-  if (headerInner) headerInner.classList.add('has-pwa');
+  const pwaToolbar = document.getElementById('pwaToolbar');
+  if (pwaToolbar) pwaToolbar.classList.add('pwa-visible');
 
   const refreshBtn = $('#refreshBtn');
   if (refreshBtn) {
@@ -151,7 +149,7 @@ if (isStandalone) {
 initRecipeDetail(recipes);
 initBrowse(recipes);
 initPantry(recipes);
-initShopping();
+initShopping(recipes);
 initFavorites(recipes);
 initReadyToCook(recipes);
 initSyncPanel();
