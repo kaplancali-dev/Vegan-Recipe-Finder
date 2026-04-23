@@ -7,8 +7,7 @@
 
 import { get, set, subscribe, getRef } from '../state/store.js';
 import { autoSync } from '../services/sync.js';
-import { findRecipes, sortResults, expandWithAliases } from '../services/matching.js';
-import { ALLERGY_KEYWORDS } from '../data/aliases.js';
+import { findRecipes } from '../services/matching.js';
 import { escHTML } from '../utils/text.js';
 import { $, $$ } from '../utils/dom.js';
 import { toggleFavorite } from '../actions/favorites.js';
@@ -24,10 +23,8 @@ let _recipes = [];
 
 /** Current filter/sort state */
 let _selectedCats = new Set();
-let _selectedSite = '';
 let _maxTime = Infinity;
 let _nameSearch = '';
-let _sortKey = 'match';
 let _allergies = new Set();
 
 /** Pagination: how many results currently visible */
@@ -53,8 +50,6 @@ export function initBrowse(recipes) {
   }
 
   buildCategoryChips();
-  buildAllergyChips();
-  buildSiteDropdown();
   wireControls();
   renderResults();
 
@@ -65,7 +60,6 @@ export function initBrowse(recipes) {
   subscribe('makelist', renderResults);
   subscribe('allergies', (val) => {
     _allergies = new Set(val);
-    syncAllergyChips();
     renderResults();
   });
 }
@@ -101,12 +95,6 @@ const V1_CATEGORIES = [
   { label: 'Instant Pot',      icon: '⚡' },
 ];
 
-/** Emoji icons for allergen chips */
-const ALLERGY_ICONS = {
-  'coconut': '🥥', 'corn': '🌽', 'mushroom': '🍄', 'nightshade': '🌶️',
-  'peanut': '🥜', 'soy': '🫘', 'tree nut': '🌰',
-};
-
 /**
  * Build category filter chips from the fixed v1 category list.
  */
@@ -130,71 +118,6 @@ function buildCategoryChips() {
       _selectedCats.add(cat);
       chip.classList.add('on');
     }
-    renderResults();
-  });
-}
-
-/**
- * Build allergy filter chips.
- */
-function buildAllergyChips() {
-  const container = $('#allergyFilters');
-  if (!container) return;
-
-  const allergens = Object.keys(ALLERGY_KEYWORDS).sort();
-  container.innerHTML = allergens.map(key => {
-    const icon = ALLERGY_ICONS[key] || '';
-    return `<button class="filter-chip${_allergies.has(key) ? ' on' : ''}" data-allergy="${escHTML(key)}">${icon ? icon + ' ' : ''}${escHTML(key)}</button>`;
-  }).join('');
-
-  container.addEventListener('click', (e) => {
-    const chip = e.target.closest('.filter-chip');
-    if (!chip) return;
-    const key = chip.dataset.allergy;
-    if (_allergies.has(key)) {
-      _allergies.delete(key);
-      chip.classList.remove('on');
-    } else {
-      _allergies.add(key);
-      chip.classList.add('on');
-    }
-    set('allergies', [..._allergies]);
-    renderResults();
-  });
-}
-
-/**
- * Keep allergy chip UI in sync with state.
- */
-function syncAllergyChips() {
-  const container = $('#allergyFilters');
-  if (!container) return;
-  container.querySelectorAll('.filter-chip').forEach(chip => {
-    const key = chip.dataset.allergy;
-    chip.classList.toggle('on', _allergies.has(key));
-  });
-}
-
-/**
- * Build the site/source dropdown from unique recipe sources.
- */
-function buildSiteDropdown() {
-  const select = $('#siteFilter');
-  if (!select) return;
-
-  const sites = new Set();
-  _recipes.forEach(r => { if (r.site) sites.add(r.site); });
-
-  const sorted = [...sites].sort();
-  sorted.forEach(site => {
-    const opt = document.createElement('option');
-    opt.value = site;
-    opt.textContent = site;
-    select.appendChild(opt);
-  });
-
-  select.addEventListener('change', () => {
-    _selectedSite = select.value;
     renderResults();
   });
 }
@@ -237,16 +160,6 @@ function wireControls() {
     slider.addEventListener('change', renderResults);
   }
 
-  // Sort buttons
-  const sortBtns = document.querySelectorAll('.sort-btn');
-  sortBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      sortBtns.forEach(b => b.classList.remove('on'));
-      btn.classList.add('on');
-      _sortKey = btn.dataset.sort;
-      renderResults();
-    });
-  });
 }
 
 /**
@@ -271,16 +184,11 @@ function _runRender() {
     ingredients: ings,
     staples,
     selectedCats: _selectedCats.size ? [..._selectedCats] : undefined,
-    selectedSite: _selectedSite || undefined,
     maxTime: _maxTime === Infinity ? undefined : _maxTime,
     nameSearch: _nameSearch || undefined,
     allergies: _allergies.size ? _allergies : undefined,
   });
 
-  // Apply sort (sortResults returns a new array)
-  if (_sortKey !== 'match') {
-    results = sortResults(results, _sortKey);
-  }
 
   _lastResults = results;
 
@@ -378,10 +286,6 @@ function renderActiveFilters() {
     tags.push(`<span class="active-filter-tag" data-clear="time">≤${_maxTime}min ×</span>`);
   }
 
-  _allergies.forEach(a => {
-    tags.push(`<span class="active-filter-tag" data-clear-allergy="${escHTML(a)}">No ${escHTML(a)} ×</span>`);
-  });
-
   container.innerHTML = tags.join('');
 
   // Click to remove
@@ -403,10 +307,6 @@ function renderActiveFilters() {
       _selectedCats.delete(tag.dataset.clearCat);
       const chip = document.querySelector(`.filter-chip[data-cat="${tag.dataset.clearCat}"]`);
       if (chip) chip.classList.remove('on');
-    } else if (tag.dataset.clearAllergy) {
-      _allergies.delete(tag.dataset.clearAllergy);
-      set('allergies', [..._allergies]);
-      syncAllergyChips();
     }
 
     renderResults();
