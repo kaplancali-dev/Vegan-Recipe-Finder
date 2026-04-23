@@ -1871,10 +1871,13 @@ input, select, textarea {
   bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
-  display: flex;
   gap: 8px;
   z-index: 150;
   padding-bottom: env(safe-area-inset-bottom, 0);
+}
+
+.pwa-toolbar:not([hidden]) {
+  display: flex;
 }
 
 .pwa-btn {
