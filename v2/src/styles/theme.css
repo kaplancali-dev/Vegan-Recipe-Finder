@@ -140,11 +140,12 @@ input, select, textarea {
   left: 0;
   right: 0;
   z-index: 150;
-  background: var(--card);
-  border-top: 1px solid var(--border);
+  background: transparent;
+  border-top: none;
   padding: 8px 0 calc(8px + var(--safe-bottom));
   justify-content: center;
   gap: 40px;
+  pointer-events: none;
 }
 .pwa-toolbar.pwa-visible {
   display: flex;
@@ -159,10 +160,12 @@ input, select, textarea {
   gap: 2px;
   padding: 4px 12px;
   cursor: pointer;
-  color: var(--green);
-  font-size: 1.4rem;
+  color: var(--muted);
+  font-size: 1.2rem;
   line-height: 1;
   transition: all var(--transition);
+  pointer-events: auto;
+  opacity: 0.5;
 }
 
 .pwa-btn span {
@@ -172,7 +175,7 @@ input, select, textarea {
 }
 
 .pwa-btn:hover {
-  color: var(--green-deep);
+  opacity: 0.8;
 }
 
 .sync-status {
