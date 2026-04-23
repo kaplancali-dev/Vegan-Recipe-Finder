@@ -9,6 +9,7 @@
 import { escHTML, norm } from '../utils/text.js';
 import { isPerishableIng } from '../services/matching.js';
 import { findSubstitute } from '../utils/substitutions.js';
+import { GF_SWAPS } from '../data/aliases.js';
 
 /**
  * Return a CSS class for the match percentage tier.
@@ -21,17 +22,39 @@ function matchTier(pct) {
   return 'lo';
 }
 
+/* ── Pre-normalized GF swap lookup ─────────────────────────── */
+
+const _gfLookup = new Map();
+for (const [key, val] of Object.entries(GF_SWAPS)) {
+  _gfLookup.set(norm(key), val);
+}
+
+/**
+ * Find a GF swap for an ingredient name, if one exists.
+ * @param {string} name - Ingredient name (raw)
+ * @returns {string|null}
+ */
+function gfSwap(name) {
+  return _gfLookup.get(norm(name)) || null;
+}
+
 /**
  * Render a single ingredient chip.
  * Perishable "have" ingredients get a distinct visual style.
+ * Non-GF ingredients show an inline swap hint.
  * @param {string} name
  * @param {string} cls - 'c-have' or 'c-need'
  */
 function ingChip(name, cls) {
+  const swap = gfSwap(name);
+  const swapTag = swap
+    ? `<span class="gf-swap">GF: ${escHTML(swap)}</span>`
+    : '';
+
   if (cls === 'c-have' && isPerishableIng(norm(name))) {
-    return `<span class="c-have c-perish">${escHTML(name)}</span>`;
+    return `<span class="c-have c-perish">${escHTML(name)}${swapTag}</span>`;
   }
-  return `<span class="${cls}">${escHTML(name)}</span>`;
+  return `<span class="${cls}">${escHTML(name)}${swapTag}</span>`;
 }
 
 /**

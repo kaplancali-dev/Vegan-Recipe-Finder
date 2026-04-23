@@ -2195,6 +2195,16 @@ input, select, textarea {
   margin-top: 6px;
 }
 
+/* ── GF Swap Tag (inline on ingredient chips) ─────────────── */
+.gf-swap {
+  display: block;
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: var(--accent);
+  margin-top: 2px;
+  line-height: 1.2;
+}
+
 /* ── Cook Button ───────────────────────────────────────────── */
 .btn-cook {
   background: var(--bg);
