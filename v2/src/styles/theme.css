@@ -2327,3 +2327,24 @@ input, select, textarea {
   animation: tour-pulse 1.4s ease infinite;
   border-radius: var(--radius-sm);
 }
+
+/* Mobile: larger tap targets, prevent text selection during tour */
+.tour-overlay {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  user-select: none;
+}
+.tour-next-btn {
+  min-height: 44px;       /* iOS minimum tap target */
+  touch-action: manipulation;
+}
+
+@media (max-width: 520px) {
+  .tour-tooltip {
+    max-width: calc(100vw - 24px);
+    padding: 16px 14px 14px;
+  }
+  .tour-body {
+    font-size: 0.84rem;
+  }
+}

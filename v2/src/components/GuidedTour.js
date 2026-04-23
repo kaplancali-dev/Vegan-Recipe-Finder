@@ -64,12 +64,26 @@ function _positionTooltip(targetEl) {
   const tooltipW = Math.min(320, window.innerWidth - 32);
   _tooltip.style.width = tooltipW + 'px';
 
-  // Position below the target, centered on it
+  // Horizontal: centered on target, clamped to viewport
   let left = rect.left + rect.width / 2 - tooltipW / 2;
-  // Clamp to viewport
   left = Math.max(12, Math.min(left, window.innerWidth - tooltipW - 12));
 
-  const top = rect.bottom + 12;
+  // Vertical: prefer below, flip above if tooltip would clip viewport
+  const gap = 12;
+  const tooltipH = _tooltip.offsetHeight || 180; // estimate if not yet rendered
+  let top;
+  let flipped = false;
+
+  if (rect.bottom + gap + tooltipH > window.innerHeight - 12) {
+    // Not enough room below — place above
+    top = rect.top - gap - tooltipH;
+    flipped = true;
+  } else {
+    top = rect.bottom + gap;
+  }
+
+  // Safety: never go above the viewport
+  top = Math.max(12, top);
 
   _tooltip.style.left = left + 'px';
   _tooltip.style.top = top + 'px';
@@ -79,6 +93,16 @@ function _positionTooltip(targetEl) {
   if (arrow) {
     const arrowLeft = rect.left + rect.width / 2 - left - 8;
     arrow.style.left = Math.max(16, Math.min(arrowLeft, tooltipW - 24)) + 'px';
+
+    if (flipped) {
+      // Arrow on bottom pointing down
+      arrow.style.top = '';
+      arrow.style.bottom = '-8px';
+    } else {
+      // Arrow on top pointing up (default)
+      arrow.style.bottom = '';
+      arrow.style.top = '-8px';
+    }
   }
 }
 
