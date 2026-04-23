@@ -206,13 +206,17 @@ initSyncPanel();
 /* ── PWA toolbar (share + refresh) ──────────────────────────── */
 
 {
-  const isIOS = /iPhone|iPad|iPod/.test(navigator.userAgent)
-    || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-  const isPWA = window.matchMedia('(display-mode: standalone)').matches
-    || window.navigator.standalone === true;
+  // Only show on iOS/iPadOS devices running as a homescreen PWA.
+  // navigator.standalone is an iOS-only property (true when launched from homescreen).
+  // For iPad (which reports as MacIntel), we also check touch + standalone display mode.
+  const isIOSStandalone = window.navigator.standalone === true;
+  const isIPadStandalone = navigator.platform === 'MacIntel'
+    && navigator.maxTouchPoints > 1
+    && window.matchMedia('(display-mode: standalone)').matches;
+  const showPWAToolbar = isIOSStandalone || isIPadStandalone;
 
   const toolbar = $('#pwaToolbar');
-  if (toolbar && isPWA && isIOS) {
+  if (toolbar && showPWAToolbar) {
     toolbar.hidden = false;
 
     const shareBtn = $('#pwaShare');
