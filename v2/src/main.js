@@ -206,17 +206,12 @@ initSyncPanel();
 /* ── PWA toolbar (share + refresh) ──────────────────────────── */
 
 {
-  // Only show on iOS/iPadOS devices running as a homescreen PWA.
-  // navigator.standalone is an iOS-only property (true when launched from homescreen).
-  // For iPad (which reports as MacIntel), we also check touch + standalone display mode.
-  const isIOSStandalone = window.navigator.standalone === true;
-  const isIPadStandalone = navigator.platform === 'MacIntel'
-    && navigator.maxTouchPoints > 1
-    && window.matchMedia('(display-mode: standalone)').matches;
-  const showPWAToolbar = isIOSStandalone || isIPadStandalone;
-
+  // Only show on iOS/iPadOS homescreen PWA.
+  // window.navigator.standalone is ONLY defined in iOS/iPadOS Safari
+  // and is true ONLY when launched from the homescreen. Desktop browsers
+  // never define this property, so it will be undefined (falsy).
   const toolbar = $('#pwaToolbar');
-  if (toolbar && showPWAToolbar) {
+  if (toolbar && window.navigator.standalone === true) {
     toolbar.hidden = false;
 
     const shareBtn = $('#pwaShare');
