@@ -9,6 +9,7 @@
 import { get, set } from '../state/store.js';
 import { escHTML } from '../utils/text.js';
 import { $ } from '../utils/dom.js';
+import { startTour } from './GuidedTour.js';
 
 /* ── Staple chips data ──────────────────────────────────────── */
 
@@ -191,7 +192,11 @@ function _saveSelections() {
 function _dismiss(overlay) {
   set('onboarded', true);
   overlay.style.opacity = '0';
-  setTimeout(() => overlay.remove(), 300);
+  setTimeout(() => {
+    overlay.remove();
+    // Launch guided tour after onboarding fades out
+    startTour();
+  }, 350);
 }
 
 /* ── Init ───────────────────────────────────────────────────── */

@@ -2222,3 +2222,108 @@ input, select, textarea {
   font-size: 0.75rem;
   color: var(--muted);
 }
+
+/* ── Guided Tour ─────────────────────────────────────────────── */
+
+.tour-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  background: rgba(0, 0, 0, 0.35);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: auto;
+}
+.tour-overlay.show {
+  opacity: 1;
+}
+
+.tour-tooltip {
+  position: fixed;
+  z-index: 9001;
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 20px 18px 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18), 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  max-width: 320px;
+  text-align: center;
+}
+
+.tour-arrow {
+  position: absolute;
+  top: -8px;
+  width: 16px;
+  height: 16px;
+  background: var(--card);
+  transform: rotate(45deg);
+  border-radius: 2px;
+}
+
+.tour-step-count {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+.tour-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+
+.tour-body {
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: var(--ink-soft);
+  margin-bottom: 16px;
+}
+
+.tour-next-btn {
+  display: inline-block;
+  padding: 10px 28px;
+  border: none;
+  border-radius: 999px;
+  background: var(--green);
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--transition);
+}
+.tour-next-btn:hover {
+  background: var(--green-deep);
+}
+
+.tour-dots {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 12px;
+}
+.tour-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--border);
+  transition: background 0.2s;
+}
+.tour-dot.on {
+  background: var(--green);
+}
+
+/* Highlight pulse on targeted tab button */
+@keyframes tour-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(45, 122, 79, 0.45); }
+  50% { box-shadow: 0 0 0 8px rgba(45, 122, 79, 0); }
+}
+.tour-highlight {
+  position: relative;
+  z-index: 9002;
+  animation: tour-pulse 1.4s ease infinite;
+  border-radius: var(--radius-sm);
+}

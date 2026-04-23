@@ -20,6 +20,7 @@ const STORAGE_KEYS = {
   shopChecked:  'vrf_shop_checked',
   activeTab:    'vrf_active_tab',
   onboarded:    'vrf_onboarded',
+  toured:       'vrf_toured',
   cookHistory:  'vrf_cook_history',
 };
 
@@ -42,6 +43,7 @@ const state = {
   shopChecked:  [],
   activeTab:    'browse',
   onboarded:    false,
+  toured:       false,
   cookHistory:  [],
 };
 
@@ -93,6 +95,7 @@ export function loadState() {
   state.cookHistory  = lsGet(STORAGE_KEYS.cookHistory, []);
   state.activeTab    = localStorage.getItem(STORAGE_KEYS.activeTab) || 'browse';
   state.onboarded    = lsGet(STORAGE_KEYS.onboarded, false) || localStorage.getItem('vrf_onboarded') === '1';
+  state.toured       = lsGet(STORAGE_KEYS.toured, false);
 }
 
 /**
