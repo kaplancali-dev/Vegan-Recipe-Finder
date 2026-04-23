@@ -62,20 +62,71 @@ export function initShopping(recipes) {
 }
 
 /**
- * Wire the Clear All button.
+ * Wire the Clear All and Send to Notes buttons.
  */
 function wireControls() {
   const clearBtn = $('#clearShopBtn');
-  if (!clearBtn) return;
+  if (clearBtn) {
+    clearBtn.addEventListener('click', () => {
+      const items = getRef('shopList');
+      if (!items.length) return;
+      set('shopList', []);
+      set('shopChecked', []);
+      autoSync();
+      showToast('Shopping list cleared');
+    });
+  }
 
-  clearBtn.addEventListener('click', () => {
-    const items = getRef('shopList');
-    if (!items.length) return;
-    set('shopList', []);
-    set('shopChecked', []);
-    autoSync();
-    showToast('Shopping list cleared');
-  });
+  const notesBtn = $('#sendToNotesBtn');
+  if (notesBtn) {
+    notesBtn.addEventListener('click', () => {
+      const manualItems = getRef('shopList');
+      const autoItems = getMakeListMissing();
+      const manualSet = new Set(manualItems.map(norm));
+      const combined = [...manualItems];
+      autoItems.forEach(item => {
+        if (!manualSet.has(norm(item))) {
+          combined.push(item);
+          manualSet.add(norm(item));
+        }
+      });
+
+      if (!combined.length) {
+        showToast('Shopping list is empty');
+        return;
+      }
+
+      const checked = getCheckedSet();
+      const unchecked = combined.filter(i => !checked.has(norm(i)));
+      const checkedItems = combined.filter(i => checked.has(norm(i)));
+
+      let body = '';
+      if (unchecked.length) {
+        body += unchecked.map(i => `• ${i}`).join('\n');
+      }
+      if (checkedItems.length) {
+        body += (unchecked.length ? '\n\n' : '') + 'Done:\n' + checkedItems.map(i => `✓ ${i}`).join('\n');
+      }
+
+      const noteURL = `applenotes://create?title=${encodeURIComponent('Shopping List')}&body=${encodeURIComponent(body)}`;
+
+      // Try Apple Notes URL scheme first, fall back to share API, then clipboard
+      if (/iPhone|iPad|iPod/.test(navigator.userAgent)) {
+        window.location.href = noteURL;
+      } else if (navigator.share) {
+        navigator.share({
+          title: 'Shopping List',
+          text: body,
+        }).catch(() => {});
+      } else {
+        navigator.clipboard.writeText(`Shopping List\n\n${body}`).then(() => {
+          showToast('Shopping list copied to clipboard!');
+        }).catch(() => {
+          showToast('Could not copy — try manually');
+        });
+      }
+    });
+  }
 }
 
 /* ── Recipes to Make section ──────────────────────────────────── */
