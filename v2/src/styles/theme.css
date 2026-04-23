@@ -200,7 +200,7 @@ input, select, textarea {
 
 .tab-btn {
   flex: 1;
-  padding: 8px 4px;
+  padding: 8px 6px;
   border: none;
   border-radius: var(--radius-sm);
   font-size: 0.82rem;
@@ -210,15 +210,20 @@ input, select, textarea {
   transition: all var(--transition);
   white-space: nowrap;
   display: flex;
-  flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 2px;
   line-height: 1.2;
   position: relative;
 }
 
-.tab-icon { font-size: 1rem; line-height: 1; }
-.tab-label { font-size: 0.72rem; line-height: 1; margin-top: 1px; }
+.tab-btn .tab-short { display: none; }
+.tab-btn .tab-full { display: inline; }
+
+@media (max-width: 520px) {
+  .tab-btn .tab-short { display: inline; }
+  .tab-btn .tab-full { display: none; }
+}
 
 .tab-btn:hover {
   background: var(--green-soft);
@@ -1751,6 +1756,7 @@ input, select, textarea {
   .logo { font-size: 1.6rem; }
   .logo-tagline { font-size: 0.85rem; }
   .header { padding: 8px 0 6px; }
+  .tab-btn { font-size: 0.76rem; padding: 8px 4px; }
   .tab-bar { top: 36px; }
   .filter-bar { top: 78px; }
 }
@@ -1759,7 +1765,7 @@ input, select, textarea {
   .logo { font-size: 1.4rem; letter-spacing: 1px; }
   .logo-tagline { font-size: 0.78rem; }
   .header-inner { gap: 6px; }
-  .tab-label { font-size: 0.65rem; }
+  .tab-btn { font-size: 0.7rem; padding: 7px 3px; }
   .tab-bar { top: 32px; }
   .filter-bar { top: 72px; }
 
