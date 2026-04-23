@@ -203,11 +203,11 @@ input, select, textarea {
 }
 
 .tab-btn {
-  flex: 1;
-  padding: 8px 6px;
+  flex-shrink: 0;
+  padding: 6px 8px;
   border: none;
   border-radius: var(--radius-sm);
-  font-size: 0.82rem;
+  font-size: 0.78rem;
   font-weight: 600;
   background: none;
   color: var(--ink-soft);
@@ -221,13 +221,6 @@ input, select, textarea {
   position: relative;
 }
 
-.tab-btn .tab-short { display: none; }
-.tab-btn .tab-full { display: inline; }
-
-@media (max-width: 520px) {
-  .tab-btn .tab-short { display: inline; }
-  .tab-btn .tab-full { display: none; }
-}
 
 .tab-btn:hover {
   background: var(--green-soft);
@@ -363,12 +356,13 @@ input, select, textarea {
 
 .text-input {
   flex: 1;
-  padding: 10px 14px;
+  padding: 8px 12px;
   border: 1.5px solid var(--border);
   border-radius: var(--radius-sm);
   background: var(--bg);
   color: var(--ink);
   outline: none;
+  font-size: 0.85rem;
   transition: border-color var(--transition);
 }
 
@@ -501,9 +495,9 @@ input, select, textarea {
 /* ── Filter Drawer & Bar ─────────────────────────────────────── */
 .filter-bar {
   position: sticky;
-  top: 88px;
+  top: 80px;
   z-index: 50;
-  padding: 12px;
+  padding: 10px 12px;
 }
 
 .filter-bar .input-row {
@@ -1757,21 +1751,22 @@ input, select, textarea {
 
 /* ── Responsive ──────────────────────────────────────────────── */
 @media (max-width: 520px) {
-  .logo { font-size: 1.6rem; }
-  .logo-tagline { font-size: 0.85rem; }
-  .header { padding: 8px 0 6px; }
-  .tab-btn { font-size: 0.76rem; padding: 8px 4px; }
-  .tab-bar { top: 36px; }
-  .filter-bar { top: 78px; }
+  .logo { font-size: 1.5rem; }
+  .logo-tagline { font-size: 0.8rem; }
+  .header { padding: 6px 0 4px; }
+  .tab-btn { font-size: 0.72rem; padding: 6px 6px; }
+  .tab-bar { top: 32px; }
+  .filter-bar { top: 68px; padding: 8px 10px; }
+  .filter-bar .input-row { gap: 6px; }
 }
 
 @media (max-width: 400px) {
-  .logo { font-size: 1.4rem; letter-spacing: 1px; }
-  .logo-tagline { font-size: 0.78rem; }
-  .header-inner { gap: 6px; }
-  .tab-btn { font-size: 0.7rem; padding: 7px 3px; }
-  .tab-bar { top: 32px; }
-  .filter-bar { top: 72px; }
+  .logo { font-size: 1.3rem; letter-spacing: 1px; }
+  .logo-tagline { font-size: 0.72rem; }
+  .header-inner { gap: 5px; }
+  .tab-btn { font-size: 0.68rem; padding: 5px 5px; }
+  .tab-bar { top: 28px; }
+  .filter-bar { top: 62px; }
 
   .qa-grid {
     grid-template-columns: 1fr;
