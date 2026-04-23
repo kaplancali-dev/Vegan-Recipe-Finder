@@ -30,14 +30,10 @@ export async function handleCook(id, opts = {}) {
     const choice = await showCookConfirm(dateStr);
 
     if (choice === 'undo') {
-      // Remove the last entry for this recipe
-      const idx = history.lastIndexOf(lastEntry);
-      if (idx !== -1) {
-        history.splice(idx, 1);
-        set('cookHistory', history);
-        autoSync();
-        showToast('Last cook entry removed');
-      }
+      // Remove ALL entries for this recipe
+      set('cookHistory', history.filter(h => h.id !== id));
+      autoSync();
+      showToast('Cook history cleared for this recipe');
       return;
     }
 
