@@ -2328,6 +2328,82 @@ input, select, textarea {
   border-radius: var(--radius-sm);
 }
 
+/* ── Star Rating Popup ───────────────────────────────────────── */
+
+.rate-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 8500;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.rate-overlay.show { opacity: 1; }
+
+.rate-card {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 24px 28px 18px;
+  text-align: center;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+  min-width: 240px;
+}
+
+.rate-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 14px;
+}
+
+.rate-stars {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.rate-star {
+  font-size: 2.2rem;
+  color: var(--border);
+  cursor: pointer;
+  transition: color 0.15s, transform 0.15s;
+  line-height: 1;
+  -webkit-user-select: none;
+  user-select: none;
+}
+.rate-star:hover,
+.rate-star.on {
+  color: #f5a623;
+  transform: scale(1.15);
+}
+
+.rate-skip {
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-size: 0.85rem;
+  cursor: pointer;
+  padding: 6px 16px;
+  border-radius: 999px;
+  transition: background var(--transition);
+}
+.rate-skip:hover {
+  background: var(--bg2);
+}
+
+/* Star display on recipe cards */
+.stars-display {
+  color: #f5a623;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  margin-left: 4px;
+}
+
 /* Mobile: larger tap targets, prevent text selection during tour */
 .tour-overlay {
   -webkit-tap-highlight-color: transparent;

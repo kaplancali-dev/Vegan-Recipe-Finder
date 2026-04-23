@@ -15,6 +15,7 @@ import { handleShareClick } from '../actions/share.js';
 import { renderCardList } from './RecipeCard.js';
 import { openDetail } from './RecipeDetail.js';
 import { showToast } from '../utils/toast.js';
+import { showRating } from '../utils/rating.js';
 import { stem, escHTML } from '../utils/text.js';
 
 /** @type {Array} Full recipe list */
@@ -270,26 +271,29 @@ function renderReadyList() {
       const current = get('makelist');
       if (current.includes(id)) {
         set('makelist', current.filter(i => i !== id));
-        showToast('Removed from Make list');
+        showToast('Removed from Shopping list');
       } else {
         current.push(id);
         set('makelist', current);
-        showToast('Added to Make list — check Shop tab!');
+        showToast('Added to Shopping list 🛒');
       }
       autoSync();
       return;
     }
 
-    // Cook button — log "I Made This"
+    // Cook button — log "I Made This" with star rating
     const cookBtn = e.target.closest('.cook-btn');
     if (cookBtn) {
       e.stopPropagation();
       const id = Number(cookBtn.dataset.cookId);
-      const history = get('cookHistory');
-      history.push({ id, date: new Date().toISOString() });
-      set('cookHistory', history);
-      autoSync();
-      showToast('Logged in I Made This!');
+      showRating().then((rating) => {
+        const history = get('cookHistory');
+        history.push({ id, date: new Date().toISOString(), rating });
+        set('cookHistory', history);
+        autoSync();
+        const stars = rating ? ' ' + '★'.repeat(rating) : '';
+        showToast(`Saved to Cook History${stars}`);
+      });
       return;
     }
 

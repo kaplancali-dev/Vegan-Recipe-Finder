@@ -12,6 +12,7 @@ import { autoSync } from '../services/sync.js';
 import { findRecipes } from '../services/matching.js';
 import { escHTML, norm } from '../utils/text.js';
 import { showToast } from '../utils/toast.js';
+import { showRating } from '../utils/rating.js';
 import { $ } from '../utils/dom.js';
 import { toggleFavorite } from '../actions/favorites.js';
 import { openDetail } from './RecipeDetail.js';
@@ -310,18 +311,21 @@ function renderShopTab() {
       return;
     }
 
-    // "I Made This" — log cook history and remove from make list
+    // "I Made This" — rate, log cook history, remove from make list
     const cookBtn = e.target.closest('[data-cook-recipe]');
     if (cookBtn) {
       e.stopPropagation();
       const id = Number(cookBtn.dataset.cookRecipe);
-      const history = get('cookHistory');
-      history.push({ id, date: new Date().toISOString() });
-      set('cookHistory', history);
-      const current = get('makelist');
-      set('makelist', current.filter(i => i !== id));
-      autoSync();
-      showToast('Logged in I Made This!');
+      showRating().then((rating) => {
+        const history = get('cookHistory');
+        history.push({ id, date: new Date().toISOString(), rating });
+        set('cookHistory', history);
+        const current = get('makelist');
+        set('makelist', current.filter(i => i !== id));
+        autoSync();
+        const stars = rating ? ' ' + '★'.repeat(rating) : '';
+        showToast(`Saved to Cook History${stars}`);
+      });
       return;
     }
 

@@ -96,11 +96,18 @@ export function renderCard(result, opts = {}) {
   const favLabel = isFavorite ? '❤️ Favorited' : '🤍 Favorite';
   const makeLabel = isOnMakeList ? '✓ Want to Make' : '📌 Want to Make';
 
-  // Cook button label
-  const lastCooked = cookedDates.length ? cookedDates[cookedDates.length - 1] : null;
-  const cookLabel = lastCooked
-    ? `🍳 Made ${new Date(lastCooked).toLocaleDateString(undefined, { month: 'numeric', day: 'numeric' })}`
-    : '🍳 I Made This';
+  // Cook button label — show date and star rating if available
+  const lastEntry = cookedDates.length ? cookedDates[cookedDates.length - 1] : null;
+  let cookLabel;
+  if (lastEntry) {
+    const dateStr = new Date(typeof lastEntry === 'string' ? lastEntry : lastEntry.date)
+      .toLocaleDateString(undefined, { month: 'numeric', day: 'numeric' });
+    const rating = typeof lastEntry === 'object' ? lastEntry.rating : 0;
+    const stars = rating ? ' ' + '★'.repeat(rating) : '';
+    cookLabel = `🍳 Made ${dateStr}${stars}`;
+  } else {
+    cookLabel = '🍳 I Made This';
+  }
 
   return `
     <article class="r-card ${tier}${heroClass}" data-recipe-id="${r.id}">
@@ -149,8 +156,7 @@ export function renderCardList(results, favorites, opts = {}) {
   const cookHistory = opts.cookHistory || [];
   return results.map(r => {
     const cookedDates = cookHistory
-      .filter(h => h.id === r.id)
-      .map(h => h.date);
+      .filter(h => h.id === r.id);
     return renderCard(r, {
       ...opts,
       isFavorite: favorites.has(r.id),

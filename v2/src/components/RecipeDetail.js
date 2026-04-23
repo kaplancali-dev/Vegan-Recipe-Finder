@@ -12,6 +12,7 @@ import { ingredientMatches, expandWithAliases } from '../services/matching.js';
 import { shareRecipe } from '../actions/share.js';
 import { toggleFavorite } from '../actions/favorites.js';
 import { showToast } from '../utils/toast.js';
+import { showRating } from '../utils/rating.js';
 
 /** @type {Array} Full recipe list — set by init */
 let _recipes = [];
@@ -175,13 +176,16 @@ export function openDetail(id) {
   const cookBtn = document.getElementById('detailCookBtn');
   if (cookBtn) {
     cookBtn.addEventListener('click', () => {
-      const history = get('cookHistory');
-      history.push({ id, date: new Date().toISOString() });
-      set('cookHistory', history);
-      autoSync();
-      cookBtn.textContent = '✓ Logged!';
-      cookBtn.disabled = true;
-      showToast('Logged in I Made This!');
+      showRating().then((rating) => {
+        const history = get('cookHistory');
+        history.push({ id, date: new Date().toISOString(), rating });
+        set('cookHistory', history);
+        autoSync();
+        cookBtn.textContent = '✓ Logged!';
+        cookBtn.disabled = true;
+        const stars = rating ? ' ' + '★'.repeat(rating) : '';
+        showToast(`Saved to Cook History${stars}`);
+      });
     });
   }
 
