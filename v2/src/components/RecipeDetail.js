@@ -123,6 +123,7 @@ export function openDetail(id) {
       ${recipe.url ? `<a href="${escHTML(recipe.url)}" target="_blank" rel="noopener" class="detail-link">View Recipe ↗</a>` : ''}
       <button class="btn btn-primary" id="detailFavBtn">${isFav ? '❤️ Unfavorite' : '🤍 Favorite'}</button>
       ${missingIngs.length ? `<button class="btn btn-outline" id="detailShopBtn">🛒 Add ${missingIngs.length} to list</button>` : ''}
+      <button class="btn btn-outline" id="detailShareBtn">📤 Share</button>
       ${recipe.url ? `<button class="btn btn-outline btn-sm" id="detailReportBtn">🔗 Report broken link</button>` : ''}
     </div>
   `;
@@ -155,6 +156,25 @@ export function openDetail(id) {
       autoSync();
       shopBtn.textContent = '✓ Added!';
       shopBtn.disabled = true;
+    });
+  }
+
+  const shareBtn = document.getElementById('detailShareBtn');
+  if (shareBtn) {
+    shareBtn.addEventListener('click', () => {
+      const title = recipe.title;
+      const recipeUrl = recipe.url || 'https://myharvestvegan.com';
+      const text = `Check out this vegan recipe: ${title}`;
+      const body = `${text}\n\n${recipeUrl}\n\nFound on HARVEST — myharvestvegan.com`;
+
+      if (navigator.share) {
+        navigator.share({ title, text: body, url: recipeUrl }).catch(() => {});
+      } else {
+        navigator.clipboard.writeText(body).then(() => {
+          shareBtn.textContent = '✓ Copied!';
+          setTimeout(() => { shareBtn.textContent = '📤 Share'; }, 2000);
+        }).catch(() => {});
+      }
     });
   }
 
