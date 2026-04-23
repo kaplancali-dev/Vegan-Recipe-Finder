@@ -190,7 +190,7 @@ input, select, textarea {
   gap: 2px;
   padding: 6px 0;
   position: sticky;
-  top: 44px;
+  top: 52px;
   z-index: 99;
   background: var(--bg);
   overflow-x: auto;
@@ -495,7 +495,7 @@ input, select, textarea {
 /* ── Filter Drawer & Bar ─────────────────────────────────────── */
 .filter-bar {
   position: sticky;
-  top: 80px;
+  top: 90px;
   z-index: 50;
   padding: 10px 12px;
 }
