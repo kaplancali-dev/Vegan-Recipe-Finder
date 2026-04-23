@@ -18,6 +18,7 @@ import { initShopping } from './components/Shopping.js';
 import { initFavorites } from './components/Favorites.js';
 import { initReadyToCook } from './components/ReadyToCook.js';
 import { initSyncPanel } from './components/SyncPanel.js';
+import { initOnboarding } from './components/Onboarding.js';
 import { submitFeedback } from './services/feedback.js';
 
 /* ── Boot sequence ───────────────────────────────────────────── */
@@ -119,6 +120,7 @@ initShopping(recipes);
 initFavorites(recipes);
 initReadyToCook(recipes);
 initSyncPanel();
+initOnboarding();
 
 /* ── Feedback form ──────────────────────────────────────────── */
 
