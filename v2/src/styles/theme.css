@@ -966,7 +966,8 @@ input, select, textarea {
 
 @media (max-width: 780px) {
   .intro-hero-grid { grid-template-columns: 1fr; gap: 18px; }
-  .intro-hero-video { max-height: 300px; overflow: hidden; border-radius: 12px; }
+  .intro-hero-video { border-radius: 12px; }
+  .intro-hero-video .hero-img { min-height: auto; max-height: none; object-fit: contain; }
   .intro-hero-sub { font-size: 14px; }
   .intro-hero-title { font-size: 20px; }
 }
