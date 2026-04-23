@@ -14,6 +14,7 @@ import { escHTML, norm } from '../utils/text.js';
 import { showToast } from '../utils/toast.js';
 import { $ } from '../utils/dom.js';
 import { toggleFavorite } from '../actions/favorites.js';
+import { openDetail } from './RecipeDetail.js';
 
 /** @type {Array} Full recipe list — set by initShopping */
 let _recipes = [];
@@ -233,7 +234,7 @@ function renderShopTab() {
     html += `<div class="shop-recipe-card${ready ? ' ready' : ''}${allChecked ? ' all-checked' : ''}" data-shop-recipe="${id}">
       <div class="shop-recipe-header">
         <div class="shop-recipe-title-row">
-          <span class="shop-recipe-title">${escHTML(title)}</span>
+          <a class="shop-recipe-title" href="#" data-open-recipe="${id}">${escHTML(title)}</a>
           <div class="shop-recipe-actions">
             ${!isFav ? `<button class="btn btn-sm shop-recipe-fav-btn" data-fav-recipe="${id}" title="Favorite">🤍 Favorite</button>` : ''}
             <button class="btn btn-sm shop-recipe-cook-btn" data-cook-recipe="${id}" title="I Made This">🍳 I Made This</button>
@@ -290,6 +291,16 @@ function renderShopTab() {
 
   // ── Event delegation ──
   container.onclick = (e) => {
+    // Recipe title link → open detail
+    const titleLink = e.target.closest('[data-open-recipe]');
+    if (titleLink) {
+      e.preventDefault();
+      e.stopPropagation();
+      const id = Number(titleLink.dataset.openRecipe);
+      openDetail(id);
+      return;
+    }
+
     // Favorite button
     const favBtn = e.target.closest('[data-fav-recipe]');
     if (favBtn) {

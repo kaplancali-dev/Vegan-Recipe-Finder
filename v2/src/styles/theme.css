@@ -1555,6 +1555,13 @@ input, select, textarea {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.shop-recipe-title:hover {
+  text-decoration: underline;
+  color: var(--green);
 }
 
 .shop-recipe-actions {
