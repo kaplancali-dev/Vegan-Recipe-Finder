@@ -32,12 +32,14 @@ export function initFavorites(recipes) {
 
   renderCollections();
   renderFavList();
+  renderCookHistory();
 
   subscribe('favorites', renderFavList);
   subscribe('collections', renderCollections);
   subscribe('ingredients', renderFavList);
   subscribe('staples', renderFavList);
   subscribe('makelist', renderFavList);
+  subscribe('cookHistory', () => { renderFavList(); renderCookHistory(); });
 }
 
 /* ── Collections Grid ────────────────────────────────────────── */
@@ -238,7 +240,8 @@ function renderFavList() {
   });
 
   const makeIds = getRef('makelist');
-  container.innerHTML = renderCardList(results, favSet, { showMatch: true, makelist: makeIds });
+  const cookHistory = getRef('cookHistory');
+  container.innerHTML = renderCardList(results, favSet, { showMatch: true, makelist: makeIds, cookHistory, userIngs: [...ings, ...staples] });
 
   container.onclick = (e) => {
     if (e.target.closest('[data-external]')) return;
@@ -271,10 +274,54 @@ function renderFavList() {
       return;
     }
 
+    // Cook button — log "I Made This"
+    const cookBtn = e.target.closest('.cook-btn');
+    if (cookBtn) {
+      e.stopPropagation();
+      const id = Number(cookBtn.dataset.cookId);
+      const history = get('cookHistory');
+      history.push({ id, date: new Date().toISOString() });
+      set('cookHistory', history);
+      autoSync();
+      showToast('Logged! Check your cooking history in Favorites.');
+      return;
+    }
+
     const card = e.target.closest('.r-card');
     if (card) {
       const id = Number(card.dataset.recipeId);
       openDetail(id);
     }
   };
+}
+
+/* ── Cooking History ────────────────────────────────────────── */
+
+function renderCookHistory() {
+  const card = $('#cookHistoryCard');
+  const listEl = $('#cookHistoryList');
+  if (!card || !listEl) return;
+
+  const history = getRef('cookHistory');
+  if (!history.length) {
+    card.hidden = true;
+    return;
+  }
+
+  card.hidden = false;
+
+  // Most recent first, limited to 20
+  const recent = [...history].reverse().slice(0, 20);
+
+  listEl.innerHTML = recent.map(entry => {
+    const recipe = _recipes.find(r => r.id === entry.id);
+    const title = recipe ? escHTML(recipe.title) : `Recipe #${entry.id}`;
+    const date = new Date(entry.date).toLocaleDateString(undefined, {
+      month: 'short', day: 'numeric', year: 'numeric'
+    });
+    return `<div class="cook-history-item">
+      <span>${title}</span>
+      <span class="cook-date">${date}</span>
+    </div>`;
+  }).join('');
 }

@@ -81,6 +81,7 @@ export function initReadyToCook(recipes) {
   subscribe('favorites', renderReadyList);
   subscribe('makelist', renderReadyList);
   subscribe('allergies', renderReadyList);
+  subscribe('cookHistory', renderReadyList);
 }
 
 /**
@@ -270,7 +271,8 @@ function renderReadyList() {
   if (emptyEl) emptyEl.hidden = true;
 
   const makeIds = getRef('makelist');
-  container.innerHTML = renderCardList(ready, favs, { makelist: makeIds });
+  const cookHistory = getRef('cookHistory');
+  container.innerHTML = renderCardList(ready, favs, { makelist: makeIds, cookHistory, userIngs: [...ings, ...staples] });
 
   // Event delegation
   container.onclick = (e) => {
@@ -302,6 +304,19 @@ function renderReadyList() {
         showToast('Added to Make list — check Shop tab!');
       }
       autoSync();
+      return;
+    }
+
+    // Cook button — log "I Made This"
+    const cookBtn = e.target.closest('.cook-btn');
+    if (cookBtn) {
+      e.stopPropagation();
+      const id = Number(cookBtn.dataset.cookId);
+      const history = get('cookHistory');
+      history.push({ id, date: new Date().toISOString() });
+      set('cookHistory', history);
+      autoSync();
+      showToast('Logged! Check your cooking history in Favorites.');
       return;
     }
 

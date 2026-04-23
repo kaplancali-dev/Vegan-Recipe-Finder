@@ -59,6 +59,7 @@ export function initBrowse(recipes) {
   subscribe('staples', renderResults);
   subscribe('favorites', renderResults);
   subscribe('makelist', renderResults);
+  subscribe('cookHistory', renderResults);
   subscribe('allergies', (val) => {
     _allergies = new Set(val);
     renderResults();
@@ -215,7 +216,8 @@ function _runRender() {
   const hasMore = results.length > _visibleCount;
 
   const makeIds = getRef('makelist');
-  list.innerHTML = renderCardList(visible, favs, { makelist: makeIds }) +
+  const cookHistory = getRef('cookHistory');
+  list.innerHTML = renderCardList(visible, favs, { makelist: makeIds, cookHistory, userIngs: [...ings, ...staples] }) +
     (hasMore ? `<button class="btn btn-outline load-more-btn" id="loadMoreBtn">Show more (${results.length - _visibleCount} remaining)</button>` : '');
 
   // Event delegation for card clicks, buttons, and load more
@@ -257,6 +259,19 @@ function _runRender() {
         showToast('Added to Make list — check Shop tab!');
       }
       autoSync();
+      return;
+    }
+
+    // Cook button — log "I Made This"
+    const cookBtn = e.target.closest('.cook-btn');
+    if (cookBtn) {
+      e.stopPropagation();
+      const id = Number(cookBtn.dataset.cookId);
+      const history = get('cookHistory');
+      history.push({ id, date: new Date().toISOString() });
+      set('cookHistory', history);
+      autoSync();
+      showToast('Logged! Check your cooking history in Favorites.');
       return;
     }
 

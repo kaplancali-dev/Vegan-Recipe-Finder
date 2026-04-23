@@ -20,6 +20,7 @@ const STORAGE_KEYS = {
   shopChecked:  'vrf_shop_checked',
   activeTab:    'vrf_active_tab',
   onboarded:    'vrf_onboarded',
+  cookHistory:  'vrf_cook_history',
 };
 
 /** @type {Map<string, Set<Function>>} */
@@ -41,6 +42,7 @@ const state = {
   shopChecked:  [],
   activeTab:    'browse',
   onboarded:    false,
+  cookHistory:  [],
 };
 
 /**
@@ -88,6 +90,7 @@ export function loadState() {
   state.collections  = lsGet(STORAGE_KEYS.collections, {});
   state.makelist     = lsGet(STORAGE_KEYS.makelist, []);
   state.shopChecked  = lsGet(STORAGE_KEYS.shopChecked, []);
+  state.cookHistory  = lsGet(STORAGE_KEYS.cookHistory, []);
   state.activeTab    = localStorage.getItem(STORAGE_KEYS.activeTab) || 'browse';
   state.onboarded    = lsGet(STORAGE_KEYS.onboarded, false) || localStorage.getItem('vrf_onboarded') === '1';
 }
@@ -190,6 +193,7 @@ function validateValue(key, value) {
     case 'allergies':
     case 'mealPlan':
     case 'makelist':
+    case 'cookHistory':
       return Array.isArray(value) ? value : undefined;
     case 'instructions':
     case 'collections':
