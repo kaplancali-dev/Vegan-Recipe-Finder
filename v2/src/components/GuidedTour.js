@@ -1,7 +1,7 @@
 /**
  * GuidedTour — tooltip-style walkthrough after onboarding.
  *
- * Shows 4 callout bubbles pointing at key UI elements,
+ * Shows 6 callout bubbles pointing at key UI elements,
  * advancing on tap/click. Teaches the app without a video.
  */
 
@@ -34,10 +34,17 @@ const STEPS = [
     arrow: 'top',
   },
   {
+    target: '#btn-favorites',
+    tab: 'favorites',
+    title: 'Save recipes you love',
+    body: 'Tap the heart on any recipe to save it here. Build your personal collection and plan meals for the week.',
+    arrow: 'top',
+  },
+  {
     target: '#btn-shopping',
     tab: 'shopping',
     title: 'Your shopping list builds itself',
-    body: 'Tap "Want to Make" on any recipe and HARVEST adds exactly what you need to buy, organized by recipe.',
+    body: 'Tap "Want to Make" on any recipe and HARVEST adds exactly what you\'re missing — organized by recipe so shopping is a breeze.',
     arrow: 'top',
   },
 ];
