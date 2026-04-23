@@ -100,6 +100,7 @@ function wireControls() {
       const unchecked = combined.filter(i => !checked.has(norm(i)));
       const checkedItems = combined.filter(i => checked.has(norm(i)));
 
+      const title = 'HARVEST Shopping List';
       let body = '';
       if (unchecked.length) {
         body += unchecked.map(i => `• ${i}`).join('\n');
@@ -108,18 +109,19 @@ function wireControls() {
         body += (unchecked.length ? '\n\n' : '') + 'Done:\n' + checkedItems.map(i => `✓ ${i}`).join('\n');
       }
 
-      const noteURL = `applenotes://create?title=${encodeURIComponent('Shopping List')}&body=${encodeURIComponent(body)}`;
-
-      // Try Apple Notes URL scheme first, fall back to share API, then clipboard
-      if (/iPhone|iPad|iPod/.test(navigator.userAgent)) {
-        window.location.href = noteURL;
+      // On iPhone/iPad use share sheet (which includes Notes), otherwise clipboard
+      if (/iPhone|iPad|iPod/.test(navigator.userAgent) && navigator.share) {
+        navigator.share({
+          title,
+          text: `${title}\n\n${body}`,
+        }).catch(() => {});
       } else if (navigator.share) {
         navigator.share({
-          title: 'Shopping List',
-          text: body,
+          title,
+          text: `${title}\n\n${body}`,
         }).catch(() => {});
       } else {
-        navigator.clipboard.writeText(`Shopping List\n\n${body}`).then(() => {
+        navigator.clipboard.writeText(`${title}\n\n${body}`).then(() => {
           showToast('Shopping list copied to clipboard!');
         }).catch(() => {
           showToast('Could not copy — try manually');
