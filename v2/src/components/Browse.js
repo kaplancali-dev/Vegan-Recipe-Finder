@@ -16,7 +16,7 @@ import { handleShareClick } from '../actions/share.js';
 import { renderCardList } from './RecipeCard.js';
 import { openDetail } from './RecipeDetail.js';
 import { showToast } from '../utils/toast.js';
-import { showRating } from '../utils/rating.js';
+import { handleCook } from '../actions/cook.js';
 
 /** How many recipes to show per page */
 const PAGE_SIZE = 50;
@@ -235,19 +235,11 @@ function _runRender() {
       return;
     }
 
-    // Cook button — log "I Made This" with star rating
+    // Cook button — log "I Made This" (with undo if already cooked)
     const cookBtn = e.target.closest('.cook-btn');
     if (cookBtn) {
       e.stopPropagation();
-      const id = Number(cookBtn.dataset.cookId);
-      showRating().then((rating) => {
-        const history = get('cookHistory');
-        history.push({ id, date: new Date().toISOString(), rating });
-        set('cookHistory', history);
-        autoSync();
-        const stars = rating ? ' ' + '★'.repeat(rating) : '';
-        showToast(`Saved to Cook History${stars}`);
-      });
+      handleCook(Number(cookBtn.dataset.cookId));
       return;
     }
 

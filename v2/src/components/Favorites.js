@@ -11,7 +11,7 @@ import { autoSync } from '../services/sync.js';
 import { findRecipes } from '../services/matching.js';
 import { escHTML } from '../utils/text.js';
 import { showToast } from '../utils/toast.js';
-import { showRating } from '../utils/rating.js';
+import { handleCook } from '../actions/cook.js';
 import { $ } from '../utils/dom.js';
 import { toggleFavorite } from '../actions/favorites.js';
 import { handleShareClick } from '../actions/share.js';
@@ -277,19 +277,11 @@ function renderFavList() {
       return;
     }
 
-    // Cook button — log "I Made This" with star rating
+    // Cook button — log "I Made This" (with undo if already cooked)
     const cookBtn = e.target.closest('.cook-btn');
     if (cookBtn) {
       e.stopPropagation();
-      const id = Number(cookBtn.dataset.cookId);
-      showRating().then((rating) => {
-        const history = get('cookHistory');
-        history.push({ id, date: new Date().toISOString(), rating });
-        set('cookHistory', history);
-        autoSync();
-        const stars = rating ? ' ' + '★'.repeat(rating) : '';
-        showToast(`Saved to Cook History${stars}`);
-      });
+      handleCook(Number(cookBtn.dataset.cookId));
       return;
     }
 

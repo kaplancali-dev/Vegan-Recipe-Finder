@@ -12,7 +12,7 @@ import { autoSync } from '../services/sync.js';
 import { findRecipes } from '../services/matching.js';
 import { escHTML, norm } from '../utils/text.js';
 import { showToast } from '../utils/toast.js';
-import { showRating } from '../utils/rating.js';
+import { handleCook } from '../actions/cook.js';
 import { $ } from '../utils/dom.js';
 import { toggleFavorite } from '../actions/favorites.js';
 import { openDetail } from './RecipeDetail.js';
@@ -315,17 +315,7 @@ function renderShopTab() {
     const cookBtn = e.target.closest('[data-cook-recipe]');
     if (cookBtn) {
       e.stopPropagation();
-      const id = Number(cookBtn.dataset.cookRecipe);
-      showRating().then((rating) => {
-        const history = get('cookHistory');
-        history.push({ id, date: new Date().toISOString(), rating });
-        set('cookHistory', history);
-        const current = get('makelist');
-        set('makelist', current.filter(i => i !== id));
-        autoSync();
-        const stars = rating ? ' ' + '★'.repeat(rating) : '';
-        showToast(`Saved to Cook History${stars}`);
-      });
+      handleCook(Number(cookBtn.dataset.cookRecipe), { removeFromMakelist: true });
       return;
     }
 

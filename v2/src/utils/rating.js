@@ -1,9 +1,9 @@
 /**
- * Rating — 5-star rating popup for "I Made This".
+ * Rating — 5-star rating popup and cook-confirm dialog.
  *
- * Shows a compact overlay with 5 tappable stars. Returns the
- * selected rating (1–5) or 0 if skipped. Uses event delegation
- * and CSS classes from theme.css.
+ * showRating()      → 5-star overlay, resolves 1–5 or 0 (skip).
+ * showCookConfirm() → "Log again / Undo" chooser when recipe
+ *                     was already cooked. Resolves 'log' | 'undo' | 'cancel'.
  */
 
 /**
@@ -32,7 +32,6 @@ export function showRating() {
 
     document.body.appendChild(overlay);
 
-    // Fade in
     requestAnimationFrame(() => {
       requestAnimationFrame(() => overlay.classList.add('show'));
     });
@@ -43,7 +42,6 @@ export function showRating() {
       resolve(rating);
     }
 
-    // Hover/touch preview
     const stars = overlay.querySelectorAll('.rate-star');
     function highlightUpTo(n) {
       stars.forEach((s, i) => s.classList.toggle('on', i < n));
@@ -64,7 +62,6 @@ export function showRating() {
       if (star) {
         const val = Number(star.dataset.star);
         highlightUpTo(val);
-        // Brief pause so the user sees their selection
         setTimeout(() => dismiss(val), 200);
         return;
       }
@@ -74,9 +71,54 @@ export function showRating() {
         return;
       }
 
-      // Tap outside card = skip
       if (!e.target.closest('.rate-card')) {
         dismiss(0);
+      }
+    });
+  });
+}
+
+/**
+ * Show a chooser when the recipe already has a cook entry.
+ * Resolves with 'log' (cook again), 'undo' (remove last), or 'cancel'.
+ * @param {string} dateStr - Human-readable date of last cook (e.g. "4/23")
+ * @returns {Promise<'log'|'undo'|'cancel'>}
+ */
+export function showCookConfirm(dateStr) {
+  return new Promise((resolve) => {
+    const overlay = document.createElement('div');
+    overlay.className = 'rate-overlay';
+
+    overlay.innerHTML = `
+      <div class="rate-card">
+        <div class="rate-title">You made this on ${dateStr}</div>
+        <button class="cook-confirm-btn cook-confirm-log" data-confirm="log">Log again</button>
+        <button class="cook-confirm-btn cook-confirm-undo" data-confirm="undo">Undo last entry</button>
+        <button class="rate-skip" data-confirm="cancel">Cancel</button>
+      </div>
+    `;
+
+    document.body.appendChild(overlay);
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => overlay.classList.add('show'));
+    });
+
+    function dismiss(action) {
+      overlay.style.opacity = '0';
+      setTimeout(() => overlay.remove(), 250);
+      resolve(action);
+    }
+
+    overlay.addEventListener('click', (e) => {
+      const btn = e.target.closest('[data-confirm]');
+      if (btn) {
+        dismiss(btn.dataset.confirm);
+        return;
+      }
+
+      if (!e.target.closest('.rate-card')) {
+        dismiss('cancel');
       }
     });
   });
