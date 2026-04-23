@@ -18,17 +18,7 @@ import { renderCardList } from './RecipeCard.js';
 import { openDetail } from './RecipeDetail.js';
 import { addToShopList } from './Shopping.js';
 
-/** Themed collection definitions */
-const COLLECTIONS = [
-  { key: 'weekly',      icon: '📅', label: 'Weekly Meal Plan' },
-  { key: 'celebration', icon: '🎉', label: 'Celebration' },
-  { key: 'romantic',    icon: '💕', label: 'Romantic Evening' },
-  { key: 'gameday',     icon: '🏈', label: 'Game Day' },
-  { key: 'batchcook',   icon: '🍲', label: 'Batch Cook' },
-  { key: 'quickweek',   icon: '⚡', label: 'Quick Weeknight' },
-  { key: 'holiday',     icon: '🎄', label: 'Holiday' },
-  { key: 'brunch',      icon: '🥞', label: 'Brunch' },
-];
+import { COLLECTIONS } from '../data/collections.js';
 
 /** @type {Array} Full recipe list */
 let _recipes = [];

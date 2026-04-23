@@ -10,6 +10,7 @@ import { get, set } from '../state/store.js';
 import { autoSync, reportBrokenLink } from '../services/sync.js';
 import { ingredientMatches, expandWithAliases } from '../services/matching.js';
 import { shareRecipe } from '../actions/share.js';
+import { toggleFavorite } from '../actions/favorites.js';
 
 /** @type {Array} Full recipe list — set by init */
 let _recipes = [];
@@ -133,17 +134,26 @@ export function openDetail(id) {
   const favBtn = document.getElementById('detailFavBtn');
   if (favBtn) {
     favBtn.addEventListener('click', () => {
-      const currentFavs = get('favorites');
-      const currentSet = new Set(currentFavs);
-      if (currentSet.has(id)) {
-        currentSet.delete(id);
+      toggleFavorite(id);
+      // Re-render after a short delay to allow collection picker to finish
+      const recheckFav = () => {
+        const nowFav = new Set(get('favorites')).has(id);
+        favBtn.textContent = nowFav ? '❤️ Unfavorite' : '🤍 Favorite';
+      };
+      // If unfavoriting, update immediately; if favoriting, update after picker closes
+      if (isFav) {
+        recheckFav();
       } else {
-        currentSet.add(id);
+        // Watch for the favorites state change from the picker
+        const observer = setInterval(() => {
+          if (!document.querySelector('.collection-picker-overlay')) {
+            recheckFav();
+            clearInterval(observer);
+          }
+        }, 200);
+        // Safety timeout
+        setTimeout(() => clearInterval(observer), 10000);
       }
-      set('favorites', [...currentSet]);
-      autoSync();
-      // Re-render the detail to update button
-      openDetail(id);
     });
   }
 
