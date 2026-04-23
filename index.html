@@ -84,16 +84,6 @@
         </div>
       </div>
 
-      <!-- Ingredient entry -->
-      <div class="card">
-        <label for="ingInput" class="card-title">Add Ingredients</label>
-        <p class="pantry-hint">Type what's in your fridge &amp; pantry, separated by commas. Fresh produce is automatically grouped as <strong style="color:var(--perishable)">perishables</strong> so you use them first. Tap &times; to remove.</p>
-        <div class="input-row">
-          <input id="ingInput" type="text" class="text-input" placeholder="e.g. tofu, rice, garlic" autocomplete="off">
-          <button id="ingAddBtn" class="btn btn-primary">Add</button>
-        </div>
-      </div>
-
       <!-- Perishables section (collapsible) -->
       <div class="card">
         <h3 class="card-title section-toggle" data-toggle="perishChips">🥬 Perishables <span class="muted">(use first — these go bad!)</span> <span class="guide-arrow">▾</span></h3>
@@ -112,6 +102,16 @@
         <div class="qa-grid section-body" id="qaGrid"></div>
       </div>
 
+      <!-- Ingredient entry -->
+      <div class="card">
+        <label for="ingInput" class="card-title">Add Ingredients</label>
+        <p class="pantry-hint">Type what's in your fridge &amp; pantry, separated by commas. Fresh produce is automatically grouped as <strong style="color:var(--perishable)">perishables</strong> so you use them first. Tap &times; to remove.</p>
+        <div class="input-row">
+          <input id="ingInput" type="text" class="text-input" placeholder="e.g. tofu, rice, garlic" autocomplete="off">
+          <button id="ingAddBtn" class="btn btn-primary">Add</button>
+        </div>
+      </div>
+
       <!-- Quick Start / About -->
       <div class="card about-card">
         <h3 class="card-title guide-toggle" id="aboutToggle">ℹ️ About HARVEST <span class="guide-arrow">▾</span></h3>
@@ -121,7 +121,7 @@
             <h4 class="about-heading">Quick Start</h4>
             <p class="about-text" style="margin-bottom:10px">HARVEST has three tabs across the top:</p>
             <ol class="about-steps">
-              <li><strong>🥬 My Pantry</strong> — this is where you tell HARVEST what you have. Type ingredients into the box at the top (separated by commas) to add perishables like fresh produce, herbs, and fruits. Then scroll down to <em>📌 Add Staples</em> and tap the category buttons to save things you always keep on hand — oils, spices, grains, beans, etc. These stay saved so you only set them up once.</li>
+              <li><strong>🥬 My Pantry</strong> — this is where you tell HARVEST what you have. Start by tapping <em>📌 Add Staples</em> to save things you always keep on hand — oils, spices, grains, beans, etc. These stay saved so you only set them up once. Then scroll down to <em>Add Ingredients</em> to type in perishables like fresh produce, herbs, and fruits (separated by commas).</li>
               <li><strong>🔍 Browse All</strong> — shows all 1,000+ recipes ranked by how well they match your pantry. The search bar at the top searches by recipe name <em>or</em> ingredient — type "pasta" to find pasta dishes, or "chickpeas" to find every recipe that uses chickpeas. Tap <em>Filters</em> to narrow by cuisine (Mexican, Thai, Italian…), max cook time, or allergens (soy, nuts, coconut…). Each recipe card shows which ingredients you have and which you're missing.</li>
               <li><strong>🍳 Ready to Make Now</strong> — shows only recipes you can make right now with 1 or fewer missing ingredients, based on what's in your pantry. This is the fastest way to decide what to cook tonight.</li>
             </ol>
