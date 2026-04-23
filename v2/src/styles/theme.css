@@ -325,6 +325,12 @@ input, select, textarea {
   color: var(--green);
 }
 
+.feedback-type-btn.on {
+  background: var(--green-soft);
+  border-color: var(--green);
+  color: var(--green);
+}
+
 .btn-danger {
   background: var(--danger-soft);
   color: var(--danger);

@@ -18,6 +18,7 @@ import { initShopping } from './components/Shopping.js';
 import { initFavorites } from './components/Favorites.js';
 import { initReadyToCook } from './components/ReadyToCook.js';
 import { initSyncPanel } from './components/SyncPanel.js';
+import { submitFeedback } from './services/feedback.js';
 
 /* ── Boot sequence ───────────────────────────────────────────── */
 
@@ -153,6 +154,54 @@ initShopping(recipes);
 initFavorites(recipes);
 initReadyToCook(recipes);
 initSyncPanel();
+
+/* ── Feedback form ──────────────────────────────────────────── */
+
+{
+  const formEl = $('#feedbackForm');
+  if (formEl) {
+    let feedbackType = 'suggestion';
+
+    // Type selector buttons
+    formEl.addEventListener('click', (e) => {
+      const typeBtn = e.target.closest('.feedback-type-btn');
+      if (typeBtn) {
+        formEl.querySelectorAll('.feedback-type-btn').forEach(b => b.classList.remove('on'));
+        typeBtn.classList.add('on');
+        feedbackType = typeBtn.dataset.type;
+      }
+    });
+
+    // Send button
+    const sendBtn = $('#feedbackSendBtn');
+    const msgEl = $('#feedbackMsg');
+    const statusEl = $('#feedbackStatus');
+
+    if (sendBtn && msgEl) {
+      sendBtn.addEventListener('click', async () => {
+        const message = msgEl.value.trim();
+        if (!message) {
+          statusEl.textContent = 'Please type a message first.';
+          return;
+        }
+
+        sendBtn.disabled = true;
+        statusEl.textContent = 'Sending…';
+
+        const result = await submitFeedback({ type: feedbackType, message });
+
+        if (result.ok) {
+          statusEl.textContent = '';
+          msgEl.value = '';
+          showToast('Thanks for your feedback! 💚');
+        } else {
+          statusEl.textContent = 'Could not send — try again later.';
+          sendBtn.disabled = false;
+        }
+      });
+    }
+  }
+}
 
 /* ── Restore last active tab ─────────────────────────────────── */
 
