@@ -206,11 +206,13 @@ initSyncPanel();
 /* ── PWA toolbar (share + refresh) ──────────────────────────── */
 
 {
+  const isIOS = /iPhone|iPad|iPod/.test(navigator.userAgent)
+    || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
   const isPWA = window.matchMedia('(display-mode: standalone)').matches
     || window.navigator.standalone === true;
 
   const toolbar = $('#pwaToolbar');
-  if (toolbar && isPWA) {
+  if (toolbar && isPWA && isIOS) {
     toolbar.hidden = false;
 
     const shareBtn = $('#pwaShare');
