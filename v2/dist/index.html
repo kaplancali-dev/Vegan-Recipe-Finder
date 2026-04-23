@@ -20,10 +20,10 @@
 <link rel="icon" type="image/png" href="favicon.png">
 <meta name="theme-color" content="#2d7a4f">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; img-src 'self' https: data:; connect-src 'self' https://*.supabase.co https://www.google-analytics.com; font-src 'self'; frame-src 'none';">
-  <script type="module" crossorigin src="/assets/index-BKiSWnEJ.js"></script>
+  <script type="module" crossorigin src="/assets/index-DFLImmgN.js"></script>
   <link rel="modulepreload" crossorigin href="/assets/supabase-DaN4is7k.js">
   <link rel="modulepreload" crossorigin href="/assets/recipes-BpSYmkTi.js">
-  <link rel="stylesheet" crossorigin href="/assets/index-D0TxvuW8.css">
+  <link rel="stylesheet" crossorigin href="/assets/index-wkX53Sa8.css">
 </head>
 <body>
 
@@ -155,8 +155,19 @@
 
           <div class="about-section">
             <h4 class="about-heading">Feedback &amp; Contact</h4>
-            <p class="about-text">Have a suggestion, found a bug, or just want to say hi? We'd love to hear from you:<br>
-            📧 <a href="mailto:kaplancali@icloud.com" style="color:var(--green)">kaplancali@icloud.com</a></p>
+            <p class="about-text" style="margin-bottom:8px">Have a suggestion, found a bug, or just want to say hi? We'd love to hear from you.</p>
+            <div id="feedbackForm">
+              <div style="display:flex;gap:6px;margin-bottom:6px">
+                <button class="btn btn-outline btn-sm feedback-type-btn on" data-type="suggestion">💡 Suggestion</button>
+                <button class="btn btn-outline btn-sm feedback-type-btn" data-type="bug">🐛 Bug</button>
+                <button class="btn btn-outline btn-sm feedback-type-btn" data-type="love">💚 Love it</button>
+              </div>
+              <textarea id="feedbackMsg" class="text-input" rows="3" placeholder="Tell us what's on your mind…" style="width:100%;resize:vertical;margin-bottom:6px"></textarea>
+              <div style="display:flex;align-items:center;gap:8px">
+                <button id="feedbackSendBtn" class="btn btn-primary btn-sm">Send Feedback</button>
+                <span id="feedbackStatus" class="muted" style="font-size:0.8rem"></span>
+              </div>
+            </div>
           </div>
 
           <div class="about-section">
