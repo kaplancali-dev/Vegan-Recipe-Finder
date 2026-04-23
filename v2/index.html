@@ -284,19 +284,16 @@
 
     <!-- SHOPPING LIST TAB -->
     <section id="tab-shopping" class="tab-panel" role="tabpanel" aria-labelledby="btn-shopping" hidden>
-      <div class="card" style="margin-bottom:14px">
-        <h3 class="card-title">📌 Recipes to Make</h3>
-        <div id="makeList"></div>
-      </div>
+      <div id="makeList" hidden></div>
       <div class="section-intro">
         <div class="section-intro-row">
           <h2>🛒 Shopping List</h2>
           <div style="display:flex;gap:6px">
-            <button id="sendToNotesBtn" class="btn btn-outline btn-sm">📝 Notes</button>
+            <button id="sendToNotesBtn" class="btn btn-outline btn-sm">📝 All to Notes</button>
             <button id="clearShopBtn" class="btn btn-outline btn-sm">Clear All</button>
           </div>
         </div>
-        <p style="font-size:0.82rem;color:var(--ink-soft);margin-top:2px">Missing ingredients from your recipes appear automatically.</p>
+        <p style="font-size:0.82rem;color:var(--ink-soft);margin-top:2px">Tap "📌 Make This" on any recipe, then shop by recipe here.</p>
       </div>
       <div id="shopList" class="shop-list"></div>
       <div id="shopEmpty" class="empty-state" hidden>

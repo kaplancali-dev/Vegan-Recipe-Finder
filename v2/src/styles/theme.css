@@ -1513,25 +1513,96 @@ input, select, textarea {
   background: var(--green-soft);
 }
 
-/* ── Make List Items ─────────────────────────────────────────── */
-.make-recipe-item {
-  display: flex;
-  align-items: center;
-  padding: 8px 12px;
-  background: var(--accent-soft);
-  border-radius: var(--radius-sm);
-  margin-bottom: 4px;
-}
-
-.make-recipe-item.ready {
-  background: var(--green-soft);
-}
-
-/* ── Shopping List ───────────────────────────────────────────── */
+/* ── Shopping List — Recipe Cards ────────────────────────────── */
 .shop-list {
   display: flex;
   flex-direction: column;
+  gap: 12px;
+}
+
+.shop-recipe-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: all var(--transition);
+}
+
+.shop-recipe-card.ready {
+  border-color: var(--green);
+  background: var(--green-soft);
+}
+
+.shop-recipe-card.all-checked {
+  opacity: 0.7;
+}
+
+.shop-recipe-header {
+  padding: 12px 14px 8px;
+}
+
+.shop-recipe-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.shop-recipe-title {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--ink);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.shop-recipe-actions {
+  display: flex;
+  align-items: center;
   gap: 4px;
+  flex-shrink: 0;
+}
+
+.shop-recipe-notes-btn {
+  font-size: 1rem !important;
+  opacity: 0.7;
+}
+
+.shop-recipe-notes-btn:hover {
+  opacity: 1;
+}
+
+.shop-recipe-delete-btn {
+  font-size: 1.1rem !important;
+  opacity: 0.4;
+}
+
+.shop-recipe-delete-btn:hover {
+  opacity: 1;
+  color: var(--accent);
+}
+
+.shop-recipe-meta {
+  margin-top: 2px;
+}
+
+.shop-recipe-count {
+  font-size: 0.78rem;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.shop-recipe-ready {
+  font-size: 0.78rem;
+  color: var(--green);
+  font-weight: 700;
+}
+
+.shop-recipe-items {
+  border-top: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
 }
 
 .shop-item {
@@ -1539,20 +1610,22 @@ input, select, textarea {
   align-items: center;
   gap: 10px;
   padding: 10px 14px;
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   cursor: pointer;
   transition: all var(--transition);
+  border-bottom: 1px solid var(--border);
+}
+
+.shop-item:last-child {
+  border-bottom: none;
 }
 
 .shop-item:hover {
-  border-color: var(--green);
+  background: var(--green-soft);
 }
 
 .shop-item.done {
-  opacity: 0.5;
+  opacity: 0.45;
   text-decoration: line-through;
 }
 
@@ -1565,6 +1638,7 @@ input, select, textarea {
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 0.7rem;
   transition: all var(--transition);
 }
 

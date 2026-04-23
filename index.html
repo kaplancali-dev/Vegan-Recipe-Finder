@@ -20,10 +20,10 @@
 <link rel="icon" type="image/png" href="favicon.png">
 <meta name="theme-color" content="#2d7a4f">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; img-src 'self' https: data:; connect-src 'self' https://*.supabase.co https://www.google-analytics.com; font-src 'self'; frame-src 'none';">
-  <script type="module" crossorigin src="/assets/index-vPIIH2hm.js"></script>
+  <script type="module" crossorigin src="/assets/index-Dk8MRsA4.js"></script>
   <link rel="modulepreload" crossorigin href="/assets/supabase-DaN4is7k.js">
   <link rel="modulepreload" crossorigin href="/assets/recipes-BpSYmkTi.js">
-  <link rel="stylesheet" crossorigin href="/assets/index-BpcOSYRl.css">
+  <link rel="stylesheet" crossorigin href="/assets/index-CxgMBViZ.css">
 </head>
 <body>
 
@@ -288,19 +288,16 @@
 
     <!-- SHOPPING LIST TAB -->
     <section id="tab-shopping" class="tab-panel" role="tabpanel" aria-labelledby="btn-shopping" hidden>
-      <div class="card" style="margin-bottom:14px">
-        <h3 class="card-title">📌 Recipes to Make</h3>
-        <div id="makeList"></div>
-      </div>
+      <div id="makeList" hidden></div>
       <div class="section-intro">
         <div class="section-intro-row">
           <h2>🛒 Shopping List</h2>
           <div style="display:flex;gap:6px">
-            <button id="sendToNotesBtn" class="btn btn-outline btn-sm">📝 Notes</button>
+            <button id="sendToNotesBtn" class="btn btn-outline btn-sm">📝 All to Notes</button>
             <button id="clearShopBtn" class="btn btn-outline btn-sm">Clear All</button>
           </div>
         </div>
-        <p style="font-size:0.82rem;color:var(--ink-soft);margin-top:2px">Missing ingredients from your recipes appear automatically.</p>
+        <p style="font-size:0.82rem;color:var(--ink-soft);margin-top:2px">Tap "📌 Make This" on any recipe, then shop by recipe here.</p>
       </div>
       <div id="shopList" class="shop-list"></div>
       <div id="shopEmpty" class="empty-state" hidden>
