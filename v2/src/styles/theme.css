@@ -2110,6 +2110,7 @@ input, select, textarea {
   .tab-bar { top: 32px; }
   .filter-bar { top: 68px; padding: 8px 10px; }
   .filter-bar .input-row { gap: 6px; }
+  .filter-bar .text-input::placeholder { font-size: 0.72rem; }
 }
 
 @media (max-width: 400px) {
@@ -2119,6 +2120,7 @@ input, select, textarea {
   .tab-btn { font-size: 0.68rem; padding: 5px 5px; }
   .tab-bar { top: 28px; }
   .filter-bar { top: 62px; }
+  .filter-bar .text-input::placeholder { font-size: 0.68rem; }
 
   .qa-grid {
     grid-template-columns: 1fr;
