@@ -11,6 +11,7 @@ import { autoSync, reportBrokenLink } from '../services/sync.js';
 import { ingredientMatches, expandWithAliases } from '../services/matching.js';
 import { shareRecipe } from '../actions/share.js';
 import { toggleFavorite } from '../actions/favorites.js';
+import { showToast } from '../utils/toast.js';
 
 /** @type {Array} Full recipe list — set by init */
 let _recipes = [];
@@ -125,6 +126,7 @@ export function openDetail(id) {
       ${recipe.url ? `<a href="${escHTML(recipe.url)}" target="_blank" rel="noopener" class="detail-link">View Recipe ↗</a>` : ''}
       <button class="btn btn-primary" id="detailFavBtn">${isFav ? '❤️ Unfavorite' : '🤍 Favorite'}</button>
       ${missingIngs.length ? `<button class="btn btn-outline" id="detailShopBtn">🛒 Add ${missingIngs.length} to list</button>` : ''}
+      <button class="btn btn-outline" id="detailCookBtn">🍳 I Made This</button>
       <button class="btn btn-outline" id="detailShareBtn">📤 Share</button>
       ${recipe.url ? `<button class="btn btn-outline btn-sm" id="detailReportBtn">🔗 Report broken link</button>` : ''}
     </div>
@@ -167,6 +169,19 @@ export function openDetail(id) {
       autoSync();
       shopBtn.textContent = '✓ Added!';
       shopBtn.disabled = true;
+    });
+  }
+
+  const cookBtn = document.getElementById('detailCookBtn');
+  if (cookBtn) {
+    cookBtn.addEventListener('click', () => {
+      const history = get('cookHistory');
+      history.push({ id, date: new Date().toISOString() });
+      set('cookHistory', history);
+      autoSync();
+      cookBtn.textContent = '✓ Logged!';
+      cookBtn.disabled = true;
+      showToast('Logged! Check your cooking history in Favorites.');
     });
   }
 

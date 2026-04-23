@@ -20,10 +20,10 @@
 <link rel="icon" type="image/png" href="favicon.png">
 <meta name="theme-color" content="#2d7a4f">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; img-src 'self' https: data:; connect-src 'self' https://*.supabase.co https://www.google-analytics.com; font-src 'self'; frame-src 'none';">
-  <script type="module" crossorigin src="/assets/index-RhmbAi3p.js"></script>
+  <script type="module" crossorigin src="/assets/index-CAMKz4GT.js"></script>
   <link rel="modulepreload" crossorigin href="/assets/supabase-DaN4is7k.js">
   <link rel="modulepreload" crossorigin href="/assets/recipes-BpSYmkTi.js">
-  <link rel="stylesheet" crossorigin href="/assets/index-BDkyYz5H.css">
+  <link rel="stylesheet" crossorigin href="/assets/index-CvmuJBpW.css">
 </head>
 <body>
 
@@ -175,6 +175,10 @@
             <p class="about-text">HARVEST does not collect, sell, or share your personal data. Your ingredient lists, staples, favorites, and preferences are stored locally on your device. If you enable Cloud Sync, your data is stored securely in your own Supabase account and is never shared with third parties. We use basic analytics to understand how the app is used — no tracking, no ads, ever.</p>
           </div>
 
+          <div class="about-section" style="text-align:center">
+            <button id="darkModeToggle" class="btn btn-outline btn-sm">🌙 Dark Mode</button>
+          </div>
+
           <div class="about-version">
             <span class="muted">HARVEST v2.27 · Made with 💚 and plants</span>
           </div>
@@ -274,6 +278,11 @@
       <div id="favList" class="recipe-list"></div>
       <div id="favEmpty" class="empty-state" hidden>
         <p>Tap the ❤️ on any recipe to save it here.</p>
+      </div>
+
+      <div class="card" id="cookHistoryCard" hidden>
+        <h3 class="card-title section-toggle" data-toggle="cookHistoryList">🍳 Cooking History <span class="guide-arrow">▾</span></h3>
+        <div id="cookHistoryList" class="section-body"></div>
       </div>
     </section>
 

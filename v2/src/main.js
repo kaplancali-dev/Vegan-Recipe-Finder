@@ -168,6 +168,41 @@ initSyncPanel();
   }
 }
 
+/* ── Dark mode toggle ───────────────────────────────────────── */
+
+{
+  const DARK_KEY = 'vrf_darkmode';
+
+  function applyTheme(dark) {
+    if (dark) {
+      document.documentElement.dataset.theme = 'dark';
+    } else {
+      delete document.documentElement.dataset.theme;
+    }
+    const btn = $('#darkModeToggle');
+    if (btn) btn.textContent = dark ? '☀️ Light Mode' : '🌙 Dark Mode';
+  }
+
+  // On load: check localStorage, fall back to prefers-color-scheme
+  const stored = localStorage.getItem(DARK_KEY);
+  let isDark;
+  if (stored !== null) {
+    isDark = stored === '1';
+  } else {
+    isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  }
+  applyTheme(isDark);
+
+  const toggleBtn = $('#darkModeToggle');
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', () => {
+      isDark = !isDark;
+      localStorage.setItem(DARK_KEY, isDark ? '1' : '0');
+      applyTheme(isDark);
+    });
+  }
+}
+
 /* ── Restore last active tab ─────────────────────────────────── */
 
 const savedTab = get('activeTab');

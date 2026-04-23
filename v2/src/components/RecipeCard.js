@@ -8,6 +8,7 @@
 
 import { escHTML, norm } from '../utils/text.js';
 import { isPerishableIng } from '../services/matching.js';
+import { findSubstitute } from '../utils/substitutions.js';
 
 /**
  * Return a CSS class for the match percentage tier.
@@ -40,10 +41,12 @@ function ingChip(name, cls) {
  * @param {Object} [opts]
  * @param {boolean} [opts.showMatch=true]
  * @param {boolean} [opts.isFavorite=false]
+ * @param {Array} [opts.cookedDates] - Dates this recipe was cooked
+ * @param {string[]} [opts.userIngs] - All user ingredients for substitution hints
  * @returns {string} HTML string
  */
 export function renderCard(result, opts = {}) {
-  const { showMatch = true, isFavorite = false, isOnMakeList = false } = opts;
+  const { showMatch = true, isFavorite = false, isOnMakeList = false, cookedDates = [], userIngs = [] } = opts;
   const r = result;
 
   const tier = matchTier(r.pct);
@@ -81,9 +84,23 @@ export function renderCard(result, opts = {}) {
     ? `<div class="chip-label-sm" style="margin-top:4px">You need</div><div class="chips">${needNames.map(n => ingChip(n, 'c-need')).join('')}</div>`
     : '';
 
+  // Substitution hint: only when exactly 1 missing ingredient
+  const subHint = needNames.length === 1 && userIngs.length
+    ? findSubstitute(needNames[0], userIngs)
+    : null;
+  const subHtml = subHint
+    ? `<div class="sub-hint">💡 Try ${escHTML(subHint)} instead of ${escHTML(needNames[0])}</div>`
+    : '';
+
   // Action buttons
   const favLabel = isFavorite ? '❤️ Favorited' : '🤍 Favorite';
   const makeLabel = isOnMakeList ? '✓ Want to Make' : '📌 Want to Make';
+
+  // Cook button label
+  const lastCooked = cookedDates.length ? cookedDates[cookedDates.length - 1] : null;
+  const cookLabel = lastCooked
+    ? `🍳 Made ${new Date(lastCooked).toLocaleDateString(undefined, { month: 'numeric', day: 'numeric' })}`
+    : '🍳 I Made This';
 
   return `
     <article class="r-card ${tier}${heroClass}" data-recipe-id="${r.id}">
@@ -106,10 +123,12 @@ export function renderCard(result, opts = {}) {
         ${nutRow}
         ${haveChips}
         ${needChips}
+        ${subHtml}
         <div class="r-actions">
           ${r.url ? `<a href="${escHTML(r.url)}" target="_blank" rel="noopener" class="btn-sm btn-link" data-external>📖 View Instructions</a>` : ''}
           <button class="btn-sm btn-shop make-btn${isOnMakeList ? ' on' : ''}" data-make-id="${r.id}">${makeLabel}</button>
           <button class="btn-sm btn-fav fav-btn${isFavorite ? ' on' : ''}" data-fav-id="${r.id}" aria-label="Toggle favorite">${favLabel}</button>
+          <button class="btn-sm btn-cook cook-btn" data-cook-id="${r.id}">${cookLabel}</button>
           <button class="btn-sm btn-share share-btn" data-share-id="${r.id}" data-share-title="${escHTML(r.title)}" data-share-url="${escHTML(r.url || '')}">📤 Share</button>
         </div>
       </div>
@@ -127,9 +146,16 @@ export function renderCard(result, opts = {}) {
 export function renderCardList(results, favorites, opts = {}) {
   if (!results.length) return '';
   const makeSet = opts.makelist ? new Set(opts.makelist) : new Set();
-  return results.map(r => renderCard(r, {
-    ...opts,
-    isFavorite: favorites.has(r.id),
-    isOnMakeList: makeSet.has(r.id),
-  })).join('');
+  const cookHistory = opts.cookHistory || [];
+  return results.map(r => {
+    const cookedDates = cookHistory
+      .filter(h => h.id === r.id)
+      .map(h => h.date);
+    return renderCard(r, {
+      ...opts,
+      isFavorite: favorites.has(r.id),
+      isOnMakeList: makeSet.has(r.id),
+      cookedDates,
+    });
+  }).join('');
 }

@@ -29,6 +29,28 @@
   --safe-bottom: env(safe-area-inset-bottom, 0px);
 }
 
+/* ── Dark Theme ─────────────────────────────────────────────── */
+[data-theme="dark"] {
+  --bg: #1a1e1a;
+  --bg2: #232823;
+  --card: #2a302a;
+  --ink: #e4e8e4;
+  --ink-soft: #b0bab0;
+  --muted: #7a8a7a;
+  --green: #4ead6e;
+  --green-deep: #6fcf8e;
+  --green-soft: #1e3528;
+  --accent: #e8a030;
+  --accent-soft: #3a2e1a;
+  --danger: #ef5555;
+  --danger-soft: #3a1e1e;
+  --perishable: #e8944a;
+  --perishable-soft: #3a2a1a;
+  --border: #3a423a;
+  --shadow: 0 1px 3px rgba(0,0,0,.2), 0 4px 16px rgba(0,0,0,.15);
+  --shadow-hover: 0 2px 6px rgba(0,0,0,.25), 0 12px 32px rgba(0,0,0,.2);
+}
+
 /* ── Reset & Base ────────────────────────────────────────────── */
 *, *::before, *::after {
   box-sizing: border-box;
@@ -1840,3 +1862,41 @@ input, select, textarea {
 .flex { display: flex; }
 .flex-center { display: flex; align-items: center; justify-content: center; }
 .hidden { display: none !important; }
+
+/* ── Substitution Hint ─────────────────────────────────────── */
+.sub-hint {
+  font-size: 0.75rem;
+  color: var(--green);
+  background: var(--green-soft);
+  padding: 4px 8px;
+  border-radius: var(--radius-xs);
+  margin-top: 6px;
+}
+
+/* ── Cook Button ───────────────────────────────────────────── */
+.btn-cook {
+  background: var(--bg);
+  border-color: var(--border);
+  color: var(--ink);
+}
+.btn-cook:hover {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* ── Cook History List ─────────────────────────────────────── */
+.cook-history-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  background: var(--bg);
+  border-radius: var(--radius-sm);
+  margin-bottom: 4px;
+  font-size: 0.85rem;
+}
+.cook-history-item .cook-date {
+  font-size: 0.75rem;
+  color: var(--muted);
+}
