@@ -2202,6 +2202,18 @@ input, select, textarea {
   border: 1px solid var(--danger) !important;
   font-weight: 600;
 }
+.allergen-add-chip {
+  background: var(--surface);
+  color: var(--ink-soft);
+  border: 1px dashed var(--border);
+  font-size: 0.78rem;
+  transition: background 0.15s, border-color 0.15s;
+}
+.allergen-add-chip:hover {
+  background: var(--danger-soft);
+  border-color: var(--danger);
+  color: var(--danger);
+}
 
 /* ── GF Swap Tag (inline on ingredient chips) ─────────────── */
 .gf-swap {

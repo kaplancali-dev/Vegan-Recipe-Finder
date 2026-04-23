@@ -60,21 +60,22 @@ function checkHero() {
 /* ── Allergy Chips ──────────────────────────────────────────── */
 
 function renderAllergyChips() {
-  const card = $('#allergyCard');
   const container = $('#allergyChips');
-  if (!card || !container) return;
+  const addContainer = $('#allergyAdd');
+  if (!container) return;
 
   const allergies = getRef('allergies');
-  if (!allergies.length) {
-    card.hidden = true;
-    return;
-  }
+  const allergySet = new Set(allergies);
 
-  card.hidden = false;
-  container.innerHTML = allergies.map((key, idx) => {
-    const label = ALLERGEN_LABELS[key] || escHTML(key);
-    return `<span class="chip allergy-chip">${label} <span class="chip-x" data-remove-allergy="${idx}" title="Remove">&times;</span></span>`;
-  }).join('');
+  // Active allergen chips with remove buttons
+  if (allergies.length) {
+    container.innerHTML = allergies.map((key, idx) => {
+      const label = ALLERGEN_LABELS[key] || escHTML(key);
+      return `<span class="chip allergy-chip">${label} <span class="chip-x" data-remove-allergy="${idx}" title="Remove">&times;</span></span>`;
+    }).join('');
+  } else {
+    container.innerHTML = '<span class="muted" style="font-size:0.82rem">No allergens set — tap below to filter out recipes</span>';
+  }
 
   container.onclick = (e) => {
     const removeEl = e.target.closest('[data-remove-allergy]');
@@ -86,6 +87,31 @@ function renderAllergyChips() {
     autoSync();
     showToast('Allergen removed');
   };
+
+  // Add-allergen buttons for allergens not yet active
+  if (addContainer) {
+    const available = Object.entries(ALLERGEN_LABELS).filter(([key]) => !allergySet.has(key));
+    if (available.length) {
+      addContainer.innerHTML = available.map(([key, label]) =>
+        `<span class="chip allergen-add-chip" data-add-allergy="${escHTML(key)}" style="cursor:pointer">+ ${label}</span>`
+      ).join('');
+    } else {
+      addContainer.innerHTML = '<span class="muted" style="font-size:0.82rem">All allergens active</span>';
+    }
+
+    addContainer.onclick = (e) => {
+      const chip = e.target.closest('[data-add-allergy]');
+      if (!chip) return;
+      const key = chip.dataset.addAllergy;
+      const current = get('allergies');
+      if (!current.includes(key)) {
+        current.push(key);
+        set('allergies', current);
+        autoSync();
+        showToast('Allergen added — matching recipes will be hidden');
+      }
+    };
+  }
 }
 
 /* ── User Guide Toggle ──────────────────────────────────────── */

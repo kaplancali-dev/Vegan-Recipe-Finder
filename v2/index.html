@@ -84,9 +84,12 @@
       </div>
 
       <!-- Allergies section (collapsible) -->
-      <div class="card" id="allergyCard" hidden>
-        <h3 class="card-title section-toggle" data-toggle="allergyChips">⚠️ Allergens <span class="muted">(filtered out of all recipes)</span> <span class="guide-arrow">▾</span></h3>
-        <div id="allergyChips" class="chip-wrap section-body"></div>
+      <div class="card" id="allergyCard">
+        <h3 class="card-title section-toggle" data-toggle="allergyBody">⚠️ Allergens <span class="muted">(filtered out of all recipes)</span> <span class="guide-arrow">▾</span></h3>
+        <div id="allergyBody" class="section-body">
+          <div id="allergyChips" class="chip-wrap" style="margin-bottom:8px"></div>
+          <div id="allergyAdd" class="chip-wrap"></div>
+        </div>
       </div>
 
       <!-- Perishables section (collapsible) -->
