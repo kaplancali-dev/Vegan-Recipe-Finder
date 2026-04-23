@@ -240,27 +240,7 @@ initSyncPanel();
 const savedTab = get('activeTab');
 showTab(TAB_MAP[savedTab] ? savedTab : 'browse');
 
-/* ── Service worker cleanup ──────────────────────────────────── */
-// v1 registered a caching SW; register the kill-switch to flush stale caches,
-// then unregister so future loads go straight to the network.
-
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js').then((reg) => {
-      // Once the kill-switch SW activates, unregister it
-      if (reg.active) {
-        reg.unregister();
-      } else if (reg.installing || reg.waiting) {
-        const sw = reg.installing || reg.waiting;
-        sw.addEventListener('statechange', () => {
-          if (sw.state === 'activated') reg.unregister();
-        });
-      }
-    }).catch(() => {
-      // No SW to clean up — that's fine
-    });
-  });
-}
+/* ── Service worker cleanup is handled by /sw-cleanup.js ─────── */
 
 /* ── Expose for debugging ────────────────────────────────────── */
 
