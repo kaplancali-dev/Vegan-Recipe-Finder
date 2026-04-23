@@ -1,3 +1,23 @@
+/* ── Skip-to-content link (accessibility) ──────────────────────── */
+
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 16px;
+  z-index: 999;
+  padding: 8px 16px;
+  background: var(--green);
+  color: #fff;
+  border-radius: 0 0 8px 8px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
 /* ── HARVEST v2 — Light Theme ──────────────────────────────────── */
 
 /* ── CSS Custom Properties ───────────────────────────────────── */

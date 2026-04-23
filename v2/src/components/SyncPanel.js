@@ -310,8 +310,7 @@ function wireSyncCodes(container) {
         navigator.clipboard.writeText(code).then(() => {
           showToast('Sync code copied to clipboard!');
         }).catch(() => {
-          showToast('Could not copy — check console');
-          console.log('Sync code:', code);
+          showToast('Could not copy sync code.');
         });
       }
     });

@@ -10,6 +10,7 @@ import { autoSync } from '../services/sync.js';
 import { findRecipes } from '../services/matching.js';
 import { $ } from '../utils/dom.js';
 import { toggleFavorite } from '../actions/favorites.js';
+import { V1_CATEGORIES } from '../data/categories.js';
 import { handleShareClick } from '../actions/share.js';
 import { renderCardList } from './RecipeCard.js';
 import { openDetail } from './RecipeDetail.js';
@@ -34,35 +35,7 @@ let _readyMaxTime = Infinity;
 /** Debounce timer */
 let _searchTimer = null;
 
-/**
- * Fixed category list (same as Browse).
- */
-const V1_CATEGORIES = [
-  { label: 'Breakfast',        icon: '🧇' },
-  { label: 'Lunch / Dinner',   icon: '🍢', filter: 'Lunch|Dinner' },
-  { label: 'Soups & Stews',    icon: '🍲' },
-  { label: 'Salads',           icon: '🥗' },
-  { label: 'Pasta & Noodles',  icon: '🍝' },
-  { label: 'High-Protein',     icon: '🏋️' },
-  { label: 'Snacks',           icon: '🥨' },
-  { label: 'Desserts',         icon: '🍨' },
-  { label: 'Sauces & Dips',    icon: '🫙' },
-  { label: 'Game Day',         icon: '🏈' },
-  { label: 'Japanese',         icon: '🍱 🇯🇵' },
-  { label: 'Mexican',          icon: '🌮 🇲🇽' },
-  { label: 'Chinese',          icon: '🥡 🇨🇳' },
-  { label: 'Thai',             icon: '🍜 🇹🇭' },
-  { label: 'Vietnamese',       icon: '🍜 🇻🇳' },
-  { label: 'Indian',           icon: '🍛 🇮🇳' },
-  { label: 'Korean',           icon: '🥢 🇰🇷' },
-  { label: 'Italian',          icon: '🍝 🇮🇹' },
-  { label: 'Mediterranean',    icon: '🫒' },
-  { label: 'Middle Eastern',   icon: '🧆' },
-  { label: 'Southern',         icon: '🌽' },
-  { label: 'GF Bread',         icon: '🍞' },
-  { label: 'One-Pot',          icon: '🥘' },
-  { label: 'Instant Pot',      icon: '⚡' },
-];
+/* V1_CATEGORIES imported from ../data/categories.js */
 
 /**
  * Initialize the Ready to Cook tab.

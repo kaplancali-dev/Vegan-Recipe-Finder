@@ -77,14 +77,33 @@ export function clearAliasCache() {
 }
 
 /**
- * Check if a recipe ingredient matches any user ingredient (bidirectional substring).
+ * Check if a recipe ingredient matches any user ingredient.
+ * Uses word-boundary matching to avoid false positives
+ * (e.g. "rice" should not match "licorice").
  *
  * @param {string} recipeIng - Normalized recipe ingredient
  * @param {string[]} userIngs - Expanded normalized user ingredients
  * @returns {boolean}
  */
 export function ingredientMatches(recipeIng, userIngs) {
-  return userIngs.some(ai => recipeIng.includes(ai) || ai.includes(recipeIng));
+  return userIngs.some(ai => _wordBoundaryMatch(recipeIng, ai) || _wordBoundaryMatch(ai, recipeIng));
+}
+
+/**
+ * Check if `needle` appears in `haystack` at a word boundary.
+ * A boundary is the start/end of string, a space, or a hyphen.
+ * @param {string} haystack
+ * @param {string} needle
+ * @returns {boolean}
+ */
+function _wordBoundaryMatch(haystack, needle) {
+  const idx = haystack.indexOf(needle);
+  if (idx === -1) return false;
+  const before = idx === 0 || haystack[idx - 1] === ' ' || haystack[idx - 1] === '-';
+  const after = idx + needle.length === haystack.length
+    || haystack[idx + needle.length] === ' '
+    || haystack[idx + needle.length] === '-';
+  return before && after;
 }
 
 /**
