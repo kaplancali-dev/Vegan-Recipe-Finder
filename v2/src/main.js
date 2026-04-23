@@ -109,41 +109,6 @@ window.addEventListener('unhandledrejection', (e) => {
   });
 });
 
-/* ── PWA refresh / share buttons (standalone mode only) ──────── */
-
-const isStandalone = window.navigator.standalone === true
-  || window.matchMedia('(display-mode: standalone)').matches;
-
-if (isStandalone) {
-  const pwaToolbar = document.getElementById('pwaToolbar');
-  if (pwaToolbar) pwaToolbar.classList.add('pwa-visible');
-
-  const refreshBtn = $('#refreshBtn');
-  if (refreshBtn) {
-    refreshBtn.addEventListener('click', () => location.reload());
-  }
-
-  const shareBtn = $('#shareBtn');
-  if (shareBtn) {
-    shareBtn.addEventListener('click', async () => {
-      const shareData = {
-        title: 'HARVEST — Vegan Recipe Finder',
-        text: 'Find vegan recipes based on what\'s in your pantry!',
-        url: window.location.href,
-      };
-      if (navigator.share) {
-        try { await navigator.share(shareData); } catch {}
-      } else {
-        try {
-          await navigator.clipboard.writeText(window.location.href);
-          showToast('Link copied to clipboard!');
-        } catch {
-          showToast('Copy this URL to share: ' + window.location.href);
-        }
-      }
-    });
-  }
-}
 
 /* ── Initialize components ───────────────────────────────────── */
 

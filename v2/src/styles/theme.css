@@ -132,53 +132,6 @@ input, select, textarea {
   gap: 6px;
 }
 
-/* ── PWA bottom toolbar (standalone mode only) ────────────────── */
-.pwa-toolbar {
-  display: none;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 150;
-  background: transparent;
-  border-top: none;
-  padding: 8px 0 calc(8px + var(--safe-bottom));
-  justify-content: center;
-  gap: 12px;
-  pointer-events: none;
-}
-.pwa-toolbar.pwa-visible {
-  display: flex;
-}
-
-.pwa-btn {
-  background: none;
-  border: none;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2px;
-  padding: 4px 8px;
-  cursor: pointer;
-  color: #ff1493;
-  font-size: 1.2rem;
-  line-height: 1;
-  transition: all var(--transition);
-  pointer-events: auto;
-  opacity: 0.7;
-}
-
-.pwa-btn span {
-  font-size: 0.6rem;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  color: #ff1493;
-}
-
-.pwa-btn:hover {
-  opacity: 1;
-}
-
 .sync-status {
   font-size: 0.75rem;
   color: var(--muted);
