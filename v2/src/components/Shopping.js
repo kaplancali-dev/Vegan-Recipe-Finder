@@ -231,6 +231,7 @@ function renderShopTab() {
         <div class="shop-recipe-title-row">
           <span class="shop-recipe-title">${escHTML(title)}</span>
           <div class="shop-recipe-actions">
+            <button class="btn btn-sm shop-recipe-cook-btn" data-cook-recipe="${id}" title="I Made This">🍳 I Made This</button>
             ${!ready ? `<button class="icon-btn shop-recipe-notes-btn" data-notes-recipe="${id}" title="Send to Notes">📝</button>` : ''}
             <button class="icon-btn shop-recipe-delete-btn" data-delete-recipe="${id}" title="Remove recipe">&times;</button>
           </div>
@@ -284,6 +285,21 @@ function renderShopTab() {
 
   // ── Event delegation ──
   container.onclick = (e) => {
+    // "I Made This" — log cook history and remove from make list
+    const cookBtn = e.target.closest('[data-cook-recipe]');
+    if (cookBtn) {
+      e.stopPropagation();
+      const id = Number(cookBtn.dataset.cookRecipe);
+      const history = get('cookHistory');
+      history.push({ id, date: new Date().toISOString() });
+      set('cookHistory', history);
+      const current = get('makelist');
+      set('makelist', current.filter(i => i !== id));
+      autoSync();
+      showToast('Logged in I Made This!');
+      return;
+    }
+
     // Delete recipe from make list
     const deleteBtn = e.target.closest('[data-delete-recipe]');
     if (deleteBtn) {

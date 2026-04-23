@@ -1583,6 +1583,23 @@ input, select, textarea {
   color: var(--accent);
 }
 
+.shop-recipe-cook-btn {
+  font-size: 0.72rem !important;
+  padding: 4px 10px !important;
+  background: var(--green-soft);
+  color: var(--green-deep);
+  border: 1px solid var(--green);
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.shop-recipe-cook-btn:hover {
+  background: var(--green);
+  color: #fff;
+}
+
 .shop-recipe-meta {
   margin-top: 2px;
 }
