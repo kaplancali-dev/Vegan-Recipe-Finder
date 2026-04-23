@@ -210,7 +210,7 @@ export const INGREDIENT_SUBS = {
   'vegetable oil': ['canola oil','grapeseed oil','sunflower oil','avocado oil','neutral oil'],
 
   // ── Tahini / Pastes ──
-  'tahini': ['sunflower seed butter','cashew butter','almond butter'],
+  // tahini — no substitutes, unique flavor
   'tomato paste': ['sun-dried tomato paste','tomato sauce'],
   'red curry paste': ['green curry paste','yellow curry paste','curry powder'],
   'green curry paste': ['red curry paste','yellow curry paste','curry powder'],
@@ -226,8 +226,8 @@ export const INGREDIENT_SUBS = {
   'sage': ['thyme','rosemary','marjoram'],
 
   // ── Egg Replacers ──
-  'flax egg': ['chia egg','flaxseed meal','applesauce','aquafaba'],
-  'aquafaba': ['flax egg','chia egg'],
+  // flax egg — no substitutes, specific binding function
+  'aquafaba': ['chia egg'],
 };
 
 /**
