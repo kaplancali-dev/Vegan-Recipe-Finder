@@ -13,9 +13,6 @@ import {
   cloudPush,
   cloudPull,
   onAuthChange,
-  onStatusChange,
-  generateSyncCode,
-  importSyncCode,
 } from '../services/sync.js';
 import { escHTML } from '../utils/text.js';
 import { showToast } from '../utils/toast.js';
@@ -78,21 +75,9 @@ function renderSignedOut(container) {
         <button id="otpVerifyBtn" class="btn btn-primary btn-sm">Verify</button>
       </div>
     </div>
-    <hr style="border:none;border-top:1px solid var(--border);margin:14px 0">
-    <details style="font-size:0.82rem;color:var(--ink-soft)">
-      <summary style="cursor:pointer;font-weight:600">Or use a Sync Code</summary>
-      <div style="margin-top:8px">
-        <div class="input-row">
-          <input id="importCodeInput" type="text" class="text-input" placeholder="Paste sync code…">
-          <button id="importCodeBtn" class="btn btn-outline btn-sm">Import</button>
-        </div>
-        <button id="exportCodeBtn" class="btn btn-outline btn-sm mt-8">Export My Data as Code</button>
-      </div>
-    </details>
   `;
 
   wireOtpFlow(container);
-  wireSyncCodes(container);
 }
 
 /**
@@ -108,17 +93,6 @@ function renderSignedIn(container, user) {
       <button id="syncPullBtn" class="btn btn-outline btn-sm">⬇ Pull from Cloud</button>
       <button id="syncSignOutBtn" class="btn btn-danger btn-sm">Sign Out</button>
     </div>
-    <hr style="border:none;border-top:1px solid var(--border);margin:12px 0">
-    <details style="font-size:0.82rem;color:var(--ink-soft)">
-      <summary style="cursor:pointer;font-weight:600">Sync Code (offline transfer)</summary>
-      <div style="margin-top:8px">
-        <div class="input-row">
-          <input id="importCodeInput" type="text" class="text-input" placeholder="Paste sync code…">
-          <button id="importCodeBtn" class="btn btn-outline btn-sm">Import</button>
-        </div>
-        <button id="exportCodeBtn" class="btn btn-outline btn-sm mt-8">Export My Data as Code</button>
-      </div>
-    </details>
   `;
 
   // Push
@@ -156,7 +130,6 @@ function renderSignedIn(container, user) {
     });
   }
 
-  wireSyncCodes(container);
 }
 
 /**
@@ -241,69 +214,3 @@ function wireOtpFlow(container) {
   }
 }
 
-/**
- * Wire sync code import/export buttons.
- */
-function wireSyncCodes(container) {
-  const importBtn = container.querySelector('#importCodeBtn');
-  const importInput = container.querySelector('#importCodeInput');
-  const exportBtn = container.querySelector('#exportCodeBtn');
-
-  if (importBtn && importInput) {
-    importBtn.addEventListener('click', () => {
-      const code = importInput.value.trim();
-      if (!code) {
-        showToast('Please paste a sync code');
-        return;
-      }
-      const success = importSyncCode(code);
-      if (success) {
-        showToast('Data imported successfully!');
-        importInput.value = '';
-      } else {
-        showToast('Invalid sync code');
-      }
-    });
-  }
-
-  if (exportBtn) {
-    exportBtn.addEventListener('click', () => {
-      const code = generateSyncCode();
-
-      // Show in the sync code modal if available
-      const modal = document.getElementById('syncCodeModal');
-      const body = document.getElementById('syncCodeBody');
-      if (modal && body) {
-        body.innerHTML = `
-          <p style="font-size:0.82rem;color:var(--ink-soft);margin-bottom:10px">
-            Copy this code and paste it on another device to transfer your data.
-          </p>
-          <textarea id="syncCodeText" class="text-input" rows="4" style="width:100%;font-family:monospace;font-size:0.75rem" readonly>${escHTML(code)}</textarea>
-          <button id="syncCodeCopyBtn" class="btn btn-primary btn-sm mt-8">Copy to Clipboard</button>
-        `;
-        // Wire events without inline handlers
-        const textarea = body.querySelector('#syncCodeText');
-        const copyBtn = body.querySelector('#syncCodeCopyBtn');
-        if (textarea) textarea.addEventListener('click', () => textarea.select());
-        if (copyBtn) {
-          copyBtn.addEventListener('click', () => {
-            navigator.clipboard.writeText(textarea.value).then(() => {
-              copyBtn.textContent = 'Copied!';
-            });
-          });
-        }
-        // Wire close button
-        const closeBtn = document.getElementById('syncCodeClose');
-        if (closeBtn) closeBtn.addEventListener('click', () => { modal.hidden = true; });
-        modal.hidden = false;
-      } else {
-        // Fallback: copy to clipboard
-        navigator.clipboard.writeText(code).then(() => {
-          showToast('Sync code copied to clipboard!');
-        }).catch(() => {
-          showToast('Could not copy sync code.');
-        });
-      }
-    });
-  }
-}
