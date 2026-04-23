@@ -283,7 +283,7 @@ function renderFavList() {
       history.push({ id, date: new Date().toISOString() });
       set('cookHistory', history);
       autoSync();
-      showToast('Logged! Check your cooking history in Favorites.');
+      showToast('Logged in I Made This!');
       return;
     }
 

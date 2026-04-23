@@ -181,7 +181,7 @@ export function openDetail(id) {
       autoSync();
       cookBtn.textContent = '✓ Logged!';
       cookBtn.disabled = true;
-      showToast('Logged! Check your cooking history in Favorites.');
+      showToast('Logged in I Made This!');
     });
   }
 
