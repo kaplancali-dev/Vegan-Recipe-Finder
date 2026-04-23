@@ -10,7 +10,7 @@ Found on HARVEST — myharvestvegan.com`;navigator.share?navigator.share({title:
       <div class="nut-item"><span class="nut-val">${d.fat??"—"}g</span><span class="nut-lbl">fat</span></div>
       <div class="nut-item"><span class="nut-val">${d.fib??"—"}g</span><span class="nut-lbl">fiber</span></div>
       <span class="nut-est">est. per serving</span>
-    </div>`:"",g=s.haveNames||[],f=s.needNames||[],$=g.length?`<div class="chip-label-sm">You have</div><div class="chips">${g.map(y=>Be(y,"c-have")).join("")}</div>`:"",T=f.length?`<div class="chip-label-sm" style="margin-top:4px">You need</div><div class="chips">${f.map(y=>Be(y,"c-need")).join("")}</div>`:"",A=a?"❤️ Favorited":"🤍 Favorite",I=o?"✓ Want to Make":"📌 Make This";return`
+    </div>`:"",g=s.haveNames||[],f=s.needNames||[],$=g.length?`<div class="chip-label-sm">You have</div><div class="chips">${g.map(y=>Be(y,"c-have")).join("")}</div>`:"",T=f.length?`<div class="chip-label-sm" style="margin-top:4px">You need</div><div class="chips">${f.map(y=>Be(y,"c-need")).join("")}</div>`:"",A=a?"❤️ Favorited":"🤍 Favorite",I=o?"✓ Want to Make":"📌 Want to Make";return`
     <article class="r-card ${c}${i}" data-recipe-id="${s.id}">
       ${r}
       <div class="card-body">
