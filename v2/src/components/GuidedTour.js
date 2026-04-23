@@ -153,11 +153,20 @@ function _showStep() {
   _tooltip.style.opacity = '0';
   _tooltip.hidden = false;
 
-  // Position after a tick (let tab switch settle)
+  // Always scroll the target into view first (especially for mobile)
+  targetEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+  // Position after a tick (let tab switch + scroll settle)
   setTimeout(() => {
     _positionTooltip(targetEl);
     _tooltip.style.opacity = '1';
-  }, 200);
+
+    // Ensure the tooltip itself is visible on screen
+    const tooltipRect = _tooltip.getBoundingClientRect();
+    if (tooltipRect.top < 0 || tooltipRect.bottom > window.innerHeight) {
+      _tooltip.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  }, 300);
 }
 
 /* ── Advance ────────────────────────────────────────────────── */
