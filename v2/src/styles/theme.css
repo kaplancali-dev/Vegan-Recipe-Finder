@@ -383,6 +383,10 @@ input, select, textarea {
   color: var(--muted);
 }
 
+@media (min-width: 601px) {
+  .filter-bar .text-input::placeholder { font-size: 1rem; }
+}
+
 .select-input {
   width: 100%;
   padding: 10px 14px;
