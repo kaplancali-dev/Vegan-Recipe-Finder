@@ -203,6 +203,37 @@ initSyncPanel();
   }
 }
 
+/* ── PWA toolbar (share + refresh) ──────────────────────────── */
+
+{
+  const isPWA = window.matchMedia('(display-mode: standalone)').matches
+    || window.navigator.standalone === true;
+
+  const toolbar = $('#pwaToolbar');
+  if (toolbar && isPWA) {
+    toolbar.hidden = false;
+
+    const shareBtn = $('#pwaShare');
+    if (shareBtn) {
+      shareBtn.addEventListener('click', () => {
+        if (navigator.share) {
+          navigator.share({
+            title: 'HARVEST — Eat More Plants!',
+            url: window.location.href,
+          }).catch(() => {});
+        }
+      });
+    }
+
+    const refreshBtn = $('#pwaRefresh');
+    if (refreshBtn) {
+      refreshBtn.addEventListener('click', () => {
+        window.location.reload();
+      });
+    }
+  }
+}
+
 /* ── Restore last active tab ─────────────────────────────────── */
 
 const savedTab = get('activeTab');
