@@ -2232,6 +2232,28 @@ input, select, textarea {
   font-size: 0.75rem;
   color: var(--muted);
 }
+.cook-history-item .cook-stars {
+  color: #f5a623;
+  font-size: 0.75rem;
+  margin-left: 4px;
+}
+.cook-delete-btn {
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-size: 0.85rem;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: var(--radius-xs);
+  margin-left: 8px;
+  transition: color var(--transition), background var(--transition);
+  line-height: 1;
+  flex-shrink: 0;
+}
+.cook-delete-btn:hover {
+  color: var(--danger);
+  background: var(--danger-soft);
+}
 
 /* ── Guided Tour ─────────────────────────────────────────────── */
 

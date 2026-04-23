@@ -308,18 +308,46 @@ function renderCookHistory() {
 
   card.hidden = false;
 
-  // Most recent first, limited to 20
-  const recent = [...history].reverse().slice(0, 20);
+  // Deduplicate: keep only the most recent entry per recipe
+  const seen = new Map();
+  for (const entry of history) {
+    const prev = seen.get(entry.id);
+    if (!prev || new Date(entry.date) > new Date(prev.date)) {
+      seen.set(entry.id, entry);
+    }
+  }
+  const unique = [...seen.values()]
+    .sort((a, b) => new Date(b.date) - new Date(a.date))
+    .slice(0, 20);
 
-  listEl.innerHTML = recent.map(entry => {
+  listEl.innerHTML = unique.map(entry => {
     const recipe = _recipes.find(r => r.id === entry.id);
     const title = recipe ? escHTML(recipe.title) : `Recipe #${entry.id}`;
     const date = new Date(entry.date).toLocaleDateString(undefined, {
       month: 'short', day: 'numeric', year: 'numeric'
     });
+    const rating = entry.rating ? ' ' + '★'.repeat(entry.rating) : '';
     return `<div class="cook-history-item">
-      <span>${title}</span>
+      <span>${title}<span class="cook-stars">${rating}</span></span>
       <span class="cook-date">${date}</span>
+      <button class="cook-delete-btn" data-cook-delete="${entry.id}" aria-label="Remove">✕</button>
     </div>`;
   }).join('');
+}
+
+/* ── Cook history delete handler ───────────────────────────── */
+
+{
+  const card = $('#cookHistoryCard');
+  if (card) {
+    card.addEventListener('click', (e) => {
+      const btn = e.target.closest('[data-cook-delete]');
+      if (!btn) return;
+      const id = Number(btn.dataset.cookDelete);
+      const history = get('cookHistory');
+      set('cookHistory', history.filter(h => h.id !== id));
+      autoSync();
+      showToast('Removed from Cook History');
+    });
+  }
 }
