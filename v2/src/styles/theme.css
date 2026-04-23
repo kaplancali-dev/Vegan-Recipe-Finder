@@ -187,15 +187,20 @@ input, select, textarea {
 /* ── Tab Bar ─────────────────────────────────────────────────── */
 .tab-bar {
   display: flex;
-  gap: 2px;
+  gap: 4px;
   padding: 6px 0;
   position: sticky;
   top: 52px;
   z-index: 99;
   background: var(--bg);
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
+}
+
+@media (max-width: 520px) {
+  .tab-bar {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
 }
 
 .tab-bar::-webkit-scrollbar {
@@ -203,7 +208,8 @@ input, select, textarea {
 }
 
 .tab-btn {
-  flex: 1;
+  flex: 1 1 0%;
+  min-width: 0;
   padding: 6px 8px;
   border: none;
   border-radius: var(--radius-sm);
@@ -219,6 +225,7 @@ input, select, textarea {
   gap: 2px;
   line-height: 1.2;
   position: relative;
+  text-align: center;
 }
 
 
