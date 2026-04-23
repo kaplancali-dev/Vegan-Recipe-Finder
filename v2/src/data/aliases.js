@@ -111,6 +111,123 @@ export const INGREDIENT_SUBS = {
   'tapioca flour': ['tapioca starch','arrowroot powder','arrowroot starch','arrowroot','tapioca','potato starch'],
   'jalapeño': ['jalapeno','jalapeños','jalapenos'],
   'balsamic vinegar': ['balsamic glaze','balsamic reduction'],
+
+  // ── Proteins / Beans ──
+  'chickpeas': ['white beans','cannellini beans','great northern beans','butter beans'],
+  'black beans': ['pinto beans','kidney beans','red beans'],
+  'pinto beans': ['black beans','kidney beans','red beans'],
+  'kidney beans': ['black beans','pinto beans','red beans'],
+  'extra-firm tofu': ['firm tofu','super-firm tofu','tempeh'],
+  'firm tofu': ['extra-firm tofu','super-firm tofu','tempeh'],
+  'silken tofu': ['soft tofu','vegan yogurt','blended cashews'],
+  'soft tofu': ['silken tofu','vegan yogurt'],
+  'tempeh': ['extra-firm tofu','firm tofu','soy curls'],
+  'green lentils': ['brown lentils','french lentils'],
+  'brown lentils': ['green lentils','french lentils'],
+  'red lentils': ['yellow lentils','split peas'],
+
+  // ── Grains / Pasta ──
+  'quinoa': ['couscous','bulgur','farro','millet'],
+  'farro': ['quinoa','barley','bulgur','freekeh'],
+  'rolled oats': ['quick oats','oats','steel-cut oats'],
+  'spaghetti': ['linguine','angel hair','thin spaghetti','pasta'],
+  'linguine': ['spaghetti','fettuccine','pasta'],
+  'penne pasta': ['rigatoni','fusilli','elbow pasta','pasta'],
+  'elbow pasta': ['penne pasta','fusilli','rotini','pasta'],
+  'udon noodles': ['rice noodles','soba noodles','ramen noodles'],
+  'ramen noodles': ['udon noodles','rice noodles','soba noodles'],
+  'basmati rice': ['jasmine rice','white rice','long grain rice'],
+  'jasmine rice': ['basmati rice','white rice','long grain rice'],
+
+  // ── Nuts / Seeds ──
+  'cashews': ['macadamia nuts','blanched almonds','sunflower seeds'],
+  'walnuts': ['pecans','almonds'],
+  'pecans': ['walnuts','almonds'],
+  'almonds': ['cashews','walnuts','pecans'],
+  'pine nuts': ['slivered almonds','cashews','hemp seeds','sunflower seeds'],
+  'sesame seeds': ['hemp seeds','poppy seeds'],
+  'sunflower seeds': ['pumpkin seeds','hemp seeds','pepitas'],
+  'pumpkin seeds': ['sunflower seeds','pepitas','hemp seeds'],
+  'chia seeds': ['flax seeds','hemp seeds','flaxseed meal'],
+  'hemp seeds': ['sunflower seeds','chia seeds','pumpkin seeds'],
+  'pistachios': ['cashews','almonds','pine nuts'],
+  'flaxseed meal': ['ground flaxseed','ground flaxseeds','chia seeds','flax seeds'],
+
+  // ── Sauces / Condiments ──
+  'soy sauce': ['tamari','coconut aminos','liquid aminos'],
+  'tamari': ['soy sauce','coconut aminos','liquid aminos'],
+  'coconut aminos': ['tamari','soy sauce','liquid aminos'],
+  'sriracha': ['hot sauce','sambal oelek','chili garlic sauce','gochujang'],
+  'hot sauce': ['sriracha','sambal oelek','chili garlic sauce'],
+  'sambal oelek': ['sriracha','chili garlic sauce','hot sauce','gochujang'],
+  'chili garlic sauce': ['sambal oelek','sriracha','gochujang'],
+  'gochujang': ['sriracha','sambal oelek','chili garlic sauce'],
+  'hoisin sauce': ['teriyaki sauce','bbq sauce','sweet soy glaze'],
+  'dijon mustard': ['whole grain mustard','yellow mustard','stone-ground mustard'],
+  'vegan worcestershire sauce': ['soy sauce','tamari','coconut aminos'],
+  'vegan mayo': ['tahini','vegan sour cream','cashew cream'],
+  'red wine vinegar': ['sherry vinegar','balsamic vinegar','white wine vinegar','apple cider vinegar'],
+  'sherry vinegar': ['red wine vinegar','white wine vinegar','apple cider vinegar'],
+  'white wine vinegar': ['rice vinegar','sherry vinegar','apple cider vinegar','red wine vinegar'],
+
+  // ── Vegetables ──
+  'zucchini': ['yellow squash','summer squash','eggplant'],
+  'sweet potato': ['butternut squash','pumpkin','sweet potatoes'],
+  'sweet potatoes': ['butternut squash','pumpkin','sweet potato'],
+  'butternut squash': ['sweet potato','pumpkin','kabocha squash'],
+  'cauliflower': ['broccoli','cauliflower florets'],
+  'broccoli': ['cauliflower','broccolini','broccoli florets'],
+  'eggplant': ['zucchini','portobello mushrooms','yellow squash'],
+  'mushrooms': ['cremini mushrooms','shiitake mushrooms','baby bella mushrooms','portobello mushrooms','white button mushrooms','oyster mushrooms'],
+  'cremini mushrooms': ['baby bella mushrooms','white button mushrooms','mushrooms','shiitake mushrooms'],
+  'shiitake mushrooms': ['cremini mushrooms','oyster mushrooms','king oyster mushrooms','mushrooms'],
+  'celery': ['fennel bulb','celery ribs'],
+  'shallot': ['shallots','red onion'],
+  'shallots': ['shallot','red onion'],
+  'scallions': ['green onion','green onions','scallion','spring onion'],
+  'green onion': ['scallions','green onions','scallion','spring onion'],
+
+  // ── Dairy Alternatives ──
+  'vegan yogurt': ['coconut yogurt','soy yogurt','cashew yogurt','plant-based yogurt'],
+  'vegan cheese': ['nutritional yeast','vegan cheddar','vegan mozzarella'],
+  'vegan parmesan': ['nutritional yeast','vegan cheese'],
+  'vegan cream cheese': ['cashew cream cheese','vegan cream','vegan sour cream'],
+  'vegan sour cream': ['vegan yogurt','cashew cream','vegan cream cheese'],
+  'vegan butter': ['coconut oil','olive oil','avocado oil'],
+  'nutritional yeast': ['vegan parmesan','vegan cheese'],
+  'coconut milk': ['coconut cream','cashew milk','oat milk'],
+
+  // ── Sweeteners (gaps) ──
+  'coconut sugar': ['brown sugar','maple syrup','date sugar','raw sugar'],
+  'brown sugar': ['coconut sugar','maple syrup','date sugar','muscovado sugar'],
+  'powdered sugar': ['blended coconut sugar','powdered monk fruit'],
+  'date syrup': ['maple syrup','agave','brown rice syrup','molasses'],
+  'medjool dates': ['dates','date paste','date syrup','prunes'],
+
+  // ── Oils (gaps) ──
+  'sesame oil': ['toasted sesame oil','peanut oil','neutral oil'],
+  'avocado oil': ['olive oil','coconut oil','vegetable oil','grapeseed oil'],
+  'vegetable oil': ['canola oil','grapeseed oil','sunflower oil','avocado oil','neutral oil'],
+
+  // ── Tahini / Pastes ──
+  'tahini': ['sunflower seed butter','cashew butter','almond butter'],
+  'tomato paste': ['sun-dried tomato paste','tomato sauce'],
+  'red curry paste': ['green curry paste','yellow curry paste','curry powder'],
+  'green curry paste': ['red curry paste','yellow curry paste','curry powder'],
+
+  // ── Herbs (gaps) ──
+  'parsley': ['cilantro','basil','chives'],
+  'basil': ['parsley','cilantro','thai basil'],
+  'mint': ['basil','cilantro'],
+  'rosemary': ['thyme','oregano','sage'],
+  'thyme': ['rosemary','oregano','marjoram'],
+  'oregano': ['thyme','marjoram','italian seasoning'],
+  'dill': ['fennel fronds','tarragon','parsley'],
+  'sage': ['thyme','rosemary','marjoram'],
+
+  // ── Egg Replacers ──
+  'flax egg': ['chia egg','flaxseed meal','applesauce','aquafaba'],
+  'aquafaba': ['flax egg','chia egg'],
 };
 
 /**
