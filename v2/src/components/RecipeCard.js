@@ -83,7 +83,7 @@ export function renderCard(result, opts = {}) {
 
   // Action buttons
   const favLabel = isFavorite ? '❤️ Favorited' : '🤍 Favorite';
-  const makeLabel = isOnMakeList ? '✓ Want to Make' : '📌 Make This';
+  const makeLabel = isOnMakeList ? '✓ Want to Make' : '📌 Want to Make';
 
   return `
     <article class="r-card ${tier}${heroClass}" data-recipe-id="${r.id}">
