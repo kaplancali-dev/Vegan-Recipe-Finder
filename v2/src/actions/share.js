@@ -11,7 +11,7 @@
  */
 export function shareRecipe(title, url) {
   const recipeUrl = url || 'https://myharvestvegan.com';
-  const text = `Check out this vegan recipe: ${title}\n\n${recipeUrl}\n\nFound on HARVEST — myharvestvegan.com`;
+  const text = `${recipeUrl}\n\nFound on HARVEST 🌿 myharvestvegan.com`;
 
   if (navigator.share) {
     navigator.share({ title, text, url: recipeUrl }).catch(() => {});
