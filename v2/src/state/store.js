@@ -16,6 +16,7 @@ const STORAGE_KEYS = {
   instructions: 'vrf_instr',
   allergies:    'vrf_allergies',
   collections:  'vrf_collections',
+  makelist:     'vrf_makelist',
   shopChecked:  'vrf_shop_checked',
   activeTab:    'vrf_active_tab',
   onboarded:    'vrf_onboarded',
@@ -36,6 +37,7 @@ const state = {
   instructions: {},
   allergies:    [],
   collections:  {},
+  makelist:     [],
   shopChecked:  [],
   activeTab:    'browse',
   onboarded:    false,
@@ -84,6 +86,7 @@ export function loadState() {
   state.instructions = lsGet(STORAGE_KEYS.instructions, {});
   state.allergies    = lsGet(STORAGE_KEYS.allergies, []);
   state.collections  = lsGet(STORAGE_KEYS.collections, {});
+  state.makelist     = lsGet(STORAGE_KEYS.makelist, []);
   state.shopChecked  = lsGet(STORAGE_KEYS.shopChecked, []);
   state.activeTab    = localStorage.getItem(STORAGE_KEYS.activeTab) || 'browse';
   state.onboarded    = lsGet(STORAGE_KEYS.onboarded, false) || localStorage.getItem('vrf_onboarded') === '1';
@@ -167,6 +170,7 @@ export function gatherAllData() {
     vrf_meal:      state.mealPlan,
     vrf_allergies:   state.allergies,
     vrf_collections: state.collections,
+    vrf_makelist:    state.makelist,
   };
 }
 
@@ -185,6 +189,7 @@ function validateValue(key, value) {
     case 'shopList':
     case 'allergies':
     case 'mealPlan':
+    case 'makelist':
       return Array.isArray(value) ? value : undefined;
     case 'instructions':
     case 'collections':
@@ -208,6 +213,7 @@ export function applyAllData(data) {
   if (data.vrf_meal      !== undefined) { const v = validateValue('mealPlan', data.vrf_meal);       if (v !== undefined) set('mealPlan', v); }
   if (data.vrf_allergies    !== undefined) { const v = validateValue('allergies', data.vrf_allergies);       if (v !== undefined) set('allergies', v); }
   if (data.vrf_collections !== undefined) { const v = validateValue('collections', data.vrf_collections); if (v !== undefined) set('collections', v); }
+  if (data.vrf_makelist    !== undefined) { const v = validateValue('makelist', data.vrf_makelist);       if (v !== undefined) set('makelist', v); }
 }
 
 /**

@@ -43,7 +43,7 @@ function ingChip(name, cls) {
  * @returns {string} HTML string
  */
 export function renderCard(result, opts = {}) {
-  const { showMatch = true, isFavorite = false } = opts;
+  const { showMatch = true, isFavorite = false, isOnMakeList = false } = opts;
   const r = result;
 
   const tier = matchTier(r.pct);
@@ -83,7 +83,7 @@ export function renderCard(result, opts = {}) {
 
   // Action buttons
   const favLabel = isFavorite ? '❤️ Favorited' : '🤍 Favorite';
-  const makeLabel = needNames.length ? '🍳 Make This' : '🍳 Ready to Cook!';
+  const makeLabel = isOnMakeList ? '✓ On My List' : '📌 Make This';
 
   return `
     <article class="r-card ${tier}${heroClass}" data-recipe-id="${r.id}">
@@ -108,7 +108,7 @@ export function renderCard(result, opts = {}) {
         ${needChips}
         <div class="r-actions">
           ${r.url ? `<a href="${escHTML(r.url)}" target="_blank" rel="noopener" class="btn-sm btn-link" data-external>📖 View Instructions</a>` : ''}
-          <button class="btn-sm btn-shop make-btn" data-make-id="${r.id}">${makeLabel}</button>
+          <button class="btn-sm btn-shop make-btn${isOnMakeList ? ' on' : ''}" data-make-id="${r.id}">${makeLabel}</button>
           <button class="btn-sm btn-fav fav-btn${isFavorite ? ' on' : ''}" data-fav-id="${r.id}" aria-label="Toggle favorite">${favLabel}</button>
         </div>
       </div>
@@ -125,8 +125,10 @@ export function renderCard(result, opts = {}) {
  */
 export function renderCardList(results, favorites, opts = {}) {
   if (!results.length) return '';
+  const makeSet = opts.makelist ? new Set(opts.makelist) : new Set();
   return results.map(r => renderCard(r, {
     ...opts,
     isFavorite: favorites.has(r.id),
+    isOnMakeList: makeSet.has(r.id),
   })).join('');
 }
