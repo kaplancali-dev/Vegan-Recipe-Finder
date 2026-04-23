@@ -13,6 +13,12 @@ import { escHTML, norm } from '../utils/text.js';
 import { showToast } from '../utils/toast.js';
 import { $ } from '../utils/dom.js';
 
+const ALLERGEN_LABELS = {
+  peanut: '🥜 Peanuts', 'tree nut': '🌰 Tree Nuts', soy: '🫘 Soy',
+  coconut: '🥥 Coconut', corn: '🌽 Corn', mushroom: '🍄 Mushrooms',
+  nightshade: '🍅 Nightshades',
+};
+
 /** @type {Array} Full recipe list */
 let _recipes = [];
 
@@ -27,6 +33,7 @@ export function initPantry(recipes) {
   wireQAGrid();
   wireGuideToggle();
   wireSectionToggles();
+  renderAllergyChips();
   renderIngChips();
   renderStapleChips();
   renderPantryPower();
@@ -41,12 +48,44 @@ export function initPantry(recipes) {
     renderStapleChips();
     renderPantryPower();
   });
+  subscribe('allergies', renderAllergyChips);
 }
 
 /* ── Hero Section (no-op — intro card is always visible now) ─ */
 
 function checkHero() {
   // Intro hero card is always visible (matches v1 behavior)
+}
+
+/* ── Allergy Chips ──────────────────────────────────────────── */
+
+function renderAllergyChips() {
+  const card = $('#allergyCard');
+  const container = $('#allergyChips');
+  if (!card || !container) return;
+
+  const allergies = getRef('allergies');
+  if (!allergies.length) {
+    card.hidden = true;
+    return;
+  }
+
+  card.hidden = false;
+  container.innerHTML = allergies.map((key, idx) => {
+    const label = ALLERGEN_LABELS[key] || escHTML(key);
+    return `<span class="chip allergy-chip">${label} <span class="chip-x" data-remove-allergy="${idx}" title="Remove">&times;</span></span>`;
+  }).join('');
+
+  container.onclick = (e) => {
+    const removeEl = e.target.closest('[data-remove-allergy]');
+    if (!removeEl) return;
+    const idx = Number(removeEl.dataset.removeAllergy);
+    const current = get('allergies');
+    current.splice(idx, 1);
+    set('allergies', current);
+    autoSync();
+    showToast('Allergen removed');
+  };
 }
 
 /* ── User Guide Toggle ──────────────────────────────────────── */
