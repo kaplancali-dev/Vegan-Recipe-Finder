@@ -98,33 +98,28 @@ input, select, textarea {
   z-index: 100;
   background: var(--bg);
   border-bottom: 1px solid var(--border);
-  padding: 16px 0 12px;
+  padding: 12px 0 8px;
 }
 
 .header-inner {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   justify-content: center;
-  position: relative;
-}
-
-.header-center {
-  text-align: center;
+  gap: 10px;
 }
 
 .logo {
-  font-size: 2.5rem;
+  font-size: 2rem;
   font-weight: 800;
   color: var(--green);
   letter-spacing: 2px;
 }
 .logo-tagline {
-  font-size: 1.3rem;
+  font-size: 1rem;
   font-weight: 500;
   color: var(--ink-soft);
   letter-spacing: 0.3px;
   font-style: italic;
-  margin-top: -2px;
 }
 
 .header-actions {
@@ -188,10 +183,10 @@ input, select, textarea {
 /* ── Tab Bar ─────────────────────────────────────────────────── */
 .tab-bar {
   display: flex;
-  gap: 4px;
-  padding: 8px 0;
+  gap: 2px;
+  padding: 6px 0;
   position: sticky;
-  top: 52px;
+  top: 44px;
   z-index: 99;
   background: var(--bg);
   overflow-x: auto;
@@ -205,10 +200,10 @@ input, select, textarea {
 
 .tab-btn {
   flex: 1;
-  padding: 9px 8px;
+  padding: 8px 4px;
   border: none;
   border-radius: var(--radius-sm);
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   font-weight: 600;
   background: none;
   color: var(--ink-soft);
@@ -222,13 +217,8 @@ input, select, textarea {
   position: relative;
 }
 
-.tab-btn .tab-short { display: none; }
-.tab-btn .tab-full { display: inline; }
-
-@media (max-width: 520px) {
-  .tab-btn .tab-short { display: inline; }
-  .tab-btn .tab-full { display: none; }
-}
+.tab-icon { font-size: 1rem; line-height: 1; }
+.tab-label { font-size: 0.72rem; line-height: 1; margin-top: 1px; }
 
 .tab-btn:hover {
   background: var(--green-soft);
@@ -502,8 +492,13 @@ input, select, textarea {
 /* ── Filter Drawer & Bar ─────────────────────────────────────── */
 .filter-bar {
   position: sticky;
-  top: 100px;
+  top: 88px;
   z-index: 50;
+  padding: 12px;
+}
+
+.filter-bar .input-row {
+  margin-bottom: 0;
 }
 
 .filter-drawer {
@@ -1753,18 +1748,20 @@ input, select, textarea {
 
 /* ── Responsive ──────────────────────────────────────────────── */
 @media (max-width: 520px) {
-  .tab-btn {
-    font-size: 0.78rem;
-    padding: 8px 6px;
-  }
-
+  .logo { font-size: 1.6rem; }
+  .logo-tagline { font-size: 0.85rem; }
+  .header { padding: 8px 0 6px; }
+  .tab-bar { top: 36px; }
+  .filter-bar { top: 78px; }
 }
 
 @media (max-width: 400px) {
-  .tab-btn {
-    font-size: 0.72rem;
-    padding: 7px 4px;
-  }
+  .logo { font-size: 1.4rem; letter-spacing: 1px; }
+  .logo-tagline { font-size: 0.78rem; }
+  .header-inner { gap: 6px; }
+  .tab-label { font-size: 0.65rem; }
+  .tab-bar { top: 32px; }
+  .filter-bar { top: 72px; }
 
   .qa-grid {
     grid-template-columns: 1fr;
