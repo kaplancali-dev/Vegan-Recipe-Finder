@@ -10,6 +10,7 @@ import { autoSync } from '../services/sync.js';
 import { findRecipes } from '../services/matching.js';
 import { $ } from '../utils/dom.js';
 import { toggleFavorite } from '../actions/favorites.js';
+import { handleShareClick } from '../actions/share.js';
 import { renderCardList } from './RecipeCard.js';
 import { openDetail } from './RecipeDetail.js';
 import { showToast } from '../utils/toast.js';
@@ -275,6 +276,8 @@ function renderReadyList() {
   container.onclick = (e) => {
     // External links
     if (e.target.closest('[data-external]')) return;
+
+    if (handleShareClick(e)) return;
 
     const favBtn = e.target.closest('.fav-btn');
     if (favBtn) {

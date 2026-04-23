@@ -13,6 +13,7 @@ import { escHTML } from '../utils/text.js';
 import { showToast } from '../utils/toast.js';
 import { $ } from '../utils/dom.js';
 import { toggleFavorite } from '../actions/favorites.js';
+import { handleShareClick } from '../actions/share.js';
 import { renderCardList } from './RecipeCard.js';
 import { openDetail } from './RecipeDetail.js';
 import { addToShopList } from './Shopping.js';
@@ -251,6 +252,8 @@ function renderFavList() {
 
   container.onclick = (e) => {
     if (e.target.closest('[data-external]')) return;
+
+    if (handleShareClick(e)) return;
 
     const favBtn = e.target.closest('.fav-btn');
     if (favBtn) {
