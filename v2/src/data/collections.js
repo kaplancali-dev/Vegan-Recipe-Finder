@@ -10,4 +10,5 @@ export const COLLECTIONS = [
   { key: 'weeknight',   icon: '🌙', label: 'Weeknight' },
   { key: 'holiday',     icon: '🎄', label: 'Holiday' },
   { key: 'brunch',      icon: '🥞', label: 'Brunch' },
+  { key: 'all',         icon: '📚', label: 'All' },
 ];

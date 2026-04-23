@@ -50,9 +50,10 @@ function renderCollections() {
 
   const collections = get('collections') || {};
 
+  const favIds = getRef('favorites');
+
   container.innerHTML = COLLECTIONS.map(({ key, icon, label }) => {
-    const items = collections[key] || [];
-    const count = items.length;
+    const count = key === 'all' ? favIds.length : (collections[key] || []).length;
     return `<button class="collection-btn" data-collection="${key}">
       <span class="collection-icon">${icon}</span>
       <span class="collection-label">${escHTML(label)}</span>
@@ -82,8 +83,8 @@ function openCollection(key) {
   if (existing) existing.remove();
 
   const collections = get('collections') || {};
-  const items = collections[key] || [];
   const favIds = getRef('favorites');
+  const items = key === 'all' ? [...favIds] : (collections[key] || []);
   const favRecipes = _recipes.filter(r => favIds.includes(r.id));
   const itemSet = new Set(items);
 
@@ -110,7 +111,8 @@ function openCollection(key) {
     if (r.needNames) r.needNames.forEach(n => allMissing.add(n));
   });
 
-  const availableToAdd = favRecipes.filter(r => !itemSet.has(r.id));
+  const isAll = key === 'all';
+  const availableToAdd = isAll ? [] : favRecipes.filter(r => !itemSet.has(r.id));
 
   popup.innerHTML = `
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
@@ -120,7 +122,7 @@ function openCollection(key) {
 
     ${matchedSaved.length ? `
       <div style="margin-bottom:16px">
-        <p style="font-size:0.82rem;color:var(--ink-soft);margin-bottom:8px"><strong>In this collection:</strong></p>
+        <p style="font-size:0.82rem;color:var(--ink-soft);margin-bottom:8px"><strong>${isAll ? 'All favorites:' : 'In this collection:'}</strong></p>
         <div style="display:flex;flex-direction:column;gap:6px">
           ${matchedSaved.map(r => {
             const missing = r.needNames || [];
@@ -128,7 +130,7 @@ function openCollection(key) {
             <div style="padding:8px 12px;background:var(--green-soft);border-radius:var(--radius)">
               <div style="display:flex;align-items:center;justify-content:space-between">
                 <span style="font-size:0.85rem;font-weight:600">${escHTML(r.title)}</span>
-                <button class="icon-btn" data-coll-remove="${r.id}" title="Remove" style="font-size:1rem">&times;</button>
+                ${!isAll ? `<button class="icon-btn" data-coll-remove="${r.id}" title="Remove" style="font-size:1rem">&times;</button>` : ''}
               </div>
               ${missing.length ? `<div style="margin-top:4px;display:flex;flex-wrap:wrap;gap:3px">
                 ${missing.map(m => `<span style="font-size:0.72rem;padding:2px 6px;background:var(--accent-soft);color:var(--accent);border-radius:4px">need: ${escHTML(m)}</span>`).join('')}
@@ -143,7 +145,7 @@ function openCollection(key) {
           🛒 Add ${allMissing.size} missing ingredient${allMissing.size !== 1 ? 's' : ''} to Shopping List
         </button>
       ` : '<p style="font-size:0.85rem;color:var(--green);font-weight:600;text-align:center;margin-bottom:16px">✓ You have everything — ready to cook!</p>'}
-    ` : '<p style="font-size:0.85rem;color:var(--muted);margin-bottom:16px">No recipes in this collection yet.</p>'}
+    ` : `<p style="font-size:0.85rem;color:var(--muted);margin-bottom:16px">${isAll ? 'No favorites yet. Tap ❤️ on any recipe to add it.' : 'No recipes in this collection yet.'}</p>`}
 
     ${availableToAdd.length ? `
       <p style="font-size:0.82rem;color:var(--ink-soft);margin-bottom:8px"><strong>Add from favorites:</strong></p>
@@ -155,7 +157,7 @@ function openCollection(key) {
           </button>
         `).join('')}
       </div>
-    ` : (favIds.length && !savedRecipes.length ? '<p style="font-size:0.85rem;color:var(--muted)">Add some ❤️ favorites first, then organize them into collections.</p>' : '')}
+    ` : (!isAll && favIds.length && !savedRecipes.length ? '<p style="font-size:0.85rem;color:var(--muted)">Add some ❤️ favorites first, then organize them into collections.</p>' : '')}
   `;
 
   popup.addEventListener('click', (e) => {
