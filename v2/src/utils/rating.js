@@ -92,7 +92,7 @@ export function showCookConfirm(dateStr) {
     overlay.innerHTML = `
       <div class="rate-card">
         <div class="rate-title">You made this on ${dateStr}</div>
-        <button class="cook-confirm-btn cook-confirm-log" data-confirm="log">Log again</button>
+        <button class="cook-confirm-btn cook-confirm-log" data-confirm="log">Rate again</button>
         <button class="cook-confirm-btn cook-confirm-undo" data-confirm="undo">Undo — I didn't make this</button>
         <button class="rate-skip" data-confirm="cancel">Cancel</button>
       </div>

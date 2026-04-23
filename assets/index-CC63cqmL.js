@@ -69,7 +69,7 @@ Found on HARVEST 🌿 myharvestvegan.com`;navigator.share?navigator.share({title
     `,document.body.appendChild(t),requestAnimationFrame(()=>{requestAnimationFrame(()=>t.classList.add("show"))});function a(o){t.style.opacity="0",setTimeout(()=>t.remove(),250),e(o)}const n=t.querySelectorAll(".rate-star");function s(o){n.forEach((r,i)=>r.classList.toggle("on",i<o))}t.addEventListener("pointerenter",o=>{const r=o.target.closest("[data-star]");r&&s(Number(r.dataset.star))},!0),t.addEventListener("pointerleave",o=>{o.target.closest("[data-star]")&&s(0)},!0),t.addEventListener("click",o=>{const r=o.target.closest("[data-star]");if(r){const i=Number(r.dataset.star);s(i),setTimeout(()=>a(i),200);return}if(o.target.closest("[data-rate-skip]")){a(0);return}o.target.closest(".rate-card")||a(0)})})}function Zt(e){return new Promise(t=>{const a=document.createElement("div");a.className="rate-overlay",a.innerHTML=`
       <div class="rate-card">
         <div class="rate-title">You made this on ${e}</div>
-        <button class="cook-confirm-btn cook-confirm-log" data-confirm="log">Log again</button>
+        <button class="cook-confirm-btn cook-confirm-log" data-confirm="log">Rate again</button>
         <button class="cook-confirm-btn cook-confirm-undo" data-confirm="undo">Undo — I didn't make this</button>
         <button class="rate-skip" data-confirm="cancel">Cancel</button>
       </div>
