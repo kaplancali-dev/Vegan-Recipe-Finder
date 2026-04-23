@@ -122,6 +122,23 @@ initReadyToCook(recipes);
 initSyncPanel();
 initOnboarding();
 
+/* ── Responsive search placeholders ────────────────────────── */
+
+function updateSearchPlaceholders() {
+  $$('[data-ph-short]').forEach(el => {
+    el.placeholder = window.innerWidth <= 600
+      ? el.dataset.phShort
+      : el.getAttribute('data-ph-full') || el.placeholder;
+  });
+}
+
+// Store the full placeholder on first run
+$$('[data-ph-short]').forEach(el => {
+  el.setAttribute('data-ph-full', el.placeholder);
+});
+updateSearchPlaceholders();
+window.addEventListener('resize', updateSearchPlaceholders);
+
 /* ── Feedback form ──────────────────────────────────────────── */
 
 {
