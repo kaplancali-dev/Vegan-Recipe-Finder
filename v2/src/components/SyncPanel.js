@@ -31,15 +31,7 @@ const OTP_COOLDOWN_MS = 30_000;
 export function initSyncPanel() {
   const panel = $('#syncPanel');
   const content = $('#syncContent');
-  const syncBtn = $('#syncBtn');
   if (!panel || !content) return;
-
-  // Show panel when cloud button clicked
-  if (syncBtn) {
-    syncBtn.addEventListener('click', () => {
-      panel.hidden = !panel.hidden;
-    });
-  }
 
   // Render based on auth state
   renderSyncUI();
@@ -60,7 +52,6 @@ function renderSyncUI() {
 
   if (user) {
     renderSignedIn(content, user);
-    if (panel) panel.hidden = false;
   } else {
     renderSignedOut(content);
   }

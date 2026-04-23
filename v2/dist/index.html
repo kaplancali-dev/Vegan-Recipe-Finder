@@ -20,7 +20,7 @@
 <link rel="icon" type="image/png" href="favicon.png">
 <meta name="theme-color" content="#2d7a4f">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; img-src 'self' https: data:; connect-src 'self' https://*.supabase.co https://www.google-analytics.com; font-src 'self'; frame-src 'none';">
-  <script type="module" crossorigin src="/assets/index-DFHQTCmZ.js"></script>
+  <script type="module" crossorigin src="/assets/index-zAszvlJo.js"></script>
   <link rel="modulepreload" crossorigin href="/assets/supabase-DaN4is7k.js">
   <link rel="modulepreload" crossorigin href="/assets/recipes-DevykIJy.js">
   <link rel="stylesheet" crossorigin href="/assets/index-0WVxdJZK.css">
@@ -124,6 +124,12 @@
         </div>
       </div>
 
+      <!-- Cloud sync panel (always visible) -->
+      <div id="syncPanel" class="card sync-card">
+        <h3 class="card-title">☁️ Cloud Sync</h3>
+        <div id="syncContent"></div>
+      </div>
+
       <!-- Quick Start / About -->
       <div class="card about-card">
         <h3 class="card-title guide-toggle" id="aboutToggle">ℹ️ About HARVEST <span class="guide-arrow">▾</span></h3>
@@ -191,9 +197,8 @@
             <p class="about-text">HARVEST does not collect, sell, or share your personal data. Your ingredient lists, staples, favorites, and preferences are stored locally on your device. If you enable Cloud Sync, your data is stored securely in your own Supabase account and is never shared with third parties. We use basic analytics to understand how the app is used — no tracking, no ads, ever.</p>
           </div>
 
-          <div class="about-section" style="text-align:center;display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
+          <div class="about-section" style="text-align:center">
             <button id="darkModeToggle" class="btn btn-outline btn-sm">🌙 Dark Mode</button>
-            <button id="syncBtn" class="btn btn-outline btn-sm">☁️ Cloud Sync</button>
           </div>
 
           <div class="about-version">
@@ -203,11 +208,6 @@
         </div>
       </div>
 
-      <!-- Cloud sync panel -->
-      <div id="syncPanel" class="card sync-card" hidden>
-        <h3 class="card-title">☁️ Cloud Sync</h3>
-        <div id="syncContent"></div>
-      </div>
     </section>
 
     <!-- BROWSE TAB -->
