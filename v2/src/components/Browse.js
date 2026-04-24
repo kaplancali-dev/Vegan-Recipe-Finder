@@ -120,6 +120,9 @@ function wireControls() {
     filterBtn.addEventListener('click', () => {
       drawer.hidden = !drawer.hidden;
       filterBtn.textContent = drawer.hidden ? 'Categories' : 'Close';
+      if (!drawer.hidden) {
+        requestAnimationFrame(() => drawer.scrollIntoView({ behavior: 'smooth', block: 'nearest' }));
+      }
     });
   }
 
