@@ -24,4 +24,11 @@ header-mockup.html
 # v2 dev artifacts
 v2/node_modules/
 v2/dist/
+node_modules/
+package.json
+package-lock.json
 .supabase-key
+v2/.supabase-key
+v2/.pexels-key
+v2/.eyJ*
+v2/patch.cjs
