@@ -20,9 +20,21 @@ PERISHABLES.forEach(cat => cat.items.forEach(item => _perishableSet.add(norm(ite
  */
 export function isPerishableIng(normedIng) {
   if (_perishableSet.has(normedIng)) return true;
-  // Fuzzy: check if any perishable is a substring or vice versa
+
+  // Non-perishable shelf-stable forms — never highlight these
+  const shelfStable = [
+    'oil','vinegar','extract','powder','dried','sauce','paste',
+    'starch','syrup','butter','cream','milk','flour','juice',
+    'jam','jelly','preserve','canned','frozen','pickled','chips',
+    'flakes','seasoning','spice','sugar',
+  ];
+  const low = normedIng.toLowerCase();
+  if (shelfStable.some(s => low.includes(s))) return false;
+
+  // Word-boundary match: "corn" matches "fresh corn" but not "cornstarch"
   for (const p of _perishableSet) {
-    if (normedIng.includes(p) || p.includes(normedIng)) return true;
+    const re = new RegExp(`\\b${p.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')}\\b`);
+    if (re.test(normedIng)) return true;
   }
   return false;
 }
