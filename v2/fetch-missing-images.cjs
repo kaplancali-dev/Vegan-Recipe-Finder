@@ -1,18 +1,17 @@
 #!/usr/bin/env node
 /**
- * fetch-missing-images.js
+ * fetch-missing-images.cjs
  *
  * Finds all recipes missing images, scrapes the OG image from each
  * recipe URL, uploads it to Supabase storage, and updates recipes.json.
  *
- * Usage:  cd v2 && node fetch-missing-images.js
+ * Usage:  cd v2 && node fetch-missing-images.cjs
  *
- * Requirements: Node 18+ (uses native fetch)
+ * Requirements: Node 18+ (uses native fetch). No external dependencies.
  */
 
 const fs = require('fs');
 const path = require('path');
-const { JSDOM } = require('jsdom');
 
 // ─── Config ──────────────────────────────────────────────────
 const SUPABASE_URL = 'https://zhncgdbhgkeiybdbzsql.supabase.co';
@@ -30,6 +29,34 @@ async function sleep(ms) {
   return new Promise((r) => setTimeout(r, ms));
 }
 
+/**
+ * Extract og:image or twitter:image from raw HTML using regex.
+ * No external dependencies needed.
+ */
+function extractImageFromHtml(html) {
+  // 1. og:image
+  const ogMatch = html.match(/<meta[^>]+property=["']og:image["'][^>]+content=["']([^"']+)["']/i)
+    || html.match(/<meta[^>]+content=["']([^"']+)["'][^>]+property=["']og:image["']/i);
+  if (ogMatch && ogMatch[1]) return ogMatch[1];
+
+  // 2. twitter:image
+  const twMatch = html.match(/<meta[^>]+name=["']twitter:image["'][^>]+content=["']([^"']+)["']/i)
+    || html.match(/<meta[^>]+content=["']([^"']+)["'][^>]+name=["']twitter:image["']/i);
+  if (twMatch && twMatch[1]) return twMatch[1];
+
+  // 3. First large wp-content/uploads image
+  const imgRegex = /<img[^>]+(?:src|data-src)=["']([^"']*(?:wp-content|uploads)[^"']+)["']/gi;
+  let m;
+  while ((m = imgRegex.exec(html))) {
+    const src = m[1];
+    if (!src.toLowerCase().includes('logo') && !src.toLowerCase().includes('icon')) {
+      return src;
+    }
+  }
+
+  return null;
+}
+
 /** Fetch a recipe page and return the best image URL found. */
 async function findImageUrl(pageUrl) {
   try {
@@ -41,31 +68,7 @@ async function findImageUrl(pageUrl) {
     if (!resp.ok) return null;
 
     const html = await resp.text();
-    const dom = new JSDOM(html);
-    const doc = dom.window.document;
-
-    // 1. og:image
-    const og = doc.querySelector('meta[property="og:image"]');
-    if (og?.content) return og.content;
-
-    // 2. twitter:image
-    const tw = doc.querySelector('meta[name="twitter:image"]');
-    if (tw?.content) return tw.content;
-
-    // 3. First wp-content image
-    for (const img of doc.querySelectorAll('img')) {
-      const src = img.src || img.getAttribute('data-src') || '';
-      if (
-        src &&
-        (src.includes('wp-content') || src.includes('uploads')) &&
-        !src.toLowerCase().includes('logo') &&
-        !src.toLowerCase().includes('icon')
-      ) {
-        return src;
-      }
-    }
-
-    return null;
+    return extractImageFromHtml(html);
   } catch {
     return null;
   }
@@ -83,7 +86,7 @@ async function downloadImage(imgUrl) {
 
     const ct = resp.headers.get('content-type') || 'image/jpeg';
     const buf = Buffer.from(await resp.arrayBuffer());
-    if (buf.length < 1000) return null; // too small
+    if (buf.length < 1000) return null;
 
     return { buffer: buf, contentType: ct };
   } catch {
@@ -131,19 +134,11 @@ async function uploadToSupabase(recipeId, buffer, contentType) {
 // ─── Main ────────────────────────────────────────────────────
 
 async function main() {
-  // Check for jsdom
-  try {
-    require('jsdom');
-  } catch {
-    console.log('Installing jsdom…');
-    const { execSync } = require('child_process');
-    execSync('npm install jsdom', { stdio: 'inherit' });
-  }
-
+  console.log('Loading recipes...');
   const recipes = JSON.parse(fs.readFileSync(RECIPES_PATH, 'utf8'));
   const missing = recipes.filter((r) => !r.img || r.img.trim() === '');
 
-  console.log(`\nTotal recipes: ${recipes.length}`);
+  console.log(`Total recipes: ${recipes.length}`);
   console.log(`Missing images: ${missing.length}\n`);
 
   if (!missing.length) {
@@ -182,7 +177,6 @@ async function main() {
     // 3. Upload to Supabase
     const publicUrl = await uploadToSupabase(recipe.id, img.buffer, img.contentType);
     if (publicUrl) {
-      // Update recipe in array
       const idx = recipes.findIndex((r) => r.id === recipe.id);
       if (idx !== -1) recipes[idx].img = publicUrl;
       console.log(`${progress} ✓ ${recipe.id} ${recipe.title}`);
@@ -193,7 +187,6 @@ async function main() {
       failedList.push(recipe);
     }
 
-    // Polite delay
     await sleep(800);
   }
 
@@ -207,16 +200,12 @@ async function main() {
   if (failedList.length) {
     console.log('Failed recipes:');
     failedList.forEach((r) => console.log(`  ${r.id} ${r.title} — ${r.url}`));
-    console.log(
-      '\nTip: For failed recipes, you can manually find an image URL and\n' +
-        'run: node -e "..." to upload individually.\n'
-    );
   }
 
-  console.log('Next steps:');
+  console.log('\nNext steps:');
   console.log('  1. npm run build');
-  console.log('  2. Copy v2/dist/* to repo root');
-  console.log('  3. git add & commit & push');
+  console.log('  2. cd .. && cp -r v2/dist/* .');
+  console.log('  3. git add -A && git commit -m "Add recipe images" && git push');
 }
 
 main().catch(console.error);
