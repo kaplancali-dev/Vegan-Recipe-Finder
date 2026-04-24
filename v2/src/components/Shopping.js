@@ -64,10 +64,8 @@ function wireTopControls() {
   if (clearBtn) {
     clearBtn.addEventListener('click', () => {
       const makeIds = getRef('makelist');
-      const manualItems = getRef('shopList');
-      if (!makeIds.length && !manualItems.length) return;
+      if (!makeIds.length) return;
       set('makelist', []);
-      set('shopList', []);
       set('shopChecked', []);
       autoSync();
       showToast('Shopping list cleared');
@@ -86,9 +84,9 @@ function wireTopControls() {
  * Share all recipes + manual items to Notes / clipboard.
  */
 function _shareAll() {
-  const { recipeCards, manualItems } = _buildShopData();
+  const { recipeCards } = _buildShopData();
 
-  if (!recipeCards.length && !manualItems.length) {
+  if (!recipeCards.length) {
     showToast('Shopping list is empty');
     return;
   }
@@ -105,15 +103,6 @@ function _shareAll() {
     if (done.length) s += '\n' + done.map(i => `  ✓ ${i}`).join('\n');
     sections.push(s);
   });
-
-  if (manualItems.length) {
-    const unchecked = manualItems.filter(i => !checked.has(norm(i)));
-    const done = manualItems.filter(i => checked.has(norm(i)));
-    let s = recipeCards.length ? '📝 Other Items' : '📝 Shopping List';
-    if (unchecked.length) s += '\n' + unchecked.map(i => `  • ${i}`).join('\n');
-    if (done.length) s += '\n' + done.map(i => `  ✓ ${i}`).join('\n');
-    sections.push(s);
-  }
 
   const body = sections.join('\n\n');
 
@@ -218,12 +207,12 @@ function renderShopTab() {
   // Hide the old makeList container — we're merging everything into shopList
   if (makeContainer) makeContainer.innerHTML = '';
 
-  const { recipeCards, manualItems } = _buildShopData();
+  const { recipeCards } = _buildShopData();
   const checked = getCheckedSet();
   const favSet = new Set(getRef('favorites'));
 
   // Clean checked set
-  const allNorms = new Set(manualItems.map(norm));
+  const allNorms = new Set();
   recipeCards.forEach(r => r.missing.forEach(m => allNorms.add(norm(m))));
   let needsClean = false;
   for (const c of checked) {
@@ -231,7 +220,7 @@ function renderShopTab() {
   }
   if (needsClean) saveChecked(checked);
 
-  if (!recipeCards.length && !manualItems.length) {
+  if (!recipeCards.length) {
     container.innerHTML = '';
     if (emptyEl) emptyEl.hidden = false;
     return;
@@ -277,29 +266,8 @@ function renderShopTab() {
     </div>`;
   });
 
-  // ── Manual items ──
-  if (manualItems.length) {
-    html += `<div class="shop-recipe-card manual">
-      <div class="shop-recipe-header">
-        <div class="shop-recipe-title-row">
-          <span class="shop-recipe-title">${recipeCards.length ? 'Other Items' : 'Shopping List'}</span>
-        </div>
-      </div>
-      <div class="shop-recipe-items">
-        ${manualItems.map(item => {
-          const isChecked = checked.has(norm(item));
-          return `<div class="shop-item${isChecked ? ' done' : ''}" data-shop-item="${escHTML(item)}">
-            <div class="shop-check">${isChecked ? '✓' : ''}</div>
-            <span>${escHTML(item)}</span>
-            <button class="icon-btn" data-remove-shop="${escHTML(item)}" aria-label="Remove" style="margin-left:auto;font-size:0.8rem;opacity:0.5">&times;</button>
-          </div>`;
-        }).join('')}
-      </div>
-    </div>`;
-  }
-
   // ── Empty make list prompt ──
-  if (!recipeCards.length && !manualItems.length) {
+  if (!recipeCards.length) {
     html += '<p style="font-size:0.85rem;color:var(--muted);padding:8px 0;text-align:center">Tap "📌 Make This" on any recipe to start building your shopping list.</p>';
   }
 
@@ -353,14 +321,6 @@ function renderShopTab() {
       const id = Number(notesBtn.dataset.notesRecipe);
       const card = recipeCards.find(r => r.id === id);
       if (card) _shareSingleRecipe(card.title, card.missing);
-      return;
-    }
-
-    // Remove manual item
-    const removeBtn = e.target.closest('[data-remove-shop]');
-    if (removeBtn) {
-      e.stopPropagation();
-      _removeManualItem(removeBtn.dataset.removeShop);
       return;
     }
 
