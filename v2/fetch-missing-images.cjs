@@ -6,11 +6,10 @@
  * uploads to Supabase, updates recipes.json.
  *
  * Usage:
- *   cd v2
- *   SUPABASE_SERVICE_KEY='your-key-here' node fetch-missing-images.cjs
+ *   1. Paste your Supabase service_role key into v2/.supabase-key
+ *   2. cd v2 && node fetch-missing-images.cjs
  *
- * IMPORTANT: Wrap the key in single quotes to avoid shell issues.
- * Get it from: Supabase Dashboard → Settings → API → service_role (secret)
+ * Get the key from: Supabase Dashboard → Settings → API → service_role (secret)
  */
 
 const fs = require('fs');
@@ -19,15 +18,22 @@ const path = require('path');
 const SUPABASE_URL = 'https://zhncgdbhgkeiybdbzsql.supabase.co';
 const BUCKET = 'recipe-images';
 const RECIPES_PATH = path.join(__dirname, 'src/data/recipes.json');
+const KEY_FILE = path.join(__dirname, '.supabase-key');
 
 const UA = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36';
 
-// ─── Get key from env or command-line arg ─────────────────────
+// ─── Get key from file, env, or command-line arg ─────────────
 let SUPABASE_KEY = process.env.SUPABASE_SERVICE_KEY;
 
-// Also accept as first argument: node fetch-missing-images.cjs <key>
 if (!SUPABASE_KEY && process.argv[2]) {
   SUPABASE_KEY = process.argv[2];
+}
+
+// Read from .supabase-key file if it exists
+if (!SUPABASE_KEY) {
+  try {
+    SUPABASE_KEY = fs.readFileSync(KEY_FILE, 'utf8').trim();
+  } catch {}
 }
 
 async function sleep(ms) {
@@ -206,15 +212,12 @@ async function uploadToSupabase(recipeId, buffer, contentType) {
 async function main() {
   if (!SUPABASE_KEY) {
     console.error(`
-ERROR: No Supabase service role key provided.
+ERROR: No Supabase service role key found.
 
-Usage (pick one):
-
-  # Option 1: Environment variable (wrap in single quotes!)
-  SUPABASE_SERVICE_KEY='eyJhbG...' node fetch-missing-images.cjs
-
-  # Option 2: Command-line argument
-  node fetch-missing-images.cjs 'eyJhbG...'
+Easiest method:
+  1. Create a file called .supabase-key in the v2 folder
+  2. Paste ONLY the key into it (no quotes, no extra text)
+  3. Run: node fetch-missing-images.cjs
 
 Get the key from: Supabase Dashboard → Settings → API → service_role (secret)
 `);
