@@ -525,6 +525,17 @@ input, select, textarea {
   margin-bottom: 12px;
 }
 
+/* When drawer is inside the sticky filter-bar, remove duplicate card styling */
+.filter-bar .filter-drawer {
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  margin-bottom: 0;
+  padding: 12px 0 4px;
+  border-top: 1px solid var(--border);
+  margin-top: 10px;
+}
+
 .filter-drawer[hidden] {
   display: none;
 }
