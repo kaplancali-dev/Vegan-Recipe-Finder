@@ -26,7 +26,10 @@ export function isPerishableIng(normedIng) {
     'oil','vinegar','extract','powder','dried','sauce','paste',
     'starch','syrup','butter','cream','milk','flour','juice',
     'jam','jelly','preserve','canned','frozen','pickled','chips',
-    'flakes','seasoning','spice','sugar',
+    'flakes','seasoning','spice','sugar','diced','crushed',
+    'puree','concentrate','ground','roasted','toasted',
+    'herb','cilantro','parsley','basil','mint','dill',
+    'rosemary','thyme','chives','oregano','cumin',
   ];
   const low = normedIng.toLowerCase();
   if (shelfStable.some(s => low.includes(s))) return false;

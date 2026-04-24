@@ -303,8 +303,7 @@ export const QA_ITEMS = [
  */
 export const PERISHABLES = [
   {cat:'🥬 Leafy Greens', items:['spinach','baby spinach','kale','arugula','mixed greens','romaine','bok choy','collard greens','chard']},
-  {cat:'🥒 Vegetables', items:['cucumber','avocado','bell peppers (any)','tomatoes','cherry tomatoes','zucchini','broccoli','cauliflower','asparagus','celery','carrots','red cabbage','green beans','corn','eggplant','mushrooms (any)','bean sprouts','snap peas','jalapeño','pumpkin']},
+  {cat:'🥒 Vegetables', items:['cucumber','bell peppers (any)','fresh tomatoes','cherry tomatoes','zucchini','broccoli','cauliflower','asparagus','celery','fresh carrots','red cabbage','fresh green beans','fresh corn','eggplant','fresh mushrooms','bean sprouts','snap peas','fresh jalapeño']},
   {cat:'🧅 Onions', items:['red onion','yellow onion','white onion','spring onion','scallions','shallots']},
-  {cat:'🌿 Fresh Herbs', items:['cilantro','parsley','basil','mint','dill','rosemary','thyme','chives']},
-  {cat:'🍓 Fruits', items:['berries (any)','lemon','lime','mango','banana','apple','oranges','peaches','pears','grapes']},
+  {cat:'🍓 Fruits', items:['berries (any)','fresh mango','banana','fresh apple','fresh peaches','fresh pears','grapes']},
 ];
