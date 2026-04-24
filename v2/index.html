@@ -213,7 +213,7 @@
       <div class="filter-bar card">
         <div class="input-row">
           <input id="nameSearch" type="text" class="text-input" placeholder="Recipe name or ingredients (i.e. protein bar, pancakes, chili, kale, broccoli, tofu, black beans, etc.)" data-ph-short="Recipe name or ingredients." autocomplete="off">
-          <button id="filterToggle" class="btn btn-outline btn-sm">Categories</button>
+          <button id="filterToggle" class="btn btn-outline btn-sm">Filters</button>
         </div>
         <div id="activeFilters" class="active-filters"></div>
         <!-- Categories drawer (inside sticky bar so it stays in place) -->
@@ -228,6 +228,10 @@
               <input id="timeSlider" type="range" min="0" max="120" step="5" value="120" class="slider">
               <span id="timeLabel" class="time-label">Any</span>
             </div>
+          </div>
+          <div class="filter-section">
+            <h4>⚠️ Allergens <span class="muted" style="font-weight:normal;font-size:0.82rem">(hide recipes containing)</span></h4>
+            <div id="browseAllergenChips" class="filter-chips"></div>
           </div>
         </div>
       </div>
@@ -248,7 +252,7 @@
       <div class="filter-bar card">
         <div class="input-row">
           <input id="readySearch" type="text" class="text-input" placeholder="Recipe name or ingredients (i.e. protein bar, pancakes, chili, kale, broccoli, tofu, black beans, etc.)" data-ph-short="Recipe name or ingredients." autocomplete="off">
-          <button id="readyFilterToggle" class="btn btn-outline">Categories</button>
+          <button id="readyFilterToggle" class="btn btn-outline">Filters</button>
         </div>
         <div id="readyActiveFilters" class="active-filters"></div>
         <!-- Categories drawer (inside sticky bar so it stays in place) -->
@@ -263,6 +267,10 @@
               <input id="readyTimeSlider" type="range" min="0" max="120" step="5" value="120" class="slider">
               <span id="readyTimeLabel" class="time-label">Any</span>
             </div>
+          </div>
+          <div class="filter-section">
+            <h4>⚠️ Allergens <span class="muted" style="font-weight:normal;font-size:0.82rem">(hide recipes containing)</span></h4>
+            <div id="readyAllergenChips" class="filter-chips"></div>
           </div>
         </div>
       </div>

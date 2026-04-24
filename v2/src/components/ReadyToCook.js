@@ -17,6 +17,7 @@ import { openDetail } from './RecipeDetail.js';
 import { showToast } from '../utils/toast.js';
 import { handleCook } from '../actions/cook.js';
 import { stem, escHTML } from '../utils/text.js';
+import { buildAllergenFilterChips } from './AllergenChips.js';
 
 /** @type {Array} Full recipe list */
 let _recipes = [];
@@ -48,13 +49,17 @@ export function initReadyToCook(recipes) {
   wireReadySearch();
   wireReadyFilters();
   buildReadyCategoryChips();
+  buildAllergenFilterChips('#readyAllergenChips', renderReadyList);
   renderReadyList();
 
   subscribe('ingredients', renderReadyList);
   subscribe('staples', renderReadyList);
   subscribe('favorites', renderReadyList);
   subscribe('makelist', renderReadyList);
-  subscribe('allergies', renderReadyList);
+  subscribe('allergies', () => {
+    buildAllergenFilterChips('#readyAllergenChips', renderReadyList);
+    renderReadyList();
+  });
   subscribe('cookHistory', renderReadyList);
 }
 
@@ -84,7 +89,7 @@ function wireReadyFilters() {
   if (filterBtn && drawer) {
     filterBtn.addEventListener('click', () => {
       drawer.hidden = !drawer.hidden;
-      filterBtn.textContent = drawer.hidden ? 'Categories' : 'Close';
+      filterBtn.textContent = drawer.hidden ? 'Filters' : 'Close';
     });
   }
 

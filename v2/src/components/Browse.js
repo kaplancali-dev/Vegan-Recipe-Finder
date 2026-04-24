@@ -17,6 +17,7 @@ import { renderCardList } from './RecipeCard.js';
 import { openDetail } from './RecipeDetail.js';
 import { showToast } from '../utils/toast.js';
 import { handleCook } from '../actions/cook.js';
+import { buildAllergenFilterChips } from './AllergenChips.js';
 
 /** How many recipes to show per page */
 const PAGE_SIZE = 50;
@@ -53,6 +54,7 @@ export function initBrowse(recipes) {
   }
 
   buildCategoryChips();
+  buildAllergenFilterChips('#browseAllergenChips', renderResults);
   wireControls();
   renderResults();
 
@@ -64,6 +66,7 @@ export function initBrowse(recipes) {
   subscribe('cookHistory', renderResults);
   subscribe('allergies', (val) => {
     _allergies = new Set(val);
+    buildAllergenFilterChips('#browseAllergenChips', renderResults);
     renderResults();
   });
 }
@@ -119,7 +122,7 @@ function wireControls() {
   if (filterBtn && drawer) {
     filterBtn.addEventListener('click', () => {
       drawer.hidden = !drawer.hidden;
-      filterBtn.textContent = drawer.hidden ? 'Categories' : 'Close';
+      filterBtn.textContent = drawer.hidden ? 'Filters' : 'Close';
     });
   }
 
