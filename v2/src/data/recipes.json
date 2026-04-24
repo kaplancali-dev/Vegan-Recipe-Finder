@@ -175,7 +175,8 @@
       "Dinner",
       "Soups & Stews",
       "One-Pot",
-      "High-Fiber"
+      "High-Fiber",
+      "High-Protein"
     ],
     "time": 30,
     "servings": 4,
@@ -430,7 +431,8 @@
     "cats": [
       "Dinner",
       "Quick Meals",
-      "Gluten-Free"
+      "Gluten-Free",
+      "High-Protein"
     ],
     "time": 25,
     "servings": 2,
@@ -602,7 +604,8 @@
       "Dinner",
       "Soups & Stews",
       "One-Pot",
-      "High-Fiber"
+      "High-Fiber",
+      "High-Protein"
     ],
     "time": 35,
     "servings": 4,
@@ -983,7 +986,8 @@
     "cats": [
       "Dinner",
       "Soups & Stews",
-      "One-Pot"
+      "One-Pot",
+      "High-Protein"
     ],
     "time": 40,
     "servings": 6,
@@ -1399,7 +1403,8 @@
       "Dinner",
       "Pasta & Noodles",
       "Quick Meals",
-      "Gluten-Free"
+      "Gluten-Free",
+      "High-Protein"
     ],
     "time": 20,
     "servings": 4,
@@ -1666,7 +1671,8 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/228.jpg",
     "cats": [
       "Dinner",
-      "Fall"
+      "Fall",
+      "High-Protein"
     ],
     "time": 30,
     "servings": 2,
@@ -2327,7 +2333,8 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/288.jpg",
     "cats": [
       "Dinner",
-      "High-Fiber"
+      "High-Fiber",
+      "High-Protein"
     ],
     "time": 35,
     "servings": 4,
@@ -2499,7 +2506,8 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/296.jpg",
     "cats": [
       "Dinner",
-      "Gluten-Free"
+      "Gluten-Free",
+      "High-Protein"
     ],
     "time": 30,
     "servings": 4,
@@ -4282,7 +4290,8 @@
     "cats": [
       "Salads",
       "Lunch",
-      "Quick Meals"
+      "Quick Meals",
+      "High-Protein"
     ],
     "time": 10,
     "servings": 4,
@@ -5548,7 +5557,8 @@
     "cats": [
       "Burgers & Patties",
       "Dinner",
-      "Gluten-Free"
+      "Gluten-Free",
+      "High-Protein"
     ],
     "time": 40,
     "servings": 4,
@@ -5594,7 +5604,8 @@
       "Chinese",
       "Dinner",
       "Quick Meals",
-      "Gluten-Free"
+      "Gluten-Free",
+      "High-Protein"
     ],
     "time": 25,
     "servings": 4,
@@ -5823,7 +5834,8 @@
       "Burgers & Patties",
       "Dinner",
       "Quick Meals",
-      "Gluten-Free"
+      "Gluten-Free",
+      "High-Protein"
     ],
     "time": 25,
     "servings": 4,
@@ -6869,7 +6881,8 @@
     "cats": [
       "Indian",
       "Dinner",
-      "One-Pot"
+      "One-Pot",
+      "High-Protein"
     ],
     "time": 45,
     "servings": 4,
@@ -8175,7 +8188,8 @@
       "Chinese",
       "Dinner",
       "Quick Meals",
-      "Gluten-Free"
+      "Gluten-Free",
+      "High-Protein"
     ],
     "time": 30,
     "servings": 4,
@@ -8293,7 +8307,8 @@
       "Chinese",
       "Dinner",
       "Quick Meals",
-      "Gluten-Free"
+      "Gluten-Free",
+      "High-Protein"
     ],
     "time": 30,
     "servings": 4,
@@ -8836,7 +8851,8 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2165.jpg",
     "cats": [
       "Salads",
-      "Fall"
+      "Fall",
+      "High-Protein"
     ],
     "time": 45,
     "servings": 4,
@@ -9124,7 +9140,8 @@
       "Dinner",
       "Gluten-Free",
       "Mediterranean",
-      "Middle Eastern"
+      "Middle Eastern",
+      "High-Protein"
     ],
     "time": 35,
     "servings": 4,
@@ -9641,7 +9658,8 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2239.jpg",
     "cats": [
       "Dinner",
-      "Mediterranean"
+      "Mediterranean",
+      "High-Protein"
     ],
     "time": 75,
     "servings": 6,
@@ -9903,7 +9921,8 @@
     "cats": [
       "Dinner",
       "Chinese",
-      "Gluten-Free"
+      "Gluten-Free",
+      "High-Protein"
     ],
     "time": 25,
     "servings": 4,
@@ -10446,7 +10465,8 @@
       "Dinner",
       "Gluten-Free",
       "One-Pot",
-      "Middle Eastern"
+      "Middle Eastern",
+      "High-Protein"
     ],
     "time": 30,
     "servings": 4,
@@ -11210,7 +11230,8 @@
       "Breakfast",
       "Dinner",
       "Gluten-Free",
-      "High-Fiber"
+      "High-Fiber",
+      "High-Protein"
     ],
     "time": 30,
     "servings": 4,
@@ -14459,7 +14480,8 @@
     "url": "https://www.lazycatkitchen.com/vegan-traybake-spring-veggies/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2584.jpg",
     "cats": [
-      "Dinner"
+      "Dinner",
+      "High-Protein"
     ],
     "time": 30,
     "servings": 4,
@@ -15590,7 +15612,8 @@
     "url": "https://www.delishknowledge.com/italian-chopped-salad-recipe/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2619.jpg",
     "cats": [
-      "Salads"
+      "Salads",
+      "High-Protein"
     ],
     "time": 30,
     "servings": 4,
@@ -18340,7 +18363,8 @@
     "url": "https://www.feastingathome.com/breakfast-burritos/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2707.jpg",
     "cats": [
-      "Breakfast"
+      "Breakfast",
+      "High-Protein"
     ],
     "time": 30,
     "servings": 4,
@@ -19027,7 +19051,8 @@
     "url": "https://www.budgetbytes.com/sesame-tempeh-bowls/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2728.jpg",
     "cats": [
-      "Dinner"
+      "Dinner",
+      "High-Protein"
     ],
     "time": 30,
     "servings": 4,
@@ -19063,7 +19088,8 @@
     "cats": [
       "Dinner",
       "Gluten-Free",
-      "Quick Meals"
+      "Quick Meals",
+      "High-Protein"
     ],
     "time": 30,
     "servings": 4,
@@ -19163,7 +19189,8 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2732.jpg",
     "cats": [
       "Dinner",
-      "High-Fiber"
+      "High-Fiber",
+      "High-Protein"
     ],
     "time": 30,
     "servings": 4,
@@ -19627,7 +19654,8 @@
     "url": "https://www.budgetbytes.com/vegan-split-pea-soup/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2745.jpg",
     "cats": [
-      "Soups & Stews"
+      "Soups & Stews",
+      "High-Protein"
     ],
     "time": 30,
     "servings": 4,
@@ -20124,7 +20152,8 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2758.jpg",
     "cats": [
       "Soups & Stews",
-      "One-Pot"
+      "One-Pot",
+      "High-Protein"
     ],
     "time": 35,
     "servings": 4,
@@ -20171,7 +20200,8 @@
       "Soups & Stews",
       "Instant Pot",
       "Italian",
-      "High-Fiber"
+      "High-Fiber",
+      "High-Protein"
     ],
     "time": 45,
     "servings": 4,
@@ -20263,7 +20293,8 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2761.jpg",
     "cats": [
       "Soups & Stews",
-      "Gluten-Free"
+      "Gluten-Free",
+      "High-Protein"
     ],
     "time": 45,
     "servings": 4,
@@ -20388,7 +20419,8 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2764.jpg",
     "cats": [
       "Soups & Stews",
-      "Italian"
+      "Italian",
+      "High-Protein"
     ],
     "time": 45,
     "servings": 4,
@@ -20649,7 +20681,8 @@
     "cats": [
       "Salads",
       "Gluten-Free",
-      "High-Fiber"
+      "High-Fiber",
+      "High-Protein"
     ],
     "time": 20,
     "servings": 4,
@@ -20903,7 +20936,8 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2777.jpg",
     "cats": [
       "Pasta & Noodles",
-      "Italian"
+      "Italian",
+      "High-Protein"
     ],
     "time": 30,
     "servings": 4,
@@ -21568,7 +21602,8 @@
     "cats": [
       "Dinner",
       "Chinese",
-      "Gluten-Free"
+      "Gluten-Free",
+      "High-Protein"
     ],
     "time": 30,
     "servings": 4,
@@ -22291,7 +22326,8 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2812.jpg",
     "cats": [
       "Breakfast",
-      "Quick Meals"
+      "Quick Meals",
+      "High-Protein"
     ],
     "time": 20,
     "servings": 4,
@@ -22498,7 +22534,8 @@
     "cats": [
       "Dinner",
       "Mexican",
-      "Gluten-Free"
+      "Gluten-Free",
+      "High-Protein"
     ],
     "time": 30,
     "servings": 4,
@@ -25170,7 +25207,8 @@
     "cats": [
       "Meal Prep",
       "Asian",
-      "Dinner"
+      "Dinner",
+      "High-Protein"
     ],
     "time": 35,
     "servings": 4,
@@ -26181,7 +26219,8 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/3071.jpg",
     "cats": [
       "Meat Alternatives",
-      "Sandwiches"
+      "Sandwiches",
+      "High-Protein"
     ],
     "time": 90,
     "servings": 8,
@@ -26254,7 +26293,8 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/3073.jpg",
     "cats": [
       "Meat Alternatives",
-      "Italian"
+      "Italian",
+      "High-Protein"
     ],
     "time": 60,
     "servings": 6,
@@ -26354,7 +26394,8 @@
     "cats": [
       "Korean",
       "Asian",
-      "Dinner"
+      "Dinner",
+      "High-Protein"
     ],
     "time": 30,
     "servings": 4,
@@ -26927,7 +26968,8 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/3103.webp",
     "cats": [
       "Vegan Bacon",
-      "Meat Alternatives"
+      "Meat Alternatives",
+      "High-Protein"
     ],
     "time": 45,
     "servings": 6,
@@ -32554,7 +32596,8 @@
     "cats": [
       "Gluten-Free",
       "Meal Prep",
-      "Breakfast"
+      "Breakfast",
+      "High-Protein"
     ],
     "time": 15,
     "servings": 8,
@@ -32613,7 +32656,8 @@
     "cats": [
       "Gluten-Free",
       "Meal Prep",
-      "Breakfast"
+      "Breakfast",
+      "High-Protein"
     ],
     "time": 10,
     "servings": 8,
@@ -32640,7 +32684,8 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/4147.jpg",
     "cats": [
       "Gluten-Free",
-      "Breakfast"
+      "Breakfast",
+      "High-Protein"
     ],
     "time": 15,
     "servings": 6,
@@ -33458,7 +33503,8 @@
     "cats": [
       "Lunch",
       "Quick Meals",
-      "Sandwiches"
+      "Sandwiches",
+      "High-Protein"
     ],
     "time": 15,
     "servings": 2,
@@ -33889,7 +33935,8 @@
     "cats": [
       "Breakfast",
       "Mexican",
-      "Quick Meals"
+      "Quick Meals",
+      "High-Protein"
     ],
     "time": 20,
     "servings": 4,
@@ -34036,7 +34083,8 @@
       "Breakfast",
       "Quick Meals",
       "Gluten-Free",
-      "Beginner"
+      "Beginner",
+      "High-Protein"
     ],
     "time": 15,
     "servings": 2,
@@ -34254,7 +34302,8 @@
     "cats": [
       "Dinner",
       "Meat Alternatives",
-      "Gluten-Free"
+      "Gluten-Free",
+      "High-Protein"
     ],
     "time": 30,
     "servings": 2,
@@ -34361,7 +34410,8 @@
     "cats": [
       "Dinner",
       "Pasta & Noodles",
-      "Italian"
+      "Italian",
+      "High-Protein"
     ],
     "time": 35,
     "servings": 4,
@@ -34430,7 +34480,8 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/4230.jpg",
     "cats": [
       "Dinner",
-      "Kid-Friendly"
+      "Kid-Friendly",
+      "High-Protein"
     ],
     "time": 30,
     "servings": 4,
@@ -34691,7 +34742,8 @@
     "cats": [
       "Lunch",
       "Quick Meals",
-      "Gluten-Free"
+      "Gluten-Free",
+      "High-Protein"
     ],
     "time": 25,
     "servings": 2,
