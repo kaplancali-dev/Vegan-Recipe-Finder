@@ -69,9 +69,9 @@ function renderSignedOut(container) {
       </div>
     </div>
     <div id="otpStep2" class="sync-form" hidden>
-      <p style="font-size:0.82rem;color:var(--muted);margin-bottom:8px">Check your email for a 6-digit code.</p>
+      <p style="font-size:0.82rem;color:var(--muted);margin-bottom:8px">Check your email for a verification code.</p>
       <div class="input-row">
-        <input id="otpCode" type="text" class="text-input" placeholder="123456" maxlength="6" inputmode="numeric" autocomplete="one-time-code">
+        <input id="otpCode" type="text" class="text-input" placeholder="Enter code" maxlength="8" inputmode="numeric" autocomplete="one-time-code">
         <button id="otpVerifyBtn" class="btn btn-primary btn-sm">Verify</button>
       </div>
     </div>
@@ -189,7 +189,7 @@ function wireOtpFlow(container) {
       const code = codeInput.value.trim();
       const email = codeInput.dataset.email || emailInput?.value?.trim();
       if (!code || code.length < 6) {
-        showToast('Please enter the 6-digit code');
+        showToast('Please enter the verification code');
         return;
       }
 
