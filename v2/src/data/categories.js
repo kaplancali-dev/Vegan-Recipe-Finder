@@ -1,6 +1,5 @@
 /**
- * Fixed category list matching v1.
- * Order and labels match the original app.
+ * Category filter list.
  * 'Lunch|Dinner' is a combined filter — matches recipes with either tag.
  */
 export const V1_CATEGORIES = [
@@ -8,8 +7,6 @@ export const V1_CATEGORIES = [
   { label: 'Breakfast',          icon: '🧇' },
   { label: 'Lunch / Dinner',    icon: '🍢', filter: 'Lunch|Dinner' },
   { label: 'Appetizers',        icon: '🥟' },
-  { label: 'Sides',             icon: '🥦' },
-  { label: 'Snacks',            icon: '🥨' },
   { label: 'Drinks',            icon: '🥤' },
   { label: 'Desserts',          icon: '🍨' },
 
@@ -21,7 +18,6 @@ export const V1_CATEGORIES = [
   { label: 'Burgers & Patties', icon: '🍔' },
   { label: 'Sauces & Dips',     icon: '🫙' },
   { label: 'Bread & Baking',    icon: '🥖' },
-  { label: 'GF Bread',          icon: '🍞' },
 
   // ── Cuisine ──
   { label: 'Japanese',          icon: '🍱 🇯🇵' },
@@ -32,7 +28,6 @@ export const V1_CATEGORIES = [
   { label: 'Indian',            icon: '🍛 🇮🇳' },
   { label: 'Korean',            icon: '🥢 🇰🇷' },
   { label: 'Italian',           icon: '🍝 🇮🇹' },
-  { label: 'Greek',             icon: '🫓 🇬🇷' },
   { label: 'Mediterranean',     icon: '🫒' },
   { label: 'Middle Eastern',    icon: '🧆' },
   { label: 'Southern',          icon: '🌽' },

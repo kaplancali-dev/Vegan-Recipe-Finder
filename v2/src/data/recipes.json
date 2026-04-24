@@ -41,7 +41,6 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/138.jpg",
     "cats": [
       "Dinner",
-      "High-Protein",
       "Quick Meals",
       "Gluten-Free"
     ],
@@ -144,8 +143,7 @@
     "url": "https://www.crazyvegankitchen.com/vegan-stuffed-peppers/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/143.jpg",
     "cats": [
-      "Dinner",
-      "High-Protein"
+      "Dinner"
     ],
     "time": 50,
     "servings": 4,
@@ -176,7 +174,6 @@
     "cats": [
       "Dinner",
       "Soups & Stews",
-      "High-Protein",
       "One-Pot",
       "High-Fiber"
     ],
@@ -395,7 +392,6 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/151.webp",
     "cats": [
       "Dinner",
-      "High-Protein",
       "One-Pot"
     ],
     "time": 30,
@@ -433,7 +429,6 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/155.webp",
     "cats": [
       "Dinner",
-      "High-Protein",
       "Quick Meals",
       "Gluten-Free"
     ],
@@ -532,8 +527,7 @@
     "url": "https://plantbasedandbroke.com/vegan-butter-chicken-recipe/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/163.jpg",
     "cats": [
-      "Dinner",
-      "High-Protein"
+      "Dinner"
     ],
     "time": 45,
     "servings": 4,
@@ -571,8 +565,7 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/165.webp",
     "cats": [
       "Dinner",
-      "Lunch",
-      "High-Protein"
+      "Lunch"
     ],
     "time": 30,
     "servings": 4,
@@ -608,7 +601,6 @@
     "cats": [
       "Dinner",
       "Soups & Stews",
-      "High-Protein",
       "One-Pot",
       "High-Fiber"
     ],
@@ -650,8 +642,7 @@
     "url": "https://rainbowplantlife.com/tofu-tikka-masala/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/169.jpg",
     "cats": [
-      "Dinner",
-      "High-Protein"
+      "Dinner"
     ],
     "time": 45,
     "servings": 4,
@@ -734,7 +725,6 @@
     "cats": [
       "Dinner",
       "Soups & Stews",
-      "High-Protein",
       "One-Pot"
     ],
     "time": 40,
@@ -776,7 +766,6 @@
     "cats": [
       "Dinner",
       "Lunch",
-      "High-Protein",
       "Fall"
     ],
     "time": 30,
@@ -814,9 +803,9 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/175.jpg",
     "cats": [
       "Dinner",
-      "High-Protein",
       "Quick Meals",
-      "Gluten-Free"
+      "Gluten-Free",
+      "High-Protein"
     ],
     "time": 20,
     "servings": 4,
@@ -923,7 +912,6 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/181.jpg",
     "cats": [
       "Dinner",
-      "High-Protein",
       "Quick Meals",
       "Gluten-Free"
     ],
@@ -995,7 +983,6 @@
     "cats": [
       "Dinner",
       "Soups & Stews",
-      "High-Protein",
       "One-Pot"
     ],
     "time": 40,
@@ -1071,8 +1058,7 @@
     "url": "https://sweetpotatosoul.com/new-orleans-red-beans-rice-video/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/197.jpg",
     "cats": [
-      "Dinner",
-      "High-Protein"
+      "Dinner"
     ],
     "time": 60,
     "servings": 6,
@@ -1112,7 +1098,6 @@
     "cats": [
       "Dinner",
       "Soups & Stews",
-      "High-Protein",
       "One-Pot"
     ],
     "time": 40,
@@ -1305,7 +1290,6 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/203.jpg",
     "cats": [
       "Dinner",
-      "High-Protein",
       "Fall"
     ],
     "time": 40,
@@ -1375,7 +1359,6 @@
     "cats": [
       "Dinner",
       "Pasta & Noodles",
-      "High-Protein",
       "Gluten-Free"
     ],
     "time": 35,
@@ -1416,7 +1399,6 @@
       "Dinner",
       "Pasta & Noodles",
       "Quick Meals",
-      "High-Protein",
       "Gluten-Free"
     ],
     "time": 20,
@@ -1453,7 +1435,6 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/213.webp",
     "cats": [
       "Dinner",
-      "High-Protein",
       "Quick Meals",
       "Gluten-Free"
     ],
@@ -1492,9 +1473,9 @@
     "cats": [
       "Dinner",
       "Soups & Stews",
-      "High-Protein",
       "One-Pot",
-      "High-Fiber"
+      "High-Fiber",
+      "High-Protein"
     ],
     "time": 40,
     "servings": 6,
@@ -1569,7 +1550,6 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/223.webp",
     "cats": [
       "Dinner",
-      "High-Protein",
       "One-Pot"
     ],
     "time": 30,
@@ -1611,7 +1591,6 @@
     "cats": [
       "Dinner",
       "Soups & Stews",
-      "High-Protein",
       "One-Pot",
       "Fall"
     ],
@@ -1647,7 +1626,6 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/227.jpg",
     "cats": [
       "Dinner",
-      "High-Protein",
       "Quick Meals",
       "Gluten-Free"
     ],
@@ -1688,7 +1666,6 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/228.jpg",
     "cats": [
       "Dinner",
-      "High-Protein",
       "Fall"
     ],
     "time": 30,
@@ -1720,7 +1697,6 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/229.jpg",
     "cats": [
       "Dinner",
-      "High-Protein",
       "Fall"
     ],
     "time": 40,
@@ -1787,7 +1763,6 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/232.jpg",
     "cats": [
       "Dinner",
-      "High-Protein",
       "One-Pot",
       "Gluten-Free"
     ],
@@ -1824,7 +1799,6 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/236.jpg",
     "cats": [
       "Dinner",
-      "High-Protein",
       "Gluten-Free"
     ],
     "time": 70,
@@ -1870,7 +1844,6 @@
     "cats": [
       "Dinner",
       "Soups & Stews",
-      "High-Protein",
       "One-Pot"
     ],
     "time": 35,
@@ -1907,7 +1880,6 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/239.jpg",
     "cats": [
       "Dinner",
-      "High-Protein",
       "Gluten-Free"
     ],
     "time": 30,
@@ -1947,7 +1919,6 @@
     "cats": [
       "Dinner",
       "Soups & Stews",
-      "High-Protein",
       "One-Pot",
       "Gluten-Free"
     ],
@@ -1983,7 +1954,6 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/243.webp",
     "cats": [
       "Dinner",
-      "High-Protein",
       "High-Fiber"
     ],
     "time": 35,
@@ -2024,7 +1994,6 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/245.webp",
     "cats": [
       "Dinner",
-      "High-Protein",
       "One-Pot",
       "Gluten-Free"
     ],
@@ -2064,7 +2033,6 @@
     "cats": [
       "Dinner",
       "Soups & Stews",
-      "High-Protein",
       "One-Pot"
     ],
     "time": 35,
@@ -2105,8 +2073,7 @@
     "cats": [
       "Dinner",
       "Lunch",
-      "Salads",
-      "High-Protein"
+      "Salads"
     ],
     "time": 50,
     "servings": 4,
@@ -2218,7 +2185,6 @@
       "Dinner",
       "Lunch",
       "Salads",
-      "High-Protein",
       "Fall"
     ],
     "time": 40,
@@ -2259,7 +2225,6 @@
     "cats": [
       "Dinner",
       "Soups & Stews",
-      "High-Protein",
       "One-Pot"
     ],
     "time": 35,
@@ -2362,7 +2327,6 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/288.jpg",
     "cats": [
       "Dinner",
-      "High-Protein",
       "High-Fiber"
     ],
     "time": 35,
@@ -2535,7 +2499,6 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/296.jpg",
     "cats": [
       "Dinner",
-      "High-Protein",
       "Gluten-Free"
     ],
     "time": 30,
@@ -2598,8 +2561,7 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/302.jpg",
     "cats": [
       "Sauces & Dips",
-      "Quick Meals",
-      "Snacks"
+      "Quick Meals"
     ],
     "time": 10,
     "servings": 8,
@@ -2658,7 +2620,6 @@
     "cats": [
       "Sauces & Dips",
       "Quick Meals",
-      "Snacks",
       "Beginner"
     ],
     "time": 5,
@@ -2950,8 +2911,7 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/313.jpg",
     "cats": [
       "Sauces & Dips",
-      "Quick Meals",
-      "Snacks"
+      "Quick Meals"
     ],
     "time": 10,
     "servings": 6,
@@ -3076,9 +3036,7 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/323.png",
     "cats": [
       "Sauces & Dips",
-      "Quick Meals",
-      "High-Protein",
-      "Snacks"
+      "Quick Meals"
     ],
     "time": 10,
     "servings": 8,
@@ -3173,9 +3131,7 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/326.webp",
     "cats": [
       "Sauces & Dips",
-      "Quick Meals",
-      "High-Protein",
-      "Snacks"
+      "Quick Meals"
     ],
     "time": 10,
     "servings": 8,
@@ -3204,8 +3160,7 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/330.webp",
     "cats": [
       "Sauces & Dips",
-      "Quick Meals",
-      "Snacks"
+      "Quick Meals"
     ],
     "time": 15,
     "servings": 8,
@@ -3236,8 +3191,7 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/331.webp",
     "cats": [
       "Sauces & Dips",
-      "Quick Meals",
-      "Snacks"
+      "Quick Meals"
     ],
     "time": 10,
     "servings": 6,
@@ -3326,7 +3280,6 @@
     "cats": [
       "Sauces & Dips",
       "Quick Meals",
-      "Snacks",
       "Fall"
     ],
     "time": 10,
@@ -3420,8 +3373,6 @@
     "cats": [
       "Sauces & Dips",
       "Quick Meals",
-      "High-Protein",
-      "Snacks",
       "Mediterranean",
       "Middle Eastern"
     ],
@@ -3664,8 +3615,7 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/362.jpg",
     "cats": [
       "Vegan Cheese",
-      "Quick Meals",
-      "High-Protein"
+      "Quick Meals"
     ],
     "time": 5,
     "servings": 6,
@@ -3696,8 +3646,7 @@
     "cats": [
       "Vegan Cheese",
       "Sauces & Dips",
-      "Quick Meals",
-      "Snacks"
+      "Quick Meals"
     ],
     "time": 10,
     "servings": 8,
@@ -3765,7 +3714,6 @@
     "cats": [
       "Vegan Bacon",
       "Quick Meals",
-      "Snacks",
       "Gluten-Free"
     ],
     "time": 15,
@@ -3796,7 +3744,6 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/371.jpg",
     "cats": [
       "Vegan Bacon",
-      "High-Protein",
       "Breakfast",
       "Gluten-Free"
     ],
@@ -3876,9 +3823,9 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/375.jpg",
     "cats": [
       "Vegan Bacon",
-      "High-Protein",
       "Quick Meals",
-      "Gluten-Free"
+      "Gluten-Free",
+      "High-Protein"
     ],
     "time": 25,
     "servings": 4,
@@ -3945,11 +3892,9 @@
     "url": "https://www.theconsciousplantkitchen.com/vegan-gluten-free-muffins/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/381.jpg",
     "cats": [
-      "GF Bread",
       "Gluten-Free",
       "Bread & Baking",
-      "Breakfast",
-      "Snacks"
+      "Breakfast"
     ],
     "time": 35,
     "servings": 12,
@@ -3986,7 +3931,6 @@
     "cats": [
       "Bread & Baking",
       "Breakfast",
-      "Snacks",
       "Desserts"
     ],
     "time": 35,
@@ -4023,10 +3967,8 @@
     "url": "https://yumden.com/socca-chickpea-flatbread-recipe/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/386.jpg",
     "cats": [
-      "GF Bread",
       "Gluten-Free",
       "Bread & Baking",
-      "High-Protein",
       "Quick Meals",
       "Breakfast"
     ],
@@ -4054,11 +3996,9 @@
     "url": "https://homemakeronabudget.com/easy-almond-flour-sandwich-bread/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/387.jpg",
     "cats": [
-      "GF Bread",
       "Gluten-Free",
       "Bread & Baking",
-      "Breakfast",
-      "High-Protein"
+      "Breakfast"
     ],
     "time": 50,
     "servings": 10,
@@ -4120,8 +4060,7 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/393.webp",
     "cats": [
       "Bread & Baking",
-      "Breakfast",
-      "Snacks"
+      "Breakfast"
     ],
     "time": 30,
     "servings": 12,
@@ -4200,7 +4139,6 @@
     "cats": [
       "Salads",
       "Lunch",
-      "High-Protein",
       "Quick Meals"
     ],
     "time": 20,
@@ -4447,7 +4385,6 @@
     "cats": [
       "Salads",
       "Lunch",
-      "High-Protein",
       "Quick Meals"
     ],
     "time": 10,
@@ -4587,7 +4524,6 @@
     "url": "https://runningonrealfood.com/chocolate-superfood-energy-balls/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/416.jpg",
     "cats": [
-      "Snacks",
       "Desserts",
       "Quick Meals"
     ],
@@ -4623,7 +4559,6 @@
     "cats": [
       "Dinner",
       "Lunch",
-      "Snacks",
       "Quick Meals"
     ],
     "time": 20,
@@ -4654,7 +4589,6 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/422.jpg",
     "cats": [
       "Desserts",
-      "Snacks",
       "Quick Meals"
     ],
     "time": 15,
@@ -4682,8 +4616,7 @@
     "url": "https://shaneandsimple.com/healthy-oil-free-granola/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/424.jpg",
     "cats": [
-      "Breakfast",
-      "Snacks"
+      "Breakfast"
     ],
     "time": 30,
     "servings": 10,
@@ -4818,8 +4751,6 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/435.webp",
     "cats": [
       "Desserts",
-      "Snacks",
-      "High-Protein",
       "Quick Meals"
     ],
     "time": 10,
@@ -4942,7 +4873,6 @@
     "cats": [
       "Desserts",
       "Quick Meals",
-      "High-Protein",
       "Beginner"
     ],
     "time": 10,
@@ -4969,8 +4899,7 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/454.webp",
     "cats": [
       "Breakfast",
-      "Quick Meals",
-      "High-Protein"
+      "Quick Meals"
     ],
     "time": 10,
     "servings": 2,
@@ -5062,9 +4991,7 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/464.jpg",
     "cats": [
       "Desserts",
-      "Snacks",
       "Quick Meals",
-      "High-Protein",
       "Beginner"
     ],
     "time": 15,
@@ -5126,8 +5053,6 @@
     "url": "https://ohsheglows.com/new-mama-glo-bars-lactation-friendly-nut-free/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/467.jpg",
     "cats": [
-      "Snacks",
-      "High-Protein",
       "Quick Meals"
     ],
     "time": 20,
@@ -5166,7 +5091,6 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/469.jpg",
     "cats": [
       "Breakfast",
-      "High-Protein",
       "Quick Meals"
     ],
     "time": 25,
@@ -5260,7 +5184,6 @@
     "cats": [
       "Burgers & Patties",
       "Dinner",
-      "High-Protein",
       "Gluten-Free"
     ],
     "time": 45,
@@ -5302,8 +5225,7 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2002.jpg",
     "cats": [
       "Burgers & Patties",
-      "Dinner",
-      "High-Protein"
+      "Dinner"
     ],
     "time": 45,
     "servings": 4,
@@ -5374,8 +5296,7 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2004.jpg",
     "cats": [
       "Burgers & Patties",
-      "Dinner",
-      "High-Protein"
+      "Dinner"
     ],
     "time": 50,
     "servings": 4,
@@ -5411,7 +5332,6 @@
     "cats": [
       "Burgers & Patties",
       "Dinner",
-      "High-Protein",
       "Gluten-Free"
     ],
     "time": 55,
@@ -5445,7 +5365,6 @@
     "cats": [
       "Burgers & Patties",
       "Dinner",
-      "High-Protein",
       "Quick Meals"
     ],
     "time": 30,
@@ -5481,7 +5400,6 @@
     "cats": [
       "Burgers & Patties",
       "Dinner",
-      "High-Protein",
       "Quick Meals",
       "Mediterranean",
       "Middle Eastern"
@@ -5521,7 +5439,6 @@
     "cats": [
       "Burgers & Patties",
       "Dinner",
-      "High-Protein",
       "Gluten-Free"
     ],
     "time": 40,
@@ -5560,7 +5477,6 @@
     "cats": [
       "Burgers & Patties",
       "Dinner",
-      "High-Protein",
       "Mexican"
     ],
     "time": 45,
@@ -5594,8 +5510,7 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2010.webp",
     "cats": [
       "Burgers & Patties",
-      "Dinner",
-      "High-Protein"
+      "Dinner"
     ],
     "time": 35,
     "servings": 4,
@@ -5633,7 +5548,6 @@
     "cats": [
       "Burgers & Patties",
       "Dinner",
-      "High-Protein",
       "Gluten-Free"
     ],
     "time": 40,
@@ -5717,7 +5631,6 @@
     "cats": [
       "Burgers & Patties",
       "Dinner",
-      "High-Protein",
       "Gluten-Free"
     ],
     "time": 45,
@@ -5753,7 +5666,6 @@
     "cats": [
       "Burgers & Patties",
       "Dinner",
-      "High-Protein",
       "Gluten-Free"
     ],
     "time": 35,
@@ -5800,7 +5712,6 @@
     "cats": [
       "Burgers & Patties",
       "Dinner",
-      "High-Protein",
       "Quick Meals"
     ],
     "time": 30,
@@ -5831,8 +5742,7 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2017.jpg",
     "cats": [
       "Burgers & Patties",
-      "Dinner",
-      "High-Protein"
+      "Dinner"
     ],
     "time": 45,
     "servings": 4,
@@ -5867,7 +5777,6 @@
     "cats": [
       "Burgers & Patties",
       "Dinner",
-      "High-Protein",
       "Quick Meals",
       "Gluten-Free"
     ],
@@ -5913,7 +5822,6 @@
     "cats": [
       "Burgers & Patties",
       "Dinner",
-      "High-Protein",
       "Quick Meals",
       "Gluten-Free"
     ],
@@ -5950,7 +5858,6 @@
     "cats": [
       "Burgers & Patties",
       "Dinner",
-      "High-Protein",
       "Quick Meals",
       "Gluten-Free"
     ],
@@ -6024,7 +5931,6 @@
     "cats": [
       "Burgers & Patties",
       "Dinner",
-      "High-Protein",
       "Gluten-Free"
     ],
     "time": 40,
@@ -6061,7 +5967,6 @@
     "cats": [
       "Burgers & Patties",
       "Dinner",
-      "High-Protein",
       "Gluten-Free"
     ],
     "time": 45,
@@ -6102,8 +6007,7 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2024.jpg",
     "cats": [
       "Burgers & Patties",
-      "Dinner",
-      "High-Protein"
+      "Dinner"
     ],
     "time": 45,
     "servings": 4,
@@ -6147,8 +6051,7 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2025.jpg",
     "cats": [
       "Burgers & Patties",
-      "Dinner",
-      "High-Protein"
+      "Dinner"
     ],
     "time": 40,
     "servings": 4,
@@ -6185,7 +6088,6 @@
     "cats": [
       "Mexican",
       "Dinner",
-      "High-Protein",
       "Gluten-Free"
     ],
     "time": 45,
@@ -6229,7 +6131,6 @@
     "cats": [
       "Mexican",
       "Dinner",
-      "High-Protein",
       "Quick Meals",
       "Gluten-Free"
     ],
@@ -6272,7 +6173,6 @@
     "cats": [
       "Mexican",
       "Dinner",
-      "High-Protein",
       "Quick Meals",
       "Gluten-Free",
       "High-Fiber"
@@ -6314,7 +6214,6 @@
     "cats": [
       "Mexican",
       "Dinner",
-      "High-Protein",
       "Quick Meals",
       "Gluten-Free"
     ],
@@ -6354,7 +6253,6 @@
     "cats": [
       "Mexican",
       "Dinner",
-      "High-Protein",
       "Quick Meals"
     ],
     "time": 25,
@@ -6389,7 +6287,6 @@
     "cats": [
       "Mexican",
       "Dinner",
-      "High-Protein",
       "Quick Meals",
       "Gluten-Free"
     ],
@@ -6427,7 +6324,6 @@
       "Mexican",
       "Dinner",
       "Quick Meals",
-      "High-Protein",
       "Gluten-Free"
     ],
     "time": 20,
@@ -6464,7 +6360,6 @@
     "cats": [
       "Mexican",
       "Dinner",
-      "High-Protein",
       "Quick Meals"
     ],
     "time": 30,
@@ -6506,8 +6401,7 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2042.webp",
     "cats": [
       "Mexican",
-      "Dinner",
-      "High-Protein"
+      "Dinner"
     ],
     "time": 50,
     "servings": 4,
@@ -6543,7 +6437,6 @@
     "cats": [
       "Thai",
       "Dinner",
-      "High-Protein",
       "One-Pot"
     ],
     "time": 45,
@@ -6623,7 +6516,6 @@
     "cats": [
       "Thai",
       "Dinner",
-      "High-Protein",
       "Quick Meals",
       "Gluten-Free"
     ],
@@ -6667,7 +6559,6 @@
     "cats": [
       "Thai",
       "Dinner",
-      "High-Protein",
       "Quick Meals",
       "Gluten-Free"
     ],
@@ -6714,7 +6605,6 @@
     "cats": [
       "Thai",
       "Dinner",
-      "High-Protein",
       "Quick Meals",
       "Gluten-Free"
     ],
@@ -6829,7 +6719,6 @@
     "cats": [
       "Thai",
       "Dinner",
-      "High-Protein",
       "Quick Meals",
       "Gluten-Free"
     ],
@@ -6899,7 +6788,6 @@
     "cats": [
       "Indian",
       "Dinner",
-      "High-Protein",
       "One-Pot"
     ],
     "time": 40,
@@ -6936,8 +6824,7 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2068.webp",
     "cats": [
       "Indian",
-      "Dinner",
-      "High-Protein"
+      "Dinner"
     ],
     "time": 50,
     "servings": 4,
@@ -6982,7 +6869,6 @@
     "cats": [
       "Indian",
       "Dinner",
-      "High-Protein",
       "One-Pot"
     ],
     "time": 45,
@@ -7027,7 +6913,6 @@
     "cats": [
       "Indian",
       "Dinner",
-      "High-Protein",
       "One-Pot"
     ],
     "time": 50,
@@ -7109,8 +6994,7 @@
     "cats": [
       "Indian",
       "Instant Pot",
-      "Dinner",
-      "High-Protein"
+      "Dinner"
     ],
     "time": 35,
     "servings": 4,
@@ -7147,7 +7031,6 @@
     "cats": [
       "Indian",
       "Dinner",
-      "High-Protein",
       "One-Pot"
     ],
     "time": 40,
@@ -7189,7 +7072,6 @@
     "cats": [
       "Indian",
       "Dinner",
-      "High-Protein",
       "One-Pot"
     ],
     "time": 60,
@@ -7271,8 +7153,8 @@
     "cats": [
       "Instant Pot",
       "Soups & Stews",
-      "High-Protein",
-      "One-Pot"
+      "One-Pot",
+      "High-Protein"
     ],
     "time": 30,
     "servings": 6,
@@ -7308,9 +7190,9 @@
     "cats": [
       "Instant Pot",
       "Soups & Stews",
-      "High-Protein",
       "One-Pot",
-      "High-Fiber"
+      "High-Fiber",
+      "High-Protein"
     ],
     "time": 35,
     "servings": 4,
@@ -7349,7 +7231,6 @@
     "cats": [
       "Instant Pot",
       "Soups & Stews",
-      "High-Protein",
       "One-Pot",
       "Mexican"
     ],
@@ -7389,8 +7270,7 @@
     "cats": [
       "Instant Pot",
       "Indian",
-      "Dinner",
-      "High-Protein"
+      "Dinner"
     ],
     "time": 30,
     "servings": 4,
@@ -7467,7 +7347,6 @@
     "cats": [
       "Instant Pot",
       "Soups & Stews",
-      "High-Protein",
       "One-Pot",
       "High-Fiber"
     ],
@@ -7597,8 +7476,7 @@
     "cats": [
       "Instant Pot",
       "Indian",
-      "Dinner",
-      "High-Protein"
+      "Dinner"
     ],
     "time": 30,
     "servings": 4,
@@ -7676,7 +7554,6 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2103.jpg",
     "cats": [
       "Instant Pot",
-      "Sides",
       "Quick Meals",
       "Beginner"
     ],
@@ -7703,7 +7580,6 @@
     "cats": [
       "Instant Pot",
       "Dinner",
-      "High-Protein",
       "One-Pot"
     ],
     "time": 35,
@@ -7746,8 +7622,8 @@
       "Instant Pot",
       "Indian",
       "Soups & Stews",
-      "High-Protein",
-      "One-Pot"
+      "One-Pot",
+      "High-Protein"
     ],
     "time": 25,
     "servings": 4,
@@ -7783,7 +7659,6 @@
     "cats": [
       "Instant Pot",
       "Soups & Stews",
-      "High-Protein",
       "One-Pot",
       "Italian"
     ],
@@ -7818,9 +7693,7 @@
     "url": "https://minimalistbaker.com/instant-pot-white-beans-great-northern-fast-no-soaking/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2112.jpg",
     "cats": [
-      "Instant Pot",
-      "Sides",
-      "High-Protein"
+      "Instant Pot"
     ],
     "time": 45,
     "servings": 6,
@@ -7893,7 +7766,6 @@
     "cats": [
       "Japanese",
       "Soups & Stews",
-      "High-Protein",
       "One-Pot",
       "Gluten-Free"
     ],
@@ -7997,8 +7869,8 @@
     "cats": [
       "Japanese",
       "Soups & Stews",
-      "High-Protein",
-      "Gluten-Free"
+      "Gluten-Free",
+      "High-Protein"
     ],
     "time": 30,
     "servings": 2,
@@ -8034,7 +7906,6 @@
     "cats": [
       "Japanese",
       "Soups & Stews",
-      "High-Protein",
       "Gluten-Free"
     ],
     "time": 30,
@@ -8148,7 +8019,6 @@
     "cats": [
       "Chinese",
       "Dinner",
-      "High-Protein",
       "Quick Meals",
       "Gluten-Free"
     ],
@@ -8230,7 +8100,6 @@
     "cats": [
       "Chinese",
       "Dinner",
-      "High-Protein",
       "Quick Meals",
       "Gluten-Free"
     ],
@@ -8305,7 +8174,6 @@
     "cats": [
       "Chinese",
       "Dinner",
-      "High-Protein",
       "Quick Meals",
       "Gluten-Free"
     ],
@@ -8343,7 +8211,6 @@
     "cats": [
       "Chinese",
       "Dinner",
-      "High-Protein",
       "Quick Meals",
       "Gluten-Free"
     ],
@@ -8385,7 +8252,6 @@
     "cats": [
       "Chinese",
       "Dinner",
-      "High-Protein",
       "Quick Meals",
       "Gluten-Free"
     ],
@@ -8426,7 +8292,6 @@
     "cats": [
       "Chinese",
       "Dinner",
-      "High-Protein",
       "Quick Meals",
       "Gluten-Free"
     ],
@@ -8464,8 +8329,8 @@
     "cats": [
       "Chinese",
       "Dinner",
-      "High-Protein",
-      "Gluten-Free"
+      "Gluten-Free",
+      "High-Protein"
     ],
     "time": 30,
     "servings": 4,
@@ -8504,7 +8369,6 @@
     "cats": [
       "Chinese",
       "Dinner",
-      "High-Protein",
       "Quick Meals",
       "Gluten-Free"
     ],
@@ -8603,7 +8467,6 @@
     "cats": [
       "Vietnamese",
       "Dinner",
-      "High-Protein",
       "Quick Meals",
       "Gluten-Free"
     ],
@@ -8640,8 +8503,8 @@
     "cats": [
       "Vietnamese",
       "Dinner",
-      "High-Protein",
-      "Gluten-Free"
+      "Gluten-Free",
+      "High-Protein"
     ],
     "time": 40,
     "servings": 4,
@@ -8693,7 +8556,6 @@
     "cats": [
       "Vietnamese",
       "Dinner",
-      "High-Protein",
       "Quick Meals",
       "Gluten-Free"
     ],
@@ -8727,7 +8589,6 @@
     "cats": [
       "Vietnamese",
       "Soups & Stews",
-      "High-Protein",
       "One-Pot",
       "Gluten-Free"
     ],
@@ -8774,7 +8635,6 @@
     "cats": [
       "Vietnamese",
       "Dinner",
-      "Snacks",
       "Gluten-Free"
     ],
     "time": 60,
@@ -8814,7 +8674,6 @@
     "url": "https://minimalistbaker.com/roasted-vegetable-salad-with-chimichurri/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2158.jpg",
     "cats": [
-      "Sides",
       "Salads",
       "Quick Meals"
     ],
@@ -8859,9 +8718,7 @@
     "url": "https://rainbowplantlife.com/quinoa-salad/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2159.jpg",
     "cats": [
-      "Sides",
       "Salads",
-      "High-Protein",
       "Quick Meals"
     ],
     "time": 25,
@@ -8903,7 +8760,6 @@
     "url": "https://minimalistbaker.com/simple-vegan-potato-salad/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2160.jpg",
     "cats": [
-      "Sides",
       "Salads",
       "Quick Meals"
     ],
@@ -8940,7 +8796,9 @@
     "url": "https://rainbowplantlife.com/crispy-smashed-potatoes/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2162.jpg",
     "cats": [
-      "Sides"
+      "Dinner",
+      "Quick Meals",
+      "Beginner"
     ],
     "time": 40,
     "servings": 4,
@@ -8977,9 +8835,7 @@
     "url": "https://minimalistbaker.com/roasted-fall-vegetable-salad-with-white-beans/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2165.jpg",
     "cats": [
-      "Sides",
       "Salads",
-      "High-Protein",
       "Fall"
     ],
     "time": 45,
@@ -9013,7 +8869,6 @@
     "url": "https://www.noracooks.com/vegan-mashed-potatoes/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2167.webp",
     "cats": [
-      "Sides",
       "Quick Meals"
     ],
     "time": 35,
@@ -9040,7 +8895,6 @@
     "url": "https://www.noracooks.com/vegan-green-bean-casserole/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2169.webp",
     "cats": [
-      "Sides",
       "Dinner"
     ],
     "time": 50,
@@ -9070,7 +8924,9 @@
     "url": "https://minimalistbaker.com/sweet-potato-wedges/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2170.jpg",
     "cats": [
-      "Sides"
+      "Dinner",
+      "Quick Meals",
+      "Beginner"
     ],
     "time": 35,
     "servings": 4,
@@ -9099,7 +8955,6 @@
     "url": "https://www.noracooks.com/vegan-garlic-bread/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2176.webp",
     "cats": [
-      "Sides",
       "Quick Meals",
       "Gluten-Free"
     ],
@@ -9194,7 +9049,6 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2189.jpg",
     "cats": [
       "Breakfast",
-      "High-Protein",
       "Quick Meals",
       "Gluten-Free"
     ],
@@ -9486,7 +9340,6 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2204.jpg",
     "cats": [
       "Soups & Stews",
-      "High-Protein",
       "Gluten-Free"
     ],
     "time": 40,
@@ -9598,7 +9451,6 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2216.jpg",
     "cats": [
       "Salads",
-      "High-Protein",
       "Gluten-Free",
       "Quick Meals"
     ],
@@ -9789,8 +9641,7 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2239.jpg",
     "cats": [
       "Dinner",
-      "Mediterranean",
-      "High-Protein"
+      "Mediterranean"
     ],
     "time": 75,
     "servings": 6,
@@ -9941,8 +9792,7 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2248.webp",
     "cats": [
       "Dinner",
-      "Gluten-Free",
-      "High-Protein"
+      "Gluten-Free"
     ],
     "time": 50,
     "servings": 4,
@@ -10089,7 +9939,6 @@
     "url": "https://www.noracooks.com/vegan-spinach-artichoke-dip/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2262.jpg",
     "cats": [
-      "Snacks",
       "Appetizers"
     ],
     "time": 30,
@@ -10216,7 +10065,6 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2284.webp",
     "cats": [
       "Dinner",
-      "High-Protein",
       "Italian",
       "Gluten-Free"
     ],
@@ -10286,7 +10134,6 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2289.jpg",
     "cats": [
       "Breakfast",
-      "Snacks",
       "Kid-Friendly",
       "Gluten-Free"
     ],
@@ -10358,7 +10205,6 @@
     "url": "https://rainbowplantlife.com/vegan-ceviche/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2294.jpg",
     "cats": [
-      "Snacks",
       "Mexican",
       "Gluten-Free",
       "Quick Meals"
@@ -10508,7 +10354,6 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2320.jpg",
     "cats": [
       "Mediterranean",
-      "Snacks",
       "Appetizers",
       "Dinner"
     ],
@@ -10724,7 +10569,6 @@
       "Middle Eastern",
       "Soups & Stews",
       "Gluten-Free",
-      "High-Protein",
       "One-Pot"
     ],
     "time": 35,
@@ -10866,8 +10710,7 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2380.webp",
     "cats": [
       "Southern",
-      "Bread & Baking",
-      "Sides"
+      "Bread & Baking"
     ],
     "time": 30,
     "servings": 9,
@@ -11024,7 +10867,6 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2441.webp",
     "cats": [
       "Breakfast",
-      "High-Protein",
       "Quick Meals"
     ],
     "time": 20,
@@ -11100,7 +10942,6 @@
     "cats": [
       "Breakfast",
       "Gluten-Free",
-      "High-Protein",
       "Quick Meals"
     ],
     "time": 15,
@@ -11169,7 +11010,6 @@
     "url": "https://minimalistbaker.com/the-best-gluten-free-pizza-crust/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2461.jpg",
     "cats": [
-      "GF Bread",
       "Gluten-Free",
       "Bread & Baking",
       "Dinner"
@@ -11200,7 +11040,6 @@
     "url": "https://www.noracooks.com/gluten-free-pie-crust/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2475.webp",
     "cats": [
-      "GF Bread",
       "Gluten-Free",
       "Bread & Baking",
       "Desserts"
@@ -11414,8 +11253,7 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2491.jpg",
     "cats": [
       "Salads",
-      "Dinner",
-      "High-Protein"
+      "Dinner"
     ],
     "time": 30,
     "servings": 4,
@@ -11595,8 +11433,7 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2496.webp",
     "cats": [
       "Salads",
-      "Dinner",
-      "High-Protein"
+      "Dinner"
     ],
     "time": 30,
     "servings": 4,
@@ -11628,8 +11465,7 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2497.webp",
     "cats": [
       "Salads",
-      "Dinner",
-      "High-Protein"
+      "Dinner"
     ],
     "time": 30,
     "servings": 4,
@@ -11838,8 +11674,7 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2503.jpg",
     "cats": [
       "Soups & Stews",
-      "Dinner",
-      "High-Protein"
+      "Dinner"
     ],
     "time": 30,
     "servings": 4,
@@ -11874,8 +11709,7 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2504.webp",
     "cats": [
       "Soups & Stews",
-      "Dinner",
-      "High-Protein"
+      "Dinner"
     ],
     "time": 30,
     "servings": 4,
@@ -11944,8 +11778,7 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2506.webp",
     "cats": [
       "Soups & Stews",
-      "Dinner",
-      "High-Protein"
+      "Dinner"
     ],
     "time": 30,
     "servings": 4,
@@ -12054,8 +11887,7 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2509.webp",
     "cats": [
       "Soups & Stews",
-      "Dinner",
-      "High-Protein"
+      "Dinner"
     ],
     "time": 30,
     "servings": 4,
@@ -12121,8 +11953,7 @@
     "url": "https://www.loveandlemons.com/tofu-scramble/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2512.jpg",
     "cats": [
-      "Dinner",
-      "High-Protein"
+      "Dinner"
     ],
     "time": 30,
     "servings": 4,
@@ -12633,8 +12464,7 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2528.jpg",
     "cats": [
       "Soups & Stews",
-      "Dinner",
-      "High-Protein"
+      "Dinner"
     ],
     "time": 30,
     "servings": 4,
@@ -12835,8 +12665,7 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2533.jpg",
     "cats": [
       "Soups & Stews",
-      "Dinner",
-      "High-Protein"
+      "Dinner"
     ],
     "time": 30,
     "servings": 4,
@@ -12906,8 +12735,7 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2535.jpg",
     "cats": [
       "Soups & Stews",
-      "Dinner",
-      "High-Protein"
+      "Dinner"
     ],
     "time": 30,
     "servings": 4,
@@ -12941,8 +12769,7 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2536.jpg",
     "cats": [
       "Soups & Stews",
-      "Dinner",
-      "High-Protein"
+      "Dinner"
     ],
     "time": 30,
     "servings": 4,
@@ -13165,8 +12992,7 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2542.webp",
     "cats": [
       "Soups & Stews",
-      "Dinner",
-      "High-Protein"
+      "Dinner"
     ],
     "time": 30,
     "servings": 4,
@@ -13200,8 +13026,7 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2543.webp",
     "cats": [
       "Soups & Stews",
-      "Dinner",
-      "High-Protein"
+      "Dinner"
     ],
     "time": 30,
     "servings": 4,
@@ -13307,7 +13132,6 @@
     "cats": [
       "Soups & Stews",
       "Dinner",
-      "High-Protein",
       "Quick Meals"
     ],
     "time": 30,
@@ -13376,7 +13200,6 @@
     "cats": [
       "Soups & Stews",
       "Dinner",
-      "High-Protein",
       "Quick Meals"
     ],
     "time": 30,
@@ -13649,7 +13472,6 @@
     "cats": [
       "Breakfast",
       "Desserts",
-      "Snacks",
       "Dinner",
       "Gluten-Free"
     ],
@@ -13798,7 +13620,6 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2560.webp",
     "cats": [
       "Dinner",
-      "High-Protein",
       "Gluten-Free",
       "Quick Meals"
     ],
@@ -13842,8 +13663,7 @@
     "url": "https://thefirstmess.com/2024/10/23/harissa-coconut-lentils-kale-roasted-sweet-potatoes/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2561.webp",
     "cats": [
-      "Dinner",
-      "High-Protein"
+      "Dinner"
     ],
     "time": 30,
     "servings": 4,
@@ -13940,8 +13760,7 @@
     "url": "https://thefirstmess.com/2023/05/24/hummus-crunch-salad/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2564.webp",
     "cats": [
-      "Salads",
-      "Snacks"
+      "Salads"
     ],
     "time": 30,
     "servings": 4,
@@ -14052,8 +13871,7 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2567.webp",
     "cats": [
       "Salads",
-      "Dinner",
-      "High-Protein"
+      "Dinner"
     ],
     "time": 30,
     "servings": 4,
@@ -14097,8 +13915,7 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2568.webp",
     "cats": [
       "Salads",
-      "Dinner",
-      "High-Protein"
+      "Dinner"
     ],
     "time": 30,
     "servings": 4,
@@ -14884,7 +14701,8 @@
     "url": "https://www.lazycatkitchen.com/vegan-chicken-soup/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2591.jpg",
     "cats": [
-      "Soups & Stews"
+      "Soups & Stews",
+      "High-Protein"
     ],
     "time": 30,
     "servings": 4,
@@ -14983,8 +14801,7 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2594.jpg",
     "cats": [
       "Breakfast",
-      "Dinner",
-      "High-Protein"
+      "Dinner"
     ],
     "time": 30,
     "servings": 4,
@@ -15275,7 +15092,6 @@
     "url": "https://www.lazycatkitchen.com/baked-vegan-latkes/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2603.jpg",
     "cats": [
-      "Snacks",
       "Dinner"
     ],
     "time": 30,
@@ -15310,8 +15126,7 @@
     "url": "https://www.delishknowledge.com/tofu-scramble/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2604.jpg",
     "cats": [
-      "Dinner",
-      "High-Protein"
+      "Dinner"
     ],
     "time": 30,
     "servings": 4,
@@ -15376,8 +15191,7 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2606.jpg",
     "cats": [
       "Breakfast",
-      "Desserts",
-      "Snacks"
+      "Desserts"
     ],
     "time": 30,
     "servings": 4,
@@ -15562,8 +15376,7 @@
     "url": "https://www.delishknowledge.com/spicy-chickpea-broccoli-and-potato-vegan-sheet-pan-dinner/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2612.jpg",
     "cats": [
-      "Dinner",
-      "High-Protein"
+      "Dinner"
     ],
     "time": 30,
     "servings": 4,
@@ -15597,7 +15410,6 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2613.jpg",
     "cats": [
       "Dinner",
-      "High-Protein",
       "Gluten-Free"
     ],
     "time": 30,
@@ -15668,8 +15480,7 @@
     "url": "https://www.delishknowledge.com/protein-vegan-caesar-salad/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2615.jpg",
     "cats": [
-      "Salads",
-      "High-Protein"
+      "Salads"
     ],
     "time": 30,
     "servings": 4,
@@ -15745,9 +15556,7 @@
     "url": "https://www.delishknowledge.com/vietnamese-tofu-spring-rolls/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2618.webp",
     "cats": [
-      "Snacks",
-      "Dinner",
-      "High-Protein"
+      "Dinner"
     ],
     "time": 30,
     "servings": 4,
@@ -15885,7 +15694,6 @@
     "cats": [
       "Salads",
       "Dinner",
-      "High-Protein",
       "Quick Meals"
     ],
     "time": 30,
@@ -16025,8 +15833,7 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2626.jpg",
     "cats": [
       "Soups & Stews",
-      "Dinner",
-      "High-Protein"
+      "Dinner"
     ],
     "time": 30,
     "servings": 4,
@@ -16064,7 +15871,6 @@
     "cats": [
       "Soups & Stews",
       "Dinner",
-      "High-Protein",
       "Quick Meals"
     ],
     "time": 30,
@@ -16136,7 +15942,6 @@
     "cats": [
       "Soups & Stews",
       "Dinner",
-      "High-Protein",
       "Gluten-Free"
     ],
     "time": 30,
@@ -16211,8 +16016,7 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2631.jpg",
     "cats": [
       "Soups & Stews",
-      "Dinner",
-      "High-Protein"
+      "Dinner"
     ],
     "time": 30,
     "servings": 4,
@@ -16451,7 +16255,6 @@
     "cats": [
       "Soups & Stews",
       "Dinner",
-      "High-Protein",
       "Gluten-Free",
       "Quick Meals"
     ],
@@ -16658,8 +16461,7 @@
     "url": "https://simpleveganblog.com/tofu-bacon/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2645.jpg",
     "cats": [
-      "Dinner",
-      "High-Protein"
+      "Dinner"
     ],
     "time": 30,
     "servings": 4,
@@ -16842,8 +16644,7 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2651.jpg",
     "cats": [
       "Salads",
-      "Dinner",
-      "High-Protein"
+      "Dinner"
     ],
     "time": 30,
     "servings": 4,
@@ -17019,7 +16820,6 @@
     "cats": [
       "Soups & Stews",
       "Dinner",
-      "High-Protein",
       "Quick Meals"
     ],
     "time": 30,
@@ -17294,7 +17094,8 @@
     "url": "https://simpleveganblog.com/how-to-make-kale-chips/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2665.webp",
     "cats": [
-      "Snacks"
+      "Quick Meals",
+      "Beginner"
     ],
     "time": 30,
     "servings": 4,
@@ -17321,7 +17122,8 @@
     "url": "https://simpleveganblog.com/vegan-popcorn/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2666.jpg",
     "cats": [
-      "Snacks"
+      "Quick Meals",
+      "Beginner"
     ],
     "time": 30,
     "servings": 4,
@@ -17347,7 +17149,9 @@
     "url": "https://simpleveganblog.com/apple-nachos/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2667.webp",
     "cats": [
-      "Snacks"
+      "Quick Meals",
+      "Beginner",
+      "Kid-Friendly"
     ],
     "time": 30,
     "servings": 4,
@@ -18019,7 +17823,6 @@
     "cats": [
       "Soups & Stews",
       "Dinner",
-      "High-Protein",
       "Quick Meals"
     ],
     "time": 30,
@@ -18193,8 +17996,7 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2693.jpg",
     "cats": [
       "Soups & Stews",
-      "Dinner",
-      "High-Protein"
+      "Dinner"
     ],
     "time": 30,
     "servings": 4,
@@ -18259,8 +18061,7 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2695.jpg",
     "cats": [
       "Soups & Stews",
-      "Dinner",
-      "High-Protein"
+      "Dinner"
     ],
     "time": 30,
     "servings": 4,
@@ -18292,7 +18093,6 @@
     "cats": [
       "Soups & Stews",
       "Dinner",
-      "High-Protein",
       "Gluten-Free"
     ],
     "time": 30,
@@ -18358,8 +18158,7 @@
     "url": "https://www.feastingathome.com/tofu-turmeric-curry/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2700.webp",
     "cats": [
-      "Dinner",
-      "High-Protein"
+      "Dinner"
     ],
     "time": 30,
     "servings": 4,
@@ -18399,8 +18198,7 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2701.webp",
     "cats": [
       "Salads",
-      "Dinner",
-      "High-Protein"
+      "Dinner"
     ],
     "time": 30,
     "servings": 4,
@@ -18436,8 +18234,7 @@
     "url": "https://www.feastingathome.com/chickpea-curry/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2704.jpg",
     "cats": [
-      "Dinner",
-      "High-Protein"
+      "Dinner"
     ],
     "time": 30,
     "servings": 4,
@@ -18740,8 +18537,7 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2713.jpg",
     "cats": [
       "Salads",
-      "Dinner",
-      "High-Protein"
+      "Dinner"
     ],
     "time": 30,
     "servings": 4,
@@ -18776,8 +18572,7 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2714.jpg",
     "cats": [
       "Salads",
-      "Dinner",
-      "High-Protein"
+      "Dinner"
     ],
     "time": 30,
     "servings": 4,
@@ -18851,8 +18646,7 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2716.jpg",
     "cats": [
       "Salads",
-      "Dinner",
-      "High-Protein"
+      "Dinner"
     ],
     "time": 30,
     "servings": 4,
@@ -18892,8 +18686,7 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2717.jpg",
     "cats": [
       "Salads",
-      "Dinner",
-      "High-Protein"
+      "Dinner"
     ],
     "time": 30,
     "servings": 4,
@@ -19089,8 +18882,7 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2723.jpg",
     "cats": [
       "Soups & Stews",
-      "Dinner",
-      "High-Protein"
+      "Dinner"
     ],
     "time": 30,
     "servings": 4,
@@ -19202,8 +18994,7 @@
     "url": "https://www.feastingathome.com/french-lentils/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2726.jpg",
     "cats": [
-      "Dinner",
-      "High-Protein"
+      "Dinner"
     ],
     "time": 30,
     "servings": 4,
@@ -19236,8 +19027,7 @@
     "url": "https://www.budgetbytes.com/sesame-tempeh-bowls/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2728.jpg",
     "cats": [
-      "Dinner",
-      "High-Protein"
+      "Dinner"
     ],
     "time": 30,
     "servings": 4,
@@ -19304,8 +19094,7 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2730.jpg",
     "cats": [
       "Soups & Stews",
-      "Dinner",
-      "High-Protein"
+      "Dinner"
     ],
     "time": 30,
     "servings": 4,
@@ -19374,7 +19163,6 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2732.jpg",
     "cats": [
       "Dinner",
-      "High-Protein",
       "High-Fiber"
     ],
     "time": 30,
@@ -19412,8 +19200,7 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2733.jpg",
     "cats": [
       "Breakfast",
-      "Dinner",
-      "High-Protein"
+      "Dinner"
     ],
     "time": 30,
     "servings": 4,
@@ -19454,8 +19241,7 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2734.jpg",
     "cats": [
       "Soups & Stews",
-      "Dinner",
-      "High-Protein"
+      "Dinner"
     ],
     "time": 30,
     "servings": 4,
@@ -19524,8 +19310,7 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2736.jpg",
     "cats": [
       "Salads",
-      "Dinner",
-      "High-Protein"
+      "Dinner"
     ],
     "time": 30,
     "servings": 4,
@@ -19735,8 +19520,7 @@
     "url": "https://www.budgetbytes.com/creamy-coconut-curry-lentils-with-spinach/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2742.jpg",
     "cats": [
-      "Dinner",
-      "High-Protein"
+      "Dinner"
     ],
     "time": 30,
     "servings": 4,
@@ -19769,7 +19553,6 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2743.jpg",
     "cats": [
       "Dinner",
-      "High-Protein",
       "Gluten-Free"
     ],
     "time": 30,
@@ -19807,8 +19590,7 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2744.jpg",
     "cats": [
       "Soups & Stews",
-      "Dinner",
-      "High-Protein"
+      "Dinner"
     ],
     "time": 30,
     "servings": 4,
@@ -19915,7 +19697,6 @@
     "cats": [
       "Soups & Stews",
       "Dinner",
-      "High-Protein",
       "High-Fiber"
     ],
     "time": 30,
@@ -19989,8 +19770,7 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2749.jpg",
     "cats": [
       "Soups & Stews",
-      "Dinner",
-      "High-Protein"
+      "Dinner"
     ],
     "time": 30,
     "servings": 4,
@@ -20025,8 +19805,7 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2750.jpg",
     "cats": [
       "Soups & Stews",
-      "Dinner",
-      "High-Protein"
+      "Dinner"
     ],
     "time": 30,
     "servings": 4,
@@ -20058,8 +19837,7 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2751.jpg",
     "cats": [
       "Soups & Stews",
-      "Dinner",
-      "High-Protein"
+      "Dinner"
     ],
     "time": 30,
     "servings": 4,
@@ -20096,8 +19874,7 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2752.jpg",
     "cats": [
       "Soups & Stews",
-      "Dinner",
-      "High-Protein"
+      "Dinner"
     ],
     "time": 30,
     "servings": 4,
@@ -20269,7 +20046,6 @@
     "url": "https://plantivores.com/best-gluten-free-vegan-challah/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2486.jpg",
     "cats": [
-      "GF Bread",
       "Gluten-Free",
       "Bread & Baking",
       "Holiday & Festive"
@@ -20308,7 +20084,8 @@
     "cats": [
       "Soups & Stews",
       "Gluten-Free",
-      "High-Fiber"
+      "High-Fiber",
+      "High-Protein"
     ],
     "time": 30,
     "servings": 4,
@@ -20394,7 +20171,6 @@
       "Soups & Stews",
       "Instant Pot",
       "Italian",
-      "High-Protein",
       "High-Fiber"
     ],
     "time": 45,
@@ -20438,7 +20214,8 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2760.jpg",
     "cats": [
       "Soups & Stews",
-      "Thai"
+      "Thai",
+      "High-Protein"
     ],
     "time": 45,
     "servings": 4,
@@ -20486,7 +20263,6 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2761.jpg",
     "cats": [
       "Soups & Stews",
-      "High-Protein",
       "Gluten-Free"
     ],
     "time": 45,
@@ -20528,7 +20304,6 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2762.jpg",
     "cats": [
       "Soups & Stews",
-      "High-Protein",
       "Gluten-Free",
       "High-Fiber"
     ],
@@ -20574,7 +20349,6 @@
     "cats": [
       "Soups & Stews",
       "Instant Pot",
-      "High-Protein",
       "Gluten-Free",
       "High-Fiber"
     ],
@@ -20614,8 +20388,7 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2764.jpg",
     "cats": [
       "Soups & Stews",
-      "Italian",
-      "High-Protein"
+      "Italian"
     ],
     "time": 45,
     "servings": 4,
@@ -20653,7 +20426,6 @@
     "cats": [
       "Soups & Stews",
       "Indian",
-      "High-Protein",
       "Gluten-Free",
       "High-Fiber"
     ],
@@ -20703,7 +20475,6 @@
     "cats": [
       "Soups & Stews",
       "Indian",
-      "High-Protein",
       "Gluten-Free"
     ],
     "time": 45,
@@ -20756,7 +20527,6 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2767.jpg",
     "cats": [
       "Salads",
-      "High-Protein",
       "Gluten-Free"
     ],
     "time": 20,
@@ -20878,7 +20648,6 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2770.jpg",
     "cats": [
       "Salads",
-      "High-Protein",
       "Gluten-Free",
       "High-Fiber"
     ],
@@ -20921,7 +20690,6 @@
     "cats": [
       "Salads",
       "Chinese",
-      "High-Protein",
       "Gluten-Free"
     ],
     "time": 20,
@@ -21447,7 +21215,6 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2785.jpg",
     "cats": [
       "Dinner",
-      "High-Protein",
       "Gluten-Free"
     ],
     "time": 45,
@@ -21572,8 +21339,7 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2788.jpg",
     "cats": [
       "Dinner",
-      "Indian",
-      "High-Protein"
+      "Indian"
     ],
     "time": 30,
     "servings": 4,
@@ -21714,7 +21480,6 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2791.jpg",
     "cats": [
       "Dinner",
-      "High-Protein",
       "Gluten-Free",
       "High-Fiber"
     ],
@@ -21758,7 +21523,6 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2792.jpg",
     "cats": [
       "Dinner",
-      "High-Protein",
       "Gluten-Free"
     ],
     "time": 45,
@@ -21804,7 +21568,6 @@
     "cats": [
       "Dinner",
       "Chinese",
-      "High-Protein",
       "Gluten-Free"
     ],
     "time": 30,
@@ -21845,9 +21608,9 @@
     "cats": [
       "Dinner",
       "Middle Eastern",
-      "High-Protein",
       "Gluten-Free",
-      "Fall"
+      "Fall",
+      "High-Protein"
     ],
     "time": 30,
     "servings": 4,
@@ -22261,7 +22024,6 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2805.jpg",
     "cats": [
       "Desserts",
-      "High-Protein",
       "Gluten-Free",
       "Comfort Food"
     ],
@@ -22562,7 +22324,6 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2813.jpg",
     "cats": [
       "Breakfast",
-      "High-Protein",
       "Gluten-Free"
     ],
     "time": 30,
@@ -22660,7 +22421,6 @@
     "url": "https://rainbowplantlife.com/vegan-nachos/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2816.jpg",
     "cats": [
-      "Snacks",
       "Mexican",
       "Comfort Food"
     ],
@@ -22696,7 +22456,6 @@
     "cats": [
       "Dinner",
       "Mexican",
-      "High-Protein",
       "Gluten-Free"
     ],
     "time": 30,
@@ -22739,7 +22498,6 @@
     "cats": [
       "Dinner",
       "Mexican",
-      "High-Protein",
       "Gluten-Free"
     ],
     "time": 30,
@@ -22790,8 +22548,7 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2819.jpg",
     "cats": [
       "Dinner",
-      "Mexican",
-      "High-Protein"
+      "Mexican"
     ],
     "time": 30,
     "servings": 4,
@@ -22877,7 +22634,6 @@
       "Dinner",
       "Quick Meals",
       "Mexican",
-      "High-Protein",
       "Gluten-Free"
     ],
     "time": 20,
@@ -22918,7 +22674,6 @@
     "cats": [
       "Dinner",
       "Quick Meals",
-      "High-Protein",
       "Gluten-Free",
       "Beginner"
     ],
@@ -22949,7 +22704,6 @@
       "Dinner",
       "Instant Pot",
       "Chinese",
-      "High-Protein",
       "Gluten-Free"
     ],
     "time": 45,
@@ -22983,7 +22737,6 @@
     "url": "https://rainbowplantlife.com/roasted-red-pepper-hummus/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2824.jpg",
     "cats": [
-      "Snacks",
       "Middle Eastern",
       "Gluten-Free"
     ],
@@ -23020,7 +22773,6 @@
     "url": "https://rainbowplantlife.com/beet-hummus/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2825.jpg",
     "cats": [
-      "Snacks",
       "Middle Eastern",
       "Gluten-Free"
     ],
@@ -23096,7 +22848,6 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2827.jpg",
     "cats": [
       "Dinner",
-      "High-Protein",
       "Gluten-Free",
       "Comfort Food"
     ],
@@ -23282,7 +23033,6 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2832.jpg",
     "cats": [
       "Dinner",
-      "High-Protein",
       "Gluten-Free",
       "High-Fiber"
     ],
@@ -23352,7 +23102,6 @@
     "cats": [
       "Dinner",
       "Indian",
-      "High-Protein",
       "Gluten-Free",
       "High-Fiber"
     ],
@@ -23561,7 +23310,6 @@
     "url": "https://rainbowplantlife.com/instant-pot-cheesy-buffalo-cauliflower-dip/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2840.jpg",
     "cats": [
-      "Snacks",
       "Instant Pot",
       "Gluten-Free"
     ],
@@ -23598,9 +23346,8 @@
     "url": "https://rainbowplantlife.com/lemony-white-bean-dip/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2841.jpg",
     "cats": [
-      "Snacks",
-      "High-Protein",
-      "Gluten-Free"
+      "Gluten-Free",
+      "Sauces & Dips"
     ],
     "time": 15,
     "servings": 4,
@@ -23808,7 +23555,6 @@
     "url": "https://rainbowplantlife.com/muhammara/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2847.jpg",
     "cats": [
-      "Snacks",
       "Middle Eastern",
       "Gluten-Free"
     ],
@@ -23911,7 +23657,6 @@
     "cats": [
       "Sauces & Dips",
       "Quick Meals",
-      "High-Protein",
       "Gluten-Free"
     ],
     "time": 20,
@@ -23949,7 +23694,6 @@
     "cats": [
       "Dinner",
       "Chinese",
-      "High-Protein",
       "Gluten-Free"
     ],
     "time": 30,
@@ -23994,7 +23738,6 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2852.jpg",
     "cats": [
       "Dinner",
-      "High-Protein",
       "Gluten-Free"
     ],
     "time": 30,
@@ -24028,7 +23771,6 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2853.jpg",
     "cats": [
       "Dinner",
-      "High-Protein",
       "Gluten-Free"
     ],
     "time": 30,
@@ -24104,8 +23846,7 @@
     "url": "https://rainbowplantlife.com/bbq-tempeh/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2855.jpg",
     "cats": [
-      "Dinner",
-      "High-Protein"
+      "Dinner"
     ],
     "time": 30,
     "servings": 4,
@@ -24129,8 +23870,9 @@
     "url": "https://rainbowplantlife.com/roasted-pepitas/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/2856.jpg",
     "cats": [
-      "Snacks",
-      "Gluten-Free"
+      "Gluten-Free",
+      "Quick Meals",
+      "Beginner"
     ],
     "time": 45,
     "servings": 4,
@@ -24199,11 +23941,9 @@
     "url": "https://minimalistbaker.com/1-bowl-vegan-gluten-free-banana-bread/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/3001.jpg",
     "cats": [
-      "GF Bread",
       "Gluten-Free",
       "Bread & Baking",
-      "Breakfast",
-      "Snacks"
+      "Breakfast"
     ],
     "time": 60,
     "servings": 10,
@@ -24237,11 +23977,9 @@
     "url": "https://thebananadiaries.com/best-vegan-banana-bread-recipe/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/3002.webp",
     "cats": [
-      "GF Bread",
       "Gluten-Free",
       "Bread & Baking",
-      "Breakfast",
-      "Snacks"
+      "Breakfast"
     ],
     "time": 55,
     "servings": 10,
@@ -24275,11 +24013,9 @@
     "url": "https://frommybowl.com/fluffy-banana-bread/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/3003.webp",
     "cats": [
-      "GF Bread",
       "Gluten-Free",
       "Bread & Baking",
-      "Breakfast",
-      "Snacks"
+      "Breakfast"
     ],
     "time": 60,
     "servings": 10,
@@ -24310,11 +24046,9 @@
     "url": "https://minimalistbaker.com/the-best-vegan-gluten-free-zucchini-bread/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/3004.jpg",
     "cats": [
-      "GF Bread",
       "Gluten-Free",
       "Bread & Baking",
-      "Breakfast",
-      "Snacks"
+      "Breakfast"
     ],
     "time": 75,
     "servings": 10,
@@ -24349,7 +24083,6 @@
     "url": "https://minimalistbaker.com/1-bowl-pumpkin-bread-v-gf/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/3005.jpg",
     "cats": [
-      "GF Bread",
       "Gluten-Free",
       "Bread & Baking",
       "Fall",
@@ -24390,11 +24123,9 @@
     "url": "https://minimalistbaker.com/1-bowl-fudgy-banana-chocolate-chip-muffins-vegan-gf/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/3006.jpg",
     "cats": [
-      "GF Bread",
       "Gluten-Free",
       "Bread & Baking",
       "Desserts",
-      "Snacks",
       "Breakfast"
     ],
     "time": 40,
@@ -24430,11 +24161,9 @@
     "url": "https://minimalistbaker.com/vegan-meyer-lemon-poppy-seed-muffins/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/3007.jpg",
     "cats": [
-      "GF Bread",
       "Gluten-Free",
       "Bread & Baking",
-      "Breakfast",
-      "Snacks"
+      "Breakfast"
     ],
     "time": 45,
     "servings": 10,
@@ -24471,11 +24200,9 @@
     "url": "https://minimalistbaker.com/the-best-vegan-gluten-free-cornbread/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/3008.jpg",
     "cats": [
-      "GF Bread",
       "Gluten-Free",
       "Bread & Baking",
       "Southern",
-      "Sides",
       "Comfort Food"
     ],
     "time": 40,
@@ -24510,13 +24237,10 @@
     "url": "https://minimalistbaker.com/gluten-free-jalapeno-cornbread-muffins/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/3009.jpg",
     "cats": [
-      "GF Bread",
       "Gluten-Free",
       "Bread & Baking",
       "Southern",
-      "Mexican",
-      "Snacks",
-      "Sides"
+      "Mexican"
     ],
     "time": 45,
     "servings": 10,
@@ -24547,7 +24271,6 @@
     "url": "https://minimalistbaker.com/the-best-gluten-free-bread-no-knead/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/3010.jpg",
     "cats": [
-      "GF Bread",
       "Gluten-Free",
       "Bread & Baking",
       "Beginner"
@@ -24581,7 +24304,6 @@
     "url": "https://minimalistbaker.com/crusty-gluten-free-artisan-bread/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/3011.jpg",
     "cats": [
-      "GF Bread",
       "Gluten-Free",
       "Bread & Baking"
     ],
@@ -24612,7 +24334,6 @@
     "url": "https://theveganharvest.com/2020/05/30/easy-gluten-free-sandwich-bread-vegan-too/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/3012.webp",
     "cats": [
-      "GF Bread",
       "Gluten-Free",
       "Bread & Baking",
       "Sandwiches"
@@ -24642,7 +24363,6 @@
     "url": "https://minimalistbaker.com/the-ultimate-gluten-free-bagels-vegan/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/3013.jpg",
     "cats": [
-      "GF Bread",
       "Gluten-Free",
       "Bread & Baking",
       "Breakfast"
@@ -24677,12 +24397,10 @@
     "url": "https://minimalistbaker.com/easy-vegan-gluten-free-biscuits/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/3014.jpg",
     "cats": [
-      "GF Bread",
       "Gluten-Free",
       "Bread & Baking",
       "Southern",
-      "Breakfast",
-      "Sides"
+      "Breakfast"
     ],
     "time": 30,
     "servings": 8,
@@ -24712,7 +24430,6 @@
     "url": "https://minimalistbaker.com/blueberry-gluten-free-scones/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/3015.jpg",
     "cats": [
-      "GF Bread",
       "Gluten-Free",
       "Bread & Baking",
       "Breakfast",
@@ -24749,7 +24466,6 @@
     "url": "https://minimalistbaker.com/cranberry-orange-scones-vegan-gf/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/3016.jpg",
     "cats": [
-      "GF Bread",
       "Gluten-Free",
       "Bread & Baking",
       "Breakfast",
@@ -24785,11 +24501,9 @@
     "url": "https://minimalistbaker.com/artisan-gluten-free-dinner-rolls/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/3017.jpg",
     "cats": [
-      "GF Bread",
       "Gluten-Free",
       "Bread & Baking",
-      "Holiday & Festive",
-      "Sides"
+      "Holiday & Festive"
     ],
     "time": 120,
     "servings": 9,
@@ -24820,7 +24534,6 @@
     "url": "https://minimalistbaker.com/gluten-free-hamburger-buns-vegan/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/3018.jpg",
     "cats": [
-      "GF Bread",
       "Gluten-Free",
       "Bread & Baking",
       "Sandwiches"
@@ -24855,7 +24568,6 @@
     "url": "https://minimalistbaker.com/vegan-gluten-free-cinnamon-rolls/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/3019.jpg",
     "cats": [
-      "GF Bread",
       "Gluten-Free",
       "Bread & Baking",
       "Desserts",
@@ -24893,7 +24605,6 @@
     "url": "https://minimalistbaker.com/gluten-free-english-muffins/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/3020.jpg",
     "cats": [
-      "GF Bread",
       "Gluten-Free",
       "Bread & Baking",
       "Breakfast"
@@ -24929,11 +24640,9 @@
     "url": "https://minimalistbaker.com/fluffy-gluten-free-naan/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/3021.jpg",
     "cats": [
-      "GF Bread",
       "Gluten-Free",
       "Bread & Baking",
-      "Indian",
-      "Sides"
+      "Indian"
     ],
     "time": 45,
     "servings": 6,
@@ -24966,7 +24675,6 @@
     "url": "https://minimalistbaker.com/cassava-flour-tortillas-grain-free/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/3022.jpg",
     "cats": [
-      "GF Bread",
       "Gluten-Free",
       "Bread & Baking",
       "Mexican",
@@ -24997,12 +24705,10 @@
     "url": "https://minimalistbaker.com/fluffy-gluten-free-focaccia-bread/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/3023.jpg",
     "cats": [
-      "GF Bread",
       "Gluten-Free",
       "Bread & Baking",
       "Italian",
-      "Mediterranean",
-      "Sides"
+      "Mediterranean"
     ],
     "time": 150,
     "servings": 10,
@@ -25035,10 +24741,8 @@
     "url": "https://minimalistbaker.com/1-bowl-vegan-gluten-free-crackers/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/3024.jpg",
     "cats": [
-      "GF Bread",
       "Gluten-Free",
       "Bread & Baking",
-      "Snacks",
       "Appetizers",
       "Beginner"
     ],
@@ -25070,11 +24774,9 @@
     "url": "https://minimalistbaker.com/gluten-free-flatbread-1-bowl-20-minutes/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/3025.jpg",
     "cats": [
-      "GF Bread",
       "Gluten-Free",
       "Bread & Baking",
       "Mediterranean",
-      "Sides",
       "Quick Meals"
     ],
     "time": 30,
@@ -25109,7 +24811,6 @@
     "cats": [
       "Meal Prep",
       "Dinner",
-      "High-Protein",
       "Gluten-Free"
     ],
     "time": 45,
@@ -25194,8 +24895,7 @@
     "cats": [
       "Meal Prep",
       "Mediterranean",
-      "Lunch",
-      "High-Protein"
+      "Lunch"
     ],
     "time": 35,
     "servings": 4,
@@ -25275,8 +24975,7 @@
     "cats": [
       "Meal Prep",
       "Mexican",
-      "Dinner",
-      "High-Protein"
+      "Dinner"
     ],
     "time": 40,
     "servings": 4,
@@ -25315,7 +25014,6 @@
       "Meal Prep",
       "Mediterranean",
       "Lunch",
-      "High-Protein",
       "Gluten-Free"
     ],
     "time": 25,
@@ -25351,8 +25049,7 @@
       "Meal Prep",
       "Japanese",
       "Asian",
-      "Dinner",
-      "High-Protein"
+      "Dinner"
     ],
     "time": 40,
     "servings": 4,
@@ -25391,7 +25088,6 @@
       "Meal Prep",
       "Mediterranean",
       "Dinner",
-      "High-Protein",
       "High-Fiber"
     ],
     "time": 45,
@@ -25436,7 +25132,6 @@
       "Meal Prep",
       "Indian",
       "Dinner",
-      "High-Protein",
       "Gluten-Free"
     ],
     "time": 40,
@@ -25475,8 +25170,7 @@
     "cats": [
       "Meal Prep",
       "Asian",
-      "Dinner",
-      "High-Protein"
+      "Dinner"
     ],
     "time": 35,
     "servings": 4,
@@ -25507,7 +25201,6 @@
       "Meal Prep",
       "Mexican",
       "Dinner",
-      "High-Protein",
       "Gluten-Free",
       "High-Fiber"
     ],
@@ -25546,8 +25239,7 @@
     "cats": [
       "Meal Prep",
       "Breakfast",
-      "Mexican",
-      "High-Protein"
+      "Mexican"
     ],
     "time": 45,
     "servings": 6,
@@ -25592,7 +25284,6 @@
     "cats": [
       "Sandwiches",
       "Lunch",
-      "High-Protein",
       "Quick Meals"
     ],
     "time": 15,
@@ -25657,7 +25348,6 @@
     "cats": [
       "Sandwiches",
       "Comfort Food",
-      "High-Protein",
       "High-Fiber"
     ],
     "time": 40,
@@ -25703,7 +25393,6 @@
     "cats": [
       "Sandwiches",
       "Lunch",
-      "High-Protein",
       "Quick Meals"
     ],
     "time": 15,
@@ -25768,8 +25457,7 @@
       "Sandwiches",
       "Vietnamese",
       "Asian",
-      "Lunch",
-      "High-Protein"
+      "Lunch"
     ],
     "time": 40,
     "servings": 4,
@@ -26060,8 +25748,7 @@
     "cats": [
       "Appetizers",
       "Meat Alternatives",
-      "Italian",
-      "High-Protein"
+      "Italian"
     ],
     "time": 50,
     "servings": 6,
@@ -26099,8 +25786,7 @@
     "cats": [
       "Appetizers",
       "Mediterranean",
-      "Middle Eastern",
-      "High-Protein"
+      "Middle Eastern"
     ],
     "time": 20,
     "servings": 8,
@@ -26235,8 +25921,8 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/3064.webp",
     "cats": [
       "Meat Alternatives",
-      "High-Protein",
-      "Comfort Food"
+      "Comfort Food",
+      "High-Protein"
     ],
     "time": 90,
     "servings": 4,
@@ -26308,7 +25994,8 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/3066.webp",
     "cats": [
       "Meat Alternatives",
-      "High-Protein"
+      "Dinner",
+      "Comfort Food"
     ],
     "time": 25,
     "servings": 6,
@@ -26420,7 +26107,6 @@
     "cats": [
       "Meat Alternatives",
       "Breakfast",
-      "High-Protein",
       "Quick Meals",
       "Gluten-Free"
     ],
@@ -26460,8 +26146,7 @@
     "cats": [
       "Meat Alternatives",
       "Comfort Food",
-      "Holiday & Festive",
-      "High-Protein"
+      "Holiday & Festive"
     ],
     "time": 75,
     "servings": 8,
@@ -26496,8 +26181,7 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/3071.jpg",
     "cats": [
       "Meat Alternatives",
-      "Sandwiches",
-      "High-Protein"
+      "Sandwiches"
     ],
     "time": 90,
     "servings": 8,
@@ -26539,7 +26223,6 @@
       "Meat Alternatives",
       "Vegan Bacon",
       "Breakfast",
-      "High-Protein",
       "Gluten-Free"
     ],
     "time": 25,
@@ -26571,8 +26254,7 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/3073.jpg",
     "cats": [
       "Meat Alternatives",
-      "Italian",
-      "High-Protein"
+      "Italian"
     ],
     "time": 60,
     "servings": 6,
@@ -26672,8 +26354,7 @@
     "cats": [
       "Korean",
       "Asian",
-      "Dinner",
-      "High-Protein"
+      "Dinner"
     ],
     "time": 30,
     "servings": 4,
@@ -26707,7 +26388,6 @@
     "cats": [
       "Korean",
       "Asian",
-      "Sides",
       "Raw",
       "Quick Meals",
       "Gluten-Free"
@@ -26949,8 +26629,7 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/3090.jpg",
     "cats": [
       "Drinks",
-      "Breakfast",
-      "High-Protein"
+      "Breakfast"
     ],
     "time": 5,
     "servings": 2,
@@ -27214,7 +26893,6 @@
     "cats": [
       "Vegan Bacon",
       "Meat Alternatives",
-      "High-Protein",
       "Gluten-Free"
     ],
     "time": 30,
@@ -27249,8 +26927,7 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/3103.webp",
     "cats": [
       "Vegan Bacon",
-      "Meat Alternatives",
-      "High-Protein"
+      "Meat Alternatives"
     ],
     "time": 45,
     "servings": 6,
@@ -27374,7 +27051,6 @@
     "cats": [
       "Vegan Cheese",
       "Mediterranean",
-      "Greek",
       "Gluten-Free"
     ],
     "time": 30,
@@ -27545,7 +27221,6 @@
       "Vietnamese",
       "Asian",
       "Dinner",
-      "High-Protein",
       "Gluten-Free"
     ],
     "time": 35,
@@ -27702,8 +27377,7 @@
     "cats": [
       "Japanese",
       "Asian",
-      "Dinner",
-      "High-Protein"
+      "Dinner"
     ],
     "time": 30,
     "servings": 4,
@@ -27777,8 +27451,7 @@
     "cats": [
       "Sandwiches",
       "Mediterranean",
-      "Dinner",
-      "High-Protein"
+      "Dinner"
     ],
     "time": 30,
     "servings": 4,
@@ -27819,7 +27492,6 @@
     "cats": [
       "Sandwiches",
       "Lunch",
-      "High-Protein",
       "Gluten-Free"
     ],
     "time": 25,
@@ -27865,8 +27537,7 @@
     "cats": [
       "Sandwiches",
       "Lunch",
-      "Quick Meals",
-      "High-Protein"
+      "Quick Meals"
     ],
     "time": 10,
     "servings": 2,
@@ -27905,7 +27576,6 @@
     "cats": [
       "Sandwiches",
       "Lunch",
-      "High-Protein",
       "Comfort Food"
     ],
     "time": 20,
@@ -27975,7 +27645,6 @@
     "cats": [
       "Korean",
       "Dinner",
-      "High-Protein",
       "Asian"
     ],
     "time": 25,
@@ -28016,7 +27685,6 @@
     "cats": [
       "Korean",
       "Dinner",
-      "High-Protein",
       "Asian"
     ],
     "time": 30,
@@ -28059,7 +27727,6 @@
     "cats": [
       "Korean",
       "Soups & Stews",
-      "High-Protein",
       "Asian"
     ],
     "time": 25,
@@ -28098,7 +27765,6 @@
     "cats": [
       "Korean",
       "Dinner",
-      "High-Protein",
       "Asian"
     ],
     "time": 40,
@@ -28152,7 +27818,6 @@
     "cats": [
       "Southern",
       "Dinner",
-      "High-Protein",
       "Comfort Food"
     ],
     "time": 45,
@@ -28235,7 +27900,6 @@
     "cats": [
       "Southern",
       "Bread & Baking",
-      "Sides",
       "Comfort Food"
     ],
     "time": 30,
@@ -28265,8 +27929,7 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/3136.jpg",
     "cats": [
       "Vegan Bacon",
-      "Breakfast",
-      "High-Protein"
+      "Breakfast"
     ],
     "time": 20,
     "servings": 4,
@@ -28297,7 +27960,6 @@
     "cats": [
       "Vietnamese",
       "Dinner",
-      "High-Protein",
       "Asian"
     ],
     "time": 25,
@@ -28334,7 +27996,6 @@
     "cats": [
       "Vietnamese",
       "Lunch",
-      "High-Protein",
       "Asian"
     ],
     "time": 30,
@@ -28367,7 +28028,6 @@
     "cats": [
       "Mediterranean",
       "Dinner",
-      "High-Protein",
       "Comfort Food"
     ],
     "time": 30,
@@ -28446,7 +28106,6 @@
     "cats": [
       "Meal Prep",
       "Dinner",
-      "High-Protein",
       "Quick Meals"
     ],
     "time": 20,
@@ -28482,7 +28141,6 @@
     "cats": [
       "Sandwiches",
       "Lunch",
-      "High-Protein",
       "Comfort Food"
     ],
     "time": 15,
@@ -28519,8 +28177,7 @@
     "cats": [
       "Korean",
       "Dinner",
-      "Asian",
-      "High-Protein"
+      "Asian"
     ],
     "time": 40,
     "servings": 4,
@@ -28682,7 +28339,6 @@
     "url": "https://www.lazycatkitchen.com/vegan-moussaka/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/4001.jpg",
     "cats": [
-      "Greek",
       "Mediterranean",
       "Dinner",
       "Comfort Food"
@@ -28716,7 +28372,6 @@
     "url": "https://schoolnightvegan.com/home/vegan-spanakopita/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/4002.jpg",
     "cats": [
-      "Greek",
       "Mediterranean",
       "Dinner",
       "Appetizers"
@@ -28751,7 +28406,6 @@
     "url": "https://myveganminimalist.com/vegan-souvlaki/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/4003.jpg",
     "cats": [
-      "Greek",
       "Mediterranean",
       "Dinner"
     ],
@@ -28785,7 +28439,6 @@
     "url": "https://www.lazycatkitchen.com/vegan-gyros/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/4004.jpg",
     "cats": [
-      "Greek",
       "Mediterranean",
       "Dinner",
       "Sandwiches"
@@ -28817,7 +28470,6 @@
     "url": "https://www.lazycatkitchen.com/greek-salad-vegan-feta/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/4005.jpg",
     "cats": [
-      "Greek",
       "Mediterranean",
       "Salads",
       "Lunch",
@@ -28851,7 +28503,6 @@
     "url": "https://cardamomandtea.com/12572/vegan-baklava-the-easy-way/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/4006.jpg",
     "cats": [
-      "Greek",
       "Mediterranean",
       "Desserts"
     ],
@@ -28884,7 +28535,6 @@
     "url": "https://www.lazycatkitchen.com/vegan-pastitsio-greek-lasagna/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/4007.jpg",
     "cats": [
-      "Greek",
       "Mediterranean",
       "Dinner",
       "Comfort Food",
@@ -28920,7 +28570,6 @@
     "url": "https://minimalistbaker.com/6-ingredient-vegan-tzatziki/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/4008.jpg",
     "cats": [
-      "Greek",
       "Mediterranean",
       "Sauces & Dips",
       "Quick Meals"
@@ -28952,9 +28601,7 @@
     "url": "https://holycowvegan.net/lemony-greek-potatoes/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/4009.jpg",
     "cats": [
-      "Greek",
-      "Mediterranean",
-      "Sides"
+      "Mediterranean"
     ],
     "time": 50,
     "servings": 6,
@@ -28984,7 +28631,6 @@
     "url": "https://www.lazycatkitchen.com/gigantes-plaki/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/4010.jpg",
     "cats": [
-      "Greek",
       "Mediterranean",
       "Dinner",
       "High-Fiber"
@@ -29017,7 +28663,6 @@
     "url": "https://holycowvegan.net/fasolada-greek-bean-soup/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/4011.jpg",
     "cats": [
-      "Greek",
       "Mediterranean",
       "Soups & Stews",
       "High-Fiber"
@@ -29055,7 +28700,6 @@
     "url": "https://vegancocotte.com/vegan-avgolemono-soup/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/4012.jpg",
     "cats": [
-      "Greek",
       "Mediterranean",
       "Soups & Stews"
     ],
@@ -29094,9 +28738,7 @@
     "url": "https://www.themediterraneandish.com/briam-greek-roasted-vegetables/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/4013.jpg",
     "cats": [
-      "Greek",
       "Mediterranean",
-      "Sides",
       "One-Pot",
       "Gluten-Free"
     ],
@@ -29130,7 +28772,6 @@
     "url": "https://simple-veganista.com/mediterranean-orzo-salad/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/4014.jpg",
     "cats": [
-      "Greek",
       "Mediterranean",
       "Salads",
       "Lunch"
@@ -29167,7 +28808,6 @@
     "url": "https://miakouppa.com/fakies-lentil-soup/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/4016.webp",
     "cats": [
-      "Greek",
       "Mediterranean",
       "Soups & Stews",
       "High-Fiber"
@@ -29205,7 +28845,6 @@
     "url": "https://www.lazycatkitchen.com/greek-inspired-chickpea-stew/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/4017.jpg",
     "cats": [
-      "Greek",
       "Mediterranean",
       "Soups & Stews",
       "Dinner",
@@ -29239,9 +28878,7 @@
     "url": "https://www.plantbasedredhead.com/en/spanakorizo-greek-spinach-rice/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/4018.webp",
     "cats": [
-      "Greek",
       "Mediterranean",
-      "Sides",
       "Dinner"
     ],
     "time": 30,
@@ -29279,7 +28916,6 @@
     "url": "https://toriavey.com/imam-bayildi-roasted-stuffed-eggplant/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/4020.jpg",
     "cats": [
-      "Greek",
       "Mediterranean",
       "Dinner",
       "Comfort Food"
@@ -29313,10 +28949,8 @@
     "url": "https://www.themediterraneandish.com/greek-meatballs-recipe-keftedes-lemon-sauce/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/4021.jpg",
     "cats": [
-      "Greek",
       "Mediterranean",
-      "Dinner",
-      "High-Protein"
+      "Dinner"
     ],
     "time": 40,
     "servings": 4,
@@ -29360,9 +28994,7 @@
     "url": "https://holycowvegan.net/greek-style-baked-lima-beans/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/4022.jpg",
     "cats": [
-      "Greek",
       "Mediterranean",
-      "Sides",
       "One-Pot",
       "High-Fiber"
     ],
@@ -29397,7 +29029,6 @@
     "url": "https://vegancocotte.com/skordalia-recipe-greek-garlic-dip/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/4023.jpg",
     "cats": [
-      "Greek",
       "Mediterranean",
       "Sauces & Dips",
       "Appetizers"
@@ -29428,7 +29059,6 @@
     "url": "https://www.themediterraneandish.com/melitzanosalata-recipe/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/4024.jpg",
     "cats": [
-      "Greek",
       "Mediterranean",
       "Sauces & Dips",
       "Appetizers"
@@ -29621,7 +29251,6 @@
       "Japanese",
       "Asian",
       "Dinner",
-      "High-Protein",
       "Comfort Food"
     ],
     "time": 35,
@@ -29745,8 +29374,7 @@
       "Japanese",
       "Asian",
       "Lunch",
-      "Dinner",
-      "High-Protein"
+      "Dinner"
     ],
     "time": 25,
     "servings": 2,
@@ -29972,8 +29600,7 @@
       "Korean",
       "Asian",
       "Dinner",
-      "Quick Meals",
-      "High-Protein"
+      "Quick Meals"
     ],
     "time": 15,
     "servings": 3,
@@ -30013,8 +29640,7 @@
     "cats": [
       "Korean",
       "Asian",
-      "Dinner",
-      "High-Protein"
+      "Dinner"
     ],
     "time": 25,
     "servings": 4,
@@ -30092,7 +29718,6 @@
       "Asian",
       "Soups & Stews",
       "Comfort Food",
-      "High-Protein",
       "Quick Meals"
     ],
     "time": 20,
@@ -30421,8 +30046,7 @@
       "Thai",
       "Asian",
       "Lunch",
-      "Dinner",
-      "High-Protein"
+      "Dinner"
     ],
     "time": 20,
     "servings": 4,
@@ -30492,8 +30116,7 @@
       "Thai",
       "Asian",
       "Dinner",
-      "Quick Meals",
-      "High-Protein"
+      "Quick Meals"
     ],
     "time": 15,
     "servings": 3,
@@ -31559,8 +31182,7 @@
     "cats": [
       "Middle Eastern",
       "Dinner",
-      "Appetizers",
-      "High-Protein"
+      "Appetizers"
     ],
     "time": 30,
     "servings": 6,
@@ -31747,7 +31369,6 @@
     "cats": [
       "Middle Eastern",
       "Dinner",
-      "High-Protein",
       "High-Fiber"
     ],
     "time": 40,
@@ -32020,7 +31641,6 @@
     "url": "https://www.loveandlemons.com/grilled-zucchini/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/4095.jpg",
     "cats": [
-      "Sides",
       "Gluten-Free",
       "Quick Meals",
       "Beginner"
@@ -32049,7 +31669,6 @@
     "url": "https://rainbowplantlife.com/5-ingredient-vegan-recipes/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/4097.webp",
     "cats": [
-      "Sides",
       "Gluten-Free",
       "Beginner",
       "Quick Meals"
@@ -32078,7 +31697,6 @@
     "url": "https://www.loveandlemons.com/roasted-asparagus/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/4102.jpg",
     "cats": [
-      "Sides",
       "Gluten-Free",
       "Quick Meals",
       "Beginner"
@@ -32107,7 +31725,6 @@
     "url": "https://minimalistbaker.com/simple-avocado-recipes-30-minutes-or-less/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/4103.jpg",
     "cats": [
-      "Snacks",
       "Gluten-Free",
       "Quick Meals",
       "Beginner"
@@ -32318,7 +31935,6 @@
     "url": "https://minimalistbaker.com/how-to-make-kale-chips/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/4114.jpg",
     "cats": [
-      "Snacks",
       "Gluten-Free",
       "Beginner"
     ],
@@ -32409,7 +32025,6 @@
     "cats": [
       "Soups & Stews",
       "Gluten-Free",
-      "High-Protein",
       "High-Fiber",
       "Comfort Food"
     ],
@@ -32437,7 +32052,6 @@
     "url": "https://www.noracooks.com/easy-vegan-recipes/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/4122.webp",
     "cats": [
-      "Sides",
       "Gluten-Free",
       "Quick Meals",
       "Beginner"
@@ -32561,7 +32175,6 @@
       "Dinner",
       "Gluten-Free",
       "Quick Meals",
-      "High-Protein",
       "High-Fiber"
     ],
     "time": 15,
@@ -32590,7 +32203,6 @@
     "cats": [
       "Salads",
       "Gluten-Free",
-      "High-Protein",
       "High-Fiber",
       "Meal Prep"
     ],
@@ -32621,8 +32233,7 @@
       "Mexican",
       "Lunch",
       "Quick Meals",
-      "Beginner",
-      "High-Protein"
+      "Beginner"
     ],
     "time": 10,
     "servings": 2,
@@ -32648,10 +32259,9 @@
     "url": "https://minimalistbaker.com/no-bake-vegan-protein-bars-4-ingredients/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/4134.jpg",
     "cats": [
-      "Snacks",
-      "High-Protein",
       "Gluten-Free",
-      "Meal Prep"
+      "Meal Prep",
+      "Breakfast"
     ],
     "time": 20,
     "servings": 10,
@@ -32677,9 +32287,7 @@
     "url": "https://minimalistbaker.com/easy-5-ingredient-protein-bars-peanut-butter-chocolate/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/4135.jpg",
     "cats": [
-      "Snacks",
       "Desserts",
-      "High-Protein",
       "Gluten-Free"
     ],
     "time": 25,
@@ -32709,10 +32317,9 @@
     "url": "https://ohsheglows.com/quick-n-easy-no-bake-protein-bars/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/4136.jpg",
     "cats": [
-      "Snacks",
-      "High-Protein",
       "Gluten-Free",
-      "Meal Prep"
+      "Meal Prep",
+      "Breakfast"
     ],
     "time": 15,
     "servings": 12,
@@ -32742,9 +32349,7 @@
     "url": "https://www.ambitiouskitchen.com/peanut-butter-cup-protein-bars/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/4137.jpg",
     "cats": [
-      "Snacks",
       "Desserts",
-      "High-Protein",
       "Gluten-Free"
     ],
     "time": 20,
@@ -32774,9 +32379,7 @@
     "url": "https://thebigmansworld.com/healthy-no-bake-chocolate-peanut-butter-chewy-bars-vegan-gluten-free/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/4138.jpg",
     "cats": [
-      "Snacks",
       "Desserts",
-      "High-Protein",
       "Gluten-Free"
     ],
     "time": 15,
@@ -32803,8 +32406,6 @@
     "url": "https://www.thefullhelping.com/higher-protein-raw-vegan-snack-bars-easy-to-customize/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/4139.jpg",
     "cats": [
-      "Snacks",
-      "High-Protein",
       "Gluten-Free",
       "Raw"
     ],
@@ -32833,10 +32434,9 @@
     "url": "https://feelgoodfoodie.net/recipe/vegan-protein-bars/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/4140.jpg",
     "cats": [
-      "Snacks",
-      "High-Protein",
       "Gluten-Free",
-      "Meal Prep"
+      "Meal Prep",
+      "Breakfast"
     ],
     "time": 25,
     "servings": 12,
@@ -32866,7 +32466,6 @@
     "url": "https://beamingbaker.com/4-ingredient-no-bake-peanut-butter-coconut-oatmeal-bars-vegan-gluten-free-dairy-free/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/4141.jpg",
     "cats": [
-      "Snacks",
       "Desserts",
       "Gluten-Free"
     ],
@@ -32893,7 +32492,6 @@
     "url": "https://minimalistbaker.com/healthy-5-ingredient-granola-bars/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/4142.jpg",
     "cats": [
-      "Snacks",
       "Breakfast",
       "Gluten-Free",
       "Meal Prep"
@@ -32923,10 +32521,9 @@
     "url": "https://dreenaburton.com/homemade-vegan-protein-bars/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/4143.jpg",
     "cats": [
-      "Snacks",
-      "High-Protein",
       "Gluten-Free",
-      "Meal Prep"
+      "Meal Prep",
+      "Breakfast"
     ],
     "time": 30,
     "servings": 12,
@@ -32955,10 +32552,9 @@
     "url": "https://www.theconsciousplantkitchen.com/protein-cereal-bars/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/4144.jpg",
     "cats": [
-      "Snacks",
-      "High-Protein",
       "Gluten-Free",
-      "Meal Prep"
+      "Meal Prep",
+      "Breakfast"
     ],
     "time": 15,
     "servings": 8,
@@ -32985,9 +32581,7 @@
     "url": "https://basicswithbails.com/popular/baking/vegan-gluten-free-protein-bars-with-dark-chocolate/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/4145.jpg",
     "cats": [
-      "Snacks",
       "Desserts",
-      "High-Protein",
       "Gluten-Free"
     ],
     "time": 20,
@@ -33017,10 +32611,9 @@
     "url": "https://thebigmansworld.com/no-bake-peanut-butter-protein-bars-keto-sugar-free-vegan/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/4146.jpg",
     "cats": [
-      "Snacks",
-      "High-Protein",
       "Gluten-Free",
-      "Meal Prep"
+      "Meal Prep",
+      "Breakfast"
     ],
     "time": 10,
     "servings": 8,
@@ -33046,9 +32639,8 @@
     "url": "https://vegtasty.com/sugar-free-protein-bars/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/4147.jpg",
     "cats": [
-      "Snacks",
-      "High-Protein",
-      "Gluten-Free"
+      "Gluten-Free",
+      "Breakfast"
     ],
     "time": 15,
     "servings": 6,
@@ -33073,10 +32665,9 @@
     "url": "https://www.theconsciousplantkitchen.com/homemade-protein-bars/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/4148.jpg",
     "cats": [
-      "Snacks",
-      "High-Protein",
       "Gluten-Free",
-      "Meal Prep"
+      "Meal Prep",
+      "Breakfast"
     ],
     "time": 25,
     "servings": 10,
@@ -33105,7 +32696,6 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/4149.jpg",
     "cats": [
       "Lunch",
-      "High-Protein",
       "Gluten-Free",
       "Meal Prep"
     ],
@@ -33288,8 +32878,7 @@
     "cats": [
       "Breakfast",
       "Quick Meals",
-      "Gluten-Free",
-      "High-Protein"
+      "Gluten-Free"
     ],
     "time": 5,
     "servings": 2,
@@ -33319,7 +32908,6 @@
     "cats": [
       "Dinner",
       "Mexican",
-      "High-Protein",
       "Quick Meals"
     ],
     "time": 25,
@@ -33458,8 +33046,7 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/4170.jpg",
     "cats": [
       "Desserts",
-      "Gluten-Free",
-      "Snacks"
+      "Gluten-Free"
     ],
     "time": 30,
     "servings": 12,
@@ -33486,7 +33073,6 @@
     "url": "https://ohsheglows.com/4-ingredient-no-knead-bread/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/4171.jpg",
     "cats": [
-      "Sides",
       "Beginner"
     ],
     "time": 60,
@@ -33627,7 +33213,6 @@
     "cats": [
       "Lunch",
       "Gluten-Free",
-      "High-Protein",
       "Meal Prep"
     ],
     "time": 35,
@@ -33697,7 +33282,6 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/4177.png",
     "cats": [
       "Appetizers",
-      "Snacks",
       "Game Day",
       "Quick Meals"
     ],
@@ -33839,8 +33423,7 @@
     "cats": [
       "Lunch",
       "Mexican",
-      "Meal Prep",
-      "High-Protein"
+      "Meal Prep"
     ],
     "time": 30,
     "servings": 6,
@@ -33875,7 +33458,6 @@
     "cats": [
       "Lunch",
       "Quick Meals",
-      "High-Protein",
       "Sandwiches"
     ],
     "time": 15,
@@ -33946,7 +33528,6 @@
     "cats": [
       "Dinner",
       "Mexican",
-      "High-Protein",
       "Quick Meals"
     ],
     "time": 20,
@@ -33983,8 +33564,8 @@
       "Lunch",
       "Salads",
       "Pasta & Noodles",
-      "Greek",
-      "Meal Prep"
+      "Meal Prep",
+      "Mediterranean"
     ],
     "time": 20,
     "servings": 6,
@@ -34199,8 +33780,7 @@
     "cats": [
       "Dinner",
       "Pasta & Noodles",
-      "One-Pot",
-      "High-Protein"
+      "One-Pot"
     ],
     "time": 30,
     "servings": 4,
@@ -34309,8 +33889,7 @@
     "cats": [
       "Breakfast",
       "Mexican",
-      "Quick Meals",
-      "High-Protein"
+      "Quick Meals"
     ],
     "time": 20,
     "servings": 4,
@@ -34455,7 +34034,6 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/4212.jpg",
     "cats": [
       "Breakfast",
-      "High-Protein",
       "Quick Meals",
       "Gluten-Free",
       "Beginner"
@@ -34675,7 +34253,6 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/4225.jpg",
     "cats": [
       "Dinner",
-      "High-Protein",
       "Meat Alternatives",
       "Gluten-Free"
     ],
@@ -34784,8 +34361,7 @@
     "cats": [
       "Dinner",
       "Pasta & Noodles",
-      "Italian",
-      "High-Protein"
+      "Italian"
     ],
     "time": 35,
     "servings": 4,
@@ -34854,9 +34430,7 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/4230.jpg",
     "cats": [
       "Dinner",
-      "Kid-Friendly",
-      "High-Protein",
-      "Snacks"
+      "Kid-Friendly"
     ],
     "time": 30,
     "servings": 4,
@@ -34888,7 +34462,6 @@
     "url": "https://schoolnightvegan.com/home/vegan-roast-potatoes/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/4231.jpg",
     "cats": [
-      "Sides",
       "Holiday & Festive",
       "Gluten-Free",
       "Beginner"
@@ -34919,7 +34492,6 @@
     "url": "https://schoolnightvegan.com/home/vegan-roasted-sweet-potatoes/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/4232.jpg",
     "cats": [
-      "Sides",
       "Gluten-Free",
       "Fall",
       "Beginner"
@@ -35020,7 +34592,6 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/4235.jpg",
     "cats": [
       "Meat Alternatives",
-      "High-Protein",
       "Quick Meals",
       "Meal Prep"
     ],
@@ -35054,7 +34625,6 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/4236.jpg",
     "cats": [
       "Sauces & Dips",
-      "High-Protein",
       "Meal Prep",
       "Beginner"
     ],
@@ -35120,7 +34690,6 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/4238.jpg",
     "cats": [
       "Lunch",
-      "High-Protein",
       "Quick Meals",
       "Gluten-Free"
     ],
@@ -35155,7 +34724,6 @@
     "url": "https://schoolnightvegan.com/home/buffalo-tofu-fries/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/4239.jpg",
     "cats": [
-      "Snacks",
       "Game Day",
       "Comfort Food",
       "Kid-Friendly"
@@ -35262,8 +34830,7 @@
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/4244.jpg",
     "cats": [
       "Dinner",
-      "Chinese",
-      "High-Protein"
+      "Chinese"
     ],
     "time": 30,
     "servings": 4,
@@ -35297,7 +34864,6 @@
     "url": "https://schoolnightvegan.com/home/vegan-sausage-rolls/",
     "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/4245.jpg",
     "cats": [
-      "Snacks",
       "Appetizers",
       "Game Day",
       "Kid-Friendly"
@@ -35335,7 +34901,6 @@
     "cats": [
       "Lunch",
       "Gluten-Free",
-      "High-Protein",
       "Meal Prep"
     ],
     "time": 30,
@@ -35546,7 +35111,6 @@
     "img": "",
     "cats": [
       "Southern",
-      "Sides",
       "Gluten-Free",
       "Comfort Food"
     ],
@@ -35583,7 +35147,6 @@
       "Southern",
       "Dinner",
       "Gluten-Free",
-      "High-Protein",
       "Comfort Food"
     ],
     "time": 45,
@@ -35619,8 +35182,7 @@
     "cats": [
       "Southern",
       "Appetizers",
-      "Comfort Food",
-      "Snacks"
+      "Comfort Food"
     ],
     "time": 30,
     "servings": 6,
@@ -35782,10 +35344,8 @@
     "img": "",
     "cats": [
       "Raw",
-      "Snacks",
       "Gluten-Free",
-      "Quick Meals",
-      "High-Protein"
+      "Quick Meals"
     ],
     "time": 10,
     "servings": 12,
@@ -35978,7 +35538,6 @@
     "img": "",
     "cats": [
       "Raw",
-      "Snacks",
       "Desserts",
       "Gluten-Free"
     ],
@@ -36333,8 +35892,7 @@
     "cats": [
       "Vegan Bacon",
       "Gluten-Free",
-      "Quick Meals",
-      "Snacks"
+      "Quick Meals"
     ],
     "time": 15,
     "servings": 4,
@@ -36363,7 +35921,6 @@
     "img": "",
     "cats": [
       "Vegan Bacon",
-      "High-Protein",
       "Breakfast"
     ],
     "time": 40,
@@ -36432,7 +35989,6 @@
     "cats": [
       "Vegan Bacon",
       "Gluten-Free",
-      "Snacks",
       "Quick Meals"
     ],
     "time": 30,
@@ -36500,7 +36056,6 @@
     "cats": [
       "Game Day",
       "Appetizers",
-      "Snacks",
       "Comfort Food"
     ],
     "time": 35,
@@ -36533,7 +36088,6 @@
     "cats": [
       "Game Day",
       "Mexican",
-      "Snacks",
       "Comfort Food"
     ],
     "time": 30,
@@ -36568,8 +36122,7 @@
       "Game Day",
       "Soups & Stews",
       "Comfort Food",
-      "Gluten-Free",
-      "High-Protein"
+      "Gluten-Free"
     ],
     "time": 45,
     "servings": 6,
@@ -36604,7 +36157,6 @@
     "img": "",
     "cats": [
       "Game Day",
-      "Snacks",
       "Kid-Friendly",
       "Comfort Food"
     ],
@@ -36635,8 +36187,6 @@
     "img": "",
     "cats": [
       "Game Day",
-      "Sides",
-      "Snacks",
       "Comfort Food"
     ],
     "time": 30,
@@ -36668,7 +36218,6 @@
     "img": "",
     "cats": [
       "Game Day",
-      "Snacks",
       "Kid-Friendly"
     ],
     "time": 40,
@@ -36732,9 +36281,7 @@
     "img": "",
     "cats": [
       "Game Day",
-      "Sides",
-      "Comfort Food",
-      "Snacks"
+      "Comfort Food"
     ],
     "time": 40,
     "servings": 4,
@@ -36767,8 +36314,7 @@
       "Game Day",
       "Sauces & Dips",
       "Appetizers",
-      "Gluten-Free",
-      "High-Protein"
+      "Gluten-Free"
     ],
     "time": 15,
     "servings": 8,
