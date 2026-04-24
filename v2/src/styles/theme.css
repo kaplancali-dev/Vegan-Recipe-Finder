@@ -148,6 +148,7 @@ input, select, textarea {
   align-items: baseline;
   justify-content: center;
   gap: 10px;
+  position: relative;
 }
 
 .logo {
@@ -1904,9 +1905,13 @@ input, select, textarea {
 /* ── Header menu button ─────────────────────────────────────── */
 
 .header-menu-btn {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
   background: none;
   border: none;
-  color: var(--text);
+  color: var(--ink);
   cursor: pointer;
   padding: 6px;
   display: flex;
@@ -1929,18 +1934,14 @@ input, select, textarea {
 
 .pwa-toolbar {
   position: fixed;
-  bottom: 20px;
+  bottom: 12px;
   left: 50%;
   transform: translateX(-50%);
-  gap: 8px;
+  gap: 16px;
   z-index: 150;
-  padding: 6px 12px;
-  padding-bottom: calc(6px + env(safe-area-inset-bottom, 0));
-  background: rgba(45, 122, 79, 0.85);
-  border-radius: 28px;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  padding: 8px 16px;
+  padding-bottom: calc(8px + env(safe-area-inset-bottom, 0));
+  background: transparent;
 }
 
 .pwa-toolbar:not([hidden]) {
@@ -1951,23 +1952,32 @@ input, select, textarea {
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  border: none;
-  background: rgba(255, 255, 255, 0.15);
-  color: #fff;
+  border: 2px solid rgba(255, 255, 255, 0.7);
+  background: transparent;
+  color: var(--green);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: background var(--transition);
+  transition: background var(--transition), border-color var(--transition);
+}
+
+.pwa-btn svg {
+  stroke: var(--green);
 }
 
 .pwa-btn:hover,
 .pwa-btn:active {
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(45, 122, 79, 0.1);
+  border-color: var(--green);
 }
 
 .pwa-btn.dark-active {
-  background: rgba(255, 200, 50, 0.3);
+  border-color: var(--accent);
+}
+
+.pwa-btn.dark-active svg {
+  stroke: var(--accent);
 }
 
 /* ── Menu overlay ──────────────────────────────────────────── */

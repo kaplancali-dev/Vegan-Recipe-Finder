@@ -286,6 +286,17 @@ function toggleDarkMode() {
     });
   }
 
+  // Cloud Sync menu item — switch to Pantry tab and scroll to sync panel
+  const menuSyncBtn = $('#menuCloudSync');
+  if (menuSyncBtn) {
+    menuSyncBtn.addEventListener('click', () => {
+      closeMenu();
+      showTab('pantry');
+      const syncPanel = $('#syncPanel');
+      if (syncPanel) syncPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  }
+
   // Header hamburger menu button (desktop)
   const headerMenuBtn = $('#headerMenuBtn');
   if (headerMenuBtn) headerMenuBtn.addEventListener('click', openMenu);
