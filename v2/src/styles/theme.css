@@ -479,19 +479,28 @@ input, select, textarea {
 .filter-chips {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
+  gap: 4px;
 }
 
 .filter-chip {
-  padding: 6px 12px;
-  border-radius: 20px;
-  font-size: 0.8rem;
+  padding: 4px 9px;
+  border-radius: 16px;
+  font-size: 0.72rem;
   font-weight: 500;
   border: 1.5px solid var(--border);
   background: var(--card);
   color: var(--ink-soft);
   cursor: pointer;
   transition: all var(--transition);
+}
+
+@media (min-width: 769px) {
+  .filter-chips { gap: 6px; }
+  .filter-chip {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+  }
 }
 
 .filter-chip:hover {
@@ -535,6 +544,9 @@ input, select, textarea {
   padding: 12px 0 4px;
   border-top: 1px solid var(--border);
   margin-top: 10px;
+  max-height: 50vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .filter-drawer[hidden] {
