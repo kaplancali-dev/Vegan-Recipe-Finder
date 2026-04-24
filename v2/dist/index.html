@@ -20,10 +20,10 @@
 <link rel="icon" type="image/png" href="favicon.png">
 <meta name="theme-color" content="#2d7a4f">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; img-src 'self' https: data:; connect-src 'self' https://*.supabase.co https://www.google-analytics.com; font-src 'self'; frame-src 'none';">
-  <script type="module" crossorigin src="/assets/index-EQX81cqA.js"></script>
+  <script type="module" crossorigin src="/assets/index-CivNx9Nk.js"></script>
   <link rel="modulepreload" crossorigin href="/assets/supabase-DaN4is7k.js">
   <link rel="modulepreload" crossorigin href="/assets/recipes-CJ1sQjHE.js">
-  <link rel="stylesheet" crossorigin href="/assets/index-xQ6WEODH.css">
+  <link rel="stylesheet" crossorigin href="/assets/index-CFSNnJgF.css">
 </head>
 <body>
 
@@ -39,6 +39,9 @@
     <!-- Top header bar -->
     <header id="header" class="header">
       <div class="header-inner">
+        <button id="headerMenuBtn" class="header-menu-btn" aria-label="Menu">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
         <h1 class="logo">🌿 HARVEST</h1>
         <p class="logo-tagline">Eat More Plants!</p>
       </div>
@@ -130,86 +133,7 @@
         <div id="syncContent"></div>
       </div>
 
-      <!-- Quick Start / About -->
-      <div class="card about-card">
-        <h3 class="card-title guide-toggle" id="aboutToggle">ℹ️ About HARVEST <span class="guide-arrow">▾</span></h3>
-        <div class="guide-body hidden" id="aboutBody">
-
-          <div class="about-section">
-            <h4 class="about-heading">Quick Start</h4>
-            <p class="about-text" style="margin-bottom:10px">HARVEST matches nearly 1,000 vegan recipes to what's already in your kitchen. Here's how to get started:</p>
-
-            <p class="about-text"><strong>Step 1 — Stock your pantry</strong></p>
-            <p class="about-text" style="margin-bottom:4px">Head to the <strong>🥬 My Pantry</strong> tab. You'll see two sections for adding items:</p>
-            <ol class="about-steps">
-              <li><strong>📌 Add Staples</strong> — tap the category buttons (Oils, Spices, Grains, Beans, etc.) to save things you always keep on hand. These stay saved forever, so you only need to do this once.</li>
-              <li><strong>Add Ingredients</strong> — scroll down and type in perishables like fresh produce, herbs, and fruits, separated by commas. Perishables are highlighted in orange so you remember to use them before they go bad.</li>
-            </ol>
-
-            <p class="about-text" style="margin-top:12px"><strong>Step 2 — Find recipes</strong></p>
-            <p class="about-text" style="margin-bottom:4px">Now check out the other tabs:</p>
-            <ol class="about-steps">
-              <li><strong>🔍 Browse All</strong> — every recipe, ranked by how well it matches your pantry. Use the search bar to find recipes by name or ingredient (try "chickpeas" or "pasta"). Tap <em>Filters</em> to filter by cuisine (Chinese, Thai, Mexican…), adjust the max cook time, or set allergens to hide recipes containing specific ingredients.</li>
-              <li><strong>🍳 Ready to Make</strong> — only shows recipes you can make right now with 1 or fewer missing ingredients. This is the fastest way to decide what to cook tonight. The same Filters drawer is available here too.</li>
-              <li><strong>❤️ Favorites</strong> — all the recipes you've saved. Tap the 🤍 button on any recipe card to add it here.</li>
-              <li><strong>🛒 Shopping</strong> — your shopping list, organized by recipe. Each recipe you've marked "Want to Make" appears as its own card with its missing ingredients (with automatic gluten-free substitutions). Tap 📝 to send a single recipe's list to Notes, or "All to Notes" for everything.</li>
-            </ol>
-
-            <p class="about-text" style="margin-top:12px"><strong>Other handy features</strong></p>
-            <ol class="about-steps">
-              <li><strong>📌 Want to Make</strong> — see a recipe you'd like to try later? Tap "Want to Make" on the card. It appears in your Shopping tab as its own card with the missing ingredients listed, so you can shop by recipe.</li>
-              <li><strong>🍳 I Made This</strong> — tap this button on any recipe card or shopping card to log that you cooked it. Your cooking history is tracked in the Favorites tab so you can see what you've made and when.</li>
-              <li><strong>🤍 Favorite + Collections</strong> — tap the heart to save a recipe. You'll be asked to file it into a collection (Weekly Meal Plan, Weeknight, Game Day, etc.). Tap 📚 All in Favorites to see everything in one place.</li>
-              <li><strong>🔄 Substitution Hints</strong> — if a recipe is missing one ingredient but you have a good swap (e.g. tamari for soy sauce, oat milk for almond milk), a green hint appears on the card suggesting the substitute.</li>
-              <li><strong>⚠️ Allergen Filters</strong> — open the Filters drawer on Browse All or Ready to Make and tap any allergen (Peanuts, Tree Nuts, Soy, Coconut, Corn, Mushrooms, Nightshades) to hide recipes containing those ingredients. Your selections sync across all tabs and are saved automatically.</li>
-              <li><strong>🛒 GF Shopping Swaps</strong> — when a recipe calls for soy sauce, flour, pasta, or other gluten-containing ingredients, the shopping list automatically shows the gluten-free substitute (tamari, GF flour, GF pasta, etc.).</li>
-              <li><strong>📤 Share</strong> — tap the Share button on any recipe to send it to a friend. They'll get a direct link to the original recipe — no app needed.</li>
-              <li><strong>Recipe details</strong> — tap any recipe card to see the full ingredient list (with checkmarks for what you have), nutrition info, and a link to the original instructions. You can also add personal notes.</li>
-              <li><strong>🌙 Dark Mode</strong> — toggle dark mode on or off in the About section below.</li>
-              <li><strong>☁️ Cloud Sync</strong> — optionally sign in to back up your pantry, favorites, and shopping list across devices.</li>
-            </ol>
-
-            <p class="about-tip">💡 Add it to your home screen for the best experience — it works like a native app with offline support.</p>
-          </div>
-
-          <div class="about-section">
-            <h4 class="about-heading">About Us</h4>
-            <p class="about-text">HARVEST was created by an experienced food creator who wanted a better way to answer the daily question: <em>"What can I actually make right now?"</em> Every recipe is 100% plant-based, sourced from trusted nutrition-focused chefs and creators. The goal isn't just to cook more — it's to make cooking feel effortless again.</p>
-          </div>
-
-          <div class="about-section">
-            <h4 class="about-heading">Feedback &amp; Contact</h4>
-            <p class="about-text" style="margin-bottom:8px">Have a suggestion, found a bug, or just want to say hi? We'd love to hear from you.</p>
-            <div id="feedbackForm">
-              <div style="display:flex;gap:6px;margin-bottom:6px">
-                <button class="btn btn-outline btn-sm feedback-type-btn on" data-type="suggestion">💡 Suggestion</button>
-                <button class="btn btn-outline btn-sm feedback-type-btn" data-type="bug">🐛 Bug</button>
-                <button class="btn btn-outline btn-sm feedback-type-btn" data-type="love">💚 Love it</button>
-              </div>
-              <textarea id="feedbackMsg" class="text-input" rows="3" placeholder="Tell us what's on your mind…" style="width:100%;resize:vertical;margin-bottom:6px"></textarea>
-              <div style="display:flex;align-items:center;gap:8px">
-                <button id="feedbackSendBtn" class="btn btn-primary btn-sm">Send Feedback</button>
-                <span id="feedbackStatus" class="muted" style="font-size:0.8rem"></span>
-              </div>
-            </div>
-          </div>
-
-          <div class="about-section">
-            <h4 class="about-heading">Privacy Policy</h4>
-            <p class="about-text">HARVEST does not collect, sell, or share your personal data. Your ingredient lists, staples, favorites, and preferences are stored locally on your device. If you enable Cloud Sync, your data is stored securely in your own Supabase account and is never shared with third parties. We use basic analytics to understand how the app is used — no tracking, no ads, ever.</p>
-          </div>
-
-          <div class="about-version">
-            <span class="muted">HARVEST v2.27 · Made with 💚 and plants</span>
-          </div>
-
-        </div>
-      </div>
-
-      <!-- Dark Mode toggle (below About) -->
-      <div class="card" style="text-align:center">
-        <button id="darkModeToggle" class="btn btn-outline btn-sm">🌙 Dark Mode</button>
-      </div>
+      <!-- About / Instructions / Feedback now live in the Menu panel -->
 
     </section>
 
@@ -344,12 +268,103 @@
 
 
     <!-- PWA bottom toolbar (share + refresh) -->
+    <!-- Menu overlay panel -->
+    <div id="menuOverlay" class="menu-overlay" hidden>
+      <div class="menu-panel">
+        <div class="menu-header">
+          <h3>🌿 HARVEST</h3>
+          <button id="menuCloseBtn" class="menu-close-btn" aria-label="Close">&times;</button>
+        </div>
+        <nav class="menu-nav">
+          <button class="menu-item" data-menu="instructions">📖 Instructions</button>
+          <button class="menu-item" data-menu="about">🌱 About Us</button>
+          <button class="menu-item" data-menu="feedback">💬 Send Feedback</button>
+          <button class="menu-item" data-menu="privacy">🔒 Privacy Policy</button>
+          <button class="menu-item" id="menuDarkToggle">🌙 Night Mode</button>
+        </nav>
+
+        <!-- Menu sub-panels (shown when a menu item is tapped) -->
+        <div id="menuContent" class="menu-content" hidden>
+          <button id="menuBackBtn" class="menu-back-btn">← Back</button>
+
+          <div id="menuInstructions" class="menu-section" hidden>
+            <h4>Quick Start</h4>
+            <p style="margin-bottom:10px">HARVEST matches nearly 1,000 vegan recipes to what's already in your kitchen. Here's how to get started:</p>
+
+            <p><strong>Step 1 — Stock your pantry</strong></p>
+            <p style="margin-bottom:4px">Head to the <strong>🥬 My Pantry</strong> tab:</p>
+            <ol class="about-steps">
+              <li><strong>📌 Add Staples</strong> — tap the category buttons (Oils, Spices, Grains, Beans, etc.) to save things you always keep on hand. These stay saved forever.</li>
+              <li><strong>Add Ingredients</strong> — type in perishables like fresh produce, herbs, and fruits, separated by commas. Perishables are highlighted in orange so you use them first.</li>
+            </ol>
+
+            <p style="margin-top:12px"><strong>Step 2 — Find recipes</strong></p>
+            <ol class="about-steps">
+              <li><strong>🔍 Browse All</strong> — every recipe, ranked by match. Tap <em>Filters</em> for cuisines, cook time, and allergens.</li>
+              <li><strong>🍳 Ready to Make</strong> — recipes you can make now with 1 or fewer missing ingredients.</li>
+              <li><strong>❤️ Favorites</strong> — your saved recipes. Tap 🤍 on any card to add.</li>
+              <li><strong>🛒 Shopping</strong> — organized by recipe with automatic GF substitutions.</li>
+            </ol>
+
+            <p style="margin-top:12px"><strong>Features</strong></p>
+            <ol class="about-steps">
+              <li><strong>📌 Want to Make</strong> — tap on any card to add it to your Shopping list with missing ingredients.</li>
+              <li><strong>🍳 I Made This</strong> — log your cooks. History is tracked in Favorites.</li>
+              <li><strong>🤍 Collections</strong> — file favorites into collections (Weekly Meal Plan, Weeknight, Game Day, etc.).</li>
+              <li><strong>⚠️ Allergens</strong> — set in the Filters drawer to hide recipes with specific ingredients.</li>
+              <li><strong>🛒 GF Swaps</strong> — shopping list auto-swaps soy sauce → tamari, flour → GF flour, etc.</li>
+              <li><strong>🔄 Substitution Hints</strong> — green hints appear when a good ingredient swap exists.</li>
+              <li><strong>☁️ Cloud Sync</strong> — back up across devices via My Pantry.</li>
+            </ol>
+            <p class="about-tip">💡 Add to your home screen for the best experience!</p>
+          </div>
+
+          <div id="menuAbout" class="menu-section" hidden>
+            <h4>About Us</h4>
+            <p>HARVEST was created by an experienced food creator who wanted a better way to answer the daily question: <em>"What can I actually make right now?"</em></p>
+            <p style="margin-top:8px">Every recipe is 100% plant-based, sourced from trusted nutrition-focused chefs and creators. The goal isn't just to cook more — it's to make cooking feel effortless again.</p>
+            <p class="about-version" style="margin-top:16px"><span class="muted">HARVEST v2.28 · Made with 💚 and plants</span></p>
+          </div>
+
+          <div id="menuFeedback" class="menu-section" hidden>
+            <h4>Send Feedback</h4>
+            <p style="margin-bottom:8px">Have a suggestion, found a bug, or just want to say hi?</p>
+            <div id="feedbackForm">
+              <div style="display:flex;gap:6px;margin-bottom:6px">
+                <button class="btn btn-outline btn-sm feedback-type-btn on" data-type="suggestion">💡 Suggestion</button>
+                <button class="btn btn-outline btn-sm feedback-type-btn" data-type="bug">🐛 Bug</button>
+                <button class="btn btn-outline btn-sm feedback-type-btn" data-type="love">💚 Love it</button>
+              </div>
+              <textarea id="feedbackMsg" class="text-input" rows="3" placeholder="Tell us what's on your mind…" style="width:100%;resize:vertical;margin-bottom:6px"></textarea>
+              <div style="display:flex;align-items:center;gap:8px">
+                <button id="feedbackSendBtn" class="btn btn-primary btn-sm">Send Feedback</button>
+                <span id="feedbackStatus" class="muted" style="font-size:0.8rem"></span>
+              </div>
+            </div>
+          </div>
+
+          <div id="menuPrivacy" class="menu-section" hidden>
+            <h4>Privacy Policy</h4>
+            <p>HARVEST does not collect, sell, or share your personal data. Your ingredient lists, staples, favorites, and preferences are stored locally on your device.</p>
+            <p style="margin-top:8px">If you enable Cloud Sync, your data is stored securely in your own Supabase account and is never shared with third parties. We use basic analytics to understand how the app is used — no tracking, no ads, ever.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PWA bottom toolbar (Share, Refresh, Menu, Night Mode) -->
     <div id="pwaToolbar" class="pwa-toolbar" hidden>
       <button id="pwaShare" class="pwa-btn" aria-label="Share">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
       </button>
       <button id="pwaRefresh" class="pwa-btn" aria-label="Refresh">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+      </button>
+      <button id="pwaMenu" class="pwa-btn" aria-label="Menu">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+      </button>
+      <button id="pwaDarkToggle" class="pwa-btn" aria-label="Night Mode">
+        <svg id="pwaDarkIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
       </button>
     </div>
 

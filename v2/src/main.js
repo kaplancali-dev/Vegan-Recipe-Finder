@@ -189,22 +189,37 @@ window.addEventListener('resize', updateSearchPlaceholders);
 
 /* ── Dark mode toggle ───────────────────────────────────────── */
 
-{
-  const DARK_KEY = 'vrf_darkmode';
+const DARK_KEY = 'vrf_darkmode';
+let isDark;
 
-  function applyTheme(dark) {
-    if (dark) {
-      document.documentElement.dataset.theme = 'dark';
-    } else {
-      delete document.documentElement.dataset.theme;
-    }
-    const btn = $('#darkModeToggle');
-    if (btn) btn.textContent = dark ? '☀️ Light Mode' : '🌙 Dark Mode';
+function applyTheme(dark) {
+  if (dark) {
+    document.documentElement.dataset.theme = 'dark';
+  } else {
+    delete document.documentElement.dataset.theme;
   }
+  // Update all dark mode buttons/icons
+  const menuBtn = $('#menuDarkToggle');
+  if (menuBtn) menuBtn.textContent = dark ? '☀️ Light Mode' : '🌙 Night Mode';
+  const pwaBtn = $('#pwaDarkToggle');
+  if (pwaBtn) pwaBtn.classList.toggle('dark-active', dark);
+  // Swap moon/sun icon in PWA toolbar
+  const pwaIcon = $('#pwaDarkIcon');
+  if (pwaIcon) {
+    pwaIcon.innerHTML = dark
+      ? '<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>'
+      : '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
+  }
+}
 
-  // On load: check localStorage, fall back to prefers-color-scheme
+function toggleDarkMode() {
+  isDark = !isDark;
+  localStorage.setItem(DARK_KEY, isDark ? '1' : '0');
+  applyTheme(isDark);
+}
+
+{
   const stored = localStorage.getItem(DARK_KEY);
-  let isDark;
   if (stored !== null) {
     isDark = stored === '1';
   } else {
@@ -212,24 +227,78 @@ window.addEventListener('resize', updateSearchPlaceholders);
   }
   applyTheme(isDark);
 
-  const toggleBtn = $('#darkModeToggle');
-  if (toggleBtn) {
-    toggleBtn.addEventListener('click', () => {
-      isDark = !isDark;
-      localStorage.setItem(DARK_KEY, isDark ? '1' : '0');
-      applyTheme(isDark);
-    });
-  }
+  // Menu panel dark mode toggle
+  const menuDarkBtn = $('#menuDarkToggle');
+  if (menuDarkBtn) menuDarkBtn.addEventListener('click', toggleDarkMode);
 }
 
-/* ── PWA toolbar (share + refresh) ──────────────────────────── */
+/* ── Menu panel ─────────────────────────────────────────────── */
 
 {
-  // Only show on iOS/iPadOS homescreen PWA.
-  // window.navigator.standalone is ONLY defined in iOS/iPadOS Safari
-  // and is true ONLY when launched from the homescreen. Desktop browsers
-  // never define this property, so it will be undefined (falsy).
+  const overlay = $('#menuOverlay');
+  const menuNav = overlay?.querySelector('.menu-nav');
+  const menuContent = $('#menuContent');
+  const menuBackBtn = $('#menuBackBtn');
+  const closeBtn = $('#menuCloseBtn');
+
+  function openMenu() {
+    if (!overlay) return;
+    overlay.hidden = false;
+    // Reset to nav view
+    if (menuNav) menuNav.hidden = false;
+    if (menuContent) menuContent.hidden = true;
+    overlay.querySelectorAll('.menu-section').forEach(s => s.hidden = true);
+  }
+
+  function closeMenu() {
+    if (overlay) overlay.hidden = true;
+  }
+
+  function showSection(id) {
+    if (menuNav) menuNav.hidden = true;
+    if (menuContent) menuContent.hidden = false;
+    overlay.querySelectorAll('.menu-section').forEach(s => s.hidden = true);
+    const section = $(`#menu${id.charAt(0).toUpperCase() + id.slice(1)}`);
+    if (section) section.hidden = false;
+  }
+
+  if (overlay) {
+    // Close on backdrop click
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) closeMenu();
+    });
+  }
+
+  if (closeBtn) closeBtn.addEventListener('click', closeMenu);
+
+  if (menuBackBtn) {
+    menuBackBtn.addEventListener('click', () => {
+      if (menuNav) menuNav.hidden = false;
+      if (menuContent) menuContent.hidden = true;
+    });
+  }
+
+  // Menu item clicks
+  if (menuNav) {
+    menuNav.addEventListener('click', (e) => {
+      const item = e.target.closest('[data-menu]');
+      if (item) showSection(item.dataset.menu);
+    });
+  }
+
+  // Header hamburger menu button (desktop)
+  const headerMenuBtn = $('#headerMenuBtn');
+  if (headerMenuBtn) headerMenuBtn.addEventListener('click', openMenu);
+
+  // Expose openMenu for PWA toolbar
+  window.__openMenu = openMenu;
+}
+
+/* ── PWA toolbar (share, refresh, menu, night mode) ──────────── */
+
+{
   const toolbar = $('#pwaToolbar');
+  // Show on iOS/iPadOS homescreen PWA (standalone mode)
   if (toolbar && window.navigator.standalone === true) {
     toolbar.hidden = false;
 
@@ -251,6 +320,16 @@ window.addEventListener('resize', updateSearchPlaceholders);
         window.location.reload();
       });
     }
+
+    const menuBtn = $('#pwaMenu');
+    if (menuBtn) {
+      menuBtn.addEventListener('click', () => {
+        if (window.__openMenu) window.__openMenu();
+      });
+    }
+
+    const darkBtn = $('#pwaDarkToggle');
+    if (darkBtn) darkBtn.addEventListener('click', toggleDarkMode);
   }
 }
 
