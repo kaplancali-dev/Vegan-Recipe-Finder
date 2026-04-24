@@ -204,7 +204,7 @@ function _buildShopData() {
     }
   }
 
-  return { recipeCards, manualItems: [...manualItems] };
+  return { recipeCards, manualItems: manualItems.map(_applyGfSwap) };
 }
 
 /* ── Main render ─────────────────────────────────────────────── */
