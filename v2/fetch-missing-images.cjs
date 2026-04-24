@@ -2,145 +2,63 @@
 /**
  * fetch-missing-images.cjs
  *
- * Finds real recipe pages via DuckDuckGo, grabs OG images,
- * uploads to Supabase, updates recipes.json.
+ * Strategy:
+ *   1. Try the recipe's own URL for an OG image (some are real)
+ *   2. Fall back to Pexels API (free, reliable, designed for this)
  *
- * Usage:
- *   1. Paste your Supabase service_role key into v2/.supabase-key
- *   2. cd v2 && node fetch-missing-images.cjs
- *
- * Get the key from: Supabase Dashboard → Settings → API → service_role (secret)
+ * Setup:
+ *   1. Put your Supabase service_role key in v2/.supabase-key
+ *   2. Put your Pexels API key in v2/.pexels-key
+ *      (Get one free at https://www.pexels.com/api/)
+ *   3. Run: node fetch-missing-images.cjs
  */
 
 const fs = require('fs');
 const path = require('path');
+const { execSync } = require('child_process');
 
 const SUPABASE_URL = 'https://zhncgdbhgkeiybdbzsql.supabase.co';
 const BUCKET = 'recipe-images';
 const RECIPES_PATH = path.join(__dirname, 'src/data/recipes.json');
-const KEY_FILE = path.join(__dirname, '.supabase-key');
 
 const UA = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36';
 
-// ─── Get key from file, env, or command-line arg ─────────────
-let SUPABASE_KEY = process.env.SUPABASE_SERVICE_KEY;
-
-if (!SUPABASE_KEY && process.argv[2]) {
-  SUPABASE_KEY = process.argv[2];
-}
-
-// Read from .supabase-key file if it exists
-if (!SUPABASE_KEY) {
+// ─── Load keys from files ────────────────────────────────────
+function loadKey(filename) {
   try {
-    SUPABASE_KEY = fs.readFileSync(KEY_FILE, 'utf8').trim();
-  } catch {}
+    return fs.readFileSync(path.join(__dirname, filename), 'utf8').trim();
+  } catch { return null; }
 }
+
+const SUPABASE_KEY = process.env.SUPABASE_SERVICE_KEY || loadKey('.supabase-key');
+const PEXELS_KEY = process.env.PEXELS_KEY || loadKey('.pexels-key');
 
 async function sleep(ms) {
   return new Promise(r => setTimeout(r, ms));
 }
 
-// ─── Step 1: Find a REAL recipe page via DuckDuckGo ──────────
+// ─── Strategy 1: Try the recipe's own URL ────────────────────
 
-async function findRealRecipeUrl(title) {
-  const query = encodeURIComponent(`${title} vegan recipe`);
-  // DuckDuckGo HTML search
-  const url = `https://html.duckduckgo.com/html/?q=${query}`;
-
+async function getOgImageFromUrl(pageUrl) {
   try {
-    const resp = await fetch(url, {
+    const resp = await fetch(pageUrl, {
       headers: { 'User-Agent': UA },
+      redirect: 'follow',
       signal: AbortSignal.timeout(10000),
     });
     if (!resp.ok) return null;
 
     const html = await resp.text();
 
-    // Extract result URLs — DDG HTML puts them in <a class="result__a" href="...">
-    const matches = [...html.matchAll(/class="result__a"[^>]*href="([^"]+)"/gi)];
-    for (const m of matches) {
-      let resultUrl = m[1];
-      // DDG wraps URLs in a redirect — extract the actual URL
-      const uddg = resultUrl.match(/uddg=([^&]+)/);
-      if (uddg) resultUrl = decodeURIComponent(uddg[1]);
-
-      // Prefer known recipe blog domains
-      if (
-        resultUrl.includes('minimalistbaker.com') ||
-        resultUrl.includes('noracooks.com') ||
-        resultUrl.includes('ohsheglows.com') ||
-        resultUrl.includes('cookieandkate.com') ||
-        resultUrl.includes('lovingitvegan.com') ||
-        resultUrl.includes('rainbowplantlife.com') ||
-        resultUrl.includes('itdoesnttastelikechicken.com') ||
-        resultUrl.includes('veganricha.com') ||
-        resultUrl.includes('frommybowl.com') ||
-        resultUrl.includes('forksoverknives.com') ||
-        resultUrl.includes('thewokoflife.com') ||
-        resultUrl.includes('maangchi.com') ||
-        resultUrl.includes('budgetbytes.com') ||
-        resultUrl.includes('food52.com') ||
-        resultUrl.includes('epicurious.com') ||
-        resultUrl.includes('tasty.co') ||
-        resultUrl.includes('allrecipes.com') ||
-        resultUrl.includes('simplyrecipes.com')
-      ) {
-        return resultUrl;
-      }
-    }
-
-    // If no preferred domain, take first recipe-like result
-    for (const m of matches) {
-      let resultUrl = m[1];
-      const uddg = resultUrl.match(/uddg=([^&]+)/);
-      if (uddg) resultUrl = decodeURIComponent(uddg[1]);
-      if (resultUrl.includes('recipe') || resultUrl.includes('cook')) {
-        return resultUrl;
-      }
-    }
-
-    // Last resort: first result
-    if (matches.length > 0) {
-      let resultUrl = matches[0][1];
-      const uddg = resultUrl.match(/uddg=([^&]+)/);
-      if (uddg) resultUrl = decodeURIComponent(uddg[1]);
-      return resultUrl;
-    }
-
-    return null;
-  } catch {
-    return null;
-  }
-}
-
-// ─── Step 2: Get OG image from a real page ───────────────────
-
-async function getOgImage(pageUrl) {
-  try {
-    const resp = await fetch(pageUrl, {
-      headers: { 'User-Agent': UA },
-      redirect: 'follow',
-      signal: AbortSignal.timeout(12000),
-    });
-    if (!resp.ok) return null;
-
-    const html = await resp.text();
-
-    // og:image (both attribute orderings)
     const og =
       html.match(/<meta[^>]+property=["']og:image["'][^>]+content=["']([^"']+)["']/i) ||
       html.match(/<meta[^>]+content=["']([^"']+)["'][^>]+property=["']og:image["']/i);
-    if (og?.[1]) return og[1];
+    if (og && og[1]) return og[1];
 
-    // twitter:image
     const tw =
       html.match(/<meta[^>]+name=["']twitter:image["'][^>]+content=["']([^"']+)["']/i) ||
       html.match(/<meta[^>]+content=["']([^"']+)["'][^>]+name=["']twitter:image["']/i);
-    if (tw?.[1]) return tw[1];
-
-    // wp-content image fallback
-    const wpMatch = html.match(/(?:src|data-src)=["'](https?:\/\/[^"']*wp-content\/uploads[^"']+\.(?:jpg|jpeg|png|webp)[^"']*)["']/i);
-    if (wpMatch?.[1]) return wpMatch[1];
+    if (tw && tw[1]) return tw[1];
 
     return null;
   } catch {
@@ -148,7 +66,39 @@ async function getOgImage(pageUrl) {
   }
 }
 
-// ─── Step 3: Download image ──────────────────────────────────
+// ─── Strategy 2: Pexels API search ──────────────────────────
+
+async function searchPexels(query) {
+  if (!PEXELS_KEY) return null;
+
+  try {
+    const url = `https://api.pexels.com/v1/search?query=${encodeURIComponent(query)}&per_page=1&orientation=landscape`;
+    const resp = await fetch(url, {
+      headers: { 'Authorization': PEXELS_KEY },
+      signal: AbortSignal.timeout(10000),
+    });
+
+    if (!resp.ok) {
+      if (resp.status === 429) {
+        console.log('  (Pexels rate limit — waiting 30s)');
+        await sleep(30000);
+        return searchPexels(query); // retry once
+      }
+      return null;
+    }
+
+    const data = await resp.json();
+    if (data.photos && data.photos.length > 0) {
+      // Use the medium-sized image (good balance of quality/size)
+      return data.photos[0].src.medium;
+    }
+    return null;
+  } catch {
+    return null;
+  }
+}
+
+// ─── Download image ─────────────────────────────────────────
 
 async function downloadImage(imgUrl) {
   try {
@@ -171,7 +121,7 @@ async function downloadImage(imgUrl) {
   }
 }
 
-// ─── Step 4: Upload to Supabase ──────────────────────────────
+// ─── Upload to Supabase ─────────────────────────────────────
 
 async function uploadToSupabase(recipeId, buffer, contentType) {
   const ext = contentType.includes('png') ? 'png'
@@ -198,7 +148,7 @@ async function uploadToSupabase(recipeId, buffer, contentType) {
       return `${SUPABASE_URL}/storage/v1/object/public/${BUCKET}/${filename}`;
     } else {
       const text = await resp.text();
-      console.error(`  Upload error ${resp.status}: ${text.slice(0, 150)}`);
+      console.error(`  Upload error ${resp.status}: ${text.slice(0, 100)}`);
       return null;
     }
   } catch (e) {
@@ -207,71 +157,76 @@ async function uploadToSupabase(recipeId, buffer, contentType) {
   }
 }
 
+// ─── Build a good search query for Pexels ───────────────────
+
+function buildSearchQuery(title) {
+  // Remove common prefixes that don't help image search
+  let q = title
+    .replace(/^(Vegan|Raw|Instant Pot|Gluten-Free)\s+/i, '')
+    .replace(/\(.*?\)/g, '')  // Remove parenthetical
+    .trim();
+
+  // Add "vegan food" to help get food-specific results
+  return q + ' vegan food';
+}
+
 // ─── Main ────────────────────────────────────────────────────
 
 async function main() {
   if (!SUPABASE_KEY) {
+    console.error('ERROR: No Supabase key. Put it in v2/.supabase-key');
+    process.exit(1);
+  }
+  if (!PEXELS_KEY) {
     console.error(`
-ERROR: No Supabase service role key found.
+ERROR: No Pexels API key found.
 
-Easiest method:
-  1. Create a file called .supabase-key in the v2 folder
-  2. Paste ONLY the key into it (no quotes, no extra text)
-  3. Run: node fetch-missing-images.cjs
-
-Get the key from: Supabase Dashboard → Settings → API → service_role (secret)
+Setup:
+  1. Go to https://www.pexels.com/api/ and sign up (free)
+  2. Copy your API key
+  3. Save it: echo "YOUR_KEY" > .pexels-key
+  4. Run: node fetch-missing-images.cjs
 `);
     process.exit(1);
   }
 
-  // Validate key format
-  if (!SUPABASE_KEY.startsWith('eyJ')) {
-    console.error('ERROR: Key does not look like a JWT (should start with "eyJ").');
-    console.error('Make sure you copied the full service_role key from Supabase.');
+  // Test Supabase upload
+  console.log('Testing Supabase upload...');
+  const testResp = await fetch(`${SUPABASE_URL}/storage/v1/object/${BUCKET}/_test.txt`, {
+    method: 'PUT',
+    headers: {
+      'Authorization': `Bearer ${SUPABASE_KEY}`,
+      'apikey': SUPABASE_KEY,
+      'Content-Type': 'text/plain',
+      'x-upsert': 'true',
+    },
+    body: Buffer.from('test'),
+    signal: AbortSignal.timeout(10000),
+  });
+  if (testResp.ok) {
+    console.log('✓ Supabase upload works!');
+    await fetch(`${SUPABASE_URL}/storage/v1/object/${BUCKET}/_test.txt`, {
+      method: 'DELETE',
+      headers: { 'Authorization': `Bearer ${SUPABASE_KEY}`, 'apikey': SUPABASE_KEY },
+    }).catch(() => {});
+  } else {
+    console.error('✗ Supabase upload failed. Check your service_role key.');
     process.exit(1);
   }
 
-  console.log(`Key starts with: ${SUPABASE_KEY.substring(0, 15)}...`);
-  console.log(`Key length: ${SUPABASE_KEY.length} chars\n`);
-
-  // Quick upload test
-  console.log('Testing Supabase upload permission...');
-  const testBuf = Buffer.from('test');
-  try {
-    const testResp = await fetch(`${SUPABASE_URL}/storage/v1/object/${BUCKET}/_test.txt`, {
-      method: 'PUT',
-      headers: {
-        'Authorization': `Bearer ${SUPABASE_KEY}`,
-        'apikey': SUPABASE_KEY,
-        'Content-Type': 'text/plain',
-        'x-upsert': 'true',
-      },
-      body: testBuf,
-      signal: AbortSignal.timeout(10000),
-    });
-    if (testResp.ok) {
-      console.log('✓ Supabase upload works!\n');
-      // Clean up test file
-      await fetch(`${SUPABASE_URL}/storage/v1/object/${BUCKET}/_test.txt`, {
-        method: 'DELETE',
-        headers: {
-          'Authorization': `Bearer ${SUPABASE_KEY}`,
-          'apikey': SUPABASE_KEY,
-        },
-      }).catch(() => {});
-    } else {
-      const errText = await testResp.text();
-      console.error(`✗ Supabase upload FAILED: ${testResp.status} ${errText.slice(0, 150)}`);
-      console.error('\nMake sure you are using the service_role key (not anon key).');
-      console.error('Find it at: Supabase Dashboard → Settings → API → service_role\n');
-      process.exit(1);
-    }
-  } catch (e) {
-    console.error(`✗ Could not reach Supabase: ${e.message}`);
+  // Test Pexels API
+  console.log('Testing Pexels API...');
+  const pxTest = await fetch('https://api.pexels.com/v1/search?query=food&per_page=1', {
+    headers: { 'Authorization': PEXELS_KEY },
+    signal: AbortSignal.timeout(10000),
+  });
+  if (pxTest.ok) {
+    console.log('✓ Pexels API works!\n');
+  } else {
+    console.error('✗ Pexels API failed. Check your API key.');
     process.exit(1);
   }
 
-  console.log('Loading recipes...');
   const recipes = JSON.parse(fs.readFileSync(RECIPES_PATH, 'utf8'));
   const missing = recipes.filter(r => !r.img || r.img.trim() === '');
 
@@ -285,53 +240,61 @@ Get the key from: Supabase Dashboard → Settings → API → service_role (secr
 
   let success = 0;
   let failed = 0;
+  let fromUrl = 0;
+  let fromPexels = 0;
   const failedList = [];
 
   for (let i = 0; i < missing.length; i++) {
     const recipe = missing[i];
     const progress = `[${i + 1}/${missing.length}]`;
 
-    // 1. Search DuckDuckGo for a real recipe page
-    const realUrl = await findRealRecipeUrl(recipe.title);
-    if (!realUrl) {
-      console.log(`${progress} ✗ ${recipe.id} ${recipe.title} — no search results`);
-      failed++;
-      failedList.push(recipe);
-      await sleep(2000);
-      continue;
+    let imgUrl = null;
+    let source = '';
+
+    // Strategy 1: Try the recipe's own URL
+    imgUrl = await getOgImageFromUrl(recipe.url);
+    if (imgUrl) {
+      source = 'page';
     }
 
-    // 2. Get OG image from that real page
-    const imgUrl = await getOgImage(realUrl);
+    // Strategy 2: Pexels API
     if (!imgUrl) {
-      console.log(`${progress} ✗ ${recipe.id} ${recipe.title} — no OG image at ${new URL(realUrl).hostname}`);
+      const query = buildSearchQuery(recipe.title);
+      imgUrl = await searchPexels(query);
+      if (imgUrl) source = 'pexels';
+    }
+
+    if (!imgUrl) {
+      console.log(`${progress} ✗ ${recipe.id} ${recipe.title} — no image found`);
       failed++;
       failedList.push(recipe);
-      await sleep(1500);
+      await sleep(500);
       continue;
     }
 
-    // 3. Download the image
+    // Download
     const img = await downloadImage(imgUrl);
     if (!img) {
-      console.log(`${progress} ✗ ${recipe.id} ${recipe.title} — image download failed`);
+      console.log(`${progress} ✗ ${recipe.id} ${recipe.title} — download failed`);
       failed++;
       failedList.push(recipe);
-      await sleep(1000);
+      await sleep(500);
       continue;
     }
 
-    // 4. Upload to Supabase
+    // Upload to Supabase
     const publicUrl = await uploadToSupabase(recipe.id, img.buffer, img.contentType);
     if (publicUrl) {
       const idx = recipes.findIndex(r => r.id === recipe.id);
       if (idx !== -1) recipes[idx].img = publicUrl;
-      console.log(`${progress} ✓ ${recipe.id} ${recipe.title} (${(img.buffer.length / 1024).toFixed(0)}KB)`);
+      if (source === 'page') fromUrl++;
+      if (source === 'pexels') fromPexels++;
+      console.log(`${progress} ✓ ${recipe.id} ${recipe.title} (${source}, ${(img.buffer.length / 1024).toFixed(0)}KB)`);
       success++;
 
       if (success % 10 === 0) {
         fs.writeFileSync(RECIPES_PATH, JSON.stringify(recipes, null, 2));
-        console.log(`  (saved progress — ${success} images so far)`);
+        console.log(`  (progress saved — ${success} images)`);
       }
     } else {
       console.log(`${progress} ✗ ${recipe.id} ${recipe.title} — upload failed`);
@@ -339,17 +302,18 @@ Get the key from: Supabase Dashboard → Settings → API → service_role (secr
       failedList.push(recipe);
     }
 
-    await sleep(2000); // Be polite to DuckDuckGo
+    await sleep(1000);
   }
 
   fs.writeFileSync(RECIPES_PATH, JSON.stringify(recipes, null, 2));
 
   console.log(`\n${'='.repeat(50)}`);
-  console.log(`Done! ${success} succeeded, ${failed} failed`);
+  console.log(`Done! ${success} succeeded (${fromUrl} from recipe pages, ${fromPexels} from Pexels)`);
+  console.log(`${failed} failed`);
   console.log(`recipes.json updated.\n`);
 
   if (failedList.length) {
-    console.log(`Failed recipes (${failedList.length}):`);
+    console.log(`Failed (${failedList.length}):`);
     failedList.forEach(r => console.log(`  ${r.id} ${r.title}`));
   }
 
