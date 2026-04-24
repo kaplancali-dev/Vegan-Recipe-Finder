@@ -2438,9 +2438,24 @@ input, select, textarea {
 }
 
 /* ── Cook History List ─────────────────────────────────────── */
+.cook-history-header {
+  display: grid;
+  grid-template-columns: 1fr auto auto 36px;
+  gap: 8px;
+  align-items: center;
+  padding: 4px 12px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 4px;
+}
 .cook-history-item {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr auto auto 36px;
+  gap: 8px;
   align-items: center;
   padding: 8px 12px;
   background: var(--bg);
@@ -2448,14 +2463,15 @@ input, select, textarea {
   margin-bottom: 4px;
   font-size: 0.85rem;
 }
-.cook-history-item .cook-date {
-  font-size: 0.75rem;
-  color: var(--muted);
-}
 .cook-history-item .cook-stars {
   color: #f5a623;
-  font-size: 0.75rem;
-  margin-left: 4px;
+  font-size: 0.8rem;
+  white-space: nowrap;
+}
+.cook-history-item .cook-date {
+  font-size: 0.78rem;
+  color: var(--muted);
+  white-space: nowrap;
 }
 .cook-delete-btn {
   background: none;
@@ -2465,10 +2481,10 @@ input, select, textarea {
   cursor: pointer;
   padding: 4px 8px;
   border-radius: var(--radius-xs);
-  margin-left: 8px;
   transition: color var(--transition), background var(--transition);
   line-height: 1;
   flex-shrink: 0;
+  text-align: center;
 }
 .cook-delete-btn:hover {
   color: var(--danger);

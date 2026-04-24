@@ -326,9 +326,10 @@ function renderCookHistory() {
     const date = new Date(entry.date).toLocaleDateString(undefined, {
       month: 'short', day: 'numeric', year: 'numeric'
     });
-    const rating = entry.rating ? ' ' + '★'.repeat(entry.rating) : '';
+    const rating = entry.rating ? '★'.repeat(entry.rating) : '—';
     return `<div class="cook-history-item">
-      <span>${title}<span class="cook-stars">${rating}</span></span>
+      <span>${title}</span>
+      <span class="cook-stars">${rating}</span>
       <span class="cook-date">${date}</span>
       <button class="cook-delete-btn" data-cook-delete="${entry.id}" aria-label="Remove">✕</button>
     </div>`;

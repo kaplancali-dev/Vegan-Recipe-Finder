@@ -214,6 +214,18 @@
         <p>Your saved recipes and collections.</p>
       </div>
 
+      <!-- Cook history (at top so it's always visible) -->
+      <div class="card" id="cookHistoryCard" hidden>
+        <h3 class="card-title section-toggle" data-toggle="cookHistoryList">🍳 I Made This <span class="guide-arrow">▾</span></h3>
+        <div class="cook-history-header">
+          <span>Recipe Name</span>
+          <span>Your Rating</span>
+          <span>Date Made</span>
+          <span></span>
+        </div>
+        <div id="cookHistoryList" class="section-body"></div>
+      </div>
+
       <!-- Collections -->
       <div class="card">
         <h3 class="card-title">📂 My Collections</h3>
@@ -224,11 +236,6 @@
       <div id="favList" class="recipe-list"></div>
       <div id="favEmpty" class="empty-state" hidden>
         <p>Tap the ❤️ on any recipe to save it here.</p>
-      </div>
-
-      <div class="card" id="cookHistoryCard" hidden>
-        <h3 class="card-title section-toggle" data-toggle="cookHistoryList">🍳 I Made This <span class="guide-arrow">▾</span></h3>
-        <div id="cookHistoryList" class="section-body"></div>
       </div>
     </section>
 

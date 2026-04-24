@@ -20,10 +20,10 @@
 <link rel="icon" type="image/png" href="favicon.png">
 <meta name="theme-color" content="#2d7a4f">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; img-src 'self' https: data:; connect-src 'self' https://*.supabase.co https://www.google-analytics.com; font-src 'self'; frame-src 'none';">
-  <script type="module" crossorigin src="/assets/index-DLdlm86C.js"></script>
+  <script type="module" crossorigin src="/assets/index-b6z1t8fp.js"></script>
   <link rel="modulepreload" crossorigin href="/assets/supabase-DaN4is7k.js">
   <link rel="modulepreload" crossorigin href="/assets/recipes-CJ1sQjHE.js">
-  <link rel="stylesheet" crossorigin href="/assets/index-C8VSMJR5.css">
+  <link rel="stylesheet" crossorigin href="/assets/index-DfsEvGZJ.css">
 </head>
 <body>
 
@@ -218,6 +218,18 @@
         <p>Your saved recipes and collections.</p>
       </div>
 
+      <!-- Cook history (at top so it's always visible) -->
+      <div class="card" id="cookHistoryCard" hidden>
+        <h3 class="card-title section-toggle" data-toggle="cookHistoryList">🍳 I Made This <span class="guide-arrow">▾</span></h3>
+        <div class="cook-history-header">
+          <span>Recipe Name</span>
+          <span>Your Rating</span>
+          <span>Date Made</span>
+          <span></span>
+        </div>
+        <div id="cookHistoryList" class="section-body"></div>
+      </div>
+
       <!-- Collections -->
       <div class="card">
         <h3 class="card-title">📂 My Collections</h3>
@@ -228,11 +240,6 @@
       <div id="favList" class="recipe-list"></div>
       <div id="favEmpty" class="empty-state" hidden>
         <p>Tap the ❤️ on any recipe to save it here.</p>
-      </div>
-
-      <div class="card" id="cookHistoryCard" hidden>
-        <h3 class="card-title section-toggle" data-toggle="cookHistoryList">🍳 I Made This <span class="guide-arrow">▾</span></h3>
-        <div id="cookHistoryList" class="section-body"></div>
       </div>
     </section>
 
