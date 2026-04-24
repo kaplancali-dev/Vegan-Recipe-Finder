@@ -7,7 +7,7 @@
  */
 
 import { escHTML, norm } from '../utils/text.js';
-import { isPerishableIng } from '../services/matching.js';
+
 import { findSubstitute } from '../utils/substitutions.js';
 import { GF_SWAPS } from '../data/aliases.js';
 
@@ -51,12 +51,7 @@ function ingChip(name, cls) {
     ? `<span class="gf-swap">GF: ${escHTML(swap)}</span>`
     : '';
 
-  let extraCls = '';
-  if (swap) {
-    extraCls = ' c-gluten';
-  } else if (cls === 'c-have' && isPerishableIng(norm(name))) {
-    extraCls = ' c-perish';
-  }
+  const extraCls = swap ? ' c-gluten' : '';
   return `<span class="${cls}${extraCls}">${escHTML(name)}${swapTag}</span>`;
 }
 
