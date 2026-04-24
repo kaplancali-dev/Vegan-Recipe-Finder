@@ -276,11 +276,11 @@ function renderReadyList() {
       const current = get('makelist');
       if (current.includes(id)) {
         set('makelist', current.filter(i => i !== id));
-        showToast('Removed from Shopping list');
+        showToast('Removed from Shopping List');
       } else {
         current.push(id);
         set('makelist', current);
-        showToast('Added to Shopping list 🛒');
+        showToast('Added to Shopping List 🛒');
       }
       autoSync();
       return;

@@ -1116,6 +1116,8 @@ const ALIASES = {
 
   // Nut/seed aliases
   'flaxseed': 'flax seeds',
+  'flax egg': 'flax seeds',
+  'flax eggs': 'flax seeds',
 
   // Grain aliases — 'brown rice' is its own entry
   // rice is its own entry

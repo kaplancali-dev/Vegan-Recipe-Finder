@@ -134,8 +134,8 @@ export function openDetail(id) {
     </div>
 
     <div class="detail-actions">
-      ${recipe.url ? `<a href="${escHTML(recipe.url)}" target="_blank" rel="noopener" class="detail-link">View Recipe ↗</a>` : ''}
-      <button class="btn btn-primary" id="detailFavBtn">${isFav ? '❤️ Unfavorite' : '🤍 Favorite'}</button>
+      ${recipe.url ? `<a href="${escHTML(recipe.url)}" target="_blank" rel="noopener" class="detail-link">📖 View Instructions ↗</a>` : ''}
+      <button class="btn btn-primary" id="detailFavBtn">${isFav ? '❤️ Favorited' : '🤍 Favorite'}</button>
       ${missingIngs.length ? `<button class="btn btn-outline" id="detailShopBtn">🛒 Add ${missingIngs.length} to list</button>` : ''}
       <button class="btn btn-outline" id="detailCookBtn">🍳 I Made This</button>
       <button class="btn btn-outline" id="detailShareBtn">📤 Share</button>
@@ -164,7 +164,7 @@ export function openDetail(id) {
       // Re-render after a short delay to allow collection picker to finish
       const recheckFav = () => {
         const nowFav = new Set(get('favorites')).has(id);
-        favBtn.textContent = nowFav ? '❤️ Unfavorite' : '🤍 Favorite';
+        favBtn.textContent = nowFav ? '❤️ Favorited' : '🤍 Favorite';
       };
       // If unfavoriting, update immediately; if favoriting, update after picker closes
       if (isFav) {

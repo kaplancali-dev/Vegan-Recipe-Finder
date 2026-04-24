@@ -68,7 +68,7 @@ function wireTopControls() {
       set('makelist', []);
       set('shopChecked', []);
       autoSync();
-      showToast('Shopping list cleared');
+      showToast('Shopping List cleared');
     });
   }
 
@@ -87,7 +87,7 @@ function _shareAll() {
   const { recipeCards } = _buildShopData();
 
   if (!recipeCards.length) {
-    showToast('Shopping list is empty');
+    showToast('Shopping List is empty');
     return;
   }
 
@@ -110,7 +110,7 @@ function _shareAll() {
     navigator.share({ title, text: `${title}\n\n${body}` }).catch(() => {});
   } else {
     navigator.clipboard.writeText(`${title}\n\n${body}`).then(() => {
-      showToast('Shopping list copied to clipboard!');
+      showToast('Shopping List copied to clipboard!');
     }).catch(() => {
       showToast('Could not copy — try manually');
     });
@@ -268,7 +268,7 @@ function renderShopTab() {
 
   // ── Empty make list prompt ──
   if (!recipeCards.length) {
-    html += '<p style="font-size:0.85rem;color:var(--muted);padding:8px 0;text-align:center">Tap "📌 Make This" on any recipe to start building your shopping list.</p>';
+    html += '<p style="font-size:0.85rem;color:var(--muted);padding:8px 0;text-align:center">Tap "📌 Want to Make" on any recipe to start building your shopping list.</p>';
   }
 
   container.innerHTML = html;
