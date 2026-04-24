@@ -51,10 +51,13 @@ function ingChip(name, cls) {
     ? `<span class="gf-swap">GF: ${escHTML(swap)}</span>`
     : '';
 
-  if (cls === 'c-have' && isPerishableIng(norm(name))) {
-    return `<span class="c-have c-perish">${escHTML(name)}${swapTag}</span>`;
+  let extraCls = '';
+  if (swap) {
+    extraCls = ' c-gluten';
+  } else if (cls === 'c-have' && isPerishableIng(norm(name))) {
+    extraCls = ' c-perish';
   }
-  return `<span class="${cls}">${escHTML(name)}${swapTag}</span>`;
+  return `<span class="${cls}${extraCls}">${escHTML(name)}${swapTag}</span>`;
 }
 
 /**
