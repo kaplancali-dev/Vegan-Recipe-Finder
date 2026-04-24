@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>HARVEST — Eat More Plants!</title>
-<meta name="description" content="Match your ingredients to nearly 1,000 plant-based recipes from the world's top nutrition-focused chefs. Prioritizes perishables, filters allergens, and builds your shopping list.">
+<meta name="description" content="Match your ingredients to over 1,000 plant-based recipes from the world's top nutrition-focused chefs. Prioritizes perishables, filters allergens, and builds your shopping list.">
 <meta property="og:title" content="HARVEST — Eat More Plants!">
 <meta property="og:description" content="You open the fridge and think, 'What can I make with this?' HARVEST knows.">
 <meta property="og:image" content="https://myharvestvegan.com/hero-image4.png">
@@ -12,7 +12,7 @@
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="HARVEST — Eat More Plants!">
-<meta name="twitter:description" content="Match your ingredients to nearly 1,000 plant-based recipes. Prioritizes perishables, filters allergens, builds your shopping list.">
+<meta name="twitter:description" content="Match your ingredients to over 1,000 plant-based recipes. Prioritizes perishables, filters allergens, builds your shopping list.">
 <meta name="twitter:image" content="https://myharvestvegan.com/hero-image4.png">
 <meta name="apple-mobile-web-app-title" content="HARVEST">
 <link rel="manifest" href="manifest.json">
@@ -20,10 +20,10 @@
 <link rel="icon" type="image/png" href="favicon.png">
 <meta name="theme-color" content="#2d7a4f">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; img-src 'self' https: data:; connect-src 'self' https://*.supabase.co https://www.google-analytics.com; font-src 'self'; frame-src 'none';">
-  <script type="module" crossorigin src="/assets/index-CivNx9Nk.js"></script>
+  <script type="module" crossorigin src="/assets/index-Cahyo5Tn.js"></script>
   <link rel="modulepreload" crossorigin href="/assets/supabase-DaN4is7k.js">
-  <link rel="modulepreload" crossorigin href="/assets/recipes-CJ1sQjHE.js">
-  <link rel="stylesheet" crossorigin href="/assets/index-CFSNnJgF.css">
+  <link rel="modulepreload" crossorigin href="/assets/recipes-CpqbUZNN.js">
+  <link rel="stylesheet" crossorigin href="/assets/index-DXmUnVax.css">
 </head>
 <body>
 
@@ -75,7 +75,7 @@
               <h2 class="intro-hero-title">"What can I make with this?"</h2>
               <p class="intro-hero-sub">
                 You open the fridge and think, <em>"What can I make with this?"</em>
-                <strong>HARVEST</strong> knows. It matches your ingredients to nearly
+                <strong>HARVEST</strong> knows. It matches your ingredients to over
                 <strong>1,000 plant-based recipes</strong> from the world's top nutrition-focused chefs and creators,
                 prioritizes your <strong>perishables</strong> so nothing goes to waste,
                 filters out your <strong>allergens</strong>,
@@ -218,6 +218,18 @@
         <p>Your saved recipes and collections.</p>
       </div>
 
+      <!-- Cook history (at top so it's always visible) -->
+      <div class="card" id="cookHistoryCard" hidden>
+        <h3 class="card-title section-toggle" data-toggle="cookHistoryList">🍳 I Made This <span class="guide-arrow">▾</span></h3>
+        <div class="cook-history-header">
+          <span>Recipe Name</span>
+          <span>Your Rating</span>
+          <span>Date Made</span>
+          <span></span>
+        </div>
+        <div id="cookHistoryList" class="section-body"></div>
+      </div>
+
       <!-- Collections -->
       <div class="card">
         <h3 class="card-title">📂 My Collections</h3>
@@ -228,11 +240,6 @@
       <div id="favList" class="recipe-list"></div>
       <div id="favEmpty" class="empty-state" hidden>
         <p>Tap the ❤️ on any recipe to save it here.</p>
-      </div>
-
-      <div class="card" id="cookHistoryCard" hidden>
-        <h3 class="card-title section-toggle" data-toggle="cookHistoryList">🍳 I Made This <span class="guide-arrow">▾</span></h3>
-        <div id="cookHistoryList" class="section-body"></div>
       </div>
     </section>
 
@@ -278,6 +285,7 @@
         <nav class="menu-nav">
           <button class="menu-item" data-menu="instructions">📖 Instructions</button>
           <button class="menu-item" data-menu="about">🌱 About Us</button>
+          <button class="menu-item" id="menuCloudSync">☁️ Cloud Sync</button>
           <button class="menu-item" data-menu="feedback">💬 Send Feedback</button>
           <button class="menu-item" data-menu="privacy">🔒 Privacy Policy</button>
           <button class="menu-item" id="menuDarkToggle">🌙 Night Mode</button>
@@ -289,7 +297,7 @@
 
           <div id="menuInstructions" class="menu-section" hidden>
             <h4>Quick Start</h4>
-            <p style="margin-bottom:10px">HARVEST matches nearly 1,000 vegan recipes to what's already in your kitchen. Here's how to get started:</p>
+            <p style="margin-bottom:10px">HARVEST matches over 1,000 vegan recipes to what's already in your kitchen. Here's how to get started:</p>
 
             <p><strong>Step 1 — Stock your pantry</strong></p>
             <p style="margin-bottom:4px">Head to the <strong>🥬 My Pantry</strong> tab:</p>
@@ -308,12 +316,14 @@
 
             <p style="margin-top:12px"><strong>Features</strong></p>
             <ol class="about-steps">
-              <li><strong>📌 Want to Make</strong> — tap on any card to add it to your Shopping list with missing ingredients.</li>
-              <li><strong>🍳 I Made This</strong> — log your cooks. History is tracked in Favorites.</li>
-              <li><strong>🤍 Collections</strong> — file favorites into collections (Weekly Meal Plan, Weeknight, Game Day, etc.).</li>
+              <li><strong>📌 Want to Make</strong> — tap on any recipe card to add it to your Shopping List with missing ingredients.</li>
+              <li><strong>🍳 I Made This</strong> — log your cooks and rate them. History is tracked at the top of Favorites.</li>
+              <li><strong>🤍 Favorite</strong> — tap on any recipe card to save it. Organize favorites into collections (Weekly Meal Plan, Game Day, etc.).</li>
+              <li><strong>ℹ️ Ingredient Benefits</strong> — tap any ingredient in a recipe to see evidence-based health benefits from clinical studies.</li>
               <li><strong>⚠️ Allergens</strong> — set in the Filters drawer to hide recipes with specific ingredients.</li>
-              <li><strong>🛒 GF Swaps</strong> — shopping list auto-swaps soy sauce → tamari, flour → GF flour, etc.</li>
+              <li><strong>🛒 GF Swaps</strong> — Shopping List auto-swaps soy sauce → tamari, flour → GF flour, etc.</li>
               <li><strong>🔄 Substitution Hints</strong> — green hints appear when a good ingredient swap exists.</li>
+              <li><strong>📤 Share</strong> — share any recipe via text, email, or social media.</li>
               <li><strong>☁️ Cloud Sync</strong> — back up across devices via My Pantry.</li>
             </ol>
             <p class="about-tip">💡 Add to your home screen for the best experience!</p>
@@ -321,7 +331,7 @@
 
           <div id="menuAbout" class="menu-section" hidden>
             <h4>About Us</h4>
-            <p>HARVEST was created by an experienced food creator who wanted a better way to answer the daily question: <em>"What can I actually make right now?"</em></p>
+            <p>HARVEST was created by an experienced team of food creators who wanted a better way to answer the daily question: <em>"What can I make right now to help ensure I'm thriving?"</em></p>
             <p style="margin-top:8px">Every recipe is 100% plant-based, sourced from trusted nutrition-focused chefs and creators. The goal isn't just to cook more — it's to make cooking feel effortless again.</p>
             <p class="about-version" style="margin-top:16px"><span class="muted">HARVEST v2.28 · Made with 💚 and plants</span></p>
           </div>
