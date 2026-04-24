@@ -13,6 +13,7 @@ import { shareRecipe } from '../actions/share.js';
 import { toggleFavorite } from '../actions/favorites.js';
 import { showToast } from '../utils/toast.js';
 import { handleCook } from '../actions/cook.js';
+import { getIngredientBenefits } from '../data/ingredient-benefits.js';
 
 /** @type {Array} Full recipe list — set by init */
 let _recipes = [];
@@ -84,12 +85,21 @@ export function openDetail(id) {
     </div>
   `;
 
-  // Ingredient list HTML
-  const ingHtml = ingList.map(i => `
-    <li class="detail-ing ${i.have ? 'have' : 'missing'}">
-      ${i.have ? '✓' : '○'} ${escHTML(i.name)}
-    </li>
-  `).join('');
+  // Ingredient list HTML (with tap-to-reveal health benefits)
+  const ingHtml = ingList.map(i => {
+    const info = getIngredientBenefits(i.name);
+    const benefitsHtml = info && info.benefits.length
+      ? `<div class="ing-benefits" hidden>
+          ${info.benefits.map(b => `<span class="ing-benefit">✦ ${escHTML(b)}</span>`).join('')}
+          <span class="ing-evidence">${escHTML(info.evidence)}</span>
+        </div>`
+      : '';
+    const tappable = info && info.benefits.length ? ' has-benefits' : '';
+    return `<li class="detail-ing ${i.have ? 'have' : 'missing'}${tappable}">
+      <span class="ing-name">${i.have ? '✓' : '○'} ${escHTML(i.name)}${tappable ? ' <span class="ing-info-icon">ℹ</span>' : ''}</span>
+      ${benefitsHtml}
+    </li>`;
+  }).join('');
 
   // Missing ingredients for shopping list button
   const missingIngs = ingList.filter(i => !i.have).map(i => i.name);
@@ -132,6 +142,19 @@ export function openDetail(id) {
       ${recipe.url ? `<button class="btn btn-outline btn-sm" id="detailReportBtn">🔗 Report broken link</button>` : ''}
     </div>
   `;
+
+  // Wire ingredient benefit toggles
+  _body.querySelectorAll('.detail-ing.has-benefits').forEach(li => {
+    li.addEventListener('click', (e) => {
+      // Don't toggle if clicking a link or button inside
+      if (e.target.closest('a, button')) return;
+      const benefits = li.querySelector('.ing-benefits');
+      if (benefits) {
+        benefits.hidden = !benefits.hidden;
+        li.classList.toggle('benefits-open', !benefits.hidden);
+      }
+    });
+  });
 
   // Wire detail action buttons
   const favBtn = document.getElementById('detailFavBtn');

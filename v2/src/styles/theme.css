@@ -1863,6 +1863,55 @@ input, select, textarea {
   color: var(--accent);
 }
 
+.detail-ing.has-benefits {
+  cursor: pointer;
+}
+
+.detail-ing.has-benefits .ing-name {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ing-info-icon {
+  font-size: 0.7rem;
+  color: var(--muted);
+  opacity: 0.6;
+  flex-shrink: 0;
+}
+
+.detail-ing.benefits-open .ing-info-icon {
+  opacity: 1;
+  color: var(--green);
+}
+
+.ing-benefits {
+  margin-top: 6px;
+  padding: 8px 10px;
+  background: rgba(255,255,255,0.6);
+  border-radius: var(--radius-xs);
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+[data-theme="dark"] .ing-benefits {
+  background: rgba(0,0,0,0.2);
+}
+
+.ing-benefit {
+  font-size: 0.78rem;
+  color: var(--ink);
+  line-height: 1.4;
+}
+
+.ing-evidence {
+  font-size: 0.68rem;
+  color: var(--muted);
+  font-style: italic;
+  margin-top: 2px;
+}
+
 .detail-actions {
   display: flex;
   gap: 8px;
