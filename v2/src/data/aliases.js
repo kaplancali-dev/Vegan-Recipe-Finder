@@ -239,7 +239,7 @@ export const GF_SWAPS = {
   'penne pasta':'gluten-free penne','spaghetti':'gluten-free spaghetti','linguine':'gluten-free linguine',
   'jumbo pasta shells':'gluten-free pasta shells','egg noodles':'rice noodles',
   'breadcrumbs':'gluten-free breadcrumbs','panko breadcrumbs':'gluten-free panko',
-  'all-purpose flour':'gluten-free flour','bread flour':'gluten-free flour','spelt flour':'gluten-free flour',
+  'all-purpose flour':'gluten-free flour','wheat flour':'gluten-free flour','flour':'gluten-free flour','bread flour':'gluten-free flour','spelt flour':'gluten-free flour',
   'burger buns':'GF burger buns','baguette':'GF baguette','sourdough bread':'GF sourdough bread',
   'thick bread':'GF bread','pita bread':'GF pita','gyoza wrappers':'rice paper wrappers',
   'dumpling wrappers':'rice paper wrappers','ladyfinger biscuits':'GF ladyfingers',
