@@ -16,6 +16,7 @@ import { handleCook } from '../actions/cook.js';
 import { $ } from '../utils/dom.js';
 import { toggleFavorite } from '../actions/favorites.js';
 import { openDetail } from './RecipeDetail.js';
+import { GF_SWAPS } from '../data/aliases.js';
 
 /** @type {Array} Full recipe list — set by initShopping */
 let _recipes = [];
@@ -157,6 +158,20 @@ function _shareSingleRecipe(recipeTitle, missing) {
   }
 }
 
+/* ── GF substitution ─────────────────────────────────────────── */
+
+/**
+ * Replace a gluten ingredient with its GF substitute for the shopping list.
+ * E.g. "all-purpose flour" → "gluten-free flour", "soy sauce" → "tamari"
+ */
+function _applyGfSwap(ingredient) {
+  const n = norm(ingredient);
+  for (const [glutenItem, gfItem] of Object.entries(GF_SWAPS)) {
+    if (norm(glutenItem) === n) return gfItem;
+  }
+  return ingredient;
+}
+
 /* ── Data helpers ─────────────────────────────────────────────── */
 
 /**
@@ -182,7 +197,7 @@ function _buildShopData() {
       recipeCards = matched.map(r => ({
         id: r.id,
         title: r.title,
-        missing: r.needNames ? [...r.needNames] : [],
+        missing: r.needNames ? r.needNames.map(_applyGfSwap) : [],
         totalIngs: r.ing ? r.ing.length : 0,
         haveCount: r.ing ? r.ing.length - (r.needNames ? r.needNames.length : 0) : 0,
       }));
