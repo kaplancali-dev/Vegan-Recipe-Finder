@@ -36456,5 +36456,2525 @@
       "fat": 5,
       "fib": 4
     }
+  },
+  {
+    "id": 4293,
+    "title": "Chocolate Peanut Butter Protein Shake",
+    "site": "Minimalist Baker",
+    "url": "https://minimalistbaker.com/chocolate-peanut-butter-protein-shake/",
+    "img": "",
+    "cats": [
+      "Drinks",
+      "High-Protein",
+      "Quick Meals",
+      "Breakfast"
+    ],
+    "time": 5,
+    "servings": 1,
+    "ing": [
+      "banana",
+      "cocoa powder",
+      "peanut butter",
+      "plant protein powder",
+      "soy milk",
+      "ice"
+    ],
+    "nut": {
+      "cal": 480,
+      "pro": 35,
+      "carb": 42,
+      "fat": 18,
+      "fib": 7
+    }
+  },
+  {
+    "id": 4294,
+    "title": "Vanilla Berry Protein Smoothie",
+    "site": "Oh She Glows",
+    "url": "https://ohsheglows.com/vanilla-berry-protein-smoothie/",
+    "img": "",
+    "cats": [
+      "Drinks",
+      "High-Protein",
+      "Quick Meals",
+      "Breakfast"
+    ],
+    "time": 5,
+    "servings": 1,
+    "ing": [
+      "banana",
+      "blueberries",
+      "hemp seeds",
+      "plant protein powder",
+      "oat milk",
+      "strawberries"
+    ],
+    "nut": {
+      "cal": 420,
+      "pro": 32,
+      "carb": 48,
+      "fat": 12,
+      "fib": 9
+    }
+  },
+  {
+    "id": 4295,
+    "title": "Green Power Protein Smoothie",
+    "site": "Forks Over Knives",
+    "url": "https://www.forksoverknives.com/recipes/vegan-green-protein-smoothie/",
+    "img": "",
+    "cats": [
+      "Drinks",
+      "High-Protein",
+      "Quick Meals",
+      "Breakfast"
+    ],
+    "time": 5,
+    "servings": 1,
+    "ing": [
+      "banana",
+      "kale",
+      "peanut butter",
+      "plant protein powder",
+      "soy milk",
+      "flax seeds"
+    ],
+    "nut": {
+      "cal": 460,
+      "pro": 36,
+      "carb": 38,
+      "fat": 16,
+      "fib": 8
+    }
+  },
+  {
+    "id": 4296,
+    "title": "Tropical Mango Protein Shake",
+    "site": "The Vegan Atlas",
+    "url": "https://theveganatlas.com/tropical-mango-protein-shake/",
+    "img": "",
+    "cats": [
+      "Drinks",
+      "High-Protein",
+      "Quick Meals"
+    ],
+    "time": 5,
+    "servings": 1,
+    "ing": [
+      "mango",
+      "banana",
+      "coconut milk",
+      "plant protein powder",
+      "hemp seeds",
+      "lime juice"
+    ],
+    "nut": {
+      "cal": 440,
+      "pro": 33,
+      "carb": 50,
+      "fat": 14,
+      "fib": 6
+    }
+  },
+  {
+    "id": 4297,
+    "title": "Coffee Banana Protein Shake",
+    "site": "Loving It Vegan",
+    "url": "https://lovingitvegan.com/coffee-banana-protein-shake/",
+    "img": "",
+    "cats": [
+      "Drinks",
+      "High-Protein",
+      "Quick Meals",
+      "Breakfast"
+    ],
+    "time": 5,
+    "servings": 1,
+    "ing": [
+      "banana",
+      "espresso",
+      "oat milk",
+      "plant protein powder",
+      "almond butter",
+      "ice"
+    ],
+    "nut": {
+      "cal": 430,
+      "pro": 34,
+      "carb": 40,
+      "fat": 15,
+      "fib": 5
+    }
+  },
+  {
+    "id": 4298,
+    "title": "Pumpkin Spice Protein Smoothie",
+    "site": "Cookie and Kate",
+    "url": "https://cookieandkate.com/pumpkin-spice-protein-smoothie/",
+    "img": "",
+    "cats": [
+      "Drinks",
+      "High-Protein",
+      "Quick Meals",
+      "Breakfast"
+    ],
+    "time": 5,
+    "servings": 1,
+    "ing": [
+      "pumpkin puree",
+      "banana",
+      "oat milk",
+      "plant protein powder",
+      "cinnamon",
+      "maple syrup",
+      "hemp seeds"
+    ],
+    "nut": {
+      "cal": 410,
+      "pro": 33,
+      "carb": 46,
+      "fat": 12,
+      "fib": 8
+    }
+  },
+  {
+    "id": 4299,
+    "title": "Chocolate Almond Protein Shake",
+    "site": "Nora Cooks",
+    "url": "https://www.noracooks.com/chocolate-almond-protein-shake/",
+    "img": "",
+    "cats": [
+      "Drinks",
+      "High-Protein",
+      "Quick Meals"
+    ],
+    "time": 5,
+    "servings": 1,
+    "ing": [
+      "almond butter",
+      "banana",
+      "cocoa powder",
+      "dates",
+      "plant protein powder",
+      "almond milk",
+      "ice"
+    ],
+    "nut": {
+      "cal": 470,
+      "pro": 35,
+      "carb": 44,
+      "fat": 20,
+      "fib": 7
+    }
+  },
+  {
+    "id": 4300,
+    "title": "Oat Milk Matcha Protein Latte",
+    "site": "From My Bowl",
+    "url": "https://frommybowl.com/matcha-protein-latte/",
+    "img": "",
+    "cats": [
+      "Drinks",
+      "High-Protein",
+      "Quick Meals"
+    ],
+    "time": 5,
+    "servings": 1,
+    "ing": [
+      "matcha powder",
+      "oat milk",
+      "plant protein powder",
+      "vanilla extract",
+      "maple syrup",
+      "ice"
+    ],
+    "nut": {
+      "cal": 350,
+      "pro": 31,
+      "carb": 35,
+      "fat": 8,
+      "fib": 3
+    }
+  },
+  {
+    "id": 4301,
+    "title": "Strawberry Cashew Protein Smoothie",
+    "site": "Rainbow Plant Life",
+    "url": "https://rainbowplantlife.com/strawberry-cashew-protein-smoothie/",
+    "img": "",
+    "cats": [
+      "Drinks",
+      "High-Protein",
+      "Quick Meals",
+      "Breakfast"
+    ],
+    "time": 5,
+    "servings": 1,
+    "ing": [
+      "strawberries",
+      "cashews",
+      "banana",
+      "plant protein powder",
+      "soy milk",
+      "vanilla extract"
+    ],
+    "nut": {
+      "cal": 440,
+      "pro": 34,
+      "carb": 45,
+      "fat": 16,
+      "fib": 6
+    }
+  },
+  {
+    "id": 4302,
+    "title": "Blueberry Oat Protein Shake",
+    "site": "It Doesn't Taste Like Chicken",
+    "url": "https://itdoesnttastelikechicken.com/blueberry-oat-protein-shake/",
+    "img": "",
+    "cats": [
+      "Drinks",
+      "High-Protein",
+      "Quick Meals",
+      "Breakfast"
+    ],
+    "time": 5,
+    "servings": 1,
+    "ing": [
+      "blueberries",
+      "oats",
+      "banana",
+      "plant protein powder",
+      "soy milk",
+      "chia seeds"
+    ],
+    "nut": {
+      "cal": 450,
+      "pro": 33,
+      "carb": 52,
+      "fat": 12,
+      "fib": 10
+    }
+  },
+  {
+    "id": 4303,
+    "title": "Raw Mango Coconut Energy Balls",
+    "site": "Minimalist Baker",
+    "url": "https://minimalistbaker.com/raw-mango-coconut-energy-balls/",
+    "img": "",
+    "cats": [
+      "Raw",
+      "Quick Meals",
+      "Beginner"
+    ],
+    "time": 10,
+    "servings": 12,
+    "ing": [
+      "dates",
+      "mango",
+      "shredded coconut",
+      "cashews",
+      "lime juice"
+    ],
+    "nut": {
+      "cal": 120,
+      "pro": 2,
+      "carb": 18,
+      "fat": 5,
+      "fib": 2
+    }
+  },
+  {
+    "id": 4304,
+    "title": "Raw Rainbow Collard Wraps",
+    "site": "Oh She Glows",
+    "url": "https://ohsheglows.com/raw-rainbow-collard-wraps/",
+    "img": "",
+    "cats": [
+      "Raw",
+      "Lunch",
+      "Quick Meals"
+    ],
+    "time": 15,
+    "servings": 4,
+    "ing": [
+      "collard greens",
+      "avocado",
+      "red bell pepper",
+      "carrot",
+      "cucumber",
+      "mango",
+      "cilantro",
+      "lime juice"
+    ],
+    "nut": {
+      "cal": 180,
+      "pro": 4,
+      "carb": 18,
+      "fat": 12,
+      "fib": 7
+    }
+  },
+  {
+    "id": 4305,
+    "title": "Raw Zucchini Pasta with Sun-Dried Tomato Sauce",
+    "site": "Rawsome Vegan",
+    "url": "https://rawsomevegan.com/zucchini-pasta-sun-dried-tomato/",
+    "img": "",
+    "cats": [
+      "Raw",
+      "Dinner",
+      "Quick Meals"
+    ],
+    "time": 15,
+    "servings": 2,
+    "ing": [
+      "zucchini",
+      "sun-dried tomatoes",
+      "cashews",
+      "garlic",
+      "basil",
+      "lemon juice",
+      "olive oil"
+    ],
+    "nut": {
+      "cal": 280,
+      "pro": 8,
+      "carb": 22,
+      "fat": 20,
+      "fib": 4
+    }
+  },
+  {
+    "id": 4306,
+    "title": "Raw Cauliflower Tabbouleh",
+    "site": "Cookie and Kate",
+    "url": "https://cookieandkate.com/raw-cauliflower-tabbouleh/",
+    "img": "",
+    "cats": [
+      "Raw",
+      "Salads",
+      "Middle Eastern",
+      "Quick Meals"
+    ],
+    "time": 15,
+    "servings": 4,
+    "ing": [
+      "cauliflower",
+      "parsley",
+      "mint",
+      "cucumber",
+      "tomato",
+      "lemon juice",
+      "olive oil",
+      "salt"
+    ],
+    "nut": {
+      "cal": 130,
+      "pro": 4,
+      "carb": 14,
+      "fat": 8,
+      "fib": 4
+    }
+  },
+  {
+    "id": 4307,
+    "title": "Raw Walnut Meat Lettuce Cups",
+    "site": "Minimalist Baker",
+    "url": "https://minimalistbaker.com/raw-walnut-meat-lettuce-cups/",
+    "img": "",
+    "cats": [
+      "Raw",
+      "Lunch",
+      "Quick Meals"
+    ],
+    "time": 10,
+    "servings": 4,
+    "ing": [
+      "walnuts",
+      "sun-dried tomatoes",
+      "cumin",
+      "smoked paprika",
+      "lettuce",
+      "avocado",
+      "tomato",
+      "lime juice"
+    ],
+    "nut": {
+      "cal": 250,
+      "pro": 7,
+      "carb": 12,
+      "fat": 22,
+      "fib": 5
+    }
+  },
+  {
+    "id": 4308,
+    "title": "Raw Carrot Cake Bites",
+    "site": "Oh She Glows",
+    "url": "https://ohsheglows.com/raw-carrot-cake-bites/",
+    "img": "",
+    "cats": [
+      "Raw",
+      "Desserts",
+      "Quick Meals"
+    ],
+    "time": 15,
+    "servings": 14,
+    "ing": [
+      "carrot",
+      "dates",
+      "walnuts",
+      "shredded coconut",
+      "cinnamon",
+      "nutmeg",
+      "vanilla extract"
+    ],
+    "nut": {
+      "cal": 95,
+      "pro": 2,
+      "carb": 14,
+      "fat": 4,
+      "fib": 2
+    }
+  },
+  {
+    "id": 4309,
+    "title": "Raw Beet and Orange Salad",
+    "site": "Forks Over Knives",
+    "url": "https://www.forksoverknives.com/recipes/raw-beet-orange-salad/",
+    "img": "",
+    "cats": [
+      "Raw",
+      "Salads",
+      "Quick Meals"
+    ],
+    "time": 15,
+    "servings": 4,
+    "ing": [
+      "beets",
+      "orange",
+      "arugula",
+      "walnuts",
+      "lemon juice",
+      "olive oil",
+      "salt",
+      "black pepper"
+    ],
+    "nut": {
+      "cal": 170,
+      "pro": 4,
+      "carb": 20,
+      "fat": 10,
+      "fib": 4
+    }
+  },
+  {
+    "id": 4310,
+    "title": "Raw Pad Thai with Kelp Noodles",
+    "site": "From My Bowl",
+    "url": "https://frommybowl.com/raw-pad-thai-kelp-noodles/",
+    "img": "",
+    "cats": [
+      "Raw",
+      "Thai",
+      "Dinner"
+    ],
+    "time": 20,
+    "servings": 2,
+    "ing": [
+      "kelp noodles",
+      "red bell pepper",
+      "carrot",
+      "cucumber",
+      "cilantro",
+      "peanuts",
+      "lime juice",
+      "tamari",
+      "maple syrup",
+      "sriracha"
+    ],
+    "nut": {
+      "cal": 310,
+      "pro": 10,
+      "carb": 28,
+      "fat": 18,
+      "fib": 5
+    }
+  },
+  {
+    "id": 4311,
+    "title": "Raw Chocolate Avocado Mousse",
+    "site": "Loving It Vegan",
+    "url": "https://lovingitvegan.com/raw-chocolate-avocado-mousse/",
+    "img": "",
+    "cats": [
+      "Raw",
+      "Desserts",
+      "Quick Meals"
+    ],
+    "time": 10,
+    "servings": 4,
+    "ing": [
+      "avocado",
+      "cocoa powder",
+      "maple syrup",
+      "vanilla extract",
+      "almond milk",
+      "salt"
+    ],
+    "nut": {
+      "cal": 220,
+      "pro": 4,
+      "carb": 22,
+      "fat": 16,
+      "fib": 6
+    }
+  },
+  {
+    "id": 4312,
+    "title": "Vegan Matzo Ball Soup",
+    "site": "The Jewish Vegan",
+    "url": "https://jewishvegan.com/vegan-matzo-ball-soup/",
+    "img": "",
+    "cats": [
+      "Holiday & Festive",
+      "Soups & Stews",
+      "Dinner",
+      "Comfort Food"
+    ],
+    "time": 45,
+    "servings": 6,
+    "ing": [
+      "matzo meal",
+      "olive oil",
+      "baking powder",
+      "salt",
+      "black pepper",
+      "vegetable broth",
+      "carrot",
+      "celery",
+      "dill",
+      "onion"
+    ],
+    "nut": {
+      "cal": 220,
+      "pro": 6,
+      "carb": 32,
+      "fat": 8,
+      "fib": 3
+    }
+  },
+  {
+    "id": 4313,
+    "title": "Vegan Latkes",
+    "site": "Nora Cooks",
+    "url": "https://www.noracooks.com/vegan-latkes/",
+    "img": "",
+    "cats": [
+      "Holiday & Festive",
+      "Appetizers",
+      "Dinner"
+    ],
+    "time": 30,
+    "servings": 12,
+    "ing": [
+      "potatoes",
+      "onion",
+      "flour",
+      "salt",
+      "black pepper",
+      "vegetable oil",
+      "applesauce"
+    ],
+    "nut": {
+      "cal": 150,
+      "pro": 3,
+      "carb": 22,
+      "fat": 6,
+      "fib": 2
+    }
+  },
+  {
+    "id": 4314,
+    "title": "Vegan Challah Bread",
+    "site": "The Jewish Vegan",
+    "url": "https://jewishvegan.com/vegan-challah/",
+    "img": "",
+    "cats": [
+      "Holiday & Festive",
+      "Bread & Baking"
+    ],
+    "time": 90,
+    "servings": 8,
+    "ing": [
+      "flour",
+      "sugar",
+      "active dry yeast",
+      "warm water",
+      "vegetable oil",
+      "salt",
+      "aquafaba"
+    ],
+    "nut": {
+      "cal": 240,
+      "pro": 6,
+      "carb": 42,
+      "fat": 5,
+      "fib": 2
+    }
+  },
+  {
+    "id": 4315,
+    "title": "Vegan Tzimmes",
+    "site": "May I Have That Recipe",
+    "url": "https://mayihavethatrecipe.com/vegan-tzimmes/",
+    "img": "",
+    "cats": [
+      "Holiday & Festive",
+      "Dinner",
+      "Comfort Food"
+    ],
+    "time": 60,
+    "servings": 6,
+    "ing": [
+      "sweet potatoes",
+      "carrot",
+      "prunes",
+      "dried apricots",
+      "orange juice",
+      "cinnamon",
+      "maple syrup",
+      "salt"
+    ],
+    "nut": {
+      "cal": 200,
+      "pro": 3,
+      "carb": 46,
+      "fat": 1,
+      "fib": 5
+    }
+  },
+  {
+    "id": 4316,
+    "title": "Vegan Kugel",
+    "site": "The Jewish Vegan",
+    "url": "https://jewishvegan.com/vegan-noodle-kugel/",
+    "img": "",
+    "cats": [
+      "Holiday & Festive",
+      "Dinner",
+      "Comfort Food"
+    ],
+    "time": 60,
+    "servings": 8,
+    "ing": [
+      "egg noodles",
+      "silken tofu",
+      "coconut cream",
+      "sugar",
+      "vanilla extract",
+      "cinnamon",
+      "raisins",
+      "vegan butter"
+    ],
+    "nut": {
+      "cal": 280,
+      "pro": 8,
+      "carb": 40,
+      "fat": 10,
+      "fib": 2
+    }
+  },
+  {
+    "id": 4317,
+    "title": "Vegan Sufganiyot (Jelly Donuts)",
+    "site": "The Jewish Vegan",
+    "url": "https://jewishvegan.com/vegan-sufganiyot/",
+    "img": "",
+    "cats": [
+      "Holiday & Festive",
+      "Desserts",
+      "Bread & Baking"
+    ],
+    "time": 90,
+    "servings": 12,
+    "ing": [
+      "flour",
+      "sugar",
+      "active dry yeast",
+      "soy milk",
+      "vegan butter",
+      "vanilla extract",
+      "salt",
+      "strawberry jam",
+      "powdered sugar",
+      "vegetable oil"
+    ],
+    "nut": {
+      "cal": 260,
+      "pro": 5,
+      "carb": 38,
+      "fat": 10,
+      "fib": 1
+    }
+  },
+  {
+    "id": 4318,
+    "title": "Vegan Hamantaschen",
+    "site": "The Jewish Vegan",
+    "url": "https://jewishvegan.com/vegan-hamantaschen/",
+    "img": "",
+    "cats": [
+      "Holiday & Festive",
+      "Desserts",
+      "Bread & Baking"
+    ],
+    "time": 45,
+    "servings": 24,
+    "ing": [
+      "flour",
+      "sugar",
+      "vegan butter",
+      "orange juice",
+      "vanilla extract",
+      "baking powder",
+      "salt",
+      "strawberry jam"
+    ],
+    "nut": {
+      "cal": 110,
+      "pro": 2,
+      "carb": 18,
+      "fat": 4,
+      "fib": 1
+    }
+  },
+  {
+    "id": 4319,
+    "title": "Vegan Charoset",
+    "site": "May I Have That Recipe",
+    "url": "https://mayihavethatrecipe.com/vegan-charoset/",
+    "img": "",
+    "cats": [
+      "Holiday & Festive",
+      "Quick Meals",
+      "Appetizers"
+    ],
+    "time": 10,
+    "servings": 8,
+    "ing": [
+      "apples",
+      "walnuts",
+      "dates",
+      "cinnamon",
+      "red wine",
+      "honey substitute"
+    ],
+    "nut": {
+      "cal": 120,
+      "pro": 2,
+      "carb": 20,
+      "fat": 5,
+      "fib": 3
+    }
+  },
+  {
+    "id": 4320,
+    "title": "Vegan Rugelach",
+    "site": "Nora Cooks",
+    "url": "https://www.noracooks.com/vegan-rugelach/",
+    "img": "",
+    "cats": [
+      "Holiday & Festive",
+      "Desserts",
+      "Bread & Baking"
+    ],
+    "time": 50,
+    "servings": 32,
+    "ing": [
+      "flour",
+      "vegan cream cheese",
+      "vegan butter",
+      "sugar",
+      "cinnamon",
+      "walnuts",
+      "raisins",
+      "strawberry jam"
+    ],
+    "nut": {
+      "cal": 95,
+      "pro": 2,
+      "carb": 12,
+      "fat": 5,
+      "fib": 1
+    }
+  },
+  {
+    "id": 4321,
+    "title": "Vegan Bánh Mì",
+    "site": "Minimalist Baker",
+    "url": "https://minimalistbaker.com/easy-vegan-banh-mi/",
+    "img": "",
+    "cats": [
+      "Sandwiches",
+      "Vietnamese",
+      "Lunch"
+    ],
+    "time": 30,
+    "servings": 4,
+    "ing": [
+      "baguette",
+      "tofu",
+      "tamari",
+      "rice vinegar",
+      "carrot",
+      "daikon",
+      "cucumber",
+      "jalapeño",
+      "cilantro",
+      "sriracha",
+      "vegan mayo"
+    ],
+    "nut": {
+      "cal": 380,
+      "pro": 16,
+      "carb": 48,
+      "fat": 14,
+      "fib": 4
+    }
+  },
+  {
+    "id": 4322,
+    "title": "Vegan Philly Cheesesteak",
+    "site": "It Doesn't Taste Like Chicken",
+    "url": "https://itdoesnttastelikechicken.com/vegan-philly-cheesesteak/",
+    "img": "",
+    "cats": [
+      "Sandwiches",
+      "Lunch",
+      "Comfort Food"
+    ],
+    "time": 25,
+    "servings": 4,
+    "ing": [
+      "seitan",
+      "hoagie rolls",
+      "green bell pepper",
+      "onion",
+      "mushrooms",
+      "vegan cheese",
+      "olive oil",
+      "garlic powder",
+      "salt"
+    ],
+    "nut": {
+      "cal": 420,
+      "pro": 24,
+      "carb": 44,
+      "fat": 16,
+      "fib": 3
+    }
+  },
+  {
+    "id": 4323,
+    "title": "Mediterranean Veggie Sandwich",
+    "site": "Cookie and Kate",
+    "url": "https://cookieandkate.com/mediterranean-veggie-sandwich/",
+    "img": "",
+    "cats": [
+      "Sandwiches",
+      "Mediterranean",
+      "Lunch"
+    ],
+    "time": 15,
+    "servings": 2,
+    "ing": [
+      "bread",
+      "hummus",
+      "cucumber",
+      "tomato",
+      "red onion",
+      "kalamata olives",
+      "arugula",
+      "red bell pepper"
+    ],
+    "nut": {
+      "cal": 340,
+      "pro": 12,
+      "carb": 42,
+      "fat": 14,
+      "fib": 6
+    }
+  },
+  {
+    "id": 4324,
+    "title": "Vegan BLT with Coconut Bacon",
+    "site": "Nora Cooks",
+    "url": "https://www.noracooks.com/vegan-blt/",
+    "img": "",
+    "cats": [
+      "Sandwiches",
+      "Lunch",
+      "Quick Meals",
+      "Vegan Bacon"
+    ],
+    "time": 20,
+    "servings": 2,
+    "ing": [
+      "bread",
+      "coconut flakes",
+      "tamari",
+      "smoked paprika",
+      "maple syrup",
+      "lettuce",
+      "tomato",
+      "vegan mayo"
+    ],
+    "nut": {
+      "cal": 360,
+      "pro": 10,
+      "carb": 38,
+      "fat": 18,
+      "fib": 4
+    }
+  },
+  {
+    "id": 4325,
+    "title": "Vegan Egg Salad Sandwich",
+    "site": "Loving It Vegan",
+    "url": "https://lovingitvegan.com/vegan-egg-salad-sandwich/",
+    "img": "",
+    "cats": [
+      "Sandwiches",
+      "Lunch",
+      "Quick Meals"
+    ],
+    "time": 15,
+    "servings": 4,
+    "ing": [
+      "tofu",
+      "vegan mayo",
+      "mustard",
+      "turmeric",
+      "black salt",
+      "celery",
+      "green onions",
+      "bread",
+      "lettuce"
+    ],
+    "nut": {
+      "cal": 310,
+      "pro": 14,
+      "carb": 36,
+      "fat": 12,
+      "fib": 3
+    }
+  },
+  {
+    "id": 4326,
+    "title": "Vegan Meatball Sub",
+    "site": "Rainbow Plant Life",
+    "url": "https://rainbowplantlife.com/vegan-meatball-sub/",
+    "img": "",
+    "cats": [
+      "Sandwiches",
+      "Italian",
+      "Dinner",
+      "Comfort Food"
+    ],
+    "time": 40,
+    "servings": 4,
+    "ing": [
+      "lentils",
+      "breadcrumbs",
+      "garlic",
+      "Italian seasoning",
+      "flax egg",
+      "marinara sauce",
+      "sub rolls",
+      "vegan cheese",
+      "basil"
+    ],
+    "nut": {
+      "cal": 450,
+      "pro": 20,
+      "carb": 56,
+      "fat": 14,
+      "fib": 8
+    }
+  },
+  {
+    "id": 4327,
+    "title": "Crispy Chickpea Gyros",
+    "site": "From My Bowl",
+    "url": "https://frommybowl.com/crispy-chickpea-gyros/",
+    "img": "",
+    "cats": [
+      "Sandwiches",
+      "Mediterranean",
+      "Lunch"
+    ],
+    "time": 25,
+    "servings": 4,
+    "ing": [
+      "chickpeas",
+      "cumin",
+      "smoked paprika",
+      "pita bread",
+      "cucumber",
+      "tomato",
+      "red onion",
+      "vegan tzatziki"
+    ],
+    "nut": {
+      "cal": 370,
+      "pro": 14,
+      "carb": 50,
+      "fat": 12,
+      "fib": 9
+    }
+  },
+  {
+    "id": 4328,
+    "title": "Vegan Pulled Jackfruit Sandwich",
+    "site": "Minimalist Baker",
+    "url": "https://minimalistbaker.com/bbq-jackfruit-sandwiches/",
+    "img": "",
+    "cats": [
+      "Sandwiches",
+      "Lunch",
+      "Comfort Food",
+      "Southern"
+    ],
+    "time": 30,
+    "servings": 4,
+    "ing": [
+      "jackfruit",
+      "barbecue sauce",
+      "onion",
+      "garlic",
+      "smoked paprika",
+      "cumin",
+      "olive oil",
+      "hamburger buns",
+      "coleslaw"
+    ],
+    "nut": {
+      "cal": 340,
+      "pro": 8,
+      "carb": 58,
+      "fat": 10,
+      "fib": 5
+    }
+  },
+  {
+    "id": 4329,
+    "title": "Vegan Malai Kofta",
+    "site": "Vegan Richa",
+    "url": "https://www.veganricha.com/vegan-malai-kofta/",
+    "img": "",
+    "cats": [
+      "Indian",
+      "Dinner",
+      "Comfort Food"
+    ],
+    "time": 50,
+    "servings": 4,
+    "ing": [
+      "potatoes",
+      "paneer substitute",
+      "cashews",
+      "coconut cream",
+      "tomato",
+      "onion",
+      "garlic",
+      "ginger",
+      "garam masala",
+      "turmeric",
+      "cumin",
+      "salt"
+    ],
+    "nut": {
+      "cal": 380,
+      "pro": 12,
+      "carb": 40,
+      "fat": 20,
+      "fib": 5
+    }
+  },
+  {
+    "id": 4330,
+    "title": "Vegan Samosa",
+    "site": "Rainbow Plant Life",
+    "url": "https://rainbowplantlife.com/vegan-samosa/",
+    "img": "",
+    "cats": [
+      "Indian",
+      "Appetizers",
+      "Dinner"
+    ],
+    "time": 60,
+    "servings": 12,
+    "ing": [
+      "potatoes",
+      "peas",
+      "cumin",
+      "coriander",
+      "garam masala",
+      "turmeric",
+      "ginger",
+      "flour",
+      "salt",
+      "vegetable oil"
+    ],
+    "nut": {
+      "cal": 180,
+      "pro": 4,
+      "carb": 26,
+      "fat": 7,
+      "fib": 3
+    }
+  },
+  {
+    "id": 4331,
+    "title": "Vegan Palak Paneer",
+    "site": "Minimalist Baker",
+    "url": "https://minimalistbaker.com/vegan-palak-paneer/",
+    "img": "",
+    "cats": [
+      "Indian",
+      "Dinner",
+      "High-Protein"
+    ],
+    "time": 30,
+    "servings": 4,
+    "ing": [
+      "tofu",
+      "spinach",
+      "onion",
+      "garlic",
+      "ginger",
+      "garam masala",
+      "cumin",
+      "turmeric",
+      "coconut cream",
+      "lemon juice",
+      "salt"
+    ],
+    "nut": {
+      "cal": 280,
+      "pro": 20,
+      "carb": 14,
+      "fat": 18,
+      "fib": 5
+    }
+  },
+  {
+    "id": 4332,
+    "title": "Vegan Aloo Gobi",
+    "site": "Cookie and Kate",
+    "url": "https://cookieandkate.com/aloo-gobi/",
+    "img": "",
+    "cats": [
+      "Indian",
+      "Dinner",
+      "One-Pot"
+    ],
+    "time": 35,
+    "servings": 4,
+    "ing": [
+      "potatoes",
+      "cauliflower",
+      "onion",
+      "garlic",
+      "ginger",
+      "turmeric",
+      "cumin",
+      "coriander",
+      "tomato",
+      "peas",
+      "cilantro",
+      "vegetable oil"
+    ],
+    "nut": {
+      "cal": 240,
+      "pro": 6,
+      "carb": 38,
+      "fat": 8,
+      "fib": 6
+    }
+  },
+  {
+    "id": 4333,
+    "title": "Vegan Mango Lassi",
+    "site": "Vegan Richa",
+    "url": "https://www.veganricha.com/vegan-mango-lassi/",
+    "img": "",
+    "cats": [
+      "Indian",
+      "Drinks",
+      "Quick Meals"
+    ],
+    "time": 5,
+    "servings": 2,
+    "ing": [
+      "mango",
+      "coconut yogurt",
+      "oat milk",
+      "cardamom",
+      "sugar",
+      "ice"
+    ],
+    "nut": {
+      "cal": 180,
+      "pro": 3,
+      "carb": 36,
+      "fat": 4,
+      "fib": 2
+    }
+  },
+  {
+    "id": 4334,
+    "title": "Vegan Biryani",
+    "site": "Rainbow Plant Life",
+    "url": "https://rainbowplantlife.com/vegan-biryani/",
+    "img": "",
+    "cats": [
+      "Indian",
+      "Dinner",
+      "One-Pot",
+      "Comfort Food"
+    ],
+    "time": 50,
+    "servings": 6,
+    "ing": [
+      "basmati rice",
+      "chickpeas",
+      "onion",
+      "garlic",
+      "ginger",
+      "tomato",
+      "garam masala",
+      "turmeric",
+      "cumin",
+      "cinnamon",
+      "saffron",
+      "cilantro",
+      "cashews",
+      "raisins",
+      "vegetable broth"
+    ],
+    "nut": {
+      "cal": 380,
+      "pro": 12,
+      "carb": 62,
+      "fat": 10,
+      "fib": 7
+    }
+  },
+  {
+    "id": 4335,
+    "title": "Smoky Chipotle Black Bean Burger",
+    "site": "Minimalist Baker",
+    "url": "https://minimalistbaker.com/chipotle-black-bean-burger/",
+    "img": "",
+    "cats": [
+      "Burgers & Patties",
+      "Lunch",
+      "Dinner",
+      "Mexican"
+    ],
+    "time": 35,
+    "servings": 6,
+    "ing": [
+      "black beans",
+      "oats",
+      "chipotle peppers",
+      "garlic",
+      "cumin",
+      "smoked paprika",
+      "flax egg",
+      "salt",
+      "hamburger buns"
+    ],
+    "nut": {
+      "cal": 320,
+      "pro": 14,
+      "carb": 48,
+      "fat": 8,
+      "fib": 10
+    }
+  },
+  {
+    "id": 4336,
+    "title": "Vegan Mushroom and Lentil Burger",
+    "site": "Oh She Glows",
+    "url": "https://ohsheglows.com/mushroom-lentil-burger/",
+    "img": "",
+    "cats": [
+      "Burgers & Patties",
+      "Lunch",
+      "Dinner"
+    ],
+    "time": 40,
+    "servings": 6,
+    "ing": [
+      "brown lentils",
+      "mushrooms",
+      "oats",
+      "walnuts",
+      "garlic",
+      "onion",
+      "tamari",
+      "smoked paprika",
+      "flax egg"
+    ],
+    "nut": {
+      "cal": 290,
+      "pro": 14,
+      "carb": 36,
+      "fat": 10,
+      "fib": 8
+    }
+  },
+  {
+    "id": 4337,
+    "title": "Crispy Falafel Burgers",
+    "site": "Cookie and Kate",
+    "url": "https://cookieandkate.com/crispy-falafel-burgers/",
+    "img": "",
+    "cats": [
+      "Burgers & Patties",
+      "Middle Eastern",
+      "Lunch"
+    ],
+    "time": 35,
+    "servings": 4,
+    "ing": [
+      "chickpeas",
+      "parsley",
+      "cilantro",
+      "garlic",
+      "cumin",
+      "coriander",
+      "flour",
+      "lemon juice",
+      "pita bread",
+      "tahini"
+    ],
+    "nut": {
+      "cal": 340,
+      "pro": 14,
+      "carb": 44,
+      "fat": 12,
+      "fib": 8
+    }
+  },
+  {
+    "id": 4338,
+    "title": "Sweet Potato and Quinoa Burger",
+    "site": "Nora Cooks",
+    "url": "https://www.noracooks.com/sweet-potato-quinoa-burger/",
+    "img": "",
+    "cats": [
+      "Burgers & Patties",
+      "Dinner",
+      "High-Fiber"
+    ],
+    "time": 40,
+    "servings": 6,
+    "ing": [
+      "sweet potatoes",
+      "quinoa",
+      "black beans",
+      "oats",
+      "cumin",
+      "chili powder",
+      "garlic powder",
+      "salt",
+      "hamburger buns"
+    ],
+    "nut": {
+      "cal": 310,
+      "pro": 12,
+      "carb": 50,
+      "fat": 6,
+      "fib": 9
+    }
+  },
+  {
+    "id": 4339,
+    "title": "Vegan BBQ Jackfruit Burger",
+    "site": "It Doesn't Taste Like Chicken",
+    "url": "https://itdoesnttastelikechicken.com/bbq-jackfruit-burger/",
+    "img": "",
+    "cats": [
+      "Burgers & Patties",
+      "Lunch",
+      "Comfort Food",
+      "Southern"
+    ],
+    "time": 30,
+    "servings": 4,
+    "ing": [
+      "jackfruit",
+      "barbecue sauce",
+      "smoked paprika",
+      "garlic powder",
+      "onion powder",
+      "hamburger buns",
+      "coleslaw",
+      "pickles"
+    ],
+    "nut": {
+      "cal": 330,
+      "pro": 8,
+      "carb": 54,
+      "fat": 10,
+      "fib": 5
+    }
+  },
+  {
+    "id": 4340,
+    "title": "Vegan Katsu Curry",
+    "site": "Wok of Life",
+    "url": "https://thewokoflife.com/vegan-katsu-curry/",
+    "img": "",
+    "cats": [
+      "Japanese",
+      "Dinner",
+      "Comfort Food"
+    ],
+    "time": 40,
+    "servings": 4,
+    "ing": [
+      "tofu",
+      "panko breadcrumbs",
+      "flour",
+      "soy milk",
+      "potatoes",
+      "carrot",
+      "onion",
+      "curry powder",
+      "vegetable broth",
+      "soy sauce",
+      "rice"
+    ],
+    "nut": {
+      "cal": 480,
+      "pro": 18,
+      "carb": 62,
+      "fat": 16,
+      "fib": 5
+    }
+  },
+  {
+    "id": 4341,
+    "title": "Vegan Okonomiyaki",
+    "site": "Minimalist Baker",
+    "url": "https://minimalistbaker.com/vegan-okonomiyaki/",
+    "img": "",
+    "cats": [
+      "Japanese",
+      "Dinner",
+      "Comfort Food"
+    ],
+    "time": 30,
+    "servings": 2,
+    "ing": [
+      "cabbage",
+      "flour",
+      "water",
+      "green onions",
+      "pickled ginger",
+      "vegan mayo",
+      "soy sauce",
+      "nori",
+      "vegetable oil"
+    ],
+    "nut": {
+      "cal": 290,
+      "pro": 8,
+      "carb": 40,
+      "fat": 10,
+      "fib": 4
+    }
+  },
+  {
+    "id": 4342,
+    "title": "Vegan Sushi Bowl",
+    "site": "From My Bowl",
+    "url": "https://frommybowl.com/vegan-sushi-bowl/",
+    "img": "",
+    "cats": [
+      "Japanese",
+      "Lunch",
+      "Quick Meals"
+    ],
+    "time": 25,
+    "servings": 2,
+    "ing": [
+      "sushi rice",
+      "rice vinegar",
+      "avocado",
+      "cucumber",
+      "carrot",
+      "edamame",
+      "nori",
+      "sesame seeds",
+      "soy sauce",
+      "sriracha"
+    ],
+    "nut": {
+      "cal": 420,
+      "pro": 14,
+      "carb": 64,
+      "fat": 12,
+      "fib": 6
+    }
+  },
+  {
+    "id": 4343,
+    "title": "Miso Glazed Eggplant",
+    "site": "Cookie and Kate",
+    "url": "https://cookieandkate.com/miso-glazed-eggplant/",
+    "img": "",
+    "cats": [
+      "Japanese",
+      "Dinner",
+      "Quick Meals"
+    ],
+    "time": 25,
+    "servings": 4,
+    "ing": [
+      "eggplant",
+      "white miso paste",
+      "mirin",
+      "soy sauce",
+      "maple syrup",
+      "sesame oil",
+      "sesame seeds",
+      "green onions",
+      "rice"
+    ],
+    "nut": {
+      "cal": 280,
+      "pro": 8,
+      "carb": 42,
+      "fat": 10,
+      "fib": 6
+    }
+  },
+  {
+    "id": 4344,
+    "title": "Vegan Japanese Curry Udon",
+    "site": "Wok of Life",
+    "url": "https://thewokoflife.com/vegan-curry-udon/",
+    "img": "",
+    "cats": [
+      "Japanese",
+      "Dinner",
+      "Soups & Stews",
+      "Comfort Food"
+    ],
+    "time": 30,
+    "servings": 4,
+    "ing": [
+      "udon noodles",
+      "tofu",
+      "onion",
+      "carrot",
+      "potatoes",
+      "curry powder",
+      "soy sauce",
+      "vegetable broth",
+      "green onions"
+    ],
+    "nut": {
+      "cal": 380,
+      "pro": 16,
+      "carb": 56,
+      "fat": 10,
+      "fib": 5
+    }
+  },
+  {
+    "id": 4345,
+    "title": "Vegan Shakshuka",
+    "site": "Minimalist Baker",
+    "url": "https://minimalistbaker.com/vegan-shakshuka/",
+    "img": "",
+    "cats": [
+      "Middle Eastern",
+      "Breakfast",
+      "One-Pot"
+    ],
+    "time": 30,
+    "servings": 4,
+    "ing": [
+      "tofu",
+      "tomato",
+      "onion",
+      "garlic",
+      "red bell pepper",
+      "cumin",
+      "smoked paprika",
+      "turmeric",
+      "olive oil",
+      "parsley",
+      "bread"
+    ],
+    "nut": {
+      "cal": 280,
+      "pro": 14,
+      "carb": 30,
+      "fat": 12,
+      "fib": 5
+    }
+  },
+  {
+    "id": 4346,
+    "title": "Vegan Stuffed Grape Leaves",
+    "site": "The Mediterranean Dish",
+    "url": "https://www.themediterraneandish.com/vegan-stuffed-grape-leaves/",
+    "img": "",
+    "cats": [
+      "Middle Eastern",
+      "Appetizers",
+      "Mediterranean"
+    ],
+    "time": 60,
+    "servings": 24,
+    "ing": [
+      "grape leaves",
+      "rice",
+      "onion",
+      "parsley",
+      "mint",
+      "lemon juice",
+      "olive oil",
+      "tomato",
+      "salt",
+      "allspice"
+    ],
+    "nut": {
+      "cal": 45,
+      "pro": 1,
+      "carb": 8,
+      "fat": 1,
+      "fib": 1
+    }
+  },
+  {
+    "id": 4347,
+    "title": "Vegan Kibbeh",
+    "site": "May I Have That Recipe",
+    "url": "https://mayihavethatrecipe.com/vegan-kibbeh/",
+    "img": "",
+    "cats": [
+      "Middle Eastern",
+      "Appetizers",
+      "Dinner"
+    ],
+    "time": 45,
+    "servings": 12,
+    "ing": [
+      "bulgur wheat",
+      "onion",
+      "walnuts",
+      "cumin",
+      "allspice",
+      "cinnamon",
+      "pine nuts",
+      "olive oil",
+      "salt",
+      "mint"
+    ],
+    "nut": {
+      "cal": 160,
+      "pro": 4,
+      "carb": 20,
+      "fat": 8,
+      "fib": 3
+    }
+  },
+  {
+    "id": 4348,
+    "title": "Lemon Herb Couscous Salad",
+    "site": "Cookie and Kate",
+    "url": "https://cookieandkate.com/lemon-herb-couscous-salad/",
+    "img": "",
+    "cats": [
+      "Middle Eastern",
+      "Salads",
+      "Lunch",
+      "Quick Meals"
+    ],
+    "time": 15,
+    "servings": 4,
+    "ing": [
+      "couscous",
+      "cucumber",
+      "tomato",
+      "red onion",
+      "parsley",
+      "mint",
+      "lemon juice",
+      "olive oil",
+      "chickpeas",
+      "salt"
+    ],
+    "nut": {
+      "cal": 280,
+      "pro": 10,
+      "carb": 42,
+      "fat": 8,
+      "fib": 6
+    }
+  },
+  {
+    "id": 4349,
+    "title": "Vegan Fattoush Salad",
+    "site": "Rainbow Plant Life",
+    "url": "https://rainbowplantlife.com/vegan-fattoush-salad/",
+    "img": "",
+    "cats": [
+      "Middle Eastern",
+      "Salads",
+      "Lunch",
+      "Quick Meals"
+    ],
+    "time": 20,
+    "servings": 4,
+    "ing": [
+      "romaine lettuce",
+      "cucumber",
+      "tomato",
+      "radishes",
+      "pita bread",
+      "sumac",
+      "lemon juice",
+      "olive oil",
+      "parsley",
+      "mint"
+    ],
+    "nut": {
+      "cal": 200,
+      "pro": 5,
+      "carb": 26,
+      "fat": 10,
+      "fib": 4
+    }
+  },
+  {
+    "id": 4350,
+    "title": "Vegan Mapo Tofu",
+    "site": "Wok of Life",
+    "url": "https://thewokoflife.com/vegan-mapo-tofu/",
+    "img": "",
+    "cats": [
+      "Chinese",
+      "Dinner",
+      "One-Pot",
+      "Comfort Food"
+    ],
+    "time": 25,
+    "servings": 4,
+    "ing": [
+      "tofu",
+      "mushrooms",
+      "garlic",
+      "ginger",
+      "chili bean paste",
+      "soy sauce",
+      "vegetable broth",
+      "cornstarch",
+      "green onions",
+      "Sichuan peppercorns",
+      "rice"
+    ],
+    "nut": {
+      "cal": 320,
+      "pro": 18,
+      "carb": 34,
+      "fat": 12,
+      "fib": 3
+    }
+  },
+  {
+    "id": 4351,
+    "title": "Vegan Chinese Scallion Pancakes",
+    "site": "The Woks of Life",
+    "url": "https://thewokoflife.com/scallion-pancakes/",
+    "img": "",
+    "cats": [
+      "Chinese",
+      "Appetizers",
+      "Breakfast"
+    ],
+    "time": 40,
+    "servings": 8,
+    "ing": [
+      "flour",
+      "hot water",
+      "sesame oil",
+      "green onions",
+      "salt",
+      "vegetable oil"
+    ],
+    "nut": {
+      "cal": 160,
+      "pro": 4,
+      "carb": 24,
+      "fat": 6,
+      "fib": 1
+    }
+  },
+  {
+    "id": 4352,
+    "title": "Vegan Char Siu Bao (BBQ Buns)",
+    "site": "Wok of Life",
+    "url": "https://thewokoflife.com/vegan-char-siu-bao/",
+    "img": "",
+    "cats": [
+      "Chinese",
+      "Appetizers",
+      "Dinner"
+    ],
+    "time": 90,
+    "servings": 12,
+    "ing": [
+      "flour",
+      "sugar",
+      "active dry yeast",
+      "baking powder",
+      "vegetable oil",
+      "jackfruit",
+      "hoisin sauce",
+      "soy sauce",
+      "garlic",
+      "ginger",
+      "sesame oil"
+    ],
+    "nut": {
+      "cal": 180,
+      "pro": 5,
+      "carb": 30,
+      "fat": 4,
+      "fib": 2
+    }
+  },
+  {
+    "id": 4353,
+    "title": "Vegan Hot and Sour Soup",
+    "site": "Cookie and Kate",
+    "url": "https://cookieandkate.com/vegan-hot-and-sour-soup/",
+    "img": "",
+    "cats": [
+      "Chinese",
+      "Soups & Stews",
+      "One-Pot"
+    ],
+    "time": 30,
+    "servings": 4,
+    "ing": [
+      "tofu",
+      "mushrooms",
+      "bamboo shoots",
+      "vegetable broth",
+      "rice vinegar",
+      "soy sauce",
+      "chili paste",
+      "cornstarch",
+      "sesame oil",
+      "green onions",
+      "white pepper"
+    ],
+    "nut": {
+      "cal": 180,
+      "pro": 12,
+      "carb": 18,
+      "fat": 8,
+      "fib": 2
+    }
+  },
+  {
+    "id": 4354,
+    "title": "Vegan Bún Bò Huế",
+    "site": "The Vegan Atlas",
+    "url": "https://theveganatlas.com/vegan-bun-bo-hue/",
+    "img": "",
+    "cats": [
+      "Vietnamese",
+      "Soups & Stews",
+      "Dinner"
+    ],
+    "time": 45,
+    "servings": 4,
+    "ing": [
+      "rice noodles",
+      "lemongrass",
+      "tofu",
+      "mushrooms",
+      "vegetable broth",
+      "chili paste",
+      "lime juice",
+      "bean sprouts",
+      "mint",
+      "cilantro",
+      "green onions"
+    ],
+    "nut": {
+      "cal": 350,
+      "pro": 14,
+      "carb": 50,
+      "fat": 10,
+      "fib": 4
+    }
+  },
+  {
+    "id": 4355,
+    "title": "Vegan Vietnamese Crepes (Bánh Xèo)",
+    "site": "Minimalist Baker",
+    "url": "https://minimalistbaker.com/vegan-banh-xeo/",
+    "img": "",
+    "cats": [
+      "Vietnamese",
+      "Dinner",
+      "Appetizers"
+    ],
+    "time": 30,
+    "servings": 4,
+    "ing": [
+      "rice flour",
+      "turmeric",
+      "coconut milk",
+      "water",
+      "bean sprouts",
+      "mushrooms",
+      "tofu",
+      "green onions",
+      "lettuce",
+      "mint",
+      "sweet chili sauce"
+    ],
+    "nut": {
+      "cal": 280,
+      "pro": 10,
+      "carb": 38,
+      "fat": 10,
+      "fib": 3
+    }
+  },
+  {
+    "id": 4356,
+    "title": "Vietnamese Tofu Lemongrass Stir-Fry",
+    "site": "Cookie and Kate",
+    "url": "https://cookieandkate.com/tofu-lemongrass-stir-fry/",
+    "img": "",
+    "cats": [
+      "Vietnamese",
+      "Dinner",
+      "Quick Meals"
+    ],
+    "time": 25,
+    "servings": 4,
+    "ing": [
+      "tofu",
+      "lemongrass",
+      "garlic",
+      "shallots",
+      "soy sauce",
+      "chili flakes",
+      "sugar",
+      "vegetable oil",
+      "rice",
+      "green onions"
+    ],
+    "nut": {
+      "cal": 340,
+      "pro": 18,
+      "carb": 40,
+      "fat": 12,
+      "fib": 2
+    }
+  },
+  {
+    "id": 4357,
+    "title": "Vietnamese Peanut Noodle Salad",
+    "site": "From My Bowl",
+    "url": "https://frommybowl.com/vietnamese-peanut-noodle-salad/",
+    "img": "",
+    "cats": [
+      "Vietnamese",
+      "Salads",
+      "Lunch",
+      "Quick Meals"
+    ],
+    "time": 20,
+    "servings": 4,
+    "ing": [
+      "rice noodles",
+      "carrot",
+      "cucumber",
+      "red cabbage",
+      "cilantro",
+      "mint",
+      "peanuts",
+      "lime juice",
+      "soy sauce",
+      "sriracha",
+      "peanut butter"
+    ],
+    "nut": {
+      "cal": 380,
+      "pro": 14,
+      "carb": 48,
+      "fat": 16,
+      "fib": 5
+    }
+  },
+  {
+    "id": 4358,
+    "title": "Vegan Japchae (Glass Noodle Stir-Fry)",
+    "site": "Maangchi",
+    "url": "https://www.maangchi.com/recipe/japchae",
+    "img": "",
+    "cats": [
+      "Korean",
+      "Dinner",
+      "Quick Meals"
+    ],
+    "time": 30,
+    "servings": 4,
+    "ing": [
+      "sweet potato noodles",
+      "spinach",
+      "carrot",
+      "mushrooms",
+      "red bell pepper",
+      "onion",
+      "garlic",
+      "soy sauce",
+      "sesame oil",
+      "sugar",
+      "sesame seeds"
+    ],
+    "nut": {
+      "cal": 320,
+      "pro": 8,
+      "carb": 54,
+      "fat": 8,
+      "fib": 4
+    }
+  },
+  {
+    "id": 4359,
+    "title": "Vegan Korean Fried Cauliflower",
+    "site": "Minimalist Baker",
+    "url": "https://minimalistbaker.com/korean-fried-cauliflower/",
+    "img": "",
+    "cats": [
+      "Korean",
+      "Appetizers",
+      "Dinner"
+    ],
+    "time": 35,
+    "servings": 4,
+    "ing": [
+      "cauliflower",
+      "flour",
+      "cornstarch",
+      "water",
+      "gochujang",
+      "soy sauce",
+      "rice vinegar",
+      "maple syrup",
+      "garlic",
+      "sesame seeds",
+      "green onions"
+    ],
+    "nut": {
+      "cal": 260,
+      "pro": 8,
+      "carb": 42,
+      "fat": 6,
+      "fib": 4
+    }
+  },
+  {
+    "id": 4360,
+    "title": "Vegan Doenjang Jjigae (Soybean Paste Stew)",
+    "site": "Maangchi",
+    "url": "https://www.maangchi.com/recipe/doenjang-jjigae",
+    "img": "",
+    "cats": [
+      "Korean",
+      "Soups & Stews",
+      "Dinner",
+      "One-Pot"
+    ],
+    "time": 30,
+    "servings": 4,
+    "ing": [
+      "doenjang",
+      "tofu",
+      "zucchini",
+      "potatoes",
+      "onion",
+      "garlic",
+      "mushrooms",
+      "green onions",
+      "chili flakes",
+      "vegetable broth"
+    ],
+    "nut": {
+      "cal": 220,
+      "pro": 14,
+      "carb": 28,
+      "fat": 6,
+      "fib": 4
+    }
+  },
+  {
+    "id": 4361,
+    "title": "Korean Kimchi Fried Rice",
+    "site": "Cookie and Kate",
+    "url": "https://cookieandkate.com/kimchi-fried-rice/",
+    "img": "",
+    "cats": [
+      "Korean",
+      "Dinner",
+      "Quick Meals",
+      "One-Pot"
+    ],
+    "time": 20,
+    "servings": 2,
+    "ing": [
+      "rice",
+      "kimchi",
+      "tofu",
+      "soy sauce",
+      "sesame oil",
+      "gochujang",
+      "green onions",
+      "sesame seeds",
+      "vegetable oil"
+    ],
+    "nut": {
+      "cal": 380,
+      "pro": 16,
+      "carb": 52,
+      "fat": 12,
+      "fib": 3
+    }
+  },
+  {
+    "id": 4362,
+    "title": "Vegan Mac and Cheese Cups",
+    "site": "Nora Cooks",
+    "url": "https://www.noracooks.com/vegan-mac-and-cheese-cups/",
+    "img": "",
+    "cats": [
+      "Kid-Friendly",
+      "Lunch",
+      "Quick Meals",
+      "Comfort Food"
+    ],
+    "time": 25,
+    "servings": 12,
+    "ing": [
+      "elbow pasta",
+      "cashews",
+      "nutritional yeast",
+      "garlic powder",
+      "turmeric",
+      "lemon juice",
+      "soy milk",
+      "salt"
+    ],
+    "nut": {
+      "cal": 180,
+      "pro": 6,
+      "carb": 26,
+      "fat": 6,
+      "fib": 2
+    }
+  },
+  {
+    "id": 4363,
+    "title": "Vegan Pizza Bagels",
+    "site": "It Doesn't Taste Like Chicken",
+    "url": "https://itdoesnttastelikechicken.com/vegan-pizza-bagels/",
+    "img": "",
+    "cats": [
+      "Kid-Friendly",
+      "Lunch",
+      "Quick Meals"
+    ],
+    "time": 15,
+    "servings": 4,
+    "ing": [
+      "bagels",
+      "marinara sauce",
+      "vegan cheese",
+      "mushrooms",
+      "green bell pepper",
+      "black olives"
+    ],
+    "nut": {
+      "cal": 280,
+      "pro": 10,
+      "carb": 40,
+      "fat": 8,
+      "fib": 3
+    }
+  },
+  {
+    "id": 4364,
+    "title": "Vegan Banana Oat Pancakes",
+    "site": "Loving It Vegan",
+    "url": "https://lovingitvegan.com/vegan-banana-oat-pancakes/",
+    "img": "",
+    "cats": [
+      "Kid-Friendly",
+      "Breakfast",
+      "Quick Meals",
+      "Beginner"
+    ],
+    "time": 15,
+    "servings": 8,
+    "ing": [
+      "banana",
+      "oats",
+      "soy milk",
+      "baking powder",
+      "cinnamon",
+      "vanilla extract",
+      "maple syrup"
+    ],
+    "nut": {
+      "cal": 120,
+      "pro": 3,
+      "carb": 24,
+      "fat": 2,
+      "fib": 3
+    }
+  },
+  {
+    "id": 4365,
+    "title": "Vegan Spaghetti and Lentil Bolognese",
+    "site": "Rainbow Plant Life",
+    "url": "https://rainbowplantlife.com/vegan-lentil-bolognese/",
+    "img": "",
+    "cats": [
+      "Kid-Friendly",
+      "Dinner",
+      "Pasta & Noodles",
+      "Italian",
+      "Comfort Food"
+    ],
+    "time": 40,
+    "servings": 6,
+    "ing": [
+      "spaghetti",
+      "red lentils",
+      "tomato",
+      "onion",
+      "garlic",
+      "carrot",
+      "celery",
+      "Italian seasoning",
+      "tomato paste",
+      "olive oil",
+      "salt"
+    ],
+    "nut": {
+      "cal": 380,
+      "pro": 18,
+      "carb": 62,
+      "fat": 6,
+      "fib": 10
+    }
+  },
+  {
+    "id": 4366,
+    "title": "Instant Pot Vegan Jambalaya",
+    "site": "Rainbow Plant Life",
+    "url": "https://rainbowplantlife.com/instant-pot-vegan-jambalaya/",
+    "img": "",
+    "cats": [
+      "Instant Pot",
+      "Dinner",
+      "One-Pot",
+      "Southern",
+      "Comfort Food"
+    ],
+    "time": 30,
+    "servings": 6,
+    "ing": [
+      "rice",
+      "kidney beans",
+      "tomato",
+      "onion",
+      "celery",
+      "green bell pepper",
+      "garlic",
+      "Cajun seasoning",
+      "vegetable broth",
+      "smoked paprika",
+      "thyme"
+    ],
+    "nut": {
+      "cal": 340,
+      "pro": 12,
+      "carb": 60,
+      "fat": 4,
+      "fib": 8
+    }
+  },
+  {
+    "id": 4367,
+    "title": "Instant Pot Vegan Pho",
+    "site": "Minimalist Baker",
+    "url": "https://minimalistbaker.com/instant-pot-vegan-pho/",
+    "img": "",
+    "cats": [
+      "Instant Pot",
+      "Vietnamese",
+      "Soups & Stews",
+      "Dinner"
+    ],
+    "time": 35,
+    "servings": 4,
+    "ing": [
+      "rice noodles",
+      "tofu",
+      "vegetable broth",
+      "star anise",
+      "cinnamon",
+      "ginger",
+      "onion",
+      "soy sauce",
+      "bean sprouts",
+      "basil",
+      "lime",
+      "hoisin sauce",
+      "sriracha"
+    ],
+    "nut": {
+      "cal": 320,
+      "pro": 14,
+      "carb": 48,
+      "fat": 8,
+      "fib": 3
+    }
+  },
+  {
+    "id": 4368,
+    "title": "Instant Pot Vegan Butter Chickpeas",
+    "site": "Nora Cooks",
+    "url": "https://www.noracooks.com/instant-pot-butter-chickpeas/",
+    "img": "",
+    "cats": [
+      "Instant Pot",
+      "Indian",
+      "Dinner",
+      "One-Pot",
+      "Comfort Food"
+    ],
+    "time": 25,
+    "servings": 6,
+    "ing": [
+      "chickpeas",
+      "tomato sauce",
+      "coconut cream",
+      "onion",
+      "garlic",
+      "ginger",
+      "garam masala",
+      "cumin",
+      "turmeric",
+      "chili powder",
+      "vegan butter",
+      "rice"
+    ],
+    "nut": {
+      "cal": 380,
+      "pro": 14,
+      "carb": 50,
+      "fat": 14,
+      "fib": 8
+    }
+  },
+  {
+    "id": 4369,
+    "title": "Vegan Thai Basil Fried Rice",
+    "site": "Cookie and Kate",
+    "url": "https://cookieandkate.com/thai-basil-fried-rice/",
+    "img": "",
+    "cats": [
+      "Thai",
+      "Dinner",
+      "Quick Meals",
+      "One-Pot"
+    ],
+    "time": 20,
+    "servings": 4,
+    "ing": [
+      "rice",
+      "tofu",
+      "garlic",
+      "Thai basil",
+      "soy sauce",
+      "chili flakes",
+      "lime juice",
+      "green beans",
+      "red bell pepper",
+      "onion",
+      "vegetable oil"
+    ],
+    "nut": {
+      "cal": 340,
+      "pro": 14,
+      "carb": 48,
+      "fat": 10,
+      "fib": 4
+    }
+  },
+  {
+    "id": 4370,
+    "title": "Vegan Thai Coconut Soup (Tom Kha)",
+    "site": "Minimalist Baker",
+    "url": "https://minimalistbaker.com/vegan-tom-kha-gai/",
+    "img": "",
+    "cats": [
+      "Thai",
+      "Soups & Stews",
+      "Dinner"
+    ],
+    "time": 25,
+    "servings": 4,
+    "ing": [
+      "coconut milk",
+      "mushrooms",
+      "tofu",
+      "lemongrass",
+      "galangal",
+      "lime leaves",
+      "lime juice",
+      "soy sauce",
+      "chili paste",
+      "cilantro",
+      "vegetable broth"
+    ],
+    "nut": {
+      "cal": 300,
+      "pro": 12,
+      "carb": 18,
+      "fat": 22,
+      "fib": 3
+    }
   }
 ]
