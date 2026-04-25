@@ -17,6 +17,7 @@ import { initRecipeDetail } from './components/RecipeDetail.js';
 import { initShopping } from './components/Shopping.js';
 import { initFavorites } from './components/Favorites.js';
 import { initReadyToCook } from './components/ReadyToCook.js';
+import { initWantToMake } from './components/WantToMake.js';
 import { initSyncPanel } from './components/SyncPanel.js';
 import { initOnboarding } from './components/Onboarding.js';
 import { submitFeedback } from './services/feedback.js';
@@ -32,6 +33,7 @@ const TAB_MAP = {
   browse:    'tab-browse',
   canmake:   'tab-canmake',
   favorites: 'tab-favorites',
+  wantmake:  'tab-wantmake',
   shopping:  'tab-shopping',
 };
 
@@ -118,6 +120,7 @@ initBrowse(recipes);
 initPantry(recipes);
 initShopping(recipes);
 initFavorites(recipes);
+initWantToMake(recipes);
 initReadyToCook(recipes);
 initSyncPanel();
 initOnboarding();

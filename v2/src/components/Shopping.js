@@ -1,10 +1,9 @@
 /**
  * Shopping — Shopping List tab component.
  *
- * Recipe-centric shopping: each recipe you want to make appears as a card
- * showing its missing ingredients with checkboxes. Each card has its own
- * "Send to Notes" button and a delete button. The top-level "Notes" button
- * exports everything grouped by recipe.
+ * Clean grocery list: each recipe you want to make appears as a card
+ * showing its missing ingredients with checkboxes. Share buttons use
+ * the Web Share API (iOS share sheet) with clipboard fallback.
  */
 
 import { get, set, subscribe, getRef } from '../state/store.js';
@@ -12,9 +11,7 @@ import { autoSync } from '../services/sync.js';
 import { findRecipes } from '../services/matching.js';
 import { escHTML, norm } from '../utils/text.js';
 import { showToast } from '../utils/toast.js';
-import { handleCook } from '../actions/cook.js';
 import { $ } from '../utils/dom.js';
-import { toggleFavorite } from '../actions/favorites.js';
 import { openDetail } from './RecipeDetail.js';
 import { GF_SWAPS } from '../data/aliases.js';
 
@@ -53,7 +50,6 @@ export function initShopping(recipes) {
   subscribe('makelist', renderShopTab);
   subscribe('ingredients', renderShopTab);
   subscribe('staples', renderShopTab);
-  subscribe('favorites', renderShopTab);
 }
 
 /**
@@ -72,9 +68,9 @@ function wireTopControls() {
     });
   }
 
-  const notesBtn = $('#sendToNotesBtn');
-  if (notesBtn) {
-    notesBtn.addEventListener('click', () => {
+  const shareBtn = $('#shareShopBtn');
+  if (shareBtn) {
+    shareBtn.addEventListener('click', () => {
       _shareAll();
     });
   }
@@ -209,8 +205,6 @@ function renderShopTab() {
 
   const { recipeCards } = _buildShopData();
   const checked = getCheckedSet();
-  const favSet = new Set(getRef('favorites'));
-
   // Clean checked set
   const allNorms = new Set();
   recipeCards.forEach(r => r.missing.forEach(m => allNorms.add(norm(m))));
@@ -234,16 +228,13 @@ function renderShopTab() {
   recipeCards.forEach(({ id, title, missing, totalIngs, haveCount }) => {
     const ready = !missing.length;
     const allChecked = missing.length > 0 && missing.every(i => checked.has(norm(i)));
-    const isFav = favSet.has(id);
 
     html += `<div class="shop-recipe-card${ready ? ' ready' : ''}${allChecked ? ' all-checked' : ''}" data-shop-recipe="${id}">
       <div class="shop-recipe-header">
         <div class="shop-recipe-title-row">
           <a class="shop-recipe-title" href="#" data-open-recipe="${id}">${escHTML(title)}</a>
           <div class="shop-recipe-actions">
-            ${!isFav ? `<button class="btn btn-sm shop-recipe-fav-btn" data-fav-recipe="${id}" title="Favorite">🤍 Favorite</button>` : ''}
-            <button class="btn btn-sm shop-recipe-cook-btn" data-cook-recipe="${id}" title="I Made This">🍳 I Made This</button>
-            ${!ready ? `<button class="icon-btn shop-recipe-notes-btn" data-notes-recipe="${id}" title="Send to Notes">📝</button>` : ''}
+            ${!ready ? `<button class="icon-btn" data-share-recipe="${id}" title="Share">📤</button>` : ''}
             <button class="icon-btn shop-recipe-delete-btn" data-delete-recipe="${id}" title="Remove recipe">&times;</button>
           </div>
         </div>
@@ -285,23 +276,6 @@ function renderShopTab() {
       return;
     }
 
-    // Favorite button
-    const favBtn = e.target.closest('[data-fav-recipe]');
-    if (favBtn) {
-      e.stopPropagation();
-      const id = Number(favBtn.dataset.favRecipe);
-      toggleFavorite(id);
-      return;
-    }
-
-    // "I Made This" — rate, log cook history, remove from make list
-    const cookBtn = e.target.closest('[data-cook-recipe]');
-    if (cookBtn) {
-      e.stopPropagation();
-      handleCook(Number(cookBtn.dataset.cookRecipe), { removeFromMakelist: true });
-      return;
-    }
-
     // Delete recipe from make list
     const deleteBtn = e.target.closest('[data-delete-recipe]');
     if (deleteBtn) {
@@ -314,11 +288,11 @@ function renderShopTab() {
       return;
     }
 
-    // Send single recipe to Notes
-    const notesBtn = e.target.closest('[data-notes-recipe]');
-    if (notesBtn) {
+    // Share single recipe's shopping list
+    const shareBtn = e.target.closest('[data-share-recipe]');
+    if (shareBtn) {
       e.stopPropagation();
-      const id = Number(notesBtn.dataset.notesRecipe);
+      const id = Number(shareBtn.dataset.shareRecipe);
       const card = recipeCards.find(r => r.id === id);
       if (card) _shareSingleRecipe(card.title, card.missing);
       return;

@@ -2791,3 +2791,241 @@ input, select, textarea {
     font-size: 0.84rem;
   }
 }
+
+/* ── Want to Make — Cards ───────────────────────────────────────── */
+
+.wm-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px;
+  margin-bottom: 12px;
+  box-shadow: var(--shadow);
+  transition: box-shadow var(--transition);
+}
+.wm-card:hover {
+  box-shadow: var(--shadow-hover);
+}
+
+.wm-card-top {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.wm-card-img {
+  width: 72px;
+  height: 72px;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+}
+
+.wm-card-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.wm-card-title {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--ink);
+  text-decoration: none;
+  display: block;
+  margin-bottom: 4px;
+  line-height: 1.3;
+}
+.wm-card-title:hover {
+  color: var(--green);
+}
+
+.wm-card-status {
+  font-size: 0.82rem;
+  margin-bottom: 2px;
+}
+.wm-ready {
+  color: var(--green);
+  font-weight: 600;
+}
+.wm-missing {
+  color: var(--accent);
+  font-weight: 500;
+}
+
+.wm-card-cooked {
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  margin-top: 2px;
+}
+.wm-again-yes {
+  color: var(--green);
+  font-weight: 600;
+}
+.wm-again-no {
+  color: var(--danger);
+  font-weight: 500;
+}
+
+/* ── Want to Make — Action buttons ──────────────────────────────── */
+
+.wm-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+  align-items: center;
+}
+
+.wm-card-actions .btn-sm,
+.wm-card-actions .btn {
+  font-size: 0.78rem;
+  padding: 5px 10px;
+  border-radius: var(--radius-xs);
+  border: 1px solid var(--border);
+  background: var(--bg2);
+  color: var(--ink);
+  cursor: pointer;
+  transition: background var(--transition), border-color var(--transition);
+  white-space: nowrap;
+}
+.wm-card-actions .btn-sm:hover,
+.wm-card-actions .btn:hover {
+  background: var(--green-soft);
+  border-color: var(--green);
+}
+
+.btn-green {
+  background: var(--green) !important;
+  color: #fff !important;
+  border-color: var(--green) !important;
+}
+.btn-green:hover {
+  background: var(--green-deep) !important;
+}
+
+.wm-btn-fav { }
+.wm-fav-on {
+  background: var(--danger-soft) !important;
+  border-color: var(--danger) !important;
+  color: var(--danger) !important;
+}
+
+.wm-card-actions .icon-btn {
+  margin-left: auto;
+  font-size: 1.1rem;
+  color: var(--muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: var(--radius-xs);
+  transition: color var(--transition), background var(--transition);
+}
+.wm-card-actions .icon-btn:hover {
+  color: var(--danger);
+  background: var(--danger-soft);
+}
+
+/* ── Want to Make — Cooking History table ───────────────────────── */
+
+.wm-history-table {
+  font-size: 0.82rem;
+}
+
+.wm-history-header {
+  display: grid;
+  grid-template-columns: 1fr 90px 100px 70px 36px;
+  gap: 8px;
+  padding: 8px 10px;
+  font-weight: 600;
+  color: var(--ink-soft);
+  border-bottom: 2px solid var(--border);
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.wm-history-row {
+  display: grid;
+  grid-template-columns: 1fr 90px 100px 70px 36px;
+  gap: 8px;
+  padding: 10px;
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+  transition: background var(--transition);
+}
+.wm-history-row:hover {
+  background: var(--bg2);
+}
+
+.wm-history-name {
+  color: var(--ink);
+  text-decoration: none;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.wm-history-name:hover {
+  color: var(--green);
+}
+
+.wm-history-stars {
+  color: #f5a623;
+  letter-spacing: 1px;
+}
+
+.wm-history-date {
+  color: var(--ink-soft);
+}
+
+.wm-history-again {
+  font-weight: 500;
+}
+
+.wm-history-del {
+  font-size: 1rem;
+  color: var(--muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: var(--radius-xs);
+  transition: color var(--transition), background var(--transition);
+}
+.wm-history-del:hover {
+  color: var(--danger);
+  background: var(--danger-soft);
+}
+
+/* ── Want to Make — Mobile responsive ──────────────────────────── */
+
+@media (max-width: 600px) {
+  .wm-card-img {
+    width: 56px;
+    height: 56px;
+  }
+  .wm-card-actions {
+    gap: 6px;
+  }
+  .wm-card-actions .btn-sm,
+  .wm-card-actions .btn {
+    font-size: 0.72rem;
+    padding: 4px 8px;
+  }
+
+  .wm-history-header {
+    grid-template-columns: 1fr 70px 80px 50px 30px;
+    font-size: 0.7rem;
+    gap: 4px;
+    padding: 6px 8px;
+  }
+  .wm-history-row {
+    grid-template-columns: 1fr 70px 80px 50px 30px;
+    gap: 4px;
+    padding: 8px;
+    font-size: 0.78rem;
+  }
+}

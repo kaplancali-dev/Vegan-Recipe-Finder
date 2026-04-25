@@ -48,10 +48,11 @@
       <button class="tab-btn" data-tab="pantry" role="tab" aria-selected="false" aria-controls="tab-pantry" id="btn-pantry">🥬 My Pantry</button>
       <button class="tab-btn on" data-tab="browse" role="tab" aria-selected="true" aria-controls="tab-browse" id="btn-browse">🔍 Browse All</button>
       <button class="tab-btn" data-tab="canmake" role="tab" aria-selected="false" aria-controls="tab-canmake" id="btn-canmake">
-        🍳 Ready to Make
+        🍳 Can Make Now
         <span id="readyCount" class="badge"></span>
       </button>
       <button class="tab-btn" data-tab="favorites" role="tab" aria-selected="false" aria-controls="tab-favorites" id="btn-favorites">❤️ Favorites</button>
+      <button class="tab-btn" data-tab="wantmake" role="tab" aria-selected="false" aria-controls="tab-wantmake" id="btn-wantmake">📌 Want to Make</button>
       <button class="tab-btn" data-tab="shopping" role="tab" aria-selected="false" aria-controls="tab-shopping" id="btn-shopping">🛒 Shopping</button>
     </nav>
 
@@ -172,7 +173,7 @@
     <!-- READY TO COOK TAB -->
     <section id="tab-canmake" class="tab-panel" role="tabpanel" aria-labelledby="btn-canmake" hidden>
       <div class="section-intro">
-        <h2>Ready to Make Now</h2>
+        <h2>Can Make Now</h2>
         <p>Recipes you can make right now — missing 1 ingredient or less. Recipes using fresh produce are prioritized so nothing goes to waste.</p>
       </div>
       <div class="filter-bar card">
@@ -239,6 +240,22 @@
       </div>
     </section>
 
+    <!-- WANT TO MAKE TAB -->
+    <section id="tab-wantmake" class="tab-panel" role="tabpanel" aria-labelledby="btn-wantmake" hidden>
+      <div class="section-intro">
+        <h2>📌 Want to Make</h2>
+        <p style="font-size:0.82rem;color:var(--ink-soft);margin-top:2px">Your meal planning hub — rate, track, and send to shopping.</p>
+      </div>
+      <div id="wantMakeList"></div>
+      <div id="wantMakeEmpty" class="empty-state" hidden>
+        <p>Tap "📌 Want to Make" on any recipe to start planning!</p>
+      </div>
+      <div id="cookHistorySection">
+        <h3 style="margin:24px 0 8px;font-size:1rem;color:var(--ink)">🍳 Cooking History</h3>
+        <div id="cookHistoryList"></div>
+      </div>
+    </section>
+
     <!-- SHOPPING LIST TAB -->
     <section id="tab-shopping" class="tab-panel" role="tabpanel" aria-labelledby="btn-shopping" hidden>
       <div id="makeList" hidden></div>
@@ -246,7 +263,7 @@
         <div class="section-intro-row">
           <h2>🛒 Shopping List</h2>
           <div style="display:flex;gap:6px">
-            <button id="sendToNotesBtn" class="btn btn-outline btn-sm">📝 All to Notes</button>
+            <button id="shareShopBtn" class="btn btn-outline btn-sm">📤 Share List</button>
             <button id="clearShopBtn" class="btn btn-outline btn-sm">Clear All</button>
           </div>
         </div>
@@ -305,7 +322,7 @@
             <p style="margin-top:12px"><strong>Step 2 — Find recipes</strong></p>
             <ol class="about-steps">
               <li><strong>🔍 Browse All</strong> — every recipe, ranked by match. Tap <em>Filters</em> for cuisines, cook time, and allergens.</li>
-              <li><strong>🍳 Ready to Make</strong> — recipes you can make now with 1 or fewer missing ingredients.</li>
+              <li><strong>🍳 Can Make Now</strong> — recipes you can make now with 1 or fewer missing ingredients.</li>
               <li><strong>❤️ Favorites</strong> — your saved recipes. Tap 🤍 on any card to add.</li>
               <li><strong>🛒 Shopping</strong> — organized by recipe with automatic GF substitutions.</li>
             </ol>
