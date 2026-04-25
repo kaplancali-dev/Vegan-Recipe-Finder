@@ -29,7 +29,7 @@ const STEPS = [
   {
     target: '#btn-canmake',
     tab: 'canmake',
-    title: 'Ready to cook right now',
+    title: 'Your pantry matches',
     body: 'These recipes need only what\'s already in your kitchen. No store run required — just pick one and start cooking.',
     arrow: 'top',
   },
