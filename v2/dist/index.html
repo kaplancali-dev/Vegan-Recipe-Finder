@@ -20,10 +20,10 @@
 <link rel="icon" type="image/png" href="favicon.png">
 <meta name="theme-color" content="#2d7a4f">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; img-src 'self' https: data:; connect-src 'self' https://*.supabase.co https://www.google-analytics.com; font-src 'self'; frame-src 'none';">
-  <script type="module" crossorigin src="/assets/index-Bvy8xAXH.js"></script>
+  <script type="module" crossorigin src="/assets/index-Dn0wihVm.js"></script>
   <link rel="modulepreload" crossorigin href="/assets/supabase-DaN4is7k.js">
   <link rel="modulepreload" crossorigin href="/assets/recipes-CpqbUZNN.js">
-  <link rel="stylesheet" crossorigin href="/assets/index-MyOHoTKH.css">
+  <link rel="stylesheet" crossorigin href="/assets/index-B4p8zIKr.css">
 </head>
 <body>
 
@@ -52,11 +52,11 @@
       <button class="tab-btn" data-tab="pantry" role="tab" aria-selected="false" aria-controls="tab-pantry" id="btn-pantry">🥬 My Pantry</button>
       <button class="tab-btn on" data-tab="browse" role="tab" aria-selected="true" aria-controls="tab-browse" id="btn-browse">🔍 Browse All</button>
       <button class="tab-btn" data-tab="canmake" role="tab" aria-selected="false" aria-controls="tab-canmake" id="btn-canmake">
-        🍳 Can Make Now
+        🍳 Ready Now
         <span id="readyCount" class="badge"></span>
       </button>
       <button class="tab-btn" data-tab="favorites" role="tab" aria-selected="false" aria-controls="tab-favorites" id="btn-favorites">❤️ Favorites</button>
-      <button class="tab-btn" data-tab="wantmake" role="tab" aria-selected="false" aria-controls="tab-wantmake" id="btn-wantmake">📌 Want to Make</button>
+      <button class="tab-btn" data-tab="wantmake" role="tab" aria-selected="false" aria-controls="tab-wantmake" id="btn-wantmake">📌 My Queue</button>
       <button class="tab-btn" data-tab="shopping" role="tab" aria-selected="false" aria-controls="tab-shopping" id="btn-shopping">🛒 Shopping</button>
     </nav>
 
@@ -177,7 +177,7 @@
     <!-- READY TO COOK TAB -->
     <section id="tab-canmake" class="tab-panel" role="tabpanel" aria-labelledby="btn-canmake" hidden>
       <div class="section-intro">
-        <h2>Can Make Now</h2>
+        <h2>Ready Now</h2>
         <p>Recipes you can make right now — missing 1 ingredient or less. Recipes using fresh produce are prioritized so nothing goes to waste.</p>
       </div>
       <div class="filter-bar card">
@@ -247,17 +247,18 @@
     <!-- WANT TO MAKE TAB -->
     <section id="tab-wantmake" class="tab-panel" role="tabpanel" aria-labelledby="btn-wantmake" hidden>
       <div class="section-intro">
-        <h2>📌 Want to Make</h2>
+        <h2>📌 My Queue</h2>
         <p style="font-size:0.82rem;color:var(--ink-soft);margin-top:2px">Your meal planning hub — rate, track, and send to shopping.</p>
+      </div>
+      <div id="wmSubTabs" class="wm-subtab-bar">
+        <button class="wm-subtab on" data-wm-sub="recipes">📌 Recipes</button>
+        <button class="wm-subtab" data-wm-sub="history">🍳 History</button>
       </div>
       <div id="wantMakeList"></div>
       <div id="wantMakeEmpty" class="empty-state" hidden>
-        <p>Tap "📌 Want to Make" on any recipe to start planning!</p>
+        <p>Tap "📌 My Queue" on any recipe to start planning!</p>
       </div>
-      <div id="cookHistorySection">
-        <h3 style="margin:24px 0 8px;font-size:1rem;color:var(--ink)">🍳 Cooking History</h3>
-        <div id="cookHistoryList"></div>
-      </div>
+      <div id="wmHistoryList" hidden></div>
     </section>
 
     <!-- SHOPPING LIST TAB -->
@@ -314,36 +315,38 @@
 
           <div id="menuInstructions" class="menu-section" hidden>
             <h4>Quick Start</h4>
-            <p style="margin-bottom:10px">HARVEST matches over 1,000 vegan recipes to what's already in your kitchen. Here's how to get started:</p>
+            <p style="margin-bottom:10px">HARVEST matches 1,100+ vegan recipes to what's in your kitchen.</p>
 
-            <p><strong>Step 1 — Stock your pantry</strong></p>
-            <p style="margin-bottom:4px">Head to the <strong>🥬 My Pantry</strong> tab:</p>
+            <p><strong>1. Stock your pantry</strong></p>
             <ol class="about-steps">
-              <li><strong>📌 Add Staples</strong> — tap the category buttons (Oils, Spices, Grains, Beans, etc.) to save things you always keep on hand. These stay saved forever.</li>
-              <li><strong>Add Ingredients</strong> — type in fresh produce, herbs, and fruits, separated by commas. Recipes using these are prioritized so nothing goes to waste.</li>
+              <li>Go to <strong>🥬 My Pantry</strong> and tap <strong>📌 Add Staples</strong> — choose Oils, Spices, Grains, Beans, and anything else you always have on hand.</li>
+              <li>Type in today's fresh ingredients (produce, herbs, etc.) separated by commas.</li>
             </ol>
 
-            <p style="margin-top:12px"><strong>Step 2 — Find recipes</strong></p>
+            <p style="margin-top:12px"><strong>2. Find recipes</strong></p>
             <ol class="about-steps">
-              <li><strong>🔍 Browse All</strong> — every recipe, ranked by match. Tap <em>Filters</em> for cuisines, cook time, and allergens.</li>
-              <li><strong>🍳 Can Make Now</strong> — recipes you can make now with 1 or fewer missing ingredients.</li>
-              <li><strong>❤️ Favorites</strong> — your saved recipes. Tap 🤍 on any card to add.</li>
-              <li><strong>🛒 Shopping</strong> — organized by recipe with automatic GF substitutions.</li>
+              <li><strong>🔍 Browse All</strong> ranks every recipe by how well it matches your pantry. Use Filters for cuisines, cook time, and allergens.</li>
+              <li><strong>🍳 Ready Now</strong> shows only recipes you can cook right now (1 or fewer missing ingredients).</li>
             </ol>
 
-            <p style="margin-top:12px"><strong>Features</strong></p>
+            <p style="margin-top:12px"><strong>3. Plan, shop, cook</strong></p>
             <ol class="about-steps">
-              <li><strong>📌 Want to Make</strong> — tap on any recipe card to add it to your Shopping List with missing ingredients.</li>
-              <li><strong>🍳 I Made This</strong> — log your cooks and rate them. History is tracked at the top of Favorites.</li>
-              <li><strong>🤍 Favorite</strong> — tap on any recipe card to save it. Organize favorites into collections (Weekly Meal Plan, Game Day, etc.).</li>
-              <li><strong>ℹ️ Ingredient Benefits</strong> — tap any ingredient in a recipe to see evidence-based health benefits from clinical studies.</li>
-              <li><strong>⚠️ Allergens</strong> — set in the Filters drawer to hide recipes with specific ingredients.</li>
-              <li><strong>🛒 GF Swaps</strong> — Shopping List auto-swaps soy sauce → tamari, flour → GF flour, etc.</li>
-              <li><strong>🔄 Substitution Hints</strong> — green hints appear when a good ingredient swap exists.</li>
-              <li><strong>📤 Share</strong> — share any recipe via text, email, or social media.</li>
-              <li><strong>☁️ Cloud Sync</strong> — back up across devices via My Pantry.</li>
+              <li>Tap <strong>📌 My Queue</strong> on any recipe card to save it. When you're ready to shop, tap 🛒 to send it to Shopping.</li>
+              <li><strong>🛒 Shopping</strong> shows only recipes you've sent — with checkboxes for each missing ingredient. Tap 📤 to share the list.</li>
+              <li>After cooking, tap <strong>🍳 I Made This</strong> to rate it and track whether you'd make it again. Your history is sortable in My Queue's History tab.</li>
             </ol>
-            <p class="about-tip">💡 Add to your home screen for the best experience!</p>
+
+            <p style="margin-top:12px"><strong>Good to know</strong></p>
+            <ol class="about-steps">
+              <li><strong>❤️ Favorites</strong> — organize saved recipes into collections like Weekly Meal Plan or Game Day.</li>
+              <li><strong>Gluten-free swaps</strong> — gluten ingredients appear in <span style="color:var(--gluten)">purple</span> with GF alternatives shown inline. Shopping auto-swaps them (soy sauce → tamari, flour → GF flour).</li>
+              <li><strong>Substitution hints</strong> — when you're missing just one ingredient and a good swap exists, a green hint appears.</li>
+              <li><strong>Ingredient benefits</strong> — tap any ingredient in a recipe to see evidence-based health info.</li>
+              <li><strong>📤 Share</strong> — share recipes or shopping lists via text, email, Notes, or social media.</li>
+              <li><strong>⚠️ Allergens</strong> — set in Filters to hide recipes with specific allergens.</li>
+              <li><strong>☁️ Cloud Sync</strong> — sign in via My Pantry to sync across devices.</li>
+            </ol>
+            <p class="about-tip">💡 Add HARVEST to your home screen for the best experience!</p>
           </div>
 
           <div id="menuAbout" class="menu-section" hidden>
