@@ -150,6 +150,22 @@ function wireIngredientInput() {
   const btn = $('#ingAddBtn');
   if (!input || !btn) return;
 
+  // Perishable / Staple toggle
+  let _addType = 'perishable'; // 'perishable' | 'staple'
+
+  const toggleBtns = document.querySelectorAll('[data-ing-type]');
+  toggleBtns.forEach(b => {
+    b.addEventListener('click', () => {
+      _addType = b.dataset.ingType;
+      toggleBtns.forEach(t => t.classList.toggle('on', t.dataset.ingType === _addType));
+      // Update placeholder to match context
+      input.placeholder = _addType === 'staple'
+        ? 'e.g. rice, olive oil, soy sauce'
+        : 'e.g. tofu, spinach, avocado';
+      input.focus();
+    });
+  });
+
   const addIngredients = () => {
     const raw = input.value;
     if (!raw.trim()) return;
@@ -161,7 +177,8 @@ function wireIngredientInput() {
 
     if (!items.length) return;
 
-    const current = get('ingredients');
+    const stateKey = _addType === 'staple' ? 'staples' : 'ingredients';
+    const current = get(stateKey);
     const currentSet = new Set(current.map(norm));
     const added = [];
 
@@ -175,8 +192,11 @@ function wireIngredientInput() {
     });
 
     if (added.length) {
-      set('ingredients', current);
+      set(stateKey, current);
       autoSync();
+
+      const label = _addType === 'staple' ? 'Staples' : 'Perishables';
+      showToast(`Added ${added.length} to ${label}`);
 
       // Mark as onboarded after first ingredient add
       if (!get('onboarded')) {

@@ -117,7 +117,13 @@
       <!-- Ingredient entry -->
       <div class="card">
         <label for="ingInput" class="card-title">Add Ingredients</label>
-        <p class="pantry-hint">Type what's in your fridge &amp; pantry, separated by commas. Recipes using fresh produce are prioritized so nothing goes to waste. Tap &times; to remove.</p>
+        <p class="pantry-hint">Type what's in your fridge &amp; pantry, separated by commas. Pick where they go, then tap Add. Tap &times; to remove.</p>
+        <div class="ing-add-controls">
+          <div class="ing-type-toggle">
+            <button class="ing-type-btn on" data-ing-type="perishable">🥬 Perishable</button>
+            <button class="ing-type-btn" data-ing-type="staple">📌 Staple</button>
+          </div>
+        </div>
         <div class="input-row">
           <input id="ingInput" type="text" class="text-input" placeholder="e.g. tofu, rice, garlic" autocomplete="off">
           <button id="ingAddBtn" class="btn btn-primary">Add</button>
@@ -316,7 +322,7 @@
             <p><strong>1. Stock your pantry</strong></p>
             <ol class="about-steps">
               <li>Go to <strong>🥬 My Pantry</strong> and tap <strong>📌 Add Staples</strong> — choose Oils, Spices, Grains, Beans, and anything else you always have on hand.</li>
-              <li>Type in today's fresh ingredients (produce, herbs, etc.) separated by commas.</li>
+              <li>Use the <strong>Add Ingredients</strong> input to type items separated by commas. Toggle between <strong>🥬 Perishable</strong> (fresh stuff that goes bad) and <strong>📌 Staple</strong> (always on hand) before adding.</li>
             </ol>
 
             <p style="margin-top:12px"><strong>2. Find recipes</strong></p>

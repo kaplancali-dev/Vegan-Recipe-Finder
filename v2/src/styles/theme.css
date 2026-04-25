@@ -360,6 +360,39 @@ input, select, textarea {
   background: var(--green-soft);
 }
 
+/* ── Ingredient Type Toggle ──────────────────────────────────── */
+.ing-add-controls {
+  margin-bottom: 8px;
+}
+
+.ing-type-toggle {
+  display: inline-flex;
+  gap: 0;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.ing-type-btn {
+  padding: 5px 14px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  background: var(--bg);
+  color: var(--muted);
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.ing-type-btn + .ing-type-btn {
+  border-left: 1.5px solid var(--border);
+}
+
+.ing-type-btn.on {
+  background: var(--green);
+  color: #fff;
+}
+
 /* ── Form Inputs ─────────────────────────────────────────────── */
 .input-row {
   display: flex;
