@@ -20,10 +20,10 @@
 <link rel="icon" type="image/png" href="favicon.png">
 <meta name="theme-color" content="#2d7a4f">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; img-src 'self' https: data:; connect-src 'self' https://*.supabase.co https://www.google-analytics.com; font-src 'self'; frame-src 'none';">
-  <script type="module" crossorigin src="/assets/index-Bvy8xAXH.js"></script>
+  <script type="module" crossorigin src="/assets/index-Bi1Q9-Ss.js"></script>
   <link rel="modulepreload" crossorigin href="/assets/supabase-DaN4is7k.js">
   <link rel="modulepreload" crossorigin href="/assets/recipes-CpqbUZNN.js">
-  <link rel="stylesheet" crossorigin href="/assets/index-MyOHoTKH.css">
+  <link rel="stylesheet" crossorigin href="/assets/index-QQ9SJgUA.css">
 </head>
 <body>
 
@@ -250,14 +250,15 @@
         <h2>📌 Want to Make</h2>
         <p style="font-size:0.82rem;color:var(--ink-soft);margin-top:2px">Your meal planning hub — rate, track, and send to shopping.</p>
       </div>
+      <div id="wmSubTabs" class="wm-subtab-bar">
+        <button class="wm-subtab on" data-wm-sub="recipes">📌 Recipes</button>
+        <button class="wm-subtab" data-wm-sub="history">🍳 History</button>
+      </div>
       <div id="wantMakeList"></div>
       <div id="wantMakeEmpty" class="empty-state" hidden>
         <p>Tap "📌 Want to Make" on any recipe to start planning!</p>
       </div>
-      <div id="cookHistorySection">
-        <h3 style="margin:24px 0 8px;font-size:1rem;color:var(--ink)">🍳 Cooking History</h3>
-        <div id="cookHistoryList"></div>
-      </div>
+      <div id="wmHistoryList" hidden></div>
     </section>
 
     <!-- SHOPPING LIST TAB -->

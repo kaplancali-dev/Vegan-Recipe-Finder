@@ -2792,109 +2792,105 @@ input, select, textarea {
   }
 }
 
-/* ── Want to Make — Cards ───────────────────────────────────────── */
+/* ── Want to Make — Sub-tab bar ─────────────────────────────────── */
 
-.wm-card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 14px;
-  margin-bottom: 12px;
-  box-shadow: var(--shadow);
-  transition: box-shadow var(--transition);
-}
-.wm-card:hover {
-  box-shadow: var(--shadow-hover);
-}
-
-.wm-card-top {
+.wm-subtab-bar {
   display: flex;
-  gap: 12px;
-  align-items: flex-start;
+  gap: 0;
+  margin-bottom: 12px;
+  border-bottom: 2px solid var(--border);
+}
+.wm-subtab {
+  padding: 8px 16px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--ink-soft);
+  background: none;
+  border: none;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  transition: color var(--transition), border-color var(--transition);
+}
+.wm-subtab:hover { color: var(--ink); }
+.wm-subtab.on {
+  color: var(--green);
+  border-bottom-color: var(--green);
+  font-weight: 600;
 }
 
-.wm-card-img {
-  width: 72px;
-  height: 72px;
+/* ── Want to Make — Compact one-line rows ──────────────────────── */
+
+.wm-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--border);
+  transition: background var(--transition);
+}
+.wm-row:hover { background: var(--bg2); }
+
+.wm-row-img {
+  width: 36px;
+  height: 36px;
   object-fit: cover;
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-xs);
+  flex-shrink: 0;
+}
+.wm-row-img-empty {
+  background: var(--bg2);
+}
+
+.wm-row-title {
+  flex: 1;
+  min-width: 0;
+  font-weight: 500;
+  font-size: 0.88rem;
+  color: var(--ink);
+  text-decoration: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.wm-row-title:hover { color: var(--green); }
+
+.wm-row-status {
+  font-size: 0.76rem;
+  font-weight: 500;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.wm-ready { color: var(--green); font-weight: 600; }
+.wm-missing { color: var(--accent); }
+
+.wm-row-actions {
+  display: flex;
+  gap: 2px;
+  align-items: center;
   flex-shrink: 0;
 }
 
-.wm-card-info {
-  flex: 1;
-  min-width: 0;
-}
+/* ── Want to Make — Icon buttons ───────────────────────────────── */
 
-.wm-card-title {
-  font-weight: 600;
-  font-size: 0.95rem;
-  color: var(--ink);
-  text-decoration: none;
-  display: block;
-  margin-bottom: 4px;
-  line-height: 1.3;
-}
-.wm-card-title:hover {
-  color: var(--green);
-}
-
-.wm-card-status {
-  font-size: 0.82rem;
-  margin-bottom: 2px;
-}
-.wm-ready {
-  color: var(--green);
-  font-weight: 600;
-}
-.wm-missing {
-  color: var(--accent);
-  font-weight: 500;
-}
-
-.wm-card-cooked {
-  font-size: 0.78rem;
-  color: var(--ink-soft);
-  margin-top: 2px;
-}
-.wm-again-yes {
-  color: var(--green);
-  font-weight: 600;
-}
-.wm-again-no {
-  color: var(--danger);
-  font-weight: 500;
-}
-
-/* ── Want to Make — Action buttons ──────────────────────────────── */
-
-.wm-card-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 12px;
-  padding-top: 10px;
-  border-top: 1px solid var(--border);
-  align-items: center;
-}
-
-.wm-card-actions .btn-sm,
-.wm-card-actions .btn {
-  font-size: 0.78rem;
-  padding: 5px 10px;
-  border-radius: var(--radius-xs);
-  border: 1px solid var(--border);
-  background: var(--bg2);
-  color: var(--ink);
+.wm-icon-btn {
+  background: none;
+  border: none;
   cursor: pointer;
-  transition: background var(--transition), border-color var(--transition);
-  white-space: nowrap;
+  font-size: 0.9rem;
+  padding: 4px 5px;
+  border-radius: var(--radius-xs);
+  transition: background var(--transition), opacity var(--transition);
+  line-height: 1;
 }
-.wm-card-actions .btn-sm:hover,
-.wm-card-actions .btn:hover {
-  background: var(--green-soft);
-  border-color: var(--green);
-}
+.wm-icon-btn:hover { background: var(--bg2); }
+
+.wm-fav-on { }
+.wm-in-shop { opacity: 0.5; }
+.wm-remove-btn { color: var(--muted); font-size: 1rem; }
+.wm-remove-btn:hover { color: var(--danger); background: var(--danger-soft); }
+
+.wm-shop-btn.wm-in-shop { opacity: 0.6; }
 
 .btn-green {
   background: var(--green) !important;
@@ -2905,30 +2901,14 @@ input, select, textarea {
   background: var(--green-deep) !important;
 }
 
-.wm-btn-fav { }
-.wm-fav-on {
-  background: var(--danger-soft) !important;
-  border-color: var(--danger) !important;
-  color: var(--danger) !important;
-}
-
-.wm-card-actions .icon-btn {
-  margin-left: auto;
-  font-size: 1.1rem;
+.wm-empty-hint {
+  font-size: 0.85rem;
   color: var(--muted);
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 4px 8px;
-  border-radius: var(--radius-xs);
-  transition: color var(--transition), background var(--transition);
-}
-.wm-card-actions .icon-btn:hover {
-  color: var(--danger);
-  background: var(--danger-soft);
+  text-align: center;
+  padding: 24px 8px;
 }
 
-/* ── Want to Make — Cooking History table ───────────────────────── */
+/* ── Want to Make — History table ──────────────────────────────── */
 
 .wm-history-table {
   font-size: 0.82rem;
@@ -2936,29 +2916,27 @@ input, select, textarea {
 
 .wm-history-header {
   display: grid;
-  grid-template-columns: 1fr 90px 100px 70px 36px;
-  gap: 8px;
+  grid-template-columns: 1fr 90px 70px 50px 36px 36px 30px;
+  gap: 6px;
   padding: 8px 10px;
   font-weight: 600;
   color: var(--ink-soft);
   border-bottom: 2px solid var(--border);
-  font-size: 0.76rem;
+  font-size: 0.72rem;
   text-transform: uppercase;
   letter-spacing: 0.03em;
 }
 
 .wm-history-row {
   display: grid;
-  grid-template-columns: 1fr 90px 100px 70px 36px;
-  gap: 8px;
-  padding: 10px;
+  grid-template-columns: 1fr 90px 70px 50px 36px 36px 30px;
+  gap: 6px;
+  padding: 8px 10px;
   align-items: center;
   border-bottom: 1px solid var(--border);
   transition: background var(--transition);
 }
-.wm-history-row:hover {
-  background: var(--bg2);
-}
+.wm-history-row:hover { background: var(--bg2); }
 
 .wm-history-name {
   color: var(--ink);
@@ -2968,64 +2946,61 @@ input, select, textarea {
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.wm-history-name:hover {
-  color: var(--green);
-}
+.wm-history-name:hover { color: var(--green); }
 
 .wm-history-stars {
   color: #f5a623;
   letter-spacing: 1px;
+  font-size: 0.78rem;
 }
 
 .wm-history-date {
   color: var(--ink-soft);
+  font-size: 0.78rem;
 }
 
 .wm-history-again {
   font-weight: 500;
+  text-align: center;
+}
+.wm-again-yes { color: var(--green); }
+.wm-again-no { color: var(--danger); }
+
+.wm-hist-fav, .wm-hist-shop {
+  font-size: 0.82rem;
+  padding: 2px 4px;
 }
 
-.wm-history-del {
-  font-size: 1rem;
-  color: var(--muted);
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 2px 6px;
-  border-radius: var(--radius-xs);
-  transition: color var(--transition), background var(--transition);
-}
-.wm-history-del:hover {
-  color: var(--danger);
-  background: var(--danger-soft);
-}
-
-/* ── Want to Make — Mobile responsive ──────────────────────────── */
+/* ── Want to Make — Mobile ─────────────────────────────────────── */
 
 @media (max-width: 600px) {
-  .wm-card-img {
-    width: 56px;
-    height: 56px;
+  .wm-row-img {
+    width: 30px;
+    height: 30px;
   }
-  .wm-card-actions {
-    gap: 6px;
+  .wm-row-title {
+    font-size: 0.82rem;
   }
-  .wm-card-actions .btn-sm,
-  .wm-card-actions .btn {
-    font-size: 0.72rem;
-    padding: 4px 8px;
+  .wm-row-status {
+    font-size: 0.7rem;
+  }
+  .wm-icon-btn {
+    font-size: 0.8rem;
+    padding: 3px 4px;
   }
 
   .wm-history-header {
-    grid-template-columns: 1fr 70px 80px 50px 30px;
-    font-size: 0.7rem;
-    gap: 4px;
-    padding: 6px 8px;
+    grid-template-columns: 1fr 70px 55px 36px 28px 28px 24px;
+    font-size: 0.65rem;
+    gap: 3px;
+    padding: 6px 6px;
   }
   .wm-history-row {
-    grid-template-columns: 1fr 70px 80px 50px 30px;
-    gap: 4px;
-    padding: 8px;
-    font-size: 0.78rem;
+    grid-template-columns: 1fr 70px 55px 36px 28px 28px 24px;
+    gap: 3px;
+    padding: 6px;
+    font-size: 0.75rem;
   }
+  .wm-history-stars { font-size: 0.7rem; }
+  .wm-history-date { font-size: 0.7rem; }
 }

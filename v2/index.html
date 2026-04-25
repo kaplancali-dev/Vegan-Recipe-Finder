@@ -246,14 +246,15 @@
         <h2>📌 Want to Make</h2>
         <p style="font-size:0.82rem;color:var(--ink-soft);margin-top:2px">Your meal planning hub — rate, track, and send to shopping.</p>
       </div>
+      <div id="wmSubTabs" class="wm-subtab-bar">
+        <button class="wm-subtab on" data-wm-sub="recipes">📌 Recipes</button>
+        <button class="wm-subtab" data-wm-sub="history">🍳 History</button>
+      </div>
       <div id="wantMakeList"></div>
       <div id="wantMakeEmpty" class="empty-state" hidden>
         <p>Tap "📌 Want to Make" on any recipe to start planning!</p>
       </div>
-      <div id="cookHistorySection">
-        <h3 style="margin:24px 0 8px;font-size:1rem;color:var(--ink)">🍳 Cooking History</h3>
-        <div id="cookHistoryList"></div>
-      </div>
+      <div id="wmHistoryList" hidden></div>
     </section>
 
     <!-- SHOPPING LIST TAB -->

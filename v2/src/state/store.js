@@ -17,6 +17,7 @@ const STORAGE_KEYS = {
   allergies:    'vrf_allergies',
   collections:  'vrf_collections',
   makelist:     'vrf_makelist',
+  shopRecipes:  'vrf_shop_recipes',
   shopChecked:  'vrf_shop_checked',
   activeTab:    'vrf_active_tab',
   onboarded:    'vrf_onboarded',
@@ -40,6 +41,7 @@ const state = {
   allergies:    [],
   collections:  {},
   makelist:     [],
+  shopRecipes:  [],
   shopChecked:  [],
   activeTab:    'browse',
   onboarded:    false,
@@ -91,6 +93,7 @@ export function loadState() {
   state.allergies    = lsGet(STORAGE_KEYS.allergies, []);
   state.collections  = lsGet(STORAGE_KEYS.collections, {});
   state.makelist     = lsGet(STORAGE_KEYS.makelist, []);
+  state.shopRecipes  = lsGet(STORAGE_KEYS.shopRecipes, []);
   state.shopChecked  = lsGet(STORAGE_KEYS.shopChecked, []);
   state.cookHistory  = lsGet(STORAGE_KEYS.cookHistory, []);
   state.activeTab    = localStorage.getItem(STORAGE_KEYS.activeTab) || 'browse';
@@ -177,6 +180,7 @@ export function gatherAllData() {
     vrf_allergies:   state.allergies,
     vrf_collections: state.collections,
     vrf_makelist:    state.makelist,
+    vrf_shop_recipes: state.shopRecipes,
   };
 }
 
@@ -196,6 +200,7 @@ function validateValue(key, value) {
     case 'allergies':
     case 'mealPlan':
     case 'makelist':
+    case 'shopRecipes':
     case 'cookHistory':
       return Array.isArray(value) ? value : undefined;
     case 'instructions':
@@ -221,6 +226,7 @@ export function applyAllData(data) {
   if (data.vrf_allergies    !== undefined) { const v = validateValue('allergies', data.vrf_allergies);       if (v !== undefined) set('allergies', v); }
   if (data.vrf_collections !== undefined) { const v = validateValue('collections', data.vrf_collections); if (v !== undefined) set('collections', v); }
   if (data.vrf_makelist    !== undefined) { const v = validateValue('makelist', data.vrf_makelist);       if (v !== undefined) set('makelist', v); }
+  if (data.vrf_shop_recipes !== undefined) { const v = validateValue('shopRecipes', data.vrf_shop_recipes); if (v !== undefined) set('shopRecipes', v); }
 }
 
 /**
@@ -234,6 +240,7 @@ export function resetState() {
   state.shopList     = [];
   state.instructions = {};
   state.allergies    = [];
+  state.shopRecipes  = [];
   state.shopChecked  = [];
   state.activeTab    = 'search';
   state.onboarded    = false;

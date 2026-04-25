@@ -47,7 +47,7 @@ export function initShopping(recipes) {
 
   subscribe('shopList', renderShopTab);
   subscribe('shopChecked', renderShopTab);
-  subscribe('makelist', renderShopTab);
+  subscribe('shopRecipes', renderShopTab);
   subscribe('ingredients', renderShopTab);
   subscribe('staples', renderShopTab);
 }
@@ -59,9 +59,9 @@ function wireTopControls() {
   const clearBtn = $('#clearShopBtn');
   if (clearBtn) {
     clearBtn.addEventListener('click', () => {
-      const makeIds = getRef('makelist');
-      if (!makeIds.length) return;
-      set('makelist', []);
+      const shopIds = getRef('shopRecipes');
+      if (!shopIds.length) return;
+      set('shopRecipes', []);
       set('shopChecked', []);
       autoSync();
       showToast('Shopping List cleared');
@@ -163,15 +163,15 @@ function _applyGfSwap(ingredient) {
  * Build the full shopping data: recipe cards + manual items.
  */
 function _buildShopData() {
-  const makeIds = getRef('makelist');
+  const shopIds = getRef('shopRecipes');
   const manualItems = getRef('shopList');
   const ings = getRef('ingredients');
   const staples = getRef('staples');
 
   let recipeCards = [];
 
-  if (makeIds.length) {
-    const makeRecipes = makeIds.map(id => _recipes.find(r => r.id === id)).filter(Boolean);
+  if (shopIds.length) {
+    const makeRecipes = shopIds.map(id => _recipes.find(r => r.id === id)).filter(Boolean);
     if (makeRecipes.length) {
       const matched = findRecipes({
         recipes: makeRecipes,
@@ -276,13 +276,13 @@ function renderShopTab() {
       return;
     }
 
-    // Delete recipe from make list
+    // Delete recipe from shopping list
     const deleteBtn = e.target.closest('[data-delete-recipe]');
     if (deleteBtn) {
       e.stopPropagation();
       const id = Number(deleteBtn.dataset.deleteRecipe);
-      const current = get('makelist');
-      set('makelist', current.filter(i => i !== id));
+      const current = get('shopRecipes');
+      set('shopRecipes', current.filter(i => i !== id));
       autoSync();
       showToast('Removed from list');
       return;
