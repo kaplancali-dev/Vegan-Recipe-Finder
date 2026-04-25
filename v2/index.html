@@ -117,7 +117,13 @@
       <!-- Ingredient entry -->
       <div class="card">
         <label for="ingInput" class="card-title">Add Ingredients</label>
-        <p class="pantry-hint">Type what's in your fridge &amp; pantry, separated by commas. Recipes using fresh produce are prioritized so nothing goes to waste. Tap &times; to remove.</p>
+        <p class="pantry-hint">Type what's in your fridge &amp; pantry, separated by commas. Pick where they go, then tap Add. Tap &times; to remove.</p>
+        <div class="ing-add-controls">
+          <div class="ing-type-toggle">
+            <button class="ing-type-btn on" data-ing-type="perishable">🥬 Perishable</button>
+            <button class="ing-type-btn" data-ing-type="staple">📌 Staple</button>
+          </div>
+        </div>
         <div class="input-row">
           <input id="ingInput" type="text" class="text-input" placeholder="e.g. tofu, rice, garlic" autocomplete="off">
           <button id="ingAddBtn" class="btn btn-primary">Add</button>
