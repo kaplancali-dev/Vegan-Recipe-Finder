@@ -294,7 +294,7 @@ def normalize_ingredient(raw: str) -> str:
     return s.strip() or raw.strip().lower()
 
 
-def dedupe_ingredients(ings: list[str]) -> list[str]:
+def dedupe_ingredients(ings):
     """Remove duplicate ingredients, keeping first occurrence."""
     seen = set()
     result = []
@@ -328,7 +328,7 @@ SIMPLE_GF_SWAPS = {
     'flour tortillas', 'all-purpose flour',
 }
 
-def classify_gluten(ings: list[str]) -> str:
+def classify_gluten(ings):
     """
     Returns:
       'gf'          — naturally gluten-free
@@ -404,7 +404,7 @@ CAT_KEYWORDS = {
 }
 
 
-def auto_categorize(title: str, ings: list[str], nut: dict, time_min: int = 0) -> list[str]:
+def auto_categorize(title, ings, nut, time_min=0):
     """Auto-assign categories based on title, ingredients, and nutrition."""
     cats = set()
     title_low = title.lower()
@@ -458,7 +458,7 @@ def fetch_page(url: str) -> str:
     return ''
 
 
-def extract_json_ld(html: str) -> dict | None:
+def extract_json_ld(html: str):
     """Extract the Recipe JSON-LD from a page."""
     soup = BeautifulSoup(html, 'html.parser')
 
@@ -535,7 +535,7 @@ def parse_nutrition(nut_data: dict) -> dict:
     return {}
 
 
-def parse_ingredients(recipe_data: dict) -> list[str]:
+def parse_ingredients(recipe_data):
     """Extract and normalize ingredient list from JSON-LD."""
     raw_ings = recipe_data.get('recipeIngredient', [])
     if not raw_ings:
@@ -574,7 +574,7 @@ def extract_site_name(url: str, recipe_data: dict) -> str:
     return name.replace('-', ' ').replace('_', ' ').title()
 
 
-def scrape_recipe(url: str) -> dict | None:
+def scrape_recipe(url: str):
     """
     Scrape a single recipe URL and return a normalized recipe dict.
     Returns None if scraping fails.
@@ -641,7 +641,7 @@ def scrape_recipe(url: str) -> dict | None:
 
 # ── Pexels photo search ────────────────────────────────────────────
 
-def search_pexels(query: str) -> str | None:
+def search_pexels(query: str):
     """Search Pexels for a food photo, return the medium image URL."""
     try:
         resp = requests.get(
@@ -674,7 +674,7 @@ def load_existing_recipes() -> tuple[set, int]:
     return set(), 0
 
 
-def run_pipeline(urls: list[str], skip_complex_gluten: bool = True):
+def run_pipeline(urls, skip_complex_gluten=True):
     """
     Main scraping pipeline.
 

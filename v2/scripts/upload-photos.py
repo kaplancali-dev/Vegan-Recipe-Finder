@@ -60,7 +60,7 @@ JPEG_QUALITY = 82
 
 # ── Image processing ───────────────────────────────────────────────
 
-def download_image(url: str) -> bytes | None:
+def download_image(url):
     """Download an image from a URL."""
     try:
         resp = requests.get(url, headers=HEADERS, timeout=15, stream=True)
@@ -102,7 +102,7 @@ def resize_image(data: bytes) -> bytes:
         return data
 
 
-def search_pexels(query: str) -> str | None:
+def search_pexels(query):
     """Search Pexels for a food photo, return the medium image URL."""
     try:
         resp = requests.get(
@@ -120,7 +120,7 @@ def search_pexels(query: str) -> str | None:
     return None
 
 
-def upload_to_supabase(data: bytes, filename: str) -> str | None:
+def upload_to_supabase(data, filename):
     """Upload image bytes to Supabase storage. Returns public URL."""
     if not SUPABASE_SERVICE_KEY:
         # Save locally instead
