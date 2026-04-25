@@ -20,7 +20,7 @@
 <link rel="icon" type="image/png" href="favicon.png">
 <meta name="theme-color" content="#2d7a4f">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; img-src 'self' https: data:; connect-src 'self' https://*.supabase.co https://www.google-analytics.com; font-src 'self'; frame-src 'none';">
-  <script type="module" crossorigin src="/assets/index-CowJtHvD.js"></script>
+  <script type="module" crossorigin src="/assets/index-Dn0wihVm.js"></script>
   <link rel="modulepreload" crossorigin href="/assets/supabase-DaN4is7k.js">
   <link rel="modulepreload" crossorigin href="/assets/recipes-CpqbUZNN.js">
   <link rel="stylesheet" crossorigin href="/assets/index-B4p8zIKr.css">
@@ -52,11 +52,11 @@
       <button class="tab-btn" data-tab="pantry" role="tab" aria-selected="false" aria-controls="tab-pantry" id="btn-pantry">🥬 My Pantry</button>
       <button class="tab-btn on" data-tab="browse" role="tab" aria-selected="true" aria-controls="tab-browse" id="btn-browse">🔍 Browse All</button>
       <button class="tab-btn" data-tab="canmake" role="tab" aria-selected="false" aria-controls="tab-canmake" id="btn-canmake">
-        🍳 Can Make Now
+        🍳 Ready Now
         <span id="readyCount" class="badge"></span>
       </button>
       <button class="tab-btn" data-tab="favorites" role="tab" aria-selected="false" aria-controls="tab-favorites" id="btn-favorites">❤️ Favorites</button>
-      <button class="tab-btn" data-tab="wantmake" role="tab" aria-selected="false" aria-controls="tab-wantmake" id="btn-wantmake">📌 Want to Make</button>
+      <button class="tab-btn" data-tab="wantmake" role="tab" aria-selected="false" aria-controls="tab-wantmake" id="btn-wantmake">📌 My Queue</button>
       <button class="tab-btn" data-tab="shopping" role="tab" aria-selected="false" aria-controls="tab-shopping" id="btn-shopping">🛒 Shopping</button>
     </nav>
 
@@ -177,7 +177,7 @@
     <!-- READY TO COOK TAB -->
     <section id="tab-canmake" class="tab-panel" role="tabpanel" aria-labelledby="btn-canmake" hidden>
       <div class="section-intro">
-        <h2>Can Make Now</h2>
+        <h2>Ready Now</h2>
         <p>Recipes you can make right now — missing 1 ingredient or less. Recipes using fresh produce are prioritized so nothing goes to waste.</p>
       </div>
       <div class="filter-bar card">
@@ -247,7 +247,7 @@
     <!-- WANT TO MAKE TAB -->
     <section id="tab-wantmake" class="tab-panel" role="tabpanel" aria-labelledby="btn-wantmake" hidden>
       <div class="section-intro">
-        <h2>📌 Want to Make</h2>
+        <h2>📌 My Queue</h2>
         <p style="font-size:0.82rem;color:var(--ink-soft);margin-top:2px">Your meal planning hub — rate, track, and send to shopping.</p>
       </div>
       <div id="wmSubTabs" class="wm-subtab-bar">
@@ -256,7 +256,7 @@
       </div>
       <div id="wantMakeList"></div>
       <div id="wantMakeEmpty" class="empty-state" hidden>
-        <p>Tap "📌 Want to Make" on any recipe to start planning!</p>
+        <p>Tap "📌 My Queue" on any recipe to start planning!</p>
       </div>
       <div id="wmHistoryList" hidden></div>
     </section>
@@ -327,12 +327,12 @@
             <p style="margin-top:12px"><strong>Step 2 — Find recipes</strong></p>
             <ol class="about-steps">
               <li><strong>🔍 Browse All</strong> — every recipe, ranked by how well it matches your pantry. Use <em>Filters</em> for cuisines, cook time, and allergens.</li>
-              <li><strong>🍳 Can Make Now</strong> — recipes you can make right now with 1 or fewer missing ingredients.</li>
+              <li><strong>🍳 Ready Now</strong> — recipes you can make right now with 1 or fewer missing ingredients.</li>
             </ol>
 
             <p style="margin-top:12px"><strong>Step 3 — Plan &amp; cook</strong></p>
             <ol class="about-steps">
-              <li><strong>📌 Want to Make</strong> — tap "📌 Want to Make" on any recipe card to save it to your planning list. From here you can rate it, track when you made it, mark "would make again," and send it to Shopping when you're ready.</li>
+              <li><strong>📌 My Queue</strong> — tap "📌 My Queue" on any recipe card to save it to your planning list. From here you can rate it, track when you made it, mark "would make again," and send it to Shopping when you're ready.</li>
               <li><strong>🛒 Shopping</strong> — only recipes you explicitly send here appear. Each card shows missing ingredients with checkboxes. Tap 📤 to share the list via text, email, or Notes.</li>
             </ol>
 
@@ -340,9 +340,9 @@
             <ol class="about-steps">
               <li><strong>🥬 My Pantry</strong> — manage your ingredients, staples, and allergen filters.</li>
               <li><strong>🔍 Browse All</strong> — search and filter all 1,100+ recipes.</li>
-              <li><strong>🍳 Can Make Now</strong> — recipes ready to cook with what you have.</li>
+              <li><strong>🍳 Ready Now</strong> — recipes ready to cook with what you have.</li>
               <li><strong>❤️ Favorites</strong> — your saved recipes, organized into collections (Weekly Meal Plan, Game Day, etc.). Cooking history is shown at the top.</li>
-              <li><strong>📌 Want to Make</strong> — your meal planning hub. Two sub-tabs: <em>Recipes</em> (compact list with actions) and <em>History</em> (sortable table of everything you've cooked, with ratings, dates, and "would make again").</li>
+              <li><strong>📌 My Queue</strong> — your meal planning hub. Two sub-tabs: <em>Recipes</em> (compact list with actions) and <em>History</em> (sortable table of everything you've cooked, with ratings, dates, and "would make again").</li>
               <li><strong>🛒 Shopping</strong> — your grocery list, organized by recipe. Checkboxes track what you've got. Share the whole list or individual recipes.</li>
             </ol>
 

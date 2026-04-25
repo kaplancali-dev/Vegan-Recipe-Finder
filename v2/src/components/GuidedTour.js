@@ -44,7 +44,7 @@ const STEPS = [
     target: '#btn-shopping',
     tab: 'shopping',
     title: 'Your shopping list builds itself',
-    body: 'Tap "Want to Make" on any recipe and HARVEST adds exactly what you\'re missing — organized by recipe so shopping is a breeze.',
+    body: 'Add recipes to My Queue, then send them to Shopping when you\'re ready. HARVEST shows exactly what you\'re missing — organized by recipe.',
     arrow: 'top',
   },
 ];

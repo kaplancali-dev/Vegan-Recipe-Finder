@@ -259,7 +259,7 @@ function renderShopTab() {
 
   // ── Empty make list prompt ──
   if (!recipeCards.length) {
-    html += '<p style="font-size:0.85rem;color:var(--muted);padding:8px 0;text-align:center">Tap "📌 Want to Make" on any recipe to start building your shopping list.</p>';
+    html += '<p style="font-size:0.85rem;color:var(--muted);padding:8px 0;text-align:center">Add recipes to 📌 My Queue, then tap 🛒 to send them here.</p>';
   }
 
   container.innerHTML = html;

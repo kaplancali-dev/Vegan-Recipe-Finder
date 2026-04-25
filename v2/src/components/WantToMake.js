@@ -364,7 +364,7 @@ function wireEvents() {
         set('shopRecipes', shopCurrent.filter(i => i !== id));
       }
       autoSync();
-      showToast('Removed from Want to Make');
+      showToast('Removed from My Queue');
       return;
     }
 

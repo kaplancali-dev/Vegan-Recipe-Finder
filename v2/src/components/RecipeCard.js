@@ -115,7 +115,7 @@ export function renderCard(result, opts = {}) {
 
   // Action buttons
   const favLabel = isFavorite ? '❤️ Favorited' : '🤍 Favorite';
-  const makeLabel = isOnMakeList ? '✓ Want to Make' : '📌 Want to Make';
+  const makeLabel = isOnMakeList ? '✓ My Queue' : '📌 My Queue';
 
   // Cook button label — show date and star rating if available
   const lastEntry = cookedDates.length ? cookedDates[cookedDates.length - 1] : null;
