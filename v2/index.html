@@ -51,8 +51,8 @@
         🍳 Ready Now
         <span id="readyCount" class="badge"></span>
       </button>
-      <button class="tab-btn" data-tab="favorites" role="tab" aria-selected="false" aria-controls="tab-favorites" id="btn-favorites">❤️ Favorites</button>
       <button class="tab-btn" data-tab="wantmake" role="tab" aria-selected="false" aria-controls="tab-wantmake" id="btn-wantmake">📌 My Queue</button>
+      <button class="tab-btn" data-tab="favorites" role="tab" aria-selected="false" aria-controls="tab-favorites" id="btn-favorites">❤️ Favorites</button>
       <button class="tab-btn" data-tab="shopping" role="tab" aria-selected="false" aria-controls="tab-shopping" id="btn-shopping">🛒 Shopping</button>
     </nav>
 
@@ -208,6 +208,23 @@
       </div>
     </section>
 
+    <!-- MY QUEUE TAB -->
+    <section id="tab-wantmake" class="tab-panel" role="tabpanel" aria-labelledby="btn-wantmake" hidden>
+      <div class="section-intro">
+        <h2>📌 My Queue</h2>
+        <p style="font-size:0.82rem;color:var(--ink-soft);margin-top:2px">Your meal planning hub — rate, track, and send to shopping.</p>
+      </div>
+      <div id="wmSubTabs" class="wm-subtab-bar">
+        <button class="wm-subtab on" data-wm-sub="recipes">📌 Recipes</button>
+        <button class="wm-subtab" data-wm-sub="history">🍳 History</button>
+      </div>
+      <div id="wantMakeList"></div>
+      <div id="wantMakeEmpty" class="empty-state" hidden>
+        <p>Tap "📌 My Queue" on any recipe to start planning!</p>
+      </div>
+      <div id="wmHistoryList" hidden></div>
+    </section>
+
     <!-- FAVORITES TAB -->
     <section id="tab-favorites" class="tab-panel" role="tabpanel" aria-labelledby="btn-favorites" hidden>
       <div class="section-intro">
@@ -238,23 +255,6 @@
       <div id="favEmpty" class="empty-state" hidden>
         <p>Tap the ❤️ on any recipe to save it here.</p>
       </div>
-    </section>
-
-    <!-- WANT TO MAKE TAB -->
-    <section id="tab-wantmake" class="tab-panel" role="tabpanel" aria-labelledby="btn-wantmake" hidden>
-      <div class="section-intro">
-        <h2>📌 My Queue</h2>
-        <p style="font-size:0.82rem;color:var(--ink-soft);margin-top:2px">Your meal planning hub — rate, track, and send to shopping.</p>
-      </div>
-      <div id="wmSubTabs" class="wm-subtab-bar">
-        <button class="wm-subtab on" data-wm-sub="recipes">📌 Recipes</button>
-        <button class="wm-subtab" data-wm-sub="history">🍳 History</button>
-      </div>
-      <div id="wantMakeList"></div>
-      <div id="wantMakeEmpty" class="empty-state" hidden>
-        <p>Tap "📌 My Queue" on any recipe to start planning!</p>
-      </div>
-      <div id="wmHistoryList" hidden></div>
     </section>
 
     <!-- SHOPPING LIST TAB -->
