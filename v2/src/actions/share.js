@@ -6,17 +6,18 @@
 /**
  * Share a recipe via native share sheet or clipboard fallback.
  * @param {string} title - Recipe title
- * @param {string} url - Recipe URL
- * @param {HTMLElement} [btn] - Button element to show feedback on
+ * @param {string} url - Recipe URL (unused — we always link to HARVEST)
  */
 export function shareRecipe(title, url) {
-  const recipeUrl = url || 'https://myharvestvegan.com';
-  const text = `${recipeUrl}\n\nFound on HARVEST 🌿 myharvestvegan.com`;
+  const harvestUrl = 'https://myharvestvegan.com';
+  const text = title
+    ? `Check out "${title}" on HARVEST 🌿 — nearly 2,000 plant-based recipes matched to what's in your kitchen.`
+    : `HARVEST 🌿 — nearly 2,000 plant-based recipes matched to what's in your kitchen.`;
 
   if (navigator.share) {
-    navigator.share({ title, text, url: recipeUrl }).catch(() => {});
+    navigator.share({ title: title || 'HARVEST', text, url: harvestUrl }).catch(() => {});
   } else {
-    navigator.clipboard.writeText(text).then(() => {}).catch(() => {});
+    navigator.clipboard.writeText(`${text}\n\n${harvestUrl}`).then(() => {}).catch(() => {});
   }
 }
 
