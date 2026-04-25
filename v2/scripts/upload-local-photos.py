@@ -7,7 +7,7 @@ import requests
 
 SUPABASE_URL = 'https://zhncgdbhgkeiybdbzsql.supabase.co'
 SUPABASE_BUCKET = 'recipe-images'
-SUPABASE_SERVICE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpobmNnZGJoZ2tlaXliZGJ6c3FsIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NjYyNzcyNywiZXhwIjoyMDkyMjAzNzI3fQ.PW58eQ6vioix4tuRvNKzc4R3kW2flZKL4i3_9bGrfhc'
+SUPABASE_SERVICE_KEY = ''  # SET THIS BEFORE RUNNING
 
 PHOTO_DIR = Path(__file__).parent / 'photos'
 

@@ -42,7 +42,7 @@ SUPABASE_BUCKET = 'recipe-images'
 
 # You'll need to set this — get it from Supabase dashboard → Settings → API
 # Use the service_role key (not anon) for storage uploads
-SUPABASE_SERVICE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpobmNnZGJoZ2tlaXliZGJ6c3FsIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NjYyNzcyNywiZXhwIjoyMDkyMjAzNzI3fQ.PW58eQ6vioix4tuRvNKzc4R3kW2flZKL4i3_9bGrfhc'  # SET THIS BEFORE RUNNING
+SUPABASE_SERVICE_KEY = ''  # SET THIS BEFORE RUNNING — get from Supabase dashboard
 
 SCRIPT_DIR = Path(__file__).parent
 PHOTO_DIR = SCRIPT_DIR / 'photos'
