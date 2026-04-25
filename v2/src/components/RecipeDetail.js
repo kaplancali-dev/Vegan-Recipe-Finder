@@ -5,7 +5,7 @@
  * action buttons (favorite, add missing to shopping list, view recipe).
  */
 
-import { escHTML } from '../utils/text.js';
+import { escHTML, decodeHTML } from '../utils/text.js';
 import { get, set } from '../state/store.js';
 import { autoSync, reportBrokenLink } from '../services/sync.js';
 import { ingredientMatches, expandWithAliases } from '../services/matching.js';
@@ -77,16 +77,17 @@ export function openDetail(id) {
   const nut = recipe.nut || {};
   const nutHtml = `
     <div class="nut-grid">
-      <div class="nut-cell"><span class="nut-val">${nut.cal ?? '—'}</span>cal</div>
-      <div class="nut-cell"><span class="nut-val">${nut.pro ?? '—'}g</span>protein</div>
-      <div class="nut-cell"><span class="nut-val">${nut.carb ?? '—'}g</span>carbs</div>
-      <div class="nut-cell"><span class="nut-val">${nut.fat ?? '—'}g</span>fat</div>
-      <div class="nut-cell"><span class="nut-val">${nut.fib ?? '—'}g</span>fiber</div>
+      <div class="nut-cell"><span class="nut-val">${nut.cal ?? '—'}</span><span class="nut-label">cal</span></div>
+      <div class="nut-cell"><span class="nut-val">${nut.pro ?? '—'}g</span><span class="nut-label">protein</span></div>
+      <div class="nut-cell"><span class="nut-val">${nut.carb ?? '—'}g</span><span class="nut-label">carbs</span></div>
+      <div class="nut-cell"><span class="nut-val">${nut.fat ?? '—'}g</span><span class="nut-label">fat</span></div>
+      <div class="nut-cell"><span class="nut-val">${nut.fib ?? '—'}g</span><span class="nut-label">fiber</span></div>
     </div>
   `;
 
   // Ingredient list HTML (with tap-to-reveal health benefits)
   const ingHtml = ingList.map(i => {
+    const displayName = decodeHTML(i.name);
     const info = getIngredientBenefits(i.name);
     const benefitsHtml = info && info.benefits.length
       ? `<div class="ing-benefits" hidden>
@@ -96,7 +97,7 @@ export function openDetail(id) {
       : '';
     const tappable = info && info.benefits.length ? ' has-benefits' : '';
     return `<li class="detail-ing ${i.have ? 'have' : 'missing'}${tappable}">
-      <span class="ing-name">${i.have ? '✓' : '○'} ${escHTML(i.name)}${tappable ? ' <span class="ing-info-icon">ℹ</span>' : ''}</span>
+      <span class="ing-name">${i.have ? '✓' : '○'} ${escHTML(displayName)}${tappable ? ' <span class="ing-info-icon">ℹ</span>' : ''}</span>
       ${benefitsHtml}
     </li>`;
   }).join('');
@@ -206,7 +207,7 @@ export function openDetail(id) {
   const shareBtn = document.getElementById('detailShareBtn');
   if (shareBtn) {
     shareBtn.addEventListener('click', () => {
-      shareRecipe(recipe.title, recipe.url);
+      shareRecipe(recipe.title, recipe.url, recipe.id);
     });
   }
 

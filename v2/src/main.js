@@ -13,7 +13,7 @@ import { $, $$ } from './utils/dom.js';
 import recipes from './data/recipes.json';
 import { initBrowse } from './components/Browse.js';
 import { initPantry } from './components/Pantry.js';
-import { initRecipeDetail } from './components/RecipeDetail.js';
+import { initRecipeDetail, openDetail } from './components/RecipeDetail.js';
 import { initShopping } from './components/Shopping.js';
 import { initFavorites } from './components/Favorites.js';
 import { initReadyToCook } from './components/ReadyToCook.js';
@@ -124,6 +124,19 @@ initWantToMake(recipes);
 initReadyToCook(recipes);
 initSyncPanel();
 initOnboarding();
+
+/* ── Deep-link: open shared recipe from ?r= parameter ─────── */
+
+const deepLinkId = new URLSearchParams(window.location.search).get('r');
+if (deepLinkId) {
+  const rid = Number(deepLinkId);
+  if (recipes.find(r => r.id === rid)) {
+    // Small delay so the UI is fully rendered before opening modal
+    setTimeout(() => openDetail(rid), 300);
+  }
+  // Clean URL without reloading
+  window.history.replaceState({}, '', window.location.pathname);
+}
 
 /* ── Responsive search placeholders ────────────────────────── */
 

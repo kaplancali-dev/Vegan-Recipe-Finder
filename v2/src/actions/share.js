@@ -5,11 +5,15 @@
 
 /**
  * Share a recipe via native share sheet or clipboard fallback.
+ * Links to HARVEST with a deep link to the specific recipe.
  * @param {string} title - Recipe title
- * @param {string} url - Recipe URL (unused — we always link to HARVEST)
+ * @param {string} url - Original recipe URL (unused)
+ * @param {number|string} [id] - Recipe ID for deep linking
  */
-export function shareRecipe(title, url) {
-  const harvestUrl = 'https://myharvestvegan.com';
+export function shareRecipe(title, url, id) {
+  const harvestUrl = id
+    ? `https://myharvestvegan.com?r=${id}`
+    : 'https://myharvestvegan.com';
   const text = title
     ? `Check out "${title}" on HARVEST 🌿 — nearly 2,000 plant-based recipes matched to what's in your kitchen.`
     : `HARVEST 🌿 — nearly 2,000 plant-based recipes matched to what's in your kitchen.`;
@@ -30,6 +34,6 @@ export function handleShareClick(e) {
   const shareBtn = e.target.closest('.share-btn');
   if (!shareBtn) return false;
   e.stopPropagation();
-  shareRecipe(shareBtn.dataset.shareTitle, shareBtn.dataset.shareUrl);
+  shareRecipe(shareBtn.dataset.shareTitle, shareBtn.dataset.shareUrl, shareBtn.dataset.shareId);
   return true;
 }
