@@ -26,6 +26,10 @@ let _recipes = [];
 /** Which sub-tab is active: 'recipes' | 'history' */
 let _activeSubTab = 'recipes';
 
+/** History sort state */
+let _sortCol = 'date';   // 'recipe' | 'rating' | 'date' | 'again'
+let _sortAsc = false;     // default: newest first
+
 /**
  * Initialize the Want to Make tab.
  * @param {Array} recipes - Full recipe list
@@ -193,22 +197,52 @@ function renderCookHistory(container, history, favSet, shopSet) {
   [...history].reverse().forEach(h => {
     if (!seen.has(h.id)) seen.set(h.id, h);
   });
-  const unique = [...seen.values()].slice(0, 30);
+  let unique = [...seen.values()].slice(0, 30);
+
+  // Resolve recipe titles for sorting
+  const resolved = unique.map(h => {
+    const recipe = _recipes.find(r => r.id === h.id);
+    return { ...h, _title: recipe ? recipe.title : '' };
+  });
+
+  // Sort
+  resolved.sort((a, b) => {
+    let cmp = 0;
+    switch (_sortCol) {
+      case 'recipe':
+        cmp = a._title.localeCompare(b._title);
+        break;
+      case 'rating':
+        cmp = (a.rating || 0) - (b.rating || 0);
+        break;
+      case 'date':
+        cmp = new Date(a.date) - new Date(b.date);
+        break;
+      case 'again': {
+        const val = v => v === true ? 2 : v === false ? 1 : 0;
+        cmp = val(a.wouldMakeAgain) - val(b.wouldMakeAgain);
+        break;
+      }
+    }
+    return _sortAsc ? cmp : -cmp;
+  });
+
+  // Sort arrow helper
+  const arrow = (col) => _sortCol === col ? (_sortAsc ? ' ▲' : ' ▼') : '';
 
   let html = `<div class="wm-history-table">
     <div class="wm-history-header">
-      <span>Recipe</span>
-      <span>Rating</span>
-      <span>Date</span>
-      <span>Again?</span>
+      <span class="wm-sort-col" data-sort-col="recipe">Recipe${arrow('recipe')}</span>
+      <span class="wm-sort-col" data-sort-col="rating">Rating${arrow('rating')}</span>
+      <span class="wm-sort-col" data-sort-col="date">Date${arrow('date')}</span>
+      <span class="wm-sort-col" data-sort-col="again">Again?${arrow('again')}</span>
       <span>Fav</span>
       <span>Shop</span>
       <span></span>
     </div>`;
 
-  unique.forEach(({ id, date, rating, wouldMakeAgain }) => {
-    const recipe = _recipes.find(r => r.id === id);
-    if (!recipe) return;
+  resolved.forEach(({ id, date, rating, wouldMakeAgain, _title }) => {
+    if (!_title) return;
     const dateStr = new Date(date).toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
     const stars = rating ? '★'.repeat(rating) + '☆'.repeat(5 - rating) : '—';
     const again = wouldMakeAgain === true ? '✓'
@@ -218,7 +252,7 @@ function renderCookHistory(container, history, favSet, shopSet) {
     const inShop = shopSet.has(id);
 
     html += `<div class="wm-history-row" data-history-id="${id}">
-      <a class="wm-history-name" href="#" data-open-recipe="${id}">${escHTML(recipe.title)}</a>
+      <a class="wm-history-name" href="#" data-open-recipe="${id}">${escHTML(_title)}</a>
       <span class="wm-history-stars">${stars}</span>
       <span class="wm-history-date">${dateStr}</span>
       <span class="wm-history-again ${wouldMakeAgain === true ? 'wm-again-yes' : wouldMakeAgain === false ? 'wm-again-no' : ''}">${again}</span>
@@ -245,6 +279,20 @@ function wireEvents() {
     const subTab = t.closest('.wm-subtab');
     if (subTab) {
       _activeSubTab = subTab.dataset.wmSub;
+      renderWantToMake();
+      return;
+    }
+
+    // Sort column header click
+    const sortCol = t.closest('[data-sort-col]');
+    if (sortCol) {
+      const col = sortCol.dataset.sortCol;
+      if (_sortCol === col) {
+        _sortAsc = !_sortAsc;
+      } else {
+        _sortCol = col;
+        _sortAsc = col === 'recipe'; // alpha defaults ascending, others descending
+      }
       renderWantToMake();
       return;
     }

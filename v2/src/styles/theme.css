@@ -2927,6 +2927,15 @@ input, select, textarea {
   letter-spacing: 0.03em;
 }
 
+.wm-sort-col {
+  cursor: pointer;
+  user-select: none;
+  transition: color var(--transition);
+}
+.wm-sort-col:hover {
+  color: var(--green);
+}
+
 .wm-history-row {
   display: grid;
   grid-template-columns: 1fr 90px 70px 50px 36px 36px 30px;
