@@ -123,7 +123,6 @@ initFavorites(recipes);
 initWantToMake(recipes);
 initReadyToCook(recipes);
 initSyncPanel();
-initOnboarding();
 
 /* ── Deep-link: open shared recipe from #r=ID or ?r=ID ────── */
 
@@ -133,10 +132,17 @@ const deepLinkId = hashMatch ? hashMatch[1] : queryId;
 if (deepLinkId) {
   const rid = Number(deepLinkId);
   if (recipes.find(r => r.id === rid)) {
+    // Skip onboarding for deep-linked visitors — show recipe instead
     setTimeout(() => openDetail(rid), 300);
+  } else {
+    // Invalid recipe ID — show onboarding normally
+    initOnboarding();
   }
   // Clean URL without reloading
   window.history.replaceState({}, '', window.location.pathname);
+} else {
+  // No deep link — normal first-visit onboarding
+  initOnboarding();
 }
 
 /* ── Responsive search placeholders ────────────────────────── */
