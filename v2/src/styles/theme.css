@@ -1874,6 +1874,79 @@ input, select, textarea {
   margin-bottom: 14px;
 }
 
+/* ── New-visitor hero image — bigger, edge-to-edge ─────────── */
+.detail-img-hero {
+  max-height: 340px;
+  border-radius: 0;
+  margin: -16px -20px 14px;
+  width: calc(100% + 40px);
+}
+
+/* ── New-visitor CTA button ────────────────────────────────── */
+.visitor-cta {
+  display: block;
+  text-align: center;
+  padding: 14px;
+  background: var(--green);
+  color: #fff;
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+  font-size: 1rem;
+  margin-bottom: 16px;
+  transition: background var(--transition);
+}
+.visitor-cta:hover {
+  background: var(--green-deep);
+  text-decoration: none;
+}
+
+/* ── New-visitor plain ingredient items ────────────────────── */
+.detail-ing.visitor-ing {
+  padding: 5px 10px;
+  font-size: 0.88rem;
+  color: var(--ink);
+  background: none;
+  border-bottom: 1px solid var(--border);
+}
+.detail-ing.visitor-ing:last-child {
+  border-bottom: none;
+}
+
+/* ── HARVEST pitch banner ──────────────────────────────────── */
+.visitor-pitch {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--green-soft);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+  cursor: pointer;
+  transition: background var(--transition);
+  margin-top: 8px;
+}
+.visitor-pitch:hover {
+  background: var(--green-bg, var(--green-soft));
+  filter: brightness(0.97);
+}
+.visitor-pitch-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.visitor-pitch-text strong {
+  font-size: 0.95rem;
+  color: var(--green-deep);
+}
+.visitor-pitch-text span {
+  font-size: 0.8rem;
+  color: var(--green);
+}
+.visitor-pitch-arrow {
+  font-size: 1.2rem;
+  color: var(--green);
+}
+
 /* ── Modal Recipe Detail Sections ────────────────────────────── */
 .detail-section {
   margin-bottom: 16px;

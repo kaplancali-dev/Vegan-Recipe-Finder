@@ -58,8 +58,104 @@ export function openDetail(id) {
 
   const ings = get('ingredients');
   const staples = get('staples');
+  const isNewVisitor = ings.length === 0 && staples.length === 0;
+
+  if (isNewVisitor) {
+    _renderNewVisitorDetail(recipe);
+  } else {
+    _renderFullDetail(recipe, ings, staples);
+  }
+
+  _overlay.hidden = false;
+  document.body.style.overflow = 'hidden';
+  _closeBtn?.focus();
+  _trapFocus(_overlay);
+}
+
+/**
+ * Render the new-visitor landing view for a shared recipe.
+ * Clean layout: big hero, plain ingredients, prominent CTA, HARVEST pitch.
+ */
+function _renderNewVisitorDetail(recipe) {
+  const ingList = recipe.ing || [];
+  const nut = recipe.nut || {};
+
+  const ingHtml = ingList.map(ing => {
+    const displayName = decodeHTML(ing);
+    return `<li class="detail-ing visitor-ing">${escHTML(displayName)}</li>`;
+  }).join('');
+
+  const nutHtml = (nut.cal || nut.pro || nut.carb) ? `
+    <div class="detail-section">
+      <h4>Nutrition (per serving)</h4>
+      <div class="nut-grid">
+        <div class="nut-cell"><span class="nut-val">${nut.cal ?? '—'}</span><span class="nut-label">cal</span></div>
+        <div class="nut-cell"><span class="nut-val">${nut.pro ?? '—'}g</span><span class="nut-label">protein</span></div>
+        <div class="nut-cell"><span class="nut-val">${nut.carb ?? '—'}g</span><span class="nut-label">carbs</span></div>
+        <div class="nut-cell"><span class="nut-val">${nut.fat ?? '—'}g</span><span class="nut-label">fat</span></div>
+        <div class="nut-cell"><span class="nut-val">${nut.fib ?? '—'}g</span><span class="nut-label">fiber</span></div>
+      </div>
+    </div>
+  ` : '';
+
+  _title.textContent = recipe.title;
+  _body.innerHTML = `
+    ${recipe.img ? `<img class="detail-img detail-img-hero" loading="lazy" decoding="async" src="${escHTML(recipe.img)}" alt="${escHTML(recipe.title)}">` : ''}
+    <div class="detail-section">
+      <div class="r-site">${escHTML(recipe.site || '')}</div>
+      <div class="r-meta" style="margin-top:6px">
+        ${recipe.time ? `<span>⏱ ${recipe.time} min</span>` : ''}
+        ${recipe.servings ? `<span>🍽 ${recipe.servings} servings</span>` : ''}
+      </div>
+    </div>
+
+    ${recipe.url ? `<a href="${escHTML(recipe.url)}" target="_blank" rel="noopener" class="visitor-cta">View full recipe</a>` : ''}
+
+    <div class="detail-section">
+      <h4>Ingredients (${ingList.length})</h4>
+      <ul class="detail-ing-list">${ingHtml}</ul>
+    </div>
+
+    ${nutHtml}
+
+    <div class="visitor-pitch" id="visitorPitch">
+      <div class="visitor-pitch-text">
+        <strong>Try HARVEST</strong>
+        <span>Find recipes based on what's already in your kitchen</span>
+      </div>
+      <span class="visitor-pitch-arrow">→</span>
+    </div>
+
+    <div class="detail-actions" style="margin-top:12px">
+      <button class="btn btn-outline" id="detailShareBtn">📤 Share</button>
+    </div>
+  `;
+
+  // Wire "Try HARVEST" banner — close modal to show onboarding
+  const pitch = document.getElementById('visitorPitch');
+  if (pitch) {
+    pitch.addEventListener('click', () => {
+      closeDetail();
+      // Scroll to top to show the hero/onboarding
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  const shareBtn = document.getElementById('detailShareBtn');
+  if (shareBtn) {
+    shareBtn.addEventListener('click', () => {
+      shareRecipe(recipe.title, recipe.url, recipe.id);
+    });
+  }
+}
+
+/**
+ * Render the full detail view for existing users with a pantry.
+ */
+function _renderFullDetail(recipe, ings, staples) {
   const userIngs = expandWithAliases([...ings, ...staples]);
   const favs = new Set(get('favorites'));
+  const id = recipe.id;
   const isFav = favs.has(id);
   const instructions = get('instructions');
   const notes = instructions[id] || '';
@@ -239,15 +335,6 @@ export function openDetail(id) {
       }, 800);
     });
   }
-
-  _overlay.hidden = false;
-  document.body.style.overflow = 'hidden';
-
-  // Focus the close button for accessibility
-  _closeBtn?.focus();
-
-  // Set up focus trap
-  _trapFocus(_overlay);
 }
 
 /** Store the element that had focus before modal opened */
