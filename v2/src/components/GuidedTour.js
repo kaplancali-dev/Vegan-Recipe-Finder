@@ -1,7 +1,7 @@
 /**
  * GuidedTour — tooltip-style walkthrough after onboarding.
  *
- * Shows 6 callout bubbles pointing at key UI elements,
+ * Shows 7 callout bubbles pointing at key UI elements,
  * advancing on tap/click. Teaches the app without a video.
  */
 
@@ -22,8 +22,16 @@ const STEPS = [
   {
     target: '#btn-browse',
     tab: 'browse',
-    title: 'Browse, search, and sort',
-    body: 'Every recipe shows how many ingredients you already have. Search for anything — like "pancakes" — then sort by Protein, Fiber, or Low Cal to find the healthiest version of what you\'re craving.',
+    title: 'Browse and search 4,500+ recipes',
+    body: 'Every recipe shows how many ingredients you already have. Search for anything — like "pancakes" — and filter by category or cook time.',
+    arrow: 'top',
+  },
+  {
+    target: '#sortBar',
+    tab: 'browse',
+    scroll: '#sortBar',
+    title: 'Sort by what matters to you',
+    body: 'Tap Protein ↓, Fiber ↓, or Low Cal to instantly rank results by nutrition. Looking for a high-protein breakfast? Search "pancakes," then tap Protein — the healthiest version floats right to the top.',
     arrow: 'top',
   },
   {
