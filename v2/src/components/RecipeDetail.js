@@ -14,6 +14,7 @@ import { toggleFavorite } from '../actions/favorites.js';
 import { showToast } from '../utils/toast.js';
 import { handleCook } from '../actions/cook.js';
 import { getIngredientBenefits } from '../data/ingredient-benefits.js';
+import { initOnboarding } from './Onboarding.js';
 
 /** @type {Array} Full recipe list — set by init */
 let _recipes = [];
@@ -132,13 +133,14 @@ function _renderNewVisitorDetail(recipe) {
     </div>
   `;
 
-  // Wire "Try HARVEST" banner — close modal to show onboarding
+  // Wire "Try HARVEST" banner — close modal and launch onboarding
   const pitch = document.getElementById('visitorPitch');
   if (pitch) {
     pitch.addEventListener('click', () => {
       closeDetail();
-      // Scroll to top to show the hero/onboarding
       window.scrollTo({ top: 0, behavior: 'smooth' });
+      // Launch the onboarding wizard
+      setTimeout(() => initOnboarding(), 300);
     });
   }
 
