@@ -211,6 +211,11 @@ export function initOnboarding() {
   // Don't show if already onboarded or has staples
   if (onboarded || hasStaples) return;
 
+  // Don't show if arriving via a shared recipe deep link
+  const hasDeepLink = window.location.hash.match(/^#r=\d+/) ||
+    new URLSearchParams(window.location.search).get('r');
+  if (hasDeepLink) return;
+
   // Create overlay
   const overlay = document.createElement('div');
   overlay.className = 'obd-overlay';
