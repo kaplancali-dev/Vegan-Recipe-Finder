@@ -302,8 +302,7 @@ function wireEvents() {
     if (openLink) {
       e.preventDefault();
       const id = Number(openLink.dataset.openRecipe);
-      const recipe = _recipes.find(r => r.id === id);
-      if (recipe) openDetail(recipe);
+      if (id) openDetail(id);
       return;
     }
 
