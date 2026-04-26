@@ -86,6 +86,15 @@ ${a}`).then(()=>{}).catch(()=>{})}function We(e){const t=e.target.closest(".shar
     </div>
   `:"";Ye.textContent=e.title,Pe.innerHTML=`
     ${e.img?`<img class="detail-img detail-img-hero" loading="lazy" decoding="async" src="${b(e.img)}" alt="${b(e.title)}">`:""}
+
+    <div class="visitor-pitch visitor-pitch-purple" id="visitorPitch">
+      <div class="visitor-pitch-text">
+        <strong>Try HARVEST</strong>
+        <span>Find recipes based on what's already in your kitchen</span>
+      </div>
+      <span class="visitor-pitch-arrow">→</span>
+    </div>
+
     <div class="detail-section">
       <div class="r-site">${b(e.site||"")}</div>
       <div class="r-meta" style="margin-top:6px">
@@ -95,14 +104,6 @@ ${a}`).then(()=>{}).catch(()=>{})}function We(e){const t=e.target.closest(".shar
     </div>
 
     ${e.url?`<a href="${b(e.url)}" target="_blank" rel="noopener" class="visitor-cta">View full recipe</a>`:""}
-
-    <div class="visitor-pitch" id="visitorPitch">
-      <div class="visitor-pitch-text">
-        <strong>Try HARVEST</strong>
-        <span>Find recipes based on what's already in your kitchen</span>
-      </div>
-      <span class="visitor-pitch-arrow">→</span>
-    </div>
 
     <div class="detail-section">
       <h4>Ingredients (${t.length})</h4>

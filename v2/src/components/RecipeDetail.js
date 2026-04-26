@@ -101,6 +101,15 @@ function _renderNewVisitorDetail(recipe) {
   _title.textContent = recipe.title;
   _body.innerHTML = `
     ${recipe.img ? `<img class="detail-img detail-img-hero" loading="lazy" decoding="async" src="${escHTML(recipe.img)}" alt="${escHTML(recipe.title)}">` : ''}
+
+    <div class="visitor-pitch visitor-pitch-purple" id="visitorPitch">
+      <div class="visitor-pitch-text">
+        <strong>Try HARVEST</strong>
+        <span>Find recipes based on what's already in your kitchen</span>
+      </div>
+      <span class="visitor-pitch-arrow">→</span>
+    </div>
+
     <div class="detail-section">
       <div class="r-site">${escHTML(recipe.site || '')}</div>
       <div class="r-meta" style="margin-top:6px">
@@ -110,14 +119,6 @@ function _renderNewVisitorDetail(recipe) {
     </div>
 
     ${recipe.url ? `<a href="${escHTML(recipe.url)}" target="_blank" rel="noopener" class="visitor-cta">View full recipe</a>` : ''}
-
-    <div class="visitor-pitch" id="visitorPitch">
-      <div class="visitor-pitch-text">
-        <strong>Try HARVEST</strong>
-        <span>Find recipes based on what's already in your kitchen</span>
-      </div>
-      <span class="visitor-pitch-arrow">→</span>
-    </div>
 
     <div class="detail-section">
       <h4>Ingredients (${ingList.length})</h4>

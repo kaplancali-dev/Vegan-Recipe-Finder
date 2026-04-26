@@ -1925,8 +1925,7 @@ input, select, textarea {
   margin-top: 8px;
 }
 .visitor-pitch:hover {
-  background: var(--green-bg, var(--green-soft));
-  filter: brightness(0.97);
+  filter: brightness(0.95);
 }
 .visitor-pitch-text {
   flex: 1;
@@ -1945,6 +1944,22 @@ input, select, textarea {
 .visitor-pitch-arrow {
   font-size: 1.2rem;
   color: var(--green);
+}
+
+/* Light purple variant */
+.visitor-pitch-purple {
+  background: #EEEDFE;
+  margin-top: 0;
+  margin-bottom: 12px;
+}
+.visitor-pitch-purple .visitor-pitch-text strong {
+  color: #3C3489;
+}
+.visitor-pitch-purple .visitor-pitch-text span {
+  color: #534AB7;
+}
+.visitor-pitch-purple .visitor-pitch-arrow {
+  color: #534AB7;
 }
 
 /* ── Modal Recipe Detail Sections ────────────────────────────── */
