@@ -2,10 +2,14 @@
 """
 Universal vegan recipe scraper for multiple sites.
 Uses JSON-LD structured data (Schema.org Recipe) and sitemap/category crawling.
+Falls back to Playwright (headless Chrome) for sites that block requests.
 
 Usage:
     python3 scrape-multi.py                    # scrape all sites
     python3 scrape-multi.py veganricha ohsheglows  # scrape specific sites
+
+Install for Playwright fallback (optional):
+    pip3 install playwright && playwright install chromium
 
 Sites: veganricha, ohsheglows, loveandlemons, plantyou,
        itdoesnttastelikechicken, forksoverknives, bestofvegan
@@ -15,6 +19,7 @@ import json
 import re
 import time
 import sys
+import random
 import xml.etree.ElementTree as ET
 from pathlib import Path
 from urllib.parse import urlparse
@@ -23,13 +28,116 @@ import requests
 from bs4 import BeautifulSoup
 
 OUTPUT_DIR = Path(__file__).parent
-HEADERS = {
-    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) '
-                  'AppleWebKit/537.36 (KHTML, like Gecko) '
-                  'Chrome/125.0.0.0 Safari/537.36',
-    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-    'Accept-Language': 'en-US,en;q=0.9',
-}
+
+# ── Realistic browser headers ───────────────────────────────────
+# Full Chrome-on-Mac header set to avoid bot detection
+
+USER_AGENTS = [
+    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36',
+    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36',
+    'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36',
+    'Mozilla/5.0 (Macintosh; Intel Mac OS X 14_5) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Safari/605.1.15',
+]
+
+def _make_headers(referer=None):
+    """Build realistic browser headers with a random User-Agent."""
+    h = {
+        'User-Agent': random.choice(USER_AGENTS),
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8',
+        'Accept-Language': 'en-US,en;q=0.9',
+        'Accept-Encoding': 'gzip, deflate, br',
+        'DNT': '1',
+        'Connection': 'keep-alive',
+        'Upgrade-Insecure-Requests': '1',
+        'Sec-Fetch-Dest': 'document',
+        'Sec-Fetch-Mode': 'navigate',
+        'Sec-Fetch-Site': 'none' if not referer else 'same-origin',
+        'Sec-Fetch-User': '?1',
+        'Cache-Control': 'max-age=0',
+    }
+    if referer:
+        h['Referer'] = referer
+    return h
+
+HEADERS = _make_headers()  # default set for backward compat
+
+# ── Playwright (headless Chrome) fallback ───────────────────────
+
+_playwright = None
+_browser = None
+_pw_page = None
+
+def _pw_available():
+    """Check if Playwright is installed."""
+    try:
+        import playwright
+        return True
+    except ImportError:
+        return False
+
+def _pw_launch():
+    """Launch headless Chromium via Playwright. Returns a page object."""
+    global _playwright, _browser, _pw_page
+    if _pw_page:
+        return _pw_page
+    from playwright.sync_api import sync_playwright
+    _playwright = sync_playwright().start()
+    _browser = _playwright.chromium.launch(headless=True)
+    ctx = _browser.new_context(
+        user_agent=USER_AGENTS[0],
+        viewport={'width': 1440, 'height': 900},
+        locale='en-US',
+    )
+    _pw_page = ctx.new_page()
+    return _pw_page
+
+def _pw_fetch(url, timeout=20000):
+    """Fetch a page using Playwright. Returns HTML string or None."""
+    page = _pw_launch()
+    try:
+        page.goto(url, timeout=timeout, wait_until='domcontentloaded')
+        time.sleep(1)  # let JS execute
+        return page.content()
+    except Exception as e:
+        print(f'    Playwright error: {e}')
+        return None
+
+def _pw_close():
+    """Clean up Playwright resources."""
+    global _playwright, _browser, _pw_page
+    try:
+        if _browser:
+            _browser.close()
+        if _playwright:
+            _playwright.stop()
+    except Exception:
+        pass
+    _playwright = _browser = _pw_page = None
+
+
+def fetch_page(url, referer=None, use_playwright=False):
+    """Fetch a URL — tries requests first, falls back to Playwright if blocked."""
+    headers = _make_headers(referer=referer)
+
+    if not use_playwright:
+        try:
+            resp = requests.get(url, headers=headers, timeout=15)
+            if resp.status_code == 403 and _pw_available():
+                print(f'(403 → trying Playwright) ', end='', flush=True)
+                html = _pw_fetch(url)
+                if html:
+                    return html, 200
+                return None, 403
+            return resp.text if resp.status_code == 200 else None, resp.status_code
+        except Exception as e:
+            if _pw_available():
+                html = _pw_fetch(url)
+                if html:
+                    return html, 200
+            return None, str(e)
+    else:
+        html = _pw_fetch(url)
+        return (html, 200) if html else (None, 'playwright failed')
 
 # ── Site configs ─────────────────────────────────────────────────
 
@@ -63,7 +171,8 @@ SITES = {
         ],
         'max_pages': 80,
         'vegan_only': True,
-        'delay': 1.0,
+        'use_playwright': True,   # site blocks requests, need headless Chrome
+        'delay': 2.0,
         'output': 'ohsheglows-recipes.json',
     },
     'loveandlemons': {
@@ -215,7 +324,7 @@ def has_dairy(ingredients):
 def fetch_sitemap_urls(sitemap_url):
     """Fetch URLs from a sitemap XML. Handles sitemap indexes recursively."""
     try:
-        resp = requests.get(sitemap_url, headers=HEADERS, timeout=15)
+        resp = requests.get(sitemap_url, headers=_make_headers(), timeout=15)
         if resp.status_code != 200:
             return []
     except Exception:
@@ -258,30 +367,39 @@ def crawl_category_pages(config):
     base = config['base']
     max_pages = config.get('max_pages', 30)
     delay = config.get('delay', 1.0)
+    use_pw = config.get('use_playwright', False)
+    pw_tried = False
 
     for cat_url in config.get('category_urls', []):
         print(f'  Crawling {cat_url}')
-        page = 1
+        page_num = 1
 
-        while page <= max_pages:
-            if page == 1:
+        while page_num <= max_pages:
+            if page_num == 1:
                 url = cat_url
             else:
-                url = cat_url.rstrip('/') + f'/page/{page}/'
+                url = cat_url.rstrip('/') + f'/page/{page_num}/'
 
-            try:
-                resp = requests.get(url, headers=HEADERS, timeout=15)
-                if resp.status_code == 404:
-                    print(f'    Page {page}: 404, done with this category')
-                    break
-                if resp.status_code != 200:
-                    print(f'    Page {page}: HTTP {resp.status_code}')
-                    break
-            except Exception as e:
-                print(f'    Page {page}: error {e}')
+            html, status = fetch_page(url, referer=base, use_playwright=use_pw)
+
+            if status == 404:
+                print(f'    Page {page_num}: 404, done with this category')
                 break
+            if html is None:
+                # If requests got blocked, try Playwright for the whole site
+                if not pw_tried and not use_pw and _pw_available():
+                    print(f'    Page {page_num}: HTTP {status} — switching to Playwright')
+                    use_pw = True
+                    pw_tried = True
+                    html, status = fetch_page(url, use_playwright=True)
+                    if html is None:
+                        print(f'    Page {page_num}: Playwright also failed')
+                        break
+                else:
+                    print(f'    Page {page_num}: HTTP {status}')
+                    break
 
-            soup = BeautifulSoup(resp.text, 'html.parser')
+            soup = BeautifulSoup(html, 'html.parser')
 
             # Find recipe links
             links = set()
@@ -316,7 +434,7 @@ def crawl_category_pages(config):
             if not new:
                 break
 
-            page += 1
+            page_num += 1
             time.sleep(delay)
 
     return list(all_urls)
@@ -390,16 +508,13 @@ def _find_recipe_in_jsonld(data):
     return None
 
 
-def extract_recipe(url, site_name, vegan_only):
+def extract_recipe(url, site_name, vegan_only, use_playwright=False):
     """Extract recipe data from a page using JSON-LD."""
-    try:
-        resp = requests.get(url, headers=HEADERS, timeout=15)
-        if resp.status_code != 200:
-            return None, f'HTTP {resp.status_code}'
-    except Exception as e:
-        return None, f'fetch error: {e}'
+    html, status = fetch_page(url, use_playwright=use_playwright)
+    if html is None:
+        return None, f'HTTP {status}'
 
-    soup = BeautifulSoup(resp.text, 'html.parser')
+    soup = BeautifulSoup(html, 'html.parser')
 
     # Find JSON-LD — use recursive search to handle any nesting
     recipe_data = None
@@ -521,26 +636,38 @@ def scrape_site(key, config):
     errors = 0
     delay = config.get('delay', 0.5)
 
+    use_pw = config.get('use_playwright', False)
+    consecutive_errors = 0
+
     for i, url in enumerate(urls, 1):
         slug = url.rstrip('/').split('/')[-1][:45]
         print(f'  [{i}/{len(urls)}] {slug}... ', end='', flush=True)
 
-        recipe, error = extract_recipe(url, config['name'], config.get('vegan_only', True))
+        recipe, error = extract_recipe(url, config['name'], config.get('vegan_only', True), use_playwright=use_pw)
         if recipe:
             recipes.append(recipe)
+            consecutive_errors = 0
             print(f'OK ({len(recipe["ing"])} ing)')
         else:
             if error and 'dairy' in error:
                 skipped_dairy += 1
+                consecutive_errors = 0
                 print(f'DAIRY')
             elif error and 'no JSON-LD' in error:
                 skipped_no_recipe += 1
+                consecutive_errors = 0
                 print(f'no recipe')
             elif error and ('fetch' in error or 'HTTP' in error):
                 errors += 1
+                consecutive_errors += 1
                 print(f'ERR ({error})')
-                # If getting lots of errors, slow down
-                if errors > 5 and errors % 5 == 0:
+                # After 3 consecutive errors, switch to Playwright
+                if consecutive_errors >= 3 and not use_pw and _pw_available():
+                    print(f'    → Switching to Playwright (headless Chrome) for remaining URLs')
+                    use_pw = True
+                    consecutive_errors = 0
+                    time.sleep(2)
+                elif errors > 5 and errors % 5 == 0:
                     print(f'    (slowing down, {errors} errors so far)')
                     time.sleep(5)
             else:
@@ -601,6 +728,9 @@ def main():
         except Exception as e:
             print(f'\n  ERROR on {key}: {e}\n  Continuing to next site...\n')
             continue
+
+    # Clean up Playwright if used
+    _pw_close()
 
     print(f'\n{"="*60}')
     print(f'  TOTAL: {total} recipes from {len(site_keys)} sites')
