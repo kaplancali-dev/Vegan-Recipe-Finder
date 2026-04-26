@@ -22,8 +22,8 @@ const STEPS = [
   {
     target: '#btn-browse',
     tab: 'browse',
-    title: 'Your match percentage',
-    body: 'Every recipe shows how many ingredients you already have. The more you add to your pantry, the higher your matches climb.',
+    title: 'Browse, search, and sort',
+    body: 'Every recipe shows how many ingredients you already have. Search for anything — like "pancakes" — then sort by Protein, Fiber, or Low Cal to find the healthiest version of what you\'re craving.',
     arrow: 'top',
   },
   {
