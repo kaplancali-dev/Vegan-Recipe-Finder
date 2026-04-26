@@ -670,10 +670,20 @@ input, select, textarea {
   border-color: var(--green);
 }
 
+.results-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 8px 0 4px;
+}
+
 .results-meta {
   font-size: 0.82rem;
   color: var(--muted);
-  padding: 6px 0;
+  padding: 0;
+  white-space: nowrap;
 }
 
 /* ── Recipe Cards ────────────────────────────────────────────── */

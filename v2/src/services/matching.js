@@ -231,7 +231,7 @@ export function findRecipes({
  * Returns a new sorted array (does not mutate the input).
  *
  * @param {Object[]} results
- * @param {'match'|'time'|'serv'|'alpha'} sortKey
+ * @param {'match'|'time'|'serv'|'alpha'|'protein'|'fiber'|'cal'} sortKey
  * @returns {Object[]} New sorted array
  */
 export function sortResults(results, sortKey) {
@@ -245,6 +245,12 @@ export function sortResults(results, sortKey) {
       return copy.sort((a, b) => (b.servings || 0) - (a.servings || 0));
     case 'alpha':
       return copy.sort((a, b) => a.title.localeCompare(b.title));
+    case 'protein':
+      return copy.sort((a, b) => ((b.nut && b.nut.pro) || 0) - ((a.nut && a.nut.pro) || 0) || a.title.localeCompare(b.title));
+    case 'fiber':
+      return copy.sort((a, b) => ((b.nut && b.nut.fib) || 0) - ((a.nut && a.nut.fib) || 0) || a.title.localeCompare(b.title));
+    case 'cal':
+      return copy.sort((a, b) => ((a.nut && a.nut.cal) || 999) - ((b.nut && b.nut.cal) || 999) || a.title.localeCompare(b.title));
     default:
       return copy;
   }

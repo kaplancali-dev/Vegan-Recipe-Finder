@@ -7,7 +7,7 @@
 
 import { get, set, subscribe, getRef } from '../state/store.js';
 import { autoSync } from '../services/sync.js';
-import { findRecipes } from '../services/matching.js';
+import { findRecipes, sortResults } from '../services/matching.js';
 import { escHTML } from '../utils/text.js';
 import { $, $$ } from '../utils/dom.js';
 import { V1_CATEGORIES } from '../data/categories.js';
@@ -30,6 +30,7 @@ let _selectedCats = new Set();
 let _maxTime = Infinity;
 let _nameSearch = '';
 let _allergies = new Set();
+let _sortKey = 'match';
 
 /** Pagination: how many results currently visible */
 let _visibleCount = PAGE_SIZE;
@@ -138,6 +139,17 @@ function wireControls() {
     slider.addEventListener('change', renderResults);
   }
 
+  // Sort buttons
+  const sortBar = $('#sortBar');
+  if (sortBar) {
+    sortBar.addEventListener('click', (e) => {
+      const btn = e.target.closest('.sort-btn');
+      if (!btn) return;
+      _sortKey = btn.dataset.sort;
+      sortBar.querySelectorAll('.sort-btn').forEach(b => b.classList.toggle('on', b === btn));
+      renderResults();
+    });
+  }
 }
 
 /**
@@ -167,6 +179,10 @@ function _runRender() {
     allergies: _allergies.size ? _allergies : new Set(),
   });
 
+  // Apply sort
+  if (_sortKey !== 'match') {
+    results = sortResults(results, _sortKey);
+  }
 
   _lastResults = results;
 
