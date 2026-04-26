@@ -502,14 +502,15 @@ input, select, textarea {
 }
 
 .chip.staple {
-  background: var(--accent-soft);
-  color: var(--accent);
+  background: var(--green-soft);
+  color: var(--green);
+  border-color: rgba(45, 122, 79, 0.25);
 }
 
 .chip.perishable {
-  background: var(--perishable-soft);
-  color: var(--perishable);
-  border-color: rgba(224, 122, 47, 0.25);
+  background: var(--green-soft);
+  color: var(--green);
+  border-color: rgba(45, 122, 79, 0.25);
 }
 
 /* ── Filter Chips ────────────────────────────────────────────── */
