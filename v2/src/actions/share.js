@@ -12,7 +12,7 @@
  */
 export function shareRecipe(title, url, id) {
   const harvestUrl = id
-    ? `https://myharvestvegan.com#r=${id}`
+    ? `https://myharvestvegan.com?r=${id}`
     : 'https://myharvestvegan.com';
   const text = title
     ? `Check out "${title}" on HARVEST 🌿 — nearly 2,000 plant-based recipes matched to what's in your kitchen.`

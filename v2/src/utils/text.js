@@ -43,6 +43,17 @@ export function escQ(s) {
 }
 
 /**
+ * Decode HTML entities (e.g. &frac14; → ¼, &amp; → &).
+ * Used to clean scraped recipe data before display.
+ */
+const _decodeArea = typeof document !== 'undefined' ? document.createElement('textarea') : null;
+export function decodeHTML(s) {
+  if (!_decodeArea || !s || !s.includes('&')) return s;
+  _decodeArea.innerHTML = s;
+  return _decodeArea.value;
+}
+
+/**
  * Escape a string for safe insertion into innerHTML.
  * Prevents XSS by converting <, >, &, ", ' to HTML entities.
  */

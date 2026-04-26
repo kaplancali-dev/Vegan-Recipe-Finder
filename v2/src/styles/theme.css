@@ -872,10 +872,10 @@ input, select, textarea {
 /* ── Nutrition row on card (matches v1) ─────────────────────── */
 .nut-row {
   display: flex;
-  gap: 10px;
+  justify-content: space-between;
   flex-wrap: wrap;
   margin: 6px 0 4px;
-  padding: 7px 10px;
+  padding: 7px 14px;
   background: var(--bg);
   border-radius: 8px;
   border: 1px solid var(--border);
@@ -885,7 +885,8 @@ input, select, textarea {
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-width: 44px;
+  flex: 1;
+  min-width: 56px;
 }
 
 .nut-val {
@@ -967,7 +968,12 @@ input, select, textarea {
 }
 
 .nut-cell {
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+.nut-cell .nut-label {
   font-size: 0.7rem;
   color: var(--muted);
 }
