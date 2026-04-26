@@ -6,6 +6,8 @@
  *                     was already cooked. Resolves 'log' | 'undo' | 'cancel'.
  */
 
+import { escHTML } from './text.js';
+
 /**
  * Show the star-rating popup and return a Promise<number>.
  * Resolves with 1–5 if the user picks stars, or 0 if they skip.
@@ -91,7 +93,7 @@ export function showCookConfirm(dateStr) {
 
     overlay.innerHTML = `
       <div class="rate-card">
-        <div class="rate-title">You made this on ${dateStr}</div>
+        <div class="rate-title">You made this on ${escHTML(dateStr)}</div>
         <button class="cook-confirm-btn cook-confirm-log" data-confirm="log">Rate again</button>
         <button class="cook-confirm-btn cook-confirm-undo" data-confirm="undo">Undo — I didn't make this</button>
         <button class="rate-skip" data-confirm="cancel">Cancel</button>

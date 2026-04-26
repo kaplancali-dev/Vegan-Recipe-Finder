@@ -9,7 +9,7 @@
 import { get, set, subscribe, getRef } from '../state/store.js';
 import { autoSync } from '../services/sync.js';
 import { findRecipes } from '../services/matching.js';
-import { escHTML, norm } from '../utils/text.js';
+import { escHTML, norm, applyGfSwap } from '../utils/text.js';
 import { showToast } from '../utils/toast.js';
 import { $ } from '../utils/dom.js';
 import { openDetail } from './RecipeDetail.js';
@@ -143,18 +143,10 @@ function _shareSingleRecipe(recipeTitle, missing) {
   }
 }
 
-/* ── GF substitution ─────────────────────────────────────────── */
+/* ── GF substitution (shared helper) ────────────────────────── */
 
-/**
- * Replace a gluten ingredient with its GF substitute for the shopping list.
- * E.g. "all-purpose flour" → "gluten-free flour", "soy sauce" → "tamari"
- */
 function _applyGfSwap(ingredient) {
-  const n = norm(ingredient);
-  for (const [glutenItem, gfItem] of Object.entries(GF_SWAPS)) {
-    if (norm(glutenItem) === n) return gfItem;
-  }
-  return ingredient;
+  return applyGfSwap(ingredient, GF_SWAPS);
 }
 
 /* ── Data helpers ─────────────────────────────────────────────── */

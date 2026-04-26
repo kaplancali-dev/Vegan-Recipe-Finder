@@ -44,9 +44,12 @@ export async function handleCook(id, opts = {}) {
 
   // First cook or "log again" — show star rating
   const rating = await showRating();
-  const freshHistory = get('cookHistory');
-  freshHistory.push({ id, date: new Date().toISOString(), rating });
-  set('cookHistory', freshHistory);
+  let freshHistory = get('cookHistory');
+  // Cap history at 500 entries to prevent localStorage bloat
+  if (freshHistory.length >= 500) {
+    freshHistory = freshHistory.slice(-499);
+  }
+  set('cookHistory', [...freshHistory, { id, date: new Date().toISOString(), rating }]);
 
   if (opts.removeFromMakelist) {
     const current = get('makelist');

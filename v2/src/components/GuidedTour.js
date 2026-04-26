@@ -61,6 +61,7 @@ const STEPS = [
 let _stepIndex = 0;
 let _overlay = null;
 let _tooltip = null;
+let _resizeHandler = null;
 
 /* ── Position the tooltip ───────────────────────────────────── */
 
@@ -205,6 +206,12 @@ function _dismiss() {
     if (el) el.classList.remove('tour-highlight');
   });
 
+  // Remove resize listener
+  if (_resizeHandler) {
+    window.removeEventListener('resize', _resizeHandler);
+    _resizeHandler = null;
+  }
+
   if (_overlay) {
     _overlay.style.opacity = '0';
     setTimeout(() => _overlay.remove(), 300);
@@ -260,12 +267,13 @@ export function startTour() {
     }
   });
 
-  // Reposition on resize
-  window.addEventListener('resize', () => {
+  // Reposition on resize (stored for cleanup in _dismiss)
+  _resizeHandler = () => {
     if (_stepIndex < STEPS.length) {
       const step = STEPS[_stepIndex];
       const el = $(step.target);
       if (el) _positionTooltip(el);
     }
-  });
+  };
+  window.addEventListener('resize', _resizeHandler);
 }

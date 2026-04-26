@@ -12,7 +12,7 @@
 import { get, set, subscribe, getRef } from '../state/store.js';
 import { autoSync } from '../services/sync.js';
 import { findRecipes } from '../services/matching.js';
-import { escHTML, norm } from '../utils/text.js';
+import { escHTML, norm, applyGfSwap } from '../utils/text.js';
 import { showToast } from '../utils/toast.js';
 import { handleCook } from '../actions/cook.js';
 import { $ } from '../utils/dom.js';
@@ -48,14 +48,10 @@ export function initWantToMake(recipes) {
   subscribe('cookHistory', renderWantToMake);
 }
 
-/* ── GF substitution ─────────────────────────────────────────── */
+/* ── GF substitution (shared helper) ────────────────────────── */
 
 function _applyGfSwap(ingredient) {
-  const n = norm(ingredient);
-  for (const [glutenItem, gfItem] of Object.entries(GF_SWAPS)) {
-    if (norm(glutenItem) === n) return gfItem;
-  }
-  return ingredient;
+  return applyGfSwap(ingredient, GF_SWAPS);
 }
 
 /* ── Share helper ────────────────────────────────────────────── */

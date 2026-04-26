@@ -153,9 +153,10 @@ export async function cloudPull() {
       applyAllData(data.data);
       _onStatusChange('Synced just now');
     } else {
-      // No cloud data yet — push local data up
+      // No cloud data yet — release lock, then push local data up
       _syncInProgress = false;
-      await cloudPush();
+      cloudPush().catch(() => {});
+      return; // skip finally's redundant unlock
     }
   } finally {
     _syncInProgress = false;

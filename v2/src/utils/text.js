@@ -49,7 +49,8 @@ export function escQ(s) {
 const _decodeArea = typeof document !== 'undefined' ? document.createElement('textarea') : null;
 export function decodeHTML(s) {
   if (!_decodeArea || !s || !s.includes('&')) return s;
-  _decodeArea.innerHTML = s;
+  // Strip tags first to prevent XSS via innerHTML on textarea
+  _decodeArea.innerHTML = s.replace(/<[^>]*>/g, '');
   return _decodeArea.value;
 }
 
@@ -60,6 +61,21 @@ export function decodeHTML(s) {
 export function escHTML(s) {
   const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' };
   return s.replace(/[&<>"']/g, c => map[c]);
+}
+
+/**
+ * Replace a gluten ingredient with its GF substitute.
+ * E.g. "all-purpose flour" → "gluten-free flour", "soy sauce" → "tamari"
+ * @param {string} ingredient - Raw ingredient name
+ * @param {Object} gfSwaps - GF_SWAPS lookup from aliases.js
+ * @returns {string}
+ */
+export function applyGfSwap(ingredient, gfSwaps) {
+  const n = norm(ingredient);
+  for (const [glutenItem, gfItem] of Object.entries(gfSwaps)) {
+    if (norm(glutenItem) === n) return gfItem;
+  }
+  return ingredient;
 }
 
 /**

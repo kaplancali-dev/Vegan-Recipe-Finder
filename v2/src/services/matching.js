@@ -13,6 +13,12 @@ import { INGREDIENT_ALIASES, INGREDIENT_SUBS, ALLERGY_KEYWORDS, PERISHABLES } fr
 const _perishableSet = new Set();
 PERISHABLES.forEach(cat => cat.items.forEach(item => _perishableSet.add(norm(item))));
 
+/** Pre-compiled word-boundary regexes for perishable matching */
+const _perishableRegexes = [..._perishableSet].map(p => ({
+  name: p,
+  re: new RegExp(`\\b${p.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`),
+}));
+
 /**
  * Check if an ingredient name matches a perishable.
  * @param {string} normedIng - Already norm()'d ingredient name
@@ -35,8 +41,7 @@ export function isPerishableIng(normedIng) {
   if (shelfStable.some(s => low.includes(s))) return false;
 
   // Word-boundary match: "corn" matches "fresh corn" but not "cornstarch"
-  for (const p of _perishableSet) {
-    const re = new RegExp(`\\b${p.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')}\\b`);
+  for (const { re } of _perishableRegexes) {
     if (re.test(normedIng)) return true;
   }
   return false;

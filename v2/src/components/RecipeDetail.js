@@ -273,15 +273,16 @@ function _renderFullDetail(recipe, ings, staples) {
       if (isFav) {
         recheckFav();
       } else {
-        // Watch for the favorites state change from the picker
-        const observer = setInterval(() => {
+        // Watch for picker overlay removal via MutationObserver
+        const mo = new MutationObserver(() => {
           if (!document.querySelector('.collection-picker-overlay')) {
             recheckFav();
-            clearInterval(observer);
+            mo.disconnect();
           }
-        }, 200);
+        });
+        mo.observe(document.body, { childList: true, subtree: true });
         // Safety timeout
-        setTimeout(() => clearInterval(observer), 10000);
+        setTimeout(() => mo.disconnect(), 10000);
       }
     });
   }

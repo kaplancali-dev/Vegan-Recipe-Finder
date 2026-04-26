@@ -161,10 +161,10 @@ function _runRender() {
     recipes: _recipes,
     ingredients: ings,
     staples,
-    selectedCats: _selectedCats.size ? [..._selectedCats] : undefined,
+    selectedCats: _selectedCats.size ? [..._selectedCats] : [],
     maxTime: _maxTime === Infinity ? undefined : _maxTime,
-    nameSearch: _nameSearch || undefined,
-    allergies: _allergies.size ? _allergies : undefined,
+    nameSearch: _nameSearch || '',
+    allergies: _allergies.size ? _allergies : new Set(),
   });
 
 
