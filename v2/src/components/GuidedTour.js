@@ -30,9 +30,10 @@ const STEPS = [
     target: '#sortBar',
     tab: 'browse',
     scroll: '#sortBar',
+    preferAbove: true,
     title: 'Sort by what matters to you',
     body: 'Tap Protein ↓, Fiber ↓, or Low Cal to instantly rank results by nutrition. Looking for a high-protein breakfast? Search "pancakes," then tap Protein — the healthiest version floats right to the top.',
-    arrow: 'top',
+    arrow: 'bottom',
   },
   {
     target: '#btn-canmake',
@@ -73,7 +74,7 @@ let _resizeHandler = null;
 
 /* ── Position the tooltip ───────────────────────────────────── */
 
-function _positionTooltip(targetEl) {
+function _positionTooltip(targetEl, preferAbove) {
   if (!_tooltip || !targetEl) return;
 
   const rect = targetEl.getBoundingClientRect();
@@ -84,13 +85,17 @@ function _positionTooltip(targetEl) {
   let left = rect.left + rect.width / 2 - tooltipW / 2;
   left = Math.max(12, Math.min(left, window.innerWidth - tooltipW - 12));
 
-  // Vertical: prefer below, flip above if tooltip would clip viewport
+  // Vertical: prefer below (or above if preferAbove), flip if clipped
   const gap = 12;
   const tooltipH = _tooltip.offsetHeight || 180; // estimate if not yet rendered
   let top;
   let flipped = false;
 
-  if (rect.bottom + gap + tooltipH > window.innerHeight - 12) {
+  if (preferAbove && rect.top - gap - tooltipH > 12) {
+    // Step requests above and there's room
+    top = rect.top - gap - tooltipH;
+    flipped = true;
+  } else if (rect.bottom + gap + tooltipH > window.innerHeight - 12) {
     // Not enough room below — place above
     top = rect.top - gap - tooltipH;
     flipped = true;
@@ -174,7 +179,7 @@ function _showStep() {
 
   // Position after a tick (let tab switch + scroll settle)
   setTimeout(() => {
-    _positionTooltip(targetEl);
+    _positionTooltip(targetEl, step.preferAbove);
     _tooltip.style.opacity = '1';
 
     // Ensure the tooltip itself is visible on screen
@@ -280,7 +285,7 @@ export function startTour() {
     if (_stepIndex < STEPS.length) {
       const step = STEPS[_stepIndex];
       const el = $(step.target);
-      if (el) _positionTooltip(el);
+      if (el) _positionTooltip(el, step.preferAbove);
     }
   };
   window.addEventListener('resize', _resizeHandler);
