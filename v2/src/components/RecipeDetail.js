@@ -158,8 +158,10 @@ function _renderNewVisitorDetail(recipe) {
 function _renderFullDetail(recipe, ings, staples) {
   const userIngs = expandWithAliases([...ings, ...staples]);
   const favs = new Set(get('favorites'));
+  const makeList = get('makelist') || [];
   const id = recipe.id;
   const isFav = favs.has(id);
+  const isQueued = makeList.includes(id);
   const instructions = get('instructions');
   const notes = instructions[id] || '';
 
@@ -236,6 +238,7 @@ function _renderFullDetail(recipe, ings, staples) {
     <div class="detail-actions">
       ${recipe.url ? `<a href="${escHTML(recipe.url)}" target="_blank" rel="noopener" class="detail-link">📖 View Instructions ↗</a>` : ''}
       <button class="btn btn-primary" id="detailFavBtn">${isFav ? '❤️ Favorited' : '🤍 Favorite'}</button>
+      <button class="btn btn-outline" id="detailQueueBtn">${isQueued ? '✓ My Queue' : '📌 My Queue'}</button>
       ${missingIngs.length ? `<button class="btn btn-outline" id="detailShopBtn">🛒 Add ${missingIngs.length} to list</button>` : ''}
       <button class="btn btn-outline" id="detailCookBtn">🍳 I Made This</button>
       <button class="btn btn-outline" id="detailShareBtn">📤 Share</button>
@@ -293,6 +296,24 @@ function _renderFullDetail(recipe, ings, staples) {
       autoSync();
       shopBtn.textContent = '✓ Added!';
       shopBtn.disabled = true;
+    });
+  }
+
+  const queueBtn = document.getElementById('detailQueueBtn');
+  if (queueBtn) {
+    queueBtn.addEventListener('click', () => {
+      const current = get('makelist') || [];
+      if (current.includes(id)) {
+        set('makelist', current.filter(i => i !== id));
+        queueBtn.textContent = '📌 My Queue';
+        showToast('Removed from My Queue');
+      } else {
+        current.push(id);
+        set('makelist', current);
+        queueBtn.textContent = '✓ My Queue';
+        showToast('Added to My Queue');
+      }
+      autoSync();
     });
   }
 
