@@ -179,14 +179,16 @@ SITES = {
         'name': 'Love and Lemons',
         'base': 'https://www.loveandlemons.com',
         'method': 'sitemap',
-        'sitemap_url': 'https://www.loveandlemons.com/post-sitemap.xml',
+        'sitemap_url': 'https://www.loveandlemons.com/sitemap_index.xml',
         'sitemap_fallbacks': [
+            'https://www.loveandlemons.com/post-sitemap.xml',
             'https://www.loveandlemons.com/post-sitemap1.xml',
             'https://www.loveandlemons.com/post-sitemap2.xml',
             'https://www.loveandlemons.com/post-sitemap3.xml',
-            'https://www.loveandlemons.com/sitemap_index.xml',
         ],
-        'url_filter': lambda u: '/category/' not in u and '/tag/' not in u,
+        'url_filter': lambda u: '/category/' not in u and '/tag/' not in u and '/author/' not in u,
+        'reverse_urls': True,  # newest first (old posts lack JSON-LD)
+        'max_consecutive_no_recipe': 80,  # stop early if hitting old posts
         'vegan_only': False,   # must filter dairy
         'delay': 0.5,
         'output': 'loveandlemons-recipes.json',
@@ -475,6 +477,11 @@ def get_urls_for_site(config):
     # Deduplicate
     urls = list(dict.fromkeys(u.rstrip('/') for u in urls))
 
+    # Reverse if configured (newest first — old posts often lack JSON-LD)
+    if config.get('reverse_urls'):
+        urls.reverse()
+        print(f'  Reversed URL order (newest first)')
+
     return urls
 
 
@@ -638,6 +645,8 @@ def scrape_site(key, config):
 
     use_pw = config.get('use_playwright', False)
     consecutive_errors = 0
+    consecutive_no_recipe = 0
+    max_no_recipe = config.get('max_consecutive_no_recipe', 0)  # 0 = no limit
 
     for i, url in enumerate(urls, 1):
         slug = url.rstrip('/').split('/')[-1][:45]
@@ -647,16 +656,23 @@ def scrape_site(key, config):
         if recipe:
             recipes.append(recipe)
             consecutive_errors = 0
+            consecutive_no_recipe = 0
             print(f'OK ({len(recipe["ing"])} ing)')
         else:
             if error and 'dairy' in error:
                 skipped_dairy += 1
                 consecutive_errors = 0
+                consecutive_no_recipe = 0
                 print(f'DAIRY')
             elif error and 'no JSON-LD' in error:
                 skipped_no_recipe += 1
-                consecutive_errors = 0
+                consecutive_no_recipe += 1
                 print(f'no recipe')
+                # Stop early if we've hit a long streak of non-recipe pages
+                if max_no_recipe and consecutive_no_recipe >= max_no_recipe:
+                    print(f'\n    → {consecutive_no_recipe} consecutive pages with no recipe data — stopping early')
+                    print(f'      (likely reached old posts without JSON-LD markup)')
+                    break
             elif error and ('fetch' in error or 'HTTP' in error):
                 errors += 1
                 consecutive_errors += 1
