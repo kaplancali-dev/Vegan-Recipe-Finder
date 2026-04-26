@@ -125,13 +125,14 @@ initReadyToCook(recipes);
 initSyncPanel();
 initOnboarding();
 
-/* ── Deep-link: open shared recipe from ?r= parameter ─────── */
+/* ── Deep-link: open shared recipe from #r=ID or ?r=ID ────── */
 
-const deepLinkId = new URLSearchParams(window.location.search).get('r');
+const hashMatch = window.location.hash.match(/^#r=(\d+)/);
+const queryId = new URLSearchParams(window.location.search).get('r');
+const deepLinkId = hashMatch ? hashMatch[1] : queryId;
 if (deepLinkId) {
   const rid = Number(deepLinkId);
   if (recipes.find(r => r.id === rid)) {
-    // Small delay so the UI is fully rendered before opening modal
     setTimeout(() => openDetail(rid), 300);
   }
   // Clean URL without reloading
