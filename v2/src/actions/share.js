@@ -19,7 +19,7 @@ export function shareRecipe(title, url, id) {
     : `HARVEST 🌿 — nearly 2,000 plant-based recipes matched to what's in your kitchen.`;
 
   if (navigator.share) {
-    navigator.share({ title: title || 'HARVEST', text, url: harvestUrl }).catch(() => {});
+    navigator.share({ title: text, url: harvestUrl }).catch(() => {});
   } else {
     navigator.clipboard.writeText(`${text}\n\n${harvestUrl}`).then(() => {}).catch(() => {});
   }

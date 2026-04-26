@@ -15,7 +15,7 @@
 
 const ORIGIN = 'https://kaplancali-dev.github.io/Vegan-Recipe-Finder';
 const SITE_URL = 'https://myharvestvegan.com';
-const OG_DATA_URL = `${ORIGIN}/og-data.json`;
+const OG_DATA_URL = `${SITE_URL}/og-data.json`;
 const FALLBACK_IMAGE = `${SITE_URL}/hero-image4.png`;
 
 const BOT_UA = /bot|crawl|spider|preview|facebookexternalhit|Facebot|Twitterbot|LinkedInBot|Slackbot|Discordbot|WhatsApp|Applebot|TelegramBot|Pinterestbot|redditbot|Embedly|Quora|Outbrain|vkShare|W3C_Validator|iframely/i;
