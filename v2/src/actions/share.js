@@ -15,8 +15,8 @@ export function shareRecipe(title, url, id) {
     ? `https://myharvestvegan.com?r=${id}`
     : 'https://myharvestvegan.com';
   const text = title
-    ? `Check out "${title}" on HARVEST 🌿 — over 2,500 plant-based recipes matched to what's in your kitchen.`
-    : `HARVEST 🌿 — over 2,500 plant-based recipes matched to what's in your kitchen.`;
+    ? `Check out "${title}" on HARVEST 🌿 — over 4,500 plant-based recipes matched to what's in your kitchen.`
+    : `HARVEST 🌿 — over 4,500 plant-based recipes matched to what's in your kitchen.`;
 
   if (navigator.share) {
     navigator.share({ title: text, url: harvestUrl }).catch(() => {});
