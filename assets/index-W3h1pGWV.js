@@ -96,13 +96,6 @@ ${a}`).then(()=>{}).catch(()=>{})}function We(e){const t=e.target.closest(".shar
 
     ${e.url?`<a href="${b(e.url)}" target="_blank" rel="noopener" class="visitor-cta">View full recipe</a>`:""}
 
-    <div class="detail-section">
-      <h4>Ingredients (${t.length})</h4>
-      <ul class="detail-ing-list">${a}</ul>
-    </div>
-
-    ${i}
-
     <div class="visitor-pitch" id="visitorPitch">
       <div class="visitor-pitch-text">
         <strong>Try HARVEST</strong>
@@ -110,6 +103,13 @@ ${a}`).then(()=>{}).catch(()=>{})}function We(e){const t=e.target.closest(".shar
       </div>
       <span class="visitor-pitch-arrow">→</span>
     </div>
+
+    <div class="detail-section">
+      <h4>Ingredients (${t.length})</h4>
+      <ul class="detail-ing-list">${a}</ul>
+    </div>
+
+    ${i}
 
     <div class="detail-actions" style="margin-top:12px">
       <button class="btn btn-outline" id="detailShareBtn">📤 Share</button>

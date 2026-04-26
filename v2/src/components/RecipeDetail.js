@@ -111,13 +111,6 @@ function _renderNewVisitorDetail(recipe) {
 
     ${recipe.url ? `<a href="${escHTML(recipe.url)}" target="_blank" rel="noopener" class="visitor-cta">View full recipe</a>` : ''}
 
-    <div class="detail-section">
-      <h4>Ingredients (${ingList.length})</h4>
-      <ul class="detail-ing-list">${ingHtml}</ul>
-    </div>
-
-    ${nutHtml}
-
     <div class="visitor-pitch" id="visitorPitch">
       <div class="visitor-pitch-text">
         <strong>Try HARVEST</strong>
@@ -125,6 +118,13 @@ function _renderNewVisitorDetail(recipe) {
       </div>
       <span class="visitor-pitch-arrow">→</span>
     </div>
+
+    <div class="detail-section">
+      <h4>Ingredients (${ingList.length})</h4>
+      <ul class="detail-ing-list">${ingHtml}</ul>
+    </div>
+
+    ${nutHtml}
 
     <div class="detail-actions" style="margin-top:12px">
       <button class="btn btn-outline" id="detailShareBtn">📤 Share</button>
