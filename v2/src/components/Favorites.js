@@ -257,11 +257,13 @@ function renderCookHistory() {
   listEl.innerHTML = unique.map(entry => {
     const recipe = _recipes.find(r => r.id === entry.id);
     const title = recipe ? escHTML(recipe.title) : `Recipe #${entry.id}`;
+    const img = recipe?.img || '';
     const date = new Date(entry.date).toLocaleDateString(undefined, {
       month: 'short', day: 'numeric', year: 'numeric'
     });
     const rating = entry.rating ? '★'.repeat(entry.rating) : '—';
     return `<div class="cook-history-item">
+      ${img ? `<img class="cook-history-img" src="${escHTML(img)}" alt="" loading="lazy">` : '<div class="cook-history-img cook-history-img-empty"></div>'}
       <a class="cook-history-link" data-recipe-id="${entry.id}">${title}</a>
       <span class="cook-stars">${rating}</span>
       <span class="cook-date">${date}</span>

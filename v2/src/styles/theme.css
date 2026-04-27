@@ -2720,7 +2720,7 @@ input, select, textarea {
 /* ── Cook History List ─────────────────────────────────────── */
 .cook-history-header {
   display: grid;
-  grid-template-columns: 1fr auto auto 36px;
+  grid-template-columns: 40px 1fr auto auto 36px;
   gap: 8px;
   align-items: center;
   padding: 4px 12px;
@@ -2734,7 +2734,7 @@ input, select, textarea {
 }
 .cook-history-item {
   display: grid;
-  grid-template-columns: 1fr auto auto 36px;
+  grid-template-columns: 40px 1fr auto auto 36px;
   gap: 8px;
   align-items: center;
   padding: 8px 12px;
@@ -2742,6 +2742,16 @@ input, select, textarea {
   border-radius: var(--radius-sm);
   margin-bottom: 4px;
   font-size: 0.85rem;
+}
+.cook-history-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 6px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+.cook-history-img-empty {
+  background: var(--bg2);
 }
 .cook-history-link {
   color: var(--green-deep);
