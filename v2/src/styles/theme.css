@@ -1104,6 +1104,8 @@ input, select, textarea {
 
 .clr-letter {
   display: inline-block;
+  width: 0.65em;
+  text-align: center;
   animation: boldWave 3s ease-in-out infinite;
 }
 .clr-letter:nth-child(1) { animation-delay: 0s; }

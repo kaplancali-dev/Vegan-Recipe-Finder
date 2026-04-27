@@ -20,10 +20,10 @@
 <link rel="icon" type="image/png" href="favicon.png">
 <meta name="theme-color" content="#2d7a4f">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://static.cloudflareinsights.com https://www.googletagmanager.com https://www.google-analytics.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; img-src 'self' https: data:; connect-src 'self' https://*.supabase.co https://cloudflareinsights.com https://www.google-analytics.com; font-src 'self'; frame-src 'none';">
-  <script type="module" crossorigin src="/assets/index-o3prI4Wp.js"></script>
+  <script type="module" crossorigin src="/assets/index-Du7OIbQU.js"></script>
   <link rel="modulepreload" crossorigin href="/assets/supabase-DaN4is7k.js">
   <link rel="modulepreload" crossorigin href="/assets/recipes-CujdhypO.js">
-  <link rel="stylesheet" crossorigin href="/assets/index-C89qmQX9.css">
+  <link rel="stylesheet" crossorigin href="/assets/index-BP_GPPWF.css">
 </head>
 <body>
 
@@ -36,7 +36,7 @@
     <!-- Toast notification -->
     <div id="toast" class="toast" aria-live="polite"></div>
 
-    <!-- Sticky shell: tab bar stays, content scrolls -->
+    <!-- Sticky shell: tab bar stays, content scrolls on mobile -->
     <div id="stickyShell" class="sticky-shell">
 
     <!-- Tab navigation bar (WAI-ARIA tabs pattern) -->
@@ -52,10 +52,10 @@
       <button class="tab-btn" data-tab="shopping" role="tab" aria-selected="false" aria-controls="tab-shopping" id="btn-shopping">🛒 Shopping</button>
     </nav>
 
-    <!-- Scrollable area: header scrolls away, tab panels scroll -->
+    <!-- Scrollable area: header + tab panels (header scrolls away on mobile) -->
     <div id="shellScroll" class="shell-scroll">
 
-    <!-- Top header bar (inside scroll area so it scrolls away) -->
+    <!-- Top header bar -->
     <header id="header" class="header">
       <div class="header-inner">
         <button id="headerMenuBtn" class="header-menu-btn" aria-label="Menu">
@@ -76,7 +76,7 @@
           <div class="intro-hero-grid">
             <div class="intro-hero-video">
               <video src="/hero.mp4" class="hero-img" autoplay loop muted playsinline></video>
-              <p class="intro-tagline">The more <span class="clr-letters"><span class="clr-letter" style="color:#e53e3e">c</span><span class="clr-letter" style="color:#dd6b20">o</span><span class="clr-letter" style="color:#d69e2e">l</span><span class="clr-letter" style="color:#38a169">o</span><span class="clr-letter" style="color:#3182ce">r</span><span class="clr-letter" style="color:#805ad5">s</span></span> on your plate, the more life in your years.&trade;</p>
+              <p class="intro-tagline">The more <span class="clr-letters"><span class="clr-letter" style="color:#e53e3e">c</span><span class="clr-letter" style="color:#dd6b20">o</span><span class="clr-letter" style="color:#d69e2e">l</span><span class="clr-letter" style="color:#38a169">o</span><span class="clr-letter" style="color:#3182ce">r</span><span class="clr-letter" style="color:#805ad5">s</span></span> on your plate, the more life in your years.</p>
             </div>
             <div class="intro-hero-copy">
               <h2 class="intro-hero-title">"What can I make with this?"</h2>
@@ -241,6 +241,19 @@
             <h4>⚠️ Allergens <span class="muted" style="font-weight:normal;font-size:0.82rem">(hide recipes containing)</span></h4>
             <div id="readyAllergenChips" class="filter-chips"></div>
           </div>
+        </div>
+      </div>
+
+      <!-- Results count + sort bar -->
+      <div class="results-bar">
+        <div id="readyResultsMeta" class="results-meta"></div>
+        <div id="readySortBar" class="sort-btns">
+          <button class="sort-btn on" data-sort="match">Best Match</button>
+          <button class="sort-btn" data-sort="protein">Protein ↓</button>
+          <button class="sort-btn" data-sort="fiber">Fiber ↓</button>
+          <button class="sort-btn" data-sort="cal">Low Cal</button>
+          <button class="sort-btn" data-sort="time">Fastest</button>
+          <button class="sort-btn" data-sort="alpha">A–Z</button>
         </div>
       </div>
 
