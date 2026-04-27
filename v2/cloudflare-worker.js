@@ -49,7 +49,7 @@ function buildOGPage(recipe, recipeId) {
 <meta property="og:image" content="${escHTML(img)}">
 <meta property="og:url" content="${escHTML(ogUrl)}">
 <meta property="og:type" content="article">
-<meta property="og:site_name" content="HARVEST — Eat More Plants!">
+<meta property="og:site_name" content="HARVEST™ — See What Your Kitchen Already Knows">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="${title}">
 <meta name="twitter:description" content="${escHTML(description)}">

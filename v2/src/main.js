@@ -335,7 +335,7 @@ function toggleDarkMode() {
       shareBtn.addEventListener('click', () => {
         if (navigator.share) {
           navigator.share({
-            title: 'HARVEST — Eat More Plants!',
+            title: 'HARVEST™ — See What Your Kitchen Already Knows',
             url: window.location.href,
           }).catch(() => {});
         }
