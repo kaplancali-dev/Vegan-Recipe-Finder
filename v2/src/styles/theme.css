@@ -1093,6 +1093,7 @@ input, select, textarea {
   line-height: 1.4;
   color: var(--green-deep);
 }
+.mobile-br { display: none; }
 
 .clr-letters { display: inline-flex; }
 
@@ -1136,6 +1137,7 @@ input, select, textarea {
   .intro-hero-sub { font-size: 14px; }
   .intro-hero-title { font-size: 20px; }
   .intro-tagline { font-size: 1.08em; }
+  .mobile-br { display: block; }
 }
 
 /* ── Pantry Power Widget (sidebar in intro hero) ──────────── */
