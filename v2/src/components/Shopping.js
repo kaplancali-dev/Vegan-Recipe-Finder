@@ -60,8 +60,10 @@ function wireTopControls() {
   if (clearBtn) {
     clearBtn.addEventListener('click', () => {
       const shopIds = getRef('shopRecipes');
-      if (!shopIds.length) return;
+      const manualList = getRef('shopList');
+      if (!shopIds.length && !manualList.length) return;
       set('shopRecipes', []);
+      set('shopList', []);
       set('shopChecked', []);
       autoSync();
       showToast('Shopping List cleared');
@@ -80,9 +82,9 @@ function wireTopControls() {
  * Share all recipes + manual items to Notes / clipboard.
  */
 function _shareAll() {
-  const { recipeCards } = _buildShopData();
+  const { recipeCards, manualItems } = _buildShopData();
 
-  if (!recipeCards.length) {
+  if (!recipeCards.length && !manualItems.length) {
     showToast('Shopping List is empty');
     return;
   }
@@ -99,6 +101,15 @@ function _shareAll() {
     if (done.length) s += '\n' + done.map(i => `  ✓ ${i}`).join('\n');
     sections.push(s);
   });
+
+  if (manualItems.length) {
+    const unchecked = manualItems.filter(i => !checked.has(norm(i)));
+    const done = manualItems.filter(i => checked.has(norm(i)));
+    let s = '🛒 Additional Items';
+    if (unchecked.length) s += '\n' + unchecked.map(i => `  • ${i}`).join('\n');
+    if (done.length) s += '\n' + done.map(i => `  ✓ ${i}`).join('\n');
+    sections.push(s);
+  }
 
   const body = sections.join('\n\n');
 
@@ -134,6 +145,30 @@ function _shareSingleRecipe(recipeTitle, missing) {
 
   if (navigator.share) {
     navigator.share({ title, text: body }).catch(() => {});
+  } else {
+    navigator.clipboard.writeText(body).then(() => {
+      showToast('Copied to clipboard!');
+    }).catch(() => {
+      showToast('Could not copy — try manually');
+    });
+  }
+}
+
+/**
+ * Share manual (non-recipe) shopping items.
+ */
+function _shareManualItems(items) {
+  if (!items.length) return;
+  const checked = getCheckedSet();
+  const unchecked = items.filter(i => !checked.has(norm(i)));
+  const done = items.filter(i => checked.has(norm(i)));
+
+  let body = '🛒 Additional Items';
+  if (unchecked.length) body += '\n' + unchecked.map(i => `• ${i}`).join('\n');
+  if (done.length) body += '\n' + done.map(i => `✓ ${i}`).join('\n');
+
+  if (navigator.share) {
+    navigator.share({ title: 'Shopping List', text: body }).catch(() => {});
   } else {
     navigator.clipboard.writeText(body).then(() => {
       showToast('Copied to clipboard!');
@@ -195,18 +230,19 @@ function renderShopTab() {
   // Hide the old makeList container — we're merging everything into shopList
   if (makeContainer) makeContainer.innerHTML = '';
 
-  const { recipeCards } = _buildShopData();
+  const { recipeCards, manualItems } = _buildShopData();
   const checked = getCheckedSet();
   // Clean checked set
   const allNorms = new Set();
   recipeCards.forEach(r => r.missing.forEach(m => allNorms.add(norm(m))));
+  manualItems.forEach(m => allNorms.add(norm(m)));
   let needsClean = false;
   for (const c of checked) {
     if (!allNorms.has(c)) { checked.delete(c); needsClean = true; }
   }
   if (needsClean) saveChecked(checked);
 
-  if (!recipeCards.length) {
+  if (!recipeCards.length && !manualItems.length) {
     container.innerHTML = '';
     if (emptyEl) emptyEl.hidden = false;
     return;
@@ -249,9 +285,36 @@ function renderShopTab() {
     </div>`;
   });
 
-  // ── Empty make list prompt ──
-  if (!recipeCards.length) {
-    html += '<p style="font-size:0.85rem;color:var(--muted);padding:8px 0;text-align:center">Add recipes to 📌 My Queue, then tap 🛒 to send them here.</p>';
+  // ── Manual items (added individually from recipe detail) ──
+  if (manualItems.length) {
+    const uncheckedManual = manualItems.filter(i => !checked.has(norm(i)));
+    const checkedManual = manualItems.filter(i => checked.has(norm(i)));
+    const allManualChecked = manualItems.length > 0 && uncheckedManual.length === 0;
+
+    html += `<div class="shop-recipe-card${allManualChecked ? ' all-checked' : ''}" data-shop-manual>
+      <div class="shop-recipe-header">
+        <div class="shop-recipe-title-row">
+          <span class="shop-recipe-title" style="cursor:default">Additional Items</span>
+          <div class="shop-recipe-actions">
+            <button class="icon-btn" data-share-manual title="Share">📤</button>
+            <button class="icon-btn shop-recipe-delete-btn" data-clear-manual title="Clear all">&times;</button>
+          </div>
+        </div>
+        <div class="shop-recipe-meta">
+          <span class="shop-recipe-count">${manualItems.length} item${manualItems.length !== 1 ? 's' : ''}</span>
+        </div>
+      </div>
+      <div class="shop-recipe-items">
+        ${manualItems.map(item => {
+          const isChecked = checked.has(norm(item));
+          return `<div class="shop-item${isChecked ? ' done' : ''}" data-shop-item="${escHTML(item)}">
+            <div class="shop-check">${isChecked ? '✓' : ''}</div>
+            <span>${escHTML(item)}</span>
+            <button class="icon-btn shop-manual-remove" data-remove-manual="${escHTML(item)}" title="Remove" style="margin-left:auto;font-size:0.75rem">&times;</button>
+          </div>`;
+        }).join('')}
+      </div>
+    </div>`;
   }
 
   container.innerHTML = html;
@@ -287,6 +350,32 @@ function renderShopTab() {
       const id = Number(shareBtn.dataset.shareRecipe);
       const card = recipeCards.find(r => r.id === id);
       if (card) _shareSingleRecipe(card.title, card.missing);
+      return;
+    }
+
+    // Remove single manual item
+    const removeManualBtn = e.target.closest('[data-remove-manual]');
+    if (removeManualBtn) {
+      e.stopPropagation();
+      _removeManualItem(removeManualBtn.dataset.removeManual);
+      return;
+    }
+
+    // Clear all manual items
+    const clearManualBtn = e.target.closest('[data-clear-manual]');
+    if (clearManualBtn) {
+      e.stopPropagation();
+      set('shopList', []);
+      autoSync();
+      showToast('Additional items cleared');
+      return;
+    }
+
+    // Share manual items
+    const shareManualBtn = e.target.closest('[data-share-manual]');
+    if (shareManualBtn) {
+      e.stopPropagation();
+      _shareManualItems(manualItems);
       return;
     }
 

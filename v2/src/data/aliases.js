@@ -293,7 +293,7 @@ export const VEGAN_SWAPS = [
 export const ALLERGY_KEYWORDS = {
   'peanut':     ['peanut','peanut butter'],
   'tree nut':   ['almond','cashew','walnut','pecan','brazil nut','pistachio','macadamia','hazelnut','pine nut','almond butter','almond milk'],
-  'soy':        ['edamame','soy milk','soy protein','soy curls'],
+  'soy':        ['edamame','soy milk','soy protein','soy curls','soy sauce','tofu','tempeh','miso','tamari'],
   'coconut':    ['coconut milk','coconut oil','coconut cream','coconut flakes','coconut'],
   'corn':       ['corn','cornstarch','corn tortilla','polenta','corn flour'],
   'mushroom':   ['mushroom'],

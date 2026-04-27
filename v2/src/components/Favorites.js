@@ -47,6 +47,27 @@ export function initFavorites(recipes) {
   subscribe('staples', () => { if (_activeColl) renderFavList(); });
   subscribe('makelist', () => { if (_activeColl) renderFavList(); });
   subscribe('cookHistory', () => { if (_activeColl) renderFavList(); renderCookHistory(); });
+
+  // Cook history card — click to open recipe or delete entry
+  const historyCard = $('#cookHistoryCard');
+  if (historyCard) {
+    historyCard.addEventListener('click', (e) => {
+      const link = e.target.closest('[data-recipe-id]');
+      if (link) {
+        e.preventDefault();
+        openDetail(Number(link.dataset.recipeId));
+        return;
+      }
+      const btn = e.target.closest('[data-cook-delete]');
+      if (!btn) return;
+      if (!confirm('Remove this recipe from your cook history? This cannot be undone.')) return;
+      const id = Number(btn.dataset.cookDelete);
+      const history = get('cookHistory');
+      set('cookHistory', history.filter(h => h.id !== id));
+      autoSync();
+      showToast('Removed from Cook History');
+    });
+  }
 }
 
 /* ── Collections Grid ────────────────────────────────────────── */
@@ -202,11 +223,11 @@ function renderFavList() {
       const current = get('makelist');
       if (current.includes(id)) {
         set('makelist', current.filter(i => i !== id));
-        showToast('Removed from Shopping List');
+        showToast('Removed from My Queue');
       } else {
         current.push(id);
         set('makelist', current);
-        showToast('Added to Shopping List 🛒');
+        showToast('Added to My Queue 📌');
       }
       autoSync();
       return;
@@ -272,26 +293,3 @@ function renderCookHistory() {
   }).join('');
 }
 
-/* ── Cook history delete handler ───────────────────────────── */
-
-{
-  const card = $('#cookHistoryCard');
-  if (card) {
-    card.addEventListener('click', (e) => {
-      const link = e.target.closest('[data-recipe-id]');
-      if (link) {
-        e.preventDefault();
-        openDetail(Number(link.dataset.recipeId));
-        return;
-      }
-      const btn = e.target.closest('[data-cook-delete]');
-      if (!btn) return;
-      if (!confirm('Remove this recipe from your cook history? This cannot be undone.')) return;
-      const id = Number(btn.dataset.cookDelete);
-      const history = get('cookHistory');
-      set('cookHistory', history.filter(h => h.id !== id));
-      autoSync();
-      showToast('Removed from Cook History');
-    });
-  }
-}

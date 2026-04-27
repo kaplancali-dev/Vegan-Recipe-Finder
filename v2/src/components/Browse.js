@@ -255,11 +255,11 @@ function _runRender() {
       const current = get('makelist');
       if (current.includes(id)) {
         set('makelist', current.filter(i => i !== id));
-        showToast('Removed from Shopping List');
+        showToast('Removed from My Queue');
       } else {
         current.push(id);
         set('makelist', current);
-        showToast('Added to Shopping List 🛒');
+        showToast('Added to My Queue 📌');
       }
       autoSync();
       return;

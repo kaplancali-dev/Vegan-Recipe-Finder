@@ -181,6 +181,8 @@ export function gatherAllData() {
     vrf_collections: state.collections,
     vrf_makelist:    state.makelist,
     vrf_shop_recipes: state.shopRecipes,
+    vrf_cook_history: state.cookHistory,
+    vrf_shop_checked: state.shopChecked,
   };
 }
 
@@ -202,6 +204,7 @@ function validateValue(key, value) {
     case 'makelist':
     case 'shopRecipes':
     case 'cookHistory':
+    case 'shopChecked':
       return Array.isArray(value) ? value : undefined;
     case 'instructions':
     case 'collections':
@@ -227,6 +230,8 @@ export function applyAllData(data) {
   if (data.vrf_collections !== undefined) { const v = validateValue('collections', data.vrf_collections); if (v !== undefined) set('collections', v); }
   if (data.vrf_makelist    !== undefined) { const v = validateValue('makelist', data.vrf_makelist);       if (v !== undefined) set('makelist', v); }
   if (data.vrf_shop_recipes !== undefined) { const v = validateValue('shopRecipes', data.vrf_shop_recipes); if (v !== undefined) set('shopRecipes', v); }
+  if (data.vrf_cook_history !== undefined) { const v = validateValue('cookHistory', data.vrf_cook_history); if (v !== undefined) set('cookHistory', v); }
+  if (data.vrf_shop_checked !== undefined) { const v = validateValue('shopChecked', data.vrf_shop_checked); if (v !== undefined) set('shopChecked', v); }
 }
 
 /**

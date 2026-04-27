@@ -59,8 +59,9 @@ export function decodeHTML(s) {
  * Prevents XSS by converting <, >, &, ", ' to HTML entities.
  */
 export function escHTML(s) {
+  if (s == null) return '';
   const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' };
-  return s.replace(/[&<>"']/g, c => map[c]);
+  return String(s).replace(/[&<>"']/g, c => map[c]);
 }
 
 /**

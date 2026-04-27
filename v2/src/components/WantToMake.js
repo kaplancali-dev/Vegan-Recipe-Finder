@@ -18,6 +18,7 @@ import { handleCook } from '../actions/cook.js';
 import { $ } from '../utils/dom.js';
 import { toggleFavorite } from '../actions/favorites.js';
 import { openDetail } from './RecipeDetail.js';
+import { shareRecipe } from '../actions/share.js';
 import { GF_SWAPS } from '../data/aliases.js';
 
 /** @type {Array} Full recipe list */
@@ -52,29 +53,6 @@ export function initWantToMake(recipes) {
 
 function _applyGfSwap(ingredient) {
   return applyGfSwap(ingredient, GF_SWAPS);
-}
-
-/* ── Share helper ────────────────────────────────────────────── */
-
-function _shareRecipe(recipe, missing) {
-  let body = `📌 ${recipe.title}`;
-  if (missing.length) {
-    body += `\n\nMissing ingredients:\n` + missing.map(i => `• ${i}`).join('\n');
-  } else {
-    body += `\n\n✓ You have everything!`;
-  }
-
-  const title = recipe.title;
-
-  if (navigator.share) {
-    navigator.share({ title, text: body }).catch(() => {});
-  } else {
-    navigator.clipboard.writeText(body).then(() => {
-      showToast('Copied to clipboard!');
-    }).catch(() => {
-      showToast('Could not copy — try manually');
-    });
-  }
 }
 
 /* ── Data building ───────────────────────────────────────────── */
@@ -322,9 +300,7 @@ function wireEvents() {
     if (shareBtn) {
       const id = Number(shareBtn.dataset.wmShare);
       const recipe = _recipes.find(r => r.id === id);
-      const cards = _buildData();
-      const card = cards.find(c => c.id === id);
-      if (recipe) _shareRecipe(recipe, card ? card.missing : []);
+      if (recipe) shareRecipe(recipe.title, recipe.url, recipe.id);
       return;
     }
 

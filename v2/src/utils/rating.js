@@ -126,15 +126,3 @@ export function showCookConfirm(dateStr) {
   });
 }
 
-/**
- * Build a star display string for a given rating (1–5).
- * Returns empty string if rating is 0 or falsy.
- * @param {number} rating
- * @returns {string}
- */
-export function starsHTML(rating) {
-  if (!rating) return '';
-  const filled = '★'.repeat(rating);
-  const empty = '☆'.repeat(5 - rating);
-  return `<span class="stars-display">${filled}${empty}</span>`;
-}

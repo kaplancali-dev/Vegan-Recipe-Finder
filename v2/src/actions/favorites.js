@@ -61,7 +61,7 @@ function showCollectionPicker(id) {
 
   const cols = get('collections') || {};
 
-  const buttons = COLLECTIONS.map(({ key, icon, label }) => {
+  const buttons = COLLECTIONS.filter(c => c.key !== 'all').map(({ key, icon, label }) => {
     const count = (cols[key] || []).length;
     return `<button class="collection-pick-btn" data-pick="${key}">
       <span>${icon}</span>
