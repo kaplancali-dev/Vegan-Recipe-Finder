@@ -3137,12 +3137,26 @@ input, select, textarea {
   border: none;
   cursor: pointer;
   font-size: 0.9rem;
-  padding: 4px 5px;
+  padding: 4px 8px;
   border-radius: var(--radius-xs);
   transition: background var(--transition), opacity var(--transition);
   line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
 }
 .wm-icon-btn:hover { background: var(--bg2); }
+
+.wm-btn-label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--ink-soft);
+  letter-spacing: 0.01em;
+}
+.wm-fav-on .wm-btn-label { color: var(--ink); }
+.wm-cooked .wm-btn-label { color: var(--green-deep); }
+.wm-remove-btn .wm-btn-label { color: var(--muted); }
+.wm-remove-btn:hover .wm-btn-label { color: var(--danger); }
 
 .wm-fav-on { }
 .wm-in-shop { opacity: 0.5; }
@@ -3256,6 +3270,7 @@ input, select, textarea {
     font-size: 0.8rem;
     padding: 3px 4px;
   }
+  .wm-btn-label { display: none; }
 
   .wm-history-header {
     grid-template-columns: 1fr 70px 55px 36px 28px 28px 24px;
