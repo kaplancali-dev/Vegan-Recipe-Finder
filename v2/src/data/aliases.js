@@ -7,7 +7,7 @@ export const INGREDIENT_ALIASES = {
   'any cooking oil':        ['coconut oil','olive oil','avocado oil','vegetable oil','canola oil','sunflower oil','grapeseed oil','light oil','neutral oil'],
   'nut butter (any)':       ['peanut butter','almond butter','sunflower butter','cashew butter','hazelnut butter','walnut butter','pecan butter','macadamia butter','mixed nut butter','seed butter'],
   'pasta (any)':            ['pasta','gluten-free pasta','spaghetti','penne','fusilli','farfalle','rigatoni','linguine','fettuccine','tagliatelle','orzo','macaroni','rotini','angel hair','lasagna noodles','noodles'],
-  'soy sauce / tamari':     ['soy sauce','tamari','coconut aminos','liquid aminos','aminos'],
+  'soy sauce / tamari / coconut aminos':     ['soy sauce','tamari','coconut aminos','liquid aminos','aminos'],
   'sweetener (any)': ['maple syrup','agave','coconut sugar','brown sugar','sugar','date syrup'],
   'leafy greens (any)': ['spinach','kale','chard','arugula','collard greens','beet greens','bok choy','baby spinach'],
   'lettuce (any)': ['lettuce','romaine','romaine lettuce','iceberg','iceberg lettuce','butter lettuce','bibb lettuce','red leaf lettuce','green leaf lettuce','mixed greens','spring mix','mesclun','mixed salad greens'],
@@ -293,7 +293,7 @@ export const QA_ITEMS = [
   {cat:'🍋 Fruits',             items:['lemon','lime','banana','berries (any)','mango','apple','oranges','pineapple','peaches','pears','grapes','watermelon','coconut','dates']},
   {cat:'🥜 Nuts & Nut Butters', items:['nut butter (any)','almonds','walnuts','pecans','brazil nuts','macadamia nuts','hazelnuts','pistachio','peanuts','sesame seeds']},
   {cat:'🥛 Plant-Based Milks',  items:['plant-based milk (any)']},
-  {cat:'🫙 Pantry & Oils',      items:['any cooking oil','olive oil','coconut oil','avocado oil','sesame oil','chili oil','canned tomatoes (any)','crushed tomatoes','diced tomatoes','tomato sauce','vegetable broth','soy sauce / tamari','coconut milk','miso paste','maple syrup','natural sweetener (any)','apple cider vinegar','nutritional yeast','rice vinegar','dijon mustard','tomato paste','vegan mayo','tamarind paste','gochujang','balsamic vinegar','sriracha / hot sauce','olives','curry paste','liquid smoke','vegan sour cream']},
+  {cat:'🫙 Pantry & Oils',      items:['any cooking oil','olive oil','coconut oil','avocado oil','sesame oil','chili oil','canned tomatoes (any)','crushed tomatoes','diced tomatoes','tomato sauce','vegetable broth','soy sauce / tamari / coconut aminos','coconut milk','miso paste','maple syrup','natural sweetener (any)','apple cider vinegar','nutritional yeast','rice vinegar','dijon mustard','tomato paste','vegan mayo','tamarind paste','gochujang','balsamic vinegar','sriracha / hot sauce','olives','curry paste','liquid smoke','vegan sour cream']},
   {cat:'🌿 Spices & Herbs',     items:['turmeric','cumin','smoked paprika','cinnamon','chili powder','ginger','curry powder','black pepper','garlic powder','onion powder','oregano','basil','thyme','coriander','cayenne','cardamom','bay leaves','five spice','nutmeg','sea salt','garam masala','lemongrass','star anise','dill','mint','rosemary','red pepper flakes','sumac','italian seasoning']},
   {cat:'🍨 Dessert Pantry',     items:['vanilla extract','vanilla','cocoa powder','chocolate chips (any)','coconut cream','coconut sugar','vegan butter','flax egg','baking soda','baking powder','cornstarch','shredded coconut','medjool dates']},
 ];
