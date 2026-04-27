@@ -2516,8 +2516,9 @@ input, select, textarea {
   .logo-tagline { width: 100%; text-align: center; font-size: 0.75rem; margin-top: -2px; }
   .header { padding: 6px 0 4px; }
   .tab-btn { flex: 0 0 auto; font-size: 0.72rem; padding: 6px 6px; }
-  .tab-bar { top: 0; }
-  .filter-bar { top: 32px; padding: 8px 10px; }
+  .tab-bar { position: fixed; top: 0; left: 0; right: 0; padding-left: 18px; padding-right: 18px; }
+  .tab-panel { padding-top: 38px; }
+  .filter-bar { top: 34px; padding: 6px 8px; max-width: 66%; }
   .filter-bar .input-row { gap: 6px; }
 }
 
@@ -2526,8 +2527,7 @@ input, select, textarea {
   .logo-tagline { font-size: 0.68rem; }
   .header-inner { gap: 0 5px; }
   .tab-btn { font-size: 0.68rem; padding: 5px 5px; }
-  .tab-bar { top: 0; }
-  .filter-bar { top: 28px; }
+  .filter-bar { top: 30px; }
 
   .qa-grid {
     grid-template-columns: 1fr;
