@@ -191,35 +191,38 @@ input, select, textarea {
   background: var(--bg);
   border-bottom: 1px solid var(--border);
   scrollbar-width: none;
-}
-
-/* Sticky shell: tab bar stays put, content scrolls independently */
-.sticky-shell {
-  display: flex;
-  flex-direction: column;
-  height: 100dvh;
-  background: var(--bg);
-}
-
-.sticky-shell .tab-bar {
-  position: static;
-  flex-shrink: 0;
-}
-
-.shell-scroll {
-  flex: 1;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-}
-
-.shell-scroll .filter-bar {
+  /* Desktop: sticky so it pins below header when scrolling */
   position: sticky;
   top: 0;
 }
 
-/* Tab panels no longer need their own scroll */
-.shell-scroll .tab-panel {
-  padding-top: 0;
+/* ── Desktop: normal page scroll, sticky tab bar ─────────────── */
+/* sticky-shell is inert on desktop — everything scrolls naturally */
+
+/* ── Mobile: flex shell keeps tab bar locked ─────────────────── */
+@media (max-width: 520px) {
+  .sticky-shell {
+    display: flex;
+    flex-direction: column;
+    height: 100dvh;
+    background: var(--bg);
+  }
+  .sticky-shell .tab-bar {
+    position: static;
+    flex-shrink: 0;
+  }
+  .shell-scroll {
+    flex: 1;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .shell-scroll .filter-bar {
+    position: sticky;
+    top: 0;
+  }
+  .shell-scroll .tab-panel {
+    padding-top: 0;
+  }
 }
 
 @media (max-width: 520px) {
