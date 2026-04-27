@@ -154,7 +154,7 @@ export function renderCard(result, opts = {}) {
     const stars = rating ? ' ' + '★'.repeat(rating) : '';
     cookLabel = `✅ Made ${dateStr}${stars}`;
   } else {
-    cookLabel = '✅ I Made This';
+    cookLabel = '☐ I Made This';
   }
 
   return `
