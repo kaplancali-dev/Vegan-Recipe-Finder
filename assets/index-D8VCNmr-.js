@@ -23,7 +23,7 @@ ${a}`).then(()=>{}).catch(()=>{})}function nt(e){const t=e.target.closest(".shar
       <div class="nut-item"><span class="nut-val">${p.fat??"—"}g</span><span class="nut-lbl">fat</span></div>
       <div class="nut-item"><span class="nut-val">${p.fib??"—"}g</span><span class="nut-lbl">fiber</span></div>
       <span class="nut-est">est. per serving</span>
-    </div>`:"",w=o.haveNames||[],L=o.needNames||[],P=w.length?`<div class="chip-label-sm">You have</div><div class="chips">${w.map(W=>ft(W,"c-have")).join("")}</div>`:"",T=L.length?`<div class="chip-label-sm" style="margin-top:4px">You need</div><div class="chips">${L.map(W=>ft(W,"c-need")).join("")}</div>`:"",R=L.length===1&&r.length?An(L[0],r):null,q=R?`<div class="sub-hint">💡 Try ${g(R)} instead of ${g(L[0])}</div>`:"",O=a?"❤️ Favorited":"🤍 Favorite",A=s?"✓ My Queue":"📌 My Queue",V=i.length?i[i.length-1]:null;let pe;if(V){const W=new Date(typeof V=="string"?V:V.date).toLocaleDateString(void 0,{month:"numeric",day:"numeric"}),$=typeof V=="object"?V.rating:0,N=$?" "+"★".repeat($):"";pe=`🍳 Made ${W}${N}`}else pe="🍳 I Made This";return`
+    </div>`:"",w=o.haveNames||[],L=o.needNames||[],P=w.length?`<div class="chip-label-sm">You have</div><div class="chips">${w.map(W=>ft(W,"c-have")).join("")}</div>`:"",T=L.length?`<div class="chip-label-sm" style="margin-top:4px">You need</div><div class="chips">${L.map(W=>ft(W,"c-need")).join("")}</div>`:"",R=L.length===1&&r.length?An(L[0],r):null,q=R?`<div class="sub-hint">💡 Try ${g(R)} instead of ${g(L[0])}</div>`:"",O=a?"❤️ Favorited":"🤍 Favorite",A=s?"✓ My Queue":"📌 My Queue",V=i.length?i[i.length-1]:null;let pe;if(V){const W=new Date(typeof V=="string"?V:V.date).toLocaleDateString(void 0,{month:"numeric",day:"numeric"}),$=typeof V=="object"?V.rating:0,N=$?" "+"★".repeat($):"";pe=`✅ Made ${W}${N}`}else pe="✅ I Made This";return`
     <article class="r-card ${c}${u}" data-recipe-id="${o.id}">
       ${l}
       <div class="card-body">
@@ -217,7 +217,7 @@ ${a}`).then(()=>{}).catch(()=>{})}function nt(e){const t=e.target.closest(".shar
 
     ${R?`
     <div class="detail-section detail-cook-history">
-      <h4>🍳 Cook History</h4>
+      <h4>✅ Cook History</h4>
       ${T.map($=>{const N=new Date($.date).toLocaleDateString(void 0,{month:"short",day:"numeric",year:"numeric"}),_=$.rating?'<span class="cook-stars">'+"★".repeat($.rating)+"☆".repeat(5-$.rating)+"</span>":"";return`<div class="detail-cook-entry">${N} ${_}</div>`}).join("")}
     </div>
     `:""}
@@ -233,7 +233,7 @@ ${a}`).then(()=>{}).catch(()=>{})}function nt(e){const t=e.target.closest(".shar
       <button class="btn btn-primary" id="detailFavBtn">${o?"❤️ Favorited":"🤍 Favorite"}</button>
       <button class="btn btn-outline" id="detailQueueBtn">${c?"✓ My Queue":"📌 My Queue"}</button>
       ${L.length?`<button class="btn btn-outline" id="detailShopBtn">🛒 Add ${L.length} to list</button>`:""}
-      <button class="btn btn-outline" id="detailCookBtn">${R?`🍳 Made ${new Date(R.date).toLocaleDateString(void 0,{month:"short",day:"numeric"})} · Make Again`:"🍳 I Made This"}</button>
+      <button class="btn btn-outline" id="detailCookBtn">${R?`✅ Made ${new Date(R.date).toLocaleDateString(void 0,{month:"short",day:"numeric"})} · Make Again`:"✅ I Made This"}</button>
       <button class="btn btn-outline" id="detailShareBtn">📤 Share</button>
       ${e.url?'<button class="btn btn-outline btn-sm" id="detailReportBtn">🔗 Report broken link</button>':""}
     </div>
@@ -308,12 +308,12 @@ Missing ingredients:
           </span>
           <div class="wm-row-actions">
             <button class="wm-icon-btn${p?" wm-fav-on":""}" data-wm-fav="${l}" title="${p?"Unfavorite":"Favorite"}">${p?"❤️":"🤍"}</button>
-            <button class="wm-icon-btn" data-wm-cook="${l}" title="I Made This">🍳</button>
+            <button class="wm-icon-btn" data-wm-cook="${l}" title="I Made This">✅</button>
             <button class="wm-icon-btn" data-wm-share="${l}" title="Share">📤</button>
             <button class="wm-icon-btn wm-shop-btn${h?" wm-in-shop":""}" data-wm-shop="${l}" title="${h?"In Shopping":"Send to Shopping"}">${h?"✓🛒":"🛒"}</button>
             <button class="wm-icon-btn wm-remove-btn" data-wm-remove="${l}" title="Remove">×</button>
           </div>
-        </div>`}),e.innerHTML=u}Pe==="history"&&(e.hidden=!0,t&&(t.hidden=!0),n&&(n.hidden=!1,La(n,r,s,i)))}function La(e,t,n,a){if(!t.length){e.innerHTML='<p class="wm-empty-hint">No cooking history yet. Tap 🍳 on a recipe after you make it!</p>';return}const s=new Map;[...t].reverse().forEach(u=>{s.has(u.id)||s.set(u.id,u)});const r=[...s.values()].slice(0,30).map(u=>{const l=qe.find(m=>m.id===u.id);return{...u,_title:l?l.title:""}});r.sort((u,l)=>{let m=0;switch(Fe){case"recipe":m=u._title.localeCompare(l._title);break;case"rating":m=(u.rating||0)-(l.rating||0);break;case"date":m=new Date(u.date)-new Date(l.date);break;case"again":{const f=y=>y===!0?2:y===!1?1:0;m=f(u.wouldMakeAgain)-f(l.wouldMakeAgain);break}}return Ce?m:-m});const o=u=>Fe===u?Ce?" ▲":" ▼":"";let c=`<div class="wm-history-table">
+        </div>`}),e.innerHTML=u}Pe==="history"&&(e.hidden=!0,t&&(t.hidden=!0),n&&(n.hidden=!1,La(n,r,s,i)))}function La(e,t,n,a){if(!t.length){e.innerHTML='<p class="wm-empty-hint">No cooking history yet. Tap ✅ on a recipe after you make it!</p>';return}const s=new Map;[...t].reverse().forEach(u=>{s.has(u.id)||s.set(u.id,u)});const r=[...s.values()].slice(0,30).map(u=>{const l=qe.find(m=>m.id===u.id);return{...u,_title:l?l.title:""}});r.sort((u,l)=>{let m=0;switch(Fe){case"recipe":m=u._title.localeCompare(l._title);break;case"rating":m=(u.rating||0)-(l.rating||0);break;case"date":m=new Date(u.date)-new Date(l.date);break;case"again":{const f=y=>y===!0?2:y===!1?1:0;m=f(u.wouldMakeAgain)-f(l.wouldMakeAgain);break}}return Ce?m:-m});const o=u=>Fe===u?Ce?" ▲":" ▼":"";let c=`<div class="wm-history-table">
     <div class="wm-history-header">
       <span class="wm-sort-col" data-sort-col="recipe">Recipe${o("recipe")}</span>
       <span class="wm-sort-col" data-sort-col="rating">Rating${o("rating")}</span>

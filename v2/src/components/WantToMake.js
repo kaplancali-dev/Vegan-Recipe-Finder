@@ -157,7 +157,7 @@ function renderWantToMake() {
           </span>
           <div class="wm-row-actions">
             <button class="wm-icon-btn${isFav ? ' wm-fav-on' : ''}" data-wm-fav="${id}" title="${isFav ? 'Unfavorite' : 'Favorite'}">${isFav ? '❤️' : '🤍'}</button>
-            <button class="wm-icon-btn" data-wm-cook="${id}" title="I Made This">🍳</button>
+            <button class="wm-icon-btn" data-wm-cook="${id}" title="I Made This">✅</button>
             <button class="wm-icon-btn" data-wm-share="${id}" title="Share">📤</button>
             <button class="wm-icon-btn wm-shop-btn${inShop ? ' wm-in-shop' : ''}" data-wm-shop="${id}" title="${inShop ? 'In Shopping' : 'Send to Shopping'}">${inShop ? '✓🛒' : '🛒'}</button>
             <button class="wm-icon-btn wm-remove-btn" data-wm-remove="${id}" title="Remove">×</button>
@@ -184,7 +184,7 @@ function renderWantToMake() {
 
 function renderCookHistory(container, history, favSet, shopSet) {
   if (!history.length) {
-    container.innerHTML = '<p class="wm-empty-hint">No cooking history yet. Tap 🍳 on a recipe after you make it!</p>';
+    container.innerHTML = '<p class="wm-empty-hint">No cooking history yet. Tap ✅ on a recipe after you make it!</p>';
     return;
   }
 

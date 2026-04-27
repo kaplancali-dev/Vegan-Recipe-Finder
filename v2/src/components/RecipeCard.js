@@ -152,9 +152,9 @@ export function renderCard(result, opts = {}) {
       .toLocaleDateString(undefined, { month: 'numeric', day: 'numeric' });
     const rating = typeof lastEntry === 'object' ? lastEntry.rating : 0;
     const stars = rating ? ' ' + '★'.repeat(rating) : '';
-    cookLabel = `🍳 Made ${dateStr}${stars}`;
+    cookLabel = `✅ Made ${dateStr}${stars}`;
   } else {
-    cookLabel = '🍳 I Made This';
+    cookLabel = '✅ I Made This';
   }
 
   return `
