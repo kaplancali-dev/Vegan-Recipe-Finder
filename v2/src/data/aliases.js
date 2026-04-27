@@ -24,6 +24,7 @@ export const INGREDIENT_ALIASES = {
   'chocolate chips (any)': ['chocolate chips','dark chocolate chips','vegan chocolate chips','semi-sweet chocolate chips','milk chocolate chips','dark-chocolate chips','mini chocolate chips'],
   'dark chocolate': ['dark chocolate','roughly chopped dark chocolate','semi-sweet chocolate','bittersweet chocolate','vegan chocolate'],
   'natural sweetener (any)': ['agave','agave nectar','agave syrup','monk fruit','monk fruit sweetener','allulose','stevia','date syrup','coconut sugar','maple syrup','maple','brown sugar','sugar','sweetener','coconut nectar','raw sugar','cane sugar'],
+  'allulose / stevia / monk fruit': ['allulose','stevia','monk fruit','monk fruit sweetener','sugar','cane sugar','white sugar','granulated sugar','brown sugar','coconut sugar','powdered sugar','maple syrup','agave','agave nectar','agave syrup','sweetener'],
   'vegan yogurt': ['vegan yogurt','plant-based yogurt','coconut yogurt','soy yogurt','non-dairy yogurt','vanilla vegan yogurt','dairy-free yogurt'],
   'vegan mayo': ['vegan mayo','vegan mayonnaise','mayo','mayonnaise','vegan mayo*'],
   'canned tomatoes (any)': ['crushed tomatoes','diced tomatoes','tomato sauce','tomato puree','tomato purée','fire roasted tomatoes','fire-roasted tomatoes','fire roasted diced tomatoes','fire-roasted diced tomatoes','diced fire-roasted tomatoes','diced fire roasted tomatoes','whole peeled tomatoes','canned tomatoes','chopped tomatoes','stewed tomatoes','tinned tomatoes','petite diced tomatoes','plum tomatoes','can diced tomatoes','can crushed tomatoes','can tomato sauce','best-quality peeled tomatoes','canned chopped tomato','canned chopped tomatoes','canned diced tomatoes juice','chopped canned tomato with juice','tomato sauce puree','tomatoes their juice'],
@@ -247,6 +248,19 @@ export const GF_SWAPS = {
 };
 
 /**
+ * Sugar-free swaps — shown inline on recipe cards for sweetener ingredients.
+ * Maps sugar-containing ingredient names to a swap tip.
+ */
+export const SUGAR_SWAPS = {
+  'sugar':'allulose or monk fruit','cane sugar':'allulose or monk fruit',
+  'white sugar':'allulose or monk fruit','granulated sugar':'allulose or monk fruit',
+  'brown sugar':'allulose brown sugar or coconut sugar','coconut sugar':'allulose or monk fruit',
+  'powdered sugar':'powdered monk fruit','icing sugar':'powdered monk fruit',
+  'maple syrup':'sugar-free maple syrup','agave':'allulose syrup',
+  'agave nectar':'allulose syrup','agave syrup':'allulose syrup',
+};
+
+/**
  * Vegan swaps — [vegan_term, original_term], most specific first.
  */
 export const VEGAN_SWAPS = [
@@ -295,7 +309,7 @@ export const QA_ITEMS = [
   {cat:'🥛 Plant-Based Milks',  items:['plant-based milk (any)']},
   {cat:'🫙 Pantry & Oils',      items:['any cooking oil','olive oil','coconut oil','avocado oil','sesame oil','chili oil','canned tomatoes (any)','crushed tomatoes','diced tomatoes','tomato sauce','vegetable broth','soy sauce / tamari / coconut aminos','coconut milk','miso paste','maple syrup','natural sweetener (any)','apple cider vinegar','nutritional yeast','rice vinegar','dijon mustard','tomato paste','vegan mayo','tamarind paste','gochujang','balsamic vinegar','sriracha / hot sauce','olives','curry paste','liquid smoke','vegan sour cream']},
   {cat:'🌿 Spices & Herbs',     items:['turmeric','cumin','smoked paprika','cinnamon','chili powder','ginger','curry powder','black pepper','garlic powder','onion powder','oregano','basil','thyme','coriander','cayenne','cardamom','bay leaves','five spice','nutmeg','sea salt','garam masala','lemongrass','star anise','dill','mint','rosemary','red pepper flakes','sumac','italian seasoning']},
-  {cat:'🍨 Dessert Pantry',     items:['vanilla extract','vanilla','cocoa powder','chocolate chips (any)','coconut cream','coconut sugar','vegan butter','flax egg','baking soda','baking powder','cornstarch','shredded coconut','medjool dates']},
+  {cat:'🍨 Dessert Pantry',     items:['vanilla extract','vanilla','cocoa powder','chocolate chips (any)','coconut cream','coconut sugar','vegan butter','flax egg','baking soda','baking powder','cornstarch','shredded coconut','medjool dates','allulose / stevia / monk fruit']},
 ];
 
 /**

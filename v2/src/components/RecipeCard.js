@@ -9,7 +9,7 @@
 import { escHTML, norm } from '../utils/text.js';
 
 import { findSubstitute } from '../utils/substitutions.js';
-import { GF_SWAPS } from '../data/aliases.js';
+import { GF_SWAPS, SUGAR_SWAPS } from '../data/aliases.js';
 
 /**
  * Return a CSS class for the match percentage tier.
@@ -38,6 +38,22 @@ function gfSwap(name) {
   return _gfLookup.get(norm(name)) || null;
 }
 
+/* ── Pre-normalized sugar swap lookup ──────────────────────── */
+
+const _sugarLookup = new Map();
+for (const [key, val] of Object.entries(SUGAR_SWAPS)) {
+  _sugarLookup.set(norm(key), val);
+}
+
+/**
+ * Find a sugar-free swap for an ingredient name, if one exists.
+ * @param {string} name - Ingredient name (raw)
+ * @returns {string|null}
+ */
+function sugarSwap(name) {
+  return _sugarLookup.get(norm(name)) || null;
+}
+
 /**
  * Render a single ingredient chip.
  * Perishable "have" ingredients get a distinct visual style.
@@ -46,13 +62,13 @@ function gfSwap(name) {
  * @param {string} cls - 'c-have' or 'c-need'
  */
 function ingChip(name, cls) {
-  const swap = gfSwap(name);
-  const swapTag = swap
-    ? `<span class="gf-swap">GF: ${escHTML(swap)}</span>`
-    : '';
+  const gf = gfSwap(name);
+  const sf = sugarSwap(name);
+  const gfTag = gf ? `<span class="gf-swap">GF: ${escHTML(gf)}</span>` : '';
+  const sfTag = sf ? `<span class="sf-swap">Swap: ${escHTML(sf)} to cut sugar calories</span>` : '';
 
-  const extraCls = swap ? ' c-gluten' : '';
-  return `<span class="${cls}${extraCls}">${escHTML(name)}${swapTag}</span>`;
+  const extraCls = gf ? ' c-gluten' : sf ? ' c-sugar' : '';
+  return `<span class="${cls}${extraCls}">${escHTML(name)}${gfTag}${sfTag}</span>`;
 }
 
 /**
