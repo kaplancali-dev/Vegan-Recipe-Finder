@@ -1086,9 +1086,9 @@ input, select, textarea {
 .intro-hero-sub strong { color: var(--ink); font-weight: 700; }
 
 .intro-tagline {
-  font-size: 1.25em;
+  font-size: 1.55em;
   text-align: center;
-  margin: 6px 0 0;
+  margin: 12px 0 0;
   font-style: italic;
   line-height: 1.4;
   color: var(--green-deep);
