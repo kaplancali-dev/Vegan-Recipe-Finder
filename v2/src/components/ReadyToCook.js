@@ -37,6 +37,9 @@ let _readyMaxTime = Infinity;
 /** Debounce timer */
 let _searchTimer = null;
 
+/** Pending render frame ID */
+let _pendingRender = 0;
+
 /* V1_CATEGORIES imported from ../data/categories.js */
 
 /**
@@ -49,18 +52,18 @@ export function initReadyToCook(recipes) {
   wireReadySearch();
   wireReadyFilters();
   buildReadyCategoryChips();
-  buildAllergenFilterChips('#readyAllergenChips', renderReadyList);
+  buildAllergenFilterChips('#readyAllergenChips', scheduleReadyRender);
   renderReadyList();
 
-  subscribe('ingredients', renderReadyList);
-  subscribe('staples', renderReadyList);
-  subscribe('favorites', renderReadyList);
-  subscribe('makelist', renderReadyList);
+  subscribe('ingredients', scheduleReadyRender);
+  subscribe('staples', scheduleReadyRender);
+  subscribe('favorites', scheduleReadyRender);
+  subscribe('makelist', scheduleReadyRender);
   subscribe('allergies', () => {
-    buildAllergenFilterChips('#readyAllergenChips', renderReadyList);
-    renderReadyList();
+    buildAllergenFilterChips('#readyAllergenChips', scheduleReadyRender);
+    scheduleReadyRender();
   });
-  subscribe('cookHistory', renderReadyList);
+  subscribe('cookHistory', scheduleReadyRender);
 }
 
 /**
@@ -74,7 +77,7 @@ function wireReadySearch() {
     clearTimeout(_searchTimer);
     _searchTimer = setTimeout(() => {
       _readySearch = input.value.trim();
-      renderReadyList();
+      scheduleReadyRender();
     }, 250);
   });
 }
@@ -102,7 +105,7 @@ function wireReadyFilters() {
       _readyMaxTime = val >= 120 ? Infinity : val;
       label.textContent = val >= 120 ? 'Any' : `${val} min`;
     });
-    slider.addEventListener('change', renderReadyList);
+    slider.addEventListener('change', scheduleReadyRender);
   }
 }
 
@@ -129,7 +132,7 @@ function buildReadyCategoryChips() {
       _readyCats.add(cat);
       chip.classList.add('on');
     }
-    renderReadyList();
+    scheduleReadyRender();
   });
 }
 
@@ -176,8 +179,18 @@ function renderReadyActiveFilters() {
       if (chip) chip.classList.remove('on');
     }
 
-    renderReadyList();
+    scheduleReadyRender();
   };
+}
+
+/**
+ * Schedule a deferred render (yields to browser for INP).
+ */
+function scheduleReadyRender() {
+  cancelAnimationFrame(_pendingRender);
+  _pendingRender = requestAnimationFrame(() => {
+    scheduleReadyRender();
+  });
 }
 
 /**

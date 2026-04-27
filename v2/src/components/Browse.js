@@ -41,6 +41,9 @@ let _lastResults = [];
 /** Debounce timer for search input */
 let _searchTimer = null;
 
+/** Pending render frame ID (for cancelling stale renders) */
+let _pendingRender = 0;
+
 /**
  * Initialize the Browse tab.
  * @param {Array} recipes
@@ -155,10 +158,18 @@ function wireControls() {
 /**
  * Run the matching engine and render results.
  * Resets pagination when filters/ingredients change.
+ * Yields to the browser first so the interaction paints immediately (INP).
  */
 function renderResults() {
   _visibleCount = PAGE_SIZE; // Reset pagination on any filter change
-  _runRender();
+
+  // Cancel any pending render so we don't do stale work
+  cancelAnimationFrame(_pendingRender);
+
+  // Yield to browser: let the click/tap paint, then do the heavy work
+  _pendingRender = requestAnimationFrame(() => {
+    _runRender();
+  });
 }
 
 /**
