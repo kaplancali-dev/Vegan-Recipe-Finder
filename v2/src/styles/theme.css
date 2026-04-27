@@ -373,11 +373,6 @@ input, select, textarea {
   color: #fff;
 }
 
-.btn-sm {
-  padding: 6px 12px;
-  font-size: 0.8rem;
-}
-
 .icon-btn {
   background: none;
   border: none;
@@ -1389,14 +1384,6 @@ input, select, textarea {
   color: var(--accent);
 }
 
-@keyframes guideGlow {
-  0%, 100% { opacity: 0.4; }
-  50% { opacity: 1; }
-}
-@keyframes guideLock {
-  0%, 30% { transform: rotate(0deg); }
-  60%, 100% { transform: rotate(-40deg); }
-}
 
 /* ── Old Pantry Power (kept for compat) ──────────────────────── */
 .pantry-power {

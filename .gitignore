@@ -24,6 +24,7 @@ header-mockup.html
 # v2 dev artifacts
 v2/node_modules/
 v2/dist/
+v2/scripts/photos/
 node_modules/
 package.json
 package-lock.json
