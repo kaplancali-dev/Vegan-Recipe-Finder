@@ -1097,16 +1097,16 @@ input, select, textarea {
 .clr-letters { display: inline-flex; }
 
 @keyframes boldWave {
-  0%, 100% { font-weight: 300; }
-  20% { font-weight: 800; }
-  40% { font-weight: 300; }
+  0%, 100% { transform: scale(1); }
+  20% { transform: scale(1.18); }
+  40% { transform: scale(1); }
 }
 
 .clr-letter {
   display: inline-block;
-  width: 0.65em;
-  text-align: center;
+  font-weight: 700;
   animation: boldWave 3s ease-in-out infinite;
+  will-change: transform;
 }
 .clr-letter:nth-child(1) { animation-delay: 0s; }
 .clr-letter:nth-child(2) { animation-delay: 0.3s; }
