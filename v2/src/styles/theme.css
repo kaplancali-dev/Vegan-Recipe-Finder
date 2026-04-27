@@ -2084,6 +2084,12 @@ input, select, textarea {
   color: var(--accent);
 }
 
+.detail-ing .gf-swap,
+.detail-ing .sf-swap {
+  margin-top: 2px;
+  font-size: 0.72rem;
+}
+
 .detail-ing.has-benefits {
   cursor: pointer;
 }

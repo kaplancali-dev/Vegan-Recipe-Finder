@@ -5,7 +5,8 @@
  * action buttons (favorite, add missing to shopping list, view recipe).
  */
 
-import { escHTML, decodeHTML } from '../utils/text.js';
+import { escHTML, decodeHTML, norm } from '../utils/text.js';
+import { GF_SWAPS, SUGAR_SWAPS } from '../data/aliases.js';
 import { get, set } from '../state/store.js';
 import { autoSync, reportBrokenLink } from '../services/sync.js';
 import { ingredientMatches, expandWithAliases } from '../services/matching.js';
@@ -15,6 +16,45 @@ import { showToast } from '../utils/toast.js';
 import { handleCook } from '../actions/cook.js';
 import { getIngredientBenefits } from '../data/ingredient-benefits.js';
 import { initOnboarding } from './Onboarding.js';
+
+/* ── Pre-normalized GF / sugar swap lookups ───────────────────── */
+
+const _gfLookup = new Map();
+for (const [key, val] of Object.entries(GF_SWAPS)) {
+  _gfLookup.set(norm(key), val);
+}
+
+const _sugarLookup = new Map();
+for (const [key, val] of Object.entries(SUGAR_SWAPS)) {
+  _sugarLookup.set(norm(key), val);
+}
+
+function _gfSwap(name) {
+  return _gfLookup.get(norm(name)) || null;
+}
+
+function _sugarSwap(name) {
+  const n = norm(name);
+  const exact = _sugarLookup.get(n);
+  if (exact) return exact;
+  for (const [key, val] of _sugarLookup) {
+    if (n.includes(key) && key.length > 3) return val;
+  }
+  return null;
+}
+
+/**
+ * Build inline swap tags for an ingredient.
+ * @param {string} name - Raw ingredient name
+ * @returns {string} HTML string (may be empty)
+ */
+function _swapTags(name) {
+  const gf = _gfSwap(name);
+  const sf = _sugarSwap(name);
+  const gfTag = gf ? `<span class="gf-swap">GF: ${escHTML(gf)}</span>` : '';
+  const sfTag = sf ? `<span class="sf-swap">Swap: ${escHTML(sf)} to cut sugar calories</span>` : '';
+  return gfTag + sfTag;
+}
 
 /** @type {Array} Full recipe list — set by init */
 let _recipes = [];
@@ -83,7 +123,9 @@ function _renderNewVisitorDetail(recipe) {
 
   const ingHtml = ingList.map(ing => {
     const displayName = decodeHTML(ing);
-    return `<li class="detail-ing visitor-ing">${escHTML(displayName)}</li>`;
+    const swaps = _swapTags(ing);
+    const extraCls = _gfSwap(ing) ? ' c-gluten' : _sugarSwap(ing) ? ' c-sugar' : '';
+    return `<li class="detail-ing visitor-ing${extraCls}">${escHTML(displayName)}${swaps}</li>`;
   }).join('');
 
   const nutHtml = (nut.cal || nut.pro || nut.carb) ? `
@@ -196,9 +238,12 @@ function _renderFullDetail(recipe, ings, staples) {
           <span class="ing-evidence">${escHTML(info.evidence)}</span>
         </div>`
       : '';
+    const swaps = _swapTags(i.name);
+    const extraCls = _gfSwap(i.name) ? ' c-gluten' : _sugarSwap(i.name) ? ' c-sugar' : '';
     const tappable = info && info.benefits.length ? ' has-benefits' : '';
-    return `<li class="detail-ing ${i.have ? 'have' : 'missing'}${tappable}">
+    return `<li class="detail-ing ${i.have ? 'have' : 'missing'}${tappable}${extraCls}">
       <span class="ing-name">${i.have ? '✓' : '○'} ${escHTML(displayName)}${tappable ? ' <span class="ing-info-icon">ℹ</span>' : ''}</span>
+      ${swaps}
       ${benefitsHtml}
     </li>`;
   }).join('');
