@@ -230,9 +230,10 @@ function renderReadyList() {
   // Apply search filter if present
   if (_readySearch) {
     const q = _readySearch.toLowerCase();
+    const stripPunc = s => s.replace(/[""''"'""'']/g, '');
     ready = ready.filter(r => {
-      const t = r.title.toLowerCase();
-      const ingStr = (r.ing || []).join(' ').toLowerCase();
+      const t = stripPunc(r.title.toLowerCase());
+      const ingStr = stripPunc((r.ing || []).join(' ').toLowerCase());
 
       // Full-phrase match first
       if (t.includes(q) || ingStr.includes(q)) return true;

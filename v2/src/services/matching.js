@@ -194,9 +194,11 @@ export function findRecipes({
 
   if (nameSearch) {
     const q = nameSearch.toLowerCase();
+    // Strip quotes/punctuation so "Meatballs" → Meatballs for matching
+    const stripPunc = s => s.replace(/[“”‘’"'""'']/g, '');
     pool = pool.filter(r => {
-      const t = r.title.toLowerCase();
-      const ings = (r.ing || []).join(' ').toLowerCase();
+      const t = stripPunc(r.title.toLowerCase());
+      const ings = stripPunc((r.ing || []).join(' ').toLowerCase());
 
       // Full-phrase match — covers multi-word terms like "ice cream"
       if (t.includes(q) || ings.includes(q)) return true;
