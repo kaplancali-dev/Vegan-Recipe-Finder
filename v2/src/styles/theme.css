@@ -1115,6 +1115,20 @@ input, select, textarea {
 .clr-letter:nth-child(5) { animation-delay: 1.2s; }
 .clr-letter:nth-child(6) { animation-delay: 1.5s; }
 
+@keyframes lifePulse {
+  0%, 100% { color: var(--green-deep); transform: scale(1); }
+  50% { color: #38a169; transform: scale(1.08); }
+}
+
+.life-word {
+  display: inline-block;
+  font-weight: 700;
+  color: var(--green-deep);
+  animation: lifePulse 4s ease-in-out infinite;
+  animation-delay: 2s;
+  will-change: transform;
+}
+
 @media (max-width: 780px) {
   .intro-hero-grid { grid-template-columns: 1fr; gap: 18px; }
   .intro-hero-video { border-radius: 12px; }
