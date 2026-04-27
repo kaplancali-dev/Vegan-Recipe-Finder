@@ -1,7 +1,7 @@
 /**
  * Cook action — shared handler for "I Made This" button.
  *
- * If the recipe has no prior cook entries → show star rating → log.
+ * If the recipe has no prior cook entries → show star rating → "would make again?" → log.
  * If it has a prior entry → show confirm (log again / undo) → act.
  */
 
@@ -59,4 +59,53 @@ export async function handleCook(id, opts = {}) {
   autoSync();
   const stars = rating ? ' ' + '★'.repeat(rating) : '';
   showToast(`Saved to Cook History${stars}`);
+
+  // Brief pause then ask "Would you make this again?"
+  await new Promise(r => setTimeout(r, 400));
+  const again = await _showWouldMakeAgain();
+  if (again !== null) {
+    const fresh = get('cookHistory');
+    // Find the entry we just added (last one for this recipe)
+    for (let i = fresh.length - 1; i >= 0; i--) {
+      if (fresh[i].id === id) {
+        fresh[i].wouldMakeAgain = again;
+        break;
+      }
+    }
+    set('cookHistory', fresh);
+    autoSync();
+  }
+}
+
+/* ── "Would you make this again?" modal ──────────────────────── */
+
+function _showWouldMakeAgain() {
+  return new Promise(resolve => {
+    const overlay = document.createElement('div');
+    overlay.className = 'modal-overlay';
+    overlay.innerHTML = `
+      <div class="modal-box" style="max-width:320px;text-align:center;padding:24px">
+        <p style="font-size:1rem;font-weight:600;margin-bottom:16px">Would you make this again?</p>
+        <div style="display:flex;gap:12px;justify-content:center">
+          <button class="btn btn-green" data-again="yes" style="min-width:80px">👍 Yes</button>
+          <button class="btn btn-outline" data-again="no" style="min-width:80px">👎 No</button>
+        </div>
+      </div>
+    `;
+
+    overlay.addEventListener('click', (e) => {
+      const btn = e.target.closest('[data-again]');
+      if (btn) {
+        overlay.remove();
+        resolve(btn.dataset.again === 'yes');
+        return;
+      }
+      if (e.target === overlay) {
+        overlay.remove();
+        resolve(null);
+      }
+    });
+
+    document.body.appendChild(overlay);
+  });
 }

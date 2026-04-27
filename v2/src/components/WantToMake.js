@@ -291,7 +291,7 @@ function wireEvents() {
     const cookBtn = t.closest('[data-wm-cook]');
     if (cookBtn) {
       const id = Number(cookBtn.dataset.wmCook);
-      handleCookWithAgain(id);
+      handleCook(id);
       return;
     }
 
@@ -352,56 +352,3 @@ function wireEvents() {
   });
 }
 
-/* ── Enhanced cook handler with "Would make again?" ──────────── */
-
-async function handleCookWithAgain(id) {
-  await handleCook(id);
-
-  const history = get('cookHistory');
-  const lastEntry = [...history].reverse().find(h => h.id === id);
-  if (!lastEntry) return;
-
-  await new Promise(r => setTimeout(r, 400));
-
-  const again = await showWouldMakeAgain();
-  if (again !== null) {
-    const fresh = get('cookHistory');
-    const idx = fresh.findLastIndex(h => h.id === id);
-    if (idx !== -1) {
-      fresh[idx].wouldMakeAgain = again;
-      set('cookHistory', fresh);
-      autoSync();
-    }
-  }
-}
-
-function showWouldMakeAgain() {
-  return new Promise(resolve => {
-    const overlay = document.createElement('div');
-    overlay.className = 'modal-overlay';
-    overlay.innerHTML = `
-      <div class="modal-box" style="max-width:320px;text-align:center;padding:24px">
-        <p style="font-size:1rem;font-weight:600;margin-bottom:16px">Would you make this again?</p>
-        <div style="display:flex;gap:12px;justify-content:center">
-          <button class="btn btn-green" data-again="yes" style="min-width:80px">👍 Yes</button>
-          <button class="btn btn-outline" data-again="no" style="min-width:80px">👎 No</button>
-        </div>
-      </div>
-    `;
-
-    overlay.addEventListener('click', (e) => {
-      const btn = e.target.closest('[data-again]');
-      if (btn) {
-        overlay.remove();
-        resolve(btn.dataset.again === 'yes');
-        return;
-      }
-      if (e.target === overlay) {
-        overlay.remove();
-        resolve(null);
-      }
-    });
-
-    document.body.appendChild(overlay);
-  });
-}
