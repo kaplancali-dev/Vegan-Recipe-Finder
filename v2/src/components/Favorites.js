@@ -286,6 +286,7 @@ function renderCookHistory() {
       }
       const btn = e.target.closest('[data-cook-delete]');
       if (!btn) return;
+      if (!confirm('Remove this recipe from your cook history? This cannot be undone.')) return;
       const id = Number(btn.dataset.cookDelete);
       const history = get('cookHistory');
       set('cookHistory', history.filter(h => h.id !== id));
