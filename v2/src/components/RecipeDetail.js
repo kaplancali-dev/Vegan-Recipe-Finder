@@ -258,7 +258,7 @@ function _renderFullDetail(recipe, ings, staples) {
       <button class="btn btn-primary" id="detailFavBtn">${isFav ? '❤️ Favorited' : '🤍 Favorite'}</button>
       <button class="btn btn-outline" id="detailQueueBtn">${isQueued ? '✓ My Queue' : '📌 My Queue'}</button>
       ${missingIngs.length ? `<button class="btn btn-outline" id="detailShopBtn">🛒 Add ${missingIngs.length} to list</button>` : ''}
-      <button class="btn btn-outline" id="detailCookBtn">${lastCook ? '🍳 Cook Again' : '🍳 I Made This'}</button>
+      <button class="btn btn-outline" id="detailCookBtn">${lastCook ? `🍳 Made ${new Date(lastCook.date).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })} · Cook Again` : '🍳 I Made This'}</button>
       <button class="btn btn-outline" id="detailShareBtn">📤 Share</button>
       ${recipe.url ? `<button class="btn btn-outline btn-sm" id="detailReportBtn">🔗 Report broken link</button>` : ''}
     </div>

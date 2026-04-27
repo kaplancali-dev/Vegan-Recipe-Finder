@@ -233,7 +233,7 @@ ${a}`).then(()=>{}).catch(()=>{})}function et(e){const t=e.target.closest(".shar
       <button class="btn btn-primary" id="detailFavBtn">${o?"❤️ Favorited":"🤍 Favorite"}</button>
       <button class="btn btn-outline" id="detailQueueBtn">${c?"✓ My Queue":"📌 My Queue"}</button>
       ${L.length?`<button class="btn btn-outline" id="detailShopBtn">🛒 Add ${L.length} to list</button>`:""}
-      <button class="btn btn-outline" id="detailCookBtn">${R?"🍳 Cook Again":"🍳 I Made This"}</button>
+      <button class="btn btn-outline" id="detailCookBtn">${R?`🍳 Made ${new Date(R.date).toLocaleDateString(void 0,{month:"short",day:"numeric"})} · Cook Again`:"🍳 I Made This"}</button>
       <button class="btn btn-outline" id="detailShareBtn">📤 Share</button>
       ${e.url?'<button class="btn btn-outline btn-sm" id="detailReportBtn">🔗 Report broken link</button>':""}
     </div>
