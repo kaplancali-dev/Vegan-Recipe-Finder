@@ -193,13 +193,22 @@ export function findRecipes({
   }
 
   if (nameSearch) {
+    const q = nameSearch.toLowerCase();
     pool = pool.filter(r => {
       const t = r.title.toLowerCase();
       const ings = (r.ing || []).join(' ').toLowerCase();
-      const words = nameSearch.toLowerCase().split(/\s+/);
+
+      // Full-phrase match — covers multi-word terms like "ice cream"
+      if (t.includes(q) || ings.includes(q)) return true;
+
+      // Word-boundary fallback — each word must appear at a word boundary
+      // so "ice" matches "ice" but not "rice" or "spice"
+      const words = q.split(/\s+/);
       return words.every(w => {
         const s = stem(w);
-        return t.includes(w) || t.includes(s) || ings.includes(w) || ings.includes(s);
+        const re = new RegExp(`(^|[\\s,\\-\\(])${w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}($|[\\s,\\-\\)])`);
+        const reStem = w !== s ? new RegExp(`(^|[\\s,\\-\\(])${s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}($|[\\s,\\-\\)])`) : null;
+        return re.test(t) || re.test(ings) || (reStem && (reStem.test(t) || reStem.test(ings)));
       });
     });
   }

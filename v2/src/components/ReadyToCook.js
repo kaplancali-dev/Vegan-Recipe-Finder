@@ -229,13 +229,21 @@ function renderReadyList() {
 
   // Apply search filter if present
   if (_readySearch) {
+    const q = _readySearch.toLowerCase();
     ready = ready.filter(r => {
       const t = r.title.toLowerCase();
       const ingStr = (r.ing || []).join(' ').toLowerCase();
-      const words = _readySearch.toLowerCase().split(/\s+/);
+
+      // Full-phrase match first
+      if (t.includes(q) || ingStr.includes(q)) return true;
+
+      // Word-boundary fallback — "ice" matches "ice" but not "rice"
+      const words = q.split(/\s+/);
       return words.every(w => {
         const s = stem(w);
-        return t.includes(w) || t.includes(s) || ingStr.includes(w) || ingStr.includes(s);
+        const re = new RegExp(`(^|[\\s,\\-\\(])${w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}($|[\\s,\\-\\)])`);
+        const reStem = w !== s ? new RegExp(`(^|[\\s,\\-\\(])${s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}($|[\\s,\\-\\)])`) : null;
+        return re.test(t) || re.test(ingStr) || (reStem && (reStem.test(t) || reStem.test(ingStr)));
       });
     });
   }
