@@ -139,8 +139,6 @@ input, select, textarea {
 
 /* ── Header ──────────────────────────────────────────────────── */
 .header {
-  position: sticky;
-  top: 0;
   z-index: 100;
   background: var(--bg);
   border-bottom: 1px solid var(--border);
@@ -190,9 +188,10 @@ input, select, textarea {
   gap: 4px;
   padding: 6px 0;
   position: sticky;
-  top: 52px;
+  top: 0;
   z-index: 99;
   background: var(--bg);
+  border-bottom: 1px solid var(--border);
   scrollbar-width: none;
 }
 
@@ -555,7 +554,7 @@ input, select, textarea {
 /* ── Filter Drawer & Bar ─────────────────────────────────────── */
 .filter-bar {
   position: sticky;
-  top: 90px;
+  top: 38px;
   z-index: 50;
   padding: 10px 12px;
 }
@@ -2517,8 +2516,8 @@ input, select, textarea {
   .logo-tagline { width: 100%; text-align: center; font-size: 0.75rem; margin-top: -2px; }
   .header { padding: 6px 0 4px; }
   .tab-btn { flex: 0 0 auto; font-size: 0.72rem; padding: 6px 6px; }
-  .tab-bar { top: 32px; }
-  .filter-bar { top: 68px; padding: 8px 10px; }
+  .tab-bar { top: 0; }
+  .filter-bar { top: 32px; padding: 8px 10px; }
   .filter-bar .input-row { gap: 6px; }
 }
 
@@ -2527,8 +2526,8 @@ input, select, textarea {
   .logo-tagline { font-size: 0.68rem; }
   .header-inner { gap: 0 5px; }
   .tab-btn { font-size: 0.68rem; padding: 5px 5px; }
-  .tab-bar { top: 28px; }
-  .filter-bar { top: 62px; }
+  .tab-bar { top: 0; }
+  .filter-bar { top: 28px; }
 
   .qa-grid {
     grid-template-columns: 1fr;
