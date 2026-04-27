@@ -258,6 +258,9 @@ export const SUGAR_SWAPS = {
   'powdered sugar':'powdered monk fruit','icing sugar':'powdered monk fruit',
   'maple syrup':'sugar-free maple syrup','agave':'allulose syrup',
   'agave nectar':'allulose syrup','agave syrup':'allulose syrup',
+  'turbinado sugar':'allulose or monk fruit','raw sugar':'allulose or monk fruit',
+  'demerara sugar':'allulose or monk fruit','muscovado sugar':'allulose or monk fruit',
+  'date sugar':'monk fruit sugar','corn syrup':'allulose syrup',
 };
 
 /**

@@ -6,7 +6,7 @@
  * and action buttons. Parent handles click events via delegation.
  */
 
-import { escHTML, norm } from '../utils/text.js';
+import { escHTML, decodeHTML, norm } from '../utils/text.js';
 
 import { findSubstitute } from '../utils/substitutions.js';
 import { GF_SWAPS, SUGAR_SWAPS } from '../data/aliases.js';
@@ -47,11 +47,21 @@ for (const [key, val] of Object.entries(SUGAR_SWAPS)) {
 
 /**
  * Find a sugar-free swap for an ingredient name, if one exists.
+ * Checks exact match first, then checks if any sugar keyword
+ * appears in the ingredient name (handles "¼ cup turbinado sugar").
  * @param {string} name - Ingredient name (raw)
  * @returns {string|null}
  */
 function sugarSwap(name) {
-  return _sugarLookup.get(norm(name)) || null;
+  const n = norm(name);
+  // Exact match
+  const exact = _sugarLookup.get(n);
+  if (exact) return exact;
+  // Substring match — check if any sugar keyword is in the ingredient
+  for (const [key, val] of _sugarLookup) {
+    if (n.includes(key) && key.length > 3) return val;
+  }
+  return null;
 }
 
 /**
@@ -62,13 +72,14 @@ function sugarSwap(name) {
  * @param {string} cls - 'c-have' or 'c-need'
  */
 function ingChip(name, cls) {
+  const display = decodeHTML(name);
   const gf = gfSwap(name);
   const sf = sugarSwap(name);
   const gfTag = gf ? `<span class="gf-swap">GF: ${escHTML(gf)}</span>` : '';
   const sfTag = sf ? `<span class="sf-swap">Swap: ${escHTML(sf)} to cut sugar calories</span>` : '';
 
   const extraCls = gf ? ' c-gluten' : sf ? ' c-sugar' : '';
-  return `<span class="${cls}${extraCls}">${escHTML(name)}${gfTag}${sfTag}</span>`;
+  return `<span class="${cls}${extraCls}">${escHTML(display)}${gfTag}${sfTag}</span>`;
 }
 
 /**
