@@ -20,10 +20,10 @@
 <link rel="icon" type="image/png" href="favicon.png">
 <meta name="theme-color" content="#2d7a4f">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://static.cloudflareinsights.com https://www.googletagmanager.com https://www.google-analytics.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; img-src 'self' https: data:; connect-src 'self' https://*.supabase.co https://cloudflareinsights.com https://www.google-analytics.com; font-src 'self'; frame-src 'none';">
-  <script type="module" crossorigin src="/assets/index-DiT3Epvh.js"></script>
+  <script type="module" crossorigin src="/assets/index-DJg_nyQC.js"></script>
   <link rel="modulepreload" crossorigin href="/assets/supabase-DaN4is7k.js">
   <link rel="modulepreload" crossorigin href="/assets/recipes-CujdhypO.js">
-  <link rel="stylesheet" crossorigin href="/assets/index-DVXXWwfz.css">
+  <link rel="stylesheet" crossorigin href="/assets/index-0ezZreWf.css">
 </head>
 <body>
 
@@ -36,8 +36,19 @@
     <!-- Toast notification -->
     <div id="toast" class="toast" aria-live="polite"></div>
 
-    <!-- Sticky shell: tab bar stays, content scrolls -->
+    <!-- Sticky shell: header + tab bar + scrollable panels -->
     <div id="stickyShell" class="sticky-shell">
+
+    <!-- Top header bar -->
+    <header id="header" class="header">
+      <div class="header-inner">
+        <button id="headerMenuBtn" class="header-menu-btn" aria-label="Menu">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+        <h1 class="logo">🌿 HARVEST</h1>
+        <p class="logo-tagline">See What Your Kitchen Already Knows™</p>
+      </div>
+    </header>
 
     <!-- Tab navigation bar (WAI-ARIA tabs pattern) -->
     <nav id="tabBar" class="tab-bar" role="tablist" aria-label="Main navigation">
@@ -52,19 +63,8 @@
       <button class="tab-btn" data-tab="shopping" role="tab" aria-selected="false" aria-controls="tab-shopping" id="btn-shopping">🛒 Shopping</button>
     </nav>
 
-    <!-- Scrollable area: header scrolls away, tab panels scroll -->
+    <!-- Scrollable area for tab panels -->
     <div id="shellScroll" class="shell-scroll">
-
-    <!-- Top header bar (inside scroll area so it scrolls away) -->
-    <header id="header" class="header">
-      <div class="header-inner">
-        <button id="headerMenuBtn" class="header-menu-btn" aria-label="Menu">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-        </button>
-        <h1 class="logo">🌿 HARVEST</h1>
-        <p class="logo-tagline">See What Your Kitchen Already Knows™</p>
-      </div>
-    </header>
 
     <!-- ── TAB PANELS ─────────────────────────────────────── -->
 

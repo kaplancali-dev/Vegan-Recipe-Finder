@@ -196,9 +196,6 @@ input, select, textarea {
   top: 0;
 }
 
-/* ── Desktop: normal page scroll, sticky tab bar ─────────────── */
-/* sticky-shell is inert on desktop — everything scrolls naturally */
-
 /* ── Mobile: flex shell keeps tab bar locked ─────────────────── */
 @media (max-width: 520px) {
   .sticky-shell {
@@ -206,6 +203,10 @@ input, select, textarea {
     flex-direction: column;
     height: 100dvh;
     background: var(--bg);
+  }
+  /* Hide header on mobile — tab bar is the top element */
+  .sticky-shell > .header {
+    display: none;
   }
   .sticky-shell .tab-bar {
     position: static;
