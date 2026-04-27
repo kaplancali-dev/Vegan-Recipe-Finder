@@ -127,23 +127,40 @@ initOnboarding();
 
 /* ── Sticky tab bar: fix for iOS Safari ──────────────────── */
 // iOS Safari's address-bar hide/show disrupts position:sticky.
-// Use IntersectionObserver to switch tab-bar to fixed once the
-// header scrolls out of view, and back to sticky when it returns.
+// Use a scroll listener to switch tab-bar to position:fixed via
+// inline styles once the header has scrolled out of view.
 {
   const header = document.getElementById('header');
   const tabBar = document.getElementById('tabBar');
   if (header && tabBar) {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          tabBar.classList.remove('tab-bar--fixed');
-        } else {
-          tabBar.classList.add('tab-bar--fixed');
-        }
-      },
-      { threshold: 0 }
-    );
-    observer.observe(header);
+    let isFixed = false;
+    let headerH = header.offsetHeight;
+    // Recalculate header height on resize (e.g. orientation change)
+    window.addEventListener('resize', () => { headerH = header.offsetHeight; }, { passive: true });
+
+    window.addEventListener('scroll', () => {
+      const shouldFix = window.scrollY >= headerH;
+      if (shouldFix === isFixed) return; // no change
+      isFixed = shouldFix;
+      if (isFixed) {
+        tabBar.style.position = 'fixed';
+        tabBar.style.top = '0';
+        tabBar.style.left = '0';
+        tabBar.style.right = '0';
+        tabBar.style.paddingLeft = '18px';
+        tabBar.style.paddingRight = '18px';
+        // Add spacer so content doesn't jump
+        tabBar.dataset.fixedActive = '1';
+      } else {
+        tabBar.style.position = '';
+        tabBar.style.top = '';
+        tabBar.style.left = '';
+        tabBar.style.right = '';
+        tabBar.style.paddingLeft = '';
+        tabBar.style.paddingRight = '';
+        tabBar.dataset.fixedActive = '';
+      }
+    }, { passive: true });
   }
 }
 

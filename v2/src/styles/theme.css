@@ -193,27 +193,15 @@ input, select, textarea {
   background: var(--bg);
   border-bottom: 1px solid var(--border);
   scrollbar-width: none;
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
 }
 
-/* When header scrolls out of view, JS adds this class for reliable iOS sticking */
-.tab-bar--fixed {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  padding-left: 18px;
-  padding-right: 18px;
-}
-
-/* Spacer to prevent content jump when tab-bar switches to fixed */
-.tab-bar--fixed ~ .tab-panel:not([hidden]) {
+/* When header scrolls out of view, JS sets inline fixed positioning.
+   Use data-attribute to handle content spacing and filter-bar offset. */
+.tab-bar[data-fixed-active="1"] ~ .tab-panel:not([hidden]) {
   padding-top: 40px;
 }
 
-/* When tab-bar is fixed, filter-bar inside panels sticks right below it */
-.tab-bar--fixed ~ .tab-panel .filter-bar {
+.tab-bar[data-fixed-active="1"] ~ .tab-panel .filter-bar {
   top: 40px;
 }
 
@@ -2538,11 +2526,13 @@ input, select, textarea {
   .logo-tagline { width: 100%; text-align: center; font-size: 0.75rem; margin-top: -2px; }
   .header { padding: 6px 0 4px; }
   .tab-btn { flex: 0 0 auto; font-size: 0.72rem; padding: 6px 6px; }
-  .tab-bar { top: 0; -webkit-transform: translateZ(0); transform: translateZ(0); }
+  .tab-bar { top: 0; }
   .filter-bar { top: 32px; padding: 4px 10px; }
   .filter-bar .input-row { gap: 6px; margin-bottom: 4px; }
   .filter-bar .text-input { padding: 5px 10px; }
   .filter-bar .btn-sm { padding: 4px 10px; }
+  .tab-bar[data-fixed-active="1"] ~ .tab-panel:not([hidden]) { padding-top: 36px; }
+  .tab-bar[data-fixed-active="1"] ~ .tab-panel .filter-bar { top: 34px; }
 }
 
 @media (max-width: 400px) {
