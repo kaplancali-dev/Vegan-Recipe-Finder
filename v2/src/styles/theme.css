@@ -2743,6 +2743,15 @@ input, select, textarea {
   margin-bottom: 4px;
   font-size: 0.85rem;
 }
+.cook-history-link {
+  color: var(--green-deep);
+  text-decoration: none;
+  cursor: pointer;
+  font-weight: 500;
+}
+.cook-history-link:hover {
+  text-decoration: underline;
+}
 .cook-history-item .cook-stars {
   color: #f5a623;
   font-size: 0.8rem;
