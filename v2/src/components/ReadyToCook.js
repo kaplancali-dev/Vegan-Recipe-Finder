@@ -189,7 +189,7 @@ function renderReadyActiveFilters() {
 function scheduleReadyRender() {
   cancelAnimationFrame(_pendingRender);
   _pendingRender = requestAnimationFrame(() => {
-    scheduleReadyRender();
+    renderReadyList();
   });
 }
 
