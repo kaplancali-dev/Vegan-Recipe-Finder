@@ -197,6 +197,26 @@ input, select, textarea {
   transform: translateZ(0);
 }
 
+/* When header scrolls out of view, JS adds this class for reliable iOS sticking */
+.tab-bar--fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding-left: 18px;
+  padding-right: 18px;
+}
+
+/* Spacer to prevent content jump when tab-bar switches to fixed */
+.tab-bar--fixed ~ .tab-panel:not([hidden]) {
+  padding-top: 40px;
+}
+
+/* When tab-bar is fixed, filter-bar inside panels sticks right below it */
+.tab-bar--fixed ~ .tab-panel .filter-bar {
+  top: 40px;
+}
+
 @media (max-width: 520px) {
   .tab-bar {
     overflow-x: auto;

@@ -125,6 +125,28 @@ initReadyToCook(recipes);
 initSyncPanel();
 initOnboarding();
 
+/* ── Sticky tab bar: fix for iOS Safari ──────────────────── */
+// iOS Safari's address-bar hide/show disrupts position:sticky.
+// Use IntersectionObserver to switch tab-bar to fixed once the
+// header scrolls out of view, and back to sticky when it returns.
+{
+  const header = document.getElementById('header');
+  const tabBar = document.getElementById('tabBar');
+  if (header && tabBar) {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          tabBar.classList.remove('tab-bar--fixed');
+        } else {
+          tabBar.classList.add('tab-bar--fixed');
+        }
+      },
+      { threshold: 0 }
+    );
+    observer.observe(header);
+  }
+}
+
 /* ── Deep-link: open shared recipe from #r=ID or ?r=ID ────── */
 
 const hashMatch = window.location.hash.match(/^#r=(\d+)/);
