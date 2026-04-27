@@ -2131,6 +2131,20 @@ input, select, textarea {
   margin-top: 2px;
 }
 
+.detail-cook-entry {
+  font-size: 0.85rem;
+  padding: 4px 0;
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.detail-cook-entry .cook-stars {
+  color: #f5a623;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+}
+
 .detail-actions {
   display: flex;
   gap: 8px;

@@ -206,6 +206,13 @@ function _renderFullDetail(recipe, ings, staples) {
   // Missing ingredients for shopping list button
   const missingIngs = ingList.filter(i => !i.have).map(i => i.name);
 
+  // Cook history for this recipe
+  const cookHistory = get('cookHistory') || [];
+  const cooked = cookHistory
+    .filter(h => h.id === id)
+    .sort((a, b) => new Date(b.date) - new Date(a.date));
+  const lastCook = cooked.length ? cooked[0] : null;
+
   // Build body
   _title.textContent = recipe.title;
   _body.innerHTML = `
@@ -229,6 +236,17 @@ function _renderFullDetail(recipe, ings, staples) {
       ${nutHtml}
     </div>
 
+    ${lastCook ? `
+    <div class="detail-section detail-cook-history">
+      <h4>🍳 Cook History</h4>
+      ${cooked.map(c => {
+        const d = new Date(c.date).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' });
+        const stars = c.rating ? '<span class="cook-stars">' + '★'.repeat(c.rating) + '☆'.repeat(5 - c.rating) + '</span>' : '';
+        return `<div class="detail-cook-entry">${d} ${stars}</div>`;
+      }).join('')}
+    </div>
+    ` : ''}
+
     <div class="detail-section">
       <h4>Notes</h4>
       <textarea id="detailNotes" class="text-input" rows="3" placeholder="Add your notes…"
@@ -240,7 +258,7 @@ function _renderFullDetail(recipe, ings, staples) {
       <button class="btn btn-primary" id="detailFavBtn">${isFav ? '❤️ Favorited' : '🤍 Favorite'}</button>
       <button class="btn btn-outline" id="detailQueueBtn">${isQueued ? '✓ My Queue' : '📌 My Queue'}</button>
       ${missingIngs.length ? `<button class="btn btn-outline" id="detailShopBtn">🛒 Add ${missingIngs.length} to list</button>` : ''}
-      <button class="btn btn-outline" id="detailCookBtn">🍳 I Made This</button>
+      <button class="btn btn-outline" id="detailCookBtn">${lastCook ? '🍳 Cook Again' : '🍳 I Made This'}</button>
       <button class="btn btn-outline" id="detailShareBtn">📤 Share</button>
       ${recipe.url ? `<button class="btn btn-outline btn-sm" id="detailReportBtn">🔗 Report broken link</button>` : ''}
     </div>
