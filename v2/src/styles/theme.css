@@ -198,11 +198,11 @@ input, select, textarea {
 /* When header scrolls out of view, JS sets inline fixed positioning.
    Use data-attribute to handle content spacing and filter-bar offset. */
 .tab-bar[data-fixed-active="1"] ~ .tab-panel:not([hidden]) {
-  padding-top: 40px;
+  padding-top: calc(40px + env(safe-area-inset-top, 0px));
 }
 
 .tab-bar[data-fixed-active="1"] ~ .tab-panel .filter-bar {
-  top: 40px;
+  top: calc(40px + env(safe-area-inset-top, 0px));
 }
 
 @media (max-width: 520px) {
@@ -2531,8 +2531,8 @@ input, select, textarea {
   .filter-bar .input-row { gap: 6px; margin-bottom: 4px; }
   .filter-bar .text-input { padding: 5px 10px; }
   .filter-bar .btn-sm { padding: 4px 10px; }
-  .tab-bar[data-fixed-active="1"] ~ .tab-panel:not([hidden]) { padding-top: 36px; }
-  .tab-bar[data-fixed-active="1"] ~ .tab-panel .filter-bar { top: 34px; }
+  .tab-bar[data-fixed-active="1"] ~ .tab-panel:not([hidden]) { padding-top: calc(36px + env(safe-area-inset-top, 0px)); }
+  .tab-bar[data-fixed-active="1"] ~ .tab-panel .filter-bar { top: calc(34px + env(safe-area-inset-top, 0px)); }
 }
 
 @media (max-width: 400px) {

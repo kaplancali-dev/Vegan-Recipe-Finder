@@ -146,7 +146,7 @@ initOnboarding();
       isFixed = shouldFix;
       if (isFixed) {
         tabBar.style.position = 'fixed';
-        tabBar.style.top = '0';
+        tabBar.style.top = 'env(safe-area-inset-top, 0px)';
         tabBar.style.left = '0';
         tabBar.style.right = '0';
         tabBar.style.paddingLeft = '18px';
