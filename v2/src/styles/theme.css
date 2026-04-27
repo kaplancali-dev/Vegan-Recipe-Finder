@@ -48,6 +48,7 @@
   --transition: 0.18s ease;
   --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro", system-ui, sans-serif;
   --font-serif: Georgia, "Iowan Old Style", "Times New Roman", serif;
+  --tab-bar-h: 41px;  /* height of sticky tab-bar, for stacking filter-bar below */
   --safe-bottom: env(safe-area-inset-bottom, 0px);
 }
 
@@ -585,9 +586,10 @@ input, select, textarea {
 /* ── Filter Drawer & Bar ─────────────────────────────────────── */
 .filter-bar {
   position: sticky;
-  top: 0;
+  top: var(--tab-bar-h, 0px);  /* sits below sticky tab-bar on desktop */
   z-index: 50;
   padding: 10px 12px;
+  background: var(--bg);
 }
 
 .filter-bar .input-row {
