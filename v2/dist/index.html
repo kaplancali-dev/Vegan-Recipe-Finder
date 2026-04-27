@@ -3,15 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>HARVEST — Eat More Plants!</title>
+<title>HARVEST™ — See What Your Kitchen Already Knows</title>
 <meta name="description" content="Match your ingredients to over 4,500 plant-based recipes from the world's top nutrition-focused chefs. Prioritizes perishables, filters allergens, and builds your shopping list.">
-<meta property="og:title" content="HARVEST — Eat More Plants!">
+<meta property="og:title" content="HARVEST™ — See What Your Kitchen Already Knows">
 <meta property="og:description" content="You open the fridge and think, 'What can I make with this?' HARVEST knows.">
 <meta property="og:image" content="https://myharvestvegan.com/hero-image4.png">
 <meta property="og:url" content="https://myharvestvegan.com">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="HARVEST — Eat More Plants!">
+<meta name="twitter:title" content="HARVEST™ — See What Your Kitchen Already Knows">
 <meta name="twitter:description" content="Match your ingredients to over 4,500 plant-based recipes. Prioritizes perishables, filters allergens, builds your shopping list.">
 <meta name="twitter:image" content="https://myharvestvegan.com/hero-image4.png">
 <meta name="apple-mobile-web-app-title" content="HARVEST">
@@ -19,11 +19,11 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="favicon.png">
 <meta name="theme-color" content="#2d7a4f">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; img-src 'self' https: data:; connect-src 'self' https://*.supabase.co https://www.google-analytics.com; font-src 'self'; frame-src 'none';">
-  <script type="module" crossorigin src="/assets/index-CuSuE_3s.js"></script>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://static.cloudflareinsights.com https://www.googletagmanager.com https://www.google-analytics.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; img-src 'self' https: data:; connect-src 'self' https://*.supabase.co https://cloudflareinsights.com https://www.google-analytics.com; font-src 'self'; frame-src 'none';">
+  <script type="module" crossorigin src="/assets/index-swWXY_fK.js"></script>
   <link rel="modulepreload" crossorigin href="/assets/supabase-DaN4is7k.js">
-  <link rel="modulepreload" crossorigin href="/assets/recipes-C4F2DzOG.js">
-  <link rel="stylesheet" crossorigin href="/assets/index-Bq-cy4Jp.css">
+  <link rel="modulepreload" crossorigin href="/assets/recipes-CujdhypO.js">
+  <link rel="stylesheet" crossorigin href="/assets/index-Dh9V8kfX.css">
 </head>
 <body>
 
@@ -43,7 +43,7 @@
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
         </button>
         <h1 class="logo">🌿 HARVEST</h1>
-        <p class="logo-tagline">Eat More Plants!</p>
+        <p class="logo-tagline">See What Your Kitchen Already Knows™</p>
       </div>
     </header>
 
@@ -77,11 +77,27 @@
               <p class="intro-hero-sub">
                 You open the fridge and think, <em>"What can I make with this?"</em>
                 <strong>HARVEST</strong> knows. It matches your ingredients to over
-                <strong>4,500+ plant-based recipes</strong> from the world's top nutrition-focused chefs and creators,
+                <strong>4,500 plant-based recipes</strong> from the world's top nutrition-focused chefs and creators,
                 prioritizes your <strong>perishables</strong> so nothing goes to waste,
                 filters out your <strong>allergens</strong>,
-                and builds a <strong>shopping list</strong> for the rest &#8212;
-                whether you're cooking for yourself on a Tuesday or feeding a table full of friends, HARVEST makes the process both fun and easy.
+                and builds a <strong>shopping list</strong> for what you want to make that day or week.
+              </p>
+              <p class="intro-hero-sub" style="margin-top:8px;">
+                Want the highest-protein pancakes? The most fiber-packed salad? HARVEST lets you <strong>sort any search by protein, fiber, or calories</strong> &#8212; so you're not just cooking what's convenient, you're cooking what your body actually needs.
+              </p>
+              <div class="intro-sort-preview" style="margin-top:10px;display:flex;gap:6px;flex-wrap:wrap;justify-content:center;">
+                <span class="sort-btn">Best Match</span>
+                <span class="sort-btn on">Protein ↓</span>
+                <span class="sort-btn">Fiber ↓</span>
+                <span class="sort-btn">Low Cal</span>
+                <span class="sort-btn">Fastest</span>
+                <span class="sort-btn">A–Z</span>
+              </div>
+              <p class="intro-hero-sub" style="margin-top:8px;">
+                Every recipe also comes with <strong>clinical-grade health evidence</strong> showing what the ingredients do for your body &#8212; from reducing inflammation to supporting heart health &#8212; so you understand <em>why</em> each meal matters, not just how to make it.
+              </p>
+              <p class="intro-hero-sub" style="margin-top:8px;">
+                Whether you're cooking for yourself on a Tuesday or feeding a table full of friends, HARVEST makes the process simple, as you <strong>strengthen your mind and body one recipe at a time</strong>. Enjoy.
               </p>
               <p class="intro-hero-sub" style="margin-top:8px;">
                 Every recipe is <strong>gluten-free</strong> by default. When a recipe calls for something like soy sauce or flour tortillas, HARVEST highlights the swap right on the card &#8212; tamari, corn tortillas &#8212; so you never have to think about it.
@@ -173,8 +189,18 @@
         </div>
       </div>
 
-      <!-- Results count -->
-      <div id="resultsMeta" class="results-meta"></div>
+      <!-- Results count + sort bar -->
+      <div class="results-bar">
+        <div id="resultsMeta" class="results-meta"></div>
+        <div id="sortBar" class="sort-btns">
+          <button class="sort-btn on" data-sort="match">Best Match</button>
+          <button class="sort-btn" data-sort="protein">Protein ↓</button>
+          <button class="sort-btn" data-sort="fiber">Fiber ↓</button>
+          <button class="sort-btn" data-sort="cal">Low Cal</button>
+          <button class="sort-btn" data-sort="time">Fastest</button>
+          <button class="sort-btn" data-sort="alpha">A–Z</button>
+        </div>
+      </div>
 
       <!-- Recipe cards list -->
       <div id="recipeList" class="recipe-list"></div>
@@ -332,6 +358,7 @@
             <p style="margin-top:12px"><strong>2. Find recipes</strong></p>
             <ol class="about-steps">
               <li><strong>🔍 Browse All</strong> ranks every recipe by how well it matches your pantry. Use Filters for cuisines, cook time, and allergens.</li>
+              <li><strong>Sort by nutrition</strong> — tap <strong>Protein ↓</strong>, <strong>Fiber ↓</strong>, or <strong>Low Cal</strong> in the sort bar to find the healthiest version of whatever you're craving.</li>
               <li><strong>🍳 Pantry Matches</strong> shows only recipes you can cook right now (1 or fewer missing ingredients).</li>
             </ol>
 
@@ -419,5 +446,7 @@
 
   <!-- SW cleanup: stable URL, runs before app bundle to clear stale caches -->
   <script src="/sw-cleanup.js"></script>
+  <!-- Cloudflare Web Analytics — privacy-friendly, no cookies -->
+  <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "PASTE_YOUR_TOKEN_HERE"}'></script>
 </body>
 </html>
