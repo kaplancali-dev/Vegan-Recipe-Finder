@@ -195,9 +195,6 @@ input, select, textarea {
 
 /* Sticky shell: tab bar stays put, content scrolls independently */
 .sticky-shell {
-  position: sticky;
-  top: 0;
-  z-index: 99;
   display: flex;
   flex-direction: column;
   height: 100dvh;
@@ -209,15 +206,20 @@ input, select, textarea {
   flex-shrink: 0;
 }
 
-.sticky-shell .tab-panel {
+.shell-scroll {
   flex: 1;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
 }
 
-.sticky-shell .tab-panel .filter-bar {
+.shell-scroll .filter-bar {
   position: sticky;
   top: 0;
+}
+
+/* Tab panels no longer need their own scroll */
+.shell-scroll .tab-panel {
+  padding-top: 0;
 }
 
 @media (max-width: 520px) {

@@ -32,18 +32,7 @@
     <!-- Toast notification -->
     <div id="toast" class="toast" aria-live="polite"></div>
 
-    <!-- Top header bar -->
-    <header id="header" class="header">
-      <div class="header-inner">
-        <button id="headerMenuBtn" class="header-menu-btn" aria-label="Menu">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-        </button>
-        <h1 class="logo">🌿 HARVEST</h1>
-        <p class="logo-tagline">See What Your Kitchen Already Knows™</p>
-      </div>
-    </header>
-
-    <!-- Sticky shell: tab bar + scrollable content -->
+    <!-- Sticky shell: tab bar stays, content scrolls -->
     <div id="stickyShell" class="sticky-shell">
 
     <!-- Tab navigation bar (WAI-ARIA tabs pattern) -->
@@ -58,6 +47,20 @@
       <button class="tab-btn" data-tab="favorites" role="tab" aria-selected="false" aria-controls="tab-favorites" id="btn-favorites">❤️ Favorites</button>
       <button class="tab-btn" data-tab="shopping" role="tab" aria-selected="false" aria-controls="tab-shopping" id="btn-shopping">🛒 Shopping</button>
     </nav>
+
+    <!-- Scrollable area: header scrolls away, tab panels scroll -->
+    <div id="shellScroll" class="shell-scroll">
+
+    <!-- Top header bar (inside scroll area so it scrolls away) -->
+    <header id="header" class="header">
+      <div class="header-inner">
+        <button id="headerMenuBtn" class="header-menu-btn" aria-label="Menu">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+        <h1 class="logo">🌿 HARVEST</h1>
+        <p class="logo-tagline">See What Your Kitchen Already Knows™</p>
+      </div>
+    </header>
 
     <!-- ── TAB PANELS ─────────────────────────────────────── -->
 
@@ -311,6 +314,7 @@
       </div>
     </section>
 
+    </div><!-- /.shell-scroll -->
     </div><!-- /.sticky-shell -->
 
     <!-- ── RECIPE DETAIL MODAL ────────────────────────────── -->
