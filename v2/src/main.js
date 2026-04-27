@@ -125,45 +125,6 @@ initReadyToCook(recipes);
 initSyncPanel();
 initOnboarding();
 
-/* ── Sticky tab bar: fix for iOS Safari ──────────────────── */
-// iOS Safari's address-bar hide/show disrupts position:sticky.
-// Use a scroll listener to switch tab-bar to position:fixed via
-// inline styles once the header has scrolled out of view.
-{
-  const tabBar = document.getElementById('tabBar');
-  if (tabBar) {
-    let isFixed = false;
-    // Capture the tab bar's natural distance from the top of the page
-    let triggerY = tabBar.offsetTop;
-    // Recalculate on resize (orientation change, etc.)
-    window.addEventListener('resize', () => {
-      if (!isFixed) triggerY = tabBar.offsetTop;
-    }, { passive: true });
-
-    window.addEventListener('scroll', () => {
-      const shouldFix = window.scrollY >= triggerY;
-      if (shouldFix === isFixed) return;
-      isFixed = shouldFix;
-      if (isFixed) {
-        tabBar.style.position = 'fixed';
-        tabBar.style.top = 'env(safe-area-inset-top, 0px)';
-        tabBar.style.left = '0';
-        tabBar.style.right = '0';
-        tabBar.style.paddingLeft = '18px';
-        tabBar.style.paddingRight = '18px';
-        tabBar.dataset.fixedActive = '1';
-      } else {
-        tabBar.style.position = '';
-        tabBar.style.top = '';
-        tabBar.style.left = '';
-        tabBar.style.right = '';
-        tabBar.style.paddingLeft = '';
-        tabBar.style.paddingRight = '';
-        tabBar.dataset.fixedActive = '';
-      }
-    }, { passive: true });
-  }
-}
 
 /* ── Deep-link: open shared recipe from #r=ID or ?r=ID ────── */
 

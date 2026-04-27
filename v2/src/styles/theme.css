@@ -187,22 +187,37 @@ input, select, textarea {
   display: flex;
   gap: 4px;
   padding: 6px 0;
-  position: sticky;
-  top: 0;
   z-index: 99;
   background: var(--bg);
   border-bottom: 1px solid var(--border);
   scrollbar-width: none;
 }
 
-/* When header scrolls out of view, JS sets inline fixed positioning.
-   Use data-attribute to handle content spacing and filter-bar offset. */
-.tab-bar[data-fixed-active="1"] ~ .tab-panel:not([hidden]) {
-  padding-top: calc(40px + env(safe-area-inset-top, 0px));
+/* Sticky shell: tab bar stays put, content scrolls independently */
+.sticky-shell {
+  position: sticky;
+  top: 0;
+  z-index: 99;
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+  background: var(--bg);
 }
 
-.tab-bar[data-fixed-active="1"] ~ .tab-panel .filter-bar {
-  top: calc(40px + env(safe-area-inset-top, 0px));
+.sticky-shell .tab-bar {
+  position: static;
+  flex-shrink: 0;
+}
+
+.sticky-shell .tab-panel {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.sticky-shell .tab-panel .filter-bar {
+  position: sticky;
+  top: 0;
 }
 
 @media (max-width: 520px) {
@@ -564,7 +579,7 @@ input, select, textarea {
 /* ── Filter Drawer & Bar ─────────────────────────────────────── */
 .filter-bar {
   position: sticky;
-  top: 38px;
+  top: 0;
   z-index: 50;
   padding: 10px 12px;
 }
@@ -2526,13 +2541,10 @@ input, select, textarea {
   .logo-tagline { width: 100%; text-align: center; font-size: 0.75rem; margin-top: -2px; }
   .header { padding: 6px 0 4px; }
   .tab-btn { flex: 0 0 auto; font-size: 0.72rem; padding: 6px 6px; }
-  .tab-bar { top: 0; }
-  .filter-bar { top: 32px; padding: 4px 10px; }
+  .filter-bar { padding: 4px 10px; }
   .filter-bar .input-row { gap: 6px; margin-bottom: 4px; }
   .filter-bar .text-input { padding: 5px 10px; }
   .filter-bar .btn-sm { padding: 4px 10px; }
-  .tab-bar[data-fixed-active="1"] ~ .tab-panel:not([hidden]) { padding-top: calc(36px + env(safe-area-inset-top, 0px)); }
-  .tab-bar[data-fixed-active="1"] ~ .tab-panel .filter-bar { top: calc(34px + env(safe-area-inset-top, 0px)); }
 }
 
 @media (max-width: 400px) {
@@ -2540,7 +2552,6 @@ input, select, textarea {
   .logo-tagline { font-size: 0.68rem; }
   .header-inner { gap: 0 5px; }
   .tab-btn { font-size: 0.68rem; padding: 5px 5px; }
-  .filter-bar { top: 28px; }
 
   .qa-grid {
     grid-template-columns: 1fr;
