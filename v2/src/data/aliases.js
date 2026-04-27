@@ -234,7 +234,7 @@ export const INGREDIENT_SUBS = {
  * Gluten-free swaps — shown inline on recipe cards when GF filter is active.
  */
 export const GF_SWAPS = {
-  'soy sauce':'tamari','flour tortillas':'corn tortillas','noodles':'rice noodles',
+  'soy sauce':'tamari or coconut aminos','flour tortillas':'corn tortillas','noodles':'rice noodles',
   'ramen noodles':'rice ramen noodles','pasta':'gluten-free pasta','elbow macaroni':'gluten-free pasta',
   'penne pasta':'gluten-free penne','spaghetti':'gluten-free spaghetti','linguine':'gluten-free linguine',
   'jumbo pasta shells':'gluten-free pasta shells','egg noodles':'rice noodles',
