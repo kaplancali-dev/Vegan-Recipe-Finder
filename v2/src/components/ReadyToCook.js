@@ -7,7 +7,7 @@
 
 import { get, set, subscribe, getRef } from '../state/store.js';
 import { autoSync } from '../services/sync.js';
-import { findRecipes } from '../services/matching.js';
+import { findRecipes, sortResults } from '../services/matching.js';
 import { $ } from '../utils/dom.js';
 import { toggleFavorite } from '../actions/favorites.js';
 import { V1_CATEGORIES } from '../data/categories.js';
@@ -34,6 +34,9 @@ let _readyCats = new Set();
 /** Max cook time for Ready tab */
 let _readyMaxTime = Infinity;
 
+/** Sort key for Ready tab */
+let _readySortKey = 'match';
+
 /** Debounce timer */
 let _searchTimer = null;
 
@@ -51,6 +54,7 @@ export function initReadyToCook(recipes) {
 
   wireReadySearch();
   wireReadyFilters();
+  wireReadySortBar();
   buildReadyCategoryChips();
   buildAllergenFilterChips('#readyAllergenChips', scheduleReadyRender);
   renderReadyList();
@@ -106,6 +110,22 @@ function wireReadyFilters() {
       label.textContent = val >= 120 ? 'Any' : `${val} min`;
     });
     slider.addEventListener('change', scheduleReadyRender);
+  }
+}
+
+/**
+ * Wire up sort buttons for Ready tab.
+ */
+function wireReadySortBar() {
+  const sortBar = $('#readySortBar');
+  if (sortBar) {
+    sortBar.addEventListener('click', (e) => {
+      const btn = e.target.closest('.sort-btn');
+      if (!btn) return;
+      _readySortKey = btn.dataset.sort;
+      sortBar.querySelectorAll('.sort-btn').forEach(b => b.classList.toggle('on', b === btn));
+      scheduleReadyRender();
+    });
   }
 }
 
@@ -247,6 +267,11 @@ function renderReadyList() {
         return re.test(t) || re.test(ingStr) || (reStem && (reStem.test(t) || reStem.test(ingStr)));
       });
     });
+  }
+
+  // Apply sort
+  if (_readySortKey !== 'match') {
+    ready = sortResults(ready, _readySortKey);
   }
 
   // Render active filter tags

@@ -20,7 +20,7 @@
 <link rel="icon" type="image/png" href="favicon.png">
 <meta name="theme-color" content="#2d7a4f">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://static.cloudflareinsights.com https://www.googletagmanager.com https://www.google-analytics.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; img-src 'self' https: data:; connect-src 'self' https://*.supabase.co https://cloudflareinsights.com https://www.google-analytics.com; font-src 'self'; frame-src 'none';">
-  <script type="module" crossorigin src="/assets/index-CFryKVZ7.js"></script>
+  <script type="module" crossorigin src="/assets/index-CC0Gq_v_.js"></script>
   <link rel="modulepreload" crossorigin href="/assets/supabase-DaN4is7k.js">
   <link rel="modulepreload" crossorigin href="/assets/recipes-CujdhypO.js">
   <link rel="stylesheet" crossorigin href="/assets/index-FFxTL6sz.css">
@@ -241,6 +241,19 @@
             <h4>⚠️ Allergens <span class="muted" style="font-weight:normal;font-size:0.82rem">(hide recipes containing)</span></h4>
             <div id="readyAllergenChips" class="filter-chips"></div>
           </div>
+        </div>
+      </div>
+
+      <!-- Results count + sort bar -->
+      <div class="results-bar">
+        <div id="readyResultsMeta" class="results-meta"></div>
+        <div id="readySortBar" class="sort-btns">
+          <button class="sort-btn on" data-sort="match">Best Match</button>
+          <button class="sort-btn" data-sort="protein">Protein ↓</button>
+          <button class="sort-btn" data-sort="fiber">Fiber ↓</button>
+          <button class="sort-btn" data-sort="cal">Low Cal</button>
+          <button class="sort-btn" data-sort="time">Fastest</button>
+          <button class="sort-btn" data-sort="alpha">A–Z</button>
         </div>
       </div>
 
