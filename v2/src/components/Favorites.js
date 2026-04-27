@@ -24,6 +24,9 @@ import { COLLECTIONS } from '../data/collections.js';
 /** @type {Array} Full recipe list */
 let _recipes = [];
 
+/** Currently selected collection key (null = grid view) */
+let _activeColl = null;
+
 /**
  * Initialize the Favorites tab.
  * @param {Array} recipes
@@ -32,15 +35,18 @@ export function initFavorites(recipes) {
   _recipes = recipes;
 
   renderCollections();
-  renderFavList();
   renderCookHistory();
 
-  subscribe('favorites', renderFavList);
-  subscribe('collections', renderCollections);
-  subscribe('ingredients', renderFavList);
-  subscribe('staples', renderFavList);
-  subscribe('makelist', renderFavList);
-  subscribe('cookHistory', () => { renderFavList(); renderCookHistory(); });
+  // Back button
+  const backBtn = $('#favCollBack');
+  if (backBtn) backBtn.addEventListener('click', closeCollection);
+
+  subscribe('favorites', () => { renderCollections(); if (_activeColl) renderFavList(); });
+  subscribe('collections', () => { renderCollections(); if (_activeColl) renderFavList(); });
+  subscribe('ingredients', () => { if (_activeColl) renderFavList(); });
+  subscribe('staples', () => { if (_activeColl) renderFavList(); });
+  subscribe('makelist', () => { if (_activeColl) renderFavList(); });
+  subscribe('cookHistory', () => { if (_activeColl) renderFavList(); renderCookHistory(); });
 }
 
 /* ── Collections Grid ────────────────────────────────────────── */
@@ -71,148 +77,47 @@ function renderCollections() {
 }
 
 /**
- * Open a collection to view/manage its recipes.
- * Shows missing ingredients per recipe and a "Shop for collection" button
- * that adds all missing ingredients to the Shopping List.
+ * Open a collection inline — show its recipes below the grid.
  */
 function openCollection(key) {
   const def = COLLECTIONS.find(c => c.key === key);
   if (!def) return;
 
-  // Remove any existing popup
-  const existing = document.querySelector('.collection-popup');
-  if (existing) existing.remove();
+  _activeColl = key;
 
-  const collections = get('collections') || {};
-  const favIds = getRef('favorites');
-  const items = key === 'all' ? [...favIds] : (collections[key] || []);
-  const favRecipes = _recipes.filter(r => favIds.includes(r.id));
-  const itemSet = new Set(items);
+  // Update header
+  const titleEl = $('#favCollTitle');
+  if (titleEl) titleEl.innerHTML = `${def.icon} ${escHTML(def.label)}`;
 
-  const popup = document.createElement('div');
-  popup.className = 'collection-popup card';
-  popup.style.cssText = 'position:fixed;bottom:0;left:0;right:0;z-index:180;max-height:70dvh;overflow-y:auto;border-radius:12px 12px 0 0;box-shadow:0 -4px 30px rgba(0,0,0,.15);padding:16px';
+  // Show detail section
+  const detail = $('#favCollDetail');
+  if (detail) detail.hidden = false;
 
-  // Run matching engine on collection recipes to get missing ingredients
-  const savedRecipes = items.map(id => _recipes.find(r => r.id === id)).filter(Boolean);
-  const ings = getRef('ingredients');
-  const staples = getRef('staples');
-  let matchedSaved = [];
-  if (savedRecipes.length) {
-    matchedSaved = findRecipes({
-      recipes: savedRecipes,
-      ingredients: ings,
-      staples,
+  // Highlight active collection button
+  const grid = $('#collectionsGrid');
+  if (grid) {
+    grid.querySelectorAll('.collection-btn').forEach(b => {
+      b.classList.toggle('active', b.dataset.collection === key);
     });
   }
 
-  // Collect all missing ingredients across the collection
-  const allMissing = new Set();
-  matchedSaved.forEach(r => {
-    if (r.needNames) r.needNames.forEach(n => allMissing.add(n));
-  });
+  renderFavList();
+}
 
-  const isAll = key === 'all';
-  const availableToAdd = isAll ? [] : favRecipes.filter(r => !itemSet.has(r.id));
+/**
+ * Close collection detail — return to grid-only view.
+ */
+function closeCollection() {
+  _activeColl = null;
 
-  popup.innerHTML = `
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-      <h4 style="font-family:var(--font-sans);font-size:1rem">${def.icon} ${escHTML(def.label)}</h4>
-      <button class="icon-btn" data-coll-close aria-label="Close">&times;</button>
-    </div>
+  const detail = $('#favCollDetail');
+  if (detail) detail.hidden = true;
 
-    ${matchedSaved.length ? `
-      <div style="margin-bottom:16px">
-        <p style="font-size:0.82rem;color:var(--ink-soft);margin-bottom:8px"><strong>${isAll ? 'All favorites:' : 'In this collection:'}</strong></p>
-        <div style="display:flex;flex-direction:column;gap:6px">
-          ${matchedSaved.map(r => {
-            const missing = r.needNames || [];
-            return `
-            <div style="padding:8px 12px;background:var(--green-soft);border-radius:var(--radius)">
-              <div style="display:flex;align-items:center;justify-content:space-between">
-                <span style="font-size:0.85rem;font-weight:600">${escHTML(r.title)}</span>
-                ${!isAll ? `<button class="icon-btn" data-coll-remove="${r.id}" title="Remove" style="font-size:1rem">&times;</button>` : ''}
-              </div>
-              ${missing.length ? `<div style="margin-top:4px;display:flex;flex-wrap:wrap;gap:3px">
-                ${missing.map(m => `<span style="font-size:0.72rem;padding:2px 6px;background:var(--accent-soft);color:var(--accent);border-radius:4px">need: ${escHTML(m)}</span>`).join('')}
-              </div>` : '<span style="font-size:0.72rem;color:var(--green);font-weight:600">✓ Ready to cook</span>'}
-            </div>`;
-          }).join('')}
-        </div>
-      </div>
-
-      ${allMissing.size ? `
-        <button class="btn btn-primary" data-coll-shop style="width:100%;margin-bottom:16px">
-          🛒 Add ${allMissing.size} missing ingredient${allMissing.size !== 1 ? 's' : ''} to Shopping List
-        </button>
-      ` : '<p style="font-size:0.85rem;color:var(--green);font-weight:600;text-align:center;margin-bottom:16px">✓ You have everything — ready to cook!</p>'}
-    ` : `<p style="font-size:0.85rem;color:var(--muted);margin-bottom:16px">${isAll ? 'No favorites yet. Tap ❤️ on any recipe to add it.' : 'No recipes in this collection yet.'}</p>`}
-
-    ${availableToAdd.length ? `
-      <p style="font-size:0.82rem;color:var(--ink-soft);margin-bottom:8px"><strong>Add from favorites:</strong></p>
-      <div style="display:flex;flex-direction:column;gap:6px">
-        ${availableToAdd.map(r => `
-          <button class="btn btn-outline" style="text-align:left;justify-content:flex-start" data-coll-add="${r.id}">
-            + ${escHTML(r.title)}
-            <span class="muted" style="margin-left:auto;font-size:0.75rem">${r.time ? r.time + 'min' : ''}</span>
-          </button>
-        `).join('')}
-      </div>
-    ` : (!isAll && favIds.length && !savedRecipes.length ? '<p style="font-size:0.85rem;color:var(--muted)">Add some ❤️ favorites first, then organize them into collections.</p>' : '')}
-  `;
-
-  popup.addEventListener('click', (e) => {
-    // Shop for collection button
-    if (e.target.closest('[data-coll-shop]')) {
-      addToShopList([...allMissing]);
-      popup.remove();
-      return;
-    }
-
-    const addBtn = e.target.closest('[data-coll-add]');
-    if (addBtn) {
-      const recipeId = Number(addBtn.dataset.collAdd);
-      const cols = get('collections') || {};
-      if (!cols[key]) cols[key] = [];
-      cols[key].push(recipeId);
-      set('collections', cols);
-      autoSync();
-      popup.remove();
-      openCollection(key);
-      return;
-    }
-
-    const removeBtn = e.target.closest('[data-coll-remove]');
-    if (removeBtn) {
-      const recipeId = Number(removeBtn.dataset.collRemove);
-      const cols = get('collections') || {};
-      if (cols[key]) {
-        cols[key] = cols[key].filter(id => id !== recipeId);
-      }
-      set('collections', cols);
-      autoSync();
-      popup.remove();
-      openCollection(key);
-      return;
-    }
-
-    if (e.target.closest('[data-coll-close]')) {
-      popup.remove();
-    }
-  });
-
-  document.body.appendChild(popup);
-
-  // Close on outside click
-  setTimeout(() => {
-    const handler = (e) => {
-      if (!popup.contains(e.target)) {
-        popup.remove();
-        document.removeEventListener('click', handler);
-      }
-    };
-    document.addEventListener('click', handler);
-  }, 100);
+  // Remove active highlight
+  const grid = $('#collectionsGrid');
+  if (grid) {
+    grid.querySelectorAll('.collection-btn').forEach(b => b.classList.remove('active'));
+  }
 }
 
 /* ── Favorites List ──────────────────────────────────────────── */
@@ -220,13 +125,24 @@ function openCollection(key) {
 function renderFavList() {
   const container = $('#favList');
   const emptyEl = $('#favEmpty');
-  if (!container) return;
+  const shopBtn = $('#favCollShop');
+  if (!container || !_activeColl) return;
 
   const favIds = getRef('favorites');
+  const collections = get('collections') || {};
 
-  if (!favIds.length) {
+  // Get recipe IDs for this collection
+  const ids = _activeColl === 'all' ? [...favIds] : (collections[_activeColl] || []);
+
+  if (!ids.length) {
     container.innerHTML = '';
-    if (emptyEl) emptyEl.hidden = false;
+    if (emptyEl) {
+      emptyEl.hidden = false;
+      emptyEl.innerHTML = _activeColl === 'all'
+        ? '<p>No favorites yet. Tap ❤️ on any recipe to save it here.</p>'
+        : '<p>No recipes in this collection yet. Tap ❤️ on a recipe, then add it to a collection.</p>';
+    }
+    if (shopBtn) shopBtn.hidden = true;
     return;
   }
 
@@ -234,13 +150,33 @@ function renderFavList() {
 
   const ings = getRef('ingredients');
   const staples = getRef('staples');
+  const idSet = new Set(ids);
   const favSet = new Set(favIds);
 
   const results = findRecipes({
-    recipes: _recipes.filter(r => favSet.has(r.id)),
+    recipes: _recipes.filter(r => idSet.has(r.id)),
     ingredients: ings,
     staples,
   });
+
+  // Collect missing ingredients for "Shop Missing" button
+  const allMissing = new Set();
+  results.forEach(r => {
+    if (r.needNames) r.needNames.forEach(n => allMissing.add(n));
+  });
+
+  if (shopBtn) {
+    if (allMissing.size) {
+      shopBtn.hidden = false;
+      shopBtn.textContent = `🛒 Shop ${allMissing.size} Missing`;
+      shopBtn.onclick = () => {
+        addToShopList([...allMissing]);
+        showToast(`Added ${allMissing.size} ingredient${allMissing.size !== 1 ? 's' : ''} to Shopping List`);
+      };
+    } else {
+      shopBtn.hidden = true;
+    }
+  }
 
   const makeIds = getRef('makelist');
   const cookHistory = getRef('cookHistory');
@@ -259,7 +195,6 @@ function renderFavList() {
       return;
     }
 
-    // Make This button — toggle on make list
     const makeBtn = e.target.closest('.make-btn');
     if (makeBtn) {
       e.stopPropagation();
@@ -277,7 +212,6 @@ function renderFavList() {
       return;
     }
 
-    // Cook button — log "I Made This" (with undo if already cooked)
     const cookBtn = e.target.closest('.cook-btn');
     if (cookBtn) {
       e.stopPropagation();

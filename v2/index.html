@@ -301,10 +301,17 @@
         <div id="collectionsGrid" class="collections-grid"></div>
       </div>
 
-      <!-- Favorites list -->
-      <div id="favList" class="recipe-list"></div>
-      <div id="favEmpty" class="empty-state" hidden>
-        <p>Tap the ❤️ on any recipe to save it here.</p>
+      <!-- Collection detail (shown when a collection is selected) -->
+      <div id="favCollDetail" hidden>
+        <div class="fav-coll-header">
+          <button id="favCollBack" class="btn btn-sm">← Back</button>
+          <h3 id="favCollTitle" class="fav-coll-title"></h3>
+          <button id="favCollShop" class="btn btn-sm btn-primary" hidden>🛒 Shop Missing</button>
+        </div>
+        <div id="favList" class="recipe-list"></div>
+        <div id="favEmpty" class="empty-state" hidden>
+          <p>No recipes in this collection yet. Tap ❤️ on any recipe to add it to your favorites.</p>
+        </div>
       </div>
     </section>
 

@@ -20,10 +20,10 @@
 <link rel="icon" type="image/png" href="favicon.png">
 <meta name="theme-color" content="#2d7a4f">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://static.cloudflareinsights.com https://www.googletagmanager.com https://www.google-analytics.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; img-src 'self' https: data:; connect-src 'self' https://*.supabase.co https://cloudflareinsights.com https://www.google-analytics.com; font-src 'self'; frame-src 'none';">
-  <script type="module" crossorigin src="/assets/index-D1UyM2sg.js"></script>
+  <script type="module" crossorigin src="/assets/index-BjtzsAki.js"></script>
   <link rel="modulepreload" crossorigin href="/assets/supabase-DaN4is7k.js">
   <link rel="modulepreload" crossorigin href="/assets/recipes-CujdhypO.js">
-  <link rel="stylesheet" crossorigin href="/assets/index-D23Y8JVm.css">
+  <link rel="stylesheet" crossorigin href="/assets/index-DX9DrkgM.css">
 </head>
 <body>
 
@@ -305,10 +305,17 @@
         <div id="collectionsGrid" class="collections-grid"></div>
       </div>
 
-      <!-- Favorites list -->
-      <div id="favList" class="recipe-list"></div>
-      <div id="favEmpty" class="empty-state" hidden>
-        <p>Tap the ❤️ on any recipe to save it here.</p>
+      <!-- Collection detail (shown when a collection is selected) -->
+      <div id="favCollDetail" hidden>
+        <div class="fav-coll-header">
+          <button id="favCollBack" class="btn btn-sm">← Back</button>
+          <h3 id="favCollTitle" class="fav-coll-title"></h3>
+          <button id="favCollShop" class="btn btn-sm btn-primary" hidden>🛒 Shop Missing</button>
+        </div>
+        <div id="favList" class="recipe-list"></div>
+        <div id="favEmpty" class="empty-state" hidden>
+          <p>No recipes in this collection yet. Tap ❤️ on any recipe to add it to your favorites.</p>
+        </div>
       </div>
     </section>
 

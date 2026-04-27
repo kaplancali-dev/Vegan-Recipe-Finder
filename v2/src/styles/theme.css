@@ -1630,6 +1630,27 @@ input, select, textarea {
   color: var(--muted);
 }
 
+.collection-btn.active {
+  border-color: var(--green);
+  background: var(--green-soft);
+  box-shadow: 0 0 0 2px var(--green);
+}
+
+/* ── Fav Collection Detail Header ────────────────────────────── */
+.fav-coll-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+}
+
+.fav-coll-title {
+  flex: 1;
+  font-family: var(--font-sans);
+  font-size: 1.1rem;
+  margin: 0;
+}
+
 /* ── Collection Picker (favorite modal) ─────────────────────── */
 .collection-picker-overlay {
   position: fixed;
