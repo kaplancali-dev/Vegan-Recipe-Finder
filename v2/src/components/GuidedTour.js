@@ -30,10 +30,10 @@ const STEPS = [
     target: '#sortBar',
     tab: 'browse',
     scroll: '#sortBar',
-    preferAbove: true,
+    scrollBlock: 'start',
     title: 'Sort by what matters to you',
-    body: 'Tap Protein ↓, Fiber ↓, or Low Cal to instantly rank results by nutrition. Looking for a high-protein breakfast? Search "pancakes," then tap Protein — the healthiest version floats right to the top.',
-    arrow: 'bottom',
+    body: 'Tap Protein ↓, Fiber ↓, or Low Cal to rank any search by nutrition — the healthiest version jumps to the top.',
+    arrow: 'top',
   },
   {
     target: '#btn-canmake',
@@ -139,9 +139,10 @@ function _showStep() {
 
   // Scroll to element if specified
   if (step.scroll) {
+    const scrollBlock = step.scrollBlock || 'center';
     setTimeout(() => {
       const scrollEl = $(step.scroll);
-      if (scrollEl) scrollEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      if (scrollEl) scrollEl.scrollIntoView({ behavior: 'smooth', block: scrollBlock });
     }, 150);
   }
 
@@ -187,7 +188,7 @@ function _showStep() {
     if (tooltipRect.top < 0 || tooltipRect.bottom > window.innerHeight) {
       _tooltip.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
-  }, 300);
+  }, 500);
 }
 
 /* ── Advance ────────────────────────────────────────────────── */
