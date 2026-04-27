@@ -3256,15 +3256,31 @@ input, select, textarea {
 /* ── Want to Make — Mobile ─────────────────────────────────────── */
 
 @media (max-width: 600px) {
+  .wm-row {
+    flex-wrap: wrap;
+    gap: 4px 8px;
+    padding: 8px 8px;
+  }
   .wm-row-img {
-    width: 30px;
-    height: 30px;
+    width: 36px;
+    height: 36px;
   }
   .wm-row-title {
-    font-size: 0.82rem;
+    flex: 1;
+    min-width: 0;
+    font-size: 0.88rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .wm-row-status {
-    font-size: 0.7rem;
+    font-size: 0.72rem;
+  }
+  .wm-row-actions {
+    width: 100%;
+    justify-content: flex-end;
+    gap: 2px;
+    margin-top: -2px;
   }
   .wm-icon-btn {
     font-size: 0.8rem;
