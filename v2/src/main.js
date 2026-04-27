@@ -130,17 +130,19 @@ initOnboarding();
 // Use a scroll listener to switch tab-bar to position:fixed via
 // inline styles once the header has scrolled out of view.
 {
-  const header = document.getElementById('header');
   const tabBar = document.getElementById('tabBar');
-  if (header && tabBar) {
+  if (tabBar) {
     let isFixed = false;
-    let headerH = header.offsetHeight;
-    // Recalculate header height on resize (e.g. orientation change)
-    window.addEventListener('resize', () => { headerH = header.offsetHeight; }, { passive: true });
+    // Capture the tab bar's natural distance from the top of the page
+    let triggerY = tabBar.offsetTop;
+    // Recalculate on resize (orientation change, etc.)
+    window.addEventListener('resize', () => {
+      if (!isFixed) triggerY = tabBar.offsetTop;
+    }, { passive: true });
 
     window.addEventListener('scroll', () => {
-      const shouldFix = window.scrollY >= headerH;
-      if (shouldFix === isFixed) return; // no change
+      const shouldFix = window.scrollY >= triggerY;
+      if (shouldFix === isFixed) return;
       isFixed = shouldFix;
       if (isFixed) {
         tabBar.style.position = 'fixed';
@@ -149,7 +151,6 @@ initOnboarding();
         tabBar.style.right = '0';
         tabBar.style.paddingLeft = '18px';
         tabBar.style.paddingRight = '18px';
-        // Add spacer so content doesn't jump
         tabBar.dataset.fixedActive = '1';
       } else {
         tabBar.style.position = '';
