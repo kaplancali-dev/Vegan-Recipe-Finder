@@ -1121,6 +1121,7 @@ input, select, textarea {
   .intro-hero-video .hero-img { min-height: auto; max-height: none; object-fit: contain; }
   .intro-hero-sub { font-size: 14px; }
   .intro-hero-title { font-size: 20px; }
+  .intro-tagline { font-size: 0.95em; }
 }
 
 /* ── Pantry Power Widget (sidebar in intro hero) ──────────── */
