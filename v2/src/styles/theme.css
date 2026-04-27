@@ -197,23 +197,37 @@ input, select, textarea {
   top: 0;
 }
 
+/* ── Desktop: header above tab bar via display:contents trick ── */
+/* HTML order: tab-bar, shell-scroll>[header, panels].
+   display:contents dissolves shell-scroll so header + panels
+   become direct flex children; order:-1 lifts header above tab-bar. */
+.sticky-shell {
+  display: flex;
+  flex-direction: column;
+}
+.shell-scroll {
+  display: contents;
+}
+.sticky-shell .header {
+  order: -1;
+}
+
 /* ── Mobile: flex shell keeps tab bar locked ─────────────────── */
 @media (max-width: 520px) {
   .sticky-shell {
-    display: flex;
-    flex-direction: column;
     height: 100dvh;
     background: var(--bg);
   }
-  /* Hide header on mobile — tab bar is the top element */
-  .sticky-shell > .header {
-    display: none;
+  .sticky-shell .header {
+    order: 0;  /* reset — header is inside scroll area */
   }
   .sticky-shell .tab-bar {
     position: static;
     flex-shrink: 0;
   }
   .shell-scroll {
+    display: flex;
+    flex-direction: column;
     flex: 1;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
