@@ -24,7 +24,11 @@ export const INGREDIENT_ALIASES = {
   'chocolate chips (any)': ['chocolate chips','dark chocolate chips','vegan chocolate chips','semi-sweet chocolate chips','milk chocolate chips','dark-chocolate chips','mini chocolate chips'],
   'dark chocolate': ['dark chocolate','roughly chopped dark chocolate','semi-sweet chocolate','bittersweet chocolate','vegan chocolate'],
   'natural sweetener (any)': ['agave','agave nectar','agave syrup','monk fruit','monk fruit sweetener','allulose','stevia','date syrup','coconut sugar','maple syrup','maple','brown sugar','sugar','sweetener','coconut nectar','raw sugar','cane sugar'],
-  'allulose / stevia / monk fruit': ['allulose','stevia','monk fruit','monk fruit sweetener','sugar','cane sugar','white sugar','granulated sugar','brown sugar','coconut sugar','powdered sugar','maple syrup','agave','agave nectar','agave syrup','sweetener'],
+  'allulose': ['sugar','cane sugar','white sugar','granulated sugar','brown sugar','powdered sugar','sweetener'],
+  'stevia / monk fruit': ['stevia','monk fruit','monk fruit sweetener','sweetener'],
+  'white chocolate chips': ['white chocolate','vegan white chocolate','vegan white chocolate chips'],
+  'cacao nibs': ['cacao nib','cocoa nibs','raw cacao nibs'],
+  'date sugar': ['date sugar','dried date sugar'],
   'vegan yogurt': ['vegan yogurt','plant-based yogurt','coconut yogurt','soy yogurt','non-dairy yogurt','vanilla vegan yogurt','dairy-free yogurt'],
   'vegan mayo': ['vegan mayo','vegan mayonnaise','mayo','mayonnaise','vegan mayo*'],
   'canned tomatoes (any)': ['crushed tomatoes','diced tomatoes','tomato sauce','tomato puree','tomato purée','fire roasted tomatoes','fire-roasted tomatoes','fire roasted diced tomatoes','fire-roasted diced tomatoes','diced fire-roasted tomatoes','diced fire roasted tomatoes','whole peeled tomatoes','canned tomatoes','chopped tomatoes','stewed tomatoes','tinned tomatoes','petite diced tomatoes','plum tomatoes','can diced tomatoes','can crushed tomatoes','can tomato sauce','best-quality peeled tomatoes','canned chopped tomato','canned chopped tomatoes','canned diced tomatoes juice','chopped canned tomato with juice','tomato sauce puree','tomatoes their juice'],
@@ -225,7 +229,7 @@ export const INGREDIENT_SUBS = {
   'sage': ['thyme','rosemary','marjoram'],
 
   // ── Egg Replacers ──
-  // flax egg — no substitutes, specific binding function
+  'flax seeds': ['flax egg'],   // flax egg is just ground flax + water
   'aquafaba': ['chia egg'],
 };
 
@@ -308,9 +312,9 @@ export const QA_ITEMS = [
   {cat:'🍋 Fruits',             items:['lemon','lime','banana','berries (any)','cranberries','cherries','mango','apple','oranges','pineapple','peaches','pears','kiwi','papaya','pomegranate','plantain','figs','grapes','watermelon','coconut','dates']},
   {cat:'🥜 Nuts & Seeds',       items:['nut butter (any)','cashews','almonds','walnuts','pecans','brazil nuts','macadamia nuts','hazelnuts','pistachio','peanuts','sesame seeds','pine nuts','tahini','hemp seeds','chia seeds','flax seeds','pumpkin seeds','sunflower seeds']},
   {cat:'🥛 Plant-Based Milks',  items:['almond milk','soy milk','rice milk','hemp milk','macadamia milk','pistachio milk','oat milk','cashew milk']},
-  {cat:'🫙 Pantry & Oils',      items:['any cooking oil','olive oil','coconut oil','avocado oil','sesame oil','chili oil','canned tomatoes (any)','crushed tomatoes','diced tomatoes','tomato sauce','vegetable broth','soy sauce / tamari / coconut aminos','coconut milk','miso paste','maple syrup','natural sweetener (any)','apple cider vinegar','nutritional yeast','rice vinegar','dijon mustard','tomato paste','vegan mayo','tamarind paste','gochujang','balsamic vinegar','sriracha / hot sauce','olives','curry paste','liquid smoke','vegan sour cream']},
+  {cat:'🫙 Pantry & Oils',      items:['any cooking oil','olive oil','coconut oil','avocado oil','sesame oil','chili oil','vegan butter','canned tomatoes (any)','crushed tomatoes','diced tomatoes','tomato sauce','vegetable broth','soy sauce / tamari / coconut aminos','coconut milk','miso paste','maple syrup','natural sweetener (any)','apple cider vinegar','nutritional yeast','rice vinegar','dijon mustard','tomato paste','vegan mayo','tamarind paste','gochujang','balsamic vinegar','sriracha / hot sauce','olives','curry paste','liquid smoke','vegan sour cream','baking soda','baking powder','cornstarch','arrowroot powder']},
   {cat:'🌿 Spices & Herbs',     items:['turmeric','cumin','smoked paprika','cinnamon','chili powder','ginger','curry powder','black pepper','garlic powder','onion powder','oregano','basil','thyme','coriander','cayenne','cardamom','bay leaves','five spice','nutmeg','sea salt','garam masala','lemongrass','star anise','dill','mint','rosemary','red pepper flakes','sumac','italian seasoning']},
-  {cat:'🍨 Dessert Pantry',     items:['vanilla extract','vanilla','cocoa powder','chocolate chips (any)','coconut cream','coconut sugar','vegan butter','flax egg','baking soda','baking powder','cornstarch','shredded coconut','medjool dates','allulose / stevia / monk fruit']},
+  {cat:'🍨 Dessert Pantry',     items:['vanilla extract','cocoa powder','chocolate chips (any)','white chocolate chips','cacao nibs','coconut cream','coconut sugar','shredded coconut','date sugar','allulose','stevia / monk fruit']},
 ];
 
 /**
