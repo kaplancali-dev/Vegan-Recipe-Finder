@@ -59,8 +59,11 @@ function renderSyncUI() {
  */
 function renderSignedOut(container) {
   container.innerHTML = `
-    <p style="font-size:0.85rem;color:var(--ink-soft);margin-bottom:12px">
-      Sign in to sync your pantry, favorites, and recipes across devices.
+    <p style="font-size:0.85rem;color:var(--ink-soft);margin-bottom:6px">
+      <strong>Why sync?</strong> Your pantry, favorites, meal plans, and cook history are saved on this device only. Sign in to back them up and access them on any device.
+    </p>
+    <p style="font-size:0.8rem;color:var(--muted);margin-bottom:12px">
+      No password needed — we'll email you a one-time code.
     </p>
     <div id="otpStep1" class="sync-form">
       <div class="input-row">
@@ -88,10 +91,15 @@ function renderSignedIn(container, user) {
     <div class="sync-user" style="margin-bottom:10px">
       Signed in as <strong>${escHTML(user.email || 'unknown')}</strong>
     </div>
-    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px">
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px">
       <button id="syncPushBtn" class="btn btn-primary btn-sm">⬆ Push to Cloud</button>
       <button id="syncPullBtn" class="btn btn-outline btn-sm">⬇ Pull from Cloud</button>
       <button id="syncSignOutBtn" class="btn btn-danger btn-sm">Sign Out</button>
+    </div>
+    <div style="font-size:0.78rem;color:var(--muted);line-height:1.4">
+      <p style="margin:0 0 4px"><strong>Push</strong> — saves this device's data to the cloud. Use after making changes you want to keep.</p>
+      <p style="margin:0 0 4px"><strong>Pull</strong> — loads your cloud data onto this device. Use when switching to a new phone or browser.</p>
+      <p style="margin:0;font-style:italic">Tip: Push from the device you use most, then Pull on your other devices.</p>
     </div>
   `;
 
