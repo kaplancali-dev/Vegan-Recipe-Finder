@@ -9,6 +9,7 @@
 
 const STORAGE_KEYS = {
   ingredients:  'vrf_ings',
+  inactiveIngs: 'vrf_inactive_ings',
   staples:      'vrf_staples',
   favorites:    'vrf_favs',
   mealPlan:     'vrf_meal',
@@ -33,6 +34,7 @@ const listeners = new Map();
  */
 const state = {
   ingredients:  [],
+  inactiveIngs: [],
   staples:      [],
   favorites:    [],
   mealPlan:     [],
@@ -85,6 +87,7 @@ function lsSet(key, value) {
  */
 export function loadState() {
   state.ingredients  = lsGet(STORAGE_KEYS.ingredients, []);
+  state.inactiveIngs = lsGet(STORAGE_KEYS.inactiveIngs, []);
   state.staples      = lsGet(STORAGE_KEYS.staples, []);
   state.favorites    = lsGet(STORAGE_KEYS.favorites, []);
   state.mealPlan     = lsGet(STORAGE_KEYS.mealPlan, []);
@@ -176,6 +179,7 @@ export function gatherAllData() {
     vrf_staples:   state.staples,
     vrf_shop:      state.shopList,
     vrf_ings:      state.ingredients,
+    vrf_inactive_ings: state.inactiveIngs,
     vrf_meal:      state.mealPlan,
     vrf_allergies:   state.allergies,
     vrf_collections: state.collections,
@@ -197,6 +201,7 @@ function validateValue(key, value) {
   switch (key) {
     case 'favorites':
     case 'ingredients':
+    case 'inactiveIngs':
     case 'staples':
     case 'shopList':
     case 'allergies':
@@ -225,6 +230,7 @@ export function applyAllData(data) {
   if (data.vrf_staples   !== undefined) { const v = validateValue('staples', data.vrf_staples);     if (v !== undefined) set('staples', v); }
   if (data.vrf_shop      !== undefined) { const v = validateValue('shopList', data.vrf_shop);       if (v !== undefined) set('shopList', v); }
   if (data.vrf_ings      !== undefined) { const v = validateValue('ingredients', data.vrf_ings);    if (v !== undefined) set('ingredients', v); }
+  if (data.vrf_inactive_ings !== undefined) { const v = validateValue('inactiveIngs', data.vrf_inactive_ings); if (v !== undefined) set('inactiveIngs', v); }
   if (data.vrf_meal      !== undefined) { const v = validateValue('mealPlan', data.vrf_meal);       if (v !== undefined) set('mealPlan', v); }
   if (data.vrf_allergies    !== undefined) { const v = validateValue('allergies', data.vrf_allergies);       if (v !== undefined) set('allergies', v); }
   if (data.vrf_collections !== undefined) { const v = validateValue('collections', data.vrf_collections); if (v !== undefined) set('collections', v); }
@@ -239,6 +245,7 @@ export function applyAllData(data) {
  */
 export function resetState() {
   state.ingredients  = [];
+  state.inactiveIngs = [];
   state.staples      = [];
   state.favorites    = [];
   state.mealPlan     = [];

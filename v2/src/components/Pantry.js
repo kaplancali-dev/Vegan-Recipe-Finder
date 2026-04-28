@@ -8,7 +8,7 @@
 import { get, set, subscribe, getRef } from '../state/store.js';
 import { autoSync } from '../services/sync.js';
 import { computePantryPower } from '../services/matching.js';
-import { QA_ITEMS, PERISHABLES } from '../data/aliases.js';
+import { QA_ITEMS } from '../data/aliases.js';
 import { escHTML, norm } from '../utils/text.js';
 import { showToast } from '../utils/toast.js';
 import { $ } from '../utils/dom.js';
@@ -41,15 +41,18 @@ export function initPantry(recipes) {
   wireGuideToggle();
   wireSectionToggles();
   renderAllergyChips();
-  renderIngChips();
+  renderMyIngs();
   renderStapleChips();
   renderPantryPower();
   checkHero();
 
   // Re-render on state changes (tracked for cleanup)
   _unsubs.push(subscribe('ingredients', () => {
-    renderIngChips();
+    renderMyIngs();
     renderPantryPower();
+  }));
+  _unsubs.push(subscribe('inactiveIngs', () => {
+    renderMyIngs();
   }));
   _unsubs.push(subscribe('staples', () => {
     renderStapleChips();
@@ -182,22 +185,6 @@ function wireIngredientInput() {
   const btn = $('#ingAddBtn');
   if (!input || !btn) return;
 
-  // Perishable / Staple toggle
-  let _addType = 'perishable'; // 'perishable' | 'staple'
-
-  const toggleBtns = document.querySelectorAll('[data-ing-type]');
-  toggleBtns.forEach(b => {
-    b.addEventListener('click', () => {
-      _addType = b.dataset.ingType;
-      toggleBtns.forEach(t => t.classList.toggle('on', t.dataset.ingType === _addType));
-      // Update placeholder to match context
-      input.placeholder = _addType === 'staple'
-        ? 'e.g. rice, olive oil, soy sauce'
-        : 'e.g. tofu, spinach, avocado';
-      input.focus();
-    });
-  });
-
   const addIngredients = () => {
     const raw = input.value;
     if (!raw.trim()) return;
@@ -209,26 +196,35 @@ function wireIngredientInput() {
 
     if (!items.length) return;
 
-    const stateKey = _addType === 'staple' ? 'staples' : 'ingredients';
-    const current = get(stateKey);
-    const currentSet = new Set(current.map(norm));
+    const current = get('ingredients');
+    const inactive = get('inactiveIngs');
+    const allNormed = new Set([...current.map(norm), ...inactive.map(norm)]);
     const added = [];
 
     items.forEach(item => {
       const n = norm(item);
-      if (n && !currentSet.has(n)) {
+      if (n && !allNormed.has(n)) {
         current.push(item.trim());
-        currentSet.add(n);
+        allNormed.add(n);
         added.push(item.trim());
+      } else if (n && inactive.map(norm).includes(n)) {
+        // Re-activate if it was inactive
+        const idx = inactive.findIndex(s => norm(s) === n);
+        if (idx !== -1) {
+          inactive.splice(idx, 1);
+          set('inactiveIngs', inactive);
+          if (!current.map(norm).includes(n)) {
+            current.push(item.trim());
+            added.push(item.trim());
+          }
+        }
       }
     });
 
     if (added.length) {
-      set(stateKey, current);
+      set('ingredients', current);
       autoSync();
-
-      const label = _addType === 'staple' ? 'Staples' : 'Perishables';
-      showToast(`Added ${added.length} to ${label}`);
+      showToast(`Added ${added.length} to My Ingredients`);
 
       // Mark as onboarded after first ingredient add
       if (!get('onboarded')) {
@@ -250,43 +246,91 @@ function wireIngredientInput() {
   });
 }
 
-/* ── Ingredient Chips (Perishables) ─────────────────────────── */
+/* ── My Ingredients (user-typed, with active/inactive toggle) ── */
 
-function renderIngChips() {
-  const container = $('#perishChips');
+function renderMyIngs() {
+  const container = $('#myIngsChips');
   if (!container) return;
 
-  const ings = getRef('ingredients');
+  const active = getRef('ingredients');
+  const inactive = getRef('inactiveIngs');
 
-  if (!ings.length) {
-    container.innerHTML = '<span class="muted" style="font-size:0.82rem">No perishables — add fresh produce, herbs, or fruits above</span>';
-  } else {
-    container.innerHTML = ings.map((ing, idx) =>
-      `<span class="chip perishable">${escHTML(ing)} <span class="chip-x" data-remove-ing="${idx}" title="Remove">&times;</span></span>`
-    ).join('');
+  if (!active.length && !inactive.length) {
+    container.innerHTML = '<span class="muted" style="font-size:0.82rem">No ingredients yet — type what you bought above</span>';
+    return;
   }
 
-  container.onclick = (e) => {
-    const removeEl = e.target.closest('[data-remove-ing]');
-    if (!removeEl) return;
-    const idx = Number(removeEl.dataset.removeIng);
-    const current = get('ingredients');
-    current.splice(idx, 1);
-    set('ingredients', current);
-    autoSync();
-  };
-}
+  // Active items first, then inactive
+  const rows = [];
+  active.forEach((ing, idx) => {
+    rows.push(`<label class="my-ing-row">
+      <input type="checkbox" checked data-ing-toggle="${idx}" data-ing-active="1">
+      <span class="my-ing-name">${escHTML(ing)}</span>
+      <span class="chip-x" data-ing-remove="${idx}" data-ing-from="active" title="Remove permanently">&times;</span>
+    </label>`);
+  });
+  inactive.forEach((ing, idx) => {
+    rows.push(`<label class="my-ing-row inactive">
+      <input type="checkbox" data-ing-toggle="${idx}" data-ing-active="0">
+      <span class="my-ing-name">${escHTML(ing)}</span>
+      <span class="chip-x" data-ing-remove="${idx}" data-ing-from="inactive" title="Remove permanently">&times;</span>
+    </label>`);
+  });
 
-/**
- * Check if an ingredient is perishable (for visual indicator).
- * @param {string} ing
- * @returns {boolean}
- */
-function isPerishable(ing) {
-  const n = norm(ing);
-  return PERISHABLES.some(cat =>
-    cat.items.some(item => norm(item) === n || n.includes(norm(item)) || norm(item).includes(n))
-  );
+  container.innerHTML = rows.join('');
+
+  container.onclick = (e) => {
+    // Permanent remove (×)
+    const removeEl = e.target.closest('[data-ing-remove]');
+    if (removeEl) {
+      e.preventDefault();
+      const idx = Number(removeEl.dataset.ingRemove);
+      const from = removeEl.dataset.ingFrom;
+      if (from === 'active') {
+        const current = get('ingredients');
+        current.splice(idx, 1);
+        set('ingredients', current);
+      } else {
+        const current = get('inactiveIngs');
+        current.splice(idx, 1);
+        set('inactiveIngs', current);
+      }
+      autoSync();
+      return;
+    }
+
+    // Checkbox toggle (active ↔ inactive)
+    const checkbox = e.target.closest('[data-ing-toggle]');
+    if (checkbox && checkbox.type === 'checkbox') {
+      const idx = Number(checkbox.dataset.ingToggle);
+      const wasActive = checkbox.dataset.ingActive === '1';
+
+      if (wasActive) {
+        // Move from active → inactive
+        const current = get('ingredients');
+        const item = current[idx];
+        if (item) {
+          current.splice(idx, 1);
+          set('ingredients', current);
+          const inact = get('inactiveIngs');
+          inact.push(item);
+          set('inactiveIngs', inact);
+        }
+      } else {
+        // Move from inactive → active
+        const current = get('inactiveIngs');
+        const item = current[idx];
+        if (item) {
+          current.splice(idx, 1);
+          set('inactiveIngs', current);
+          const act = get('ingredients');
+          act.push(item);
+          set('ingredients', act);
+        }
+      }
+      autoSync();
+    }
+  };
 }
 
 /* ── Staple Chips ────────────────────────────────────────────── */

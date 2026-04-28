@@ -1292,6 +1292,47 @@ input, select, textarea {
   color: var(--green);
 }
 
+/* ── My Ingredients List ────────────────────────────────────── */
+.my-ings-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.my-ing-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.88rem;
+  transition: background 0.15s;
+}
+.my-ing-row:hover { background: var(--green-soft); }
+.my-ing-row input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--green);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.my-ing-row .my-ing-name {
+  flex: 1;
+  color: var(--ink);
+}
+.my-ing-row.inactive .my-ing-name {
+  color: var(--muted);
+  text-decoration: line-through;
+}
+.my-ing-row .chip-x {
+  font-size: 1rem;
+  color: var(--muted);
+  cursor: pointer;
+  padding: 0 4px;
+  opacity: 0.6;
+}
+.my-ing-row .chip-x:hover { opacity: 1; color: var(--accent); }
+
 /* ── Chip action icons (star & remove) ──────────────────────── */
 .chip-action {
   display: inline-flex;

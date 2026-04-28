@@ -20,10 +20,10 @@
 <link rel="icon" type="image/png" href="favicon.png">
 <meta name="theme-color" content="#2d7a4f">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://static.cloudflareinsights.com https://www.googletagmanager.com https://www.google-analytics.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; img-src 'self' https: data:; connect-src 'self' https://*.supabase.co https://cloudflareinsights.com https://www.google-analytics.com; font-src 'self'; frame-src 'none';">
-  <script type="module" crossorigin src="/assets/index-B7PxDVeN.js"></script>
+  <script type="module" crossorigin src="/assets/index-DW15Pede.js"></script>
   <link rel="modulepreload" crossorigin href="/assets/supabase-DaN4is7k.js">
   <link rel="modulepreload" crossorigin href="/assets/recipes-rFAtZ14r.js">
-  <link rel="stylesheet" crossorigin href="/assets/index-Bxh3hM1V.css">
+  <link rel="stylesheet" crossorigin href="/assets/index-B31th7j5.css">
 </head>
 <body>
 
@@ -131,12 +131,6 @@
         </div>
       </div>
 
-      <!-- Perishables section (collapsible) -->
-      <div class="card">
-        <h3 class="card-title section-toggle" data-toggle="perishChips">🥬 Perishables <span class="muted">(use first — these go bad!)</span> <span class="guide-arrow">▾</span></h3>
-        <div id="perishChips" class="chip-wrap section-body"></div>
-      </div>
-
       <!-- Staples section (collapsible) -->
       <div class="card">
         <h3 class="card-title section-toggle" data-toggle="stapleChips">📌 Staples <span class="muted">(always on hand)</span> <span class="guide-arrow">▾</span></h3>
@@ -149,19 +143,16 @@
         <div class="qa-grid section-body" id="qaGrid"></div>
       </div>
 
-      <!-- Ingredient entry -->
+      <!-- My Ingredients — user-typed items with active/inactive toggle -->
       <div class="card">
-        <label for="ingInput" class="card-title">Add Ingredients</label>
-        <p class="pantry-hint">Type what's in your fridge &amp; pantry, separated by commas. Pick where they go, then tap Add. Tap &times; to remove.</p>
-        <div class="ing-add-controls">
-          <div class="ing-type-toggle">
-            <button class="ing-type-btn on" data-ing-type="perishable">🥬 Perishable</button>
-            <button class="ing-type-btn" data-ing-type="staple">📌 Staple</button>
+        <h3 class="card-title section-toggle" data-toggle="myIngsBody">🛒 My Ingredients <span class="muted">(what I bought)</span> <span class="guide-arrow">▾</span></h3>
+        <div id="myIngsBody" class="section-body">
+          <p class="pantry-hint">Add what you picked up — uncheck when you run out. Checked items count toward recipe matching.</p>
+          <div class="input-row" style="margin-bottom:10px">
+            <input id="ingInput" type="text" class="text-input" placeholder="e.g. tofu, spinach, avocado, lemons" autocomplete="off">
+            <button id="ingAddBtn" class="btn btn-primary">Add</button>
           </div>
-        </div>
-        <div class="input-row">
-          <input id="ingInput" type="text" class="text-input" placeholder="e.g. tofu, rice, garlic" autocomplete="off">
-          <button id="ingAddBtn" class="btn btn-primary">Add</button>
+          <div id="myIngsChips" class="my-ings-list"></div>
         </div>
       </div>
 
