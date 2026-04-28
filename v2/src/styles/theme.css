@@ -1116,18 +1116,20 @@ input, select, textarea {
 .clr-letter:nth-child(5) { animation-delay: 1.2s; }
 .clr-letter:nth-child(6) { animation-delay: 1.5s; }
 
-@keyframes lifePulse {
-  0%, 100% { color: var(--green-deep); transform: scale(1); }
-  50% { color: #38a169; transform: scale(1.08); }
+@keyframes lifeColor {
+  0%, 100% { color: #e53e3e; }
+  17%      { color: #dd6b20; }
+  33%      { color: #d69e2e; }
+  50%      { color: #38a169; }
+  67%      { color: #3182ce; }
+  83%      { color: #805ad5; }
 }
 
 .life-word {
   display: inline-block;
   font-weight: 700;
-  color: var(--green-deep);
-  animation: lifePulse 4s ease-in-out infinite;
-  animation-delay: 2s;
-  will-change: transform;
+  color: #e53e3e;
+  animation: lifeColor 8s ease-in-out infinite;
 }
 
 @media (max-width: 780px) {
