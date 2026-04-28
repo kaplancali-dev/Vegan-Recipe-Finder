@@ -1088,7 +1088,7 @@ input, select, textarea {
 .intro-tagline {
   font-size: 1.55em;
   text-align: center;
-  margin: 12px 0 0;
+  margin: 2px 0 0;
   font-style: italic;
   line-height: 1.4;
   color: var(--green-deep);
