@@ -1043,12 +1043,18 @@ input, select, textarea {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 14px 20px;
+  padding: 8px 20px;
   cursor: pointer;
   user-select: none;
   background: linear-gradient(180deg, var(--green-soft), var(--card));
 }
 .intro-hero-header:hover { opacity: 0.85; }
+.intro-toggle-label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+}
 .intro-chevron {
   font-size: 1.2em;
   color: var(--muted);
