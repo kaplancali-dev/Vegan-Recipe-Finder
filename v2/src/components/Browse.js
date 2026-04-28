@@ -124,9 +124,18 @@ function wireControls() {
   const filterBtn = $('#filterToggle');
   const drawer = $('#filterDrawer');
   if (filterBtn && drawer) {
+    // Stop pulse if user already clicked before
+    if (localStorage.getItem('vrf_filters_seen') === '1') {
+      filterBtn.classList.add('no-pulse');
+    }
     filterBtn.addEventListener('click', () => {
       drawer.hidden = !drawer.hidden;
       filterBtn.textContent = drawer.hidden ? 'Filters' : 'Close';
+      // Stop pulse permanently after first click
+      if (!filterBtn.classList.contains('no-pulse')) {
+        filterBtn.classList.add('no-pulse');
+        try { localStorage.setItem('vrf_filters_seen', '1'); } catch {}
+      }
     });
   }
 

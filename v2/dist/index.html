@@ -20,10 +20,10 @@
 <link rel="icon" type="image/png" href="favicon.png">
 <meta name="theme-color" content="#2d7a4f">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://static.cloudflareinsights.com https://www.googletagmanager.com https://www.google-analytics.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; img-src 'self' https: data:; connect-src 'self' https://*.supabase.co https://cloudflareinsights.com https://www.google-analytics.com; font-src 'self'; frame-src 'none';">
-  <script type="module" crossorigin src="/assets/index-Qs-0LtVf.js"></script>
+  <script type="module" crossorigin src="/assets/index-vnyh_Fo2.js"></script>
   <link rel="modulepreload" crossorigin href="/assets/supabase-DaN4is7k.js">
   <link rel="modulepreload" crossorigin href="/assets/recipes-rFAtZ14r.js">
-  <link rel="stylesheet" crossorigin href="/assets/index-DtEsB-Cu.css">
+  <link rel="stylesheet" crossorigin href="/assets/index-B2nisvD_.css">
 </head>
 <body>
 
@@ -72,18 +72,23 @@
     <section id="tab-pantry" class="tab-panel" role="tabpanel" aria-labelledby="btn-pantry" hidden>
       <!-- Intro hero card (always visible — matches v1) -->
       <div class="intro-card" id="introCard">
+        <div class="intro-hero-header" id="introToggle">
+          <span class="intro-toggle-label">About HARVEST</span>
+          <span class="intro-chevron" id="introChevron">▾</span>
+        </div>
+        <div class="intro-hero-body" id="introBody">
         <div class="intro-hero">
           <div class="intro-hero-grid">
             <div class="intro-hero-video">
+              <h2 class="intro-hero-title">"What can I make with this?"</h2>
               <video src="/hero.mp4" class="hero-img" autoplay loop muted playsinline></video>
               <p class="intro-tagline">More <span class="clr-letters"><span class="clr-letter" style="color:#e53e3e">c</span><span class="clr-letter" style="color:#dd6b20">o</span><span class="clr-letter" style="color:#d69e2e">l</span><span class="clr-letter" style="color:#38a169">o</span><span class="clr-letter" style="color:#3182ce">r</span><span class="clr-letter" style="color:#805ad5">s</span></span> &amp; <span class="clr-letters"><span class="clr-letter" style="color:#e53e3e">d</span><span class="clr-letter" style="color:#dd6b20">i</span><span class="clr-letter" style="color:#d69e2e">v</span><span class="clr-letter" style="color:#38a169">e</span><span class="clr-letter" style="color:#2b6cb0">r</span><span class="clr-letter" style="color:#805ad5">s</span><span class="clr-letter" style="color:#b83280">i</span><span class="clr-letter" style="color:#e53e3e">t</span><span class="clr-letter" style="color:#dd6b20">y</span></span> on your plate, <br class="mobile-br">more <span class="life-word">life</span> in your years!</p>
             </div>
             <div class="intro-hero-copy">
-              <h2 class="intro-hero-title">"What can I make with this?"</h2>
               <p class="intro-hero-sub">
                 You open the fridge and think, <em>"What can I make with this?"</em>
                 <strong>HARVEST</strong> knows. It matches your ingredients to over
-                <strong>4,500 plant-based recipes</strong> from the world's top nutrition-focused chefs and creators,
+                <strong>4,500 unique plant-based recipes</strong> from the world's top nutrition-focused chefs and creators,
                 prioritizes your <strong>perishables</strong> so nothing goes to waste,
                 filters out your <strong>allergens</strong>,
                 and builds a <strong>shopping list</strong> for what you want to make that day or week.
@@ -115,6 +120,7 @@
             </div>
           </div>
         </div>
+        </div><!-- /intro-hero-body -->
       </div>
 
       <!-- Allergies section (collapsible) -->
@@ -124,12 +130,6 @@
           <div id="allergyChips" class="chip-wrap" style="margin-bottom:8px"></div>
           <div id="allergyAdd" class="chip-wrap"></div>
         </div>
-      </div>
-
-      <!-- Perishables section (collapsible) -->
-      <div class="card">
-        <h3 class="card-title section-toggle" data-toggle="perishChips">🥬 Perishables <span class="muted">(use first — these go bad!)</span> <span class="guide-arrow">▾</span></h3>
-        <div id="perishChips" class="chip-wrap section-body"></div>
       </div>
 
       <!-- Staples section (collapsible) -->
@@ -144,19 +144,16 @@
         <div class="qa-grid section-body" id="qaGrid"></div>
       </div>
 
-      <!-- Ingredient entry -->
+      <!-- My Ingredients — user-typed items with active/inactive toggle -->
       <div class="card">
-        <label for="ingInput" class="card-title">Add Ingredients</label>
-        <p class="pantry-hint">Type what's in your fridge &amp; pantry, separated by commas. Pick where they go, then tap Add. Tap &times; to remove.</p>
-        <div class="ing-add-controls">
-          <div class="ing-type-toggle">
-            <button class="ing-type-btn on" data-ing-type="perishable">🥬 Perishable</button>
-            <button class="ing-type-btn" data-ing-type="staple">📌 Staple</button>
+        <h3 class="card-title section-toggle" data-toggle="myIngsBody">🛒 My Ingredients <span class="muted">(what I bought)</span> <span class="guide-arrow">▾</span></h3>
+        <div id="myIngsBody" class="section-body">
+          <p class="pantry-hint">Add what you picked up — uncheck when you run out. Checked items count toward recipe matching.</p>
+          <div class="input-row" style="margin-bottom:10px">
+            <input id="ingInput" type="text" class="text-input" placeholder="e.g. gochugaru, hearts of palm, black garlic, yuzu" autocomplete="off">
+            <button id="ingAddBtn" class="btn btn-primary">Add</button>
           </div>
-        </div>
-        <div class="input-row">
-          <input id="ingInput" type="text" class="text-input" placeholder="e.g. tofu, rice, garlic" autocomplete="off">
-          <button id="ingAddBtn" class="btn btn-primary">Add</button>
+          <div id="myIngsChips" class="my-ings-list"></div>
         </div>
       </div>
 
