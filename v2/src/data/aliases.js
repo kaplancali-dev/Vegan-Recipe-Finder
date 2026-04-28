@@ -48,6 +48,19 @@ export const INGREDIENT_ALIASES = {
   'vegan worcestershire': ['worcestershire sauce','worcestershire','vegan worcestershire sauce'],
   'hoisin sauce': ['hoisin'],
   'active dry yeast': ['yeast','instant yeast','dry yeast','rapid rise yeast'],
+  'lentils': ['red lentils','green lentils','brown lentils','french lentils','yellow lentils','split red lentils','split lentils'],
+  'flax seeds': ['flax egg','ground flaxseed','flaxseed meal','ground flax','flax meal'],
+  'jackfruit': ['young jackfruit','canned jackfruit','green jackfruit'],
+  'fresh ginger': ['ginger root','fresh ginger root','minced ginger','grated ginger','1 inch ginger','2 inch ginger'],
+  'lettuce (any)': ['lettuce','romaine','romaine lettuce','iceberg','iceberg lettuce','butter lettuce','bibb lettuce','red leaf lettuce','green leaf lettuce','mixed greens','spring mix','mesclun','mixed salad greens'],
+  'vegan yogurt': ['vegan yogurt','plant-based yogurt','coconut yogurt','soy yogurt','non-dairy yogurt','dairy-free yogurt'],
+  'vegan cream cheese': ['vegan cream cheese','dairy-free cream cheese','plant-based cream cheese'],
+  'vegan parmesan': ['vegan parmesan','dairy-free parmesan','cashew parmesan','nutritional yeast parmesan'],
+  'chickpea flour': ['besan','gram flour','garbanzo bean flour'],
+  'soba noodles': ['buckwheat noodles'],
+  'sambal oelek': ['sambal','chili garlic sauce'],
+  'TVP': ['textured vegetable protein','tvp','soy crumbles','soy mince'],
+  'raisins': ['golden raisins','sultanas','dried currants'],
   'agave nectar': ['agave','agave syrup'],
   'molasses': ['blackstrap molasses','dark molasses','unsulphured molasses'],
   'date syrup': ['date molasses','silan'],
@@ -252,7 +265,7 @@ export const GF_SWAPS = {
   'penne pasta':'gluten-free penne','spaghetti':'gluten-free spaghetti','linguine':'gluten-free linguine',
   'jumbo pasta shells':'gluten-free pasta shells','egg noodles':'rice noodles',
   'breadcrumbs':'gluten-free breadcrumbs','panko breadcrumbs':'gluten-free panko',
-  'all-purpose flour':'gluten-free flour','wheat flour':'gluten-free flour','flour':'gluten-free flour','bread flour':'gluten-free flour','spelt flour':'gluten-free flour',
+  'all-purpose flour':'gluten-free flour','wheat flour':'gluten-free flour','flour':'gluten-free flour','bread flour':'gluten-free flour','spelt flour':'gluten-free flour','whole wheat flour':'gluten-free flour','chickpea flour':'gluten-free flour','self-rising flour':'GF self-rising flour',
   'burger buns':'GF burger buns','baguette':'GF baguette','sourdough bread':'GF sourdough bread',
   'thick bread':'GF bread','pita bread':'GF pita','gyoza wrappers':'rice paper wrappers',
   'dumpling wrappers':'rice paper wrappers','ladyfinger biscuits':'GF ladyfingers',
@@ -310,25 +323,26 @@ export const ALLERGY_KEYWORDS = {
   'corn':       ['corn','cornstarch','corn tortilla','polenta','corn flour'],
   'mushroom':   ['mushroom'],
   'nightshade': ['tomato','bell pepper','eggplant','potato','paprika','chili','jalapeño','chipotle'],
+  'gluten':     ['flour','all-purpose flour','wheat flour','whole wheat flour','bread flour','spelt flour','self-rising flour','pasta','spaghetti','penne','fusilli','fettuccine','linguine','noodles','ramen','udon','soba','couscous','barley','breadcrumbs','panko','pita bread','flour tortillas','pie crust','pizza dough','pastry'],
 };
 
 /**
  * Quick-add ingredient panels — staples organized by category.
  */
 export const QA_ITEMS = [
-  {cat:'🫘 Beans & Legumes',     items:['chickpeas','black beans','lentils','kidney beans','navy beans','pinto beans','white beans','mung beans','split peas','black-eyed peas','lima beans','tofu','tempeh','edamame']},
-  {cat:'🌾 Grains & Starches',  items:['pasta (any)','rice (any)','quinoa','oats','couscous','barley','millet','farro','sweet potatoes','potatoes','corn tortillas','flour tortillas','polenta','buckwheat','rice noodles','nori','pita bread','breadcrumbs']},
-  {cat:'🥦 Vegetables',         items:['garlic','onions','spinach','kale','carrots','broccoli','cauliflower','bell peppers','mushrooms (any)','tomatoes','avocado','zucchini','corn','cucumber','green onions','eggplant','cabbage','bean sprouts','bamboo shoots','shallots']},
-  {cat:'🍋 Fruits',             items:['lemon','lime','banana','berries (any)','cranberries','cherries','mango','apple','oranges','pineapple','peaches','pears','kiwi','papaya','pomegranate','plantain','figs','grapes','watermelon','coconut','dates']},
+  {cat:'🫘 Beans & Legumes',     items:['chickpeas','black beans','lentils','kidney beans','navy beans','pinto beans','white beans','mung beans','split peas','black-eyed peas','lima beans','tofu','tempeh','edamame','jackfruit','TVP','soy curls']},
+  {cat:'🌾 Grains & Starches',  items:['pasta (any)','rice (any)','quinoa','oats','couscous','barley','millet','farro','sweet potatoes','potatoes','corn tortillas','flour tortillas','polenta','buckwheat','rice noodles','soba noodles','udon noodles','nori','pita bread','bread (any)','breadcrumbs']},
+  {cat:'🥦 Vegetables',         items:['garlic','onions','fresh ginger','spinach','kale','carrots','celery','broccoli','cauliflower','bell peppers','mushrooms (any)','tomatoes','avocado','zucchini','corn','cucumber','green onions','eggplant','cabbage','lettuce (any)','green beans','asparagus','jalapeño','beets','radishes','artichoke hearts','bean sprouts','bamboo shoots','shallots']},
+  {cat:'🍋 Fruits',             items:['lemon','lime','banana','berries (any)','cranberries','cherries','mango','apple','oranges','pineapple','peaches','pears','kiwi','papaya','pomegranate','plantain','figs','grapes','watermelon','coconut','dates','raisins']},
   {cat:'🥜 Nuts & Seeds',       items:['nut butter (any)','cashews','almonds','walnuts','pecans','brazil nuts','macadamia nuts','hazelnuts','pistachio','peanuts','sesame seeds','pine nuts','tahini','hemp seeds','chia seeds','flax seeds','pumpkin seeds','sunflower seeds','protein powder']},
-  {cat:'🥛 Plant-Based Milks',  items:['almond milk','soy milk','rice milk','hemp milk','macadamia milk','pistachio milk','oat milk','cashew milk']},
+  {cat:'🥛 Plant-Based Dairy',  items:['almond milk','soy milk','rice milk','hemp milk','macadamia milk','pistachio milk','oat milk','cashew milk','vegan yogurt','vegan cream cheese','vegan parmesan']},
   {cat:'🫒 Oils & Fats',         items:['any cooking oil','olive oil','coconut oil','avocado oil','sesame oil','chili oil','vegan butter']},
-  {cat:'🥫 Canned & Jarred',    items:['canned tomatoes (any)','crushed tomatoes','diced tomatoes','tomato sauce','tomato paste','vegetable broth','coconut milk','olives']},
-  {cat:'🫙 Sauces & Condiments', items:['soy sauce / tamari / coconut aminos','miso paste','vegan mayo','ketchup','BBQ sauce','hoisin sauce','vegan worcestershire','tamarind paste','gochujang','sriracha / hot sauce','curry paste','dijon mustard','liquid smoke','vegan sour cream','nutritional yeast']},
+  {cat:'🥫 Canned & Jarred',    items:['canned tomatoes (any)','tomato sauce','tomato paste','vegetable broth','coconut milk','olives','artichoke hearts','roasted red peppers','sun-dried tomatoes','capers']},
+  {cat:'🫙 Sauces & Condiments', items:['soy sauce / tamari / coconut aminos','miso paste','vegan mayo','ketchup','yellow mustard','dijon mustard','BBQ sauce','hoisin sauce','vegan worcestershire','tamarind paste','gochujang','sriracha / hot sauce','sambal oelek','curry paste','liquid smoke','vegan sour cream','nutritional yeast']},
   {cat:'🍯 Sweeteners & Vinegars', items:['maple syrup','natural sweetener (any)','agave nectar','coconut sugar','date syrup','molasses','coconut nectar','allulose','stevia / monk fruit','apple cider vinegar','rice vinegar','balsamic vinegar','white vinegar','red wine vinegar','white wine vinegar','sherry vinegar']},
-  {cat:'🧂 Baking & Flours',    items:['baking soda','baking powder','cornstarch','arrowroot powder','almond flour','coconut flour','oat flour','tapioca flour','brown rice flour','xanthan gum','cream of tartar','active dry yeast','protein powder']},
-  {cat:'🌿 Spices & Herbs',     items:['turmeric','cumin','smoked paprika','cinnamon','chili powder','ginger','curry powder','black pepper','garlic powder','onion powder','oregano','basil','thyme','coriander','cayenne','cardamom','bay leaves','five spice','nutmeg','sea salt','garam masala','lemongrass','star anise','dill','mint','rosemary','red pepper flakes','sumac','italian seasoning']},
-  {cat:'🍨 Dessert Pantry',     items:['vanilla extract','cocoa powder','chocolate chips (any)','white chocolate chips','cacao nibs','coconut cream','shredded coconut','date sugar','allulose','stevia / monk fruit']},
+  {cat:'🧂 Baking & Flours',    items:['baking soda','baking powder','cornstarch','arrowroot powder','all-purpose flour','whole wheat flour','chickpea flour','spelt flour','almond flour','coconut flour','oat flour','tapioca flour','brown rice flour','xanthan gum','cream of tartar','active dry yeast','protein powder']},
+  {cat:'🌿 Spices & Herbs',     items:['turmeric','cumin','smoked paprika','cinnamon','chili powder','ginger','curry powder','black pepper','garlic powder','onion powder','oregano','basil','thyme','sage','coriander','cayenne','cardamom','cloves','allspice','bay leaves','five spice','nutmeg','sea salt','garam masala','lemongrass','star anise','dill','mint','chives','rosemary','red pepper flakes','fennel seeds','sumac','italian seasoning']},
+  {cat:'🍨 Dessert Pantry',     items:['vanilla extract','cocoa powder','chocolate chips (any)','white chocolate chips','dark chocolate','cacao nibs','coconut cream','shredded coconut','date sugar','allulose','stevia / monk fruit']},
 ];
 
 /**
@@ -337,6 +351,6 @@ export const QA_ITEMS = [
 export const PERISHABLES = [
   {cat:'🥬 Leafy Greens', items:['spinach','baby spinach','kale','arugula','mixed greens','romaine','bok choy','collard greens','chard']},
   {cat:'🥒 Vegetables', items:['cucumber','bell peppers (any)','fresh tomatoes','cherry tomatoes','zucchini','broccoli','cauliflower','asparagus','celery','fresh carrots','red cabbage','fresh green beans','fresh corn','eggplant','fresh mushrooms','bean sprouts','snap peas','fresh jalapeño']},
-  {cat:'🧅 Onions', items:['red onion','yellow onion','white onion','spring onion','scallions','shallots']},
-  {cat:'🍓 Fruits', items:['berries (any)','fresh mango','banana','fresh apple','fresh peaches','fresh pears','grapes']},
+  {cat:'🧅 Onions', items:['red onion','yellow onion','white onion','spring onion','scallions','shallots','leeks']},
+  {cat:'🍓 Fruits', items:['berries (any)','fresh mango','banana','fresh apple','fresh peaches','fresh pears','grapes','lemon','lime','avocado']},
 ];
