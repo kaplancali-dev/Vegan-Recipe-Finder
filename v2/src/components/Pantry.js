@@ -58,10 +58,35 @@ export function initPantry(recipes) {
   _unsubs.push(subscribe('allergies', renderAllergyChips));
 }
 
-/* ── Hero Section (no-op — intro card is always visible now) ─ */
+/* ── Hero Section — collapsible, persisted via localStorage ─── */
+
+const HERO_COLLAPSED_KEY = 'vrf_hero_collapsed';
 
 function checkHero() {
-  // Intro hero card is always visible (matches v1 behavior)
+  const toggle = $('#introToggle');
+  const body = $('#introBody');
+  if (!toggle || !body) return;
+
+  // Restore saved state
+  const wasCollapsed = localStorage.getItem(HERO_COLLAPSED_KEY) === '1';
+  if (wasCollapsed) {
+    body.classList.add('hidden');
+    toggle.classList.add('collapsed');
+  }
+
+  toggle.addEventListener('click', () => {
+    const isHidden = body.classList.toggle('hidden');
+    toggle.classList.toggle('collapsed', isHidden);
+    try {
+      localStorage.setItem(HERO_COLLAPSED_KEY, isHidden ? '1' : '0');
+    } catch {}
+
+    // Pause/resume video to save resources when collapsed
+    const video = body.querySelector('video');
+    if (video) {
+      isHidden ? video.pause() : video.play();
+    }
+  });
 }
 
 /* ── Allergy Chips ──────────────────────────────────────────── */

@@ -1037,6 +1037,34 @@ input, select, textarea {
   border-radius: 16px;
   box-shadow: var(--shadow);
   overflow: hidden;
+}
+
+.intro-hero-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  cursor: pointer;
+  user-select: none;
+  background: linear-gradient(180deg, var(--green-soft), var(--card));
+}
+.intro-hero-header:hover { opacity: 0.85; }
+.intro-chevron {
+  font-size: 1.2em;
+  color: var(--muted);
+  transition: transform 0.25s ease;
+}
+.intro-hero-header.collapsed .intro-chevron {
+  transform: rotate(-90deg);
+}
+.intro-hero-body {
+  transition: max-height 0.35s ease, opacity 0.25s ease;
+  overflow: hidden;
+}
+.intro-hero-body.hidden {
+  max-height: 0 !important;
+  opacity: 0;
+  pointer-events: none;
   margin-bottom: 18px;
 }
 
