@@ -316,17 +316,17 @@ export const ALLERGY_KEYWORDS = {
  * Quick-add ingredient panels — staples organized by category.
  */
 export const QA_ITEMS = [
-  {cat:'🫘 Beans & Legumes',     items:['chickpeas','black beans','lentils','kidney beans','navy beans','pinto beans','white beans','mung beans','split peas','black-eyed peas','lima beans','tofu','tempeh','edamame','protein powder']},
+  {cat:'🫘 Beans & Legumes',     items:['chickpeas','black beans','lentils','kidney beans','navy beans','pinto beans','white beans','mung beans','split peas','black-eyed peas','lima beans','tofu','tempeh','edamame']},
   {cat:'🌾 Grains & Starches',  items:['pasta (any)','rice (any)','quinoa','oats','couscous','barley','millet','farro','sweet potatoes','potatoes','corn tortillas','flour tortillas','polenta','buckwheat','rice noodles','nori','pita bread','breadcrumbs']},
   {cat:'🥦 Vegetables',         items:['garlic','onions','spinach','kale','carrots','broccoli','cauliflower','bell peppers','mushrooms (any)','tomatoes','avocado','zucchini','corn','cucumber','green onions','eggplant','cabbage','bean sprouts','bamboo shoots','shallots']},
   {cat:'🍋 Fruits',             items:['lemon','lime','banana','berries (any)','cranberries','cherries','mango','apple','oranges','pineapple','peaches','pears','kiwi','papaya','pomegranate','plantain','figs','grapes','watermelon','coconut','dates']},
-  {cat:'🥜 Nuts & Seeds',       items:['nut butter (any)','cashews','almonds','walnuts','pecans','brazil nuts','macadamia nuts','hazelnuts','pistachio','peanuts','sesame seeds','pine nuts','tahini','hemp seeds','chia seeds','flax seeds','pumpkin seeds','sunflower seeds']},
+  {cat:'🥜 Nuts & Seeds',       items:['nut butter (any)','cashews','almonds','walnuts','pecans','brazil nuts','macadamia nuts','hazelnuts','pistachio','peanuts','sesame seeds','pine nuts','tahini','hemp seeds','chia seeds','flax seeds','pumpkin seeds','sunflower seeds','protein powder']},
   {cat:'🥛 Plant-Based Milks',  items:['almond milk','soy milk','rice milk','hemp milk','macadamia milk','pistachio milk','oat milk','cashew milk']},
   {cat:'🫒 Oils & Fats',         items:['any cooking oil','olive oil','coconut oil','avocado oil','sesame oil','chili oil','vegan butter']},
   {cat:'🥫 Canned & Jarred',    items:['canned tomatoes (any)','crushed tomatoes','diced tomatoes','tomato sauce','tomato paste','vegetable broth','coconut milk','olives']},
   {cat:'🫙 Sauces & Condiments', items:['soy sauce / tamari / coconut aminos','miso paste','vegan mayo','ketchup','BBQ sauce','hoisin sauce','vegan worcestershire','tamarind paste','gochujang','sriracha / hot sauce','curry paste','dijon mustard','liquid smoke','vegan sour cream','nutritional yeast']},
   {cat:'🍯 Sweeteners & Vinegars', items:['maple syrup','natural sweetener (any)','agave nectar','coconut sugar','date syrup','molasses','coconut nectar','apple cider vinegar','rice vinegar','balsamic vinegar','white vinegar','red wine vinegar','white wine vinegar','sherry vinegar']},
-  {cat:'🧂 Baking & Flours',    items:['baking soda','baking powder','cornstarch','arrowroot powder','almond flour','coconut flour','oat flour','tapioca flour','brown rice flour','xanthan gum','cream of tartar','active dry yeast']},
+  {cat:'🧂 Baking & Flours',    items:['baking soda','baking powder','cornstarch','arrowroot powder','almond flour','coconut flour','oat flour','tapioca flour','brown rice flour','xanthan gum','cream of tartar','active dry yeast','protein powder']},
   {cat:'🌿 Spices & Herbs',     items:['turmeric','cumin','smoked paprika','cinnamon','chili powder','ginger','curry powder','black pepper','garlic powder','onion powder','oregano','basil','thyme','coriander','cayenne','cardamom','bay leaves','five spice','nutmeg','sea salt','garam masala','lemongrass','star anise','dill','mint','rosemary','red pepper flakes','sumac','italian seasoning']},
   {cat:'🍨 Dessert Pantry',     items:['vanilla extract','cocoa powder','chocolate chips (any)','white chocolate chips','cacao nibs','coconut cream','shredded coconut','date sugar','allulose','stevia / monk fruit']},
 ];
