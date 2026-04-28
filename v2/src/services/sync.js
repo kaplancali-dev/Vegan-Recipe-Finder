@@ -9,7 +9,7 @@ import { createClient } from '@supabase/supabase-js';
 import { gatherAllData, applyAllData } from '../state/store.js';
 
 const SUPABASE_URL  = 'https://zhncgdbhgkeiybdbzsql.supabase.co';
-const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpobmNnZGJoZ2tlaXliZGJ6c3FsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY2Mjc3MjcsImV4cCI6MjA5MjIwMzcyN30.6kVwmiSaFHWg1Qq1ZWj3HsMXt39GGk77O4Ma4KFim9M';
+const SUPABASE_ANON = 'sb_publishable_BZH9BWe5WHbvYYZVz6tK5A_7zw4qj2D';
 
 let _sb = null;
 let _sbUser = null;
