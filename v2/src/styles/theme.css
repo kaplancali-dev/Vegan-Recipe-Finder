@@ -2822,15 +2822,15 @@ input, select, textarea {
 
 /* ── Sugar-Free Swap Tag ──────────────────────────────────── */
 .c-sugar {
-  background: #fef3e2;
-  color: #b45309;
-  border: 1px solid rgba(180, 83, 9, 0.2);
+  background: var(--gluten-soft);
+  color: var(--gluten);
+  border: 1px solid rgba(124, 92, 191, 0.2);
 }
 .sf-swap {
   display: block;
   font-size: 0.65rem;
   font-weight: 600;
-  color: #b45309;
+  color: var(--gluten);
   margin-top: 2px;
   line-height: 1.2;
 }
