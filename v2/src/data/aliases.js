@@ -48,6 +48,12 @@ export const INGREDIENT_ALIASES = {
   'vegan worcestershire': ['worcestershire sauce','worcestershire','vegan worcestershire sauce'],
   'hoisin sauce': ['hoisin'],
   'active dry yeast': ['yeast','instant yeast','dry yeast','rapid rise yeast'],
+  'agave nectar': ['agave','agave syrup'],
+  'molasses': ['blackstrap molasses','dark molasses','unsulphured molasses'],
+  'date syrup': ['date molasses','silan'],
+  'coconut nectar': ['coconut syrup'],
+  'sherry vinegar': ['sherry wine vinegar'],
+  'white wine vinegar': ['champagne vinegar'],
   'lima beans': ['butter beans'],
   'split peas': ['green split peas','yellow split peas'],
 };
@@ -319,10 +325,10 @@ export const QA_ITEMS = [
   {cat:'🫒 Oils & Fats',         items:['any cooking oil','olive oil','coconut oil','avocado oil','sesame oil','chili oil','vegan butter']},
   {cat:'🥫 Canned & Jarred',    items:['canned tomatoes (any)','crushed tomatoes','diced tomatoes','tomato sauce','tomato paste','vegetable broth','coconut milk','olives']},
   {cat:'🫙 Sauces & Condiments', items:['soy sauce / tamari / coconut aminos','miso paste','vegan mayo','ketchup','BBQ sauce','hoisin sauce','vegan worcestershire','tamarind paste','gochujang','sriracha / hot sauce','curry paste','dijon mustard','liquid smoke','vegan sour cream','nutritional yeast']},
-  {cat:'🍯 Sweeteners & Vinegars', items:['maple syrup','natural sweetener (any)','apple cider vinegar','rice vinegar','balsamic vinegar']},
+  {cat:'🍯 Sweeteners & Vinegars', items:['maple syrup','natural sweetener (any)','agave nectar','coconut sugar','date syrup','molasses','coconut nectar','apple cider vinegar','rice vinegar','balsamic vinegar','white vinegar','red wine vinegar','white wine vinegar','sherry vinegar']},
   {cat:'🧂 Baking & Flours',    items:['baking soda','baking powder','cornstarch','arrowroot powder','almond flour','coconut flour','oat flour','tapioca flour','brown rice flour','xanthan gum','cream of tartar','active dry yeast']},
   {cat:'🌿 Spices & Herbs',     items:['turmeric','cumin','smoked paprika','cinnamon','chili powder','ginger','curry powder','black pepper','garlic powder','onion powder','oregano','basil','thyme','coriander','cayenne','cardamom','bay leaves','five spice','nutmeg','sea salt','garam masala','lemongrass','star anise','dill','mint','rosemary','red pepper flakes','sumac','italian seasoning']},
-  {cat:'🍨 Dessert Pantry',     items:['vanilla extract','cocoa powder','chocolate chips (any)','white chocolate chips','cacao nibs','coconut cream','coconut sugar','shredded coconut','date sugar','allulose','stevia / monk fruit']},
+  {cat:'🍨 Dessert Pantry',     items:['vanilla extract','cocoa powder','chocolate chips (any)','white chocolate chips','cacao nibs','coconut cream','shredded coconut','date sugar','allulose','stevia / monk fruit']},
 ];
 
 /**
