@@ -90,12 +90,17 @@ describe('ingredientMatches()', () => {
     expect(ingredientMatches('garlic', ['garlic', 'onion'])).toBe(true);
   });
 
-  it('matches by substring (recipe contains user ingredient)', () => {
-    expect(ingredientMatches('coconut milk', ['coconut'])).toBe(true);
+  it('rejects identity-changing suffix matches (coconut ≠ coconut milk)', () => {
+    expect(ingredientMatches('coconut milk', ['coconut'])).toBe(false);
+    expect(ingredientMatches('avocado', ['avocado oil'])).toBe(false);
+    expect(ingredientMatches('sesame', ['sesame oil'])).toBe(false);
+    expect(ingredientMatches('coconut', ['coconut milk'])).toBe(false);
+    expect(ingredientMatches('almond', ['almond flour'])).toBe(false);
   });
 
   it('matches by substring (user ingredient contains recipe)', () => {
     expect(ingredientMatches('rice', ['brown rice'])).toBe(true);
+    expect(ingredientMatches('mushroom', ['shiitake mushroom'])).toBe(true);
   });
 
   it('returns false for no match', () => {

@@ -114,20 +114,45 @@ export function ingredientMatches(recipeIng, userIngs, userIngSet) {
 }
 
 /**
+ * Suffixes that change an ingredient's identity.
+ * "avocado oil" is NOT a type of avocado, "coconut milk" is NOT coconut, etc.
+ * When the longer string ends with one of these, don't match the shorter base word.
+ */
+const IDENTITY_SUFFIXES = new Set([
+  'oil', 'milk', 'butter', 'cream', 'flour', 'powder', 'sauce',
+  'paste', 'vinegar', 'sugar', 'syrup', 'extract', 'water', 'juice',
+  'seed', 'seeds', 'starch', 'nectar', 'noodles',
+]);
+
+/**
  * Check if `needle` appears in `haystack` at a word boundary.
  * A boundary is the start/end of string, a space, or a hyphen.
+ * Guards against false positives where a compound ingredient
+ * (e.g. "avocado oil") matches a different ingredient ("avocado").
  * @param {string} haystack
  * @param {string} needle
  * @returns {boolean}
  */
 function _wordBoundaryMatch(haystack, needle) {
+  if (haystack === needle) return true;
   const idx = haystack.indexOf(needle);
   if (idx === -1) return false;
   const before = idx === 0 || haystack[idx - 1] === ' ' || haystack[idx - 1] === '-';
   const after = idx + needle.length === haystack.length
     || haystack[idx + needle.length] === ' '
     || haystack[idx + needle.length] === '-';
-  return before && after;
+  if (!before || !after) return false;
+
+  // Guard: if needle is at the start and the remaining word(s) are an
+  // identity-changing suffix, reject the match (e.g. "avocado" ≠ "avocado oil")
+  if (haystack.length > needle.length) {
+    const remainder = haystack.slice(idx + needle.length).trim().replace(/^-/, '').trim();
+    if (IDENTITY_SUFFIXES.has(remainder)) return false;
+    // Also check if needle is the suffix and the prefix changes identity
+    const prefix = haystack.slice(0, idx).trim().replace(/-$/, '').trim();
+    if (prefix && IDENTITY_SUFFIXES.has(needle)) return false;
+  }
+  return true;
 }
 
 /**
