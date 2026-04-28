@@ -47,6 +47,7 @@ export const INGREDIENT_ALIASES = {
   'BBQ sauce': ['barbecue sauce','bbq sauce','BBQ'],
   'vegan worcestershire': ['worcestershire sauce','worcestershire','vegan worcestershire sauce'],
   'hoisin sauce': ['hoisin'],
+  'active dry yeast': ['yeast','instant yeast','dry yeast','rapid rise yeast'],
   'lima beans': ['butter beans'],
   'split peas': ['green split peas','yellow split peas'],
 };
@@ -310,7 +311,7 @@ export const ALLERGY_KEYWORDS = {
  */
 export const QA_ITEMS = [
   {cat:'🫘 Beans & Legumes',     items:['chickpeas','black beans','lentils','kidney beans','navy beans','pinto beans','white beans','mung beans','split peas','black-eyed peas','lima beans','tofu','tempeh','edamame','protein powder']},
-  {cat:'🌾 Grains & Starches',  items:['pasta (any)','rice (any)','quinoa','oats','sweet potatoes','potatoes','corn tortillas','polenta','buckwheat','almond flour','coconut flour','oat flour','tapioca flour','brown rice flour','arrowroot powder','rice noodles','nori','pita bread','breadcrumbs']},
+  {cat:'🌾 Grains & Starches',  items:['pasta (any)','rice (any)','quinoa','oats','sweet potatoes','potatoes','corn tortillas','polenta','buckwheat','rice noodles','nori','pita bread','breadcrumbs']},
   {cat:'🥦 Vegetables',         items:['garlic','onions','spinach','kale','carrots','broccoli','cauliflower','bell peppers','mushrooms (any)','tomatoes','avocado','zucchini','corn','cucumber','green onions','eggplant','cabbage','bean sprouts','bamboo shoots','shallots']},
   {cat:'🍋 Fruits',             items:['lemon','lime','banana','berries (any)','cranberries','cherries','mango','apple','oranges','pineapple','peaches','pears','kiwi','papaya','pomegranate','plantain','figs','grapes','watermelon','coconut','dates']},
   {cat:'🥜 Nuts & Seeds',       items:['nut butter (any)','cashews','almonds','walnuts','pecans','brazil nuts','macadamia nuts','hazelnuts','pistachio','peanuts','sesame seeds','pine nuts','tahini','hemp seeds','chia seeds','flax seeds','pumpkin seeds','sunflower seeds']},
@@ -319,7 +320,7 @@ export const QA_ITEMS = [
   {cat:'🥫 Canned & Jarred',    items:['canned tomatoes (any)','crushed tomatoes','diced tomatoes','tomato sauce','tomato paste','vegetable broth','coconut milk','olives']},
   {cat:'🫙 Sauces & Condiments', items:['soy sauce / tamari / coconut aminos','miso paste','vegan mayo','ketchup','BBQ sauce','hoisin sauce','vegan worcestershire','tamarind paste','gochujang','sriracha / hot sauce','curry paste','dijon mustard','liquid smoke','vegan sour cream','nutritional yeast']},
   {cat:'🍯 Sweeteners & Vinegars', items:['maple syrup','natural sweetener (any)','apple cider vinegar','rice vinegar','balsamic vinegar']},
-  {cat:'🧂 Baking Staples',     items:['baking soda','baking powder','cornstarch','arrowroot powder']},
+  {cat:'🧂 Baking & Flours',    items:['baking soda','baking powder','cornstarch','arrowroot powder','almond flour','coconut flour','oat flour','tapioca flour','brown rice flour','xanthan gum','cream of tartar','active dry yeast']},
   {cat:'🌿 Spices & Herbs',     items:['turmeric','cumin','smoked paprika','cinnamon','chili powder','ginger','curry powder','black pepper','garlic powder','onion powder','oregano','basil','thyme','coriander','cayenne','cardamom','bay leaves','five spice','nutmeg','sea salt','garam masala','lemongrass','star anise','dill','mint','rosemary','red pepper flakes','sumac','italian seasoning']},
   {cat:'🍨 Dessert Pantry',     items:['vanilla extract','cocoa powder','chocolate chips (any)','white chocolate chips','cacao nibs','coconut cream','coconut sugar','shredded coconut','date sugar','allulose','stevia / monk fruit']},
 ];
