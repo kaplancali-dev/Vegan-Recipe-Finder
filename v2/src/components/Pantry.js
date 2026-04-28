@@ -22,12 +22,19 @@ const ALLERGEN_LABELS = {
 /** @type {Array} Full recipe list */
 let _recipes = [];
 
+/** Track subscriptions to prevent listener accumulation on re-init */
+let _unsubs = [];
+
 /**
  * Initialize the Pantry tab.
  * @param {Array} recipes
  */
 export function initPantry(recipes) {
   _recipes = recipes;
+
+  // Clean up previous subscriptions if re-initialized
+  _unsubs.forEach(fn => fn());
+  _unsubs = [];
 
   wireIngredientInput();
   wireQAGrid();
@@ -39,16 +46,16 @@ export function initPantry(recipes) {
   renderPantryPower();
   checkHero();
 
-  // Re-render on state changes
-  subscribe('ingredients', () => {
+  // Re-render on state changes (tracked for cleanup)
+  _unsubs.push(subscribe('ingredients', () => {
     renderIngChips();
     renderPantryPower();
-  });
-  subscribe('staples', () => {
+  }));
+  _unsubs.push(subscribe('staples', () => {
     renderStapleChips();
     renderPantryPower();
-  });
-  subscribe('allergies', renderAllergyChips);
+  }));
+  _unsubs.push(subscribe('allergies', renderAllergyChips));
 }
 
 /* ── Hero Section (no-op — intro card is always visible now) ─ */
@@ -340,10 +347,14 @@ function wireQAGrid() {
 /**
  * Show a quick-add popup for a QA category.
  */
+/** Active popup outside-click handler (for cleanup) */
+let _popupCleanup = null;
+
 function showQAPopup(category, anchorEl) {
-  // Remove any existing popup
+  // Remove any existing popup and its listener
   const existing = document.querySelector('.qa-popup');
   if (existing) existing.remove();
+  if (_popupCleanup) { _popupCleanup(); _popupCleanup = null; }
 
   const currentIngs = new Set(getRef('ingredients').map(norm));
   const currentStaples = new Set(getRef('staples').map(norm));
@@ -421,14 +432,19 @@ function showQAPopup(category, anchorEl) {
     grid.appendChild(popup);
   }
 
-  // Close on outside click
+  // Close on outside click (with tracked cleanup)
   setTimeout(() => {
     const handler = (e) => {
       if (!popup.contains(e.target)) {
         popup.remove();
-        document.removeEventListener('click', handler);
+        cleanup();
       }
     };
+    const cleanup = () => {
+      document.removeEventListener('click', handler);
+      if (_popupCleanup === cleanup) _popupCleanup = null;
+    };
+    _popupCleanup = cleanup;
     document.addEventListener('click', handler);
   }, 100);
 }

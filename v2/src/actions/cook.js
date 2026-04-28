@@ -65,10 +65,10 @@ export async function handleCook(id, opts = {}) {
   const again = await _showWouldMakeAgain();
   if (again !== null) {
     const fresh = get('cookHistory');
-    // Find the entry we just added (last one for this recipe)
+    // Find the entry we just added (last one for this recipe) and clone before mutating
     for (let i = fresh.length - 1; i >= 0; i--) {
       if (fresh[i].id === id) {
-        fresh[i].wouldMakeAgain = again;
+        fresh[i] = { ...fresh[i], wouldMakeAgain: again };
         break;
       }
     }

@@ -109,10 +109,16 @@ function renderSignedIn(container, user) {
     pushBtn.addEventListener('click', async () => {
       pushBtn.disabled = true;
       pushBtn.textContent = 'Pushing…';
-      await cloudPush();
-      pushBtn.textContent = '⬆ Push to Cloud';
-      pushBtn.disabled = false;
-      showToast('Pushed to cloud');
+      try {
+        await cloudPush();
+        showToast('Pushed to cloud');
+      } catch (err) {
+        showToast('Push failed — check your connection');
+        console.error('[sync] push error:', err);
+      } finally {
+        pushBtn.textContent = '⬆ Push to Cloud';
+        pushBtn.disabled = false;
+      }
     });
   }
 
@@ -122,10 +128,16 @@ function renderSignedIn(container, user) {
     pullBtn.addEventListener('click', async () => {
       pullBtn.disabled = true;
       pullBtn.textContent = 'Pulling…';
-      await cloudPull();
-      pullBtn.textContent = '⬇ Pull from Cloud';
-      pullBtn.disabled = false;
-      showToast('Pulled from cloud');
+      try {
+        await cloudPull();
+        showToast('Pulled from cloud');
+      } catch (err) {
+        showToast('Pull failed — check your connection');
+        console.error('[sync] pull error:', err);
+      } finally {
+        pullBtn.textContent = '⬇ Pull from Cloud';
+        pullBtn.disabled = false;
+      }
     });
   }
 
@@ -133,8 +145,13 @@ function renderSignedIn(container, user) {
   const signOutBtn = container.querySelector('#syncSignOutBtn');
   if (signOutBtn) {
     signOutBtn.addEventListener('click', async () => {
-      await signOut();
-      showToast('Signed out');
+      try {
+        await signOut();
+        showToast('Signed out');
+      } catch (err) {
+        showToast('Sign out failed');
+        console.error('[sync] sign out error:', err);
+      }
     });
   }
 

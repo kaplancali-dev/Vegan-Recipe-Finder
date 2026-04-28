@@ -345,8 +345,8 @@ function _renderFullDetail(recipe, ings, staples) {
           }
         });
         mo.observe(document.body, { childList: true, subtree: true });
-        // Safety timeout
-        setTimeout(() => mo.disconnect(), 10000);
+        // Safety timeout — also recheck fav state when timer expires
+        setTimeout(() => { mo.disconnect(); recheckFav(); }, 10000);
       }
     });
   }
@@ -405,13 +405,15 @@ function _renderFullDetail(recipe, ings, staples) {
     });
   }
 
-  // Notes auto-save
+  // Notes auto-save (scoped timer cleared when modal closes)
   const notesEl = document.getElementById('detailNotes');
   if (notesEl) {
     let noteTimer;
     notesEl.addEventListener('input', () => {
       clearTimeout(noteTimer);
       noteTimer = setTimeout(() => {
+        // Guard: don't save if the textarea has been removed from DOM
+        if (!document.contains(notesEl)) return;
         const allNotes = get('instructions');
         const val = notesEl.value.trim();
         if (val) {
@@ -423,6 +425,18 @@ function _renderFullDetail(recipe, ings, staples) {
         autoSync();
       }, 800);
     });
+
+    // Clear pending timer when modal overlay is removed
+    const modal = notesEl.closest('.modal-overlay');
+    if (modal) {
+      const _notesObs = new MutationObserver(() => {
+        if (!document.contains(modal)) {
+          clearTimeout(noteTimer);
+          _notesObs.disconnect();
+        }
+      });
+      _notesObs.observe(document.body, { childList: true });
+    }
   }
 }
 
