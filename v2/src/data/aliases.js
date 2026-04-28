@@ -69,6 +69,10 @@ export const INGREDIENT_ALIASES = {
   'white wine vinegar': ['champagne vinegar'],
   'lima beans': ['butter beans'],
   'split peas': ['green split peas','yellow split peas'],
+  'GF bread': ['gluten-free bread','gf bread','bread','sandwich bread','sourdough bread','white bread','whole wheat bread'],
+  'GF breadcrumbs': ['gluten-free breadcrumbs','gf breadcrumbs','breadcrumbs','panko','panko breadcrumbs','bread crumbs'],
+  'GF tortillas': ['gluten-free tortillas','gf tortillas','flour tortillas','tortillas','wraps','gf wraps'],
+  'glass noodles': ['cellophane noodles','bean thread noodles','mung bean noodles','crystal noodles','sweet potato noodles','japchae noodles'],
 };
 
 /**
@@ -96,7 +100,8 @@ export const INGREDIENT_SUBS = {
   'rice vinegar': ['apple cider vinegar','white vinegar','white wine vinegar','seasoned rice vinegar'],
   'flour': ['oat flour','almond flour','spelt flour','rice flour','gluten-free flour','gf flour','all-purpose flour','1:1 gluten-free flour'],
   'all-purpose flour': ['gluten-free flour','1:1 gluten-free flour','gf flour','oat flour','almond flour','rice flour','spelt flour'],
-  'gluten-free flour': ['1:1 gluten-free flour','gf flour','oat flour','almond flour','rice flour'],
+  'gluten-free flour': ['1:1 gluten-free flour','gf flour','oat flour','almond flour','rice flour','all-purpose flour','flour','whole wheat flour','spelt flour','cassava flour'],
+  'cassava flour': ['gluten-free flour','tapioca flour','oat flour','almond flour','rice flour'],
   'almond flour': ['oat flour','coconut flour','rice flour','gluten-free flour'],
   'oat flour': ['almond flour','rice flour','gluten-free flour','1:1 gluten-free flour'],
   'rice flour': ['oat flour','almond flour','gluten-free flour','1:1 gluten-free flour'],
@@ -133,6 +138,10 @@ export const INGREDIENT_SUBS = {
   'diced tomatoes': ['crushed tomatoes','canned tomatoes','chopped tomatoes','whole peeled tomatoes','fire roasted tomatoes'],
   'tomato sauce': ['tomato puree','crushed tomatoes','canned tomatoes'],
   'tomato puree': ['tomato sauce','crushed tomatoes','canned tomatoes'],
+  'GF bread': ['bread','sandwich bread','sourdough bread','white bread','whole wheat bread','pita bread','baguette','thick bread'],
+  'GF breadcrumbs': ['breadcrumbs','panko','panko breadcrumbs','bread crumbs'],
+  'GF tortillas': ['flour tortillas','tortillas','wraps'],
+  'glass noodles': ['noodles','cellophane noodles','bean thread noodles','mung bean noodles','sweet potato noodles'],
   'sea salt': ['kosher salt','fine salt','salt','coarse salt','fine sea salt','flaky salt','table salt'],
   'bay leaves': ['bay leaf'],
   'bell peppers (any)': ['bell pepper','red bell pepper','green bell pepper','yellow bell pepper','orange bell pepper','red pepper','green pepper'],
@@ -265,11 +274,15 @@ export const GF_SWAPS = {
   'penne pasta':'gluten-free penne','spaghetti':'gluten-free spaghetti','linguine':'gluten-free linguine',
   'jumbo pasta shells':'gluten-free pasta shells','egg noodles':'rice noodles',
   'breadcrumbs':'gluten-free breadcrumbs','panko breadcrumbs':'gluten-free panko',
-  'all-purpose flour':'gluten-free flour','wheat flour':'gluten-free flour','flour':'gluten-free flour','bread flour':'gluten-free flour','spelt flour':'gluten-free flour','whole wheat flour':'gluten-free flour','chickpea flour':'gluten-free flour','self-rising flour':'GF self-rising flour',
+  'all-purpose flour':'gluten-free flour','wheat flour':'gluten-free flour','flour':'gluten-free flour','bread flour':'gluten-free flour','spelt flour':'gluten-free flour','whole wheat flour':'gluten-free flour','self-rising flour':'GF self-rising flour',
   'burger buns':'GF burger buns','baguette':'GF baguette','sourdough bread':'GF sourdough bread',
   'thick bread':'GF bread','pita bread':'GF pita','gyoza wrappers':'rice paper wrappers',
   'dumpling wrappers':'rice paper wrappers','ladyfinger biscuits':'GF ladyfingers',
   'phyllo dough':'GF phyllo dough','seitan':'extra firm tofu','couscous':'quinoa','barley':'brown rice',
+  'penne':'gluten-free penne','fusilli':'gluten-free fusilli','fettuccine':'gluten-free fettuccine',
+  'udon noodles':'rice noodles','udon':'rice noodles','soba noodles':'buckwheat soba (100% buckwheat)','soba':'buckwheat soba (100% buckwheat)',
+  'panko':'gluten-free panko','pie crust':'GF pie crust','pizza dough':'GF pizza dough','pastry':'GF pastry',
+  'ramen':'rice ramen noodles','orzo':'GF orzo',
 };
 
 /**
@@ -331,7 +344,7 @@ export const ALLERGY_KEYWORDS = {
  */
 export const QA_ITEMS = [
   {cat:'🫘 Beans & Legumes',     items:['chickpeas','black beans','lentils','kidney beans','navy beans','pinto beans','white beans','mung beans','split peas','black-eyed peas','lima beans','tofu','tempeh','edamame','jackfruit','TVP','soy curls']},
-  {cat:'🌾 Grains & Starches',  items:['pasta (any)','rice (any)','quinoa','oats','couscous','barley','millet','farro','sweet potatoes','potatoes','corn tortillas','flour tortillas','polenta','buckwheat','rice noodles','soba noodles','udon noodles','nori','pita bread','bread (any)','breadcrumbs']},
+  {cat:'🌾 Grains & Starches',  items:['pasta (any)','rice (any)','quinoa','oats','millet','sweet potatoes','potatoes','corn tortillas','polenta','buckwheat','rice noodles','glass noodles','nori','GF bread','GF breadcrumbs','GF tortillas']},
   {cat:'🥦 Vegetables',         items:['garlic','onions','fresh ginger','spinach','kale','carrots','celery','broccoli','cauliflower','bell peppers','mushrooms (any)','tomatoes','avocado','zucchini','corn','cucumber','green onions','eggplant','cabbage','lettuce (any)','green beans','asparagus','jalapeño','beets','radishes','artichoke hearts','bean sprouts','bamboo shoots','shallots']},
   {cat:'🍋 Fruits',             items:['lemon','lime','banana','berries (any)','cranberries','cherries','mango','apple','oranges','pineapple','peaches','pears','kiwi','papaya','pomegranate','plantain','figs','grapes','watermelon','coconut','dates','raisins']},
   {cat:'🥜 Nuts & Seeds',       items:['nut butter (any)','cashews','almonds','walnuts','pecans','brazil nuts','macadamia nuts','hazelnuts','pistachio','peanuts','sesame seeds','pine nuts','tahini','hemp seeds','chia seeds','flax seeds','pumpkin seeds','sunflower seeds','protein powder']},
@@ -340,7 +353,7 @@ export const QA_ITEMS = [
   {cat:'🥫 Canned & Jarred',    items:['canned tomatoes (any)','tomato sauce','tomato paste','vegetable broth','coconut milk','olives','artichoke hearts','roasted red peppers','sun-dried tomatoes','capers']},
   {cat:'🫙 Sauces & Condiments', items:['soy sauce / tamari / coconut aminos','miso paste','vegan mayo','ketchup','yellow mustard','dijon mustard','BBQ sauce','hoisin sauce','vegan worcestershire','tamarind paste','gochujang','sriracha / hot sauce','sambal oelek','curry paste','liquid smoke','vegan sour cream','nutritional yeast']},
   {cat:'🍯 Sweeteners & Vinegars', items:['maple syrup','natural sweetener (any)','agave nectar','coconut sugar','date syrup','molasses','coconut nectar','allulose','stevia / monk fruit','apple cider vinegar','rice vinegar','balsamic vinegar','white vinegar','red wine vinegar','white wine vinegar','sherry vinegar']},
-  {cat:'🧂 Baking & Flours',    items:['baking soda','baking powder','cornstarch','arrowroot powder','all-purpose flour','whole wheat flour','chickpea flour','spelt flour','almond flour','coconut flour','oat flour','tapioca flour','brown rice flour','xanthan gum','cream of tartar','active dry yeast','protein powder']},
+  {cat:'🧂 Baking & Flours',    items:['baking soda','baking powder','cornstarch','arrowroot powder','gluten-free flour','almond flour','coconut flour','oat flour','tapioca flour','brown rice flour','chickpea flour','cassava flour','xanthan gum','cream of tartar','active dry yeast','protein powder']},
   {cat:'🌿 Spices & Herbs',     items:['turmeric','cumin','smoked paprika','cinnamon','chili powder','ginger','curry powder','black pepper','garlic powder','onion powder','oregano','basil','thyme','sage','coriander','cayenne','cardamom','cloves','allspice','bay leaves','five spice','nutmeg','sea salt','garam masala','lemongrass','star anise','dill','mint','chives','rosemary','red pepper flakes','fennel seeds','sumac','italian seasoning']},
   {cat:'🍨 Dessert Pantry',     items:['vanilla extract','cocoa powder','chocolate chips (any)','white chocolate chips','dark chocolate','cacao nibs','coconut cream','shredded coconut','date sugar','allulose','stevia / monk fruit']},
 ];
