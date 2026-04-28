@@ -303,7 +303,7 @@ function renderReadyList() {
   // Event delegation
   container.onclick = (e) => {
     // External links
-    if (e.target.closest('[data-external]')) return;
+    if (e.target.closest('[data-recipe-url]')) return;
 
     if (handleShareClick(e)) return;
 

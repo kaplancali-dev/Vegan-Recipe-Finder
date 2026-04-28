@@ -204,7 +204,7 @@ function renderFavList() {
   container.innerHTML = renderCardList(results, favSet, { showMatch: true, makelist: makeIds, cookHistory, userIngs: [...ings, ...staples] });
 
   container.onclick = (e) => {
-    if (e.target.closest('[data-external]')) return;
+    if (e.target.closest('[data-recipe-url]')) return;
 
     if (handleShareClick(e)) return;
 

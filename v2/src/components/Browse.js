@@ -233,7 +233,7 @@ function _runRender() {
     }
 
     // External links (View Instructions) — let them open normally
-    if (e.target.closest('[data-external]')) return;
+    if (e.target.closest('[data-recipe-url]')) return;
 
     // Share button
     if (handleShareClick(e)) return;

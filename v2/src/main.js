@@ -21,6 +21,7 @@ import { initWantToMake } from './components/WantToMake.js';
 import { initSyncPanel } from './components/SyncPanel.js';
 import { initOnboarding } from './components/Onboarding.js';
 import { submitFeedback } from './services/feedback.js';
+import { openRecipeLink } from './utils/safe-link.js';
 
 /* ── Boot sequence ───────────────────────────────────────────── */
 
@@ -125,6 +126,21 @@ initReadyToCook(recipes);
 initSyncPanel();
 initOnboarding();
 
+
+/* ── Safe recipe link handler ────────────────────────────────── */
+// Intercept all [data-recipe-url] clicks globally.
+// Opens the original URL and shows a "Page not found? Search instead" toast.
+document.addEventListener('click', (e) => {
+  const link = e.target.closest('[data-recipe-url]');
+  if (!link) return;
+  e.preventDefault();
+  e.stopPropagation();
+  openRecipeLink(
+    link.dataset.recipeUrl,
+    link.dataset.recipeTitle || '',
+    link.dataset.recipeSite || ''
+  );
+});
 
 /* ── Deep-link: open shared recipe from #r=ID or ?r=ID ────── */
 

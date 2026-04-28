@@ -3309,3 +3309,78 @@ input, select, textarea {
   .wm-history-stars { font-size: 0.7rem; }
   .wm-history-date { font-size: 0.7rem; }
 }
+
+/* ── Fallback toast (safe recipe links) ────────────────────────── */
+
+.fallback-toast {
+  position: fixed;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  background: var(--card);
+  color: var(--ink);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  box-shadow: 0 4px 20px rgba(0,0,0,.15);
+  font-size: 0.88rem;
+  max-width: 92vw;
+  animation: fallback-in 0.3s ease;
+}
+
+.fallback-toast span {
+  white-space: nowrap;
+  color: var(--ink-soft);
+}
+
+.fallback-toast a {
+  color: var(--green);
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.fallback-toast a:hover {
+  text-decoration: underline;
+}
+
+.fallback-toast-close {
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 0 2px;
+  line-height: 1;
+}
+
+.fallback-toast-close:hover {
+  color: var(--ink);
+}
+
+.fallback-toast-out {
+  animation: fallback-out 0.3s ease forwards;
+}
+
+@keyframes fallback-in {
+  from { opacity: 0; transform: translateX(-50%) translateY(12px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+@keyframes fallback-out {
+  from { opacity: 1; transform: translateX(-50%) translateY(0); }
+  to   { opacity: 0; transform: translateX(-50%) translateY(12px); }
+}
+
+@media (max-width: 480px) {
+  .fallback-toast {
+    bottom: 70px;
+    font-size: 0.82rem;
+    padding: 8px 12px;
+    gap: 8px;
+  }
+}

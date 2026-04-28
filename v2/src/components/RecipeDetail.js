@@ -7,6 +7,7 @@
 
 import { escHTML, decodeHTML, norm } from '../utils/text.js';
 import { GF_SWAPS, SUGAR_SWAPS } from '../data/aliases.js';
+import { openRecipeLink } from '../utils/safe-link.js';
 import { get, set } from '../state/store.js';
 import { autoSync, reportBrokenLink } from '../services/sync.js';
 import { ingredientMatches, expandWithAliases } from '../services/matching.js';
@@ -161,7 +162,7 @@ function _renderNewVisitorDetail(recipe) {
       </div>
     </div>
 
-    ${recipe.url ? `<a href="${escHTML(recipe.url)}" target="_blank" rel="noopener" class="visitor-cta">View full recipe</a>` : ''}
+    ${recipe.url ? `<a href="#" class="visitor-cta" data-recipe-url="${escHTML(recipe.url)}" data-recipe-title="${escHTML(recipe.title)}" data-recipe-site="${escHTML(recipe.site || '')}">View full recipe</a>` : ''}
 
     <div class="detail-section">
       <h4>Ingredients (${ingList.length})</h4>
@@ -299,7 +300,7 @@ function _renderFullDetail(recipe, ings, staples) {
     </div>
 
     <div class="detail-actions">
-      ${recipe.url ? `<a href="${escHTML(recipe.url)}" target="_blank" rel="noopener" class="detail-link">📖 View Instructions ↗</a>` : ''}
+      ${recipe.url ? `<a href="#" class="detail-link" data-recipe-url="${escHTML(recipe.url)}" data-recipe-title="${escHTML(recipe.title)}" data-recipe-site="${escHTML(recipe.site || '')}">📖 View Instructions ↗</a>` : ''}
       <button class="btn btn-primary" id="detailFavBtn">${isFav ? '❤️ Favorited' : '🤍 Favorite'}</button>
       <button class="btn btn-outline" id="detailQueueBtn">${isQueued ? '✓ My Queue' : '📌 My Queue'}</button>
       ${missingIngs.length ? `<button class="btn btn-outline" id="detailShopBtn">🛒 Add ${missingIngs.length} to list</button>` : ''}
