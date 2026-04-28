@@ -1127,6 +1127,7 @@ input, select, textarea {
   line-height: 1.2;
   font-weight: 700;
   color: var(--ink);
+  text-align: center;
   margin: 4px 0 10px;
   letter-spacing: -0.5px;
 }
