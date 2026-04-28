@@ -1060,12 +1060,10 @@ input, select, textarea {
   .intro-hero-grid {
     grid-template-columns: 2fr 3fr;
     gap: 32px;
-    align-items: start;
+    align-items: center;
   }
   .intro-hero-video {
     max-width: none;
-    position: sticky;
-    top: 20px;
   }
   .intro-hero-copy {
     max-width: none;
@@ -1095,7 +1093,7 @@ input, select, textarea {
   line-height: 1.2;
   font-weight: 700;
   color: var(--ink);
-  margin: 14px 0 10px;
+  margin: 4px 0 10px;
   letter-spacing: -0.5px;
 }
 
