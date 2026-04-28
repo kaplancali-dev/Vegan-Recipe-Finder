@@ -1055,6 +1055,30 @@ input, select, textarea {
 .intro-hero-video { min-width: 0; max-width: 700px; margin: 0 auto; }
 .intro-hero-copy { min-width: 0; max-width: 750px; margin: 0 auto; }
 
+/* Desktop two-column hero: video left, copy right */
+@media (min-width: 900px) {
+  .intro-hero-grid {
+    grid-template-columns: 2fr 3fr;
+    gap: 32px;
+    align-items: start;
+  }
+  .intro-hero-video {
+    max-width: none;
+    position: sticky;
+    top: 20px;
+  }
+  .intro-hero-copy {
+    max-width: none;
+  }
+  .hero-img {
+    min-height: 240px;
+    max-height: 400px;
+  }
+  .intro-tagline {
+    font-size: 1.15em;
+  }
+}
+
 .hero-img {
   width: 100%;
   height: 100%;
