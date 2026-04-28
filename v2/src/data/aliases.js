@@ -3,7 +3,7 @@
  * If a user has "mushrooms (any)", they match any of the 20+ variants.
  */
 export const INGREDIENT_ALIASES = {
-  'plant-based milk (any)': ['almond milk','oat milk','soy milk','cashew milk','rice milk','hemp milk','macadamia milk','plant milk','nondairy milk','non-dairy milk'],
+  'plant-based milk (any)': ['almond milk','oat milk','soy milk','cashew milk','rice milk','hemp milk','macadamia milk','pistachio milk','plant milk','nondairy milk','non-dairy milk'],
   'any cooking oil':        ['coconut oil','olive oil','avocado oil','vegetable oil','canola oil','sunflower oil','grapeseed oil','light oil','neutral oil'],
   'nut butter (any)':       ['peanut butter','almond butter','sunflower butter','cashew butter','hazelnut butter','walnut butter','pecan butter','macadamia butter','mixed nut butter','seed butter'],
   'pasta (any)':            ['pasta','gluten-free pasta','spaghetti','penne','fusilli','farfalle','rigatoni','linguine','fettuccine','tagliatelle','orzo','macaroni','rotini','angel hair','lasagna noodles','noodles'],
@@ -48,10 +48,14 @@ export const INGREDIENT_ALIASES = {
 export const INGREDIENT_SUBS = {
   'olive oil':      ['coconut oil','avocado oil','vegetable oil','light oil','neutral oil'],
   'coconut oil':    ['olive oil','vegetable oil','light oil'],
-  'almond milk':    ['oat milk','soy milk','cashew milk','plant milk','plant-based milk','nondairy milk'],
-  'oat milk':       ['almond milk','soy milk','cashew milk','plant milk','plant-based milk'],
-  'soy milk':       ['almond milk','oat milk','cashew milk','plant milk','plant-based milk'],
-  'cashew milk':    ['almond milk','oat milk','plant milk','plant-based milk'],
+  'almond milk':    ['soy milk','rice milk','hemp milk','macadamia milk','pistachio milk','oat milk','cashew milk','plant milk','plant-based milk'],
+  'soy milk':       ['almond milk','rice milk','hemp milk','macadamia milk','pistachio milk','oat milk','cashew milk','plant milk','plant-based milk'],
+  'rice milk':      ['almond milk','soy milk','hemp milk','macadamia milk','pistachio milk','oat milk','cashew milk','plant milk','plant-based milk'],
+  'hemp milk':      ['almond milk','soy milk','rice milk','macadamia milk','pistachio milk','oat milk','cashew milk','plant milk','plant-based milk'],
+  'macadamia milk': ['almond milk','soy milk','rice milk','hemp milk','pistachio milk','oat milk','cashew milk','plant milk','plant-based milk'],
+  'pistachio milk': ['almond milk','soy milk','rice milk','hemp milk','macadamia milk','oat milk','cashew milk','plant milk','plant-based milk'],
+  'oat milk':       ['almond milk','soy milk','rice milk','hemp milk','macadamia milk','pistachio milk','cashew milk','plant milk','plant-based milk'],
+  'cashew milk':    ['almond milk','soy milk','rice milk','hemp milk','macadamia milk','pistachio milk','oat milk','plant milk','plant-based milk'],
   'peanut butter':  ['almond butter','sunflower butter','cashew butter','nut butter'],
   'almond butter':  ['peanut butter','sunflower butter','cashew butter','nut butter'],
   'sunflower butter': ['peanut butter','almond butter','cashew butter','nut butter'],
@@ -286,7 +290,7 @@ export const VEGAN_SWAPS = [
  */
 export const ALLERGY_KEYWORDS = {
   'peanut':     ['peanut','peanut butter'],
-  'tree nut':   ['almond','cashew','walnut','pecan','brazil nut','pistachio','macadamia','hazelnut','pine nut','almond butter','almond milk'],
+  'tree nut':   ['almond','cashew','walnut','pecan','brazil nut','pistachio','macadamia','hazelnut','pine nut','almond butter','almond milk','cashew milk','macadamia milk','pistachio milk','cashew butter','macadamia butter','hazelnut butter','pecan butter','walnut butter'],
   'soy':        ['edamame','soy milk','soy protein','soy curls','soy sauce','tofu','tempeh','miso','tamari'],
   'coconut':    ['coconut milk','coconut oil','coconut cream','coconut flakes','coconut'],
   'corn':       ['corn','cornstarch','corn tortilla','polenta','corn flour'],
@@ -303,7 +307,7 @@ export const QA_ITEMS = [
   {cat:'🥦 Vegetables',         items:['garlic','onions','spinach','kale','carrots','broccoli','cauliflower','bell peppers','mushrooms (any)','tomatoes','avocado','zucchini','corn','cucumber','green onions','eggplant','cabbage','bean sprouts','bamboo shoots','shallots']},
   {cat:'🍋 Fruits',             items:['lemon','lime','banana','berries (any)','mango','apple','oranges','pineapple','peaches','pears','grapes','watermelon','coconut','dates']},
   {cat:'🥜 Nuts & Seeds', items:['nut butter (any)','cashews','almonds','walnuts','pecans','brazil nuts','macadamia nuts','hazelnuts','pistachio','peanuts','sesame seeds','pine nuts']},
-  {cat:'🥛 Plant-Based Milks',  items:['plant-based milk (any)']},
+  {cat:'🥛 Plant-Based Milks',  items:['plant-based milk (any)','almond milk','soy milk','rice milk','hemp milk','macadamia milk','pistachio milk','oat milk','cashew milk']},
   {cat:'🫙 Pantry & Oils',      items:['any cooking oil','olive oil','coconut oil','avocado oil','sesame oil','chili oil','canned tomatoes (any)','crushed tomatoes','diced tomatoes','tomato sauce','vegetable broth','soy sauce / tamari / coconut aminos','coconut milk','miso paste','maple syrup','natural sweetener (any)','apple cider vinegar','nutritional yeast','rice vinegar','dijon mustard','tomato paste','vegan mayo','tamarind paste','gochujang','balsamic vinegar','sriracha / hot sauce','olives','curry paste','liquid smoke','vegan sour cream']},
   {cat:'🌿 Spices & Herbs',     items:['turmeric','cumin','smoked paprika','cinnamon','chili powder','ginger','curry powder','black pepper','garlic powder','onion powder','oregano','basil','thyme','coriander','cayenne','cardamom','bay leaves','five spice','nutmeg','sea salt','garam masala','lemongrass','star anise','dill','mint','rosemary','red pepper flakes','sumac','italian seasoning']},
   {cat:'🍨 Dessert Pantry',     items:['vanilla extract','vanilla','cocoa powder','chocolate chips (any)','coconut cream','coconut sugar','vegan butter','flax egg','baking soda','baking powder','cornstarch','shredded coconut','medjool dates','allulose / stevia / monk fruit']},
