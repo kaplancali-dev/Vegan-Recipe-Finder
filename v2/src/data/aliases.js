@@ -40,6 +40,8 @@ export const INGREDIENT_ALIASES = {
   'cornstarch': ['potato starch','corn starch'],
   'jalapeño': ['jalapeno','jalapeños','jalapenos'],
   'maple syrup': ['honey','agave nectar','agave syrup','agave'],
+  'lima beans': ['butter beans'],
+  'split peas': ['green split peas','yellow split peas'],
 };
 
 /**
@@ -300,7 +302,7 @@ export const ALLERGY_KEYWORDS = {
  * Quick-add ingredient panels — staples organized by category.
  */
 export const QA_ITEMS = [
-  {cat:'🫘 Beans & Legumes',     items:['chickpeas','black beans','lentils','kidney beans','navy beans','pinto beans','white beans','tofu','tempeh','edamame','protein powder']},
+  {cat:'🫘 Beans & Legumes',     items:['chickpeas','black beans','lentils','kidney beans','navy beans','pinto beans','white beans','mung beans','split peas','black-eyed peas','lima beans','tofu','tempeh','edamame','protein powder']},
   {cat:'🌾 Grains & Starches',  items:['pasta (any)','rice (any)','quinoa','oats','sweet potatoes','potatoes','corn tortillas','polenta','buckwheat','almond flour','coconut flour','oat flour','tapioca flour','brown rice flour','arrowroot powder','rice noodles','nori','pita bread','breadcrumbs']},
   {cat:'🥦 Vegetables',         items:['garlic','onions','spinach','kale','carrots','broccoli','cauliflower','bell peppers','mushrooms (any)','tomatoes','avocado','zucchini','corn','cucumber','green onions','eggplant','cabbage','bean sprouts','bamboo shoots','shallots']},
   {cat:'🍋 Fruits',             items:['lemon','lime','banana','berries (any)','mango','apple','oranges','pineapple','peaches','pears','grapes','watermelon','coconut','dates']},
