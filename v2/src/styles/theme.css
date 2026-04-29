@@ -798,6 +798,39 @@ input, select, textarea {
   padding: 10px 28px;
 }
 
+/* ── Recipe of the Day Spotlight ────────────────────────────── */
+
+.rotd-spotlight {
+  margin: 0 0 16px;
+  position: relative;
+}
+
+.rotd-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 8px;
+}
+
+.rotd-spotlight .r-card {
+  border: 2px solid var(--green);
+  border-left-width: 2px;
+  box-shadow: 0 4px 20px rgba(46,125,50,0.12);
+}
+
+.rotd-spotlight .r-card:hover {
+  box-shadow: 0 6px 24px rgba(46,125,50,0.18);
+}
+
+.rotd-spotlight .hero-wrap {
+  aspect-ratio: 16 / 9;
+}
+
 /* ── Recipe Card (vertical layout — matches v1) ─────────────── */
 .r-card {
   background: var(--card);

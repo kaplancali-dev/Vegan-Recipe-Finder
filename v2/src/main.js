@@ -131,9 +131,11 @@ recipesReady.then(async (recipes) => {
   const { initFavorites } = await import('./components/Favorites.js');
   const { initWantToMake } = await import('./components/WantToMake.js');
   const { initReadyToCook } = await import('./components/ReadyToCook.js');
+  const { initROTD } = await import('./components/RecipeOfTheDay.js');
 
   initRecipeDetail(recipes);
   initBrowse(recipes);
+  initROTD(recipes);
   initPantry(recipes);
   initShopping(recipes);
   initFavorites(recipes);
