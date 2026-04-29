@@ -8,7 +8,8 @@
 
 import { getRef } from '../state/store.js';
 import { findRecipes } from '../services/matching.js';
-import { escHTML } from '../utils/text.js';
+import { escHTML, decodeHTML } from '../utils/text.js';
+import { gfSwap, sugarSwap } from './RecipeCard.js';
 import { openDetail } from './RecipeDetail.js';
 import { toggleFavorite } from '../actions/favorites.js';
 import { handleShareClick } from '../actions/share.js';
@@ -100,14 +101,24 @@ function renderROTD() {
   const nut = r.nut || {};
   const matchInfo = ings.length > 0 ? `<span class="rotd-match">${scored.pct}% match</span>` : '';
 
-  // Compact ingredient summary
+  // Compact ingredient summary with GF/sugar swap hints
   const haveNames = scored.haveNames || [];
   const needNames = scored.needNames || [];
+
+  function ingWithSwap(name) {
+    const display = escHTML(decodeHTML(name));
+    const gf = gfSwap(name);
+    const sf = sugarSwap(name);
+    if (gf) return `<span class="rotd-ing-gf">${display} <em>(GF: ${escHTML(gf)})</em></span>`;
+    if (sf) return `<span class="rotd-ing-sf">${display} <em>(Swap: ${escHTML(sf)})</em></span>`;
+    return display;
+  }
+
   const haveStr = haveNames.length
-    ? `<strong>You have:</strong> ${haveNames.slice(0, 6).map(n => escHTML(n)).join(', ')}${haveNames.length > 6 ? ` +${haveNames.length - 6} more` : ''}`
+    ? `<strong>You have:</strong> ${haveNames.slice(0, 6).map(ingWithSwap).join(', ')}${haveNames.length > 6 ? ` +${haveNames.length - 6} more` : ''}`
     : '';
   const needStr = needNames.length
-    ? `<strong>You need:</strong> ${needNames.slice(0, 5).map(n => escHTML(n)).join(', ')}${needNames.length > 5 ? ` +${needNames.length - 5} more` : ''}`
+    ? `<strong>You need:</strong> ${needNames.slice(0, 5).map(ingWithSwap).join(', ')}${needNames.length > 5 ? ` +${needNames.length - 5} more` : ''}`
     : '';
 
   let cookLabel = '☐ I Made This';

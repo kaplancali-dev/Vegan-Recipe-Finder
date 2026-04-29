@@ -34,7 +34,7 @@ for (const [key, val] of Object.entries(GF_SWAPS)) {
  * @param {string} name - Ingredient name (raw)
  * @returns {string|null}
  */
-function gfSwap(name) {
+export function gfSwap(name) {
   return _gfLookup.get(norm(name)) || null;
 }
 
@@ -52,7 +52,7 @@ for (const [key, val] of Object.entries(SUGAR_SWAPS)) {
  * @param {string} name - Ingredient name (raw)
  * @returns {string|null}
  */
-function sugarSwap(name) {
+export function sugarSwap(name) {
   const n = norm(name);
   // Exact match
   const exact = _sugarLookup.get(n);
