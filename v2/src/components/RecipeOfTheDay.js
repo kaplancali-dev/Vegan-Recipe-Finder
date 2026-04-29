@@ -42,7 +42,8 @@ function pickROTD(recipes) {
   const candidates = recipes.filter(r =>
     r.img &&
     r.nut && r.nut.pro >= 20 &&
-    r.ing && r.ing.length >= 7 &&
+    r.ing && r.ing.length >= 7 && r.ing.length <= 15 &&
+    r.time && r.time <= 90 &&
     !r.cats?.some(c => DESSERT_CATS.has(c))
   );
   if (!candidates.length) return null;
@@ -97,7 +98,17 @@ function renderROTD() {
   const lastCook = cooked.length ? cooked[cooked.length - 1] : null;
 
   const nut = r.nut || {};
-  const matchInfo = ings.length > 0 ? `<span>${scored.pct}% match</span>` : '';
+  const matchInfo = ings.length > 0 ? `<span class="rotd-match">${scored.pct}% match</span>` : '';
+
+  // Compact ingredient summary
+  const haveNames = scored.haveNames || [];
+  const needNames = scored.needNames || [];
+  const haveStr = haveNames.length
+    ? `<strong>You have:</strong> ${haveNames.slice(0, 6).map(n => escHTML(n)).join(', ')}${haveNames.length > 6 ? ` +${haveNames.length - 6} more` : ''}`
+    : '';
+  const needStr = needNames.length
+    ? `<strong>You need:</strong> ${needNames.slice(0, 5).map(n => escHTML(n)).join(', ')}${needNames.length > 5 ? ` +${needNames.length - 5} more` : ''}`
+    : '';
 
   let cookLabel = '☐ I Made This';
   if (lastCook) {
@@ -114,14 +125,8 @@ function renderROTD() {
         <img loading="lazy" decoding="async" src="${escHTML(r.img)}" alt="${escHTML(r.title)}">
       </div>
       <div class="rotd-body">
-        <div class="rotd-title">${escHTML(r.title)}</div>
-        <div class="rotd-site">${escHTML(r.site || '')}</div>
-        <div class="rotd-meta">
-          ${r.time ? `<span>⏱ ${r.time} min</span>` : ''}
-          ${r.servings ? `<span>👤 ${r.servings} servings</span>` : ''}
-          <span>🥘 ${r.ing.length} ingredients</span>
-          ${matchInfo}
-        </div>
+        <div class="rotd-title">${escHTML(r.title)} ${matchInfo}</div>
+        <div class="rotd-site">${escHTML(r.site || '')} · ${r.time ? `${r.time} min` : ''} · ${r.servings ? `${r.servings} servings` : ''} · ${r.ing.length} ingredients</div>
         <div class="rotd-nut">
           <div>${nut.cal ?? '—'} <span>cal</span></div>
           <div>${nut.pro ?? '—'}g <span>protein</span></div>
@@ -129,6 +134,7 @@ function renderROTD() {
           <div>${nut.fat ?? '—'}g <span>fat</span></div>
           <div>${nut.fib ?? '—'}g <span>fiber</span></div>
         </div>
+        ${haveStr || needStr ? `<div class="rotd-ings">${haveStr}${haveStr && needStr ? '<br>' : ''}${needStr}</div>` : ''}
         <div class="rotd-actions">
           ${r.url ? `<a href="#" class="btn-sm btn-link" data-recipe-url="${escHTML(r.url)}" data-recipe-title="${escHTML(r.title)}" data-recipe-site="${escHTML(r.site || '')}">📖 View Instructions</a>` : ''}
           <button class="btn-sm btn-shop make-btn${isQueued ? ' on' : ''}" data-make-id="${r.id}">${isQueued ? '✓ My Queue' : '📌 My Queue'}</button>
