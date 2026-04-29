@@ -1,12 +1,15 @@
 {
-  "name": "HARVEST — Eat More Plants!",
+  "name": "HARVEST — See What Your Kitchen Already Knows",
   "short_name": "HARVEST",
+  "description": "4,300+ vegan recipes matched to what's already in your pantry.",
   "start_url": "./index.html",
-  "display": "browser",
+  "display": "standalone",
+  "orientation": "portrait-primary",
   "background_color": "#faf7f2",
   "theme_color": "#2d7a4f",
+  "categories": ["food", "lifestyle"],
   "icons": [
-    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
-    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" }
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
   ]
 }

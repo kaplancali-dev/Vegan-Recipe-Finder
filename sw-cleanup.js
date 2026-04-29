@@ -1,19 +1,18 @@
 /**
- * SW Cleanup — stable-URL script that runs before the app bundle.
- * Unregisters any service workers and clears all caches so stale
- * builds never block fresh content from loading.
+ * SW Bootstrap — registers the caching service worker.
+ * Loaded before the app bundle so SW installs early.
  */
 (function () {
-  // Unregister all service workers
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.getRegistrations().then(function (regs) {
-      regs.forEach(function (reg) { reg.unregister(); });
-    });
-  }
-  // Clear all caches
-  if ('caches' in window) {
-    caches.keys().then(function (keys) {
-      keys.forEach(function (key) { caches.delete(key); });
+    window.addEventListener('load', function () {
+      navigator.serviceWorker.register('./sw.js')
+        .then(function (reg) {
+          // Check for updates every 30 minutes
+          setInterval(function () { reg.update(); }, 30 * 60 * 1000);
+        })
+        .catch(function (err) {
+          console.warn('SW registration failed:', err);
+        });
     });
   }
 })();
