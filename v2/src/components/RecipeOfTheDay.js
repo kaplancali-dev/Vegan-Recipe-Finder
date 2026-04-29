@@ -124,11 +124,15 @@ function renderROTD() {
   }
 
   const haveStr = haveNames.length
-    ? `<strong>You have:</strong> ${haveNames.slice(0, 6).map(n => ingWithSwap(n, false)).join(', ')}${haveNames.length > 6 ? ` +${haveNames.length - 6} more` : ''}`
+    ? `<strong>You have:</strong> ${haveNames.map(n => ingWithSwap(n, false)).join(', ')}`
     : '';
   const needStr = needNames.length
-    ? `<strong>You need:</strong> ${needNames.slice(0, 5).map(n => ingWithSwap(n, true)).join(', ')}${needNames.length > 5 ? ` +${needNames.length - 5} more` : ''}`
+    ? `<strong>You need:</strong> ${needNames.map(n => ingWithSwap(n, true)).join(', ')}`
     : '';
+
+  // Category tags
+  const cats = r.cats || [];
+  const catChips = cats.map(c => `<span class="rotd-cat">${escHTML(c)}</span>`).join('');
 
   let cookLabel = '☐ I Made This';
   if (lastCook) {
@@ -155,6 +159,7 @@ function renderROTD() {
           <div>${nut.fib ?? '—'}g <span>fiber</span></div>
         </div>
         ${haveStr || needStr ? `<div class="rotd-ings">${haveStr}${haveStr && needStr ? '<br>' : ''}${needStr}</div>` : ''}
+        ${catChips ? `<div class="rotd-cats">${catChips}</div>` : ''}
         <div class="rotd-actions">
           ${r.url ? `<a href="#" class="btn-sm btn-link" data-recipe-url="${escHTML(r.url)}" data-recipe-title="${escHTML(r.title)}" data-recipe-site="${escHTML(r.site || '')}">📖 View Instructions</a>` : ''}
           <button class="btn-sm btn-shop make-btn${isQueued ? ' on' : ''}" data-make-id="${r.id}">${isQueued ? '✓ My Queue' : '📌 My Queue'}</button>

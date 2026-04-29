@@ -827,7 +827,6 @@ input, select, textarea {
   overflow: hidden;
   cursor: pointer;
   transition: transform var(--transition), box-shadow var(--transition);
-  max-height: 280px;
 }
 
 .rotd-card:hover {
@@ -905,6 +904,21 @@ input, select, textarea {
 .rotd-hint-gf { font-size: 0.68rem; font-style: normal; color: #9b59b6; }
 .rotd-hint-sf { font-size: 0.68rem; font-style: normal; color: #558b2f; }
 .rotd-hint-sub { font-size: 0.68rem; font-style: normal; color: #e67e22; }
+
+.rotd-cats {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+
+.rotd-cat {
+  font-size: 0.65rem;
+  padding: 2px 8px;
+  border-radius: 10px;
+  background: var(--bg2);
+  color: var(--ink-soft);
+  font-weight: 500;
+}
 
 .rotd-match {
   font-size: 0.72rem;
