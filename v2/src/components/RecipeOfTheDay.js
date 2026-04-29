@@ -31,20 +31,30 @@ function hashDate(str) {
   return Math.abs(h);
 }
 
+/** Categories considered desserts — skip for ROTD */
+const DESSERT_CATS = new Set([
+  'Dessert', 'Baking', 'Snack', 'Breakfast', 'Smoothie',
+]);
+
 /**
  * Pick today's recipe. Deterministic: same date → same recipe.
- * Only picks from recipes that have an image.
+ * Filters: has image, ≥20g protein, not a dessert, ≥5 ingredients (colorful).
  * @param {Array} recipes
  * @returns {Object|null}
  */
 function pickROTD(recipes) {
-  const withImg = recipes.filter(r => r.img);
-  if (!withImg.length) return null;
+  const candidates = recipes.filter(r =>
+    r.img &&
+    r.nut && r.nut.pro >= 20 &&
+    r.ing && r.ing.length >= 5 &&
+    !r.cats?.some(c => DESSERT_CATS.has(c))
+  );
+  if (!candidates.length) return null;
 
   const today = new Date();
   const dateStr = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
-  const idx = hashDate(dateStr) % withImg.length;
-  return withImg[idx];
+  const idx = hashDate(dateStr) % candidates.length;
+  return candidates[idx];
 }
 
 /** @type {Object|null} Today's recipe (raw) */
