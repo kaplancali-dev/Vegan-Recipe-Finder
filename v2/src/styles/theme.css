@@ -393,7 +393,8 @@ input, select, textarea {
 
 @media (prefers-reduced-motion: reduce) {
   #filterToggle,
-  #readyFilterToggle {
+  #readyFilterToggle,
+  .results-meta strong {
     animation: none;
     font-weight: 700;
   }
@@ -758,6 +759,13 @@ input, select, textarea {
 }
 .results-meta strong {
   font-weight: 700;
+  display: inline-block;
+  animation: pulse-bold 2.4s ease-in-out infinite;
+}
+
+@keyframes pulse-bold {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.55; transform: scale(0.97); }
 }
 
 /* ── Recipe Cards ────────────────────────────────────────────── */
