@@ -884,6 +884,38 @@ export const INGREDIENT_BENEFITS = {
     evidence: 'Systematic review, Molecules 2019'
   },
 
+  'vegetable oil': {
+    benefits: [
+      'Neutral flavor suited to high-heat cooking',
+      'Source of vitamin E and essential fatty acids'
+    ],
+    evidence: 'Review, Journal of Food Science and Technology 2015'
+  },
+
+  'toasted sesame oil': {
+    benefits: [
+      'Rich in sesamol and sesamin antioxidants',
+      'May help lower blood pressure and inflammation'
+    ],
+    evidence: 'Clinical trial, Yale Journal of Biology and Medicine 2006'
+  },
+
+  'sunflower oil': {
+    benefits: [
+      'High in vitamin E for skin and immune health',
+      'Good source of linoleic acid (omega-6)'
+    ],
+    evidence: 'Review, Journal of the American Oil Chemists Society 2017'
+  },
+
+  'grapeseed oil': {
+    benefits: [
+      'Rich in proanthocyanidin antioxidants',
+      'High smoke point suited to sautéing and frying'
+    ],
+    evidence: 'Review, Nutrition and Metabolic Insights 2016'
+  },
+
   // ═══════════════════════════════════════════════════════════════
   // OTHER / SPECIALTY ITEMS
   // ═══════════════════════════════════════════════════════════════

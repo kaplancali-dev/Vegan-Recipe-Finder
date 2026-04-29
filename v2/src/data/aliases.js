@@ -241,8 +241,11 @@ export const INGREDIENT_SUBS = {
 
   // ── Oils (gaps) ──
   'sesame oil': ['toasted sesame oil','peanut oil','neutral oil'],
+  'toasted sesame oil': ['sesame oil','peanut oil'],
   'avocado oil': ['olive oil','coconut oil','vegetable oil','grapeseed oil'],
   'vegetable oil': ['canola oil','grapeseed oil','sunflower oil','avocado oil','neutral oil'],
+  'sunflower oil': ['vegetable oil','grapeseed oil','canola oil','avocado oil'],
+  'grapeseed oil': ['sunflower oil','vegetable oil','avocado oil','canola oil'],
 
   // ── Tahini / Pastes ──
   // tahini — no substitutes, unique flavor
@@ -359,7 +362,7 @@ export const QA_ITEMS = [
   {cat:'🍋 Fruits',             items:['lemon','lime','banana','berries (any)','cranberries','cherries','mango','apple','oranges','pineapple','peaches','pears','kiwi','papaya','pomegranate','plantain','figs','grapes','watermelon','coconut','dates','raisins']},
   {cat:'🥜 Nuts & Seeds',       items:['nut butter (any)','cashews','almonds','walnuts','pecans','brazil nuts','macadamia nuts','hazelnuts','pistachio','peanuts','sesame seeds','pine nuts','tahini','hemp seeds','chia seeds','flax seeds','pumpkin seeds','sunflower seeds','protein powder']},
   {cat:'🥛 Plant-Based Dairy',  items:['almond milk','soy milk','rice milk','hemp milk','macadamia milk','pistachio milk','oat milk','cashew milk','vegan yogurt','vegan cream cheese','vegan parmesan']},
-  {cat:'🫒 Oils & Fats',         items:['olive oil','coconut oil','avocado oil','sesame oil','chili oil','vegan butter']},
+  {cat:'🫒 Oils & Fats',         items:['olive oil','coconut oil','avocado oil','sesame oil','chili oil','vegan butter','vegetable oil','toasted sesame oil','sunflower oil','grapeseed oil']},
   {cat:'🥫 Canned & Jarred',    items:['canned tomatoes (any)','tomato sauce','tomato paste','vegetable broth','coconut milk','olives','artichoke hearts','roasted red peppers','sun-dried tomatoes','capers']},
   {cat:'🫙 Sauces & Condiments', items:['soy sauce / tamari / coconut aminos','miso paste','vegan mayo','ketchup','yellow mustard','dijon mustard','BBQ sauce','hoisin sauce','vegan worcestershire','tamarind paste','gochujang','sriracha / hot sauce','sambal oelek','curry paste','liquid smoke','vegan sour cream','nutritional yeast']},
   {cat:'🍯 Sweeteners & Vinegars', items:['maple syrup','natural sweetener (any)','agave nectar','coconut sugar','date syrup','molasses','coconut nectar','allulose','stevia / monk fruit','apple cider vinegar','rice vinegar','balsamic vinegar','white vinegar','red wine vinegar','white wine vinegar','sherry vinegar']},
