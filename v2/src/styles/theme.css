@@ -763,7 +763,6 @@ input, select, textarea {
   animation: pulse-bold 2.4s ease-in-out infinite;
 }
 .results-meta .count-label {
-  color: #1a7a6a;
   font-weight: 600;
   display: inline-block;
   animation: pulse-bold 2.4s ease-in-out infinite;
@@ -2288,9 +2287,6 @@ input, select, textarea {
 
 [data-theme="dark"] .results-meta {
   color: #c4a0f0;
-}
-[data-theme="dark"] .results-meta .count-label {
-  color: #5ce0c8;
 }
 
 [data-theme="dark"] .ing-benefits {
