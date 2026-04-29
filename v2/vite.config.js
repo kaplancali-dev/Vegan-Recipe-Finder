@@ -9,7 +9,6 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: {
-          recipes: ['./src/data/recipes.json'],
           supabase: ['@supabase/supabase-js'],
         },
       },

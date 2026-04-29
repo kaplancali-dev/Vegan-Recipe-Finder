@@ -10,18 +10,13 @@ import { loadState, get, set, subscribe } from './state/store.js';
 import { sbClient, onStatusChange, onAuthChange, logError } from './services/sync.js';
 import { showToast } from './utils/toast.js';
 import { $, $$ } from './utils/dom.js';
-import recipes from './data/recipes.json';
-import { initBrowse } from './components/Browse.js';
-import { initPantry } from './components/Pantry.js';
-import { initRecipeDetail, openDetail } from './components/RecipeDetail.js';
-import { initShopping } from './components/Shopping.js';
-import { initFavorites } from './components/Favorites.js';
-import { initReadyToCook } from './components/ReadyToCook.js';
-import { initWantToMake } from './components/WantToMake.js';
 import { initSyncPanel } from './components/SyncPanel.js';
 import { initOnboarding } from './components/Onboarding.js';
 import { submitFeedback } from './services/feedback.js';
 import { openRecipeLink } from './utils/safe-link.js';
+
+/* ── Lazy-load recipes (non-blocking — lets the shell paint first) ── */
+const recipesReady = import('./data/recipes.json').then(m => m.default);
 
 /* ── Boot sequence ───────────────────────────────────────────── */
 
@@ -121,17 +116,47 @@ window.addEventListener('unhandledrejection', (e) => {
 });
 
 
-/* ── Initialize components ───────────────────────────────────── */
+/* ── Initialize shell components (no recipes needed) ─────────── */
 
-initRecipeDetail(recipes);
-initBrowse(recipes);
-initPantry(recipes);
-initShopping(recipes);
-initFavorites(recipes);
-initWantToMake(recipes);
-initReadyToCook(recipes);
 initSyncPanel();
 initOnboarding();
+
+/* ── Initialize recipe-dependent components (after async load) ── */
+
+recipesReady.then(async (recipes) => {
+  const { initRecipeDetail, openDetail } = await import('./components/RecipeDetail.js');
+  const { initBrowse } = await import('./components/Browse.js');
+  const { initPantry } = await import('./components/Pantry.js');
+  const { initShopping } = await import('./components/Shopping.js');
+  const { initFavorites } = await import('./components/Favorites.js');
+  const { initWantToMake } = await import('./components/WantToMake.js');
+  const { initReadyToCook } = await import('./components/ReadyToCook.js');
+
+  initRecipeDetail(recipes);
+  initBrowse(recipes);
+  initPantry(recipes);
+  initShopping(recipes);
+  initFavorites(recipes);
+  initWantToMake(recipes);
+  initReadyToCook(recipes);
+
+  /* ── Deep-link: open shared recipe from #r=ID or ?r=ID ────── */
+  const hashMatch = window.location.hash.match(/^#r=(\d+)/);
+  const queryId = new URLSearchParams(window.location.search).get('r');
+  const deepLinkId = hashMatch ? hashMatch[1] : queryId;
+  if (deepLinkId) {
+    const rid = Number(deepLinkId);
+    if (recipes.find(r => r.id === rid)) {
+      setTimeout(() => openDetail(rid), 300);
+    }
+    window.history.replaceState({}, '', window.location.pathname);
+  }
+
+  /* ── Expose for debugging ────────────────────────────────────── */
+  if (import.meta.env.DEV) {
+    window.__harvest = { recipes, showTab, showToast };
+  }
+});
 
 
 /* ── Safe recipe link handler ────────────────────────────────── */
@@ -149,19 +174,6 @@ document.addEventListener('click', (e) => {
   );
 });
 
-/* ── Deep-link: open shared recipe from #r=ID or ?r=ID ────── */
-
-const hashMatch = window.location.hash.match(/^#r=(\d+)/);
-const queryId = new URLSearchParams(window.location.search).get('r');
-const deepLinkId = hashMatch ? hashMatch[1] : queryId;
-if (deepLinkId) {
-  const rid = Number(deepLinkId);
-  if (recipes.find(r => r.id === rid)) {
-    setTimeout(() => openDetail(rid), 300);
-  }
-  // Clean URL without reloading
-  window.history.replaceState({}, '', window.location.pathname);
-}
 
 /* ── Responsive search placeholders ────────────────────────── */
 
@@ -392,8 +404,3 @@ showTab(TAB_MAP[savedTab] ? savedTab : 'browse');
 
 /* ── Service worker cleanup is handled by /sw-cleanup.js ─────── */
 
-/* ── Expose for debugging ────────────────────────────────────── */
-
-if (import.meta.env.DEV) {
-  window.__harvest = { recipes, showTab, showToast };
-}
