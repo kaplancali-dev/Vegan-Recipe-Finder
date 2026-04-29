@@ -901,9 +901,10 @@ input, select, textarea {
 
 .rotd-ings strong { color: var(--green); font-weight: 600; }
 .rotd-ing-gf { color: #7b2fbe; }
-.rotd-ing-gf em { font-size: 0.68rem; font-style: normal; color: #9b59b6; }
 .rotd-ing-sf { color: #2e7d32; }
-.rotd-ing-sf em { font-size: 0.68rem; font-style: normal; color: #558b2f; }
+.rotd-hint-gf { font-size: 0.68rem; font-style: normal; color: #9b59b6; }
+.rotd-hint-sf { font-size: 0.68rem; font-style: normal; color: #558b2f; }
+.rotd-hint-sub { font-size: 0.68rem; font-style: normal; color: #e67e22; }
 
 .rotd-match {
   font-size: 0.72rem;

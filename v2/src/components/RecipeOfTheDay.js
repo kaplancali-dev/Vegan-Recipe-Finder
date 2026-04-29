@@ -10,6 +10,7 @@ import { getRef } from '../state/store.js';
 import { findRecipes } from '../services/matching.js';
 import { escHTML, decodeHTML } from '../utils/text.js';
 import { gfSwap, sugarSwap } from './RecipeCard.js';
+import { findSubstitute } from '../utils/substitutions.js';
 import { openDetail } from './RecipeDetail.js';
 import { toggleFavorite } from '../actions/favorites.js';
 import { handleShareClick } from '../actions/share.js';
@@ -101,24 +102,32 @@ function renderROTD() {
   const nut = r.nut || {};
   const matchInfo = ings.length > 0 ? `<span class="rotd-match">${scored.pct}% match</span>` : '';
 
-  // Compact ingredient summary with GF/sugar swap hints
+  // Compact ingredient summary with all swap hints (GF, sugar, general subs)
   const haveNames = scored.haveNames || [];
   const needNames = scored.needNames || [];
+  const allUserIngs = [...ings, ...staples];
 
-  function ingWithSwap(name) {
+  function ingWithSwap(name, isNeed) {
     const display = escHTML(decodeHTML(name));
     const gf = gfSwap(name);
     const sf = sugarSwap(name);
-    if (gf) return `<span class="rotd-ing-gf">${display} <em>(GF: ${escHTML(gf)})</em></span>`;
-    if (sf) return `<span class="rotd-ing-sf">${display} <em>(Swap: ${escHTML(sf)})</em></span>`;
+    let hints = '';
+    if (gf) hints += ` <em class="rotd-hint-gf">(GF: ${escHTML(gf)})</em>`;
+    if (sf) hints += ` <em class="rotd-hint-sf">(Swap: ${escHTML(sf)})</em>`;
+    // General substitution hint for missing ingredients
+    if (isNeed && allUserIngs.length) {
+      const sub = findSubstitute(name, allUserIngs);
+      if (sub) hints += ` <em class="rotd-hint-sub">(💡 try ${escHTML(sub)})</em>`;
+    }
+    if (hints) return `<span class="${gf ? 'rotd-ing-gf' : sf ? 'rotd-ing-sf' : ''}">${display}${hints}</span>`;
     return display;
   }
 
   const haveStr = haveNames.length
-    ? `<strong>You have:</strong> ${haveNames.slice(0, 6).map(ingWithSwap).join(', ')}${haveNames.length > 6 ? ` +${haveNames.length - 6} more` : ''}`
+    ? `<strong>You have:</strong> ${haveNames.slice(0, 6).map(n => ingWithSwap(n, false)).join(', ')}${haveNames.length > 6 ? ` +${haveNames.length - 6} more` : ''}`
     : '';
   const needStr = needNames.length
-    ? `<strong>You need:</strong> ${needNames.slice(0, 5).map(ingWithSwap).join(', ')}${needNames.length > 5 ? ` +${needNames.length - 5} more` : ''}`
+    ? `<strong>You need:</strong> ${needNames.slice(0, 5).map(n => ingWithSwap(n, true)).join(', ')}${needNames.length > 5 ? ` +${needNames.length - 5} more` : ''}`
     : '';
 
   let cookLabel = '☐ I Made This';
