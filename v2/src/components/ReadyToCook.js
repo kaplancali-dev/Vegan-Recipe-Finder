@@ -285,7 +285,7 @@ function renderReadyList() {
   const metaEl = $('#canMakeMeta');
   if (metaEl) {
     metaEl.innerHTML = ready.length > 0
-      ? `<strong>${ready.length}</strong> recipe${ready.length !== 1 ? 's' : ''}`
+      ? `<strong>${ready.length}</strong> <span class="count-label">recipe${ready.length !== 1 ? 's' : ''}</span>`
       : '';
   }
 
