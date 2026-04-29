@@ -44,7 +44,7 @@ function pickROTD(recipes) {
   const candidates = recipes.filter(r =>
     r.img &&
     r.nut && r.nut.pro >= 20 &&
-    r.ing && r.ing.length >= 7 && r.ing.length <= 15 &&
+    r.ing && r.ing.length >= 9 && r.ing.length <= 15 &&
     r.time && r.time <= 90 &&
     !r.cats?.some(c => DESSERT_CATS.has(c))
   );
