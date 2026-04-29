@@ -51,7 +51,7 @@ function pickROTD(recipes) {
   if (!candidates.length) return null;
 
   const today = new Date();
-  const dateStr = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
+  const dateStr = `harvest-${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
   const idx = hashDate(dateStr) % candidates.length;
   return candidates[idx];
 }
