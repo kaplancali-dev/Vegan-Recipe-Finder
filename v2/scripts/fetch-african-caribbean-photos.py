@@ -25,7 +25,7 @@ except ImportError:
 
 # ═══════════════════════════════════════════════════════════════════
 # PASTE YOUR SUPABASE SERVICE ROLE KEY HERE ↓
-SUPABASE_SERVICE_KEY = ''
+SUPABASE_SERVICE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpobmNnZGJoZ2tlaXliZGJ6c3FsIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NjYyNzcyNywiZXhwIjoyMDkyMjAzNzI3fQ.PW58eQ6vioix4tuRvNKzc4R5kW2flZKL4i3_9bGrfhc'
 # ═══════════════════════════════════════════════════════════════════
 
 SUPABASE_URL = 'https://zhncgdbhgkeiybdbzsql.supabase.co'
@@ -169,10 +169,17 @@ def main():
         url = r.get('url', '')
         filename = f"{rid}.jpg"
 
-        # Skip if already has a Supabase image
+        # Skip only if image actually exists in Supabase (HEAD check)
         if r.get('img') and 'supabase.co' in r.get('img', ''):
-            print(f"[{i}/{len(recipes)}] {rid} {title} — already has image ✓")
-            continue
+            try:
+                head = requests.head(r['img'], timeout=10)
+                if head.status_code == 200:
+                    print(f"[{i}/{len(recipes)}] {rid} {title} — verified in Supabase ✓")
+                    continue
+                else:
+                    print(f"[{i}/{len(recipes)}] {rid} {title} — URL set but file missing (404), fetching...")
+            except Exception:
+                print(f"[{i}/{len(recipes)}] {rid} {title} — couldn't verify, fetching...")
 
         print(f"[{i}/{len(recipes)}] {rid} {title}")
         img_data = None

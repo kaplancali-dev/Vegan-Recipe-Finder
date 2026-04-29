@@ -25,6 +25,13 @@ import { openRecipeLink } from './utils/safe-link.js';
 
 /* ── Boot sequence ───────────────────────────────────────────── */
 
+/* Swap search placeholders on small screens */
+if (window.innerWidth < 520) {
+  $$('[data-ph-short]').forEach(el => {
+    el.placeholder = el.dataset.phShort;
+  });
+}
+
 loadState();
 
 /* ── Tab system ──────────────────────────────────────────────── */
