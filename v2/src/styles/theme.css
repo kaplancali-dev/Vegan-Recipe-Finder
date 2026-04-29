@@ -817,42 +817,95 @@ input, select, textarea {
   margin-bottom: 6px;
 }
 
-.rotd-spotlight .r-card {
+/* ROTD uses a custom horizontal layout — not the standard .r-card */
+.rotd-card {
+  display: flex;
+  background: var(--card);
   border: 2px solid var(--green);
-  border-left-width: 2px;
+  border-radius: var(--radius);
   box-shadow: 0 2px 12px rgba(46,125,50,0.10);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform var(--transition), box-shadow var(--transition);
 }
 
-.rotd-spotlight .r-card:hover {
+.rotd-card:hover {
+  transform: translateY(-2px);
   box-shadow: 0 4px 16px rgba(46,125,50,0.16);
 }
 
-.rotd-spotlight .hero-wrap {
-  aspect-ratio: 3 / 1;
-  max-height: 180px;
+.rotd-img {
+  flex: 0 0 220px;
+  min-height: 180px;
+  background: var(--bg2);
+  overflow: hidden;
 }
 
-.rotd-spotlight .hero-wrap img {
-  object-position: center 30%;
+.rotd-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
-/* Tighter card internals for ROTD */
-.rotd-spotlight .card-body { padding: 10px 12px 8px; }
-.rotd-spotlight .r-title { font-size: 0.95rem; }
-.rotd-spotlight .r-site { font-size: 0.75rem; }
-.rotd-spotlight .r-meta { font-size: 0.78rem; gap: 8px; margin: 2px 0 4px; }
-.rotd-spotlight .nut-row { padding: 4px 0; gap: 0; }
-.rotd-spotlight .nut-val { font-size: 0.82rem; }
-.rotd-spotlight .nut-lbl { font-size: 0.65rem; }
-.rotd-spotlight .nut-est { font-size: 0.62rem; }
-.rotd-spotlight .chip-label-sm { font-size: 0.68rem; margin-bottom: 2px; }
-.rotd-spotlight .chips { gap: 4px; }
-.rotd-spotlight .chips span { font-size: 0.72rem; padding: 2px 6px; }
-.rotd-spotlight .r-actions { gap: 4px; margin-top: 6px; padding-top: 6px; }
-.rotd-spotlight .r-actions .btn-sm { font-size: 0.72rem; padding: 3px 8px; }
-.rotd-spotlight .r-actions .btn-link { font-size: 0.72rem; padding: 3px 8px; }
-.rotd-spotlight .bar-wrap { margin: 2px 0 4px; }
-.rotd-spotlight .match-pill { font-size: 0.72rem; padding: 1px 6px; }
+.rotd-body {
+  flex: 1;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.rotd-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.25;
+}
+
+.rotd-site {
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.rotd-meta {
+  display: flex;
+  gap: 10px;
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  flex-wrap: wrap;
+}
+
+.rotd-nut {
+  display: flex;
+  gap: 12px;
+  font-size: 0.78rem;
+  color: var(--ink);
+  font-weight: 600;
+  flex-wrap: wrap;
+}
+
+.rotd-nut span { font-weight: 400; color: var(--muted); font-size: 0.68rem; }
+
+.rotd-actions {
+  display: flex;
+  gap: 6px;
+  margin-top: auto;
+  padding-top: 6px;
+  flex-wrap: wrap;
+}
+
+.rotd-actions .btn-sm {
+  font-size: 0.74rem;
+  padding: 4px 10px;
+}
+
+/* Stack on narrow screens */
+@media (max-width: 520px) {
+  .rotd-card { flex-direction: column; }
+  .rotd-img { flex: none; height: 140px; }
+}
 
 /* ── Recipe Card (vertical layout — matches v1) ─────────────── */
 .r-card {

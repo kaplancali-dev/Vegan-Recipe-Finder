@@ -2,13 +2,13 @@
  * Recipe of the Day — deterministic daily spotlight.
  *
  * Uses the current date as a seed to pick one recipe per day.
- * Only picks recipes that have a hero image for visual impact.
- * The same recipe is shown to all users on the same day.
+ * Custom horizontal card layout: image left, info right.
+ * Only picks high-protein savory recipes with colorful ingredients.
  */
 
 import { getRef } from '../state/store.js';
 import { findRecipes } from '../services/matching.js';
-import { renderCard } from './RecipeCard.js';
+import { escHTML } from '../utils/text.js';
 import { openDetail } from './RecipeDetail.js';
 import { toggleFavorite } from '../actions/favorites.js';
 import { handleShareClick } from '../actions/share.js';
@@ -20,8 +20,6 @@ import { $ } from '../utils/dom.js';
 
 /**
  * Simple hash from a date string → stable integer.
- * @param {string} str
- * @returns {number}
  */
 function hashDate(str) {
   let h = 0;
@@ -38,9 +36,7 @@ const DESSERT_CATS = new Set([
 
 /**
  * Pick today's recipe. Deterministic: same date → same recipe.
- * Filters: has image, ≥20g protein, not a dessert, ≥5 ingredients (colorful).
- * @param {Array} recipes
- * @returns {Object|null}
+ * Filters: has image, ≥20g protein, not a dessert, ≥7 ingredients.
  */
 function pickROTD(recipes) {
   const candidates = recipes.filter(r =>
@@ -57,25 +53,16 @@ function pickROTD(recipes) {
   return candidates[idx];
 }
 
-/** @type {Object|null} Today's recipe (raw) */
 let _rotdRecipe = null;
-
-/** @type {Array} Full recipes list */
 let _recipes = [];
 
-/**
- * Initialize Recipe of the Day.
- * @param {Array} recipes
- */
 export function initROTD(recipes) {
   _recipes = recipes;
   _rotdRecipe = pickROTD(recipes);
-
   if (!_rotdRecipe) return;
 
   renderROTD();
 
-  // Re-render when user state changes (favorites, pantry, etc.)
   subscribe('ingredients', renderROTD);
   subscribe('staples', renderROTD);
   subscribe('favorites', renderROTD);
@@ -83,69 +70,85 @@ export function initROTD(recipes) {
   subscribe('cookHistory', renderROTD);
 }
 
-/**
- * Render (or re-render) the ROTD spotlight card.
- */
 function renderROTD() {
   const container = $('#rotdSpotlight');
   if (!container || !_rotdRecipe) return;
 
-  // Score the recipe against user's pantry
+  const r = _rotdRecipe;
   const ings = getRef('ingredients');
   const staples = getRef('staples');
   const favs = new Set(getRef('favorites'));
   const makeIds = getRef('makelist');
-  const cookHistory = getRef('cookHistory');
+  const cookHistory = getRef('cookHistory') || [];
 
-  // Run matching to get scored version
+  // Score against pantry
   const results = findRecipes({
-    recipes: [_rotdRecipe],
+    recipes: [r],
     ingredients: ings,
     staples,
     selectedCats: [],
     allergies: new Set(),
   });
+  const scored = results[0] || { ...r, pct: 0, haveNames: [], needNames: r.ing || [] };
 
-  const scored = results[0] || {
-    ..._rotdRecipe,
-    pct: 0,
-    haveNames: [],
-    needNames: _rotdRecipe.ing || [],
-  };
+  const isFav = favs.has(r.id);
+  const isQueued = makeIds.includes(r.id);
+  const cooked = cookHistory.filter(h => h.id === r.id);
+  const lastCook = cooked.length ? cooked[cooked.length - 1] : null;
 
-  const cookedDates = (cookHistory || []).filter(h => h.id === _rotdRecipe.id);
+  const nut = r.nut || {};
+  const matchInfo = ings.length > 0 ? `<span>${scored.pct}% match</span>` : '';
 
-  const cardHTML = renderCard(scored, {
-    showMatch: ings.length > 0,
-    isFavorite: favs.has(_rotdRecipe.id),
-    isOnMakeList: makeIds.includes(_rotdRecipe.id),
-    cookedDates,
-    userIngs: [...ings, ...staples],
-  });
+  let cookLabel = '☐ I Made This';
+  if (lastCook) {
+    const d = new Date(typeof lastCook === 'string' ? lastCook : lastCook.date)
+      .toLocaleDateString(undefined, { month: 'numeric', day: 'numeric' });
+    const stars = (typeof lastCook === 'object' && lastCook.rating) ? ' ' + '★'.repeat(lastCook.rating) : '';
+    cookLabel = `✅ Made ${d}${stars}`;
+  }
 
   container.innerHTML = `
     <div class="rotd-label">🌟 Recipe of the Day</div>
-    ${cardHTML}
+    <div class="rotd-card" data-recipe-id="${r.id}">
+      <div class="rotd-img">
+        <img loading="lazy" decoding="async" src="${escHTML(r.img)}" alt="${escHTML(r.title)}">
+      </div>
+      <div class="rotd-body">
+        <div class="rotd-title">${escHTML(r.title)}</div>
+        <div class="rotd-site">${escHTML(r.site || '')}</div>
+        <div class="rotd-meta">
+          ${r.time ? `<span>⏱ ${r.time} min</span>` : ''}
+          ${r.servings ? `<span>👤 ${r.servings} srv</span>` : ''}
+          <span>🥘 ${r.ing.length} ingredients</span>
+          ${matchInfo}
+        </div>
+        <div class="rotd-nut">
+          <div>${nut.cal ?? '—'} <span>cal</span></div>
+          <div>${nut.pro ?? '—'}g <span>protein</span></div>
+          <div>${nut.carb ?? '—'}g <span>carbs</span></div>
+          <div>${nut.fat ?? '—'}g <span>fat</span></div>
+          <div>${nut.fib ?? '—'}g <span>fiber</span></div>
+        </div>
+        <div class="rotd-actions">
+          ${r.url ? `<a href="#" class="btn-sm btn-link" data-recipe-url="${escHTML(r.url)}" data-recipe-title="${escHTML(r.title)}" data-recipe-site="${escHTML(r.site || '')}">📖 View</a>` : ''}
+          <button class="btn-sm btn-shop make-btn${isQueued ? ' on' : ''}" data-make-id="${r.id}">${isQueued ? '✓ Queued' : '📌 Queue'}</button>
+          <button class="btn-sm btn-fav fav-btn${isFav ? ' on' : ''}" data-fav-id="${r.id}">${isFav ? '❤️' : '🤍'}</button>
+          <button class="btn-sm btn-cook cook-btn" data-cook-id="${r.id}">${cookLabel}</button>
+          <button class="btn-sm btn-share share-btn" data-share-id="${r.id}" data-share-title="${escHTML(r.title)}" data-share-url="${escHTML(r.url || '')}">📤</button>
+        </div>
+      </div>
+    </div>
   `;
   container.hidden = false;
 
-  // Wire up event delegation (same as Browse)
+  // Event delegation
   container.onclick = (e) => {
-    // External links
     if (e.target.closest('[data-recipe-url]')) return;
-
-    // Share
     if (handleShareClick(e)) return;
 
-    // Favorite
     const favBtn = e.target.closest('.fav-btn');
-    if (favBtn) {
-      e.stopPropagation();
-      toggleFavorite(Number(favBtn.dataset.favId));
-      return;
-    }
+    if (favBtn) { e.stopPropagation(); toggleFavorite(Number(favBtn.dataset.favId)); return; }
 
-    // My Queue
     const makeBtn = e.target.closest('.make-btn');
     if (makeBtn) {
       e.stopPropagation();
@@ -163,18 +166,10 @@ function renderROTD() {
       return;
     }
 
-    // Cook
     const cookBtn = e.target.closest('.cook-btn');
-    if (cookBtn) {
-      e.stopPropagation();
-      handleCook(Number(cookBtn.dataset.cookId));
-      return;
-    }
+    if (cookBtn) { e.stopPropagation(); handleCook(Number(cookBtn.dataset.cookId)); return; }
 
-    // Card click → detail
-    const card = e.target.closest('.r-card');
-    if (card) {
-      openDetail(Number(card.dataset.recipeId));
-    }
+    const card = e.target.closest('.rotd-card');
+    if (card) openDetail(Number(card.dataset.recipeId));
   };
 }
