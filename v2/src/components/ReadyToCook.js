@@ -281,6 +281,14 @@ function renderReadyList() {
     badge.textContent = ready.length > 0 ? String(ready.length) : '';
   }
 
+  // Update results-meta count (same style as Browse)
+  const metaEl = $('#canMakeMeta');
+  if (metaEl) {
+    metaEl.innerHTML = ready.length > 0
+      ? `<strong>${ready.length}</strong> recipe${ready.length !== 1 ? 's' : ''}`
+      : '';
+  }
+
   if (!ready.length) {
     container.innerHTML = '';
     if (emptyEl) {

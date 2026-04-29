@@ -750,10 +750,14 @@ input, select, textarea {
 }
 
 .results-meta {
-  font-size: 0.82rem;
-  color: var(--muted);
+  font-size: 0.85rem;
+  color: #5b2d8e;
   padding: 0;
   white-space: nowrap;
+  font-weight: 400;
+}
+.results-meta strong {
+  font-weight: 700;
 }
 
 /* ── Recipe Cards ────────────────────────────────────────────── */
@@ -2265,6 +2269,10 @@ input, select, textarea {
   display: flex;
   flex-direction: column;
   gap: 3px;
+}
+
+[data-theme="dark"] .results-meta {
+  color: #c4a0f0;
 }
 
 [data-theme="dark"] .ing-benefits {

@@ -200,7 +200,7 @@ function _runRender() {
   // Render count
   const meta = $('#resultsMeta');
   if (meta) {
-    meta.textContent = `${results.length} recipe${results.length !== 1 ? 's' : ''}`;
+    meta.innerHTML = `<strong>${results.length}</strong> recipe${results.length !== 1 ? 's' : ''}`;
   }
 
   // Render active filter tags

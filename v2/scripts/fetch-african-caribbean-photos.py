@@ -153,10 +153,10 @@ def main():
     with open(RECIPES_PATH) as f:
         all_recipes = json.load(f)
 
-    recipes = [r for r in all_recipes if 8097 <= r['id'] <= 8151]
+    recipes = [r for r in all_recipes if 8097 <= r['id'] <= 8190]
     print(f"\n{'='*60}")
     print(f"  HARVEST Photo Pipeline — African/Caribbean/Ethiopian")
-    print(f"  Recipes: {len(recipes)} (IDs 8097–8151)")
+    print(f"  Recipes: {len(recipes)} (IDs 8097–8190)")
     print(f"  Supabase: {'ready' if SUPABASE_SERVICE_KEY else 'local only'}")
     print(f"{'='*60}\n")
 
