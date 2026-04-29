@@ -31,6 +31,7 @@ export const V1_CATEGORIES = [
   { label: 'Mediterranean',     icon: '🫒' },
   { label: 'Middle Eastern',    icon: '🧆' },
   { label: 'Southern',          icon: '🌽' },
+  { label: 'African & Caribbean', icon: '🌍' },
 
   // ── Lifestyle & Diet ──
   { label: 'High-Protein',      icon: '🏋️' },
