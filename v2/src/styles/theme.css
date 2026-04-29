@@ -48,7 +48,7 @@
   --transition: 0.18s ease;
   --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro", system-ui, sans-serif;
   --font-serif: Georgia, "Iowan Old Style", "Times New Roman", serif;
-  --tab-bar-h: 44px;  /* height of sticky tab-bar, for stacking filter-bar below */
+  --tab-bar-h: 48px;  /* height of sticky tab-bar, for stacking filter-bar below */
   --safe-bottom: env(safe-area-inset-bottom, 0px);
   --hover: rgba(45, 122, 79, 0.08);
 }
