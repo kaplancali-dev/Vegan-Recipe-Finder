@@ -836,6 +836,24 @@ input, select, textarea {
   object-position: center 30%;
 }
 
+/* Tighter card internals for ROTD */
+.rotd-spotlight .card-body { padding: 10px 12px 8px; }
+.rotd-spotlight .r-title { font-size: 0.95rem; }
+.rotd-spotlight .r-site { font-size: 0.75rem; }
+.rotd-spotlight .r-meta { font-size: 0.78rem; gap: 8px; margin: 2px 0 4px; }
+.rotd-spotlight .nut-row { padding: 4px 0; gap: 0; }
+.rotd-spotlight .nut-val { font-size: 0.82rem; }
+.rotd-spotlight .nut-lbl { font-size: 0.65rem; }
+.rotd-spotlight .nut-est { font-size: 0.62rem; }
+.rotd-spotlight .chip-label-sm { font-size: 0.68rem; margin-bottom: 2px; }
+.rotd-spotlight .chips { gap: 4px; }
+.rotd-spotlight .chips span { font-size: 0.72rem; padding: 2px 6px; }
+.rotd-spotlight .r-actions { gap: 4px; margin-top: 6px; padding-top: 6px; }
+.rotd-spotlight .r-actions .btn-sm { font-size: 0.72rem; padding: 3px 8px; }
+.rotd-spotlight .r-actions .btn-link { font-size: 0.72rem; padding: 3px 8px; }
+.rotd-spotlight .bar-wrap { margin: 2px 0 4px; }
+.rotd-spotlight .match-pill { font-size: 0.72rem; padding: 1px 6px; }
+
 /* ── Recipe Card (vertical layout — matches v1) ─────────────── */
 .r-card {
   background: var(--card);
