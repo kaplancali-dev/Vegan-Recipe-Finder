@@ -129,7 +129,7 @@ function renderROTD() {
     const sf = sugarSwap(name);
     let hints = '';
     if (gf) hints += ` <em class="rotd-hint-gf">(GF: ${escHTML(gf)})</em>`;
-    if (sf) hints += ` <em class="rotd-hint-sf">(Swap: ${escHTML(sf)})</em>`;
+    if (sf) hints += ` <em class="rotd-hint-sf">(Swap: ${escHTML(sf)} to significantly reduce sugar calories/carbs)</em>`;
     // General substitution hint for missing ingredients
     if (isNeed && allUserIngs.length) {
       const sub = findSubstitute(name, allUserIngs);

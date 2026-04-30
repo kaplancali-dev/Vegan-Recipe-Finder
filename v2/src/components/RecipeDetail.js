@@ -53,7 +53,7 @@ function _swapTags(name) {
   const gf = _gfSwap(name);
   const sf = _sugarSwap(name);
   const gfTag = gf ? `<span class="gf-swap">GF: ${escHTML(gf)}</span>` : '';
-  const sfTag = sf ? `<span class="sf-swap">Swap: ${escHTML(sf)} to cut sugar calories</span>` : '';
+  const sfTag = sf ? `<span class="sf-swap">Swap: ${escHTML(sf)} to significantly reduce sugar calories/carbs</span>` : '';
   return gfTag + sfTag;
 }
 
