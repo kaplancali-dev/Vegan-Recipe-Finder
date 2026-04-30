@@ -160,21 +160,25 @@ export function renderCard(result, opts = {}) {
     ? `<div class="sub-hint">💡 Try ${escHTML(subHint)} instead of ${escHTML(needNames[0])}</div>`
     : '';
 
-  // Action buttons
-  const favLabel = isFavorite ? '❤️' : '🤍';
-  const makeLabel = isOnMakeList ? '✓ Queue' : '📌 Queue';
+  // Action buttons — icon stacked above label
+  const favIcon = isFavorite ? '❤️' : '🤍';
+  const favText = isFavorite ? 'Saved' : 'Favorite';
+  const makeIcon = isOnMakeList ? '✓' : '📌';
+  const makeText = 'Queue';
 
   // Cook button label — show date and star rating if available
   const lastEntry = cookedDates.length ? cookedDates[cookedDates.length - 1] : null;
-  let cookLabel;
+  let cookIcon, cookText;
   if (lastEntry) {
     const dateStr = new Date(typeof lastEntry === 'string' ? lastEntry : lastEntry.date)
       .toLocaleDateString(undefined, { month: 'numeric', day: 'numeric' });
     const rating = typeof lastEntry === 'object' ? lastEntry.rating : 0;
     const stars = rating ? ' ' + '★'.repeat(rating) : '';
-    cookLabel = `✅ ${dateStr}${stars}`;
+    cookIcon = '✅';
+    cookText = `${dateStr}${stars}`;
   } else {
-    cookLabel = '☐ Made';
+    cookIcon = '☐';
+    cookText = 'Made';
   }
 
   return `
@@ -202,10 +206,10 @@ export function renderCard(result, opts = {}) {
         ${subHtml}
         <div class="r-actions">
           ${r.url ? `<a href="#" class="btn-sm btn-link" data-recipe-url="${escHTML(r.url)}" data-recipe-title="${escHTML(r.title)}" data-recipe-site="${escHTML(r.site || '')}">📖 View Instructions</a>` : ''}
-          <button class="btn-sm btn-shop make-btn${isOnMakeList ? ' on' : ''}" data-make-id="${r.id}">${makeLabel}</button>
-          <button class="btn-sm btn-fav fav-btn${isFavorite ? ' on' : ''}" data-fav-id="${r.id}" aria-label="Toggle favorite">${favLabel}</button>
-          <button class="btn-sm btn-cook cook-btn" data-cook-id="${r.id}">${cookLabel}</button>
-          <button class="btn-sm btn-share share-btn" data-share-id="${r.id}" data-share-title="${escHTML(r.title)}" data-share-url="${escHTML(r.url || '')}">📤 Share</button>
+          <button class="btn-sm btn-shop btn-stacked make-btn${isOnMakeList ? ' on' : ''}" data-make-id="${r.id}"><span class="btn-icon">${makeIcon}</span><span class="btn-lbl">${makeText}</span></button>
+          <button class="btn-sm btn-fav btn-stacked fav-btn${isFavorite ? ' on' : ''}" data-fav-id="${r.id}" aria-label="Toggle favorite"><span class="btn-icon">${favIcon}</span><span class="btn-lbl">${favText}</span></button>
+          <button class="btn-sm btn-cook btn-stacked cook-btn" data-cook-id="${r.id}"><span class="btn-icon">${cookIcon}</span><span class="btn-lbl">${cookText}</span></button>
+          <button class="btn-sm btn-share btn-stacked share-btn" data-share-id="${r.id}" data-share-title="${escHTML(r.title)}" data-share-url="${escHTML(r.url || '')}"><span class="btn-icon">📤</span><span class="btn-lbl">Share</span></button>
         </div>
       </div>
     </article>
