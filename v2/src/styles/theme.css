@@ -835,7 +835,8 @@ input, select, textarea {
 }
 
 .rotd-img {
-  flex: 0 0 240px;
+  flex: 0 0 38%;
+  max-width: 380px;
   background: var(--bg2);
   overflow: hidden;
 }
