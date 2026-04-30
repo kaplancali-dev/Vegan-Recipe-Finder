@@ -34,8 +34,13 @@ function _gfSwap(name) {
   return _gfLookup.get(norm(name)) || null;
 }
 
+/** Natural sweeteners that should never get a sugar swap hint */
+const _sugarSafe = new Set(['maple syrup', 'maple', 'date syrup', 'molasses', 'coconut nectar'].map(norm));
+
 function _sugarSwap(name) {
   const n = norm(name);
+  if (_sugarSafe.has(n)) return null;
+  for (const safe of _sugarSafe) { if (n.includes(safe)) return null; }
   const exact = _sugarLookup.get(n);
   if (exact) return exact;
   for (const [key, val] of _sugarLookup) {

@@ -83,8 +83,14 @@ for (const [key, val] of Object.entries(SUGAR_SWAPS)) {
  * @param {string} name - Ingredient name (raw)
  * @returns {string|null}
  */
+/** Natural sweeteners that should never get a sugar swap hint */
+const _sugarSafe = new Set(['maple syrup', 'maple', 'date syrup', 'molasses', 'coconut nectar'].map(norm));
+
 export function sugarSwap(name) {
   const n = norm(name);
+  // Skip natural sweeteners we want to keep as-is
+  if (_sugarSafe.has(n)) return null;
+  for (const safe of _sugarSafe) { if (n.includes(safe)) return null; }
   // Exact match
   const exact = _sugarLookup.get(n);
   if (exact) return exact;
