@@ -1120,36 +1120,12 @@ input, select, textarea {
 }
 
 .r-actions .btn-sm {
-  min-height: 34px;
+  font-size: 0.72rem;
+  padding: 3px 8px;
 }
 
 .r-actions .btn-link {
   flex: 1 1 100%;
-}
-
-/* Stacked icon-above-label action buttons */
-.btn-stacked {
-  flex: 1 1 0;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 6px 2px 4px;
-  min-width: 0;
-  gap: 1px;
-}
-
-.btn-stacked .btn-icon {
-  font-size: 1.1rem;
-  line-height: 1;
-}
-
-.btn-stacked .btn-lbl {
-  font-size: 0.58rem;
-  line-height: 1.1;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 100%;
 }
 
 
