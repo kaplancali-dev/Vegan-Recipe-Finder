@@ -1251,6 +1251,9 @@ input, select, textarea {
   color: var(--ink);
   line-height: 1.35;
 }
+.refresh-tip[hidden] {
+  display: none !important;
+}
 
 [data-theme="dark"] .refresh-tip {
   background: linear-gradient(135deg, rgba(76,175,80,0.1), rgba(129,199,132,0.06));
