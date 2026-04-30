@@ -499,6 +499,10 @@ function showQAPopup(category, anchorEl) {
   if (grid) {
     grid.style.position = 'relative';
     grid.appendChild(popup);
+    // Scroll the popup into view so the user sees the items they tapped
+    requestAnimationFrame(() => {
+      popup.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
   }
 
   // Close on outside click (with tracked cleanup)
