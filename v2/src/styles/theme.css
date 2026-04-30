@@ -1257,6 +1257,12 @@ input, select, textarea {
   border-color: rgba(76,175,80,0.2);
 }
 
+.tip-desktop { display: none; }
+@media (min-width: 521px) {
+  .tip-mobile  { display: none; }
+  .tip-desktop { display: inline; }
+}
+
 .refresh-tip-close {
   background: none;
   border: none;
