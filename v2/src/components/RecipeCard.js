@@ -29,13 +29,30 @@ for (const [key, val] of Object.entries(GF_SWAPS)) {
   _gfLookup.set(norm(key), val);
 }
 
+/** Ingredients that are already gluten-free — never show a GF swap */
+const _gfSafe = new Set([
+  'almond flour', 'oat flour', 'rice flour', 'coconut flour',
+  'chickpea flour', 'buckwheat flour', 'cassava flour', 'tapioca flour',
+  'brown rice flour', 'gluten-free flour', 'gf flour',
+  'cornstarch', 'arrowroot powder', 'arrowroot starch', 'potato starch',
+  'tapioca starch', 'corn tortilla', 'rice noodles', 'rice paper',
+  'rice paper wrappers', 'tamari', 'coconut aminos',
+  'gf breadcrumbs', 'gf panko', 'gf pasta',
+].map(norm));
+
 /**
  * Find a GF swap for an ingredient name, if one exists.
+ * Skips ingredients that are already gluten-free.
  * @param {string} name - Ingredient name (raw)
  * @returns {string|null}
  */
 export function gfSwap(name) {
   const n = norm(name);
+  // Skip already-GF ingredients
+  if (_gfSafe.has(n)) return null;
+  for (const safe of _gfSafe) {
+    if (n.includes(safe)) return null;
+  }
   // Exact match
   const exact = _gfLookup.get(n);
   if (exact) return exact;

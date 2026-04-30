@@ -307,7 +307,7 @@ export const SUGAR_SWAPS = {
   'white sugar':'allulose or monk fruit','granulated sugar':'allulose or monk fruit',
   'brown sugar':'allulose brown sugar or coconut sugar','coconut sugar':'allulose or monk fruit',
   'powdered sugar':'powdered monk fruit','icing sugar':'powdered monk fruit',
-  'maple syrup':'zero-sugar maple syrup (allulose/monk fruit)','agave':'allulose syrup',
+  'agave':'allulose syrup',
   'agave nectar':'allulose syrup','agave syrup':'allulose syrup',
   'turbinado sugar':'allulose or monk fruit','raw sugar':'allulose or monk fruit',
   'demerara sugar':'allulose or monk fruit','muscovado sugar':'allulose or monk fruit',
