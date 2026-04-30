@@ -207,8 +207,8 @@ export function renderCard(result, opts = {}) {
         <div class="r-actions">
           ${r.url ? `<a href="#" class="btn-sm btn-link" data-recipe-url="${escHTML(r.url)}" data-recipe-title="${escHTML(r.title)}" data-recipe-site="${escHTML(r.site || '')}">📖 View Instructions</a>` : ''}
           <button class="btn-sm btn-shop btn-stacked make-btn${isOnMakeList ? ' on' : ''}" data-make-id="${r.id}"><span class="btn-icon">${makeIcon}</span><span class="btn-lbl">${makeText}</span></button>
-          <button class="btn-sm btn-fav btn-stacked fav-btn${isFavorite ? ' on' : ''}" data-fav-id="${r.id}" aria-label="Toggle favorite"><span class="btn-icon">${favIcon}</span><span class="btn-lbl">${favText}</span></button>
           <button class="btn-sm btn-cook btn-stacked cook-btn" data-cook-id="${r.id}"><span class="btn-icon">${cookIcon}</span><span class="btn-lbl">${cookText}</span></button>
+          <button class="btn-sm btn-fav btn-stacked fav-btn${isFavorite ? ' on' : ''}" data-fav-id="${r.id}" aria-label="Toggle favorite"><span class="btn-icon">${favIcon}</span><span class="btn-lbl">${favText}</span></button>
           <button class="btn-sm btn-share btn-stacked share-btn" data-share-id="${r.id}" data-share-title="${escHTML(r.title)}" data-share-url="${escHTML(r.url || '')}"><span class="btn-icon">📤</span><span class="btn-lbl">Share</span></button>
         </div>
       </div>
