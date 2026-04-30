@@ -1117,15 +1117,13 @@ input, select, textarea {
   gap: 5px;
   margin-top: 8px;
   flex-wrap: wrap;
+  justify-content: flex-start;
 }
 
 .r-actions .btn-sm {
   font-size: 0.72rem;
   padding: 3px 8px;
-}
-
-.r-actions .btn-link {
-  flex: 0 1 auto;
+  flex: 0 0 auto;
 }
 
 
