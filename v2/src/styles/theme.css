@@ -920,6 +920,35 @@ input, select, textarea {
   font-weight: 500;
 }
 
+.rotd-benefits {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 8px;
+  align-items: center;
+}
+
+.rotd-benefits-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--green);
+  margin-right: 2px;
+}
+
+.rotd-benefit {
+  font-size: 0.66rem;
+  padding: 2px 8px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, rgba(46,125,50,0.08), rgba(129,199,132,0.12));
+  color: #2e7d32;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+[data-theme="dark"] .rotd-benefit {
+  background: linear-gradient(135deg, rgba(76,175,80,0.15), rgba(129,199,132,0.10));
+  color: #81c784;
+}
+
 .rotd-match {
   font-size: 0.72rem;
   font-weight: 700;
@@ -998,13 +1027,7 @@ input, select, textarea {
   display: block;
 }
 
-.hero-wrap::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: linear-gradient(180deg, transparent 65%, var(--card));
-}
+/* hero-wrap overlay removed — clean, full-brightness images */
 
 /* Card inner structure */
 .r-top {
