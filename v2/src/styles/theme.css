@@ -998,15 +998,22 @@ input, select, textarea {
   color: #81c784;
 }
 
+.rotd-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+}
+
 .rotd-match {
-  font-size: 0.72rem;
+  flex-shrink: 0;
+  font-size: 0.82rem;
   font-weight: 700;
   color: #fff;
   background: var(--green);
-  padding: 1px 7px;
+  padding: 3px 10px;
   border-radius: 10px;
-  vertical-align: middle;
-  margin-left: 6px;
+  white-space: nowrap;
 }
 
 .rotd-actions {

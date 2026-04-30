@@ -184,7 +184,10 @@ function renderROTD() {
         <img loading="lazy" decoding="async" src="${escHTML(r.img)}" alt="${escHTML(r.title)}">
       </div>
       <div class="rotd-body">
-        <div class="rotd-title">${escHTML(r.title)} ${matchInfo}</div>
+        <div class="rotd-top">
+          <div class="rotd-title">${escHTML(r.title)}</div>
+          ${matchInfo}
+        </div>
         <div class="rotd-site">${escHTML(r.site || '')} · ${r.time ? `${r.time} min` : ''} · ${r.servings ? `${r.servings} servings` : ''} · ${r.ing.length} ingredients</div>
         <div class="rotd-nut">
           <div>${nut.cal ?? '—'} <span>cal</span></div>
