@@ -132,32 +132,34 @@ initOnboarding();
 /* ── Initialize recipe-dependent components (after async load) ── */
 
 recipesReady.then(async (recipes) => {
-  // Critical path: RecipeDetail (needed for any card click) + Browse (default tab) + ROTD
-  const [{ initRecipeDetail, openDetail }, { initBrowse }, { initROTD }] = await Promise.all([
+  const [
+    { initRecipeDetail, openDetail },
+    { initBrowse },
+    { initROTD },
+    { initPantry },
+    { initShopping },
+    { initFavorites },
+    { initWantToMake },
+    { initReadyToCook },
+  ] = await Promise.all([
     import('./components/RecipeDetail.js'),
     import('./components/Browse.js'),
     import('./components/RecipeOfTheDay.js'),
+    import('./components/Pantry.js'),
+    import('./components/Shopping.js'),
+    import('./components/Favorites.js'),
+    import('./components/WantToMake.js'),
+    import('./components/ReadyToCook.js'),
   ]);
 
   initRecipeDetail(recipes);
   initBrowse(recipes);
   initROTD(recipes);
-
-  // Deferred: other tabs load after first paint
-  requestIdleCallback(async () => {
-    const [{ initPantry }, { initShopping }, { initFavorites }, { initWantToMake }, { initReadyToCook }] = await Promise.all([
-      import('./components/Pantry.js'),
-      import('./components/Shopping.js'),
-      import('./components/Favorites.js'),
-      import('./components/WantToMake.js'),
-      import('./components/ReadyToCook.js'),
-    ]);
-    initPantry(recipes);
-    initShopping(recipes);
-    initFavorites(recipes);
-    initWantToMake(recipes);
-    initReadyToCook(recipes);
-  }, { timeout: 200 });
+  initPantry(recipes);
+  initShopping(recipes);
+  initFavorites(recipes);
+  initWantToMake(recipes);
+  initReadyToCook(recipes);
 
   /* ── Deep-link: open shared recipe from #r=ID or ?r=ID ────── */
   const hashMatch = window.location.hash.match(/^#r=(\d+)/);
