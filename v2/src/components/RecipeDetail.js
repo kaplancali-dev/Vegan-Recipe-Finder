@@ -49,11 +49,12 @@ function _sugarSwap(name) {
  * @param {string} name - Raw ingredient name
  * @returns {string} HTML string (may be empty)
  */
-function _swapTags(name) {
+function _swapTags(name, displayName) {
   const gf = _gfSwap(name);
   const sf = _sugarSwap(name);
+  const display = displayName || stripMeasure(decodeHTML(name));
   const gfTag = gf ? `<span class="gf-swap">GF: ${escHTML(gf)}</span>` : '';
-  const sfTag = sf ? `<span class="sf-swap">Swap: ${escHTML(sf)} to significantly reduce sugar calories/carbs</span>` : '';
+  const sfTag = sf ? `<span class="sf-swap">${escHTML(display)} swap: ${escHTML(sf)} to significantly reduce calories/carbs</span>` : '';
   return gfTag + sfTag;
 }
 
@@ -124,7 +125,7 @@ function _renderNewVisitorDetail(recipe) {
 
   const ingHtml = ingList.map(ing => {
     const displayName = stripMeasure(decodeHTML(ing));
-    const swaps = _swapTags(ing);
+    const swaps = _swapTags(ing, displayName);
     const extraCls = _gfSwap(ing) ? ' c-gluten' : _sugarSwap(ing) ? ' c-sugar' : '';
     return `<li class="detail-ing visitor-ing${extraCls}">${escHTML(displayName)}${swaps}</li>`;
   }).join('');
@@ -240,7 +241,7 @@ function _renderFullDetail(recipe, ings, staples) {
           <span class="ing-evidence">${escHTML(info.evidence)}</span>
         </div>`
       : '';
-    const swaps = _swapTags(i.name);
+    const swaps = _swapTags(i.name, displayName);
     const extraCls = _gfSwap(i.name) ? ' c-gluten' : _sugarSwap(i.name) ? ' c-sugar' : '';
     const tappable = info && info.benefits.length ? ' has-benefits' : '';
     return `<li class="detail-ing ${i.have ? 'have' : 'missing'}${tappable}${extraCls}">

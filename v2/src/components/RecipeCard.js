@@ -90,7 +90,7 @@ function ingChip(name, cls) {
   const gf = gfSwap(name);
   const sf = sugarSwap(name);
   const gfTag = gf ? `<span class="gf-swap">GF: ${escHTML(gf)}</span>` : '';
-  const sfTag = sf ? `<span class="sf-swap">Swap: ${escHTML(sf)} to significantly reduce sugar calories/carbs</span>` : '';
+  const sfTag = sf ? `<span class="sf-swap">${escHTML(display)} swap: ${escHTML(sf)} to significantly reduce calories/carbs</span>` : '';
 
   const extraCls = gf ? ' c-gluten' : sf ? ' c-sugar' : '';
   return `<span class="${cls}${extraCls}">${escHTML(display)}${gfTag}${sfTag}</span>`;
