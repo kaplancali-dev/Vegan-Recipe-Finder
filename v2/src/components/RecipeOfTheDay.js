@@ -116,7 +116,7 @@ function renderROTD() {
   const lastCook = cooked.length ? cooked[cooked.length - 1] : null;
 
   const nut = r.nut || {};
-  const matchInfo = ings.length > 0 ? `<span class="rotd-match">${scored.pct}% match</span>` : '';
+  const matchInfo = (ings.length > 0 || staples.length > 0) ? `<span class="rotd-match">${scored.pct}% match</span>` : '';
 
   // Compact ingredient summary with all swap hints (GF, sugar, general subs)
   const haveNames = scored.haveNames || [];
