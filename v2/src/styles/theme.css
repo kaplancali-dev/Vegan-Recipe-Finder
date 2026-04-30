@@ -949,6 +949,47 @@ input, select, textarea {
   color: #81c784;
 }
 
+/* ── Card-level category tags & health benefits ───────────── */
+
+.card-cats, .detail-cats {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}
+
+.card-cat {
+  font-size: 0.62rem;
+  padding: 2px 8px;
+  border-radius: 10px;
+  background: var(--bg2);
+  color: var(--ink-soft);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.card-benefits {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px 6px;
+  margin-top: 5px;
+}
+
+.card-benefit {
+  font-size: 0.6rem;
+  padding: 2px 7px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, rgba(46,125,50,0.08), rgba(129,199,132,0.12));
+  color: #2e7d32;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+[data-theme="dark"] .card-benefit {
+  background: linear-gradient(135deg, rgba(76,175,80,0.15), rgba(129,199,132,0.10));
+  color: #81c784;
+}
+
 .rotd-match {
   font-size: 0.72rem;
   font-weight: 700;

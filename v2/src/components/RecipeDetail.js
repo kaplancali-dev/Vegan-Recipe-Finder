@@ -5,7 +5,7 @@
  * action buttons (favorite, add missing to shopping list, view recipe).
  */
 
-import { escHTML, decodeHTML, norm } from '../utils/text.js';
+import { escHTML, decodeHTML, norm, stripMeasure } from '../utils/text.js';
 import { GF_SWAPS, SUGAR_SWAPS } from '../data/aliases.js';
 import { openRecipeLink } from '../utils/safe-link.js';
 import { get, set } from '../state/store.js';
@@ -123,7 +123,7 @@ function _renderNewVisitorDetail(recipe) {
   const nut = recipe.nut || {};
 
   const ingHtml = ingList.map(ing => {
-    const displayName = decodeHTML(ing);
+    const displayName = stripMeasure(decodeHTML(ing));
     const swaps = _swapTags(ing);
     const extraCls = _gfSwap(ing) ? ' c-gluten' : _sugarSwap(ing) ? ' c-sugar' : '';
     return `<li class="detail-ing visitor-ing${extraCls}">${escHTML(displayName)}${swaps}</li>`;
@@ -160,6 +160,7 @@ function _renderNewVisitorDetail(recipe) {
         ${recipe.time ? `<span>⏱ ${recipe.time} min</span>` : ''}
         ${recipe.servings ? `<span>🍽 ${recipe.servings} servings</span>` : ''}
       </div>
+      ${recipe.cats?.length ? `<div class="detail-cats">${recipe.cats.map(c => `<span class="card-cat">${escHTML(c)}</span>`).join('')}</div>` : ''}
     </div>
 
     ${recipe.url ? `<a href="#" class="visitor-cta" data-recipe-url="${escHTML(recipe.url)}" data-recipe-title="${escHTML(recipe.title)}" data-recipe-site="${escHTML(recipe.site || '')}">View full recipe</a>` : ''}
@@ -231,7 +232,7 @@ function _renderFullDetail(recipe, ings, staples) {
 
   // Ingredient list HTML (with tap-to-reveal health benefits)
   const ingHtml = ingList.map(i => {
-    const displayName = decodeHTML(i.name);
+    const displayName = stripMeasure(decodeHTML(i.name));
     const info = getIngredientBenefits(i.name);
     const benefitsHtml = info && info.benefits.length
       ? `<div class="ing-benefits" hidden>
@@ -270,6 +271,7 @@ function _renderFullDetail(recipe, ings, staples) {
         ${recipe.servings ? `<span>🍽 ${recipe.servings} servings</span>` : ''}
         <span>${haveCount}/${ingList.length} ingredients (${pct}%)</span>
       </div>
+      ${recipe.cats?.length ? `<div class="detail-cats">${recipe.cats.map(c => `<span class="card-cat">${escHTML(c)}</span>`).join('')}</div>` : ''}
     </div>
 
     <div class="detail-section">

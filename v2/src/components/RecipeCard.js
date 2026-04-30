@@ -6,10 +6,11 @@
  * and action buttons. Parent handles click events via delegation.
  */
 
-import { escHTML, decodeHTML, norm } from '../utils/text.js';
+import { escHTML, decodeHTML, norm, stripMeasure } from '../utils/text.js';
 
 import { findSubstitute } from '../utils/substitutions.js';
 import { GF_SWAPS, SUGAR_SWAPS } from '../data/aliases.js';
+import { getIngredientBenefits } from '../data/ingredient-benefits.js';
 
 /**
  * Return a CSS class for the match percentage tier.
@@ -35,7 +36,21 @@ for (const [key, val] of Object.entries(GF_SWAPS)) {
  * @returns {string|null}
  */
 export function gfSwap(name) {
-  return _gfLookup.get(norm(name)) || null;
+  const n = norm(name);
+  // Exact match
+  const exact = _gfLookup.get(n);
+  if (exact) return exact;
+  // Substring match — check if any GF keyword appears in the ingredient name
+  // Prefer longest match to get most specific swap (e.g. "penne pasta" over "pasta")
+  let bestMatch = null;
+  let bestLen = 0;
+  for (const [key, val] of _gfLookup) {
+    if (n.includes(key) && key.length > 3 && key.length > bestLen) {
+      bestMatch = val;
+      bestLen = key.length;
+    }
+  }
+  return bestMatch;
 }
 
 /* ── Pre-normalized sugar swap lookup ──────────────────────── */
@@ -72,7 +87,7 @@ export function sugarSwap(name) {
  * @param {string} cls - 'c-have' or 'c-need'
  */
 function ingChip(name, cls) {
-  const display = decodeHTML(name);
+  const display = stripMeasure(decodeHTML(name));
   const gf = gfSwap(name);
   const sf = sugarSwap(name);
   const gfTag = gf ? `<span class="gf-swap">GF: ${escHTML(gf)}</span>` : '';
@@ -121,6 +136,31 @@ export function renderCard(result, opts = {}) {
       <div class="nut-item"><span class="nut-val">${nut.fib ?? '—'}g</span><span class="nut-lbl">fiber</span></div>
       <span class="nut-est">est. per serving</span>
     </div>` : '';
+
+  // Category tags
+  const cats = r.cats || [];
+  const catChips = cats.length
+    ? `<div class="card-cats">${cats.map(c => `<span class="card-cat">${escHTML(c)}</span>`).join('')}</div>`
+    : '';
+
+  // Health benefits (top 3 unique from all ingredients)
+  const allIngs = r.ing || [];
+  const benefitSet = new Set();
+  const benefitItems = [];
+  for (const ing of allIngs) {
+    const info = getIngredientBenefits(ing);
+    if (info && info.benefits) {
+      for (const b of info.benefits) {
+        if (!benefitSet.has(b)) {
+          benefitSet.add(b);
+          benefitItems.push(b);
+        }
+      }
+    }
+  }
+  const benefitsHtml = benefitItems.length
+    ? `<div class="card-benefits">${benefitItems.slice(0, 3).map(b => `<span class="card-benefit">✦ ${escHTML(b)}</span>`).join('')}</div>`
+    : '';
 
   // Ingredient chips (have / need)
   const haveNames = r.haveNames || [];
@@ -176,6 +216,8 @@ export function renderCard(result, opts = {}) {
           <span>✅ ${haveNames.length}/${r.ing?.length ?? 0} ingredients</span>
         </div>
         ${nutRow}
+        ${catChips}
+        ${benefitsHtml}
         ${haveChips}
         ${needChips}
         ${subHtml}
