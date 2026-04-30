@@ -16,7 +16,15 @@ import { submitFeedback } from './services/feedback.js';
 import { openRecipeLink } from './utils/safe-link.js';
 
 /* ── Lazy-load recipes (non-blocking — lets the shell paint first) ── */
-const recipesReady = import('./data/recipes.json').then(m => m.default);
+const IMG_BASE = 'https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/';
+const recipesReady = import('./data/recipes.json').then(m => {
+  const recipes = m.default;
+  // Expand compact image URLs (~ prefix → full Supabase URL)
+  for (const r of recipes) {
+    if (r.img && r.img[0] === '~') r.img = IMG_BASE + r.img.slice(1);
+  }
+  return recipes;
+});
 
 /* ── Boot sequence ───────────────────────────────────────────── */
 
@@ -124,23 +132,32 @@ initOnboarding();
 /* ── Initialize recipe-dependent components (after async load) ── */
 
 recipesReady.then(async (recipes) => {
-  const { initRecipeDetail, openDetail } = await import('./components/RecipeDetail.js');
-  const { initBrowse } = await import('./components/Browse.js');
-  const { initPantry } = await import('./components/Pantry.js');
-  const { initShopping } = await import('./components/Shopping.js');
-  const { initFavorites } = await import('./components/Favorites.js');
-  const { initWantToMake } = await import('./components/WantToMake.js');
-  const { initReadyToCook } = await import('./components/ReadyToCook.js');
-  const { initROTD } = await import('./components/RecipeOfTheDay.js');
+  // Critical path: RecipeDetail (needed for any card click) + Browse (default tab) + ROTD
+  const [{ initRecipeDetail, openDetail }, { initBrowse }, { initROTD }] = await Promise.all([
+    import('./components/RecipeDetail.js'),
+    import('./components/Browse.js'),
+    import('./components/RecipeOfTheDay.js'),
+  ]);
 
   initRecipeDetail(recipes);
   initBrowse(recipes);
   initROTD(recipes);
-  initPantry(recipes);
-  initShopping(recipes);
-  initFavorites(recipes);
-  initWantToMake(recipes);
-  initReadyToCook(recipes);
+
+  // Deferred: other tabs load after first paint
+  requestIdleCallback(async () => {
+    const [{ initPantry }, { initShopping }, { initFavorites }, { initWantToMake }, { initReadyToCook }] = await Promise.all([
+      import('./components/Pantry.js'),
+      import('./components/Shopping.js'),
+      import('./components/Favorites.js'),
+      import('./components/WantToMake.js'),
+      import('./components/ReadyToCook.js'),
+    ]);
+    initPantry(recipes);
+    initShopping(recipes);
+    initFavorites(recipes);
+    initWantToMake(recipes);
+    initReadyToCook(recipes);
+  }, { timeout: 200 });
 
   /* ── Deep-link: open shared recipe from #r=ID or ?r=ID ────── */
   const hashMatch = window.location.hash.match(/^#r=(\d+)/);
