@@ -205,7 +205,7 @@ export function renderCard(result, opts = {}) {
           <button class="btn-sm btn-shop make-btn${isOnMakeList ? ' on' : ''}" data-make-id="${r.id}">${makeLabel}</button>
           <button class="btn-sm btn-fav fav-btn${isFavorite ? ' on' : ''}" data-fav-id="${r.id}" aria-label="Toggle favorite">${favLabel}</button>
           <button class="btn-sm btn-cook cook-btn" data-cook-id="${r.id}">${cookLabel}</button>
-          <button class="btn-sm btn-share share-btn" data-share-id="${r.id}" data-share-title="${escHTML(r.title)}" data-share-url="${escHTML(r.url || '')}">📤</button>
+          <button class="btn-sm btn-share share-btn" data-share-id="${r.id}" data-share-title="${escHTML(r.title)}" data-share-url="${escHTML(r.url || '')}">📤 Share</button>
         </div>
       </div>
     </article>
