@@ -60,6 +60,7 @@ export function initBrowse(recipes) {
   buildCategoryChips();
   buildAllergenFilterChips('#browseAllergenChips', renderResults);
   wireControls();
+  initRefreshTip();
   renderResults();
 
   // Re-render when ingredients or staples change
@@ -101,6 +102,21 @@ function buildCategoryChips() {
       chip.classList.add('on');
     }
     renderResults();
+  });
+}
+
+/**
+ * Show a one-time refresh tip banner. Dismissed permanently via localStorage.
+ */
+function initRefreshTip() {
+  const tip = $('#refreshTip');
+  const closeBtn = $('#refreshTipClose');
+  if (!tip || !closeBtn) return;
+  if (localStorage.getItem('h_refreshTipDismissed')) return;
+  tip.hidden = false;
+  closeBtn.addEventListener('click', () => {
+    tip.hidden = true;
+    localStorage.setItem('h_refreshTipDismissed', '1');
   });
 }
 

@@ -1125,7 +1125,7 @@ input, select, textarea {
 }
 
 .r-actions .btn-link {
-  flex: 1 1 100%;
+  flex: 0 1 auto;
 }
 
 
@@ -1234,6 +1234,37 @@ input, select, textarea {
 }
 
 /* ── Ingredient chips on card ────────────────────────────────── */
+/* ── Refresh tip banner ────────────────────────────────────── */
+.refresh-tip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  margin: 6px 0;
+  background: linear-gradient(135deg, rgba(46,125,50,0.07), rgba(129,199,132,0.12));
+  border: 1px solid rgba(46,125,50,0.18);
+  border-radius: 10px;
+  font-size: 0.78rem;
+  color: var(--ink);
+  line-height: 1.35;
+}
+
+[data-theme="dark"] .refresh-tip {
+  background: linear-gradient(135deg, rgba(76,175,80,0.1), rgba(129,199,132,0.06));
+  border-color: rgba(76,175,80,0.2);
+}
+
+.refresh-tip-close {
+  background: none;
+  border: none;
+  font-size: 1.1rem;
+  cursor: pointer;
+  color: var(--muted);
+  padding: 2px 6px;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
 .chip-label-sm {
   font-size: 0.69rem;
   font-weight: 700;
