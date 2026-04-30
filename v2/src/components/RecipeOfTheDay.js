@@ -8,9 +8,10 @@
 
 import { getRef } from '../state/store.js';
 import { findRecipes } from '../services/matching.js';
-import { escHTML, decodeHTML } from '../utils/text.js';
+import { escHTML, decodeHTML, stripMeasure } from '../utils/text.js';
 import { gfSwap, sugarSwap } from './RecipeCard.js';
 import { findSubstitute } from '../utils/substitutions.js';
+import { getIngredientBenefits } from '../data/ingredient-benefits.js';
 import { openDetail } from './RecipeDetail.js';
 import { toggleFavorite } from '../actions/favorites.js';
 import { handleShareClick } from '../actions/share.js';
@@ -36,19 +37,34 @@ const DESSERT_CATS = new Set([
   'Dessert', 'Baking', 'Snack', 'Breakfast', 'Smoothie',
 ]);
 
+/** Preferred creator sites — these tend to have professional photos */
+const PREFERRED_SITES = new Set([
+  'Lazy Cat Kitchen',
+  'Rainbow Plant Life',
+  'Pick Up Limes',
+  'Vegan Richa',
+  'Minimalist Baker',
+  'Loving It Vegan',
+]);
+
 /**
  * Pick today's recipe. Deterministic: same date → same recipe.
- * Filters: has image, ≥20g protein, not a dessert, ≥7 ingredients.
+ * Filters: has image, ≥20g protein, not a dessert, ≥10 ingredients.
+ * Prefers recipes from popular creators with great photos.
  */
 function pickROTD(recipes) {
-  const candidates = recipes.filter(r =>
+  const base = recipes.filter(r =>
     r.img &&
     r.nut && r.nut.pro >= 20 &&
-    r.ing && r.ing.length >= 9 && r.ing.length <= 15 &&
+    r.ing && r.ing.length >= 10 && r.ing.length <= 15 &&
     r.time && r.time <= 90 &&
     !r.cats?.some(c => DESSERT_CATS.has(c))
   );
-  if (!candidates.length) return null;
+  if (!base.length) return null;
+
+  // Prefer recipes from top creators; fall back to full pool if needed
+  const preferred = base.filter(r => r.site && PREFERRED_SITES.has(r.site));
+  const candidates = preferred.length >= 30 ? preferred : base;
 
   const today = new Date();
   const dateStr = `harvest-${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
@@ -108,7 +124,7 @@ function renderROTD() {
   const allUserIngs = [...ings, ...staples];
 
   function ingWithSwap(name, isNeed) {
-    const display = escHTML(decodeHTML(name));
+    const display = escHTML(stripMeasure(decodeHTML(name)));
     const gf = gfSwap(name);
     const sf = sugarSwap(name);
     let hints = '';
@@ -133,6 +149,25 @@ function renderROTD() {
   // Category tags
   const cats = r.cats || [];
   const catChips = cats.map(c => `<span class="rotd-cat">${escHTML(c)}</span>`).join('');
+
+  // Collect unique health benefits from all ingredients
+  const allIngs = [...(r.ing || [])];
+  const benefitSet = new Set();
+  const benefitItems = [];
+  for (const ing of allIngs) {
+    const info = getIngredientBenefits(ing);
+    if (info && info.benefits) {
+      for (const b of info.benefits) {
+        if (!benefitSet.has(b)) {
+          benefitSet.add(b);
+          benefitItems.push(b);
+        }
+      }
+    }
+  }
+  const benefitsHtml = benefitItems.length
+    ? benefitItems.slice(0, 5).map(b => `<span class="rotd-benefit">✦ ${escHTML(b)}</span>`).join('')
+    : '';
 
   let cookLabel = '☐ I Made This';
   if (lastCook) {
@@ -160,6 +195,7 @@ function renderROTD() {
         </div>
         ${haveStr || needStr ? `<div class="rotd-ings">${haveStr}${haveStr && needStr ? '<br>' : ''}${needStr}</div>` : ''}
         ${catChips ? `<div class="rotd-cats">${catChips}</div>` : ''}
+        ${benefitsHtml ? `<div class="rotd-benefits"><div class="rotd-benefits-label">🌿 Health Benefits</div>${benefitsHtml}</div>` : ''}
         <div class="rotd-actions">
           ${r.url ? `<a href="#" class="btn-sm btn-link" data-recipe-url="${escHTML(r.url)}" data-recipe-title="${escHTML(r.title)}" data-recipe-site="${escHTML(r.site || '')}">📖 View Instructions</a>` : ''}
           <button class="btn-sm btn-shop make-btn${isQueued ? ' on' : ''}" data-make-id="${r.id}">${isQueued ? '✓ My Queue' : '📌 My Queue'}</button>
