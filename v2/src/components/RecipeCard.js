@@ -10,7 +10,6 @@ import { escHTML, decodeHTML, norm, stripMeasure } from '../utils/text.js';
 
 import { findSubstitute } from '../utils/substitutions.js';
 import { GF_SWAPS, SUGAR_SWAPS } from '../data/aliases.js';
-import { getIngredientBenefits } from '../data/ingredient-benefits.js';
 
 /**
  * Return a CSS class for the match percentage tier.
@@ -143,25 +142,6 @@ export function renderCard(result, opts = {}) {
     ? `<div class="card-cats">${cats.map(c => `<span class="card-cat">${escHTML(c)}</span>`).join('')}</div>`
     : '';
 
-  // Health benefits (top 3 unique from all ingredients)
-  const allIngs = r.ing || [];
-  const benefitSet = new Set();
-  const benefitItems = [];
-  for (const ing of allIngs) {
-    const info = getIngredientBenefits(ing);
-    if (info && info.benefits) {
-      for (const b of info.benefits) {
-        if (!benefitSet.has(b)) {
-          benefitSet.add(b);
-          benefitItems.push(b);
-        }
-      }
-    }
-  }
-  const benefitsHtml = benefitItems.length
-    ? `<div class="card-benefits">${benefitItems.slice(0, 3).map(b => `<span class="card-benefit">✦ ${escHTML(b)}</span>`).join('')}</div>`
-    : '';
-
   // Ingredient chips (have / need)
   const haveNames = r.haveNames || [];
   const needNames = r.needNames || [];
@@ -217,7 +197,6 @@ export function renderCard(result, opts = {}) {
         </div>
         ${nutRow}
         ${catChips}
-        ${benefitsHtml}
         ${haveChips}
         ${needChips}
         ${subHtml}

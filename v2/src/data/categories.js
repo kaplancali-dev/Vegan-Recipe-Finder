@@ -5,7 +5,7 @@
 export const V1_CATEGORIES = [
   // ── Meal Type ──
   { label: 'Breakfast',          icon: '🧇' },
-  { label: 'Lunch / Dinner',    icon: '🍢', filter: 'Lunch|Dinner' },
+  { label: 'Lunch / Dinner',    icon: '🍢' },
   { label: 'Appetizers',        icon: '🥟' },
   { label: 'Drinks',            icon: '🥤' },
   { label: 'Desserts',          icon: '🍨' },
