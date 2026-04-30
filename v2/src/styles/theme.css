@@ -903,7 +903,10 @@ input, select, textarea {
   overflow: hidden;
 }
 
-.rotd-ings strong { color: var(--green); font-weight: 600; }
+.rotd-have { color: var(--green); }
+.rotd-have strong { font-weight: 600; }
+.rotd-need { color: #e65100; }
+.rotd-need strong { font-weight: 600; }
 .rotd-ing-gf { color: #7b2fbe; }
 .rotd-ing-sf { color: #2e7d32; }
 .rotd-hint-gf { font-size: 0.68rem; font-style: normal; color: #9b59b6; }

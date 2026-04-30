@@ -140,10 +140,10 @@ function renderROTD() {
   }
 
   const haveStr = haveNames.length
-    ? `<strong>You have:</strong> ${haveNames.map(n => ingWithSwap(n, false)).join(', ')}`
+    ? `<span class="rotd-have"><strong>You have:</strong> ${haveNames.map(n => ingWithSwap(n, false)).join(', ')}</span>`
     : '';
   const needStr = needNames.length
-    ? `<strong>You need:</strong> ${needNames.map(n => ingWithSwap(n, true)).join(', ')}`
+    ? `<span class="rotd-need"><strong>You need:</strong> ${needNames.map(n => ingWithSwap(n, true)).join(', ')}</span>`
     : '';
 
   // Category tags
