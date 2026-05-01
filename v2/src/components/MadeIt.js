@@ -28,6 +28,22 @@ export function initMadeIt(recipes) {
   const panel = $('#tab-madeit');
   if (panel) {
     panel.addEventListener('click', (e) => {
+      // Re-cook: update date to today
+      const recookBtn = e.target.closest('[data-recook-id]');
+      if (recookBtn) {
+        e.stopPropagation();
+        const id = Number(recookBtn.dataset.recookId);
+        const history = get('cookHistory');
+        const entry = history.find(h => h.id === id);
+        if (entry) {
+          entry.date = new Date().toISOString();
+          set('cookHistory', [...history]);
+          autoSync();
+          showToast('Updated to today!');
+        }
+        return;
+      }
+
       // Delete entry
       const delBtn = e.target.closest('[data-cook-delete]');
       if (delBtn) {
@@ -145,6 +161,7 @@ function renderMadeIt() {
       ${noteHtml}
       <span class="cook-stars cook-stars-editable">${stars}</span>
       <span class="cook-date">${date}</span>
+      <button class="cook-recook-btn" data-recook-id="${entry.id}" aria-label="Made again today" title="Made again today">🔄</button>
       <button class="cook-delete-btn" data-cook-delete="${entry.id}" aria-label="Remove">✕</button>
     </div>`;
   }).join('');

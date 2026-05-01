@@ -3286,12 +3286,12 @@ input, select, textarea {
   white-space: nowrap;
 }
 
-/* Made It tab: wider grid with notes column */
+/* Made It tab: wider grid with notes column + recook button */
 .cook-history-header.has-notes {
-  grid-template-columns: 40px 1fr 1fr auto auto 36px;
+  grid-template-columns: 40px 1fr 1fr 90px 100px 28px 28px;
 }
 #madeItHistory .cook-history-item {
-  grid-template-columns: 40px 1fr 1fr auto auto 36px;
+  grid-template-columns: 40px 1fr 1fr 90px 100px 28px 28px;
 }
 .cook-stars-editable .star-btn {
   cursor: pointer;
@@ -3313,15 +3313,32 @@ input, select, textarea {
 }
 @media (max-width: 520px) {
   .cook-history-header.has-notes {
-    grid-template-columns: 40px 1fr auto auto 28px;
+    grid-template-columns: 40px 1fr 80px 80px 24px 24px;
   }
   #madeItHistory .cook-history-item {
-    grid-template-columns: 40px 1fr auto auto 28px;
+    grid-template-columns: 40px 1fr 80px 80px 24px 24px;
   }
   .cook-note-preview,
   .cook-history-header.has-notes span:nth-child(3) {
     display: none;
   }
+}
+.cook-recook-btn {
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-size: 0.85rem;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: var(--radius-xs);
+  transition: color var(--transition), background var(--transition);
+  line-height: 1;
+  flex-shrink: 0;
+  text-align: center;
+}
+.cook-recook-btn:hover {
+  color: var(--green);
+  background: var(--green-soft);
 }
 .cook-delete-btn {
   background: none;
