@@ -3293,6 +3293,17 @@ input, select, textarea {
 #madeItHistory .cook-history-item {
   grid-template-columns: 40px 1fr 1fr auto auto 36px;
 }
+.cook-stars-editable .star-btn {
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+.cook-stars-editable .star-btn:hover {
+  transform: scale(1.3);
+}
+.cook-stars-editable .star-btn.on {
+  color: #f5a623;
+}
+
 .cook-note-preview {
   font-size: 0.78rem;
   color: var(--ink-soft);

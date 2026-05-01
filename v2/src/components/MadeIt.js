@@ -41,6 +41,23 @@ export function initMadeIt(recipes) {
         return;
       }
 
+      // Star rating click
+      const star = e.target.closest('.star-btn');
+      if (star) {
+        e.stopPropagation();
+        const id = Number(star.dataset.starId);
+        const newRating = Number(star.dataset.star);
+        const history = get('cookHistory');
+        const entry = history.find(h => h.id === id);
+        if (entry) {
+          entry.rating = newRating;
+          set('cookHistory', [...history]);
+          autoSync();
+          showToast(`Rated ${newRating} star${newRating !== 1 ? 's' : ''}`);
+        }
+        return;
+      }
+
       // Recipe link — open detail
       const link = e.target.closest('[data-recipe-id]');
       if (link) {
@@ -113,7 +130,10 @@ function renderMadeIt() {
     const date = new Date(entry.date).toLocaleDateString(undefined, {
       month: 'short', day: 'numeric', year: 'numeric'
     });
-    const rating = entry.rating ? '★'.repeat(entry.rating) + '☆'.repeat(5 - entry.rating) : '—';
+    const r = entry.rating || 0;
+    const stars = [1,2,3,4,5].map(n =>
+      `<span class="star-btn${n <= r ? ' on' : ''}" data-star="${n}" data-star-id="${entry.id}">${n <= r ? '★' : '☆'}</span>`
+    ).join('');
     const note = allNotes[entry.id] || '';
     const notePreview = note ? escHTML(note.length > 50 ? note.slice(0, 50) + '…' : note) : '';
     const noteHtml = notePreview
@@ -123,7 +143,7 @@ function renderMadeIt() {
       ${img ? `<img class="cook-history-img" src="${escHTML(img)}" alt="" loading="lazy">` : '<div class="cook-history-img cook-history-img-empty"></div>'}
       <a class="cook-history-link" data-recipe-id="${entry.id}">${title}</a>
       ${noteHtml}
-      <span class="cook-stars">${rating}</span>
+      <span class="cook-stars cook-stars-editable">${stars}</span>
       <span class="cook-date">${date}</span>
       <button class="cook-delete-btn" data-cook-delete="${entry.id}" aria-label="Remove">✕</button>
     </div>`;
