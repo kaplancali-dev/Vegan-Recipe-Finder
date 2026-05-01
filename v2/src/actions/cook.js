@@ -9,6 +9,7 @@ import { get, set } from '../state/store.js';
 import { autoSync } from '../services/sync.js';
 import { showToast } from '../utils/toast.js';
 import { showRating, showCookConfirm } from '../utils/rating.js';
+import { shareRecipe } from './share.js';
 
 /**
  * Handle a cook button tap for a given recipe ID.
@@ -17,6 +18,7 @@ import { showRating, showCookConfirm } from '../utils/rating.js';
  *
  * @param {number} id - Recipe ID
  * @param {Object} [opts]
+ * @param {string} [opts.title] - Recipe title (for share prompt)
  * @param {boolean} [opts.removeFromMakelist=false] - Also remove from makelist (Shopping tab)
  */
 export async function handleCook(id, opts = {}) {
@@ -57,8 +59,6 @@ export async function handleCook(id, opts = {}) {
   }
 
   autoSync();
-  const stars = rating ? ' ' + '★'.repeat(rating) : '';
-  showToast(`Saved to Cook History${stars}`);
 
   // Brief pause then ask "Would you make this again?"
   await new Promise(r => setTimeout(r, 400));
@@ -75,6 +75,35 @@ export async function handleCook(id, opts = {}) {
     set('cookHistory', fresh);
     autoSync();
   }
+
+  // Show share toast with 5-second auto-dismiss
+  _showShareToast(id, opts.title);
+}
+
+/* ── Share toast after cook ─────────────────────────────────── */
+
+function _showShareToast(id, title) {
+  const el = document.createElement('div');
+  el.className = 'cook-share-toast';
+  el.innerHTML = `
+    <span class="cook-share-text">Added to your cooking journal</span>
+    <button class="cook-share-btn">Share with a friend</button>
+  `;
+
+  el.querySelector('.cook-share-btn').addEventListener('click', () => {
+    shareRecipe(title || '', '', id);
+    el.remove();
+  });
+
+  document.body.appendChild(el);
+
+  // Auto-dismiss after 5 seconds
+  setTimeout(() => {
+    if (el.parentNode) {
+      el.classList.add('cook-share-toast-out');
+      setTimeout(() => el.remove(), 300);
+    }
+  }, 5000);
 }
 
 /* ── "Would you make this again?" modal ──────────────────────── */

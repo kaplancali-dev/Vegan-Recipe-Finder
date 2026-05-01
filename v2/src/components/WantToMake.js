@@ -135,7 +135,7 @@ function renderWantToMake() {
           </span>
           <div class="wm-row-actions">
             <button class="wm-icon-btn${isFav ? ' wm-fav-on' : ''}" data-wm-fav="${id}" title="${isFav ? 'Unfavorite' : 'Favorite'}">${isFav ? '❤️' : '🤍'}<span class="wm-btn-label">${isFav ? 'Saved' : 'Favorite'}</span></button>
-            <button class="wm-icon-btn${lastCook ? ' wm-cooked' : ''}" data-wm-cook="${id}" title="I Made This">${lastCook ? '✅' : '☐'}<span class="wm-btn-label">${lastCook ? 'Made It' : 'I Made This'}</span></button>
+            <button class="wm-icon-btn${lastCook ? ' wm-cooked' : ''}" data-wm-cook="${id}" data-wm-cook-title="${escHTML(title)}" title="I Made This">${lastCook ? '✅' : '☐'}<span class="wm-btn-label">${lastCook ? 'Made It' : 'I Made This'}</span></button>
             <button class="wm-icon-btn" data-wm-share="${id}" title="Share">📤<span class="wm-btn-label">Share</span></button>
             <button class="wm-icon-btn wm-shop-btn${inShop ? ' wm-in-shop' : ''}" data-wm-shop="${id}" title="${inShop ? 'In Shopping' : 'Send to Shopping'}">${inShop ? '✓🛒' : '🛒'}<span class="wm-btn-label">${inShop ? 'In Cart' : 'Shop'}</span></button>
             <button class="wm-icon-btn wm-remove-btn" data-wm-remove="${id}" title="Remove">×<span class="wm-btn-label">Remove</span></button>
@@ -291,7 +291,7 @@ function wireEvents() {
     const cookBtn = t.closest('[data-wm-cook]');
     if (cookBtn) {
       const id = Number(cookBtn.dataset.wmCook);
-      handleCook(id);
+      handleCook(id, { title: cookBtn.dataset.wmCookTitle });
       return;
     }
 

@@ -236,7 +236,7 @@ function renderROTD() {
     }
 
     const cookBtn = e.target.closest('.cook-btn');
-    if (cookBtn) { e.stopPropagation(); handleCook(Number(cookBtn.dataset.cookId)); return; }
+    if (cookBtn) { e.stopPropagation(); handleCook(Number(cookBtn.dataset.cookId), { title: cookBtn.dataset.cookTitle }); return; }
 
     const card = e.target.closest('.rotd-card');
     if (card) openDetail(Number(card.dataset.recipeId));

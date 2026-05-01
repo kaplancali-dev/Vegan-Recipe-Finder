@@ -244,7 +244,7 @@ function renderFavList() {
     const cookBtn = e.target.closest('.cook-btn');
     if (cookBtn) {
       e.stopPropagation();
-      handleCook(Number(cookBtn.dataset.cookId));
+      handleCook(Number(cookBtn.dataset.cookId), { title: cookBtn.dataset.cookTitle });
       return;
     }
 

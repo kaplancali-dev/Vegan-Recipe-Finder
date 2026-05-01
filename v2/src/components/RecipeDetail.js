@@ -171,7 +171,7 @@ function _wireActionButtons(recipe, missingIngs = []) {
 
   const cookBtn = document.getElementById('detailCookBtn');
   if (cookBtn) {
-    cookBtn.addEventListener('click', () => handleCook(id));
+    cookBtn.addEventListener('click', () => handleCook(id, { title: recipe.title }));
   }
 
   const shareBtn = document.getElementById('detailShareBtn');
