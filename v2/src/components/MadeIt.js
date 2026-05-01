@@ -28,20 +28,6 @@ export function initMadeIt(recipes) {
   const panel = $('#tab-madeit');
   if (panel) {
     panel.addEventListener('click', (e) => {
-      // Re-cook: update date to today
-      const recookBtn = e.target.closest('[data-recook-id]');
-      if (recookBtn) {
-        e.stopPropagation();
-        const id = Number(recookBtn.dataset.recookId);
-        const history = get('cookHistory');
-        set('cookHistory', history.map(h =>
-          h.id === id ? { ...h, date: new Date().toISOString() } : h
-        ));
-        autoSync();
-        showToast('Updated to today!');
-        return;
-      }
-
       // Delete entry
       const delBtn = e.target.closest('[data-cook-delete]');
       if (delBtn) {
@@ -106,12 +92,16 @@ function renderMadeIt() {
   if (statsEl) statsEl.hidden = false;
   if (journalCard) journalCard.hidden = false;
 
-  // Deduplicate: keep only the most recent entry per recipe
+  // Deduplicate: keep the earliest entry per recipe (first made),
+  // but preserve the latest rating if updated
   const seen = new Map();
   for (const entry of history) {
     const prev = seen.get(entry.id);
-    if (!prev || new Date(entry.date) > new Date(prev.date)) {
-      seen.set(entry.id, entry);
+    if (!prev) {
+      seen.set(entry.id, { ...entry });
+    } else {
+      if (new Date(entry.date) < new Date(prev.date)) prev.date = entry.date;
+      if (entry.rating) prev.rating = entry.rating;
     }
   }
   const unique = [...seen.values()]
@@ -156,7 +146,6 @@ function renderMadeIt() {
       ${noteHtml}
       <span class="cook-stars cook-stars-editable">${stars}</span>
       <span class="cook-date">${date}</span>
-      <button class="cook-recook-btn" data-recook-id="${entry.id}" aria-label="Update date to today" title="Update date to today">🔄</button>
       <button class="cook-delete-btn" data-cook-delete="${entry.id}" aria-label="Remove">✕</button>
     </div>`;
   }).join('');
