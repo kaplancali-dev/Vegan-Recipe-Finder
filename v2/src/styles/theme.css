@@ -3344,9 +3344,9 @@ input, select, textarea {
 /* ── Cook Share Toast ────────────────────────────────────────── */
 .cook-share-toast {
   position: fixed;
-  bottom: 80px;
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%, -50%);
   background: var(--green);
   color: #fff;
   border-radius: var(--radius);
