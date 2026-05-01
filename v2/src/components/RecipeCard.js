@@ -37,7 +37,8 @@ const _gfSafe = new Set([
   'cornstarch', 'arrowroot powder', 'arrowroot starch', 'potato starch',
   'tapioca starch', 'corn tortilla', 'rice noodles', 'rice paper',
   'rice paper wrappers', 'tamari', 'coconut aminos',
-  'gf breadcrumbs', 'gf panko', 'gf pasta',
+  'gf breadcrumbs', 'gf panko', 'gf pasta', 'gf bread', 'gluten-free bread',
+  'gf naan', 'gf pita', 'gf buns', 'gf tortillas', 'corn tortillas',
   'miso', 'white miso', 'red miso', 'yellow miso', 'light miso', 'miso paste',
 ].map(norm));
 

@@ -96,6 +96,98 @@ export function initRecipeDetail(recipes) {
   });
 }
 
+/** Check if a recipe is favorited */
+function _isFav(id) {
+  return new Set(get('favorites')).has(id);
+}
+
+/** Check if a recipe is in My Queue */
+function _isQueued(id) {
+  return (get('makelist') || []).includes(id);
+}
+
+/**
+ * Wire action buttons (Favorite, Queue, Cook, Share, Report)
+ * shared by both new-visitor and full detail views.
+ */
+function _wireActionButtons(recipe, missingIngs = []) {
+  const id = recipe.id;
+  const isFav = _isFav(id);
+
+  const favBtn = document.getElementById('detailFavBtn');
+  if (favBtn) {
+    favBtn.addEventListener('click', () => {
+      toggleFavorite(id);
+      const recheckFav = () => {
+        const nowFav = _isFav(id);
+        favBtn.textContent = nowFav ? '❤️ Favorited' : '🤍 Favorite';
+      };
+      if (isFav) {
+        recheckFav();
+      } else {
+        const mo = new MutationObserver(() => {
+          if (!document.querySelector('.collection-picker-overlay')) {
+            recheckFav();
+            mo.disconnect();
+          }
+        });
+        mo.observe(document.body, { childList: true, subtree: true });
+        setTimeout(() => { mo.disconnect(); recheckFav(); }, 10000);
+      }
+    });
+  }
+
+  const shopBtn = document.getElementById('detailShopBtn');
+  if (shopBtn && missingIngs.length) {
+    shopBtn.addEventListener('click', () => {
+      const currentShop = get('shopList');
+      const shopSet = new Set(currentShop);
+      missingIngs.forEach(ing => shopSet.add(ing));
+      set('shopList', [...shopSet]);
+      autoSync();
+      shopBtn.textContent = '✓ Added!';
+      shopBtn.disabled = true;
+    });
+  }
+
+  const queueBtn = document.getElementById('detailQueueBtn');
+  if (queueBtn) {
+    queueBtn.addEventListener('click', () => {
+      const current = get('makelist') || [];
+      if (current.includes(id)) {
+        set('makelist', current.filter(i => i !== id));
+        queueBtn.textContent = '📌 My Queue';
+        showToast('Removed from My Queue');
+      } else {
+        current.push(id);
+        set('makelist', current);
+        queueBtn.textContent = '✓ My Queue';
+        showToast('Added to My Queue');
+      }
+      autoSync();
+    });
+  }
+
+  const cookBtn = document.getElementById('detailCookBtn');
+  if (cookBtn) {
+    cookBtn.addEventListener('click', () => handleCook(id));
+  }
+
+  const shareBtn = document.getElementById('detailShareBtn');
+  if (shareBtn) {
+    shareBtn.addEventListener('click', () => shareRecipe(recipe.title, recipe.url, recipe.id));
+  }
+
+  const reportBtn = document.getElementById('detailReportBtn');
+  if (reportBtn) {
+    reportBtn.addEventListener('click', () => {
+      reportBrokenLink(recipe.id, recipe.title, recipe.url || '');
+      reportBtn.textContent = '✓ Reported';
+      reportBtn.disabled = true;
+    });
+  }
+}
+
 /**
  * Open the recipe detail modal for a given recipe ID.
  * @param {number} id - Recipe ID
@@ -179,6 +271,10 @@ function _renderNewVisitorDetail(recipe) {
     ${nutHtml}
 
     <div class="detail-actions" style="margin-top:12px">
+      ${recipe.url ? `<a href="#" class="detail-link" data-recipe-url="${escHTML(recipe.url)}" data-recipe-title="${escHTML(recipe.title)}" data-recipe-site="${escHTML(recipe.site || '')}">📖 View Instructions ↗</a>` : ''}
+      <button class="btn btn-primary" id="detailFavBtn">${_isFav(recipe.id) ? '❤️ Favorited' : '🤍 Favorite'}</button>
+      <button class="btn btn-outline" id="detailQueueBtn">${_isQueued(recipe.id) ? '✓ My Queue' : '📌 My Queue'}</button>
+      <button class="btn btn-outline" id="detailCookBtn">☐ I Made This</button>
       <button class="btn btn-outline" id="detailShareBtn">📤 Share</button>
     </div>
   `;
@@ -194,12 +290,8 @@ function _renderNewVisitorDetail(recipe) {
     });
   }
 
-  const shareBtn = document.getElementById('detailShareBtn');
-  if (shareBtn) {
-    shareBtn.addEventListener('click', () => {
-      shareRecipe(recipe.title, recipe.url, recipe.id);
-    });
-  }
+  // Wire all action buttons (same as full detail)
+  _wireActionButtons(recipe);
 }
 
 /**
@@ -331,87 +423,8 @@ function _renderFullDetail(recipe, ings, staples) {
     });
   });
 
-  // Wire detail action buttons
-  const favBtn = document.getElementById('detailFavBtn');
-  if (favBtn) {
-    favBtn.addEventListener('click', () => {
-      toggleFavorite(id);
-      // Re-render after a short delay to allow collection picker to finish
-      const recheckFav = () => {
-        const nowFav = new Set(get('favorites')).has(id);
-        favBtn.textContent = nowFav ? '❤️ Favorited' : '🤍 Favorite';
-      };
-      // If unfavoriting, update immediately; if favoriting, update after picker closes
-      if (isFav) {
-        recheckFav();
-      } else {
-        // Watch for picker overlay removal via MutationObserver
-        const mo = new MutationObserver(() => {
-          if (!document.querySelector('.collection-picker-overlay')) {
-            recheckFav();
-            mo.disconnect();
-          }
-        });
-        mo.observe(document.body, { childList: true, subtree: true });
-        // Safety timeout — also recheck fav state when timer expires
-        setTimeout(() => { mo.disconnect(); recheckFav(); }, 10000);
-      }
-    });
-  }
-
-  const shopBtn = document.getElementById('detailShopBtn');
-  if (shopBtn) {
-    shopBtn.addEventListener('click', () => {
-      const currentShop = get('shopList');
-      const shopSet = new Set(currentShop);
-      missingIngs.forEach(ing => shopSet.add(ing));
-      set('shopList', [...shopSet]);
-      autoSync();
-      shopBtn.textContent = '✓ Added!';
-      shopBtn.disabled = true;
-    });
-  }
-
-  const queueBtn = document.getElementById('detailQueueBtn');
-  if (queueBtn) {
-    queueBtn.addEventListener('click', () => {
-      const current = get('makelist') || [];
-      if (current.includes(id)) {
-        set('makelist', current.filter(i => i !== id));
-        queueBtn.textContent = '📌 My Queue';
-        showToast('Removed from My Queue');
-      } else {
-        current.push(id);
-        set('makelist', current);
-        queueBtn.textContent = '✓ My Queue';
-        showToast('Added to My Queue');
-      }
-      autoSync();
-    });
-  }
-
-  const cookBtn = document.getElementById('detailCookBtn');
-  if (cookBtn) {
-    cookBtn.addEventListener('click', () => {
-      handleCook(id);
-    });
-  }
-
-  const shareBtn = document.getElementById('detailShareBtn');
-  if (shareBtn) {
-    shareBtn.addEventListener('click', () => {
-      shareRecipe(recipe.title, recipe.url, recipe.id);
-    });
-  }
-
-  const reportBtn = document.getElementById('detailReportBtn');
-  if (reportBtn) {
-    reportBtn.addEventListener('click', () => {
-      reportBrokenLink(recipe.id, recipe.title, recipe.url || '');
-      reportBtn.textContent = '✓ Reported';
-      reportBtn.disabled = true;
-    });
-  }
+  // Wire action buttons (shared helper)
+  _wireActionButtons(recipe, missingIngs);
 
   // Notes auto-save (scoped timer cleared when modal closes)
   const notesEl = document.getElementById('detailNotes');
