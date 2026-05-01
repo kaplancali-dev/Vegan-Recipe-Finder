@@ -2589,8 +2589,13 @@ input, select, textarea {
 
 .detail-actions {
   display: flex;
-  gap: 8px;
+  gap: 6px;
   flex-wrap: wrap;
+}
+.detail-actions .btn,
+.detail-actions .detail-link {
+  padding: 7px 12px;
+  font-size: 0.82rem;
 }
 
 .detail-link {
