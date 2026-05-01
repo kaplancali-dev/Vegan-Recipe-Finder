@@ -357,6 +357,8 @@ function renderReadyList() {
       return;
     }
 
+    // Card click → open detail (skip if inside action row)
+    if (e.target.closest('.r-actions')) return;
     const card = e.target.closest('.r-card');
     if (card) {
       const id = Number(card.dataset.recipeId);

@@ -1133,12 +1133,16 @@ input, select, textarea {
   margin-top: 8px;
   flex-wrap: wrap;
   justify-content: flex-start;
+  position: relative;
+  z-index: 2;
 }
 
 .r-actions .btn-sm {
   font-size: 0.72rem;
-  padding: 3px 8px;
+  padding: 5px 10px;
   flex: 0 0 auto;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .move-arrow {
@@ -1184,6 +1188,8 @@ input, select, textarea {
   display: inline-flex;
   align-items: center;
   gap: 4px;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .btn-link { background: var(--green); border-color: transparent; color: #fff; }
@@ -3691,6 +3697,8 @@ input, select, textarea {
   gap: 2px;
   align-items: center;
   flex-shrink: 0;
+  position: relative;
+  z-index: 2;
 }
 
 /* ── Want to Make — Icon buttons ───────────────────────────────── */
@@ -3700,13 +3708,15 @@ input, select, textarea {
   border: none;
   cursor: pointer;
   font-size: 0.9rem;
-  padding: 4px 8px;
+  padding: 6px 10px;
   border-radius: var(--radius-xs);
   transition: background var(--transition), opacity var(--transition);
   line-height: 1;
   display: inline-flex;
   align-items: center;
   gap: 4px;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 .wm-icon-btn:hover { background: var(--bg2); }
 

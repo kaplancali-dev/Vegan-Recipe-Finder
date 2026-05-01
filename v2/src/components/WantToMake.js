@@ -271,9 +271,9 @@ function wireEvents() {
       return;
     }
 
-    // Open recipe detail
+    // Open recipe detail (title link only — not if inside action buttons)
     const openLink = t.closest('[data-open-recipe]');
-    if (openLink) {
+    if (openLink && !t.closest('.wm-row-actions')) {
       e.preventDefault();
       const id = Number(openLink.dataset.openRecipe);
       if (id) openDetail(id);
