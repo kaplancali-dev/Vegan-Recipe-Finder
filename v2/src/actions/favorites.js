@@ -14,6 +14,16 @@ import { escHTML } from '../utils/text.js';
 import { showToast } from '../utils/toast.js';
 
 /**
+ * Move a recipe to a different collection (without unfavoriting).
+ * Shows the collection picker; on pick, removes from all other
+ * collections and adds to the chosen one.
+ * @param {number} id - Recipe ID
+ */
+export function moveToCollection(id) {
+  showCollectionPicker(id, true);
+}
+
+/**
  * Toggle a recipe's favorite status.
  * If adding, shows a collection picker first.
  * @param {number} id - Recipe ID
@@ -49,9 +59,11 @@ export function toggleFavorite(id) {
 /**
  * Show a modal asking the user to pick a collection for the recipe.
  * The recipe is not favorited until a collection is chosen.
+ * In move mode, the recipe stays favorited but switches collections.
  * @param {number} id - Recipe ID
+ * @param {boolean} [isMove=false] - Move mode (already favorited)
  */
-function showCollectionPicker(id) {
+function showCollectionPicker(id, isMove = false) {
   // Remove any existing picker
   const existing = document.querySelector('.collection-picker-overlay');
   if (existing) existing.remove();
@@ -70,13 +82,16 @@ function showCollectionPicker(id) {
     </button>`;
   }).join('');
 
+  const pickerTitle = isMove ? 'Move to collection' : 'Save to collection';
+  const pickerHint = isMove ? 'Pick the new collection:' : 'Pick a collection for this recipe:';
+
   overlay.innerHTML = `
     <div class="collection-picker-modal card">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-        <h4 style="font-family:var(--font-sans);font-size:1rem;margin:0">Save to collection</h4>
+        <h4 style="font-family:var(--font-sans);font-size:1rem;margin:0">${pickerTitle}</h4>
         <button class="icon-btn" data-picker-close aria-label="Cancel">&times;</button>
       </div>
-      <p style="font-size:0.82rem;color:var(--ink-soft);margin-bottom:12px">Pick a collection for this recipe:</p>
+      <p style="font-size:0.82rem;color:var(--ink-soft);margin-bottom:12px">${pickerHint}</p>
       <div style="display:flex;flex-direction:column;gap:6px">
         ${buttons}
       </div>
@@ -95,14 +110,24 @@ function showCollectionPicker(id) {
 
     const key = pickBtn.dataset.pick;
 
-    // Add to favorites
-    const favs = get('favorites');
-    const favSet = new Set(favs);
-    favSet.add(id);
-    set('favorites', [...favSet]);
+    const collections = get('collections') || {};
+
+    if (isMove) {
+      // Move: remove from all other collections first
+      for (const k of Object.keys(collections)) {
+        if (Array.isArray(collections[k])) {
+          collections[k] = collections[k].filter(i => i !== id);
+        }
+      }
+    } else {
+      // Add to favorites
+      const favs = get('favorites');
+      const favSet = new Set(favs);
+      favSet.add(id);
+      set('favorites', [...favSet]);
+    }
 
     // Add to the chosen collection
-    const collections = get('collections') || {};
     if (!collections[key]) collections[key] = [];
     if (!collections[key].includes(id)) {
       collections[key].push(id);
@@ -113,7 +138,7 @@ function showCollectionPicker(id) {
     overlay.remove();
 
     const def = COLLECTIONS.find(c => c.key === key);
-    showToast(`Saved to ${def ? def.label : 'collection'} ❤️`);
+    showToast(isMove ? `Moved to ${def ? def.label : 'collection'} 📁` : `Saved to ${def ? def.label : 'collection'} ❤️`);
   });
 
   document.body.appendChild(overlay);

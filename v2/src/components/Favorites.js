@@ -13,7 +13,7 @@ import { escHTML } from '../utils/text.js';
 import { showToast } from '../utils/toast.js';
 import { handleCook } from '../actions/cook.js';
 import { $ } from '../utils/dom.js';
-import { toggleFavorite } from '../actions/favorites.js';
+import { toggleFavorite, moveToCollection } from '../actions/favorites.js';
 import { handleShareClick } from '../actions/share.js';
 import { renderCardList } from './RecipeCard.js';
 import { openDetail } from './RecipeDetail.js';
@@ -203,10 +203,33 @@ function renderFavList() {
   const cookHistory = getRef('cookHistory');
   container.innerHTML = renderCardList(results, favSet, { showMatch: true, makelist: makeIds, cookHistory, userIngs: [...ings, ...staples] });
 
+  // Inject a "Move" button into each card's action row (only inside non-All collections)
+  if (_activeColl && _activeColl !== 'all') {
+    container.querySelectorAll('.r-card').forEach(card => {
+      const id = card.dataset.recipeId;
+      const actions = card.querySelector('.r-actions');
+      if (actions) {
+        const moveBtn = document.createElement('button');
+        moveBtn.className = 'btn-sm btn-move move-btn';
+        moveBtn.dataset.moveId = id;
+        moveBtn.textContent = '📁 Move';
+        actions.appendChild(moveBtn);
+      }
+    });
+  }
+
   container.onclick = (e) => {
     if (e.target.closest('[data-recipe-url]')) return;
 
     if (handleShareClick(e)) return;
+
+    // Move button
+    const moveBtn = e.target.closest('.move-btn');
+    if (moveBtn) {
+      e.stopPropagation();
+      moveToCollection(Number(moveBtn.dataset.moveId));
+      return;
+    }
 
     const favBtn = e.target.closest('.fav-btn');
     if (favBtn) {
