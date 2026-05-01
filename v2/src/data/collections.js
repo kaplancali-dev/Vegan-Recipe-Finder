@@ -9,6 +9,6 @@ export const COLLECTIONS = [
   { key: 'gameday',     icon: '🏈', label: 'Game Day' },
   { key: 'weeknight',   icon: '🌙', label: 'Weeknight' },
   { key: 'holiday',     icon: '🎄', label: 'Holiday' },
-  { key: 'brunch',      icon: '🥞', label: 'Brunch' },
+  { key: 'brunch',      icon: '🥞', label: 'Breakfast/Brunch' },
   { key: 'all',         icon: '📚', label: 'All' },
 ];
