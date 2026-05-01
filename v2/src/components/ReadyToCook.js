@@ -306,7 +306,8 @@ function renderReadyList() {
 
   const makeIds = getRef('makelist');
   const cookHistory = getRef('cookHistory');
-  container.innerHTML = renderCardList(ready, favs, { makelist: makeIds, cookHistory, userIngs: [...ings, ...staples] });
+  const notes = get('instructions');
+  container.innerHTML = renderCardList(ready, favs, { makelist: makeIds, cookHistory, userIngs: [...ings, ...staples], notes });
 
   // Event delegation
   container.onclick = (e) => {

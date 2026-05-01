@@ -394,8 +394,8 @@ function _renderFullDetail(recipe, ings, staples) {
     ` : ''}
 
     <div class="detail-section">
-      <h4>Notes</h4>
-      <textarea id="detailNotes" class="text-input" rows="3" placeholder="Add your notes…"
+      <h4>📝 My Notes</h4>
+      <textarea id="detailNotes" class="text-input" rows="3" placeholder="Your tweaks, substitutions, serving tips…"
         style="width:100%;resize:vertical">${escHTML(notes)}</textarea>
     </div>
 

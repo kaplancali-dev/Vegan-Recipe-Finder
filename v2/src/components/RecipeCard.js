@@ -133,7 +133,7 @@ function ingChip(name, cls) {
  * @returns {string} HTML string
  */
 export function renderCard(result, opts = {}) {
-  const { showMatch = true, isFavorite = false, isOnMakeList = false, cookedDates = [], userIngs = [] } = opts;
+  const { showMatch = true, isFavorite = false, isOnMakeList = false, cookedDates = [], userIngs = [], hasNotes = false } = opts;
   const r = result;
 
   const tier = matchTier(r.pct);
@@ -208,7 +208,7 @@ export function renderCard(result, opts = {}) {
       <div class="card-body">
         <div class="r-top">
           <div class="r-main">
-            <div class="r-title">${escHTML(r.title)}</div>
+            <div class="r-title">${escHTML(r.title)}${hasNotes ? ' <span class="notes-badge" title="You have notes on this recipe">📝</span>' : ''}</div>
             <div class="r-site">${escHTML(r.site || '')}</div>
           </div>
           <div class="r-right">
@@ -248,6 +248,7 @@ export function renderCardList(results, favorites, opts = {}) {
   if (!results.length) return '';
   const makeSet = opts.makelist ? new Set(opts.makelist) : new Set();
   const cookHistory = opts.cookHistory || [];
+  const notes = opts.notes || {};
   return results.map(r => {
     const cookedDates = cookHistory
       .filter(h => h.id === r.id);
@@ -256,6 +257,7 @@ export function renderCardList(results, favorites, opts = {}) {
       isFavorite: favorites.has(r.id),
       isOnMakeList: makeSet.has(r.id),
       cookedDates,
+      hasNotes: !!notes[r.id],
     });
   }).join('');
 }

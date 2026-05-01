@@ -236,7 +236,8 @@ function _runRender() {
 
   const makeIds = getRef('makelist');
   const cookHistory = getRef('cookHistory');
-  list.innerHTML = renderCardList(visible, favs, { makelist: makeIds, cookHistory, userIngs: [...ings, ...staples] }) +
+  const notes = get('instructions');
+  list.innerHTML = renderCardList(visible, favs, { makelist: makeIds, cookHistory, userIngs: [...ings, ...staples], notes }) +
     (hasMore ? `<button class="btn btn-outline load-more-btn" id="loadMoreBtn">Show more (${results.length - _visibleCount} remaining)</button>` : '');
 
   // Event delegation for card clicks, buttons, and load more

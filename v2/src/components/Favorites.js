@@ -201,7 +201,8 @@ function renderFavList() {
 
   const makeIds = getRef('makelist');
   const cookHistory = getRef('cookHistory');
-  container.innerHTML = renderCardList(results, favSet, { showMatch: true, makelist: makeIds, cookHistory, userIngs: [...ings, ...staples] });
+  const notes = get('instructions');
+  container.innerHTML = renderCardList(results, favSet, { showMatch: true, makelist: makeIds, cookHistory, userIngs: [...ings, ...staples], notes });
 
   // Inject a "Move → Fav" pair into each card's action row (only inside non-All collections)
   if (_activeColl && _activeColl !== 'all') {

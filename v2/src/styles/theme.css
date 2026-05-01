@@ -1148,6 +1148,13 @@ input, select, textarea {
   margin: 0 -2px;
 }
 
+.notes-badge {
+  font-size: 0.75rem;
+  cursor: pointer;
+  opacity: 0.8;
+  margin-left: 4px;
+}
+
 
 .btn-sm {
   padding: 5px 11px;
