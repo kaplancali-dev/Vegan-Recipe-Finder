@@ -2,6 +2,7 @@ const ORIGIN = 'https://kaplancali-dev.github.io/Vegan-Recipe-Finder';
 const SITE_URL = 'https://myharvestvegan.com';
 const OG_DATA_URL = 'https://raw.githubusercontent.com/kaplancali-dev/Vegan-Recipe-Finder/main/og-data.json';
 const FALLBACK_IMAGE = `${SITE_URL}/hero-image4.png`;
+const NOTIFY_EMAIL = 'kaplancali@icloud.com';
 
 let cachedOGData = null;
 let cacheTimestamp = 0;
@@ -62,9 +63,74 @@ function buildOGPage(recipe, recipeId) {
 </html>`;
 }
 
+/**
+ * Handle broken-link report webhook from Supabase.
+ * Sends an email via Resend API.
+ */
+async function handleReport(request, env) {
+  // Verify shared secret
+  const authHeader = request.headers.get('x-webhook-secret') || '';
+  if (!env.WEBHOOK_SECRET || authHeader !== env.WEBHOOK_SECRET) {
+    return new Response('Unauthorized', { status: 401 });
+  }
+
+  try {
+    const payload = await request.json();
+    // Supabase webhook sends { type, table, record, ... }
+    const row = payload.record || payload;
+    const recipeTitle = (row.message || '').replace('Broken link report: ', '');
+    const recipeId = row.line || 'unknown';
+    const recipeUrl = row.stack || 'N/A';
+    const reportedAt = row.created_at || new Date().toISOString();
+    const userAgent = row.user_agent || '';
+
+    const emailBody = [
+      `Recipe: ${recipeTitle}`,
+      `ID: ${recipeId}`,
+      `URL: ${recipeUrl}`,
+      `Reported: ${reportedAt}`,
+      `User-Agent: ${userAgent}`,
+      '',
+      `View in app: ${SITE_URL}?r=${recipeId}`,
+    ].join('\n');
+
+    // Send via Resend
+    const res = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${env.RESEND_API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        from: 'HARVEST Alerts <alerts@myharvestvegan.com>',
+        to: [NOTIFY_EMAIL],
+        subject: `🔗 Broken link: ${recipeTitle}`,
+        text: emailBody,
+      }),
+    });
+
+    if (!res.ok) {
+      const err = await res.text();
+      console.error('Resend error:', err);
+      return new Response('Email send failed', { status: 502 });
+    }
+
+    return new Response('OK', { status: 200 });
+  } catch (e) {
+    console.error('Report handler error:', e);
+    return new Response('Error', { status: 500 });
+  }
+}
+
 export default {
-  async fetch(request) {
+  async fetch(request, env) {
     const url = new URL(request.url);
+
+    // Broken-link report webhook endpoint
+    if (url.pathname === '/api/report' && request.method === 'POST') {
+      return handleReport(request, env);
+    }
+
     const recipeId = url.searchParams.get('r');
 
     if (recipeId) {
