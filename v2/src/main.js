@@ -43,8 +43,9 @@ const TAB_MAP = {
   pantry:    'tab-pantry',
   browse:    'tab-browse',
   canmake:   'tab-canmake',
-  favorites: 'tab-favorites',
   wantmake:  'tab-wantmake',
+  madeit:    'tab-madeit',
+  favorites: 'tab-favorites',
   shopping:  'tab-shopping',
 };
 
@@ -141,6 +142,7 @@ recipesReady.then(async (recipes) => {
     { initFavorites },
     { initWantToMake },
     { initReadyToCook },
+    { initMadeIt },
   ] = await Promise.all([
     import('./components/RecipeDetail.js'),
     import('./components/Browse.js'),
@@ -150,6 +152,7 @@ recipesReady.then(async (recipes) => {
     import('./components/Favorites.js'),
     import('./components/WantToMake.js'),
     import('./components/ReadyToCook.js'),
+    import('./components/MadeIt.js'),
   ]);
 
   initRecipeDetail(recipes);
@@ -160,6 +163,7 @@ recipesReady.then(async (recipes) => {
   initFavorites(recipes);
   initWantToMake(recipes);
   initReadyToCook(recipes);
+  initMadeIt(recipes);
 
   /* ── Deep-link: open shared recipe from #r=ID or ?r=ID ────── */
   const hashMatch = window.location.hash.match(/^#r=(\d+)/);

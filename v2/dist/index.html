@@ -20,9 +20,9 @@
 <link rel="icon" type="image/png" href="favicon.png">
 <meta name="theme-color" content="#2d7a4f">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://static.cloudflareinsights.com https://www.googletagmanager.com https://www.google-analytics.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; img-src 'self' https: data:; connect-src 'self' https://*.supabase.co https://cloudflareinsights.com https://www.google-analytics.com; font-src 'self'; frame-src 'none';">
-  <script type="module" crossorigin src="/assets/index-BiqPLxzA.js"></script>
+  <script type="module" crossorigin src="/assets/index-B1CQRB7C.js"></script>
   <link rel="modulepreload" crossorigin href="/assets/supabase-DaN4is7k.js">
-  <link rel="stylesheet" crossorigin href="/assets/index-mrae8Kqz.css">
+  <link rel="stylesheet" crossorigin href="/assets/index-DDQMnENj.css">
 </head>
 <body>
 
@@ -47,6 +47,7 @@
         <span id="readyCount" class="badge"></span>
       </button>
       <button class="tab-btn" data-tab="wantmake" role="tab" aria-selected="false" aria-controls="tab-wantmake" id="btn-wantmake">📌 My Queue</button>
+      <button class="tab-btn" data-tab="madeit" role="tab" aria-selected="false" aria-controls="tab-madeit" id="btn-madeit">✅ Made It</button>
       <button class="tab-btn" data-tab="favorites" role="tab" aria-selected="false" aria-controls="tab-favorites" id="btn-favorites">❤️ Favorites</button>
       <button class="tab-btn" data-tab="shopping" role="tab" aria-selected="false" aria-controls="tab-shopping" id="btn-shopping">🛒 Shopping</button>
     </nav>
@@ -292,15 +293,23 @@
     </section>
 
     <!-- FAVORITES TAB -->
-    <section id="tab-favorites" class="tab-panel" role="tabpanel" aria-labelledby="btn-favorites" hidden>
+    <!-- MADE IT TAB (Cooking Journal) -->
+    <section id="tab-madeit" class="tab-panel" role="tabpanel" aria-labelledby="btn-madeit" hidden>
       <div class="section-intro">
-        <h2>Favorites</h2>
-        <p>Your saved recipes and collections.</p>
+        <h2>✅ Made It</h2>
+        <p>Your cooking journal — every recipe you've made, rated, and loved.</p>
       </div>
 
-      <!-- Cook history (at top so it's always visible) -->
-      <div class="card" id="cookHistoryCard" hidden>
-        <h3 class="card-title section-toggle" data-toggle="cookHistoryList">✅ I Made This <span class="guide-arrow">▾</span></h3>
+      <div id="madeItStats" class="madeit-stats" hidden></div>
+
+      <div id="madeItEmpty" class="empty-state" hidden>
+        <p>No recipes cooked yet. Tap <strong>☐ Made It</strong> on any recipe card to log it here with a date and rating.</p>
+      </div>
+
+      <div id="madeItCards" class="recipe-list"></div>
+
+      <div class="card" id="madeItJournal">
+        <h3 class="card-title">📖 Full Cooking Log</h3>
         <div class="cook-history-header">
           <span></span>
           <span>Recipe Name</span>
@@ -308,7 +317,14 @@
           <span>Date Made</span>
           <span></span>
         </div>
-        <div id="cookHistoryList" class="section-body"></div>
+        <div id="madeItHistory"></div>
+      </div>
+    </section>
+
+    <section id="tab-favorites" class="tab-panel" role="tabpanel" aria-labelledby="btn-favorites" hidden>
+      <div class="section-intro">
+        <h2>Favorites</h2>
+        <p>Your saved recipes and collections.</p>
       </div>
 
       <!-- Collections -->

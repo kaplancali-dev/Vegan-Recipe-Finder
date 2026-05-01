@@ -1155,6 +1155,23 @@ input, select, textarea {
   margin-left: 4px;
 }
 
+/* ── Made It tab stats ─────────────────────────────────────── */
+
+.madeit-stats {
+  display: flex;
+  gap: 16px;
+  padding: 10px 14px;
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  margin-bottom: 12px;
+  border: 1px solid var(--border);
+}
+
+.madeit-stat {
+  font-size: 0.88rem;
+  color: var(--ink-soft);
+}
+
 
 .btn-sm {
   padding: 5px 11px;

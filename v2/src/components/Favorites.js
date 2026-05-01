@@ -18,6 +18,7 @@ import { handleShareClick } from '../actions/share.js';
 import { renderCardList } from './RecipeCard.js';
 import { openDetail } from './RecipeDetail.js';
 import { addToShopList } from './Shopping.js';
+// Note: Cook history moved to its own MadeIt tab
 
 import { COLLECTIONS } from '../data/collections.js';
 
@@ -35,7 +36,6 @@ export function initFavorites(recipes) {
   _recipes = recipes;
 
   renderCollections();
-  renderCookHistory();
 
   // Back button
   const backBtn = $('#favCollBack');
@@ -46,28 +46,7 @@ export function initFavorites(recipes) {
   subscribe('ingredients', () => { if (_activeColl) renderFavList(); });
   subscribe('staples', () => { if (_activeColl) renderFavList(); });
   subscribe('makelist', () => { if (_activeColl) renderFavList(); });
-  subscribe('cookHistory', () => { if (_activeColl) renderFavList(); renderCookHistory(); });
-
-  // Cook history card — click to open recipe or delete entry
-  const historyCard = $('#cookHistoryCard');
-  if (historyCard) {
-    historyCard.addEventListener('click', (e) => {
-      const link = e.target.closest('[data-recipe-id]');
-      if (link) {
-        e.preventDefault();
-        openDetail(Number(link.dataset.recipeId));
-        return;
-      }
-      const btn = e.target.closest('[data-cook-delete]');
-      if (!btn) return;
-      if (!confirm('Remove this recipe from your cook history? This cannot be undone.')) return;
-      const id = Number(btn.dataset.cookDelete);
-      const history = get('cookHistory');
-      set('cookHistory', history.filter(h => h.id !== id));
-      autoSync();
-      showToast('Removed from Cook History');
-    });
-  }
+  subscribe('cookHistory', () => { if (_activeColl) renderFavList(); });
 }
 
 /* ── Collections Grid ────────────────────────────────────────── */
@@ -277,48 +256,5 @@ function renderFavList() {
   };
 }
 
-/* ── Cooking History ────────────────────────────────────────── */
 
-function renderCookHistory() {
-  const card = $('#cookHistoryCard');
-  const listEl = $('#cookHistoryList');
-  if (!card || !listEl) return;
-
-  const history = getRef('cookHistory');
-  if (!history.length) {
-    card.hidden = true;
-    return;
-  }
-
-  card.hidden = false;
-
-  // Deduplicate: keep only the most recent entry per recipe
-  const seen = new Map();
-  for (const entry of history) {
-    const prev = seen.get(entry.id);
-    if (!prev || new Date(entry.date) > new Date(prev.date)) {
-      seen.set(entry.id, entry);
-    }
-  }
-  const unique = [...seen.values()]
-    .sort((a, b) => new Date(b.date) - new Date(a.date))
-    .slice(0, 20);
-
-  listEl.innerHTML = unique.map(entry => {
-    const recipe = _recipes.find(r => r.id === entry.id);
-    const title = recipe ? escHTML(recipe.title) : `Recipe #${entry.id}`;
-    const img = recipe?.img || '';
-    const date = new Date(entry.date).toLocaleDateString(undefined, {
-      month: 'short', day: 'numeric', year: 'numeric'
-    });
-    const rating = entry.rating ? '★'.repeat(entry.rating) : '—';
-    return `<div class="cook-history-item">
-      ${img ? `<img class="cook-history-img" src="${escHTML(img)}" alt="" loading="lazy">` : '<div class="cook-history-img cook-history-img-empty"></div>'}
-      <a class="cook-history-link" data-recipe-id="${entry.id}">${title}</a>
-      <span class="cook-stars">${rating}</span>
-      <span class="cook-date">${date}</span>
-      <button class="cook-delete-btn" data-cook-delete="${entry.id}" aria-label="Remove">✕</button>
-    </div>`;
-  }).join('');
-}
 
