@@ -4,7 +4,7 @@
  */
 export const COLLECTIONS = [
   { key: 'weekly',      icon: '📅', label: 'Weekly Meal Plan' },
-  { key: 'celebration', icon: '🎉', label: 'Celebration' },
+  { key: 'desserts',    icon: '🍰', label: 'Desserts' },
   { key: 'romantic',    icon: '💕', label: 'Romantic Evening' },
   { key: 'gameday',     icon: '🏈', label: 'Game Day' },
   { key: 'weeknight',   icon: '🌙', label: 'Weeknight' },
