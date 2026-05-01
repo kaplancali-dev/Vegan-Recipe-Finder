@@ -6,13 +6,7 @@
  * for that recipe on the same site — not a dead 404 page.
  *
  * Usage:
- *   import { safeRecipeHref, wireSafeLinks } from '../utils/safe-link.js';
- *
- *   // In HTML templates:
- *   `<a href="${safeRecipeHref(url, title, site)}" data-recipe-url="${url}" ...>`
- *
- *   // After rendering, wire up click handlers:
- *   wireSafeLinks(container);
+ *   import { openRecipeLink } from '../utils/safe-link.js';
  */
 
 /**
@@ -35,35 +29,6 @@ export function buildFallbackUrl(url, title, site) {
     ? `site:${domain} ${title}`
     : title;
   return `https://www.google.com/search?q=${encodeURIComponent(query)}`;
-}
-
-/**
- * Return the original URL (for href), but data attributes carry
- * the fallback info. The click handler in wireSafeLinks() will
- * intercept and provide the safety net.
- *
- * @param {string} url - Original recipe URL
- * @param {string} title - Recipe title
- * @param {string} [site] - Site name
- * @returns {string} The original URL (unchanged)
- */
-export function safeRecipeHref(url, title, site) {
-  return url; // href stays the same; fallback is handled on click
-}
-
-/**
- * Wire click handlers on [data-recipe-url] links inside a container.
- * On click, opens the original URL in a new tab. After a short delay,
- * checks if the tab is still on an error page. If detection isn't
- * possible (cross-origin), it does nothing extra — the fallback
- * is available via the "Report broken link" button.
- *
- * More importantly: this sets up the global handler that intercepts
- * all recipe link clicks and provides a "search instead" option
- * when the user reports a broken link.
- */
-export function wireSafeLinks() {
-  // Handled via delegation in the global click handler below
 }
 
 /**

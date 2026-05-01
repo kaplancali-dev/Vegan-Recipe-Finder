@@ -125,14 +125,15 @@ function _wireActionButtons(recipe, missingIngs = []) {
       if (isFav) {
         recheckFav();
       } else {
-        const mo = new MutationObserver(() => {
-          if (!document.querySelector('.collection-picker-overlay')) {
+        // Poll briefly for collection picker to close (lightweight, max 5s)
+        let polls = 0;
+        const pollId = setInterval(() => {
+          polls++;
+          if (!document.querySelector('.collection-picker-overlay') || polls >= 25) {
+            clearInterval(pollId);
             recheckFav();
-            mo.disconnect();
           }
-        });
-        mo.observe(document.body, { childList: true, subtree: true });
-        setTimeout(() => { mo.disconnect(); recheckFav(); }, 10000);
+        }, 200);
       }
     });
   }
@@ -426,14 +427,12 @@ function _renderFullDetail(recipe, ings, staples) {
   // Wire action buttons (shared helper)
   _wireActionButtons(recipe, missingIngs);
 
-  // Notes auto-save (scoped timer cleared when modal closes)
+  // Notes auto-save (timer stored on overlay so closeDetail can clear it)
   const notesEl = document.getElementById('detailNotes');
   if (notesEl) {
-    let noteTimer;
     notesEl.addEventListener('input', () => {
-      clearTimeout(noteTimer);
-      noteTimer = setTimeout(() => {
-        // Guard: don't save if the textarea has been removed from DOM
+      clearTimeout(_overlay._noteTimer);
+      _overlay._noteTimer = setTimeout(() => {
         if (!document.contains(notesEl)) return;
         const allNotes = get('instructions');
         const val = notesEl.value.trim();
@@ -446,18 +445,6 @@ function _renderFullDetail(recipe, ings, staples) {
         autoSync();
       }, 800);
     });
-
-    // Clear pending timer when modal overlay is removed
-    const modal = notesEl.closest('.modal-overlay');
-    if (modal) {
-      const _notesObs = new MutationObserver(() => {
-        if (!document.contains(modal)) {
-          clearTimeout(noteTimer);
-          _notesObs.disconnect();
-        }
-      });
-      _notesObs.observe(document.body, { childList: true });
-    }
   }
 }
 
@@ -504,6 +491,8 @@ export function closeDetail() {
       _overlay.removeEventListener('keydown', _overlay._focusTrapHandler);
       delete _overlay._focusTrapHandler;
     }
+    // Clear pending notes auto-save
+    clearTimeout(_overlay._noteTimer);
     _overlay.hidden = true;
   }
   document.body.style.overflow = '';

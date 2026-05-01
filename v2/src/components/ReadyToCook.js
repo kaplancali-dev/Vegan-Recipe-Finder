@@ -251,6 +251,17 @@ function renderReadyList() {
   if (_readySearch) {
     const q = _readySearch.toLowerCase();
     const stripPunc = s => s.replace(/[""''"'""'']/g, '');
+
+    // Pre-compile regex once (not per-recipe)
+    const words = q.split(/\s+/);
+    const wordPatterns = words.map(w => {
+      const s = stem(w);
+      const esc = w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      const re = new RegExp(`(^|[\\s,\\-\\(])${esc}($|[\\s,\\-\\)])`);
+      const reStem = w !== s ? new RegExp(`(^|[\\s,\\-\\(])${s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}($|[\\s,\\-\\)])`) : null;
+      return { re, reStem };
+    });
+
     ready = ready.filter(r => {
       const t = stripPunc(r.title.toLowerCase());
       const ingStr = stripPunc((r.ing || []).join(' ').toLowerCase());
@@ -259,13 +270,9 @@ function renderReadyList() {
       if (t.includes(q) || ingStr.includes(q)) return true;
 
       // Word-boundary fallback — "ice" matches "ice" but not "rice"
-      const words = q.split(/\s+/);
-      return words.every(w => {
-        const s = stem(w);
-        const re = new RegExp(`(^|[\\s,\\-\\(])${w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}($|[\\s,\\-\\)])`);
-        const reStem = w !== s ? new RegExp(`(^|[\\s,\\-\\(])${s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}($|[\\s,\\-\\)])`) : null;
-        return re.test(t) || re.test(ingStr) || (reStem && (reStem.test(t) || reStem.test(ingStr)));
-      });
+      return wordPatterns.every(({ re, reStem }) =>
+        re.test(t) || re.test(ingStr) || (reStem && (reStem.test(t) || reStem.test(ingStr)))
+      );
     });
   }
 

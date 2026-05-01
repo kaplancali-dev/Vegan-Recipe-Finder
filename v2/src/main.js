@@ -255,6 +255,7 @@ window.addEventListener('resize', updateSearchPlaceholders);
         if (result.ok) {
           statusEl.textContent = '';
           msgEl.value = '';
+          sendBtn.disabled = false;
           showToast('Thanks for your feedback! 💚');
         } else {
           statusEl.textContent = 'Could not send — try again later.';

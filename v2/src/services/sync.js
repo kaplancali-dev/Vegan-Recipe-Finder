@@ -153,10 +153,14 @@ export async function cloudPull() {
       applyAllData(data.data);
       _onStatusChange('Synced just now');
     } else {
-      // No cloud data yet — release lock, then push local data up
-      _syncInProgress = false;
-      cloudPush().catch(() => {});
-      return; // skip finally's redundant unlock
+      // No cloud data yet — push local data up after releasing lock
+      _onStatusChange('Pushing…');
+      const allData = gatherAllData();
+      const { error: pushErr } = await sb.from('user_data').upsert({
+        id: _sbUser.id,
+        data: allData,
+      });
+      _onStatusChange(pushErr ? 'Push failed' : 'Synced just now');
     }
   } finally {
     _syncInProgress = false;

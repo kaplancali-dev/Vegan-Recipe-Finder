@@ -34,13 +34,11 @@ export function initMadeIt(recipes) {
         e.stopPropagation();
         const id = Number(recookBtn.dataset.recookId);
         const history = get('cookHistory');
-        const entry = history.find(h => h.id === id);
-        if (entry) {
-          entry.date = new Date().toISOString();
-          set('cookHistory', [...history]);
-          autoSync();
-          showToast('Updated to today!');
-        }
+        set('cookHistory', history.map(h =>
+          h.id === id ? { ...h, date: new Date().toISOString() } : h
+        ));
+        autoSync();
+        showToast('Updated to today!');
         return;
       }
 
@@ -48,7 +46,6 @@ export function initMadeIt(recipes) {
       const delBtn = e.target.closest('[data-cook-delete]');
       if (delBtn) {
         e.stopPropagation();
-        if (!confirm('Remove this recipe from your cooking journal? This cannot be undone.')) return;
         const id = Number(delBtn.dataset.cookDelete);
         const history = get('cookHistory');
         set('cookHistory', history.filter(h => h.id !== id));
@@ -64,13 +61,11 @@ export function initMadeIt(recipes) {
         const id = Number(star.dataset.starId);
         const newRating = Number(star.dataset.star);
         const history = get('cookHistory');
-        const entry = history.find(h => h.id === id);
-        if (entry) {
-          entry.rating = newRating;
-          set('cookHistory', [...history]);
-          autoSync();
-          showToast(`Rated ${newRating} star${newRating !== 1 ? 's' : ''}`);
-        }
+        set('cookHistory', history.map(h =>
+          h.id === id ? { ...h, rating: newRating } : h
+        ));
+        autoSync();
+        showToast(`Rated ${newRating} star${newRating !== 1 ? 's' : ''}`);
         return;
       }
 

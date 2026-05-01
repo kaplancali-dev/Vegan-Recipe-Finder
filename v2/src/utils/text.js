@@ -166,14 +166,6 @@ export function stripMeasure(s) {
 }
 
 /**
- * Escape a string for safe insertion into an onclick='...' attribute.
- * Escapes backslashes and single quotes.
- */
-export function escQ(s) {
-  return s.replace(/\\/g, '\\\\').replace(/'/g, "\\'");
-}
-
-/**
  * Decode HTML entities (e.g. &frac14; → ¼, &amp; → &).
  * Used to clean scraped recipe data before display.
  */
@@ -210,14 +202,3 @@ export function applyGfSwap(ingredient, gfSwaps) {
   return ingredient;
 }
 
-/**
- * Wrap each digit in a colored span for the animated counter display.
- * Uses CSS classes (d-hi, d-md, d-lo) defined in theme.css.
- */
-export function colorDigits(n) {
-  const s = String(n);
-  const classes = ['d-hi', 'd-md', 'd-lo'];
-  return s.split('').map((d, i) =>
-    `<span class="${classes[i % 3]}">${d}</span>`
-  ).join('');
-}

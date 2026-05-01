@@ -252,10 +252,14 @@ export function resetState() {
   state.shopList     = [];
   state.instructions = {};
   state.allergies    = [];
+  state.collections  = {};
+  state.makelist     = [];
   state.shopRecipes  = [];
   state.shopChecked  = [];
-  state.activeTab    = 'search';
+  state.cookHistory  = [];
+  state.activeTab    = 'browse';
   state.onboarded    = false;
+  state.toured       = false;
   listeners.clear();
 }
 

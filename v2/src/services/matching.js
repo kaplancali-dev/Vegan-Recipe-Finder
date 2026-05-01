@@ -220,7 +220,18 @@ export function findRecipes({
   if (nameSearch) {
     const q = nameSearch.toLowerCase();
     // Strip quotes/punctuation so "Meatballs" → Meatballs for matching
-    const stripPunc = s => s.replace(/[“”‘’"'""'']/g, '');
+    const stripPunc = s => s.replace(/[“”‘’„‚«»"']/g, '');
+
+    // Pre-compile regex for each search word (avoids creating per-recipe)
+    const words = q.split(/\s+/);
+    const wordPatterns = words.map(w => {
+      const s = stem(w);
+      const esc = w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      const re = new RegExp(`(^|[\\s,\\-\\(])${esc}($|[\\s,\\-\\)])`);
+      const reStem = w !== s ? new RegExp(`(^|[\\s,\\-\\(])${s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}($|[\\s,\\-\\)])`) : null;
+      return { re, reStem };
+    });
+
     pool = pool.filter(r => {
       const t = stripPunc(r.title.toLowerCase());
       const ings = stripPunc((r.ing || []).join(' ').toLowerCase());
@@ -229,14 +240,9 @@ export function findRecipes({
       if (t.includes(q) || ings.includes(q)) return true;
 
       // Word-boundary fallback — each word must appear at a word boundary
-      // so "ice" matches "ice" but not "rice" or "spice"
-      const words = q.split(/\s+/);
-      return words.every(w => {
-        const s = stem(w);
-        const re = new RegExp(`(^|[\\s,\\-\\(])${w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}($|[\\s,\\-\\)])`);
-        const reStem = w !== s ? new RegExp(`(^|[\\s,\\-\\(])${s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}($|[\\s,\\-\\)])`) : null;
-        return re.test(t) || re.test(ings) || (reStem && (reStem.test(t) || reStem.test(ings)));
-      });
+      return wordPatterns.every(({ re, reStem }) =>
+        re.test(t) || re.test(ings) || (reStem && (reStem.test(t) || reStem.test(ings)))
+      );
     });
   }
 
@@ -247,8 +253,12 @@ export function findRecipes({
   // Score each recipe
   const results = pool.map(r => {
     const rIngs = r.ing.map(norm);
-    const have  = rIngs.filter(ri => ingredientMatches(ri, allIngs, allIngSet));
-    const need  = rIngs.filter(ri => !ingredientMatches(ri, allIngs, allIngSet));
+    // Compute matches once and partition into have/need
+    const have = [];
+    const need = [];
+    for (const ri of rIngs) {
+      (ingredientMatches(ri, allIngs, allIngSet) ? have : need).push(ri);
+    }
     const userHave = rIngs.filter(ri => ingredientMatches(ri, userNorm, userNormSet));
     const pct   = rIngs.length ? Math.round(have.length / rIngs.length * 100) : 0;
 

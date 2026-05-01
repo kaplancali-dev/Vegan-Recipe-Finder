@@ -6,7 +6,7 @@
  * Only picks high-protein savory recipes with colorful ingredients.
  */
 
-import { getRef } from '../state/store.js';
+import { get, set, getRef, subscribe } from '../state/store.js';
 import { findRecipes } from '../services/matching.js';
 import { escHTML, decodeHTML, stripMeasure } from '../utils/text.js';
 import { gfSwap, sugarSwap } from './RecipeCard.js';
@@ -17,7 +17,6 @@ import { toggleFavorite } from '../actions/favorites.js';
 import { handleShareClick } from '../actions/share.js';
 import { handleCook } from '../actions/cook.js';
 import { showToast } from '../utils/toast.js';
-import { get, set, subscribe } from '../state/store.js';
 import { autoSync } from '../services/sync.js';
 import { $ } from '../utils/dom.js';
 
