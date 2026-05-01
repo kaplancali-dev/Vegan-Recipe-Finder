@@ -120,7 +120,7 @@ function _wireActionButtons(recipe, missingIngs = []) {
       toggleFavorite(id);
       const recheckFav = () => {
         const nowFav = _isFav(id);
-        favBtn.textContent = nowFav ? '❤️ Fav'd' : '🤍 Fav';
+        favBtn.textContent = nowFav ? '❤️ Fav' : '🤍 Fav';
       };
       if (isFav) {
         recheckFav();
