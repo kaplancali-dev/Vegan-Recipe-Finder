@@ -186,8 +186,8 @@ export function renderCard(result, opts = {}) {
     : '';
 
   // Action buttons — compact inline (matches ROTD style)
-  const favLabel = isFavorite ? '❤️ Favorited' : '🤍 Favorite';
-  const makeLabel = isOnMakeList ? '✓ My Queue' : '📌 My Queue';
+  const favLabel = isFavorite ? '❤️ Fav' : '🤍 Fav';
+  const makeLabel = isOnMakeList ? '✓ Queue' : '📌 Queue';
 
   // Cook button label — show date and star rating if available
   const lastEntry = cookedDates.length ? cookedDates[cookedDates.length - 1] : null;
@@ -199,7 +199,7 @@ export function renderCard(result, opts = {}) {
     const stars = rating ? ' ' + '★'.repeat(rating) : '';
     cookLabel = `✅ Made ${dateStr}${stars}`;
   } else {
-    cookLabel = '☐ I Made This';
+    cookLabel = '☐ Made It';
   }
 
   return `
@@ -226,7 +226,7 @@ export function renderCard(result, opts = {}) {
         ${needChips}
         ${subHtml}
         <div class="r-actions">
-          ${r.url ? `<a href="#" class="btn-sm btn-link" data-recipe-url="${escHTML(r.url)}" data-recipe-title="${escHTML(r.title)}" data-recipe-site="${escHTML(r.site || '')}">📖 View Instructions</a>` : ''}
+          ${r.url ? `<a href="#" class="btn-sm btn-link" data-recipe-url="${escHTML(r.url)}" data-recipe-title="${escHTML(r.title)}" data-recipe-site="${escHTML(r.site || '')}">📖 Instructions</a>` : ''}
           <button class="btn-sm btn-shop make-btn${isOnMakeList ? ' on' : ''}" data-make-id="${r.id}">${makeLabel}</button>
           <button class="btn-sm btn-cook cook-btn" data-cook-id="${r.id}">${cookLabel}</button>
           <button class="btn-sm btn-fav fav-btn${isFavorite ? ' on' : ''}" data-fav-id="${r.id}" aria-label="Toggle favorite">${favLabel}</button>

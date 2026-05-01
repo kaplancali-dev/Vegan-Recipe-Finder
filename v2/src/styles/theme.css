@@ -1141,6 +1141,13 @@ input, select, textarea {
   flex: 0 0 auto;
 }
 
+.move-arrow {
+  font-size: 0.7rem;
+  color: var(--ink-muted);
+  align-self: center;
+  margin: 0 -2px;
+}
+
 
 .btn-sm {
   padding: 5px 11px;

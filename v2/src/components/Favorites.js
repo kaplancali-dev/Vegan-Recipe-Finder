@@ -203,17 +203,22 @@ function renderFavList() {
   const cookHistory = getRef('cookHistory');
   container.innerHTML = renderCardList(results, favSet, { showMatch: true, makelist: makeIds, cookHistory, userIngs: [...ings, ...staples] });
 
-  // Inject a "Move" button into each card's action row (only inside non-All collections)
+  // Inject a "Move → Fav" pair into each card's action row (only inside non-All collections)
   if (_activeColl && _activeColl !== 'all') {
     container.querySelectorAll('.r-card').forEach(card => {
       const id = card.dataset.recipeId;
-      const actions = card.querySelector('.r-actions');
-      if (actions) {
+      const favBtn = card.querySelector('.fav-btn');
+      if (favBtn) {
+        // Create move button and arrow, insert before fav
         const moveBtn = document.createElement('button');
         moveBtn.className = 'btn-sm btn-move move-btn';
         moveBtn.dataset.moveId = id;
         moveBtn.textContent = '📁 Move';
-        actions.appendChild(moveBtn);
+        const arrow = document.createElement('span');
+        arrow.className = 'move-arrow';
+        arrow.textContent = '→';
+        favBtn.parentNode.insertBefore(moveBtn, favBtn);
+        favBtn.parentNode.insertBefore(arrow, favBtn);
       }
     });
   }
