@@ -120,7 +120,7 @@ function _wireActionButtons(recipe, missingIngs = []) {
       toggleFavorite(id);
       const recheckFav = () => {
         const nowFav = _isFav(id);
-        favBtn.textContent = nowFav ? '❤️ Favorited' : '🤍 Favorite';
+        favBtn.textContent = nowFav ? '❤️ Fav'd' : '🤍 Fav';
       };
       if (isFav) {
         recheckFav();
@@ -156,12 +156,12 @@ function _wireActionButtons(recipe, missingIngs = []) {
       const current = get('makelist') || [];
       if (current.includes(id)) {
         set('makelist', current.filter(i => i !== id));
-        queueBtn.textContent = '📌 My Queue';
+        queueBtn.textContent = '📌 Queue';
         showToast('Removed from My Queue');
       } else {
         current.push(id);
         set('makelist', current);
-        queueBtn.textContent = '✓ My Queue';
+        queueBtn.textContent = '✓ Queue';
         showToast('Added to My Queue');
       }
       autoSync();
@@ -271,10 +271,10 @@ function _renderNewVisitorDetail(recipe) {
     ${nutHtml}
 
     <div class="detail-actions" style="margin-top:12px">
-      ${recipe.url ? `<a href="#" class="detail-link" data-recipe-url="${escHTML(recipe.url)}" data-recipe-title="${escHTML(recipe.title)}" data-recipe-site="${escHTML(recipe.site || '')}">📖 View Instructions ↗</a>` : ''}
-      <button class="btn btn-primary" id="detailFavBtn">${_isFav(recipe.id) ? '❤️ Favorited' : '🤍 Favorite'}</button>
-      <button class="btn btn-outline" id="detailQueueBtn">${_isQueued(recipe.id) ? '✓ My Queue' : '📌 My Queue'}</button>
-      <button class="btn btn-outline" id="detailCookBtn">☐ I Made This</button>
+      ${recipe.url ? `<a href="#" class="detail-link" data-recipe-url="${escHTML(recipe.url)}" data-recipe-title="${escHTML(recipe.title)}" data-recipe-site="${escHTML(recipe.site || '')}">📖 Instructions ↗</a>` : ''}
+      <button class="btn btn-primary" id="detailFavBtn">${_isFav(recipe.id) ? '❤️ Fav' : '🤍 Fav'}</button>
+      <button class="btn btn-outline" id="detailQueueBtn">${_isQueued(recipe.id) ? '✓ Queue' : '📌 Queue'}</button>
+      <button class="btn btn-outline" id="detailCookBtn">☐ Made It</button>
       <button class="btn btn-outline" id="detailShareBtn">📤 Share</button>
     </div>
   `;
@@ -400,14 +400,14 @@ function _renderFullDetail(recipe, ings, staples) {
     </div>
 
     <div class="detail-actions">
-      ${recipe.url ? `<a href="#" class="detail-link" data-recipe-url="${escHTML(recipe.url)}" data-recipe-title="${escHTML(recipe.title)}" data-recipe-site="${escHTML(recipe.site || '')}">📖 View Instructions ↗</a>` : ''}
-      <button class="btn btn-primary" id="detailFavBtn">${isFav ? '❤️ Favorited' : '🤍 Favorite'}</button>
-      <button class="btn btn-outline" id="detailQueueBtn">${isQueued ? '✓ My Queue' : '📌 My Queue'}</button>
-      ${missingIngs.length ? `<button class="btn btn-outline" id="detailShopBtn">🛒 Add ${missingIngs.length} to list</button>` : ''}
-      <button class="btn btn-outline" id="detailCookBtn">${lastCook ? `✅ Made ${new Date(lastCook.date).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })} · Make Again` : '☐ I Made This'}</button>
+      ${recipe.url ? `<a href="#" class="detail-link" data-recipe-url="${escHTML(recipe.url)}" data-recipe-title="${escHTML(recipe.title)}" data-recipe-site="${escHTML(recipe.site || '')}">📖 Instructions ↗</a>` : ''}
+      <button class="btn btn-primary" id="detailFavBtn">${isFav ? '❤️ Fav' : '🤍 Fav'}</button>
+      <button class="btn btn-outline" id="detailQueueBtn">${isQueued ? '✓ Queue' : '📌 Queue'}</button>
+      ${missingIngs.length ? `<button class="btn btn-outline" id="detailShopBtn">🛒 +${missingIngs.length}</button>` : ''}
+      <button class="btn btn-outline" id="detailCookBtn">${lastCook ? `✅ ${new Date(lastCook.date).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}` : '☐ Made It'}</button>
       <button class="btn btn-outline" id="detailShareBtn">📤 Share</button>
-      ${recipe.url ? `<button class="btn btn-outline btn-sm" id="detailReportBtn">🔗 Report broken link</button>` : ''}
     </div>
+    ${recipe.url ? `<div style="text-align:center;margin-top:6px"><button class="btn-text" id="detailReportBtn" style="font-size:0.75rem;color:var(--ink-muted);background:none;border:none;cursor:pointer">🔗 Report broken link</button></div>` : ''}
   `;
 
   // Wire ingredient benefit toggles
