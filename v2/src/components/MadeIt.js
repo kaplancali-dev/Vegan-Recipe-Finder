@@ -161,7 +161,7 @@ function renderMadeIt() {
       ${noteHtml}
       <span class="cook-stars cook-stars-editable">${stars}</span>
       <span class="cook-date">${date}</span>
-      <button class="cook-recook-btn" data-recook-id="${entry.id}" aria-label="Made again today" title="Made again today">🔄</button>
+      <button class="cook-recook-btn" data-recook-id="${entry.id}" aria-label="Update date to today" title="Update date to today">🔄</button>
       <button class="cook-delete-btn" data-cook-delete="${entry.id}" aria-label="Remove">✕</button>
     </div>`;
   }).join('');
