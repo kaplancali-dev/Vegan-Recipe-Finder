@@ -52,6 +52,7 @@ export function initMadeIt(recipes) {
   }
 
   subscribe('cookHistory', renderMadeIt);
+  subscribe('instructions', renderMadeIt);
 }
 
 /* ── Render ──────────────────────────────────────────────────── */
@@ -102,7 +103,9 @@ function renderMadeIt() {
     `;
   }
 
-  // Journal list — compact rows with thumbnail, name, rating, date, delete
+  // Journal list — compact rows with thumbnail, name, notes preview, rating, date, delete
+  const allNotes = get('instructions') || {};
+
   historyList.innerHTML = unique.map(entry => {
     const recipe = _recipes.find(r => r.id === entry.id);
     const title = recipe ? escHTML(recipe.title) : `Recipe #${entry.id}`;
@@ -111,9 +114,15 @@ function renderMadeIt() {
       month: 'short', day: 'numeric', year: 'numeric'
     });
     const rating = entry.rating ? '★'.repeat(entry.rating) + '☆'.repeat(5 - entry.rating) : '—';
+    const note = allNotes[entry.id] || '';
+    const notePreview = note ? escHTML(note.length > 50 ? note.slice(0, 50) + '…' : note) : '';
+    const noteHtml = notePreview
+      ? `<span class="cook-note-preview" title="${escHTML(note)}">📝 ${notePreview}</span>`
+      : '<span class="cook-note-preview"></span>';
     return `<div class="cook-history-item">
       ${img ? `<img class="cook-history-img" src="${escHTML(img)}" alt="" loading="lazy">` : '<div class="cook-history-img cook-history-img-empty"></div>'}
       <a class="cook-history-link" data-recipe-id="${entry.id}">${title}</a>
+      ${noteHtml}
       <span class="cook-stars">${rating}</span>
       <span class="cook-date">${date}</span>
       <button class="cook-delete-btn" data-cook-delete="${entry.id}" aria-label="Remove">✕</button>

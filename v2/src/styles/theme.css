@@ -3285,6 +3285,33 @@ input, select, textarea {
   color: var(--muted);
   white-space: nowrap;
 }
+
+/* Made It tab: wider grid with notes column */
+.cook-history-header.has-notes {
+  grid-template-columns: 40px 1fr 1fr auto auto 36px;
+}
+#madeItHistory .cook-history-item {
+  grid-template-columns: 40px 1fr 1fr auto auto 36px;
+}
+.cook-note-preview {
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+@media (max-width: 520px) {
+  .cook-history-header.has-notes {
+    grid-template-columns: 40px 1fr auto auto 28px;
+  }
+  #madeItHistory .cook-history-item {
+    grid-template-columns: 40px 1fr auto auto 28px;
+  }
+  .cook-note-preview,
+  .cook-history-header.has-notes span:nth-child(3) {
+    display: none;
+  }
+}
 .cook-delete-btn {
   background: none;
   border: none;
