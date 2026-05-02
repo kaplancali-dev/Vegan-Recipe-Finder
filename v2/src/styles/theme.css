@@ -262,7 +262,7 @@ input, select, textarea {
 
 .tab-btn {
   flex: 1 1 0%;
-  min-width: 0;
+  min-width: fit-content;
   min-height: 44px;
   padding: 10px 8px;
   border: none;
@@ -280,6 +280,7 @@ input, select, textarea {
   line-height: 1.2;
   position: relative;
   text-align: center;
+  overflow: visible;
 }
 
 
