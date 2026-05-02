@@ -2942,18 +2942,50 @@ input, select, textarea {
 .obd-step { display: none; }
 .obd-step.active { display: block; }
 
+.obd-hero-icon {
+  font-size: 2rem;
+  margin-bottom: 8px;
+  letter-spacing: 4px;
+}
+
 .obd-title {
   font-family: Georgia, serif;
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   color: var(--green-deep);
-  margin-bottom: 6px;
+  margin-bottom: 10px;
+}
+
+.obd-hook {
+  font-size: 1.02rem;
+  color: var(--ink);
+  line-height: 1.6;
+  margin-bottom: 14px;
+  font-style: normal;
+}
+
+.obd-hook em {
+  font-style: italic;
+  font-weight: 600;
 }
 
 .obd-sub {
   font-size: 0.92rem;
   color: var(--ink-soft);
-  line-height: 1.5;
-  margin-bottom: 18px;
+  line-height: 1.6;
+  margin-bottom: 14px;
+}
+
+.obd-stat {
+  font-size: 0.82rem;
+  color: var(--green);
+  font-weight: 600;
+  margin-bottom: 6px;
+  letter-spacing: 0.01em;
+}
+
+.obd-skip-note {
+  font-weight: 400;
+  opacity: 0.7;
 }
 
 .obd-cat-label {
