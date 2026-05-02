@@ -339,11 +339,11 @@ function renderReadyList() {
       const current = get('makelist');
       if (current.includes(id)) {
         set('makelist', current.filter(i => i !== id));
-        showToast('Removed from My Queue');
+        showToast('Unqueued — maybe next week');
       } else {
         current.push(id);
         set('makelist', current);
-        showToast('Added to My Queue 📌');
+        showToast('Queued — this week is looking good 📌');
       }
       autoSync();
       return;

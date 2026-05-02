@@ -35,7 +35,7 @@ export async function handleCook(id, opts = {}) {
       // Remove ALL entries for this recipe
       set('cookHistory', history.filter(h => h.id !== id));
       autoSync();
-      showToast('Cook history cleared for this recipe');
+      showToast('Wiped from the record — never happened');
       return;
     }
 
@@ -86,7 +86,7 @@ function _showShareToast(id, title) {
   const el = document.createElement('div');
   el.className = 'cook-share-toast';
   el.innerHTML = `
-    <span class="cook-share-text">Added to your cooking journal</span>
+    <span class="cook-share-text">Logged — you're officially a chef now</span>
     <button class="cook-share-btn">Share with a friend</button>
   `;
 

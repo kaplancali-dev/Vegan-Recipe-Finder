@@ -45,7 +45,7 @@ const STAPLE_SECTIONS = [
     'vegetable broth','coconut milk',
     { name: 'maple syrup', hint: 'not just for pancakes' },
     'canned tomatoes','tomato paste',
-    { name: 'nutritional yeast', hint: 'nooch gang' },
+    { name: 'nutritional yeast', hint: 'cheese flavor, zero guilt' },
     'apple cider vinegar','rice vinegar','dijon mustard','miso paste','vegan mayo',
   ]},
   { label: '🌿 Spices & Herbs', sub: 'the flavor council', items: [
@@ -173,7 +173,7 @@ function _buildHTML() {
       <!-- STEP 3: Allergies -->
       <div class="obd-step" data-obd-step="3">
         <div class="obd-title">Anything your body vetoes?</div>
-        <div class="obd-sub">We'll keep these out of every recipe. Tap any that apply — no judgment, just fewer surprise reactions and zero trips to the ER — are any of them fun?</div>
+        <div class="obd-sub">We'll keep these out of every recipe. Tap any that apply — no judgment, just fewer surprise reactions. (Your throat closing up is not a vibe.)</div>
         <div class="obd-chips" style="justify-content:center">
           ${_buildAllergenChips()}
         </div>
@@ -184,7 +184,7 @@ function _buildHTML() {
       <div class="obd-step" data-obd-step="4">
         <div style="font-size:2.5rem;margin-bottom:4px">🎉</div>
         <div class="obd-title">You're in.</div>
-        <div class="obd-sub" style="font-size:1rem">HARVEST just matched your kitchen to thousands of recipes. The fridge can stop talking now.</div>
+        <div class="obd-sub" style="font-size:1rem">Your fridge just went from Mean Girls to your biggest hype man. It's already rehearsing what to say when you come back from the farmers market.</div>
         <div style="font-size:.85rem;color:var(--ink-soft);line-height:1.5;margin-bottom:12px">
           Toss in fresh items anytime under <strong>My Pantry</strong> — the more you add, the more recipes unlock.</div>
         <button class="obd-btn obd-btn-primary" data-obd-done>Let's cook</button>

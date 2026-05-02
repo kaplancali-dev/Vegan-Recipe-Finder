@@ -313,12 +313,12 @@ function wireEvents() {
         // Remove from shopping
         set('shopRecipes', current.filter(i => i !== id));
         autoSync();
-        showToast('Removed from Shopping');
+        showToast('Pulled from shopping list');
       } else {
         // Add to shopping
         set('shopRecipes', [...current, id]);
         autoSync();
-        showToast('Added to Shopping List! 🛒');
+        showToast('On the shopping list — go get it 🛒');
       }
       return;
     }
@@ -335,7 +335,7 @@ function wireEvents() {
         set('shopRecipes', shopCurrent.filter(i => i !== id));
       }
       autoSync();
-      showToast('Removed from My Queue');
+      showToast('Unqueued — maybe next week');
       return;
     }
 
@@ -346,7 +346,7 @@ function wireEvents() {
       const hist = get('cookHistory');
       set('cookHistory', hist.filter(h => h.id !== id));
       autoSync();
-      showToast('History entry removed');
+      showToast('Gone — like it never happened');
       return;
     }
   });

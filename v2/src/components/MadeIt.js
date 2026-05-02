@@ -36,7 +36,7 @@ export function initMadeIt(recipes) {
         const history = get('cookHistory');
         set('cookHistory', history.filter(h => h.id !== id));
         autoSync();
-        showToast('Removed from cooking journal');
+        showToast('Erased from history — your secret');
         return;
       }
 
@@ -51,7 +51,7 @@ export function initMadeIt(recipes) {
           h.id === id ? { ...h, rating: newRating } : h
         ));
         autoSync();
-        showToast(`Rated ${newRating} star${newRating !== 1 ? 's' : ''}`);
+        showToast(`${newRating} star${newRating !== 1 ? 's' : ''} — noted`);
         return;
       }
 

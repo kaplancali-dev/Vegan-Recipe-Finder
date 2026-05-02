@@ -138,7 +138,7 @@ function showCollectionPicker(id, isMove = false) {
     overlay.remove();
 
     const def = COLLECTIONS.find(c => c.key === key);
-    showToast(isMove ? `Moved to ${def ? def.label : 'collection'} 📁` : `Saved to ${def ? def.label : 'collection'} ❤️`);
+    showToast(isMove ? `Moved to ${def ? def.label : 'collection'} — nice organizing 📁` : `Saved to ${def ? def.label : 'collection'} ❤️`);
   });
 
   document.body.appendChild(overlay);

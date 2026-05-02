@@ -43,11 +43,11 @@ export function buildAllergenFilterChips(selector, onChangeCallback) {
 
     if (current.includes(key)) {
       set('allergies', current.filter(a => a !== key));
-      showToast('Allergen removed');
+      showToast('Removed — back on the menu');
     } else {
       current.push(key);
       set('allergies', current);
-      showToast('Allergen added — matching recipes hidden');
+      showToast('Noted — those recipes are hidden now');
     }
     autoSync();
   };

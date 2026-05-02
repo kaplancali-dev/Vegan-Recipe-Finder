@@ -171,7 +171,7 @@ function renderFavList() {
       shopBtn.textContent = `🛒 Shop ${allMissing.size} Missing`;
       shopBtn.onclick = () => {
         addToShopList([...allMissing]);
-        showToast(`Added ${allMissing.size} ingredient${allMissing.size !== 1 ? 's' : ''} to Shopping List`);
+        showToast(`${allMissing.size} ingredient${allMissing.size !== 1 ? 's' : ''} on the shopping list`);
       };
     } else {
       shopBtn.hidden = true;
@@ -231,11 +231,11 @@ function renderFavList() {
       const current = get('makelist');
       if (current.includes(id)) {
         set('makelist', current.filter(i => i !== id));
-        showToast('Removed from My Queue');
+        showToast('Unqueued — maybe next week');
       } else {
         current.push(id);
         set('makelist', current);
-        showToast('Added to My Queue 📌');
+        showToast('Queued — this week is looking good 📌');
       }
       autoSync();
       return;

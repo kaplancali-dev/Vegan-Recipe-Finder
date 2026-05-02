@@ -158,12 +158,12 @@ function _wireActionButtons(recipe, missingIngs = []) {
       if (current.includes(id)) {
         set('makelist', current.filter(i => i !== id));
         queueBtn.textContent = '📌 Queue';
-        showToast('Removed from My Queue');
+        showToast('Unqueued — maybe next week');
       } else {
         current.push(id);
         set('makelist', current);
         queueBtn.textContent = '✓ Queue';
-        showToast('Added to My Queue');
+        showToast('Queued — this week is looking good 📌');
       }
       autoSync();
     });

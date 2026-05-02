@@ -20,7 +20,7 @@
 <link rel="icon" type="image/png" href="favicon.png">
 <meta name="theme-color" content="#2d7a4f">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://static.cloudflareinsights.com https://www.googletagmanager.com https://www.google-analytics.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; img-src 'self' https: data:; connect-src 'self' https://*.supabase.co https://cloudflareinsights.com https://www.google-analytics.com; font-src 'self'; frame-src 'none';">
-  <script type="module" crossorigin src="/assets/index-Dh-vVw_4.js"></script>
+  <script type="module" crossorigin src="/assets/index-Di7jFgSf.js"></script>
   <link rel="modulepreload" crossorigin href="/assets/supabase-DaN4is7k.js">
   <link rel="stylesheet" crossorigin href="/assets/index-txHiDf62.css">
 </head>
@@ -140,7 +140,7 @@
       <div class="card">
         <h3 class="card-title section-toggle" data-toggle="myIngsBody">🛒 My Ingredients <span class="muted">(what I bought)</span> <span class="guide-arrow">▾</span></h3>
         <div id="myIngsBody" class="section-body">
-          <p class="pantry-hint">Add what you picked up — uncheck when you run out. Checked items count toward recipe matching.</p>
+          <p class="pantry-hint">Add what you picked up — uncheck when you run out. If it's checked, we're matching recipes to it.</p>
           <div class="input-row" style="margin-bottom:10px">
             <input id="ingInput" type="text" class="text-input" placeholder="e.g. gochugaru, hearts of palm, black garlic, yuzu" autocomplete="off">
             <button id="ingAddBtn" class="btn btn-primary">Add</button>
@@ -219,7 +219,7 @@
     <section id="tab-canmake" class="tab-panel" role="tabpanel" aria-labelledby="btn-canmake" hidden>
       <div class="section-intro">
         <h2>Your Matches</h2>
-        <p>Recipes you can make right now — missing 1 ingredient or less. Recipes using fresh produce are prioritized so nothing goes to waste.</p>
+        <p>Everything here uses what's already in your kitchen — perishables first, so nothing dies a slow death in the crisper drawer.</p>
       </div>
       <div class="filter-bar card">
         <div class="input-row">
@@ -263,7 +263,7 @@
       <div id="canMakeMeta" class="results-meta"></div>
       <div id="canMakeList" class="recipe-list"><div class="skeleton-card"></div><div class="skeleton-card"></div></div>
       <div id="canMakeEmpty" class="empty-state" hidden>
-        <p>Add ingredients to your pantry to see what you can make!</p>
+        <p>Your kitchen's holding out on you — add some ingredients to your pantry and watch recipes appear like magic.</p>
       </div>
     </section>
 
@@ -279,7 +279,7 @@
       </div>
       <div id="wantMakeList"></div>
       <div id="wantMakeEmpty" class="empty-state" hidden>
-        <p>Tap "📌 My Queue" on any recipe to start planning!</p>
+        <p>Nothing queued up yet — tap 📌 My Queue on any recipe to start building your week.</p>
       </div>
       <div id="wmHistoryList" hidden></div>
     </section>
@@ -289,13 +289,13 @@
     <section id="tab-madeit" class="tab-panel" role="tabpanel" aria-labelledby="btn-madeit" hidden>
       <div class="section-intro">
         <h2>✅ Made It</h2>
-        <p>Your cooking journal — every recipe you've made, rated, and loved.</p>
+        <p>Your cooking journal — every recipe you've made, rated, and inevitably told someone about.</p>
       </div>
 
       <div id="madeItStats" class="madeit-stats" hidden></div>
 
       <div id="madeItEmpty" class="empty-state" hidden>
-        <p>No recipes cooked yet. Tap <strong>☐ Made It</strong> on any recipe card to log it here with a date and rating.</p>
+        <p>Your cooking journal is a blank page — tap <strong>☐ Made It</strong> on any recipe to start writing your origin story.</p>
       </div>
 
       <div class="card" id="madeItJournal" hidden>
@@ -314,7 +314,7 @@
     <section id="tab-favorites" class="tab-panel" role="tabpanel" aria-labelledby="btn-favorites" hidden>
       <div class="section-intro">
         <h2>Favorites</h2>
-        <p>Your saved recipes and collections.</p>
+        <p>The ones you keep coming back to.</p>
       </div>
 
       <!-- Collections -->
@@ -332,7 +332,7 @@
         </div>
         <div id="favList" class="recipe-list"></div>
         <div id="favEmpty" class="empty-state" hidden>
-          <p>No recipes in this collection yet. Tap ❤️ on any recipe to add it to your favorites.</p>
+          <p>This collection is waiting for its first recipe — tap ❤️ on anything that earns a spot.</p>
         </div>
       </div>
     </section>
@@ -348,11 +348,11 @@
             <button id="clearShopBtn" class="btn btn-outline btn-sm">Clear All</button>
           </div>
         </div>
-        <p style="font-size:0.82rem;color:var(--ink-soft);margin-top:2px">Tap "📌 Make This" on any recipe, then shop by recipe here.</p>
+        <p style="font-size:0.82rem;color:var(--ink-soft);margin-top:2px">Nothing to buy yet — queue up recipes and we'll build the list for you.</p>
       </div>
       <div id="shopList" class="shop-list"></div>
       <div id="shopEmpty" class="empty-state" hidden>
-        <p>Tap "📌 Make This" on any recipe to build your shopping list!</p>
+        <p>Nothing to buy yet — queue up recipes and we'll build the list for you.</p>
       </div>
     </section>
 

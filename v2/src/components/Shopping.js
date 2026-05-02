@@ -66,7 +66,7 @@ function wireTopControls() {
       set('shopList', []);
       set('shopChecked', []);
       autoSync();
-      showToast('Shopping List cleared');
+      showToast('Clean slate — list wiped');
     });
   }
 
@@ -85,7 +85,7 @@ function _shareAll() {
   const { recipeCards, manualItems } = _buildShopData();
 
   if (!recipeCards.length && !manualItems.length) {
-    showToast('Shopping List is empty');
+    showToast('Nothing to share yet — queue some recipes first');
     return;
   }
 
@@ -117,9 +117,9 @@ function _shareAll() {
     navigator.share({ title, text: `${title}\n\n${body}` }).catch(() => {});
   } else {
     navigator.clipboard.writeText(`${title}\n\n${body}`).then(() => {
-      showToast('Shopping List copied to clipboard!');
+      showToast("Copied — send it to whoever's driving");
     }).catch(() => {
-      showToast('Could not copy — try manually');
+      showToast('Clipboard said no — try again');
     });
   }
 }
@@ -129,7 +129,7 @@ function _shareAll() {
  */
 function _shareSingleRecipe(recipeTitle, missing) {
   if (!missing.length) {
-    showToast('All ingredients ready!');
+    showToast('You already have everything — go cook!');
     return;
   }
 
@@ -147,9 +147,9 @@ function _shareSingleRecipe(recipeTitle, missing) {
     navigator.share({ title, text: body }).catch(() => {});
   } else {
     navigator.clipboard.writeText(body).then(() => {
-      showToast('Copied to clipboard!');
+      showToast('Copied — go get the goods');
     }).catch(() => {
-      showToast('Could not copy — try manually');
+      showToast('Clipboard said no — try again');
     });
   }
 }
@@ -171,9 +171,9 @@ function _shareManualItems(items) {
     navigator.share({ title: 'Shopping List', text: body }).catch(() => {});
   } else {
     navigator.clipboard.writeText(body).then(() => {
-      showToast('Copied to clipboard!');
+      showToast('Copied — go get the goods');
     }).catch(() => {
-      showToast('Could not copy — try manually');
+      showToast('Clipboard said no — try again');
     });
   }
 }
@@ -339,7 +339,7 @@ function renderShopTab() {
       const current = get('shopRecipes');
       set('shopRecipes', current.filter(i => i !== id));
       autoSync();
-      showToast('Removed from list');
+      showToast('Off the list — one less thing');
       return;
     }
 
@@ -367,7 +367,7 @@ function renderShopTab() {
       e.stopPropagation();
       set('shopList', []);
       autoSync();
-      showToast('Additional items cleared');
+      showToast('Extra items cleared');
       return;
     }
 
@@ -432,6 +432,6 @@ export function addToShopList(items) {
   if (added) {
     set('shopList', current);
     autoSync();
-    showToast(`Added ${added} item${added > 1 ? 's' : ''} to shopping list`);
+    showToast(`${added} item${added > 1 ? 's' : ''} added — happy shopping`);
   }
 }

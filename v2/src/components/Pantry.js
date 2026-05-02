@@ -109,7 +109,7 @@ function renderAllergyChips() {
       return `<span class="chip allergy-chip">${label} <span class="chip-x" data-remove-allergy="${idx}" title="Remove">&times;</span></span>`;
     }).join('');
   } else {
-    container.innerHTML = '<span class="muted" style="font-size:0.82rem">No allergens set — tap below to filter out recipes</span>';
+    container.innerHTML = '<span class="muted" style="font-size:0.82rem">No allergens flagged — if your body vetoes anything, add it here</span>';
   }
 
   container.onclick = (e) => {
@@ -120,7 +120,7 @@ function renderAllergyChips() {
     current.splice(idx, 1);
     set('allergies', current);
     autoSync();
-    showToast('Allergen removed');
+    showToast('Removed — back on the menu');
   };
 
   // Add-allergen buttons for allergens not yet active
@@ -143,7 +143,7 @@ function renderAllergyChips() {
         current.push(key);
         set('allergies', current);
         autoSync();
-        showToast('Allergen added — matching recipes will be hidden');
+        showToast('Noted — those recipes are hidden now');
       }
     };
   }
@@ -224,7 +224,7 @@ function wireIngredientInput() {
     if (added.length) {
       set('ingredients', current);
       autoSync();
-      showToast(`Added ${added.length} to My Ingredients`);
+      showToast(`${added.length} ingredient${added.length !== 1 ? 's' : ''} added — let's cook`);
 
       // Mark as onboarded after first ingredient add
       if (!get('onboarded')) {

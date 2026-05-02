@@ -111,9 +111,9 @@ function renderSignedIn(container, user) {
       pushBtn.textContent = 'Pushing…';
       try {
         await cloudPush();
-        showToast('Pushed to cloud');
+        showToast('Synced up — safe in the cloud');
       } catch (err) {
-        showToast('Push failed — check your connection');
+        showToast('Push failed — Wi-Fi ghosting you?');
         console.error('[sync] push error:', err);
       } finally {
         pushBtn.textContent = '⬆ Push to Cloud';
@@ -130,9 +130,9 @@ function renderSignedIn(container, user) {
       pullBtn.textContent = 'Pulling…';
       try {
         await cloudPull();
-        showToast('Pulled from cloud');
+        showToast('Pulled — all caught up');
       } catch (err) {
-        showToast('Pull failed — check your connection');
+        showToast('Pull failed — Wi-Fi ghosting you?');
         console.error('[sync] pull error:', err);
       } finally {
         pullBtn.textContent = '⬇ Pull from Cloud';
@@ -147,9 +147,9 @@ function renderSignedIn(container, user) {
     signOutBtn.addEventListener('click', async () => {
       try {
         await signOut();
-        showToast('Signed out');
+        showToast('Signed out — see you next meal');
       } catch (err) {
-        showToast('Sign out failed');
+        showToast('Sign out failed — clingy, we know');
         console.error('[sync] sign out error:', err);
       }
     });
@@ -172,7 +172,7 @@ function wireOtpFlow(container) {
     sendBtn.addEventListener('click', async () => {
       const email = emailInput.value.trim();
       if (!email || !email.includes('@')) {
-        showToast('Please enter a valid email');
+        showToast("Hmm, that doesn't look like an email");
         return;
       }
 
@@ -180,7 +180,7 @@ function wireOtpFlow(container) {
       const now = Date.now();
       if (now - _lastOtpSend < OTP_COOLDOWN_MS) {
         const wait = Math.ceil((OTP_COOLDOWN_MS - (now - _lastOtpSend)) / 1000);
-        showToast(`Please wait ${wait}s before requesting another code`);
+        showToast(`Easy — wait ${wait}s before trying again`);
         return;
       }
 
@@ -190,13 +190,13 @@ function wireOtpFlow(container) {
 
       const { error } = await sendOtp(email);
       if (error) {
-        showToast('Failed to send code: ' + error.message);
+        showToast("Couldn't send code — " + error.message);
         sendBtn.disabled = false;
         sendBtn.textContent = 'Send Code';
         return;
       }
 
-      showToast('Code sent! Check your email');
+      showToast('Code sent — check your inbox');
       if (step1) step1.hidden = true;
       if (step2) step2.hidden = false;
 
@@ -214,7 +214,7 @@ function wireOtpFlow(container) {
       const code = codeInput.value.trim();
       const email = codeInput.dataset.email || emailInput?.value?.trim();
       if (!code || code.length < 6) {
-        showToast('Please enter the verification code');
+        showToast('Pop in that 6-digit code from your email');
         return;
       }
 
@@ -223,13 +223,13 @@ function wireOtpFlow(container) {
 
       const { error } = await verifyOtp(email, code);
       if (error) {
-        showToast('Verification failed: ' + error.message);
+        showToast("That code didn't work — " + error.message);
         verifyBtn.disabled = false;
         verifyBtn.textContent = 'Verify';
         return;
       }
 
-      showToast('Signed in successfully!');
+      showToast("You're in — welcome back");
       // Auth state change will trigger re-render via onAuthChange
     });
 
