@@ -14,56 +14,126 @@ import { startTour } from './GuidedTour.js';
 /* ── Staple chips data ──────────────────────────────────────── */
 
 const STAPLE_SECTIONS = [
-  { label: '🫘 Proteins & Legumes', sub: 'the workhorses', items: [
-    'chickpeas','black beans','lentils','kidney beans','white beans',
+  // 0 — Beans & Legumes
+  { label: '🫘 Beans & Legumes', sub: 'the workhorses', items: [
+    'chickpeas','black beans','lentils','kidney beans','navy beans','pinto beans','white beans',
+    { name: 'mung beans', hint: 'sprout-worthy' },
+    'split peas','black-eyed peas','lima beans',
     'tofu','tempeh','edamame',
-    { name: 'hemp seeds', hint: 'no, not that kind' },
-    { name: 'chia seeds', hint: 'remember 2013?' },
-    'flax seeds','tahini',
-    { name: 'cashews', hint: "soak 'em, blend 'em, thank us" },
+    { name: 'jackfruit', hint: 'the pulled pork impersonator' },
+    'TVP','soy curls',
   ]},
+  // 1 — Grains & Starches
   { label: '🌾 Grains & Starches', sub: 'the carb committee', items: [
-    'pasta','rice',
+    'pasta (any)','rice (any)',
     { name: 'quinoa', hint: 'still pronouncing it wrong' },
-    'oats','potatoes','sweet potatoes',
-    'corn tortillas','rice noodles','breadcrumbs',
+    'oats','millet','sweet potatoes','potatoes',
+    'corn tortillas','polenta','buckwheat',
+    'rice noodles','glass noodles','nori',
+    'GF bread','GF breadcrumbs','GF tortillas',
   ]},
+  // 2 — Vegetables
   { label: '🥦 Vegetables', sub: 'the main event', items: [
     { name: 'garlic', hint: 'always more' },
-    'onions','carrots','broccoli','spinach',
+    'onions','fresh ginger','spinach',
     { name: 'kale', hint: 'we know' },
-    'tomatoes','bell peppers','mushrooms',
+    'carrots','celery','broccoli','cauliflower','bell peppers',
+    'mushrooms (any)','tomatoes',
     { name: 'avocado', hint: "yes it's a fruit, no we don't care" },
-    'zucchini','corn','cucumber','green onions','cauliflower','cabbage',
+    'zucchini','corn','cucumber','green onions','eggplant','cabbage',
+    'lettuce (any)','green beans','asparagus',
+    { name: 'jalapeño', hint: 'proceed with caution' },
+    'beets','radishes','artichoke hearts','bean sprouts','bamboo shoots','shallots',
   ]},
+  // 3 — Fruits
   { label: '🍋 Fruits', sub: "for snacking, smoothies, and pretending you're virtuous", items: [
-    'lemon','lime','banana','berries',
+    'lemon','lime','banana','berries (any)','cranberries','cherries',
+    'mango','apple','oranges','pineapple','peaches','pears',
+    'kiwi','papaya',
+    { name: 'pomegranate', hint: 'worth the mess' },
+    'plantain','figs','grapes','watermelon','coconut',
     { name: 'dates', hint: "nature's caramel, no notes" },
+    'raisins',
   ]},
-  { label: '🫙 Pantry & Oils', sub: 'the unsung heroes', items: [
-    'olive oil','coconut oil','sesame oil','soy sauce',
-    'vegetable broth','coconut milk',
-    { name: 'maple syrup', hint: 'not just for pancakes' },
-    'canned tomatoes','tomato paste',
+  // 4 — Nuts & Seeds
+  { label: '🥜 Nuts & Seeds', sub: 'creamy dreams', items: [
+    { name: 'nut butter (any)', hint: 'spoon optional' },
+    { name: 'cashews', hint: "soak 'em, blend 'em, thank us" },
+    'almonds','walnuts','pecans','brazil nuts','macadamia nuts','hazelnuts',
+    'pistachio','peanuts','sesame seeds','pine nuts','tahini',
+    { name: 'hemp seeds', hint: 'no, not that kind' },
+    { name: 'chia seeds', hint: 'remember 2013?' },
+    'flax seeds','pumpkin seeds','sunflower seeds','protein powder',
+  ]},
+  // 5 — Plant-Based Dairy
+  { label: '🥛 Plant-Based Dairy', sub: 'moo-free zone', items: [
+    'almond milk','soy milk','rice milk','hemp milk',
+    'macadamia milk','pistachio milk',
+    { name: 'oat milk', hint: "the people's champion" },
+    'cashew milk','vegan yogurt','vegan cream cheese','vegan parmesan',
+  ]},
+  // 6 — Oils & Fats
+  { label: '🫒 Oils & Fats', sub: 'the slip-and-slide section', items: [
+    'olive oil','coconut oil','avocado oil','sesame oil','chili oil',
+    { name: 'vegan butter', hint: "yes it melts, yes it's real" },
+    'vegetable oil','toasted sesame oil','sunflower oil','grapeseed oil',
+  ]},
+  // 7 — Canned & Jarred
+  { label: '🥫 Canned & Jarred', sub: 'shelf-stable MVPs', items: [
+    'canned tomatoes (any)','tomato sauce','tomato paste','vegetable broth',
+    'coconut milk','olives','artichoke hearts','roasted red peppers',
+    { name: 'sun-dried tomatoes', hint: 'umami bombs' },
+    'capers',
+  ]},
+  // 8 — Sauces & Condiments
+  { label: '🫙 Sauces & Condiments', sub: 'the personality section', items: [
+    'soy sauce / tamari / coconut aminos','miso paste','vegan mayo',
+    'ketchup','yellow mustard','dijon mustard','BBQ sauce',
+    { name: 'hoisin sauce', hint: 'stir-fry cheat code' },
+    'vegan worcestershire','tamarind paste',
+    { name: 'gochujang', hint: 'Korean heat, instant depth' },
+    'sriracha / hot sauce','sambal oelek','curry paste','liquid smoke',
+    'vegan sour cream',
     { name: 'nutritional yeast', hint: 'cheese flavor, zero guilt' },
-    'apple cider vinegar','rice vinegar','dijon mustard','miso paste','vegan mayo',
   ]},
+  // 9 — Sweeteners & Vinegars
+  { label: '🍯 Sweeteners & Vinegars', sub: 'the sweet-and-sour squad', items: [
+    { name: 'maple syrup', hint: 'not just for pancakes' },
+    'natural sweetener (any)','agave nectar','coconut sugar',
+    'date syrup','molasses','coconut nectar','allulose','stevia / monk fruit',
+    'apple cider vinegar','rice vinegar','balsamic vinegar',
+    'white vinegar','red wine vinegar','white wine vinegar','sherry vinegar',
+  ]},
+  // 10 — Baking & Flours
+  { label: '🧂 Baking & Flours', sub: 'for your ambitious Sunday self', items: [
+    'baking soda','baking powder','cornstarch','arrowroot powder',
+    'gluten-free flour','almond flour','coconut flour','oat flour',
+    'tapioca flour','brown rice flour','chickpea flour','cassava flour',
+    { name: 'xanthan gum', hint: 'tiny amount, big difference' },
+    'cream of tartar','active dry yeast','protein powder',
+  ]},
+  // 11 — Spices & Herbs
   { label: '🌿 Spices & Herbs', sub: 'the flavor council', items: [
-    'salt','black pepper','garlic powder','onion powder','cumin',
+    'turmeric','cumin',
     { name: 'smoked paprika', hint: 'makes everything better' },
     'cinnamon','chili powder','ginger','curry powder',
-    'oregano','basil','thyme','cayenne','turmeric',
-    'red pepper flakes',
+    'black pepper','garlic powder','onion powder',
+    'oregano','basil','thyme','sage','coriander','cayenne',
+    'cardamom','cloves','allspice','bay leaves','five spice','nutmeg',
+    'sea salt',
     { name: 'garam masala', hint: 'instant warmth' },
+    'lemongrass','star anise','dill','mint','chives','rosemary',
+    'red pepper flakes','fennel seeds',
+    { name: 'sumac', hint: 'lemony magic' },
+    'italian seasoning',
   ]},
-  { label: '🥜 Nuts & Milks', sub: 'creamy dreams', items: [
-    { name: 'peanut butter', hint: 'spoon optional' },
-    'plant milk','almonds','walnuts',
-  ]},
-  { label: '🍨 Baking', sub: 'for your ambitious Sunday self', items: [
-    'vanilla extract','cocoa powder','baking soda','baking powder',
-    'cornstarch','coconut cream',
-    { name: 'vegan butter', hint: "yes it melts, yes it's real" },
+  // 12 — Dessert Pantry
+  { label: '🍨 Dessert Pantry', sub: 'treat yourself (responsibly)', items: [
+    'vanilla extract','cocoa powder',
+    'chocolate chips (any)','white chocolate chips','dark chocolate',
+    { name: 'cacao nibs', hint: 'chocolate for grown-ups' },
+    'coconut cream','shredded coconut',
+    'date sugar','allulose','stevia / monk fruit',
   ]},
 ];
 
@@ -80,10 +150,16 @@ const ALLERGENS = [
 /* ── Sub-page groupings for Step 2 ─────────────────────────── */
 
 const STAPLE_PAGES = [
-  { sections: [0, 1], label: 'Proteins & Grains' },
-  { sections: [2, 3], label: 'Veggies & Fruits' },
-  { sections: [4, 5], label: 'Pantry & Spices' },
-  { sections: [6, 7], label: 'Nuts & Baking' },
+  { sections: [0],     label: 'Beans & Legumes' },
+  { sections: [1],     label: 'Grains & Starches' },
+  { sections: [2],     label: 'Vegetables' },
+  { sections: [3],     label: 'Fruits' },
+  { sections: [4],     label: 'Nuts & Seeds' },
+  { sections: [5, 6],  label: 'Dairy & Oils' },
+  { sections: [7, 8],  label: 'Pantry Essentials' },
+  { sections: [9, 10], label: 'Sweeteners & Baking' },
+  { sections: [11],    label: 'Spices & Herbs' },
+  { sections: [12],    label: 'Dessert Pantry' },
 ];
 
 /* ── State ──────────────────────────────────────────────────── */
