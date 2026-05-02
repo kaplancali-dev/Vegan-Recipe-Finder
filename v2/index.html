@@ -123,7 +123,10 @@
 
       <!-- Staples section (collapsible) -->
       <div class="card">
-        <h3 class="card-title section-toggle" data-toggle="stapleChips">📌 Staples <span class="muted">(always on hand)</span> <span class="guide-arrow">▾</span></h3>
+        <div class="section-header-row">
+          <h3 class="card-title section-toggle" data-toggle="stapleChips">📌 Staples <span class="muted">(always on hand)</span> <span class="guide-arrow">▾</span></h3>
+          <button id="scanBtn" class="btn btn-outline scan-trigger" title="Scan groceries with your camera">📷 Scan</button>
+        </div>
         <div id="stapleChips" class="chip-wrap section-body"></div>
       </div>
 
@@ -141,7 +144,6 @@
           <div class="input-row" style="margin-bottom:10px">
             <input id="ingInput" type="text" class="text-input" placeholder="e.g. gochugaru, hearts of palm, black garlic, yuzu" autocomplete="off">
             <button id="ingAddBtn" class="btn btn-primary">Add</button>
-            <button id="scanBtn" class="btn btn-outline scan-trigger" title="Scan groceries with your camera">📷</button>
           </div>
           <div id="myIngsChips" class="my-ings-list"></div>
         </div>

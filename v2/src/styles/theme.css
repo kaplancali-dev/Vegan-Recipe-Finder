@@ -4123,11 +4123,22 @@ input, select, textarea {
 
 /* ── Pantry Scan Overlay ───────────────────────────────────────── */
 
+.section-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.section-header-row .card-title {
+  margin-bottom: 0;
+}
+
 .scan-trigger {
-  min-width: 42px;
-  padding: 0 10px;
-  font-size: 1.1rem;
-  line-height: 1;
+  padding: 5px 12px;
+  font-size: 0.82rem;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .scan-overlay {
