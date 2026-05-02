@@ -77,18 +77,27 @@ const ALLERGENS = [
   { key: 'nightshade', label: '🍅 Nightshades' },
 ];
 
+/* ── Sub-page groupings for Step 2 ─────────────────────────── */
+
+const STAPLE_PAGES = [
+  { sections: [0, 1], label: 'Proteins & Grains' },
+  { sections: [2, 3], label: 'Veggies & Fruits' },
+  { sections: [4, 5], label: 'Pantry & Spices' },
+  { sections: [6, 7], label: 'Nuts & Baking' },
+];
+
 /* ── State ──────────────────────────────────────────────────── */
 
 const _staplesPicked = new Set();
 const _allergiesPicked = new Set();
 let _currentStep = 1;
+let _currentSubPage = 0;
 
 /* ── Render ─────────────────────────────────────────────────── */
 
-function _buildStapleChips() {
-  return STAPLE_SECTIONS.map(sec => {
-    const subHTML = sec.sub ? `<span class="obd-cat-sub">${escHTML(sec.sub)}</span>` : '';
-    return `
+function _buildSectionHTML(sec) {
+  const subHTML = sec.sub ? `<span class="obd-cat-sub">${escHTML(sec.sub)}</span>` : '';
+  return `
     <div class="obd-cat-label">${escHTML(sec.label)}${subHTML}</div>
     <div class="obd-chips">
       ${sec.items.map(item => {
@@ -104,7 +113,20 @@ function _buildStapleChips() {
       }).join('')}
     </div>
   `;
+}
+
+function _buildStaplePages() {
+  return STAPLE_PAGES.map((page, i) => {
+    const sectionsHTML = page.sections.map(idx => _buildSectionHTML(STAPLE_SECTIONS[idx])).join('');
+    const activeClass = i === 0 ? ' active' : '';
+    return `<div class="obd-subpage${activeClass}" data-obd-subpage="${i}">${sectionsHTML}</div>`;
   }).join('');
+}
+
+function _buildSubProgress() {
+  return STAPLE_PAGES.map((_, i) =>
+    `<span class="obd-sub-dot${i === 0 ? ' on' : ''}" data-sub-idx="${i}"></span>`
+  ).join('');
 }
 
 function _buildAllergenChips() {
@@ -132,21 +154,26 @@ function _buildHTML() {
         <button class="obd-btn-skip" data-obd-skip>Skip — I trust my chaos <span class="obd-skip-note">(you can come back anytime)</span></button>
       </div>
 
-      <!-- STEP 2: Staples -->
+      <!-- STEP 2: Staples (paginated) -->
       <div class="obd-step" data-obd-step="2">
         <div class="obd-title">What's always in your kitchen?</div>
         <div class="obd-sub">Tap everything you usually keep around.
-          Don't overthink it — past-you bought it for a reason, and you can edit this anytime.</div>
-        <div id="obdStaples">${_buildStapleChips()}</div>
+          Don't overthink it — you bought it for a reason, and you can edit this anytime.</div>
+        <div class="obd-sub-progress" id="obdSubProgress">${_buildSubProgress()}</div>
+        <div class="obd-sub-label" id="obdSubLabel">1 of ${STAPLE_PAGES.length}</div>
+        <div id="obdStaples" class="obd-subpage-container">${_buildStaplePages()}</div>
         <div id="obdStapleCount" class="obd-count"></div>
-        <button class="obd-btn obd-btn-primary" data-obd-go="3">Next — Allergies</button><br>
-        <button class="obd-btn-skip" data-obd-go="4">No allergies, skip ahead</button>
+        <div class="obd-sub-nav">
+          <button class="obd-btn obd-btn-back" data-obd-sub-back style="visibility:hidden">Back</button>
+          <button class="obd-btn obd-btn-primary" data-obd-sub-next>Next</button>
+        </div>
+        <button class="obd-btn-skip" data-obd-go="4">Skip ahead</button>
       </div>
 
       <!-- STEP 3: Allergies -->
       <div class="obd-step" data-obd-step="3">
         <div class="obd-title">Anything your body vetoes?</div>
-        <div class="obd-sub">We'll keep these out of every recipe. Tap any that apply — no judgment, just fewer surprise reactions.</div>
+        <div class="obd-sub">We'll keep these out of every recipe. Tap any that apply — no judgment, just fewer surprise reactions and zero trips to the ER — are any of them fun?</div>
         <div class="obd-chips" style="justify-content:center">
           ${_buildAllergenChips()}
         </div>
@@ -166,10 +193,54 @@ function _buildHTML() {
   `;
 }
 
+/* ── Sub-page navigation (within Step 2) ───────────────────── */
+
+function _goToSubPage(overlay, idx) {
+  _currentSubPage = idx;
+  const total = STAPLE_PAGES.length;
+
+  // Show/hide sub-pages
+  overlay.querySelectorAll('.obd-subpage').forEach(p => {
+    p.classList.toggle('active', Number(p.dataset.obdSubpage) === idx);
+  });
+
+  // Update sub-progress dots
+  overlay.querySelectorAll('.obd-sub-dot').forEach((d, i) => {
+    d.classList.toggle('on', i <= idx);
+  });
+
+  // Update label
+  const label = overlay.querySelector('#obdSubLabel');
+  if (label) label.textContent = `${idx + 1} of ${total}`;
+
+  // Back button visibility
+  const backBtn = overlay.querySelector('[data-obd-sub-back]');
+  if (backBtn) backBtn.style.visibility = idx === 0 ? 'hidden' : 'visible';
+
+  // Next button text — last sub-page goes to allergies
+  const nextBtn = overlay.querySelector('[data-obd-sub-next]');
+  if (nextBtn) {
+    if (idx === total - 1) {
+      nextBtn.textContent = 'Next — Allergies';
+    } else {
+      nextBtn.textContent = 'Next';
+    }
+  }
+
+  // Scroll card to top
+  const card = overlay.querySelector('.obd-card');
+  if (card) card.scrollTop = 0;
+}
+
 /* ── Step navigation ────────────────────────────────────────── */
 
 function _goToStep(overlay, step) {
   _currentStep = step;
+
+  // Reset sub-page when entering step 2
+  if (step === 2) {
+    _goToSubPage(overlay, 0);
+  }
 
   // Update step visibility
   overlay.querySelectorAll('.obd-step').forEach(s => {
@@ -288,6 +359,25 @@ export function initOnboarding() {
         _allergiesPicked.add(key);
       } else {
         _allergiesPicked.delete(key);
+      }
+      return;
+    }
+
+    // Sub-page Next button (within Step 2)
+    if (el.closest('[data-obd-sub-next]')) {
+      if (_currentSubPage < STAPLE_PAGES.length - 1) {
+        _goToSubPage(overlay, _currentSubPage + 1);
+      } else {
+        // Last sub-page → go to allergies (step 3)
+        _goToStep(overlay, 3);
+      }
+      return;
+    }
+
+    // Sub-page Back button (within Step 2)
+    if (el.closest('[data-obd-sub-back]')) {
+      if (_currentSubPage > 0) {
+        _goToSubPage(overlay, _currentSubPage - 1);
       }
       return;
     }
