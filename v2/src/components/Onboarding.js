@@ -14,41 +14,56 @@ import { startTour } from './GuidedTour.js';
 /* ── Staple chips data ──────────────────────────────────────── */
 
 const STAPLE_SECTIONS = [
-  { label: '🫘 Proteins & Legumes', items: [
+  { label: '🫘 Proteins & Legumes', sub: 'the workhorses', items: [
     'chickpeas','black beans','lentils','kidney beans','white beans',
-    'tofu','tempeh','edamame','hemp seeds','chia seeds','flax seeds',
-    'tahini','cashews',
+    'tofu','tempeh','edamame',
+    { name: 'hemp seeds', hint: 'no, not that kind' },
+    { name: 'chia seeds', hint: 'remember 2013?' },
+    'flax seeds','tahini',
+    { name: 'cashews', hint: "soak 'em, blend 'em, thank us" },
   ]},
-  { label: '🌾 Grains & Starches', items: [
-    'pasta','rice','quinoa','oats','potatoes','sweet potatoes',
+  { label: '🌾 Grains & Starches', sub: 'the carb committee', items: [
+    'pasta','rice',
+    { name: 'quinoa', hint: 'still pronouncing it wrong' },
+    'oats','potatoes','sweet potatoes',
     'corn tortillas','rice noodles','breadcrumbs',
   ]},
-  { label: '🥦 Vegetables', items: [
-    'garlic','onions','carrots','broccoli','spinach','kale',
-    'tomatoes','bell peppers','mushrooms','avocado','zucchini',
-    'corn','cucumber','green onions','cauliflower','cabbage',
+  { label: '🥦 Vegetables', sub: 'the main event', items: [
+    { name: 'garlic', hint: 'always more' },
+    'onions','carrots','broccoli','spinach',
+    { name: 'kale', hint: 'we know' },
+    'tomatoes','bell peppers','mushrooms',
+    { name: 'avocado', hint: "yes it's a fruit, no we don't care" },
+    'zucchini','corn','cucumber','green onions','cauliflower','cabbage',
   ]},
-  { label: '🍋 Fruits', items: [
-    'lemon','lime','banana','berries','dates',
+  { label: '🍋 Fruits', sub: "for snacking, smoothies, and pretending you're virtuous", items: [
+    'lemon','lime','banana','berries',
+    { name: 'dates', hint: "nature's caramel, no notes" },
   ]},
-  { label: '🫙 Pantry & Oils', items: [
+  { label: '🫙 Pantry & Oils', sub: 'the unsung heroes', items: [
     'olive oil','coconut oil','sesame oil','soy sauce',
-    'vegetable broth','coconut milk','maple syrup','canned tomatoes',
-    'tomato paste','nutritional yeast','apple cider vinegar',
-    'rice vinegar','dijon mustard','miso paste','vegan mayo',
+    'vegetable broth','coconut milk',
+    { name: 'maple syrup', hint: 'not just for pancakes' },
+    'canned tomatoes','tomato paste',
+    { name: 'nutritional yeast', hint: 'nooch gang' },
+    'apple cider vinegar','rice vinegar','dijon mustard','miso paste','vegan mayo',
   ]},
-  { label: '🌿 Spices & Herbs', items: [
+  { label: '🌿 Spices & Herbs', sub: 'the flavor council', items: [
     'salt','black pepper','garlic powder','onion powder','cumin',
-    'smoked paprika','cinnamon','chili powder','ginger','curry powder',
-    'oregano','basil','thyme','cayenne','turmeric','red pepper flakes',
-    'garam masala',
+    { name: 'smoked paprika', hint: 'makes everything better' },
+    'cinnamon','chili powder','ginger','curry powder',
+    'oregano','basil','thyme','cayenne','turmeric',
+    'red pepper flakes',
+    { name: 'garam masala', hint: 'instant warmth' },
   ]},
-  { label: '🥜 Nuts & Milks', items: [
-    'peanut butter','plant milk','almonds','walnuts',
+  { label: '🥜 Nuts & Milks', sub: 'creamy dreams', items: [
+    { name: 'peanut butter', hint: 'spoon optional' },
+    'plant milk','almonds','walnuts',
   ]},
-  { label: '🍨 Baking', items: [
+  { label: '🍨 Baking', sub: 'for your ambitious Sunday self', items: [
     'vanilla extract','cocoa powder','baking soda','baking powder',
-    'cornstarch','coconut cream','vegan butter',
+    'cornstarch','coconut cream',
+    { name: 'vegan butter', hint: "yes it melts, yes it's real" },
   ]},
 ];
 
@@ -71,14 +86,25 @@ let _currentStep = 1;
 /* ── Render ─────────────────────────────────────────────────── */
 
 function _buildStapleChips() {
-  return STAPLE_SECTIONS.map(sec => `
-    <div class="obd-cat-label">${escHTML(sec.label)}</div>
+  return STAPLE_SECTIONS.map(sec => {
+    const subHTML = sec.sub ? `<span class="obd-cat-sub">${escHTML(sec.sub)}</span>` : '';
+    return `
+    <div class="obd-cat-label">${escHTML(sec.label)}${subHTML}</div>
     <div class="obd-chips">
-      ${sec.items.map(item =>
-        `<span class="obd-chip" data-obd-staple="${escHTML(item)}">${escHTML(item)}</span>`
-      ).join('')}
+      ${sec.items.map(item => {
+        const name = typeof item === 'string' ? item : item.name;
+        const hint = typeof item === 'object' && item.hint ? item.hint : '';
+        const hintHTML = hint
+          ? `<span class="obd-chip-hint">${escHTML(hint)}</span>`
+          : '';
+        return `<span class="obd-chip-wrap">
+          <span class="obd-chip" data-obd-staple="${escHTML(name)}">${escHTML(name)}</span>
+          ${hintHTML}
+        </span>`;
+      }).join('')}
     </div>
-  `).join('');
+  `;
+  }).join('');
 }
 
 function _buildAllergenChips() {
@@ -109,8 +135,8 @@ function _buildHTML() {
       <!-- STEP 2: Staples -->
       <div class="obd-step" data-obd-step="2">
         <div class="obd-title">What's always in your kitchen?</div>
-        <div class="obd-sub">Tap everything you usually have on hand.
-          Don't overthink it — you can change these anytime.</div>
+        <div class="obd-sub">Tap everything you usually keep around.
+          Don't overthink it — past-you bought it for a reason, and you can edit this anytime.</div>
         <div id="obdStaples">${_buildStapleChips()}</div>
         <div id="obdStapleCount" class="obd-count"></div>
         <button class="obd-btn obd-btn-primary" data-obd-go="3">Next — Allergies</button><br>
@@ -119,23 +145,22 @@ function _buildHTML() {
 
       <!-- STEP 3: Allergies -->
       <div class="obd-step" data-obd-step="3">
-        <div class="obd-title">Any ingredients to avoid?</div>
-        <div class="obd-sub">We'll filter these out of every recipe. Tap any that apply — or skip if none.</div>
+        <div class="obd-title">Anything your body vetoes?</div>
+        <div class="obd-sub">We'll keep these out of every recipe. Tap any that apply — no judgment, just fewer surprise reactions.</div>
         <div class="obd-chips" style="justify-content:center">
           ${_buildAllergenChips()}
         </div>
-        <button class="obd-btn obd-btn-primary" data-obd-go="4">See my recipes</button>
+        <button class="obd-btn obd-btn-primary" data-obd-go="4">Show me what I can make</button>
       </div>
 
       <!-- STEP 4: Done -->
       <div class="obd-step" data-obd-step="4">
         <div style="font-size:2.5rem;margin-bottom:4px">🎉</div>
-        <div class="obd-title">Your pantry is ready!</div>
-        <div class="obd-sub" style="font-size:1rem">Your selections have been saved.
-          HARVEST will now match you to recipes based on what you have.</div>
+        <div class="obd-title">You're in.</div>
+        <div class="obd-sub" style="font-size:1rem">HARVEST just matched your kitchen to thousands of recipes. The fridge can stop talking now.</div>
         <div style="font-size:.85rem;color:var(--ink-soft);line-height:1.5;margin-bottom:12px">
-          Add fresh items anytime under <strong>My Pantry</strong> to unlock even more recipes.</div>
-        <button class="obd-btn obd-btn-primary" data-obd-done>Start cooking</button>
+          Toss in fresh items anytime under <strong>My Pantry</strong> — the more you add, the more recipes unlock.</div>
+        <button class="obd-btn obd-btn-primary" data-obd-done>Let's cook</button>
       </div>
     </div>
   `;

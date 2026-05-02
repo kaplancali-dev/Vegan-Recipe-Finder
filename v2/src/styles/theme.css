@@ -2994,8 +2994,20 @@ input, select, textarea {
   text-transform: uppercase;
   letter-spacing: 0.06em;
   color: var(--green);
-  margin: 12px 0 6px;
+  margin: 16px 0 6px;
   text-align: left;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.obd-cat-sub {
+  font-weight: 400;
+  text-transform: none;
+  font-size: 0.75rem;
+  font-style: italic;
+  color: var(--ink-soft);
+  letter-spacing: normal;
 }
 
 .obd-chips {
@@ -3003,6 +3015,26 @@ input, select, textarea {
   flex-wrap: wrap;
   gap: 6px;
   margin-bottom: 4px;
+}
+
+.obd-chip-wrap {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.obd-chip-hint {
+  font-size: 0.65rem;
+  color: var(--ink-soft);
+  font-style: italic;
+  opacity: 0.6;
+  line-height: 1.2;
+  max-width: 120px;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .obd-chip {
