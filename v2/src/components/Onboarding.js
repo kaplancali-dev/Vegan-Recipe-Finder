@@ -19,7 +19,7 @@ const STAPLE_SECTIONS = [
     'chickpeas','black beans','lentils','kidney beans','navy beans','pinto beans','white beans',
     { name: 'mung beans', hint: 'sprout-worthy' },
     'split peas','black-eyed peas','lima beans',
-    'firm tofu','soft tofu','tempeh','edamame',
+    'firm tofu','extra-firm tofu','soft tofu','silken tofu','tempeh','edamame',
     { name: 'jackfruit', hint: 'the pulled pork impersonator' },
     'TVP','soy curls',
   ]},

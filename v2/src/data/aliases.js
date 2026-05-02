@@ -361,7 +361,7 @@ export const ALLERGY_KEYWORDS = {
  * Quick-add ingredient panels — staples organized by category.
  */
 export const QA_ITEMS = [
-  {cat:'🫘 Beans & Legumes',     items:['chickpeas','black beans','lentils','kidney beans','navy beans','pinto beans','white beans','mung beans','split peas','black-eyed peas','lima beans','firm tofu','soft tofu','tempeh','edamame','jackfruit','TVP','soy curls']},
+  {cat:'🫘 Beans & Legumes',     items:['chickpeas','black beans','lentils','kidney beans','navy beans','pinto beans','white beans','mung beans','split peas','black-eyed peas','lima beans','firm tofu','extra-firm tofu','soft tofu','silken tofu','tempeh','edamame','jackfruit','TVP','soy curls']},
   {cat:'🌾 Grains & Starches',  items:['pasta (any)','rice (any)','quinoa','oats','millet','sweet potatoes','potatoes','corn tortillas','polenta','buckwheat','rice noodles','glass noodles','nori','GF bread','GF breadcrumbs','GF tortillas']},
   {cat:'🥦 Vegetables',         items:['garlic','onions','fresh ginger','spinach','kale','carrots','celery','broccoli','cauliflower','bell peppers','mushrooms (any)','tomatoes','avocado','zucchini','corn','cucumber','green onions','eggplant','cabbage','lettuce (any)','green beans','asparagus','jalapeño','beets','radishes','artichoke hearts','bean sprouts','bamboo shoots','shallots']},
   {cat:'🍋 Fruits',             items:['lemon','lime','banana','berries (any)','cranberries','cherries','mango','apple','oranges','pineapple','peaches','pears','kiwi','papaya','pomegranate','plantain','figs','grapes','watermelon','coconut','dates','raisins']},
