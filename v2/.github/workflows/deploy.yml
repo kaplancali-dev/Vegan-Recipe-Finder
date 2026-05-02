@@ -46,7 +46,7 @@ jobs:
           cp ../icon-512.png deploy/
           cp ../manifest.json deploy/
           cp ../hero-image4.png deploy/ 2>/dev/null || true
-          cp ../og-share.png deploy/ 2>/dev/null || true
+          cp ../og-preview.png deploy/ 2>/dev/null || true
           cp ../hero.mp4 deploy/ 2>/dev/null || true
 
       - uses: actions/upload-pages-artifact@v3
