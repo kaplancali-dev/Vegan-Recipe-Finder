@@ -1534,21 +1534,6 @@ input, select, textarea {
 .clr-letter:nth-child(5) { animation-delay: 1.2s; }
 .clr-letter:nth-child(6) { animation-delay: 1.5s; }
 
-@keyframes lifeColor {
-  0%, 100% { color: #e53e3e; }
-  17%      { color: #dd6b20; }
-  33%      { color: #d69e2e; }
-  50%      { color: #38a169; }
-  67%      { color: #3182ce; }
-  83%      { color: #805ad5; }
-}
-
-.life-word {
-  display: inline-block;
-  font-weight: 700;
-  color: #e53e3e;
-  animation: lifeColor 8s ease-in-out infinite;
-}
 
 @media (max-width: 780px) {
   .intro-hero-grid { grid-template-columns: 1fr; gap: 18px; }
@@ -3025,10 +3010,11 @@ input, select, textarea {
 }
 
 .obd-chip-hint {
-  font-size: 0.68rem;
+  font-size: 0.7rem;
   color: var(--ink-soft);
   font-style: italic;
-  opacity: 0.7;
+  font-weight: 600;
+  opacity: 0.85;
   line-height: 1.3;
   text-align: center;
   white-space: normal;
