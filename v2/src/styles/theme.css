@@ -1533,6 +1533,9 @@ input, select, textarea {
 .clr-letter:nth-child(4) { animation-delay: 0.9s; }
 .clr-letter:nth-child(5) { animation-delay: 1.2s; }
 .clr-letter:nth-child(6) { animation-delay: 1.5s; }
+.clr-letter:nth-child(7) { animation-delay: 1.8s; }
+.clr-letter:nth-child(8) { animation-delay: 2.1s; }
+.clr-letter:nth-child(9) { animation-delay: 2.4s; }
 
 
 @media (max-width: 780px) {
