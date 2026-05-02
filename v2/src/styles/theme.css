@@ -4123,21 +4123,37 @@ input, select, textarea {
 
 /* ── Pantry Scan Overlay ───────────────────────────────────────── */
 
-.section-header-row {
+/* Scan banner */
+.scan-banner {
+  background: var(--green-soft);
+  border: 1.5px solid var(--green);
+  border-left: 4px solid var(--green);
+}
+
+.scan-banner-inner {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 8px;
+  gap: 12px;
 }
 
-.section-header-row .card-title {
-  margin-bottom: 0;
+.scan-banner-text {
+  flex: 1;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  color: var(--ink);
 }
 
-.scan-trigger {
-  padding: 5px 12px;
-  font-size: 0.82rem;
-  white-space: nowrap;
+.scan-banner-text strong {
+  display: block;
+  font-size: 0.9rem;
+  margin-bottom: 2px;
+}
+
+.scan-banner-text span {
+  color: var(--ink-soft);
+}
+
+.scan-banner .btn {
   flex-shrink: 0;
 }
 
