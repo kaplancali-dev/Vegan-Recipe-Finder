@@ -4120,3 +4120,124 @@ input, select, textarea {
     gap: 8px;
   }
 }
+
+/* ── Pantry Scan Overlay ───────────────────────────────────────── */
+
+.scan-trigger {
+  min-width: 42px;
+  padding: 0 10px;
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.scan-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(26, 46, 36, 0.55);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.scan-overlay.show {
+  opacity: 1;
+}
+
+.scan-modal {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 28px 24px;
+  max-width: 380px;
+  width: 100%;
+  box-shadow: 0 12px 48px rgba(26, 46, 36, 0.18);
+  text-align: center;
+}
+
+.scan-confirm {
+  max-width: 440px;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.scan-title {
+  margin: 0 0 4px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.scan-status {
+  font-size: 0.95rem;
+  color: var(--ink);
+  margin: 12px 0 4px;
+}
+
+.scan-sub {
+  font-size: 0.82rem;
+  color: var(--muted);
+  margin: 0 0 16px;
+}
+
+/* Spinner */
+.scan-spinner {
+  width: 40px;
+  height: 40px;
+  margin: 0 auto 12px;
+  border: 3px solid var(--border);
+  border-top-color: var(--green);
+  border-radius: 50%;
+  animation: scan-spin 0.8s linear infinite;
+}
+
+@keyframes scan-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Chips */
+.scan-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.scan-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  border: 1.5px solid var(--border);
+  background: var(--bg);
+  color: var(--ink-soft);
+  font-size: 0.82rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.scan-chip.on {
+  background: var(--green-soft);
+  border-color: var(--green);
+  color: var(--green-deep);
+}
+
+.scan-chip:active {
+  transform: scale(0.95);
+}
+
+/* Actions */
+.scan-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 16px;
+}

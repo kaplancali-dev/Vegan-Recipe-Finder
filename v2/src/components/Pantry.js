@@ -12,6 +12,7 @@ import { QA_ITEMS } from '../data/aliases.js';
 import { escHTML, norm } from '../utils/text.js';
 import { showToast } from '../utils/toast.js';
 import { $ } from '../utils/dom.js';
+import { wirePantryScan } from './PantryScan.js';
 
 const ALLERGEN_LABELS = {
   peanut: '🥜 Peanuts', 'tree nut': '🌰 Tree Nuts', soy: '🫘 Soy',
@@ -37,6 +38,7 @@ export function initPantry(recipes) {
   _unsubs = [];
 
   wireIngredientInput();
+  wirePantryScan();
   wireQAGrid();
   wireGuideToggle();
   wireSectionToggles();
