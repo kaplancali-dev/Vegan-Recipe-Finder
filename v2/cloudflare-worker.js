@@ -1,7 +1,7 @@
 const ORIGIN = 'https://kaplancali-dev.github.io/Vegan-Recipe-Finder';
 const SITE_URL = 'https://myharvestvegan.com';
 const OG_DATA_URL = 'https://raw.githubusercontent.com/kaplancali-dev/Vegan-Recipe-Finder/main/og-data.json';
-const FALLBACK_IMAGE = `${SITE_URL}/hero-image4.png`;
+const FALLBACK_IMAGE = `${SITE_URL}/og-share.png`;
 const NOTIFY_EMAIL = 'kaplancali@icloud.com';
 
 let cachedOGData = null;
