@@ -64,8 +64,8 @@ const STEPS = [
     arrow: 'top',
   },
   {
-    target: '#btn-browse',
-    tab: 'browse',
+    target: '#btn-madeit',
+    tab: 'madeit',
     title: 'Cook it, rate it, brag about it',
     body: "Tap I Made This after cooking to rate it 1–5 stars. You'll get the option to share with a friend — because what's the point of nailing a recipe if nobody knows?",
     arrow: 'top',
