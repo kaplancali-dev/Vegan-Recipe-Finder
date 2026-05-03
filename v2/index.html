@@ -23,6 +23,50 @@
 </head>
 <body>
 
+  <!-- ── LANDING PAGE (new visitors only) ───────────────────── -->
+  <div id="landingPage" class="landing" hidden>
+    <nav class="landing-nav">
+      <div class="landing-logo">HARVEST.</div>
+      <div class="landing-nav-links">
+        <a href="#how" class="landing-link" data-landing-scroll="how">How it works</a>
+        <a href="#" class="landing-link" data-landing-action="pantry">Pantry</a>
+        <a href="#" class="landing-link" data-landing-action="signin">Sign in</a>
+      </div>
+    </nav>
+
+    <main class="landing-main">
+      <div class="landing-hero">
+        <div class="landing-hero-left">
+          <p class="landing-kicker">&mdash; PANTRY INTELLIGENCE &middot; EST. NOW</p>
+          <h1 class="landing-headline">
+            <em>You have<br>hundreds<br>of meals in your<br><span class="landing-accent">kitchen.</span></em><br>
+            You also have<br>three open jars<br>of mustard.
+          </h1>
+          <p class="landing-sub">We can only help with one of these. <span class="landing-strike">Sorry about the mustard.</span></p>
+          <p class="landing-welcome">&rarr; Welcome to HARVEST.</p>
+          <div class="landing-ctas">
+            <button class="landing-btn-primary" data-landing-action="enter">SHOW ME DINNER &rarr;</button>
+            <a href="#how" class="landing-btn-text" data-landing-scroll="how">How it works</a>
+          </div>
+        </div>
+        <div class="landing-hero-right">
+          <div class="landing-widget">
+            <div class="landing-widget-header">
+              <span>TRY IT &middot; NO SIGNUP</span>
+              <span class="landing-live-dot">&bull;LIVE</span>
+            </div>
+            <div class="landing-widget-input">
+              <span class="landing-plus">+</span>
+              <input id="landingIngInput" type="text" placeholder="leftover rice (vintage)..." autocomplete="off">
+            </div>
+            <button class="landing-widget-btn" data-landing-action="findmeals">FIND MY MEALS</button>
+          </div>
+        </div>
+      </div>
+      <p class="landing-footer-tagline">&mdash; no account, no judgment, no recipe blogs that start with childhood memoirs &mdash;</p>
+    </main>
+  </div>
+
   <!-- Skip to main content (accessibility) -->
   <a href="#tab-browse" class="skip-link">Skip to content</a>
 

@@ -37,6 +37,66 @@ if (window.innerWidth < 520) {
 
 loadState();
 
+/* ── Landing page (new visitors only) ───────────────────────── */
+
+const landingEl = $('#landingPage');
+const hasSeenLanding = localStorage.getItem('harvest_seen_landing');
+
+if (landingEl && !hasSeenLanding && !window.location.search.includes('r=') && !window.location.hash.includes('r=')) {
+  landingEl.hidden = false;
+  $('#app').hidden = true;
+
+  function dismissLanding(ingredient) {
+    localStorage.setItem('harvest_seen_landing', '1');
+    landingEl.hidden = true;
+    $('#app').hidden = false;
+
+    // If user typed an ingredient in the widget, add it to the search
+    if (ingredient) {
+      setTimeout(() => {
+        const searchEl = $('#nameSearch');
+        if (searchEl) {
+          searchEl.value = ingredient;
+          searchEl.dispatchEvent(new Event('input', { bubbles: true }));
+        }
+      }, 500);
+    }
+  }
+
+  // Wire up all landing actions
+  landingEl.addEventListener('click', (e) => {
+    const action = e.target.closest('[data-landing-action]');
+    if (!action) return;
+
+    const type = action.dataset.landingAction;
+
+    if (type === 'enter') {
+      dismissLanding();
+    } else if (type === 'findmeals') {
+      const input = $('#landingIngInput');
+      dismissLanding(input ? input.value.trim() : '');
+    } else if (type === 'pantry') {
+      e.preventDefault();
+      dismissLanding();
+      setTimeout(() => showTab('pantry'), 100);
+    } else if (type === 'signin') {
+      e.preventDefault();
+      dismissLanding();
+      setTimeout(() => showTab('pantry'), 100);
+    }
+  });
+
+  // Enter key in widget input
+  const landingInput = $('#landingIngInput');
+  if (landingInput) {
+    landingInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        dismissLanding(landingInput.value.trim());
+      }
+    });
+  }
+}
+
 /* ── Tab system ──────────────────────────────────────────────── */
 
 const TAB_MAP = {
