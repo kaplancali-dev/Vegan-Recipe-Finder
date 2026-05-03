@@ -1938,8 +1938,10 @@ input, select, textarea {
   transform: translateX(-50%);
   width: 90%;
   max-width: 480px;
-  overflow: hidden;
+  max-height: 60vh;
+  overflow-y: auto;
   box-sizing: border-box;
+  padding-bottom: 80px;
 }
 
 .qa-popup .chip-wrap {
