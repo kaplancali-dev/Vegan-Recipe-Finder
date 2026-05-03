@@ -301,10 +301,10 @@ function renderReadyList() {
     if (emptyEl) {
       emptyEl.hidden = false;
       emptyEl.innerHTML = (_readySearch || _readyCats.size || _readyMaxTime !== Infinity)
-        ? '<p>No matching recipes found. Try adjusting your filters.</p>'
+        ? '<p>Nothing matches those filters — try loosening one up.</p>'
         : ings.length || staples.length
-          ? '<p>No recipes with 1 or fewer missing ingredients yet. Add more to your pantry!</p>'
-          : '<p>Add ingredients to your pantry to see what you can make!</p>';
+          ? '<p>Not quite enough to work with yet — add a few more ingredients and recipes will start appearing here.</p>'
+          : '<p>Your pantry is empty — tell us what you have and we’ll show you what you can make.</p>';
     }
     return;
   }

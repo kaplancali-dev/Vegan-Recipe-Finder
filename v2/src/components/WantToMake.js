@@ -162,7 +162,7 @@ function renderWantToMake() {
 
 function renderCookHistory(container, history, favSet, shopSet) {
   if (!history.length) {
-    container.innerHTML = '<p class="wm-empty-hint">No cooking history yet. Tap ✅ on a recipe after you make it!</p>';
+    container.innerHTML = '<p class="wm-empty-hint">Nothing cooked yet — your kitchen origin story starts the moment you tap ✅ on a recipe.</p>';
     return;
   }
 

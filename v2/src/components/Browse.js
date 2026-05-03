@@ -227,7 +227,7 @@ function _runRender() {
   if (!list) return;
 
   if (!results.length) {
-    list.innerHTML = '<div class="empty-state"><p>No recipes match your filters. Try adjusting your criteria.</p></div>';
+    list.innerHTML = '<div class="empty-state"><p>Zero matches — your filters are being a little too exclusive right now. Loosen one up?</p></div>';
     return;
   }
 

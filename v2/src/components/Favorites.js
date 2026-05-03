@@ -139,8 +139,8 @@ function renderFavList() {
     if (emptyEl) {
       emptyEl.hidden = false;
       emptyEl.innerHTML = _activeColl === 'all'
-        ? '<p>No favorites yet. Tap ❤️ on any recipe to save it here.</p>'
-        : '<p>No recipes in this collection yet. Tap ❤️ on a recipe, then add it to a collection.</p>';
+        ? '<p>No favorites yet — tap ❤️ on anything that makes you feel something.</p>'
+        : '<p>This collection is empty. Tap ❤️ on a recipe, then file it here for safekeeping.</p>';
     }
     if (shopBtn) shopBtn.hidden = true;
     return;
