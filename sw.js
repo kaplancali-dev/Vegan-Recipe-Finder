@@ -8,7 +8,7 @@
  *  - Everything else: network-first with cache fallback
  */
 
-const CACHE_VERSION = 'harvest-moq7e79h';
+const CACHE_VERSION = 'harvest-moq8fj2i';
 const IMG_CACHE    = 'harvest-images';
 
 // App shell — updated by the build step (hashes change each deploy)
