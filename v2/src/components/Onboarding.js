@@ -223,7 +223,7 @@ function _buildHTML() {
       <div class="obd-step active" data-obd-step="1">
         <div class="obd-hero-icon">🥬🧅🫙</div>
         <div class="obd-title">Welcome to HARVEST</div>
-        <div class="obd-hook">Your fridge is judging you behind closed doors.<br>It goes full <em>Mean Girls</em> when you're not around.<br>We can fix that.</div>
+        <div class="obd-hook">Your fridge is judging you behind closed doors. It goes full <em>Mean Girls</em> when you're not around. We can fix that.</div>
         <div class="obd-sub">Tell us what's lurking in there — the sad half-onion, the mystery jar, the kale you bought with good intentions — and we'll match you to plant-based recipes you can actually make tonight.</div>
         <div class="obd-stat">Takes about a minute. Unlocks 4,500+ recipes from the world's top plant-based cooks.</div>
         <button class="obd-btn obd-btn-primary" data-obd-go="2">Let's go</button><br>
