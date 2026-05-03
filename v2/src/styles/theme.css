@@ -13,6 +13,7 @@
 .landing-nav {
   display: flex;
   align-items: center;
+  justify-content: center;
   padding: 20px 40px;
   max-width: 1200px;
   margin: 0 auto;
@@ -28,13 +29,19 @@
 
 /* Main hero layout */
 .landing-main {
-  max-width: 1200px;
+  max-width: 800px;
   margin: 0 auto;
   padding: 40px 40px 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: calc(100vh - 80px);
+  justify-content: center;
 }
 
 .landing-hero {
-  max-width: 720px;
+  width: 100%;
+  text-align: center;
 }
 
 .landing-hero-left {
@@ -116,6 +123,12 @@
   transition: background 0.2s;
 }
 .landing-btn-primary:hover { background: #1a1a1a; }
+
+.landing-btn-lg {
+  padding: 18px 44px;
+  font-size: 0.95rem;
+  letter-spacing: 0.1em;
+}
 
 /* Footer tagline */
 .landing-footer-tagline {
