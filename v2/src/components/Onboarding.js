@@ -238,7 +238,7 @@ function _buildHTML() {
       <div class="obd-step active" data-obd-step="1">
         <div class="obd-hero-icon">🥬🧅🫙</div>
         <div class="obd-title">Welcome to HARVEST</div>
-        <div class="obd-hook">Your fridge is judging you behind closed doors. It goes full <em>Mean Girls</em> when you're not around. We can fix that.</div>
+        <div class="obd-hook">Right now, something in your fridge is quietly giving up on you. Let's prove it wrong.</div>
         <div class="obd-sub">Tell us what's lurking in there — the sad half-onion, the mystery jar, the kale you bought with good intentions — and we'll match you to plant-based recipes you can actually make tonight.</div>
         <div class="obd-stat">Takes about a minute. Unlocks 4,500+ recipes from the world's top plant-based cooks.</div>
         <button class="obd-btn obd-btn-primary" data-obd-go="2">Let's go</button><br>
@@ -274,7 +274,7 @@ function _buildHTML() {
       <div class="obd-step" data-obd-step="4">
         <div style="font-size:2.5rem;margin-bottom:4px">🎉</div>
         <div class="obd-title">You're in.</div>
-        <div class="obd-sub" style="font-size:1rem">Your fridge just went from Mean Girls to your biggest hype man. It's already rehearsing what to say when you come back from the farmers market.</div>
+        <div class="obd-sub" style="font-size:1rem">Nothing in your fridge is giving up on you anymore. You just gave every ingredient a reason to exist.</div>
         <div style="font-size:.85rem;color:var(--ink-soft);line-height:1.5;margin-bottom:12px">
           Toss in fresh items anytime under <strong>My Pantry</strong> — the more you add, the more recipes unlock.</div>
         <button class="obd-btn obd-btn-primary" data-obd-done>Let's cook</button>
