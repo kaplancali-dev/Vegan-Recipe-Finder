@@ -162,6 +162,21 @@ const STAPLE_PAGES = [
   { sections: [12],    label: 'Dessert Pantry' },
 ];
 
+/* ── Page prompts (one per staple sub-page) ────────────────── */
+
+const PAGE_PROMPTS = [
+  "Let's start with the protein heavy-hitters. These are the beans, lentils, and tofu that keep you full and your muscles happy.",
+  "Carbs aren't the enemy — they're the foundation. Pick the grains and starches you always have lurking in a cabinet somewhere.",
+  "The produce aisle. Tap everything you usually grab, even the one you buy and forget about until it's too late.",
+  "Fruit! The stuff you eat with good intentions and the stuff you eat standing over the sink at midnight. Both count.",
+  "Nuts and seeds — tiny but mighty. These add crunch, protein, and that satisfying feeling of eating like a responsible adult.",
+  "Milks and oils — the behind-the-scenes MVPs. They don't get the glory, but nothing works without them.",
+  "The pantry shelf essentials. Canned goods, sauces, the stuff that turns 'I have nothing' into an actual meal.",
+  "Sweeteners and vinegars — the sweet-and-sour backbone. A splash of vinegar or drizzle of maple can save almost anything.",
+  "Spices are where the magic happens. This is the difference between 'I ate' and 'I COOKED.' Go wild.",
+  "Last stop — the dessert pantry. Because sometimes dinner is just the opening act. You're almost done!",
+];
+
 /* ── State ──────────────────────────────────────────────────── */
 
 const _staplesPicked = new Set();
@@ -233,8 +248,7 @@ function _buildHTML() {
       <!-- STEP 2: Staples (paginated) -->
       <div class="obd-step" data-obd-step="2">
         <div class="obd-title">What's always in your kitchen?</div>
-        <div class="obd-sub">Tap everything you usually keep around.
-          Don't overthink it — you bought it for a reason, and you can edit this anytime.</div>
+        <div class="obd-sub obd-page-prompt" id="obdPagePrompt">${PAGE_PROMPTS[0]}</div>
         <div class="obd-sub-progress" id="obdSubProgress">${_buildSubProgress()}</div>
         <div class="obd-sub-label" id="obdSubLabel">1 of ${STAPLE_PAGES.length}</div>
         <div id="obdStaples" class="obd-subpage-container">${_buildStaplePages()}</div>
@@ -288,6 +302,10 @@ function _goToSubPage(overlay, idx) {
   // Update label
   const label = overlay.querySelector('#obdSubLabel');
   if (label) label.textContent = `${idx + 1} of ${total}`;
+
+  // Update page prompt
+  const prompt = overlay.querySelector('#obdPagePrompt');
+  if (prompt && PAGE_PROMPTS[idx]) prompt.textContent = PAGE_PROMPTS[idx];
 
   // Back button visibility
   const backBtn = overlay.querySelector('[data-obd-sub-back]');
