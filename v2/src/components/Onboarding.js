@@ -170,7 +170,7 @@ const PAGE_PROMPTS = [
   "The produce aisle. Tap everything you usually grab, even the one you buy and forget about until it's too late.",
   "Fruit! The stuff you eat with good intentions and the stuff you eat standing over the sink at midnight. Both count.",
   "Nuts and seeds — tiny but mighty. These add crunch, protein, and that satisfying feeling of eating like a responsible adult.",
-  "Milks and oils — the behind-the-scenes MVPs. They don't get the glory, but nothing works without them.",
+  "Plant milks and oils — because regular dairy is clearly for their offspring, and you, my friend, are not a cow. These are the behind-the-scenes MVPs.",
   "The pantry shelf essentials. Canned goods, sauces, the stuff that turns 'I have nothing' into an actual meal.",
   "Sweeteners and vinegars — the sweet-and-sour backbone. A splash of vinegar or drizzle of maple can save almost anything.",
   "Spices are where the magic happens. This is the difference between 'I ate' and 'I COOKED.' Go wild.",
