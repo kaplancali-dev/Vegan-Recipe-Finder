@@ -3227,7 +3227,7 @@ input, select, textarea {
   .tab-btn { font-size: 0.68rem; padding: 5px 5px; min-height: 44px; }
 
   .qa-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .meal-slots {
