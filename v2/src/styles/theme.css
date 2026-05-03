@@ -327,6 +327,8 @@ input, select, textarea {
   box-shadow: var(--shadow);
   padding: 16px;
   margin-bottom: 12px;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
 .card-title {
@@ -1936,11 +1938,13 @@ input, select, textarea {
   transform: translateX(-50%);
   width: 90%;
   max-width: 480px;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
 .qa-popup .chip-wrap {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  flex-wrap: wrap;
   gap: 6px;
 }
 
@@ -1948,6 +1952,7 @@ input, select, textarea {
   text-align: center;
   justify-content: center;
   font-size: 0.82rem;
+  white-space: nowrap;
 }
 
 /* ── Sync Card ───────────────────────────────────────────────── */
