@@ -21,7 +21,7 @@ const STAPLE_SECTIONS = [
     'split peas','black-eyed peas','lima beans',
     'firm tofu','extra-firm tofu','soft tofu','silken tofu','tempeh','edamame',
     { name: 'jackfruit', hint: 'the pulled pork impersonator' },
-    'TVP','soy curls',
+    { name: 'TVP', hint: 'the ground beef understudy' },'soy curls',
   ]},
   // 1 — Grains & Starches
   { label: '🌾 Grains & Starches', sub: 'the carb committee', items: [
