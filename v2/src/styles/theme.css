@@ -1939,9 +1939,16 @@ input, select, textarea {
   width: 90%;
   max-width: 480px;
   max-height: 60vh;
-  overflow-y: auto;
+  overflow: hidden;
   box-sizing: border-box;
-  padding-bottom: 80px;
+  display: flex;
+  flex-direction: column;
+}
+
+.qa-popup-scroll {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  min-height: 0;
 }
 
 .qa-popup .chip-wrap {

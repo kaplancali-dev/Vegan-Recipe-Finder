@@ -435,14 +435,16 @@ function showQAPopup(category, anchorEl) {
 
   popup.innerHTML = `
     <h4 style="margin-bottom:8px;font-family:var(--font-sans)">${escHTML(category.cat)}</h4>
-    <div class="chip-wrap">
-      ${category.items.map(item => {
-        const n = norm(item);
-        const have = currentIngs.has(n) || currentStaples.has(n);
-        return `<span class="chip${have ? ' staple' : ''}" data-qa-item="${escHTML(item)}" style="cursor:pointer">
-          ${have ? '✓' : '+'} ${escHTML(item)}${have ? ' <span class="chip-x" data-qa-remove="' + escHTML(item) + '" title="Remove">×</span>' : ''}
-        </span>`;
-      }).join('')}
+    <div class="qa-popup-scroll">
+      <div class="chip-wrap">
+        ${category.items.map(item => {
+          const n = norm(item);
+          const have = currentIngs.has(n) || currentStaples.has(n);
+          return `<span class="chip${have ? ' staple' : ''}" data-qa-item="${escHTML(item)}" style="cursor:pointer">
+            ${have ? '✓' : '+'} ${escHTML(item)}${have ? ' <span class="chip-x" data-qa-remove="' + escHTML(item) + '" title="Remove">×</span>' : ''}
+          </span>`;
+        }).join('')}
+      </div>
     </div>
     <button class="btn btn-sm btn-outline" style="margin-top:8px" data-qa-close>Close</button>
   `;
