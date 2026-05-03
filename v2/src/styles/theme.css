@@ -21,9 +21,9 @@
 
 .landing-logo {
   font-family: var(--font-sans);
-  font-weight: 700;
-  font-size: 1.1rem;
-  letter-spacing: 0.04em;
+  font-weight: 800;
+  font-size: 1.8rem;
+  letter-spacing: 0.06em;
   color: #1a1a1a;
 }
 
@@ -81,10 +81,10 @@
 /* Sub text */
 .landing-sub {
   font-family: var(--font-sans);
-  font-size: 1rem;
+  font-size: 1.15rem;
   color: #3a3a3a;
   line-height: 1.5;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
 }
 
 .landing-strike {
@@ -95,9 +95,9 @@
 /* Welcome line */
 .landing-welcome {
   font-family: 'Courier New', Courier, monospace;
-  font-size: 0.9rem;
+  font-size: 1.05rem;
   color: #6a6a6a;
-  margin-bottom: 32px;
+  margin-bottom: 36px;
   letter-spacing: 0.02em;
 }
 
