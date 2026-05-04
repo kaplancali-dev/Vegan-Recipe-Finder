@@ -1,24 +1,19 @@
 /**
- * SW Bootstrap — registers the caching service worker.
- *
- * Updates happen silently: when a new version is deployed, the new SW
- * installs in the background and takes control on the user's next page
- * load. No banner, no interruption — they just see the fresh version
- * the next time they open HARVEST.
+ * SW Cleanup — stable-URL script that runs before the app bundle.
+ * Unregisters any service workers and clears all caches so stale
+ * builds never block fresh content from loading.
  */
 (function () {
-  if (!('serviceWorker' in navigator)) return;
-
-  window.addEventListener('load', function () {
-    navigator.serviceWorker.register('./sw.js')
-      .then(function (reg) {
-        // Periodically check for new versions in the background.
-        // The browser will install any new SW it finds and activate
-        // it on the next full page load.
-        setInterval(function () { reg.update(); }, 30 * 60 * 1000);
-      })
-      .catch(function (err) {
-        console.warn('SW registration failed:', err);
-      });
-  });
+  // Unregister all service workers
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistrations().then(function (regs) {
+      regs.forEach(function (reg) { reg.unregister(); });
+    });
+  }
+  // Clear all caches
+  if ('caches' in window) {
+    caches.keys().then(function (keys) {
+      keys.forEach(function (key) { caches.delete(key); });
+    });
+  }
 })();
