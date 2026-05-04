@@ -70,17 +70,6 @@ if (_showLanding) {
   // just dismiss the landing rather than scroll to nothing.
   const _hasInlineOnboarding = slot && slot.children.length > 0;
 
-  // Reveal the sticky nav CTA only when the main SHOW ME button has
-  // scrolled out of view. Avoids showing two identical CTAs at once.
-  const heroBtn = landingEl.querySelector('.landing-btn-primary[data-landing-action="enter"]');
-  if (heroBtn && 'IntersectionObserver' in window) {
-    const io = new IntersectionObserver((entries) => {
-      const visible = entries[0].isIntersecting;
-      landingEl.classList.toggle('show-nav-cta', !visible);
-    }, { rootMargin: '0px 0px -10% 0px', threshold: 0 });
-    io.observe(heroBtn);
-  }
-
   // Wire up landing actions
   landingEl.addEventListener('click', (e) => {
     const action = e.target.closest('[data-landing-action]');
