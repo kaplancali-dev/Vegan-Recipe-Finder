@@ -3158,6 +3158,32 @@ input, select, textarea {
   max-height: none;
   overflow-y: visible;
   box-shadow: 0 6px 28px rgba(0, 0, 0, 0.08);
+  /* Force the light editorial theme for the inline picker so it matches
+     the landing page hero, regardless of OS or app dark-mode setting. */
+  background: #ffffff;
+  color: #1a1a1a;
+}
+
+.obd-overlay--inline .obd-title,
+.obd-overlay--inline .obd-sub,
+.obd-overlay--inline .obd-hook,
+.obd-overlay--inline .obd-stat,
+.obd-overlay--inline .obd-page-prompt,
+.obd-overlay--inline .obd-sub-label,
+.obd-overlay--inline .obd-cat-label {
+  color: #1a1a1a;
+}
+
+.obd-overlay--inline .obd-chip {
+  background: #f5f0e6;
+  color: #1a1a1a;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.obd-overlay--inline .obd-chip.on,
+.obd-overlay--inline .obd-chip.allergy-on {
+  background: #2d6a4f;
+  color: #fff;
 }
 
 /* Slot for inline onboarding below the landing hero. Hidden until the
