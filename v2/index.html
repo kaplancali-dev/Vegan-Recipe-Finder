@@ -27,6 +27,7 @@
   <div id="landingPage" class="landing" hidden>
     <nav class="landing-nav">
       <div class="landing-logo">HARVEST.</div>
+      <button class="landing-nav-cta" data-landing-action="enter">Get started &rarr;</button>
     </nav>
 
     <main class="landing-main">
@@ -46,6 +47,10 @@
       </div>
       <p class="landing-footer-tagline">&mdash; no account, no judgment, no recipe blogs that start with childhood memoirs &mdash;</p>
     </main>
+
+    <!-- Inline onboarding mounts here so the CTA can scroll into setup
+         on the same page rather than navigating to a modal. -->
+    <section id="landingOnboardingSlot" class="landing-onboarding-slot"></section>
   </div>
 
   <!-- Skip to main content (accessibility) -->

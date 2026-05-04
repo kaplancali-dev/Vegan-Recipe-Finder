@@ -48,13 +48,37 @@ if (_showLanding) {
   landingEl.hidden = false;
   $('#app').hidden = true;
 
+  // Hide landing + reveal app. Called when inline onboarding completes,
+  // or as a safety net if onboarding can't mount inline.
   function dismissLanding() {
     localStorage.setItem('harvest_seen_landing', '1');
     landingEl.hidden = true;
     $('#app').hidden = false;
+  }
 
-    // Now trigger onboarding (was deferred while landing was showing)
-    initOnboarding();
+  // Mount onboarding inline below the landing hero so the CTA can
+  // smooth-scroll into setup on the same page (no modal jump).
+  const slot = $('#landingOnboardingSlot');
+  initOnboarding({
+    inline: true,
+    mountInto: slot,
+    onDismiss: dismissLanding,
+  });
+
+  // If onboarding short-circuited (returning user with state but missing
+  // landing flag), the slot will be empty — in that case the CTA should
+  // just dismiss the landing rather than scroll to nothing.
+  const _hasInlineOnboarding = slot && slot.children.length > 0;
+
+  // Reveal the sticky nav CTA only when the main SHOW ME button has
+  // scrolled out of view. Avoids showing two identical CTAs at once.
+  const heroBtn = landingEl.querySelector('.landing-btn-primary[data-landing-action="enter"]');
+  if (heroBtn && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      const visible = entries[0].isIntersecting;
+      landingEl.classList.toggle('show-nav-cta', !visible);
+    }, { rootMargin: '0px 0px -10% 0px', threshold: 0 });
+    io.observe(heroBtn);
   }
 
   // Wire up landing actions
@@ -62,7 +86,19 @@ if (_showLanding) {
     const action = e.target.closest('[data-landing-action]');
     if (!action) return;
     if (action.dataset.landingAction === 'enter') {
-      dismissLanding();
+      if (_hasInlineOnboarding) {
+        // Hide the hero copy + CTA and reveal the picker. The HARVEST.
+        // nav logo stays as a brand anchor. This guarantees only one CTA
+        // exists in the document at a time — no scrolling back to find
+        // SHOW ME again next to the picker's Next button.
+        landingEl.classList.add('landing--hero-dismissed');
+        slot.classList.add('revealed');
+        requestAnimationFrame(() => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      } else {
+        dismissLanding();
+      }
     }
   });
 }

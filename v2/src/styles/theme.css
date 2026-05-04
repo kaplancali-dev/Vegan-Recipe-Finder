@@ -11,12 +11,19 @@
 
 /* Nav */
 .landing-nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
   display: flex;
   align-items: center;
-  justify-content: center;
-  padding: 20px 40px;
+  justify-content: space-between;
+  padding: 16px 40px;
   max-width: 1200px;
   margin: 0 auto;
+  /* Slight backdrop so nav stays readable as hero scrolls under it */
+  background: rgba(245, 240, 230, 0.92);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
 }
 
 .landing-logo {
@@ -25,6 +32,43 @@
   font-size: 1.8rem;
   letter-spacing: 0.06em;
   color: #1a1a1a;
+}
+
+/* Mini CTA in the sticky nav — acts as a safety net that fades IN
+   only once the main SHOW ME button has scrolled out of view. Avoids
+   showing two competing CTAs on the initial view. */
+.landing-nav-cta {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  color: #fff;
+  background: #1a1a1a;
+  border: none;
+  border-radius: 999px;
+  padding: 8px 18px;
+  cursor: pointer;
+  /* Hidden by default; revealed when .landing has the .show-nav-cta class */
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-4px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.landing.show-nav-cta .landing-nav-cta {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.landing-nav-cta:hover {
+  opacity: 0.9;
+}
+
+/* Once the hero is dismissed, the picker has its own Next button —
+   hide the sticky nav CTA to avoid competing actions. */
+.landing--hero-dismissed .landing-nav-cta {
+  display: none;
 }
 
 /* Main hero layout */
@@ -3096,6 +3140,42 @@ input, select, textarea {
 .obd-overlay.show {
   opacity: 1;
   pointer-events: auto;
+}
+
+/* Inline variant: when onboarding is mounted below the landing hero
+   instead of as a full-screen modal. Flows naturally in the document. */
+.obd-overlay--inline {
+  position: relative;
+  inset: auto;
+  z-index: auto;
+  background: transparent;
+  padding: 32px 16px 64px;
+  pointer-events: auto;
+  min-height: auto;
+}
+
+.obd-overlay--inline .obd-card {
+  max-height: none;
+  overflow-y: visible;
+  box-shadow: 0 6px 28px rgba(0, 0, 0, 0.08);
+}
+
+/* Slot for inline onboarding below the landing hero. Hidden until the
+   user clicks "SHOW ME WHAT'S POSSIBLE" so there's only ever one set
+   of CTAs visible at a time. */
+.landing-onboarding-slot {
+  display: none;
+}
+
+.landing-onboarding-slot.revealed {
+  display: block;
+}
+
+/* When the user clicks SHOW ME, hide the hero copy + CTA so the picker
+   takes over as the only visible content. Keep the nav logo as a brand
+   anchor at the top. */
+.landing--hero-dismissed .landing-main {
+  display: none;
 }
 
 .obd-card {

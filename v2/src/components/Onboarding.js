@@ -380,11 +380,13 @@ function _saveSelections() {
 
 /* ── Dismiss ────────────────────────────────────────────────── */
 
-function _dismiss(overlay) {
+function _dismiss(overlay, onDismiss) {
   set('onboarded', true);
   overlay.style.opacity = '0';
   setTimeout(() => {
     overlay.remove();
+    // Notify caller (e.g. landing page) that onboarding is done
+    if (typeof onDismiss === 'function') onDismiss();
     // Launch guided tour after onboarding fades out
     startTour();
   }, 350);
@@ -394,8 +396,22 @@ function _dismiss(overlay) {
 
 /**
  * Initialize onboarding. Shows the walkthrough if this is a first visit.
+ *
+ * @param {Object} [opts]
+ * @param {boolean} [opts.inline=false]    Mount inline (no full-screen modal).
+ * @param {string|Element} [opts.mountInto] Target element/selector when inline.
+ * @param {Function} [opts.onDismiss]      Called after onboarding completes.
+ * @param {number} [opts.startStep]        Which step to start on (1-4). Defaults
+ *                                         to 1 in modal mode and 2 in inline mode
+ *                                         (skips the welcome step since the
+ *                                         landing hero already welcomes the user).
  */
-export function initOnboarding() {
+export function initOnboarding(opts = {}) {
+  const { inline = false, mountInto = null, onDismiss = null } = opts;
+  // In inline mode the landing hero already serves as the welcome,
+  // so by default skip step 1 and jump straight to the staples picker.
+  const startStep = opts.startStep != null ? opts.startStep : (inline ? 2 : 1);
+
   const onboarded = get('onboarded');
   const hasStaples = get('staples').length > 0;
 
@@ -407,12 +423,28 @@ export function initOnboarding() {
     new URLSearchParams(window.location.search).get('r');
   if (hasDeepLink) return;
 
+  // Resolve mount target for inline mode
+  let mountEl = document.body;
+  if (inline) {
+    mountEl = typeof mountInto === 'string' ? document.querySelector(mountInto) : mountInto;
+    if (!mountEl) {
+      console.warn('[Onboarding] inline mode requested but mountInto not found; falling back to body');
+      mountEl = document.body;
+    }
+  }
+
   // Create overlay
   const overlay = document.createElement('div');
-  overlay.className = 'obd-overlay';
+  overlay.className = 'obd-overlay' + (inline && mountEl !== document.body ? ' obd-overlay--inline' : '');
   overlay.id = 'obdOverlay';
   overlay.innerHTML = _buildHTML();
-  document.body.appendChild(overlay);
+  mountEl.appendChild(overlay);
+
+  // If a non-default starting step was requested, swap the active step
+  // (default state from _buildHTML has step 1 active and the first dot on).
+  if (startStep !== 1) {
+    _goToStep(overlay, startStep);
+  }
 
   // Fade in
   requestAnimationFrame(() => {
@@ -485,13 +517,13 @@ export function initOnboarding() {
 
     // Skip button
     if (el.closest('[data-obd-skip]')) {
-      _dismiss(overlay);
+      _dismiss(overlay, onDismiss);
       return;
     }
 
     // Done button
     if (el.closest('[data-obd-done]')) {
-      _dismiss(overlay);
+      _dismiss(overlay, onDismiss);
       return;
     }
   });
