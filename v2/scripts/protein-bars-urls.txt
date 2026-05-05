@@ -1,0 +1,21 @@
+# 15 plant-based, gluten-free, high-protein, high-fiber protein bar recipes
+# Curated for HARVEST. Run through the standard pipeline:
+#   python3 scrape-recipes.py protein-bars-urls.txt
+#   python3 upload-photos.py
+#   python3 merge-recipes.py
+
+https://minimalistbaker.com/no-bake-vegan-protein-bars-4-ingredients/
+https://feelgoodfoodie.net/recipe/vegan-protein-bars/
+https://thebigmansworld.com/easy-4-ingredient-no-bake-protein-bars-vegan-gluten-free-sugar-free/
+https://www.purelykaylie.com/cookie-dough-protein-bars/
+https://www.bucketlisttummy.com/sunflower-chocolatechip-chickpea-bars/
+https://myquietkitchen.com/vegan-protein-bars/
+https://www.powerhungry.com/2015/05/15/chickpea-protein-bars-gluten-free-grain-free-vegan/
+https://www.powerhungry.com/2013/02/27/no-bake-quinoa-protein-bars/
+https://www.cottercrunch.com/how-to-make-homemade-vegan-protein-bars/
+https://www.rhiansrecipes.com/protein-bars/
+https://healthygirlkitchen.com/recipes/homemade-vegan-protein-bars-no-bake/
+https://eatwithclarity.com/vegan-protein-bars/
+https://80twentynutrition.com/lentil-energy-bars/
+https://www.nomeatathlete.com/quinoa-protein-energy-bars/
+https://theallnaturalvegan.com/easy-homemade-vegan-gluten-free-protein-bars/

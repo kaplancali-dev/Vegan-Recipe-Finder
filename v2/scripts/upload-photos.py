@@ -19,6 +19,7 @@ Requires:
 """
 
 import json
+import os
 import sys
 import time
 import io
@@ -40,11 +41,24 @@ PEXELS_API_KEY = 'd2SOQDCAwQdtPjjIZAp395a57B9OVKyqUz3tjgRf5PEAl0JfAmVFkogu'
 SUPABASE_URL = 'https://zhncgdbhgkeiybdbzsql.supabase.co'
 SUPABASE_BUCKET = 'recipe-images'
 
-# You'll need to set this — get it from Supabase dashboard → Settings → API
-# Use the service_role key (not anon) for storage uploads
-SUPABASE_SERVICE_KEY = ''  # SET THIS BEFORE RUNNING — get from Supabase dashboard
-
 SCRIPT_DIR = Path(__file__).parent
+
+# Read the Supabase service-role key automatically from one of:
+#   1. SUPABASE_SERVICE_KEY environment variable
+#   2. v2/.supabase-key file (gitignored — created once, reused forever)
+#   3. ~/.harvest-supabase-key file (alternative location)
+#
+# To set up the first time, run ONE of these in Terminal:
+#   echo "<your-key>" > ~/Desktop/Vegan-Recipe-Finder/v2/.supabase-key && chmod 600 ~/Desktop/Vegan-Recipe-Finder/v2/.supabase-key
+def _load_supabase_key():
+    if os.environ.get('SUPABASE_SERVICE_KEY'):
+        return os.environ['SUPABASE_SERVICE_KEY'].strip()
+    for path in [SCRIPT_DIR.parent / '.supabase-key', Path.home() / '.harvest-supabase-key']:
+        if path.exists():
+            return path.read_text().strip()
+    return ''
+
+SUPABASE_SERVICE_KEY = _load_supabase_key()
 PHOTO_DIR = SCRIPT_DIR / 'photos'
 DEFAULT_INPUT = SCRIPT_DIR / 'scraped-recipes.json'
 
