@@ -225,6 +225,18 @@
   letter-spacing: 0.02em;
 }
 
+/* Desktop: bump the sub-copy and welcome line so they don't feel
+   tiny next to the giant hero typography. Mobile sizing stays as-is. */
+@media (min-width: 768px) {
+  .landing-sub {
+    font-size: 1.85rem;
+    line-height: 1.45;
+  }
+  .landing-welcome {
+    font-size: 1.7rem;
+  }
+}
+
 /* CTA buttons */
 .landing-ctas {
   display: flex;
