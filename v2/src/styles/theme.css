@@ -42,6 +42,112 @@
   display: none;
 }
 
+/* ── Notes full-screen editor ────────────────────────────────── */
+
+/* Heading row with inline expand-to-fullscreen button */
+.notes-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.notes-header h4 {
+  margin: 0;
+}
+
+.notes-expand-btn {
+  background: transparent;
+  border: 1px solid var(--ink-muted, #999);
+  color: var(--ink, #1a1a1a);
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-size: 0.95rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.notes-expand-btn:hover {
+  background: rgba(0, 0, 0, 0.06);
+  border-color: var(--ink, #1a1a1a);
+}
+
+/* Full-screen overlay for distraction-free notes editing */
+.notes-fs-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 11000;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  padding: 16px;
+}
+
+.notes-fs-card {
+  background: var(--bg, #fff);
+  color: var(--ink, #1a1a1a);
+  border-radius: 14px;
+  width: 100%;
+  max-width: 720px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+}
+
+.notes-fs-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.notes-fs-header h3 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.notes-fs-close {
+  background: transparent;
+  border: none;
+  font-size: 1.6rem;
+  line-height: 1;
+  color: var(--ink, #1a1a1a);
+  cursor: pointer;
+  padding: 0 6px;
+}
+
+.notes-fs-textarea {
+  flex: 1;
+  width: 100%;
+  border: none;
+  outline: none;
+  resize: none;
+  padding: 16px 18px;
+  font-family: inherit;
+  font-size: 1rem;
+  line-height: 1.5;
+  background: transparent;
+  color: inherit;
+}
+
+.notes-fs-footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 12px 18px;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+/* Mobile: take the full screen, no padding */
+@media (max-width: 640px) {
+  .notes-fs-overlay { padding: 0; }
+  .notes-fs-card { border-radius: 0; max-width: none; height: 100%; }
+}
+
 /* Main hero layout */
 .landing-main {
   max-width: 800px;

@@ -395,7 +395,10 @@ function _renderFullDetail(recipe, ings, staples) {
     ` : ''}
 
     <div class="detail-section">
-      <h4>📝 My Notes</h4>
+      <div class="notes-header">
+        <h4>📝 My Notes</h4>
+        <button id="detailNotesExpand" class="notes-expand-btn" type="button" aria-label="Expand notes to full screen" title="Expand to full screen">⛶</button>
+      </div>
       <textarea id="detailNotes" class="text-input" rows="3" placeholder="Your tweaks, substitutions, serving tips…"
         style="width:100%;resize:vertical">${escHTML(notes)}</textarea>
     </div>
@@ -445,6 +448,48 @@ function _renderFullDetail(recipe, ings, staples) {
         autoSync();
       }, 800);
     });
+
+    // Expand-to-fullscreen for notes editing on small screens
+    const expandBtn = document.getElementById('detailNotesExpand');
+    if (expandBtn) {
+      expandBtn.addEventListener('click', () => {
+        const overlay = document.createElement('div');
+        overlay.className = 'notes-fs-overlay';
+        overlay.innerHTML = `
+          <div class="notes-fs-card">
+            <div class="notes-fs-header">
+              <h3>📝 My Notes</h3>
+              <button class="notes-fs-close" type="button" aria-label="Close">&times;</button>
+            </div>
+            <textarea class="notes-fs-textarea" placeholder="Your tweaks, substitutions, serving tips…"></textarea>
+            <div class="notes-fs-footer">
+              <button class="btn btn-primary notes-fs-done" type="button">Done</button>
+            </div>
+          </div>
+        `;
+        document.body.appendChild(overlay);
+
+        const fsTextarea = overlay.querySelector('.notes-fs-textarea');
+        fsTextarea.value = notesEl.value;
+        // Autofocus so the keyboard appears immediately on mobile
+        setTimeout(() => fsTextarea.focus(), 50);
+
+        function closeFs() {
+          // Copy back to the original textarea + dispatch 'input' so the
+          // existing auto-save logic picks up the change.
+          notesEl.value = fsTextarea.value;
+          notesEl.dispatchEvent(new Event('input', { bubbles: true }));
+          overlay.remove();
+        }
+
+        overlay.querySelector('.notes-fs-close').addEventListener('click', closeFs);
+        overlay.querySelector('.notes-fs-done').addEventListener('click', closeFs);
+        // Escape key closes too
+        overlay.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape') closeFs();
+        });
+      });
+    }
   }
 }
 
