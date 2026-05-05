@@ -33,3 +33,7 @@ v2/.supabase-key
 v2/.pexels-key
 v2/.eyJ*
 v2/patch.cjs
+
+# Vite temp files generated during build (should never be committed)
+v2/vite.config.js.timestamp-*.mjs
+*.timestamp-*.mjs
