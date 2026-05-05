@@ -1073,6 +1073,23 @@ input, select, textarea {
   font-weight: 500;
   cursor: pointer;
   transition: all var(--transition);
+  white-space: nowrap;
+}
+
+/* Mobile: fit all 5 sort buttons on one line by distributing available
+   width evenly and tightening padding/font. No wrap. */
+@media (max-width: 640px) {
+  .sort-btns {
+    flex-wrap: nowrap;
+    gap: 4px;
+  }
+  .sort-btn {
+    flex: 1 1 0;
+    min-width: 0;
+    padding: 6px 4px;
+    font-size: 0.72rem;
+    text-align: center;
+  }
 }
 
 .sort-btn.on {
