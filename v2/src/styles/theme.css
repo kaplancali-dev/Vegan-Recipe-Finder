@@ -1076,19 +1076,29 @@ input, select, textarea {
   white-space: nowrap;
 }
 
-/* Mobile: fit all 5 sort buttons on one line by distributing available
-   width evenly and tightening padding/font. No wrap. */
+/* Mobile: fit all 5 sort buttons on one line. Each sizes to its content
+   so labels don't get clipped, with comfortable spacing. */
 @media (max-width: 640px) {
   .sort-btns {
     flex-wrap: nowrap;
     gap: 4px;
+    justify-content: space-between;
   }
   .sort-btn {
-    flex: 1 1 0;
+    flex: 1 1 auto;
     min-width: 0;
-    padding: 6px 4px;
+    padding: 6px 8px;
     font-size: 0.72rem;
     text-align: center;
+    letter-spacing: 0;
+  }
+}
+
+/* Smaller phones (iPhone mini, older Android): tighten further */
+@media (max-width: 400px) {
+  .sort-btn {
+    padding: 6px 4px;
+    font-size: 0.68rem;
   }
 }
 
