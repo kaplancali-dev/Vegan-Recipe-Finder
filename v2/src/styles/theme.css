@@ -1819,19 +1819,21 @@ input, select, textarea {
 .intro-hero-video { min-width: 0; max-width: 700px; margin: 0 auto; }
 .intro-hero-copy { min-width: 0; max-width: 750px; margin: 0 auto; }
 
-/* Desktop two-column hero: video left, copy right */
+/* Desktop two-column hero: title spans both columns at top, then
+   video left + copy right on the next row, both top-aligned so the
+   paragraph starts at the top of the video. */
 @media (min-width: 900px) {
   .intro-hero-grid {
     grid-template-columns: 2fr 3fr;
-    gap: 32px;
-    align-items: center;
+    grid-template-areas:
+      "title title"
+      "video copy";
+    gap: 16px 32px;
+    align-items: start;
   }
-  .intro-hero-video {
-    max-width: none;
-  }
-  .intro-hero-copy {
-    max-width: none;
-  }
+  .intro-hero-title { grid-area: title; }
+  .intro-hero-video { grid-area: video; max-width: none; }
+  .intro-hero-copy  { grid-area: copy;  max-width: none; }
   .hero-img {
     min-height: 240px;
     max-height: 400px;
