@@ -149,6 +149,7 @@ def upload_to_supabase(data, filename):
         resp = requests.post(
             url,
             headers={
+                'apikey': SUPABASE_SERVICE_KEY,
                 'Authorization': f'Bearer {SUPABASE_SERVICE_KEY}',
                 'Content-Type': 'image/jpeg',
                 'x-upsert': 'true',

@@ -41,6 +41,7 @@ for i, photo in enumerate(photos, 1):
         resp = requests.post(
             url,
             headers={
+                'apikey': SUPABASE_SERVICE_KEY,
                 'Authorization': f'Bearer {SUPABASE_SERVICE_KEY}',
                 'Content-Type': 'image/jpeg',
                 'x-upsert': 'true',
