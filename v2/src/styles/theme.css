@@ -1064,16 +1064,19 @@ input, select, textarea {
 }
 
 .sort-btn {
-  padding: 6px 12px;
+  flex: 1 1 0;
+  min-width: 0;
+  padding: 8px 12px;
   border: 1.5px solid var(--border);
   border-radius: var(--radius-sm);
   background: var(--card);
   color: var(--ink-soft);
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   font-weight: 500;
   cursor: pointer;
   transition: all var(--transition);
   white-space: nowrap;
+  text-align: center;
 }
 
 /* Mobile: distribute all 5 sort buttons evenly across full width so they
