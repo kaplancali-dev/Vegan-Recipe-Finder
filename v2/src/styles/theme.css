@@ -226,14 +226,20 @@
 }
 
 /* Desktop: bump the sub-copy and welcome line so they don't feel
-   tiny next to the giant hero typography. Mobile sizing stays as-is. */
+   tiny next to the giant hero typography. Mobile sizing stays as-is.
+   Also widen the hero container so the punchline stays on one line. */
 @media (min-width: 768px) {
+  .landing-main {
+    max-width: 1100px;
+  }
   .landing-sub {
-    font-size: 1.85rem;
+    font-size: 1.7rem;
     line-height: 1.45;
+    white-space: nowrap;
   }
   .landing-welcome {
-    font-size: 1.7rem;
+    font-size: 1.55rem;
+    white-space: nowrap;
   }
 }
 
