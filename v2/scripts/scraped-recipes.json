@@ -1,250 +1,86 @@
 [
   {
-    "title": "Cookie Dough Protein Bars (Vegan and Gluten-Free)",
-    "site": "Kaylie Grace",
-    "url": "https://www.purelykaylie.com/cookie-dough-protein-bars/",
+    "title": "Coconut Lime Protein Bars",
+    "site": "Camilla",
+    "url": "https://www.powerhungry.com/2017/10/09/coconut-lime-protein-bars-vegan/",
+    "cats": [
+      "Bread & Baking",
+      "Desserts",
+      "Gluten-Free",
+      "Quick Meals"
+    ],
+    "time": 10,
+    "servings": 4,
+    "ing": [
+      "limes",
+      "unsweetened coconut flakes/shreds",
+      "vanilla vegan protein powder",
+      "almond butter",
+      "white chocolate baking chips )",
+      "lime zest"
+    ],
+    "nut": {
+      "cal": 245.0,
+      "pro": 14.0,
+      "carb": 11.0,
+      "fat": 19.0,
+      "fib": 6.0
+    },
+    "id": 8372,
+    "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/8372.jpg"
+  },
+  {
+    "title": "Vegan Chocolate Black Bean Protein Bars (GF)",
+    "site": "Camilla",
+    "url": "https://www.powerhungry.com/2010/10/18/vegan-chocolate-black-bean-protein-bars/",
     "cats": [
       "Desserts",
       "Gluten-Free",
-      "High-Protein",
       "Quick Meals"
     ],
     "time": 10,
     "servings": 8,
     "ing": [
-      "cashew butter",
-      "vanilla protein powder",
-      "almond flour",
-      "coconut flour",
-      "maple syrup",
-      "vanilla extract",
-      "salt",
-      "mini chocolate chips"
+      "olled oats",
+      "can unseasoned black beans",
+      "moist dates",
+      "plant-based vanilla or chocolate protein powder",
+      "unsweetened cocoa powder",
+      "nondairy milk or water )",
+      "optional: more cocoa powder for dusting"
     ],
     "nut": {
-      "cal": 295.0,
-      "pro": 16.0,
-      "carb": 25.0,
+      "cal": 132.0,
+      "pro": 9.4,
+      "carb": 21.5,
       "fat": 16.0,
-      "fib": 4.0
+      "fib": 5.3
     },
-    "id": 8365,
-    "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/8365.jpg"
+    "id": 8373,
+    "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/8373.jpg"
   },
   {
-    "title": "Homemade Nut Free Protein Bars with Chickpeas",
-    "site": "Bucketlisttummy",
-    "url": "https://www.bucketlisttummy.com/sunflower-chocolatechip-chickpea-bars/",
+    "title": "Black Bean Protein Bars (Vegan & Without Protein Powder)",
+    "site": "Nutritionbymichaela",
+    "url": "https://www.nutritionbymichaela.com/recipes/black-bean-protein-bars-vegan/",
     "cats": [
       "Bread & Baking",
-      "Desserts",
       "Gluten-Free"
     ],
     "time": 40,
-    "servings": 9,
+    "servings": 8,
     "ing": [
-      "chickpeas",
-      "oats",
-      "sunflower seed butter*",
-      "coconut sugar",
-      "baking powder",
-      "baking soda",
+      "dates",
+      "black beans",
+      "rolled oats",
+      "coconut flour",
+      "cocoa powder",
+      "hemp seeds",
+      "nut butter or tahini",
+      "water",
       "salt",
-      "vanilla extract",
-      "maple syrup",
-      "sunflower seeds",
-      "chocolate chips"
-    ],
-    "nut": {
-      "cal": 273.0,
-      "pro": 9.0,
-      "carb": 34.0,
-      "fat": 12.0,
-      "fib": 4.0
-    },
-    "id": 8366,
-    "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/8366.jpg"
-  },
-  {
-    "title": "The Best Vegan Chickpea Protein Bars (Grain-Free, Oil-Free)",
-    "site": "Camilla",
-    "url": "https://www.powerhungry.com/2015/05/15/chickpea-protein-bars-gluten-free-grain-free-vegan/",
-    "cats": [
-      "Dinner",
-      "Gluten-Free",
-      "Quick Meals"
-    ],
-    "time": 1,
-    "servings": 8,
-    "ing": [
-      "chickpeas",
-      "very soft dates )",
-      "creamy natural peanut butter )",
-      "vegan vanilla protein powder",
-      "pepitas )",
-      "cranberries"
-    ],
-    "nut": {
-      "cal": 169.0,
-      "pro": 10.0,
-      "carb": 20.0,
-      "fat": 7.0,
-      "fib": 3.5
-    },
-    "id": 8367,
-    "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/8367.jpg"
-  },
-  {
-    "title": "No-Bake Quinoa Protein Bars (Vegan, Gluten-free)",
-    "site": "Camilla",
-    "url": "https://www.powerhungry.com/2013/02/27/no-bake-quinoa-protein-bars/",
-    "cats": [
-      "Bread & Baking",
-      "Desserts",
-      "Gluten-Free",
-      "Quick Meals",
-      "Raw"
-    ],
-    "time": 10,
-    "servings": 12,
-    "ing": [
-      "packed",
-      "unsweetened natural nut or seed butter",
-      "salt",
-      "vanilla extract",
-      "old-fashioned or quick-cooking rolled oats",
-      "coarsely toasted walnuts",
-      "semisweet chocolate chips"
-    ],
-    "nut": {
-      "cal": 211.0,
-      "pro": 7.0,
-      "carb": 35.5,
-      "fat": 7.5,
-      "fib": 4.5
-    },
-    "id": 8368,
-    "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/8368.jpg"
-  },
-  {
-    "title": "Homemade Vegan Protein Bars",
-    "site": "Lindsay Cotter",
-    "url": "https://www.cottercrunch.com/how-to-make-homemade-vegan-protein-bars/",
-    "cats": [
-      "Bread & Baking",
-      "Gluten-Free",
-      "Quick Meals"
-    ],
-    "time": 40,
-    "servings": 8,
-    "ing": [
-      "chickpeas",
-      "rolled oats or quick oats *rolled oats have protein*",
-      "apricots",
-      "cranberries or cherries",
-      "chia seed",
-      "maple syrup or honey",
-      "vanilla",
-      "unsweetened almond or coconut milk",
-      "dash of cinnamon",
-      "dash of sea salt"
-    ],
-    "nut": {
-      "cal": 149.0,
-      "pro": 4.5,
-      "carb": 26.9,
-      "fat": 3.2,
-      "fib": 5.1
-    },
-    "id": 8369,
-    "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/8369.jpg"
-  },
-  {
-    "title": "Vegan Protein Bars (Gluten-Free)",
-    "site": "Rhiansrecipes",
-    "url": "https://www.rhiansrecipes.com/protein-bars/",
-    "cats": [
-      "Bread & Baking",
-      "Gluten-Free",
-      "Quick Meals"
-    ],
-    "time": 15,
-    "servings": 6,
-    "ing": [
-      "pitted dates )",
-      "smooth peanut butter )",
-      "vegan protein powder )",
-      "rolled oats )",
-      "unsweetened almond milk )",
-      "cranberries"
-    ],
-    "nut": {
-      "cal": 150.0,
-      "pro": 7.0,
-      "carb": 25.0,
-      "fat": 4.0,
-      "fib": 3.0
-    },
-    "id": 8370,
-    "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/8370.jpg"
-  },
-  {
-    "title": "Homemade Vegan Protein Bars (no bake!)",
-    "site": "Healthygirlkitchen",
-    "url": "https://healthygirlkitchen.com/recipes/homemade-vegan-protein-bars-no-bake/",
-    "cats": [
-      "Bread & Baking",
-      "Desserts",
-      "Gluten-Free",
-      "Raw"
-    ],
-    "time": 75,
-    "servings": 10,
-    "ing": [
-      "medjool dates",
-      "cashews",
-      "hazelnuts",
-      "pumpkin seeds",
-      "cherries",
-      "chia seeds",
-      "peanut butter",
-      "dark chocolate chips",
-      "coconut",
-      "salt"
-    ],
-    "nut": {
-      "cal": 286.0,
-      "pro": 7.0,
-      "carb": 30.0,
-      "fat": 17.0,
-      "fib": 4.0
-    },
-    "id": 8371,
-    "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/8371.jpg"
-  },
-  {
-    "title": "Easy Homemade Vegan & Gluten-Free Protein Bars",
-    "site": "Katie",
-    "url": "https://theallnaturalvegan.com/easy-homemade-vegan-gluten-free-protein-bars/",
-    "cats": [
-      "Desserts",
-      "Gluten-Free",
-      "Quick Meals"
-    ],
-    "time": 130,
-    "servings": 8,
-    "ing": [
-      "quick oats",
-      "flaxseed",
-      "chia seeds",
-      "sunflower seeds",
-      "plant-based protein powder",
-      "mini chocolate chips",
-      "sunbutter sunflower seed butter",
-      "maple syrup",
-      "vanilla extract",
-      "chocolate chips",
-      "coconut oil"
+      "cinnamon",
+      "vanilla extract"
     ],
     "nut": {
       "cal": 0,
@@ -253,7 +89,265 @@
       "fat": 0,
       "fib": 0
     },
-    "id": 8372,
-    "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/8372.jpg"
+    "id": 8374,
+    "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/8374.jpg"
+  },
+  {
+    "title": "No-Pea-Protein Protein Bars",
+    "site": "Dreena Burton",
+    "url": "https://dreenaburton.com/homemade-vegan-protein-bars/",
+    "cats": [
+      "Bread & Baking",
+      "Gluten-Free"
+    ],
+    "time": 30,
+    "servings": 12,
+    "ing": [
+      "pitted dates",
+      "pumpkin seeds",
+      "rolled oats",
+      "cocoa powder",
+      "peanut butter",
+      "peanut butter powder",
+      "pumpkin seed protein powder",
+      "salt",
+      "tablespoon"
+    ],
+    "nut": {
+      "cal": 0,
+      "pro": 0,
+      "carb": 0,
+      "fat": 0,
+      "fib": 0
+    },
+    "id": 8375,
+    "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/8375.jpg"
+  },
+  {
+    "title": "No-Bake Tahini Energy Bars",
+    "site": "Dishingouthealth",
+    "url": "https://dishingouthealth.com/no-bake-tahini-energy-bars/",
+    "cats": [
+      "Bread & Baking",
+      "Gluten-Free",
+      "Quick Meals",
+      "Raw"
+    ],
+    "time": 10,
+    "servings": 8,
+    "ing": [
+      "tahini",
+      "honey",
+      "coconut oil",
+      "old fashioned oats",
+      "pitted medjool dates",
+      "salted pistachios",
+      "goji berries",
+      "salt"
+    ],
+    "nut": {
+      "cal": 212.0,
+      "pro": 5.0,
+      "carb": 28.0,
+      "fat": 10.0,
+      "fib": 4.0
+    },
+    "id": 8376,
+    "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/8376.jpg"
+  },
+  {
+    "title": "Banana Peanut Butter Oat Bars",
+    "site": "Dishingouthealth",
+    "url": "https://dishingouthealth.com/banana-peanut-butter-oat-protein-bars/",
+    "cats": [
+      "Bread & Baking",
+      "Desserts",
+      "Gluten-Free"
+    ],
+    "time": 30,
+    "servings": 12,
+    "ing": [
+      "bananas",
+      "peanut butter",
+      "maple syrup",
+      "coconut oil",
+      "vanilla extract",
+      "old-fashioned rolled oats",
+      "scoops collagen protein )",
+      "chocolate chips )",
+      "walnuts )",
+      "salt"
+    ],
+    "nut": {
+      "cal": 220.0,
+      "pro": 8.0,
+      "carb": 35.0,
+      "fat": 13.0,
+      "fib": 4.0
+    },
+    "id": 8377,
+    "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/8377.jpg"
+  },
+  {
+    "title": "Paleo & Vegan Chewy Date Protein Bars",
+    "site": "Hopeandhummus",
+    "url": "https://hopeandhummus.com/paleo-vegan-chewy-date-protein-bars/",
+    "cats": [
+      "Desserts",
+      "Gluten-Free",
+      "Quick Meals"
+    ],
+    "time": 10,
+    "servings": 10,
+    "ing": [
+      "dates",
+      "vanilla protein powder of choice",
+      "almond flour",
+      "smooth",
+      "vanilla extract",
+      "non-dairy chocolate chips"
+    ],
+    "nut": {
+      "cal": 0,
+      "pro": 0,
+      "carb": 0,
+      "fat": 0,
+      "fib": 0
+    },
+    "id": 8378,
+    "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/8378.jpg"
+  },
+  {
+    "title": "Vegan Protein Bars with Peanut Butter",
+    "site": "Ana Ankeny",
+    "url": "https://therealfooddietitians.com/vegan-protein-bars/",
+    "cats": [
+      "Desserts",
+      "Gluten-Free",
+      "Quick Meals"
+    ],
+    "time": 30,
+    "servings": 12,
+    "ing": [
+      "peanut butter",
+      "maple syrup",
+      "banana",
+      "pure vanilla extract",
+      "vanilla vegan protein powder",
+      "flax meal",
+      "quick-cooking oats *",
+      "crispy rice cereal",
+      "dairy-free mini chocolate chips",
+      "pinch of sea salt",
+      "coconut oil"
+    ],
+    "nut": {
+      "cal": 214.0,
+      "pro": 10.0,
+      "carb": 20.0,
+      "fat": 11.0,
+      "fib": 3.0
+    },
+    "id": 8379,
+    "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/8379.jpg"
+  },
+  {
+    "title": "Gluten-Free Protein Bars",
+    "site": "Theconsciousplantkitchen",
+    "url": "https://www.theconsciousplantkitchen.com/gluten-free-protein-bars/",
+    "cats": [
+      "Desserts",
+      "Gluten-Free",
+      "Quick Meals"
+    ],
+    "time": 10,
+    "servings": 16,
+    "ing": [
+      "peanut butter )",
+      "maple syrup )",
+      "vanilla protein powder )",
+      "almond flour )",
+      "to 4 tablespoons coconut flour )",
+      "vanilla extract )",
+      "coconut oil )",
+      "coconut oil",
+      "dark chocolate"
+    ],
+    "nut": {
+      "cal": 184.7,
+      "pro": 8.5,
+      "carb": 13.7,
+      "fat": 11.7,
+      "fib": 1.9
+    },
+    "id": 8380,
+    "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/8380.jpg"
+  },
+  {
+    "title": "Protein Energy Bars (Healthy Recipe)",
+    "site": "Basicswithbails",
+    "url": "https://basicswithbails.com/course/breakfast/protein-energy-bars/",
+    "cats": [
+      "Desserts",
+      "Gluten-Free"
+    ],
+    "time": 255,
+    "servings": 8,
+    "ing": [
+      "peanut butter",
+      "honey",
+      "coconut oil",
+      "vanilla extract",
+      "scoop vanilla protein powder",
+      "certified gluten free oats",
+      "rice crispy cereal",
+      "flaxseed",
+      "pinch of salt",
+      "cinnamon",
+      "nuts",
+      "fruit",
+      "chocolate chips"
+    ],
+    "nut": {
+      "cal": 317.0,
+      "pro": 10.0,
+      "carb": 32.0,
+      "fat": 17.0,
+      "fib": 5.0
+    },
+    "id": 8381,
+    "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/8381.jpg"
+  },
+  {
+    "title": "Gluten-Free Homemade Protein Bars",
+    "site": "Fitasamamabear",
+    "url": "https://fitasamamabear.com/gluten-free-homemade-protein/",
+    "cats": [
+      "Dinner",
+      "Gluten-Free",
+      "Meat Alternatives"
+    ],
+    "time": 45,
+    "servings": 8,
+    "ing": [
+      "almond flour",
+      "old fashioned oats",
+      "beef based protein powder",
+      "coconut oil",
+      "almond butter",
+      "maple syrup",
+      "almond milk",
+      "cherries",
+      "almonds"
+    ],
+    "nut": {
+      "cal": 234.0,
+      "pro": 11.0,
+      "carb": 15.0,
+      "fat": 16.0,
+      "fib": 4.0
+    },
+    "id": 8382,
+    "img": "https://zhncgdbhgkeiybdbzsql.supabase.co/storage/v1/object/public/recipe-images/8382.jpg"
   }
 ]

@@ -1,15 +1,30 @@
 #!/usr/bin/env python3
 """Upload all local photos from the photos/ folder to Supabase storage."""
 
+import os
 import time
 from pathlib import Path
 import requests
 
 SUPABASE_URL = 'https://zhncgdbhgkeiybdbzsql.supabase.co'
 SUPABASE_BUCKET = 'recipe-images'
-SUPABASE_SERVICE_KEY = ''  # SET THIS BEFORE RUNNING
 
-PHOTO_DIR = Path(__file__).parent / 'photos'
+SCRIPT_DIR = Path(__file__).parent
+
+# Auto-load Supabase service-role key from env var or v2/.supabase-key file
+def _load_key():
+    if os.environ.get('SUPABASE_SERVICE_KEY'):
+        return os.environ['SUPABASE_SERVICE_KEY'].strip()
+    for path in [SCRIPT_DIR.parent / '.supabase-key', Path.home() / '.harvest-supabase-key']:
+        if path.exists():
+            return path.read_text().strip()
+    return ''
+
+SUPABASE_SERVICE_KEY = _load_key()
+if not SUPABASE_SERVICE_KEY:
+    raise SystemExit('No Supabase service key found in env or v2/.supabase-key')
+
+PHOTO_DIR = SCRIPT_DIR / 'photos'
 
 photos = sorted(PHOTO_DIR.glob('*.jpg'))
 print(f"Found {len(photos)} photos to upload\n")

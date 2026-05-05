@@ -443,15 +443,65 @@ def auto_categorize(title, ings, nut, time_min=0):
 
 # ── JSON-LD recipe scraper ─────────────────────────────────────────
 
+# ── Playwright fallback for sites that block requests ─────────────
+# Some sites (Minimalist Baker, Feel Good Foodie, etc.) actively block
+# python requests. We fall back to a real headless Chromium via
+# Playwright when we hit a 403 or a generic block. Install once with:
+#     pip3 install playwright && playwright install chromium
+
+_PW_PAGE = None
+_PW_PLAYWRIGHT = None
+_PW_BROWSER = None
+
+def _pw_available():
+    try:
+        import playwright  # noqa: F401
+        return True
+    except ImportError:
+        return False
+
+def _pw_fetch(url: str) -> str:
+    """Fetch with headless Chromium. Lazy-launches the browser."""
+    global _PW_PAGE, _PW_PLAYWRIGHT, _PW_BROWSER
+    if _PW_PAGE is None:
+        from playwright.sync_api import sync_playwright
+        _PW_PLAYWRIGHT = sync_playwright().start()
+        _PW_BROWSER = _PW_PLAYWRIGHT.chromium.launch(headless=True)
+        ctx = _PW_BROWSER.new_context(
+            user_agent='Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36',
+            viewport={'width': 1440, 'height': 900},
+            locale='en-US',
+        )
+        _PW_PAGE = ctx.new_page()
+    try:
+        _PW_PAGE.goto(url, timeout=20000, wait_until='domcontentloaded')
+        time.sleep(1)
+        return _PW_PAGE.content()
+    except Exception as e:
+        print(f"    Playwright error: {e}")
+        return ''
+
 def fetch_page(url: str) -> str:
-    """Fetch a web page with retries."""
+    """Fetch a web page with retries; falls back to Playwright if blocked."""
     for attempt in range(3):
         try:
             resp = requests.get(url, headers=HEADERS, timeout=15)
+            if resp.status_code == 403 and _pw_available():
+                print(f"  → 403, trying Playwright")
+                html = _pw_fetch(url)
+                if html:
+                    return html
+                raise requests.HTTPError(f"403 + playwright failed")
             resp.raise_for_status()
             return resp.text
         except requests.RequestException as e:
             if attempt == 2:
+                # Final attempt — try Playwright if we haven't already
+                if _pw_available():
+                    print(f"  → final retry via Playwright")
+                    html = _pw_fetch(url)
+                    if html:
+                        return html
                 raise
             print(f"  Retry {attempt + 1} for {url}: {e}")
             time.sleep(2)
