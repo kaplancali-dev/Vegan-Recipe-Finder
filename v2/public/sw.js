@@ -1,77 +1,59 @@
 /**
- * HARVEST — Caching Service Worker
+ * HARVEST — Image-Only Caching Service Worker
  *
- * Strategies:
- *  - App shell (HTML, CSS, JS): cache-first with version-based invalidation
- *  - Recipe images (Supabase): cache-first, persistent across versions
- *  - Supabase API calls: network-only (live sync data)
- *  - Everything else: network-first with cache fallback
+ * Strategy: cache the heavy stuff (Supabase recipe images) so we don't
+ * burn bandwidth re-downloading them, but leave everything else
+ * (HTML, CSS, JS, recipe data, API calls) uncached so deploys take
+ * effect on the next visit and dev iteration stays snappy.
+ *
+ * Why this trade-off: at <5 users, fast iteration matters more than
+ * peak optimization. Image caching alone covers ~90% of bandwidth
+ * since recipes.json is gzipped and code bundles are small relative
+ * to images.
  */
 
-const CACHE_VERSION = 'harvest-v1';
-const IMG_CACHE    = 'harvest-images';
+const IMG_CACHE = 'harvest-images-v1';
 
-// App shell — updated by the build step (hashes change each deploy)
-const APP_SHELL = [
-  './',
-  './index.html',
-  './manifest.json',
-  './apple-touch-icon.png',
-  './favicon.png',
-  './hero.mp4',
-];
-
-/* ── Install: pre-cache app shell ──────────────────────────────── */
+/* ── Install: take over immediately ────────────────────────────── */
 
 self.addEventListener('install', (event) => {
-  event.waitUntil(
-    caches.open(CACHE_VERSION)
-      .then((cache) => cache.addAll(APP_SHELL))
-      .then(() => self.skipWaiting())
-  );
+  // Skip waiting so the new SW activates without requiring a second visit
+  event.waitUntil(self.skipWaiting());
 });
 
-/* ── Activate: clean old version caches ────────────────────────── */
+/* ── Activate: clean up any stale caches from old versions ─────── */
 
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((keys) =>
       Promise.all(
         keys
-          .filter((k) => k !== CACHE_VERSION && k !== IMG_CACHE)
+          .filter((k) => k !== IMG_CACHE)
           .map((k) => caches.delete(k))
       )
     ).then(() => self.clients.claim())
   );
 });
 
-/* ── Fetch: route by request type ──────────────────────────────── */
+/* ── Fetch: only intercept Supabase recipe images ──────────────── */
 
 self.addEventListener('fetch', (event) => {
+  if (event.request.method !== 'GET') return;
+
   const url = new URL(event.request.url);
 
-  // Skip non-GET and Supabase API calls (auth, sync, storage uploads)
-  if (event.request.method !== 'GET') return;
-  if (url.hostname.includes('supabase.co') && url.pathname.startsWith('/rest/')) return;
-  if (url.hostname.includes('supabase.co') && url.pathname.startsWith('/auth/')) return;
-
-  // Recipe images from Supabase storage — cache-first, persistent
+  // Cache-first for Supabase recipe image storage
   if (url.hostname.includes('supabase.co') && url.pathname.includes('/recipe-images/')) {
     event.respondWith(cacheFirst(event.request, IMG_CACHE));
     return;
   }
 
-  // Hashed assets (CSS/JS with content hash in filename) — cache-first
-  if (url.pathname.startsWith('/assets/') && /\.[a-zA-Z0-9]{8,}\.(js|css)$/.test(url.pathname)) {
-    event.respondWith(cacheFirst(event.request, CACHE_VERSION));
-    return;
-  }
-
-  // Everything else (HTML, manifest, etc.) — network-first with cache fallback
-  event.respondWith(networkFirst(event.request, CACHE_VERSION));
+  // Everything else: don't intercept — let the browser handle it normally.
+  // (No event.respondWith() means the browser handles the request natively,
+  // which means HTML/JS/CSS deploys appear immediately on next visit.)
 });
 
-/* ── Cache strategies ──────────────────────────────────────────── */
+/* ── Cache strategy ────────────────────────────────────────────── */
 
 async function cacheFirst(request, cacheName) {
   const cached = await caches.match(request);
@@ -85,27 +67,6 @@ async function cacheFirst(request, cacheName) {
     }
     return response;
   } catch (err) {
-    // Offline and not cached — return a simple fallback
-    return new Response('Offline', { status: 503, statusText: 'Offline' });
-  }
-}
-
-async function networkFirst(request, cacheName) {
-  try {
-    const response = await fetch(request);
-    if (response.ok) {
-      const cache = await caches.open(cacheName);
-      cache.put(request, response.clone());
-    }
-    return response;
-  } catch (err) {
-    const cached = await caches.match(request);
-    if (cached) return cached;
-    // If it's a navigation request, return the cached index.html (SPA fallback)
-    if (request.mode === 'navigate') {
-      const fallback = await caches.match('./index.html');
-      if (fallback) return fallback;
-    }
     return new Response('Offline', { status: 503, statusText: 'Offline' });
   }
 }
