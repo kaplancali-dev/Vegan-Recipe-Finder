@@ -123,10 +123,33 @@ export function ingredientMatches(recipeIng, userIngs, userIngSet) {
  * pumpkin. Same for "apple pie spice", "chinese five spice", etc.
  */
 const IDENTITY_SUFFIXES = new Set([
-  'oil', 'milk', 'butter', 'cream', 'flour', 'powder', 'sauce',
-  'paste', 'vinegar', 'sugar', 'syrup', 'extract', 'water', 'juice',
-  'seed', 'seeds', 'starch', 'nectar', 'noodles',
+  // Liquid/oil/dairy forms — base ingredient ≠ derived liquid/fat
+  'oil', 'milk', 'butter', 'cream', 'water', 'juice', 'nectar',
+  // Powdered/ground/processed forms — base ≠ processed form
+  'flour', 'powder', 'paste', 'starch', 'extract',
+  // Sweet/sour derivatives
+  'sugar', 'syrup', 'vinegar',
+  // Seeds (e.g. "pumpkin seeds" vs "pumpkin", "sunflower seeds" vs "sunflower")
+  'seed', 'seeds',
+  // Spice mixes — base ≠ blend
   'spice', 'pie spice', 'spice blend', 'spice mix', 'seasoning',
+  // Sauces and condiments — base ≠ derived sauce
+  'sauce', 'aminos', 'mayo', 'mayonnaise', 'mustard',
+  // Wrappers/papers (rice paper, etc.) — base ≠ derived sheet
+  'paper', 'wrapper', 'wrappers',
+  // Soup/broth derivatives — base ≠ liquid
+  'broth', 'stock', 'bouillon', 'bisque', 'consommé', 'consomme',
+  // Preserves/spreads — base ≠ jam/jelly form
+  'jam', 'jelly', 'preserves', 'marmalade', 'compote', 'butter',
+  // Dried/snack forms — base ≠ dried strip
+  // (Note: "chips" deliberately excluded so users with "chocolate" still
+  // match recipes calling for "chocolate chips" — chips are a form of the
+  // base ingredient, not an identity-changing derivative.)
+  'leather', 'jerky', 'crisps',
+  // Alcohol and infusions
+  'wine', 'liqueur', 'beer', 'tea',
+  // Pasta/noodle forms
+  'noodles', 'pasta',
 ]);
 
 /**
@@ -159,15 +182,22 @@ function _wordBoundaryMatch(haystack, needle) {
     || haystack[idx + needle.length] === '-';
   if (!before || !after) return false;
 
-  // Guard: if needle is at the start and the remaining word(s) are an
-  // identity-changing suffix, reject the match (e.g. "avocado" ≠ "avocado oil")
+  // Guard: if needle is at the start and the remaining word(s) include any
+  // identity-changing suffix, reject the match. Examples:
+  //   "avocado oil"        → remainder "oil"          → reject ("avocado" ≠ oil)
+  //   "rice wine vinegar"  → remainder "wine vinegar" → reject (wine OR vinegar identity-shifts rice)
+  //   "rice paper wrappers"→ remainder "paper wrappers" → reject
+  //   "pumpkin pie spice"  → remainder "pie spice"    → reject (spice = blend)
+  // Checks both the full remainder string (catches multi-word suffixes like
+  // "pie spice" if explicitly listed) AND each individual word (catches any
+  // suffix anywhere in the remainder).
   if (haystack.length > needle.length) {
     const remainder = haystack.slice(idx + needle.length).trim().replace(/^-/, '').trim();
     if (IDENTITY_SUFFIXES.has(remainder)) return false;
-    // Catch any spice-blend pattern ("five spice", "garam masala spice", etc.)
-    // even if not explicitly listed — if remainder ends in " spice" or is
-    // "spice" alone, treat as a distinct spice mix.
-    if (remainder === 'spice' || remainder.endsWith(' spice')) return false;
+    // Word-by-word check: any identity-changing suffix in the remainder
+    // means the haystack is a derived form of something else.
+    const remainderWords = remainder.split(/\s+/);
+    if (remainderWords.some(w => IDENTITY_SUFFIXES.has(w))) return false;
     // Also check if needle is the suffix and the prefix changes identity
     const prefix = haystack.slice(0, idx).trim().replace(/-$/, '').trim();
     if (prefix && IDENTITY_SUFFIXES.has(needle)) return false;
