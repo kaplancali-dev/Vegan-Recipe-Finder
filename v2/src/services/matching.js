@@ -141,11 +141,15 @@ const IDENTITY_SUFFIXES = new Set([
   'broth', 'stock', 'bouillon', 'bisque', 'consommé', 'consomme',
   // Preserves/spreads — base ≠ jam/jelly form
   'jam', 'jelly', 'preserves', 'marmalade', 'compote', 'butter',
-  // Dried/snack forms — base ≠ dried strip
-  // (Note: "chips" deliberately excluded so users with "chocolate" still
-  // match recipes calling for "chocolate chips" — chips are a form of the
-  // base ingredient, not an identity-changing derivative.)
-  'leather', 'jerky', 'crisps',
+  // Dried/snack/baking-chip forms — base ≠ derived chip product
+  // "Chips" is a distinct manufactured form. Even chocolate chips, while
+  // similar to chocolate, are a specific shape that doesn't exist as a
+  // generic chocolate property. Confection chips (peanut butter chips,
+  // butterscotch chips, caramel chips) are MUCH further from their base.
+  // Users who have "chocolate chips (any)" via the staples picker get the
+  // chip alias automatically; users who have just "chocolate" can chop a
+  // bar but the matcher should be honest about what they actually have.
+  'leather', 'jerky', 'crisps', 'chips',
   // Alcohol and infusions
   'wine', 'liqueur', 'beer', 'tea',
   // Pasta/noodle forms

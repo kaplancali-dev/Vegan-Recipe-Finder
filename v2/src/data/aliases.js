@@ -79,8 +79,14 @@ export const INGREDIENT_ALIASES = {
  * One-way substitutions: if user HAS the left item, it also covers the right items in recipes.
  */
 export const INGREDIENT_SUBS = {
-  'olive oil':      ['coconut oil','avocado oil','vegetable oil','light oil','neutral oil'],
-  'coconut oil':    ['olive oil','vegetable oil','light oil'],
+  // Liquid cooking oils — interchangeable for sautéing, dressings, frying.
+  // Coconut oil is DELIBERATELY excluded: it solidifies at room temp, which
+  // is essential for peanut-butter cups, chocolate bark, no-bake bars, energy
+  // bites, and anything that needs to "set firm." Liquid oils can't substitute.
+  'olive oil':      ['avocado oil','vegetable oil','light oil','neutral oil'],
+  // Coconut oil is its own thing — neither donates to nor accepts liquid oils
+  // as substitutes. If a recipe calls for it specifically, the user needs it.
+  'coconut oil':    [],
   'almond milk':    ['soy milk','rice milk','hemp milk','macadamia milk','pistachio milk','oat milk','cashew milk','plant milk','plant-based milk'],
   'soy milk':       ['almond milk','rice milk','hemp milk','macadamia milk','pistachio milk','oat milk','cashew milk','plant milk','plant-based milk'],
   'rice milk':      ['almond milk','soy milk','hemp milk','macadamia milk','pistachio milk','oat milk','cashew milk','plant milk','plant-based milk'],
