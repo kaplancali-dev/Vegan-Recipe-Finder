@@ -171,7 +171,7 @@
       <div class="card">
         <h3 class="card-title section-toggle" data-toggle="myIngsBody">🛒 My Ingredients <span class="muted">(what I bought)</span> <span class="guide-arrow">▾</span></h3>
         <div id="myIngsBody" class="section-body">
-          <p class="pantry-hint">Add what you picked up — uncheck when you run out. If it's checked, we're matching recipes to it.</p>
+          <p class="pantry-hint">Add what you picked up. Uncheck when you run out. If it's checked, we're matching recipes to it.</p>
           <div class="input-row" style="margin-bottom:10px">
             <input id="ingInput" type="text" class="text-input" placeholder="e.g. gochugaru, hearts of palm, black garlic, yuzu" autocomplete="off">
             <button id="ingAddBtn" class="btn btn-primary">Add</button>
@@ -221,8 +221,8 @@
 
       <!-- Refresh tip banner (dismissible, shown once) -->
       <div id="refreshTip" class="refresh-tip" hidden>
-        <span class="tip-mobile">🔄 We improve the user experience, daily — tap the <strong>refresh icon</strong> at the bottom of your screen to get the latest!</span>
-        <span class="tip-desktop">🔄 We improve the user experience, daily — hit <strong>refresh</strong> in your browser to get the latest!</span>
+        <span class="tip-mobile">🔄 We improve the user experience, daily. Tap the <strong>refresh icon</strong> at the bottom of your screen to get the latest!</span>
+        <span class="tip-desktop">🔄 We improve the user experience, daily. Hit <strong>refresh</strong> in your browser to get the latest!</span>
         <button id="refreshTipClose" class="refresh-tip-close" aria-label="Dismiss">&times;</button>
       </div>
 
@@ -249,7 +249,7 @@
     <section id="tab-canmake" class="tab-panel" role="tabpanel" aria-labelledby="btn-canmake" hidden>
       <div class="section-intro">
         <h2>Your Matches</h2>
-        <p>Everything here uses what's already in your kitchen — perishables first, so nothing dies a slow death in the crisper drawer.</p>
+        <p>Everything here uses what's already in your kitchen. Perishables first, so nothing dies a slow death in the crisper drawer.</p>
       </div>
       <div class="filter-bar card">
         <div class="input-row">
@@ -292,7 +292,7 @@
       <div id="canMakeMeta" class="results-meta"></div>
       <div id="canMakeList" class="recipe-list"><div class="skeleton-card"></div><div class="skeleton-card"></div></div>
       <div id="canMakeEmpty" class="empty-state" hidden>
-        <p>Your kitchen's holding out on you — add some ingredients to your pantry and watch recipes appear like magic.</p>
+        <p>Your kitchen's holding out on you. Add some ingredients to your pantry and watch recipes appear like magic.</p>
       </div>
     </section>
 
@@ -300,7 +300,7 @@
     <section id="tab-wantmake" class="tab-panel" role="tabpanel" aria-labelledby="btn-wantmake" hidden>
       <div class="section-intro">
         <h2>📌 My Queue</h2>
-        <p style="font-size:0.82rem;color:var(--ink-soft);margin-top:2px">Your meal planning hub — rate, track, and send to shopping.</p>
+        <p style="font-size:0.82rem;color:var(--ink-soft);margin-top:2px">Your meal planning hub. Rate, track, and send to shopping.</p>
       </div>
       <div id="wmSubTabs" class="wm-subtab-bar">
         <button class="wm-subtab on" data-wm-sub="recipes">📌 Recipes</button>
@@ -308,7 +308,7 @@
       </div>
       <div id="wantMakeList"></div>
       <div id="wantMakeEmpty" class="empty-state" hidden>
-        <p>Nothing queued up yet — tap 📌 My Queue on any recipe to start building your week.</p>
+        <p>Nothing queued up yet. Tap 📌 My Queue on any recipe to start building your week.</p>
       </div>
       <div id="wmHistoryList" hidden></div>
     </section>
@@ -318,13 +318,13 @@
     <section id="tab-madeit" class="tab-panel" role="tabpanel" aria-labelledby="btn-madeit" hidden>
       <div class="section-intro">
         <h2>✅ Made It</h2>
-        <p>Your cooking journal — every recipe you've made, rated, and inevitably told someone about.</p>
+        <p>Your cooking journal. Every recipe you've made, rated, and inevitably told someone about.</p>
       </div>
 
       <div id="madeItStats" class="madeit-stats" hidden></div>
 
       <div id="madeItEmpty" class="empty-state" hidden>
-        <p>Nothing here yet — once you cook something and tap <strong>✅ Made It</strong>, it'll show up here so you never lose a winner.</p>
+        <p>Nothing here yet. Once you cook something and tap <strong>✅ Made It</strong>, it'll show up here so you never lose a winner.</p>
       </div>
 
       <div class="card" id="madeItJournal" hidden>
@@ -361,7 +361,7 @@
         </div>
         <div id="favList" class="recipe-list"></div>
         <div id="favEmpty" class="empty-state" hidden>
-          <p>This collection is waiting for its first recipe — tap ❤️ on anything that earns a spot.</p>
+          <p>This collection is waiting for its first recipe. Tap ❤️ on anything that earns a spot.</p>
         </div>
       </div>
     </section>
@@ -377,11 +377,11 @@
             <button id="clearShopBtn" class="btn btn-outline btn-sm">Clear All</button>
           </div>
         </div>
-        <p style="font-size:0.82rem;color:var(--ink-soft);margin-top:2px">Nothing to buy yet — queue up recipes and we'll build the list for you.</p>
+        <p style="font-size:0.82rem;color:var(--ink-soft);margin-top:2px">Nothing to buy yet. Queue up recipes and we'll build the list for you.</p>
       </div>
       <div id="shopList" class="shop-list"></div>
       <div id="shopEmpty" class="empty-state" hidden>
-        <p>Your shopping list is wide open — add recipes to your queue and we'll tell you exactly what to grab.</p>
+        <p>Your shopping list is wide open. Add recipes to your queue and we'll tell you exactly what to grab.</p>
       </div>
     </section>
 
@@ -426,49 +426,49 @@
 
             <p><strong>1. Stock your pantry</strong></p>
             <ol class="about-steps">
-              <li>Go to <strong>🥬 My Pantry</strong> and tap <strong>📌 Add Staples</strong> — choose Oils, Spices, Grains, Beans, and anything else you always have on hand.</li>
+              <li>Go to <strong>🥬 My Pantry</strong> and tap <strong>📌 Add Staples</strong>: choose Oils, Spices, Grains, Beans, and anything else you always have on hand.</li>
               <li>Use the <strong>Add Ingredients</strong> input to type items separated by commas. These go into your active ingredient list for matching. Staples are added separately via the <strong>📌 Add Staples</strong> grid.</li>
-              <li>Or tap <strong>📷 Scan</strong> to photograph your groceries — we'll identify what's in the photo and let you confirm before adding anything.</li>
+              <li>Or tap <strong>📷 Scan</strong> to photograph your groceries. We'll identify what's in the photo and let you confirm before adding anything.</li>
             </ol>
 
             <p style="margin-top:12px"><strong>2. Find recipes</strong></p>
             <ol class="about-steps">
-              <li><strong>🔍 Browse All</strong> ranks every recipe by how well it matches your pantry. Use Filters for cuisines, cook time, and allergens.</li>
-              <li><strong>Sort by nutrition</strong> — tap <strong>Protein ↓</strong>, <strong>Fiber ↓</strong>, or <strong>Low Cal</strong> in the sort bar to find the healthiest version of whatever you're craving.</li>
+              <li><strong>🔍 Browse All</strong> shows every recipe in HARVEST, ranked by combined protein and fiber per serving. Use Filters for cuisines, cook time, and allergens.</li>
+              <li><strong>Sort by nutrition</strong>: tap <strong>Protein ↓</strong>, <strong>Fiber ↓</strong>, or <strong>Low Cal</strong> in the sort bar to find the healthiest version of whatever you're craving.</li>
               <li><strong>🍳 Your Matches</strong> shows only recipes you can cook right now (1 or fewer missing ingredients).</li>
             </ol>
 
             <p style="margin-top:12px"><strong>3. Plan, shop, cook</strong></p>
             <ol class="about-steps">
               <li>Tap <strong>📌 My Queue</strong> on any recipe card to save it. When you're ready to shop, tap 🛒 to send it to Shopping.</li>
-              <li><strong>🛒 Shopping</strong> shows only recipes you've sent — with checkboxes for each missing ingredient. Tap 📤 to share the list.</li>
+              <li><strong>🛒 Shopping</strong> shows only recipes you've sent, with checkboxes for each missing ingredient. Tap 📤 to share the list.</li>
               <li>After cooking, tap <strong>✅ I Made This</strong> to rate it 1–5 stars and log whether you'd make it again. You'll also get a quick option to share the recipe with a friend.</li>
             </ol>
 
             <p style="margin-top:12px"><strong>4. Track what you've made</strong></p>
             <ol class="about-steps">
-              <li><strong>Made It</strong> (inside ❤️ Favorites) is your cooking journal — it shows every recipe you've cooked, the date you first made it, and your star rating.</li>
+              <li><strong>Made It</strong> (inside ❤️ Favorites) is your cooking journal. It shows every recipe you've cooked, the date you first made it, and your star rating.</li>
               <li>Tap the stars to update your rating anytime. Tap ✕ to remove an entry.</li>
-              <li>My Queue's <strong>History</strong> sub-tab shows the same log with sortable columns — sort by recipe name, rating, date, or "Would make again."</li>
+              <li>My Queue's <strong>History</strong> sub-tab shows the same log with sortable columns. Sort by recipe name, rating, date, or "Would make again."</li>
             </ol>
 
             <p style="margin-top:12px"><strong>Good to know</strong></p>
             <ol class="about-steps">
-              <li><strong>❤️ Favorites</strong> — organize saved recipes into collections like Weekly Meal Plan, Celebration, or Game Day.</li>
-              <li><strong>Substitution hints</strong> — when you're missing an ingredient and a good swap exists, a green hint appears (GF and lower-sugar alternatives too).</li>
-              <li><strong>Ingredient benefits</strong> — tap any ingredient in a recipe to see evidence-based health info.</li>
-              <li><strong>📤 Share</strong> — share recipes or shopping lists via text, email, Notes, or social media. After rating a recipe you just cooked, a "Share with a friend" button appears for 5 seconds.</li>
-              <li><strong>⚠️ Allergens</strong> — set in My Pantry or in the Filters drawer on Browse and Your Matches to hide recipes with specific allergens.</li>
-              <li><strong>☁️ Cloud Sync</strong> — open the ☰ Menu and tap Cloud Sync. Enter your email, verify with a one-time code, then push your data to the cloud or pull it down to any device. No password needed.</li>
-              <li><strong>🌟 Recipe of the Day</strong> — a new high-protein recipe spotlighted daily on the Browse tab, matched against your pantry.</li>
+              <li><strong>❤️ Favorites</strong>: organize saved recipes into collections like Weekly Meal Plan, Celebration, or Game Day.</li>
+              <li><strong>Substitution hints</strong>: when you're missing an ingredient and a good swap exists, a green hint appears (GF and lower-sugar alternatives too).</li>
+              <li><strong>Ingredient benefits</strong>: tap any ingredient in a recipe to see evidence-based health info.</li>
+              <li><strong>📤 Share</strong>: share recipes or shopping lists via text, email, Notes, or social media. After rating a recipe you just cooked, a "Share with a friend" button appears for 5 seconds.</li>
+              <li><strong>⚠️ Allergens</strong>: set in My Pantry or in the Filters drawer on Browse and Your Matches to hide recipes with specific allergens.</li>
+              <li><strong>☁️ Cloud Sync</strong>: open the ☰ Menu and tap Cloud Sync. Enter your email, verify with a one-time code, then push your data to the cloud or pull it down to any device. No password needed.</li>
+              <li><strong>🌟 Recipe of the Day</strong>: a new high-protein recipe spotlighted daily on the Browse tab, matched against your pantry.</li>
             </ol>
             <p style="margin-top:12px"><strong>Phone toolbar</strong></p>
             <p style="margin-bottom:6px;font-size:0.88rem">When installed on your phone, a toolbar appears at the bottom with four buttons:</p>
             <ol class="about-steps">
-              <li><strong>📤 Share</strong> — share a recipe or the app itself via text, email, or social media so friends can add HARVEST to their home screen too.</li>
-              <li><strong>🔄 Refresh</strong> — reload the app to get the latest recipes and updates.</li>
-              <li><strong>☰ Menu</strong> — open the menu for Instructions, About, Feedback, and Cloud Sync.</li>
-              <li><strong>🌙 Night Mode</strong> — toggle dark mode for easier reading at night.</li>
+              <li><strong>📤 Share</strong>: share a recipe or the app itself via text, email, or social media so friends can add HARVEST to their home screen too.</li>
+              <li><strong>🔄 Refresh</strong>: reload the app to get the latest recipes and updates.</li>
+              <li><strong>☰ Menu</strong>: open the menu for Instructions, About, Feedback, and Cloud Sync.</li>
+              <li><strong>🌙 Night Mode</strong>: toggle dark mode for easier reading at night.</li>
             </ol>
 
             <p class="about-tip">💡 Add HARVEST to your home screen for the best experience!</p>
@@ -477,8 +477,8 @@
           <div id="menuAbout" class="menu-section" hidden>
             <h4>About Us</h4>
             <p>HARVEST was created by an experienced team of food creators who wanted a better way to answer the daily question: <em>"What can I make right now to help ensure I'm thriving?"</em></p>
-            <p style="margin-top:8px">Our database of over 4,500 recipes brings together the best of the world's top plant-based chefs and creators — from Pick Up Limes and Woon Heng to The Korean Vegan and Hot for Food. Whether you're craving Korean comfort food, Italian pasta night, or a quick Indian curry, HARVEST introduces you to creators and cuisines you might never have discovered on your own.</p>
-            <p style="margin-top:8px">Every recipe is 100% plant-based and nutrition-focused. The goal isn't just to cook more — it's to expand your palate, try something new, and make cooking feel effortless again.</p>
+            <p style="margin-top:8px">Our database of over 4,500 recipes brings together the best of the world's top plant-based chefs and creators, from Pick Up Limes and Woon Heng to The Korean Vegan and Hot for Food. Whether you're craving Korean comfort food, Italian pasta night, or a quick Indian curry, HARVEST introduces you to creators and cuisines you might never have discovered on your own.</p>
+            <p style="margin-top:8px">Every recipe is 100% plant-based and nutrition-focused. The goal isn't just to cook more. It's to expand your palate, try something new, and make cooking feel effortless again.</p>
             <p class="about-version" style="margin-top:16px"><span class="muted">HARVEST v2.28 · Made with 💚 and plants</span></p>
           </div>
 
@@ -502,7 +502,7 @@
           <div id="menuPrivacy" class="menu-section" hidden>
             <h4>Privacy Policy</h4>
             <p>HARVEST does not collect, sell, or share your personal data. Your ingredient lists, staples, favorites, and preferences are stored locally on your device.</p>
-            <p style="margin-top:8px">If you enable Cloud Sync, your data is stored securely in your own Supabase account and is never shared with third parties. We use basic analytics to understand how the app is used — no tracking, no ads, ever.</p>
+            <p style="margin-top:8px">If you enable Cloud Sync, your data is stored securely in your own Supabase account and is never shared with third parties. We use basic analytics to understand how the app is used. No tracking, no ads, ever.</p>
           </div>
         </div>
       </div>
