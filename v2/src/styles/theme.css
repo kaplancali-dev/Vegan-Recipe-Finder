@@ -1837,9 +1837,10 @@ input, select, textarea {
   }
   .intro-hero-copy {
     max-width: none;
-    /* Copy starts at the same Y as the title on the left so the two
-       columns are vertically symmetrical at the top. */
-    padding-top: 0;
+    /* Push the copy down so its first line aligns with the top of the
+       video (below the title). Title is font-size:24px, line-height:1.2,
+       margin:4px 0 10px → rendered height ≈ 43px. */
+    padding-top: 43px;
   }
   .hero-img {
     min-height: 240px;
