@@ -248,7 +248,7 @@ function _buildHTML() {
       <!-- STEP 2: Staples (paginated) -->
       <div class="obd-step" data-obd-step="2">
         <div class="obd-title">What's always in your kitchen?</div>
-        <div class="obd-why">
+        <div class="obd-why" id="obdWhyCallout">
           <strong>Quick game:</strong> tap what usually lives in your kitchen — across <strong>10 quick categories</strong>, about a minute total. The reward: from here on, we filter 4,500+ recipes down to <em>only</em> the ones you can cook tonight. No taunting you with ingredients you don't have.
         </div>
         <div class="obd-sub obd-page-prompt" id="obdPagePrompt">${PAGE_PROMPTS[0]}</div>
@@ -309,6 +309,10 @@ function _goToSubPage(overlay, idx) {
   // Update page prompt
   const prompt = overlay.querySelector('#obdPagePrompt');
   if (prompt && PAGE_PROMPTS[idx]) prompt.textContent = PAGE_PROMPTS[idx];
+
+  // Show "Quick game" callout only on the first sub-page
+  const whyCallout = overlay.querySelector('#obdWhyCallout');
+  if (whyCallout) whyCallout.style.display = idx === 0 ? '' : 'none';
 
   // Back button visibility
   const backBtn = overlay.querySelector('[data-obd-sub-back]');
