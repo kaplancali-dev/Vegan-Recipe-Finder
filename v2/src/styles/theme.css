@@ -1826,22 +1826,27 @@ input, select, textarea {
   .intro-hero-grid {
     grid-template-columns: 2fr 3fr;
     gap: 32px;
-    align-items: start;
+    /* Stretch so both columns are the same height; the video element
+       fills its column and ends at the same Y as the last line of copy. */
+    align-items: stretch;
   }
   .intro-hero-video {
     max-width: none;
+    display: flex;
+    flex-direction: column;
   }
   .intro-hero-copy {
     max-width: none;
-    /* Match the title's font-size + line-height + margin so the first
-       paragraph starts at the same Y as the top of the video below the
-       title. (.intro-hero-title is font-size:24px, line-height:1.2,
-       margin:4px 0 10px → rendered height ≈ 24*1.2 + 4 + 10 = 42.8px.) */
-    padding-top: 43px;
+    /* Copy starts at the same Y as the title on the left so the two
+       columns are vertically symmetrical at the top. */
+    padding-top: 0;
   }
   .hero-img {
     min-height: 240px;
-    max-height: 400px;
+    /* No max-height in two-column layout: video stretches to match copy
+       height (object-fit: cover crops gracefully). */
+    max-height: none;
+    flex: 1;
   }
   .intro-tagline {
     font-size: 1.15em;
