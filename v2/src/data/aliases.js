@@ -100,10 +100,20 @@ export const INGREDIENT_SUBS = {
   'maple syrup': ['agave','agave nectar','agave syrup','coconut sugar','brown sugar','date syrup','monk fruit','allulose','stevia','sweetener','maple','sugar','coconut nectar','honey'],
   'agave': ['maple syrup','maple','coconut sugar','brown sugar','date syrup','monk fruit','allulose','stevia','sweetener','agave nectar','agave syrup','sugar','coconut nectar'],
   'natural sweetener (any)': ['maple syrup','maple','agave','agave nectar','agave syrup','coconut sugar','brown sugar','date syrup','monk fruit','allulose','stevia','sweetener','sugar','coconut nectar','raw sugar','cane sugar'],
-  'spinach': ['kale','chard','baby spinach','arugula','collard greens'],
-  'kale': ['spinach','chard','collard greens','baby spinach'],
-  'apple cider vinegar': ['rice vinegar','white vinegar','lemon juice'],
-  'rice vinegar': ['apple cider vinegar','white vinegar','white wine vinegar','seasoned rice vinegar'],
+  // Greens are NOT interchangeable. Different plants, different textures,
+  // different cooking behaviors. Spinach wilts in seconds; kale needs
+  // massaging or longer cooking. Only keep same-plant variants. Users who
+  // want broad coverage can pick "leafy greens (any)" as a staple.
+  'spinach': ['baby spinach'],
+  'baby spinach': ['spinach'],
+  'kale': [],
+  // Vinegars are NOT generally interchangeable. Apple cider vinegar is
+  // fruity; rice vinegar is mild and slightly sweet; white vinegar is
+  // sharp; balsamic is sweet/syrupy. Substituting changes the dish.
+  // Lemon juice is a totally different acid. Keep only seasoned/unseasoned
+  // rice vinegar pairing since they're effectively the same product.
+  'apple cider vinegar': [],
+  'rice vinegar': ['seasoned rice vinegar'],
   'flour': ['oat flour','almond flour','spelt flour','rice flour','gluten-free flour','gf flour','all-purpose flour','1:1 gluten-free flour'],
   'all-purpose flour': ['gluten-free flour','1:1 gluten-free flour','gf flour','oat flour','almond flour','rice flour','spelt flour'],
   'gluten-free flour': ['1:1 gluten-free flour','gf flour','oat flour','almond flour','rice flour','all-purpose flour','flour','whole wheat flour','spelt flour','cassava flour'],
@@ -115,17 +125,28 @@ export const INGREDIENT_SUBS = {
   'arrowroot powder': ['cornstarch','tapioca flour','tapioca starch','tapioca','arrowroot starch','arrowroot','potato starch'],
   'vegetable broth': ['water','mushroom broth','miso water','vegetable stock','veggie broth','veggie stock','veg broth','veg stock'],
   'coconut cream': ['coconut milk'],
-  'lemon': ['lime','apple cider vinegar'],
+  // Citrus juice is only loosely substitutable — lemon and lime can swap
+  // in many recipes (similar acidity), but vinegar is a different flavor
+  // profile entirely. Removing ACV cross-alias.
+  'lemon': ['lime'],
   'lime': ['lemon'],
-  'cilantro': ['parsley','basil'],
+  // Cilantro and parsley LOOK alike but taste nothing alike. Cilantro has
+  // a citrus-soapy note; parsley is grassy. Substituting changes the dish.
+  // Basil is a third totally different herb. No aliases.
+  'cilantro': [],
   'lettuce':            ['romaine','iceberg','butter lettuce','bibb lettuce','red leaf lettuce','green leaf lettuce','mixed greens','spring mix'],
   'romaine':            ['lettuce','iceberg','butter lettuce','green leaf lettuce','red leaf lettuce','mixed greens'],
   'iceberg':            ['lettuce','romaine','butter lettuce','green leaf lettuce','red leaf lettuce'],
   'butter lettuce':     ['lettuce','romaine','iceberg','bibb lettuce','green leaf lettuce','red leaf lettuce'],
   'red leaf lettuce':   ['lettuce','romaine','iceberg','green leaf lettuce','butter lettuce','mixed greens'],
   'green leaf lettuce': ['lettuce','romaine','iceberg','red leaf lettuce','butter lettuce','mixed greens'],
+  // Mixed greens packages typically contain multiple lettuce types and
+  // sometimes baby spinach/arugula — keep the broad expansion since the
+  // user explicitly bought "a mix."
   'mixed greens':       ['lettuce','romaine','spring mix','mesclun','arugula','spinach','baby spinach'],
-  'arugula':            ['spinach','baby spinach','mixed greens','lettuce'],
+  // Arugula is its own peppery thing — not interchangeable with spinach
+  // or generic lettuce in dishes where the flavor matters.
+  'arugula':            [],
   'fresh ginger': ['ginger','ginger powder'],
   'ginger': ['fresh ginger','ginger powder'],
   'cocoa powder': ['cacao powder','raw cacao powder','cacao','cocoa','unsweetened cocoa powder','dutch process cocoa'],
@@ -164,11 +185,14 @@ export const INGREDIENT_SUBS = {
   'black beans': ['pinto beans','kidney beans','red beans'],
   'pinto beans': ['black beans','kidney beans','red beans'],
   'kidney beans': ['black beans','pinto beans','red beans'],
-  'extra-firm tofu': ['firm tofu','super-firm tofu','tempeh'],
-  'firm tofu': ['extra-firm tofu','super-firm tofu','tempeh'],
-  'silken tofu': ['soft tofu','vegan yogurt'],
-  'soft tofu': ['silken tofu','vegan yogurt'],
-  'tempeh': ['extra-firm tofu','firm tofu','soy curls'],
+  // Tofu firmness levels are interchangeable as a product family;
+  // tempeh is a DIFFERENT product (fermented whole soybeans, dense
+  // texture, nutty flavor) — not an honest substitute for tofu.
+  'extra-firm tofu': ['firm tofu','super-firm tofu'],
+  'firm tofu': ['extra-firm tofu','super-firm tofu'],
+  'silken tofu': ['soft tofu'],
+  'soft tofu': ['silken tofu'],
+  'tempeh': ['soy curls'],
   'green lentils': ['brown lentils','french lentils'],
   'brown lentils': ['green lentils','french lentils'],
   'red lentils': ['yellow lentils','split peas'],
@@ -187,8 +211,10 @@ export const INGREDIENT_SUBS = {
   'jasmine rice': ['basmati rice','white rice','long grain rice'],
 
   // ── Nuts / Seeds ──
-  'almonds': ['peanuts'],
-  'peanuts': ['almonds'],
+  // Almonds are tree nuts; peanuts are legumes. Completely different
+  // ingredients with allergen implications. Never alias.
+  'almonds': [],
+  'peanuts': [],
   'sunflower seeds': ['pumpkin seeds','pepitas'],
   'pumpkin seeds': ['sunflower seeds','pepitas'],
   'chia seeds': ['flax seeds','flaxseed meal'],
@@ -213,12 +239,19 @@ export const INGREDIENT_SUBS = {
 
   // ── Vegetables ──
   'zucchini': ['yellow squash','summer squash','eggplant'],
-  'sweet potato': ['butternut squash','pumpkin','sweet potatoes'],
-  'sweet potatoes': ['butternut squash','pumpkin','sweet potato'],
-  'butternut squash': ['sweet potato','pumpkin','kabocha squash'],
+  // Sweet potato, pumpkin, butternut squash are ALL different plants with
+  // different flavor profiles, water content, and cooking times. They're
+  // sometimes substitutable in roasts/soups but the matcher should be
+  // honest: if a recipe calls for pumpkin and you only have sweet potato,
+  // that's a substitution decision the cook makes — not a 100% match.
+  'sweet potato': ['sweet potatoes'],
+  'sweet potatoes': ['sweet potato'],
+  'butternut squash': ['kabocha squash'],
   'cauliflower': ['broccoli','cauliflower florets'],
   'broccoli': ['cauliflower','broccolini','broccoli florets'],
-  'eggplant': ['zucchini','portobello mushrooms','yellow squash'],
+  // Eggplant is a nightshade; mushrooms are fungi; zucchini is a squash.
+  // Three completely different ingredients. Removing cross-aliases.
+  'eggplant': [],
   'mushrooms': ['cremini mushrooms','shiitake mushrooms','baby bella mushrooms','portobello mushrooms','white button mushrooms','oyster mushrooms'],
   'cremini mushrooms': ['baby bella mushrooms','white button mushrooms','mushrooms','shiitake mushrooms'],
   'shiitake mushrooms': ['cremini mushrooms','oyster mushrooms','king oyster mushrooms','mushrooms'],

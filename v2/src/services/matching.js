@@ -110,7 +110,18 @@ export function ingredientMatches(recipeIng, userIngs, userIngSet) {
   // Fast path: exact match via Set (avoids all string ops for ~40% of cases)
   if (userIngSet && userIngSet.has(recipeIng)) return true;
 
-  return userIngs.some(ai => _wordBoundaryMatch(recipeIng, ai) || _wordBoundaryMatch(ai, recipeIng));
+  // Two checks per user ingredient:
+  //   1) Recipe-as-haystack: applies STRICT modifier guard. If the recipe is
+  //      asking for "white chocolate chips" and user has plain "chocolate
+  //      chips", the "white" prefix means recipe wants something specific
+  //      the user doesn't have — REJECT.
+  //   2) User-as-haystack: applies LOOSE modifier guard. If the user has
+  //      "red onion" and recipe asks for "onion", the user has a specific
+  //      instance of what the recipe wants — ACCEPT.
+  return userIngs.some(ai =>
+    _wordBoundaryMatch(recipeIng, ai, /* strictPrefix */ true) ||
+    _wordBoundaryMatch(ai, recipeIng, /* strictPrefix */ false)
+  );
 }
 
 /**
@@ -176,7 +187,7 @@ const COLOR_TYPE_MODIFIERS = new Set([
  * @param {string} needle
  * @returns {boolean}
  */
-function _wordBoundaryMatch(haystack, needle) {
+function _wordBoundaryMatch(haystack, needle, strictPrefix = true) {
   if (haystack === needle) return true;
   const idx = haystack.indexOf(needle);
   if (idx === -1) return false;
@@ -211,7 +222,12 @@ function _wordBoundaryMatch(haystack, needle) {
     // recipe is calling for a specifically-modified ingredient that the
     // unmodified user ingredient can't satisfy. E.g., recipe needs "white
     // chocolate chips" but user only has "chocolate chips" — reject.
-    if (prefix) {
+    //
+    // ONLY apply this guard when haystack is the recipe ingredient
+    // (strictPrefix=true). When the user has the specific version (e.g.
+    // "red onion") and the recipe asks for the generic ("onion"), the user
+    // legitimately HAS what the recipe wants — accept that match.
+    if (strictPrefix && prefix) {
       const lastPrefixWord = prefix.split(/\s+/).pop();
       if (COLOR_TYPE_MODIFIERS.has(lastPrefixWord)) return false;
     }
