@@ -305,9 +305,11 @@
 .landing-footer-tagline {
   text-align: center;
   font-family: var(--font-serif);
-  font-style: italic;
-  font-size: 0.82rem;
-  color: #aaa;
+  /* Subtle bump: bigger and darker so the joke actually lands, but
+     still styled as an after-the-fact aside so it doesn't compete
+     with the mustard headline above. */
+  font-size: 1.05rem;
+  color: #6b6358;
   margin-top: 60px;
   padding-top: 30px;
   border-top: 1px solid #e5e0d8;
