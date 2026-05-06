@@ -117,11 +117,27 @@ export function ingredientMatches(recipeIng, userIngs, userIngSet) {
  * Suffixes that change an ingredient's identity.
  * "avocado oil" is NOT a type of avocado, "coconut milk" is NOT coconut, etc.
  * When the longer string ends with one of these, don't match the shorter base word.
+ *
+ * Includes spice-mix terms because "pumpkin pie spice" and "pumpkin spice" are
+ * blends of OTHER spices (cinnamon, nutmeg, ginger, clove) — they contain zero
+ * pumpkin. Same for "apple pie spice", "chinese five spice", etc.
  */
 const IDENTITY_SUFFIXES = new Set([
   'oil', 'milk', 'butter', 'cream', 'flour', 'powder', 'sauce',
   'paste', 'vinegar', 'sugar', 'syrup', 'extract', 'water', 'juice',
   'seed', 'seeds', 'starch', 'nectar', 'noodles',
+  'spice', 'pie spice', 'spice blend', 'spice mix', 'seasoning',
+]);
+
+/**
+ * Color/type modifiers that change an ingredient's identity when they appear
+ * before the matched word in the recipe ingredient. E.g., a recipe needing
+ * "white chocolate chips" is NOT satisfied by user's plain "chocolate chips" —
+ * the "white" is doing real work. Same for dark/milk chocolate, white/brown
+ * rice, white/red wine vinegar, etc.
+ */
+const COLOR_TYPE_MODIFIERS = new Set([
+  'white', 'dark', 'milk', 'black', 'brown', 'red', 'green', 'yellow',
 ]);
 
 /**
@@ -148,9 +164,23 @@ function _wordBoundaryMatch(haystack, needle) {
   if (haystack.length > needle.length) {
     const remainder = haystack.slice(idx + needle.length).trim().replace(/^-/, '').trim();
     if (IDENTITY_SUFFIXES.has(remainder)) return false;
+    // Catch any spice-blend pattern ("five spice", "garam masala spice", etc.)
+    // even if not explicitly listed — if remainder ends in " spice" or is
+    // "spice" alone, treat as a distinct spice mix.
+    if (remainder === 'spice' || remainder.endsWith(' spice')) return false;
     // Also check if needle is the suffix and the prefix changes identity
     const prefix = haystack.slice(0, idx).trim().replace(/-$/, '').trim();
     if (prefix && IDENTITY_SUFFIXES.has(needle)) return false;
+
+    // Color/type modifier guard: if the word immediately before `needle` in
+    // the haystack is a color/type modifier ("white", "dark", etc.), the
+    // recipe is calling for a specifically-modified ingredient that the
+    // unmodified user ingredient can't satisfy. E.g., recipe needs "white
+    // chocolate chips" but user only has "chocolate chips" — reject.
+    if (prefix) {
+      const lastPrefixWord = prefix.split(/\s+/).pop();
+      if (COLOR_TYPE_MODIFIERS.has(lastPrefixWord)) return false;
+    }
   }
   return true;
 }
