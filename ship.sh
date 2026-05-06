@@ -44,10 +44,11 @@ done
 echo "  Removed $REMOVED orphan asset(s). Remaining: $(ls assets/ | wc -l | tr -d ' ')"
 
 echo "→ Committing & pushing…"
-# Clear stale locks left behind by interrupted git operations or sandbox runs
-# (HEAD.lock, index.lock, and tmp_obj_* objects all block subsequent commits).
-rm -f .git/index.lock .git/HEAD.lock
-rm -f .git/objects/*/tmp_obj_* 2>/dev/null || true
+# Bulletproof lock cleanup — clear EVERY lock or tmp object git might
+# have left behind (interrupted operations, crashed processes, sandbox
+# runs, etc.). Suppress errors since most of these may not exist.
+find .git -name "*.lock" -type f -delete 2>/dev/null || true
+find .git/objects -name "tmp_obj_*" -type f -delete 2>/dev/null || true
 git add -A
 git commit -m "$MSG"
 git push
