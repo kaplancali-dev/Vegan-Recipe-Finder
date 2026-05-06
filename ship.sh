@@ -44,7 +44,10 @@ done
 echo "  Removed $REMOVED orphan asset(s). Remaining: $(ls assets/ | wc -l | tr -d ' ')"
 
 echo "→ Committing & pushing…"
-rm -f .git/index.lock
+# Clear stale locks left behind by interrupted git operations or sandbox runs
+# (HEAD.lock, index.lock, and tmp_obj_* objects all block subsequent commits).
+rm -f .git/index.lock .git/HEAD.lock
+rm -f .git/objects/*/tmp_obj_* 2>/dev/null || true
 git add -A
 git commit -m "$MSG"
 git push
