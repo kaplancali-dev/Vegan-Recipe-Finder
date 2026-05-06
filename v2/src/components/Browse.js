@@ -30,7 +30,23 @@ let _selectedCats = new Set();
 let _maxTime = Infinity;
 let _nameSearch = '';
 let _allergies = new Set();
-let _sortKey = 'match';
+// Browse defaults to combined protein+fiber sort — the "what's actually
+// good for you" view across all categories. Other tabs default to 'match'.
+let _sortKey = 'pronutri';
+
+/**
+ * Browse-only hard exclusions: drinks (whole category) and ice-cream-style
+ * desserts (sorbet, gelato, milkshakes, nice cream) are never shown in
+ * Browse since they don't meaningfully serve "what's nourishing tonight".
+ * They remain searchable via Your Matches if the user has the ingredients.
+ */
+const ICE_CREAM_TITLE_RE = /\b(ice cream|nice cream|sorbet|gelato|milkshake|frozen yogurt)\b/i;
+function _isBrowseExcluded(r) {
+  const cats = r.cats || r.categories || [];
+  if (cats.some(c => /^drinks$/i.test(c))) return true;
+  if (ICE_CREAM_TITLE_RE.test(r.title || '')) return true;
+  return false;
+}
 
 /** Pagination: how many results currently visible */
 let _visibleCount = PAGE_SIZE;
@@ -205,6 +221,9 @@ function _runRender() {
     nameSearch: _nameSearch || '',
     allergies: _allergies.size ? _allergies : new Set(),
   });
+
+  // Browse-only: hide drinks and ice-cream desserts
+  results = results.filter(r => !_isBrowseExcluded(r));
 
   // Apply sort
   if (_sortKey !== 'match') {

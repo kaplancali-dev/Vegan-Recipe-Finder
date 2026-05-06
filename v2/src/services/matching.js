@@ -283,7 +283,7 @@ export function findRecipes({
  * Returns a new sorted array (does not mutate the input).
  *
  * @param {Object[]} results
- * @param {'match'|'time'|'serv'|'alpha'|'protein'|'fiber'|'cal'} sortKey
+ * @param {'match'|'time'|'serv'|'alpha'|'protein'|'fiber'|'cal'|'pronutri'} sortKey
  * @returns {Object[]} New sorted array
  */
 export function sortResults(results, sortKey) {
@@ -303,6 +303,14 @@ export function sortResults(results, sortKey) {
       return copy.sort((a, b) => ((b.nut && b.nut.fib) || 0) - ((a.nut && a.nut.fib) || 0) || a.title.localeCompare(b.title));
     case 'cal':
       return copy.sort((a, b) => ((a.nut && a.nut.cal) || 999) - ((b.nut && b.nut.cal) || 999) || a.title.localeCompare(b.title));
+    case 'pronutri':
+      // Combined protein + fiber per serving, descending. The Browse default —
+      // surfaces the most nutritionally dense recipes first, regardless of category.
+      return copy.sort((a, b) => {
+        const aScore = ((a.nut && a.nut.pro) || 0) + ((a.nut && a.nut.fib) || 0);
+        const bScore = ((b.nut && b.nut.pro) || 0) + ((b.nut && b.nut.fib) || 0);
+        return bScore - aScore || a.title.localeCompare(b.title);
+      });
     default:
       return copy;
   }
