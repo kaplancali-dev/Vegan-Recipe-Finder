@@ -27,15 +27,6 @@ const STEPS = [
     arrow: 'top',
   },
   {
-    target: '#sortBar',
-    tab: 'browse',
-    scroll: '#sortBar',
-    scrollBlock: 'start',
-    title: 'Nutrition nerd mode',
-    body: "Tap Protein, Fiber, or Low Cal to sort any search by what your body actually wants. The healthiest version floats to the top like it owns the place.",
-    arrow: 'top',
-  },
-  {
     target: '#btn-canmake',
     tab: 'canmake',
     title: "No store run required",
@@ -50,6 +41,13 @@ const STEPS = [
     arrow: 'top',
   },
   {
+    target: '#btn-madeit',
+    tab: 'madeit',
+    title: 'Cook it, rate it, brag about it',
+    body: "Tap I Made This after cooking to rate it 1–5 stars. You'll get the option to share with a friend — because what's the point of nailing a recipe if nobody knows?",
+    arrow: 'top',
+  },
+  {
     target: '#btn-favorites',
     tab: 'favorites',
     title: "Your hall of fame",
@@ -61,13 +59,6 @@ const STEPS = [
     tab: 'shopping',
     title: 'The list that writes itself',
     body: "Send recipes from your queue and HARVEST builds the grocery list — organized by recipe so you're not wandering the aisles like a lost soul. Tap share to text it to whoever's driving.",
-    arrow: 'top',
-  },
-  {
-    target: '#btn-madeit',
-    tab: 'madeit',
-    title: 'Cook it, rate it, brag about it',
-    body: "Tap I Made This after cooking to rate it 1–5 stars. You'll get the option to share with a friend — because what's the point of nailing a recipe if nobody knows?",
     arrow: 'top',
   },
 ];
