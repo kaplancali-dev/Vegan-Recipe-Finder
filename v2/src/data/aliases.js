@@ -710,7 +710,8 @@ export const HARD_GLUTEN_REGEX = (() => {
     'semolina', 'durum wheat', 'durum flour',
     'spelt berries', 'spelt grain',
     'rye flour', 'rye bread', 'rye berries', 'rye',
-    'shaoxing wine', 'shaoxing rice wine', 'chinese cooking wine',
+    'shaoxing wine', 'shaoxing rice wine', 'shaoxing cooking wine', 'chinese cooking wine', 'rice cooking wine',
+    'wheat starch', 'wheat flakes',
     'beer', 'lager', 'stout', 'pilsner',
     'malt extract', 'malt syrup', 'malted barley',
   ];

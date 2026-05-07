@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-05-07T20:03:44.772Z",
+  "generatedAt": "2026-05-07T20:14:27.970Z",
   "pantrySize": 317,
-  "total": 4344,
-  "at100": 2607,
-  "at80": 4161,
+  "total": 4193,
+  "at100": 2499,
+  "at80": 4020,
   "failPatterns": [
     {
       "normalized": "apple juice",
@@ -133,22 +133,6 @@
       ]
     },
     {
-      "normalized": "sparkling water",
-      "count": 6,
-      "examples": [
-        "¾ cup sparkling water",
-        "sparkling water",
-        "2 cups sparkling water"
-      ],
-      "sampleRecipeIds": [
-        7231,
-        2447,
-        4033,
-        8237,
-        7475
-      ]
-    },
-    {
       "normalized": "yuca",
       "count": 6,
       "examples": [
@@ -274,21 +258,6 @@
       ]
     },
     {
-      "normalized": "clove",
-      "count": 5,
-      "examples": [
-        "clove",
-        "⅛ teaspoon ground clove"
-      ],
-      "sampleRecipeIds": [
-        2070,
-        6341,
-        2578,
-        4652,
-        4454
-      ]
-    },
-    {
       "normalized": "tortilla chips",
       "count": 5,
       "examples": [
@@ -390,7 +359,7 @@
       "examples": [
         "1/4 cup chopped nuts and seeds",
         "1/3 cup chopped nuts and seeds such as  (pecans, walnuts, sunflower seeds, pumpkin seeds)",
-        "1/4 cup chopped nuts and seeds, (I use a mix of chopped pistachios, chia seeds and hemp seeds.)"
+        "1/4 cup chopped nuts and seeds,"
       ],
       "sampleRecipeIds": [
         6136,
@@ -538,34 +507,6 @@
       ]
     },
     {
-      "normalized": "granola",
-      "count": 5,
-      "examples": [
-        "granola"
-      ],
-      "sampleRecipeIds": [
-        4710,
-        4995,
-        2514,
-        4106,
-        8292
-      ]
-    },
-    {
-      "normalized": "jerk seasoning",
-      "count": 5,
-      "examples": [
-        "jerk seasoning"
-      ],
-      "sampleRecipeIds": [
-        4524,
-        8139,
-        8147,
-        8132,
-        8318
-      ]
-    },
-    {
       "normalized": "purchased pico de gallo",
       "count": 5,
       "examples": [
@@ -702,18 +643,17 @@
       ]
     },
     {
-      "normalized": "petit pois",
+      "normalized": "clove",
       "count": 4,
       "examples": [
-        "petit pois",
-        "130 g / 1 cup frozen petit pois (or peas)",
-        "½ cup frozen petit pois (small peas)"
+        "clove",
+        "⅛ teaspoon ground clove"
       ],
       "sampleRecipeIds": [
-        2584,
-        5288,
-        2573,
-        5502
+        2070,
+        6341,
+        4652,
+        4454
       ]
     },
     {
@@ -729,21 +669,6 @@
         4510,
         8353,
         5918
-      ]
-    },
-    {
-      "normalized": "cantaloupe",
-      "count": 4,
-      "examples": [
-        "1 medium cantaloupe, halved, seeded, cut into 16 wedges, and peeled",
-        "2 cups chopped cantaloupe",
-        "1 cantaloupe"
-      ],
-      "sampleRecipeIds": [
-        7155,
-        7395,
-        6613,
-        8261
       ]
     },
     {
@@ -836,20 +761,6 @@
       ]
     },
     {
-      "normalized": "taro",
-      "count": 4,
-      "examples": [
-        "taro",
-        "taro cubes"
-      ],
-      "sampleRecipeIds": [
-        4063,
-        4671,
-        4640,
-        4615
-      ]
-    },
-    {
       "normalized": "plant milk + to glaze",
       "count": 4,
       "examples": [
@@ -888,6 +799,21 @@
         3060,
         2564,
         3139
+      ]
+    },
+    {
+      "normalized": "sparkling water",
+      "count": 4,
+      "examples": [
+        "¾ cup sparkling water",
+        "sparkling water",
+        "2 cups sparkling water"
+      ],
+      "sampleRecipeIds": [
+        7231,
+        2447,
+        7475,
+        7296
       ]
     },
     {
@@ -983,7 +909,7 @@
       "examples": [
         "veggies",
         "of veggies",
-        "2 cups of veggies (I used bell pepper, carrots, broccoflower(Romanesco broccoli))"
+        "2 cups of veggies"
       ],
       "sampleRecipeIds": [
         150,
@@ -1034,6 +960,19 @@
         7013,
         7528,
         6993
+      ]
+    },
+    {
+      "normalized": "jerk seasoning",
+      "count": 4,
+      "examples": [
+        "jerk seasoning"
+      ],
+      "sampleRecipeIds": [
+        4524,
+        8139,
+        8147,
+        8132
       ]
     },
     {
@@ -1154,19 +1093,6 @@
       ]
     },
     {
-      "normalized": "long beans",
-      "count": 4,
-      "examples": [
-        "long beans"
-      ],
-      "sampleRecipeIds": [
-        4620,
-        8284,
-        8279,
-        8273
-      ]
-    },
-    {
       "normalized": "cavolo nero",
       "count": 4,
       "examples": [
@@ -1194,20 +1120,6 @@
         5327,
         5233,
         2586
-      ]
-    },
-    {
-      "normalized": "rose water",
-      "count": 4,
-      "examples": [
-        "rose water",
-        "1 teaspoon rose water"
-      ],
-      "sampleRecipeIds": [
-        8204,
-        8209,
-        6682,
-        8194
       ]
     },
     {
@@ -1318,32 +1230,6 @@
       ]
     },
     {
-      "normalized": "tofu puffs",
-      "count": 3,
-      "examples": [
-        "tofu puffs"
-      ],
-      "sampleRecipeIds": [
-        2150,
-        2760,
-        8273
-      ]
-    },
-    {
-      "normalized": "veggie",
-      "count": 3,
-      "examples": [
-        "⅔ cup veggie",
-        "¾ cup veggie",
-        "veggie"
-      ],
-      "sampleRecipeIds": [
-        4394,
-        4404,
-        2726
-      ]
-    },
-    {
       "normalized": "cajun seasoning",
       "count": 3,
       "examples": [
@@ -1398,6 +1284,20 @@
       ]
     },
     {
+      "normalized": "cantaloupe",
+      "count": 3,
+      "examples": [
+        "1 medium cantaloupe, halved, seeded, cut into 16 wedges, and peeled",
+        "2 cups chopped cantaloupe",
+        "1 cantaloupe"
+      ],
+      "sampleRecipeIds": [
+        7155,
+        7395,
+        6613
+      ]
+    },
+    {
       "normalized": "pot o beans",
       "count": 3,
       "examples": [
@@ -1429,7 +1329,7 @@
       "examples": [
         "chilli sauce",
         "1-2 tsp chilli sauce (like Sriracha, sambal oelek)",
-        "1-2 tsp chilli sauce (I used sambal oelek)"
+        "1-2 tsp chilli sauce"
       ],
       "sampleRecipeIds": [
         4815,
@@ -1441,9 +1341,8 @@
       "normalized": "oil with high smoke point",
       "count": 3,
       "examples": [
-        "2 tbsp of oil with high smoke point (I used peanut oil)",
-        "1 tbsp oil with high smoke point (I used rice bran oil)",
-        "1 tbsp oil with high smoke point (I used peanut oil)"
+        "2 tbsp of oil with high smoke point",
+        "1 tbsp oil with high smoke point"
       ],
       "sampleRecipeIds": [
         5746,
@@ -1475,6 +1374,19 @@
         7001,
         6846,
         7190
+      ]
+    },
+    {
+      "normalized": "taro",
+      "count": 3,
+      "examples": [
+        "taro",
+        "taro cubes"
+      ],
+      "sampleRecipeIds": [
+        4063,
+        4671,
+        4615
       ]
     },
     {
@@ -1554,6 +1466,20 @@
         7089,
         6621,
         7364
+      ]
+    },
+    {
+      "normalized": "petit pois",
+      "count": 3,
+      "examples": [
+        "130 g / 1 cup frozen petit pois (or peas)",
+        "petit pois",
+        "½ cup frozen petit pois (small peas)"
+      ],
+      "sampleRecipeIds": [
+        5288,
+        2573,
+        5502
       ]
     },
     {
@@ -1761,20 +1687,6 @@
       ]
     },
     {
-      "normalized": "chilies",
-      "count": 3,
-      "examples": [
-        "ground chilies",
-        "chilies",
-        "dried chilies"
-      ],
-      "sampleRecipeIds": [
-        2568,
-        4650,
-        8266
-      ]
-    },
-    {
       "normalized": "paddles nopales",
       "count": 3,
       "examples": [
@@ -1826,6 +1738,18 @@
         5251,
         5786,
         5376
+      ]
+    },
+    {
+      "normalized": "granola",
+      "count": 3,
+      "examples": [
+        "granola"
+      ],
+      "sampleRecipeIds": [
+        4710,
+        4995,
+        2514
       ]
     },
     {
@@ -1910,20 +1834,6 @@
         6855,
         7831,
         6439
-      ]
-    },
-    {
-      "normalized": "red chilies",
-      "count": 3,
-      "examples": [
-        "dry red chilies",
-        "dried red chilies",
-        "red chilies"
-      ],
-      "sampleRecipeIds": [
-        5072,
-        8313,
-        5047
       ]
     },
     {
@@ -2273,19 +2183,6 @@
       ]
     },
     {
-      "normalized": "tajin seasoning",
-      "count": 3,
-      "examples": [
-        "tajin seasoning",
-        "1/2 teaspoon Tajin seasoning (or Cajun spice or  pepper flakes)"
-      ],
-      "sampleRecipeIds": [
-        8302,
-        8251,
-        6130
-      ]
-    },
-    {
       "normalized": "msg",
       "count": 3,
       "examples": [
@@ -2295,6 +2192,20 @@
         3143,
         3137,
         2146
+      ]
+    },
+    {
+      "normalized": "brewed coffee",
+      "count": 3,
+      "examples": [
+        "1 tbsp brewed coffee (or 1/4 tsp instant coffee)",
+        "60 ml / ¼ cup brewed coffee",
+        "3/4 cup brewed coffee  (or 1.5 to 2 tsp coffee in 3/4 cup water)"
+      ],
+      "sampleRecipeIds": [
+        6219,
+        5595,
+        6059
       ]
     },
     {
@@ -2322,20 +2233,6 @@
         7153,
         7236,
         7088
-      ]
-    },
-    {
-      "normalized": "brewed coffee",
-      "count": 3,
-      "examples": [
-        "1 tbsp brewed coffee (or 1/4 tsp instant coffee)",
-        "60 ml / ¼ cup brewed coffee",
-        "3/4 cup brewed coffee  (or 1.5 to 2 tsp coffee in 3/4 cup water)"
-      ],
-      "sampleRecipeIds": [
-        6219,
-        5595,
-        6059
       ]
     },
     {
@@ -2496,6 +2393,17 @@
       ]
     },
     {
+      "normalized": "tofu puffs",
+      "count": 2,
+      "examples": [
+        "tofu puffs"
+      ],
+      "sampleRecipeIds": [
+        2150,
+        2760
+      ]
+    },
+    {
       "normalized": "chipotle sauce",
       "count": 2,
       "examples": [
@@ -2543,6 +2451,18 @@
       ]
     },
     {
+      "normalized": "veggie",
+      "count": 2,
+      "examples": [
+        "⅔ cup veggie",
+        "veggie"
+      ],
+      "sampleRecipeIds": [
+        4394,
+        2726
+      ]
+    },
+    {
       "normalized": "vegan buttermilk",
       "count": 2,
       "examples": [
@@ -2581,8 +2501,8 @@
       "normalized": "date nectar or sugar",
       "count": 2,
       "examples": [
-        "1 tsp date nectar (I use homemade) or sugar",
-        "1-2 tsp date nectar (I use homemade) or sugar"
+        "1 tsp date nectar or sugar",
+        "1-2 tsp date nectar or sugar"
       ],
       "sampleRecipeIds": [
         5429,
@@ -2593,7 +2513,6 @@
       "normalized": "oil for shallow frying",
       "count": 2,
       "examples": [
-        "oil for shallow frying (I used rice bran oil)",
         "oil for shallow frying"
       ],
       "sampleRecipeIds": [
@@ -2653,7 +2572,7 @@
       "count": 2,
       "examples": [
         "beansprouts",
-        "handful of beansprouts (I used mung bean sprouts)"
+        "handful of beansprouts"
       ],
       "sampleRecipeIds": [
         4498,
@@ -2763,6 +2682,63 @@
       "sampleRecipeIds": [
         5476,
         5095
+      ]
+    },
+    {
+      "normalized": "other veggies",
+      "count": 2,
+      "examples": [
+        "1/2 cup other veggies such as butternut squash, (sweet potato, green beans, etc)",
+        "1/2  cup other veggies ( like bell pepper, celery, sweet potatoes)"
+      ],
+      "sampleRecipeIds": [
+        6156,
+        6014
+      ]
+    },
+    {
+      "normalized": "mock chicken",
+      "count": 2,
+      "examples": [
+        "mock chicken pieces"
+      ],
+      "sampleRecipeIds": [
+        4429,
+        4419
+      ]
+    },
+    {
+      "normalized": "zest ½ small lemon 15 ml 1 tbsp juice",
+      "count": 2,
+      "examples": [
+        "zest ½ small lemon + 15 ml / 1 tbsp juice"
+      ],
+      "sampleRecipeIds": [
+        5223,
+        5150
+      ]
+    },
+    {
+      "normalized": "other sugar",
+      "count": 2,
+      "examples": [
+        "1/2 cup raw or other sugar (I usually use 1/3 cup for a less sweet breakfast loaf)",
+        "1/2 cup raw or other sugar (add 2 tbsp more for sweeter esp if using whole grain flours)"
+      ],
+      "sampleRecipeIds": [
+        6193,
+        5989
+      ]
+    },
+    {
+      "normalized": "lemon + juice only",
+      "count": 2,
+      "examples": [
+        "½ lemon, juice only"
+      ],
+      "sampleRecipeIds": [
+        5788,
+        5470
       ]
     }
   ],
@@ -2897,23 +2873,6 @@
         "  ½ cup raw fresh vegetables, such as sliced or chopped cucumber and/or tomato",
         "  ¼ cup sliced avocado ",
         "  Hot sauce (optional)"
-      ]
-    },
-    {
-      "id": 8292,
-      "title": "Brazilian Açaí Bowl with Guaraná",
-      "pct": 50,
-      "haveCount": 3,
-      "needCount": 3,
-      "needNames": [
-        "frozen açaí puree",
-        "guaraná syrup",
-        "granola"
-      ],
-      "haveNames": [
-        "frozen banana",
-        "coconut flakes",
-        "sliced strawberries"
       ]
     },
     {
@@ -3100,15 +3059,15 @@
       "haveCount": 6,
       "needCount": 5,
       "needNames": [
-        "1/2 cup urad daal ((split black gram daal))",
-        "1/4 cup toor daal ((split pigeon pea))",
-        "1/4 cup chana daal ((split Bengal gram))",
-        "2 teaspoons methi seeds ((Fenugreek seeds))",
-        "handful of methi leaves ((fresh fenugreek leaves))"
+        "1/2 cup urad daal",
+        "1/4 cup toor daal",
+        "1/4 cup chana daal",
+        "2 teaspoons methi seeds",
+        "handful of methi leaves"
       ],
       "haveNames": [
         "1/2 cup brown rice",
-        "1/2 cup white rice ((I used basmati.. typically should use parboiled rice))",
+        "1/2 cup white rice ( )",
         "1 inch ginger",
         "1  dried red chili",
         "salt to taste",
@@ -3224,11 +3183,11 @@
         "420 g / 1½ cups sour cherry jam / preserve*"
       ],
       "haveNames": [
-        "315 g / 2½ cups all purpose flour OR GF all purpose flour mix (I used Dove's Farm)",
+        "315 g / 2½ cups all purpose flour OR GF all purpose flour mix",
         "25 g / 3 tbsp icing sugar, fine sugar or maple syrup",
         "½ tsp sea salt",
         "¾ tsp xantham gum (for GF version only)",
-        "150 g / 5¼ oz firm silken tofu (I used Clearspring)",
+        "150 g / 5¼ oz firm silken tofu",
         "90 ml / 6 tbsp juice + zest 1½ lemons",
         "2 tsp vanilla extract",
         "1 tbsp tapioca starch"
@@ -3364,14 +3323,14 @@
       "haveCount": 7,
       "needCount": 4,
       "needNames": [
-        "1/2 cup urad daal ((split black gram daal))",
-        "1/4 cup toor daal ((split pigeon pea))",
-        "1/4 cup whole Raungi ((other names Black eyed peas/cowpea/lobhia/chowla))",
-        "2 teaspoons methi seeds ((Fenugreek seeds))"
+        "1/2 cup urad daal",
+        "1/4 cup toor daal",
+        "1/4 cup whole Raungi",
+        "2 teaspoons methi seeds"
       ],
       "haveNames": [
         "1/2 cup brown rice",
-        "1/2 cup white rice ((I used basmati.. typically should use parboiled rice))",
+        "1/2 cup white rice ( )",
         "1 inch ginger",
         "1  dried red chili",
         "handful of cilantro leaves",
@@ -3388,7 +3347,7 @@
       "needNames": [
         "60 ml / ¼ cup very strong coffee*",
         "195 g / 1½ cups raw cashews, soaked in boiling water for 20 min",
-        "195 ml / ¾ cup + 1 tbsp plant milk (I used almond milk)",
+        "195 ml / ¾ cup + 1 tbsp plant milk",
         "60 ml / ¼ cup very strong coffee*"
       ],
       "haveNames": [
@@ -3870,7 +3829,7 @@
       ],
       "haveNames": [
         "  12 pitted Medjool dates (6 oz.) ",
-        "  2 tablespoons chopped vegan dark chocolate or mini chocolate chips, such as Enjoy Life"
+        "2 tablespoons chopped vegan dark chocolate or mini chocolate chips, such as"
       ]
     },
     {
@@ -4055,23 +4014,6 @@
       ]
     },
     {
-      "id": 8282,
-      "title": "Vietnamese Coffee Smoothie Bowl",
-      "pct": 67,
-      "haveCount": 4,
-      "needCount": 2,
-      "needNames": [
-        "strong vietnamese coffee",
-        "coconut condensed milk"
-      ],
-      "haveNames": [
-        "frozen bananas",
-        "cacao nibs",
-        "coconut flakes",
-        "chia seeds"
-      ]
-    },
-    {
       "id": 6439,
       "title": "Cheesy Caesar Dressing",
       "pct": 70,
@@ -4091,37 +4033,6 @@
         "  Freshly ground black pepper to taste",
         "  2 tablespoons freshly squeezed lemon juice",
         "  1½ teaspoons pure maple syrup"
-      ]
-    },
-    {
-      "id": 4640,
-      "title": "Taro Basket or Prosperity Yam Ring - (芋钵Yù bō or 佛钵 Fú bō)",
-      "pct": 70,
-      "haveCount": 14,
-      "needCount": 6,
-      "needNames": [
-        "taro",
-        "wheat starch for dusting",
-        "spice powder",
-        "konnyaku",
-        "roasted chestnut",
-        "shaoxing cooking wine"
-      ],
-      "haveNames": [
-        "salt",
-        "sugar",
-        "coconut oil",
-        "garlic",
-        "chili",
-        "carrot",
-        "tofu",
-        "king oyster mushrooms",
-        "baby corn",
-        "peas",
-        "toasted cashew",
-        "soy sauce",
-        "corn starch",
-        "mung bean vermicelli"
       ]
     },
     {
@@ -4246,7 +4157,7 @@
       "haveCount": 5,
       "needCount": 2,
       "needNames": [
-        "5 Tbsps raw sugar ((brown sugar or sucanat))",
+        "5 Tbsps raw sugar",
         "1  Tbps water"
       ],
       "haveNames": [
@@ -4255,43 +4166,6 @@
         "1 Tbsp cornstarch",
         "vanilla extract if using regular coconut milk",
         "1.75  cups + 2 Tbsps  So delicious vanilla coconut milk"
-      ]
-    },
-    {
-      "id": 6189,
-      "title": "Ginger Pancakes (Vegan Multigrain)",
-      "pct": 71,
-      "haveCount": 6,
-      "needCount": 2,
-      "needNames": [
-        "3 tablespoons Bobs Red mill organic 7 grain Pancake mix ((already has salt and rising agent))",
-        "2 tablespoons ginger syrup or 1 tablespoon Agave syrup and 1/2 teaspoon ginger powder"
-      ],
-      "haveNames": [
-        "1.5 tablespoons self rising flour",
-        "3-4 tablespoons water/almond milk",
-        "1 teaspoon crystallized ginger ((1/2 cm pieces))",
-        "1/2 teaspoon lemon juice",
-        "1 tablespoon raisins ((optional))",
-        "vegan butter for cooking and serving"
-      ]
-    },
-    {
-      "id": 8194,
-      "title": "Jeweled Persian Rice with Saffron and Barberries",
-      "pct": 71,
-      "haveCount": 5,
-      "needCount": 2,
-      "needNames": [
-        "barberries",
-        "rose water"
-      ],
-      "haveNames": [
-        "basmati rice",
-        "saffron threads",
-        "pistachios",
-        "slivered almonds",
-        "coconut oil"
       ]
     },
     {
@@ -4559,7 +4433,7 @@
         "1 tsp baking soda",
         "½ tsp baking powder",
         "120 g / 1 cup cacao powder",
-        "180 g / 1 scant cup sugar (I used demerara sugar)",
+        "180 g / 1 scant cup sugar",
         "240 ml / 1 cup almond milk (or other thin plant milk)",
         "450 g / 1 lb sweet cherries (or sour cherries), pitted",
         "1 heaped tsp cornflour / cornstarch"
@@ -4577,7 +4451,7 @@
         "coarse sea salt, to decorate"
       ],
       "haveNames": [
-        "130 g / 4.5 oz vegan dark chocolate (I used semi-sweet 70% cacao)",
+        "130 g / 4.5 oz vegan dark chocolate",
         "1 tbsp melted coconut oil",
         "45 g / ½ cup almond flour*",
         "30 g / ¼ cup buckwheat flour",
@@ -4600,12 +4474,12 @@
       ],
       "haveNames": [
         "360 g / 1½ cups mashed up, very ripe bananas",
-        "60 ml / ¼ cup mild tasting oil (I used 50 g mild coconut oil) or nut butter like hazelnut (for oil-free version)",
+        "60 ml / ¼ cup mild tasting oil or nut butter like hazelnut (for oil-free version)",
         "50 g / ½ cup unsweetened cocoa powder",
         "1¼ tsp baking powder",
         "¾ tsp baking soda",
-        "180 g / 1½ cups all purpose wheat flour or GF flour mix (I use this one)",
-        "½ tsp sea salt (I use Maldon salt flakes crushed between my fingers)",
+        "180 g / 1½ cups all purpose wheat flour or GF flour mix",
+        "½ tsp sea salt",
         "100 g / 3.5 oz vegan 70% dark chocolate, diced small (optional)",
         "chopped hazelnuts, for decoration"
       ]
@@ -4648,35 +4522,16 @@
       ],
       "haveNames": [
         "250 g / 9 oz firm or extra firm (cotton not silken) tofu, pressed",
-        "1 tbsp ground flax (I used golden flax seeds) or chia seeds*",
+        "1 tbsp ground flax or chia seeds*",
         "3 tbsp soy sauce / tamari (GF)",
         "2 tbsp rice wine vinegar",
         "1 tbsp maple syrup or sugar",
         "1 tbsp toasted sesame oil",
         "1-2 tsp finely grated ginger",
         "1 small garlic clove, finely grated",
-        "approx. 2 tbsp oil (I use rice bran)",
+        "approx. 2 tbsp oil",
         "cooked brown rice",
         "Asian chilli oil"
-      ]
-    },
-    {
-      "id": 8284,
-      "title": "Indonesian Pecel (Vegetables with Peanut Sambal)",
-      "pct": 75,
-      "haveCount": 6,
-      "needCount": 2,
-      "needNames": [
-        "long beans",
-        "tamarind"
-      ],
-      "haveNames": [
-        "water spinach",
-        "bean sprouts",
-        "roasted peanuts",
-        "palm sugar",
-        "chili",
-        "kaffir lime leaf"
       ]
     },
     {
@@ -4886,25 +4741,6 @@
       ]
     },
     {
-      "id": 8279,
-      "title": "Thai Som Tum Green Papaya Salad",
-      "pct": 75,
-      "haveCount": 6,
-      "needCount": 2,
-      "needNames": [
-        "green papaya",
-        "long beans"
-      ],
-      "haveNames": [
-        "cherry tomatoes",
-        "roasted peanuts",
-        "lime juice",
-        "palm sugar",
-        "tamari",
-        "dried chili"
-      ]
-    },
-    {
       "id": 7507,
       "title": "Ultimate Earth Day Smoothie",
       "pct": 75,
@@ -5067,10 +4903,29 @@
         "2½ tbsp / 35 ml soy sauce or tamari, more to serve",
         "10 ml / 2 tsp rice vinegar",
         "5 ml / 1 tsp toasted sesame oil (optional)",
-        "1-2 tbsp vegetable oil, for frying (I used peanut oil)",
+        "1-2 tbsp vegetable oil, for frying",
         "chilli oil, to serve (optional)",
         "250 g / 2 cups plain flour",
         "1 tsp fine sea salt"
+      ]
+    },
+    {
+      "id": 6189,
+      "title": "Ginger Pancakes (Vegan Multigrain)",
+      "pct": 75,
+      "haveCount": 6,
+      "needCount": 2,
+      "needNames": [
+        "3 tablespoons organic 7 grain Pancake mix",
+        "2 tablespoons ginger syrup or 1 tablespoon Agave syrup and 1/2 teaspoon ginger powder"
+      ],
+      "haveNames": [
+        "1.5 tablespoons self rising flour",
+        "3-4 tablespoons water/almond milk",
+        "1 teaspoon crystallized ginger",
+        "1/2 teaspoon lemon juice",
+        "1 tablespoon raisins",
+        "vegan butter for cooking and serving"
       ]
     },
     {
@@ -5090,25 +4945,6 @@
         "maple syrup",
         "vegetable oil for brushing",
         "icing sugar to dust"
-      ]
-    },
-    {
-      "id": 8273,
-      "title": "Indonesian Sayur Lodeh (Vegetable Coconut Stew)",
-      "pct": 75,
-      "haveCount": 6,
-      "needCount": 2,
-      "needNames": [
-        "long beans",
-        "tofu puffs"
-      ],
-      "haveNames": [
-        "chayote squash",
-        "coconut milk",
-        "galangal",
-        "turmeric",
-        "bay leaves",
-        "palm sugar"
       ]
     },
     {
@@ -5133,7 +4969,7 @@
       "haveCount": 3,
       "needCount": 1,
       "needNames": [
-        "1/2 Cups Vegan Peanut Butter Chips ((see notes for substitute))"
+        "1/2 Cups Vegan Peanut Butter Chips"
       ],
       "haveNames": [
         "1 1/2 Cups Vegan Semi-Sweet Chocolate",
@@ -5225,23 +5061,8 @@
       ],
       "haveNames": [
         "20 large Medjool dates",
-        "60 g / ¼ cup thick nut or seed butter* (I used dark roast PB)",
+        "60 g / ¼ cup thick nut or seed butter*",
         "180 g / 6.3 oz 70% dark chocolate"
-      ]
-    },
-    {
-      "id": 8236,
-      "title": "Sweet Azuki Bean Paste (Anko)",
-      "pct": 75,
-      "haveCount": 3,
-      "needCount": 1,
-      "needNames": [
-        "azuki beans"
-      ],
-      "haveNames": [
-        "coconut sugar",
-        "salt",
-        "vanilla extract"
       ]
     },
     {
@@ -5340,7 +5161,7 @@
         "75 g / ½ cup (not packed) raisins*",
         "60 ml / ¼ cup maple syrup",
         "150 g / 5¼ oz vegan dark chocolate (70% cacao solids)*",
-        "45 ml / 3 tbsp vegan single cream (I used Oatly) or full fat coconut milk",
+        "45 ml / 3 tbsp vegan single cream or full fat coconut milk",
         "1 tsp vanilla extract (or rum extract to taste)",
         "pinch of fine salt"
       ]
@@ -5402,7 +5223,7 @@
       "haveCount": 15,
       "needCount": 5,
       "needNames": [
-        "90 ml / 1/3 cup + 2 tsp plant milk (I used soy)",
+        "90 ml / 1/3 cup + 2 tsp plant milk",
         "cocoa powder, to decorate",
         "2 tbsp instant coffee granules",
         "60 ml / ¼ cup Oatly cream",
@@ -5410,18 +5231,18 @@
       ],
       "haveNames": [
         "260 g / 2 cup cashews, soaked",
-        "100 g / 8 tbsp vegan butter (I use Naturli)",
+        "100 g / 8 tbsp vegan butter",
         "100 g / ½ cup caster (superfine white) sugar",
         "15 ml / 1 tbsp vanilla extract",
         "30 ml / 2 tbsp lemon juice",
-        "360 ml / 2¼ cup plant milk (I used soy)",
+        "360 ml / 2¼ cup plant milk",
         "420 g / 3½ cup plain flour*",
         "½ tsp salt",
         "250 g / 1¼ cup caster (superfine white) sugar",
         "1 tsp baking soda",
         "1 tsp baking powder",
         "15 ml / 1 tbsp vanilla extract",
-        "150 ml / 10 tbsp neutral oil (I use grapeseed)",
+        "150 ml / 10 tbsp neutral oil",
         "75 g / 2.65 oz 70% dark chocolate",
         "12 g / 1 tbsp caster (superfine white) sugar"
       ]
@@ -5518,7 +5339,7 @@
         "30 ml / 2 tbsp olive oil*, divided",
         "1 large shallot, thickly sliced",
         "2 garlic cloves, thickly sliced",
-        "150 g / 5.3 oz mushrooms (I used chestnut / cremini), sliced",
+        "150 g / 5.3 oz mushrooms , sliced",
         "1½ tsp chopped rosemary leaves (or thyme leaves)",
         "7 ml / 1½ tsp soy sauce (or tamari if GF)",
         "scant ¼ tsp pepper and ¼ tsp flaky salt, adjust both to taste",
@@ -5761,7 +5582,7 @@
       "haveCount": 11,
       "needCount": 3,
       "needNames": [
-        "3/4 cup  Bob's red mill organic 7 grain pancake mix (already has flax or my multigrain pancake mix or my glutenfree pancake mix)",
+        "3/4 cup organic 7 grain pancake mix (already has flax or my multigrain pancake mix or my glutenfree pancake mix)",
         "few Tablespoons water",
         "Mix Maple syrup and brewed coffee or coffee liqueur or rum or other liqueur to preference."
       ],
@@ -5951,16 +5772,16 @@
       "needCount": 2,
       "needNames": [
         "1 cup raw cashew nuts, soaked in boiling water for 30 min",
-        "oil, suitable for frying (I used rice bran oil)"
+        "oil, suitable for frying"
       ],
       "haveNames": [
         "juice of 1 lemon, adjust to taste",
         "salt, to taste",
-        "1 kg / 2 lb starchy potatoes (I used Maris Piper)",
+        "1 kg / 2 lb starchy potatoes",
         "1 small onion, very finely grated or diced",
         "1 tsp fine salt, more to taste",
         "freshly ground black pepper",
-        "3 tbsp flour (I used Dove's Farm free from to keep the latkes GF, but rice flour or all purpose wheat flour works well too)"
+        "3 tbsp flour"
       ]
     },
     {
@@ -6001,27 +5822,6 @@
         "garlic",
         "salt",
         "plantains"
-      ]
-    },
-    {
-      "id": 6009,
-      "title": "Salted Caramel Mocha Coffee",
-      "pct": 78,
-      "haveCount": 8,
-      "needCount": 2,
-      "needNames": [
-        "1 1/2 cups pre-made coffee or two shots of espresso, plus one cup of water",
-        "2-2 1/2 tbsp salted caramel (recipe below)"
-      ],
-      "haveNames": [
-        "2 tbsp cocoa powder",
-        "1 1/2 cups of non dairy milk such as oat milk (or soy milk or cashew milk)",
-        "generous pinches of sea salt",
-        "4 tbsp coconut sugar",
-        "1 tbsp maple syrup",
-        "1 tsp coconut oil ((optional))",
-        "1/8 tsp sea salt",
-        "1 tbsp coconut cream or oat milk"
       ]
     },
     {
@@ -6137,7 +5937,7 @@
       ],
       "haveNames": [
         "120-150 ml / ½ cup + 1-2 more tbsp maple syrup, adjust to taste",
-        "200 g / 7 oz silken tofu (I use Clearspring)",
+        "200 g / 7 oz silken tofu",
         "zest of 1 lemon + 1 tbsp lemon juice",
         "2 tsp vanilla paste or vanilla extract",
         "a pinch of ground saffron (or saffron threads) or a few pinches of turmeric",
@@ -6179,7 +5979,7 @@
       "haveCount": 11,
       "needCount": 3,
       "needNames": [
-        "120 ml / ½ cup neutral, high smoke oil (I used grapeseed)",
+        "120 ml / ½ cup neutral, high smoke oil",
         "30-45 ml / 2-3 tbsp scallion oil (or shop-bought - SEE NOTES*)",
         "15 ml / 1 tbsp Chinkiang Black Rice Vinegar*"
       ],
@@ -6255,31 +6055,6 @@
         "jalapeño slices",
         "lime wedges",
         "a handful of: thai basil"
-      ]
-    },
-    {
-      "id": 4404,
-      "title": "Dan Dan Noodles",
-      "pct": 79,
-      "haveCount": 11,
-      "needCount": 3,
-      "needNames": [
-        "¾ cup veggie",
-        "¼ cup preserved mustard greens",
-        "½ tbsp chinese rice cooking wine"
-      ],
-      "haveNames": [
-        "sichuan peppercorns",
-        "⅓ cup water",
-        "chili oil",
-        "brown sugar",
-        "rice vinegar",
-        "oil",
-        "ginger",
-        "baby bok choy",
-        "quick-cooking ramen noodles",
-        "unsalted roasted peanuts",
-        "green onion"
       ]
     },
     {
@@ -6509,7 +6284,7 @@
         "1/2 teaspoon vinegar",
         "1 cup grated Cauliflower (loaded cup)",
         "3-4  Shiitake mushrooms  (or other fresh mushrooms finely chopped 1/3-1/2 cup)",
-        "1/2  chili pepper finely chopped (I used Jalapeno)",
+        "1/2 chili pepper finely chopped",
         "1/4 cup finely chopped red onion",
         "1/4 cup chopped cilantro (optional)",
         "Add 1-2 tsp sriracha to the batter"
@@ -6616,22 +6391,6 @@
         "  6 cups romaine lettuce, cut into 1-inch dice (6 ounces)",
         "  2 tablespoons finely chopped fresh parsley",
         "  2 tablespoons pine nuts"
-      ]
-    },
-    {
-      "id": 4106,
-      "title": "Banana Berry Smoothie Bowl",
-      "pct": 80,
-      "haveCount": 4,
-      "needCount": 1,
-      "needNames": [
-        "granola"
-      ],
-      "haveNames": [
-        "banana",
-        "mixed berries",
-        "plant-based milk",
-        "peanut butter"
       ]
     },
     {
@@ -7058,7 +6817,7 @@
         "oil or oil spray"
       ],
       "haveNames": [
-        "450 g / 1 lb starchy variety potatoes (I used Maris Piper), peeled",
+        "450 g / 1 lb starchy variety potatoes , peeled",
         "heaped ½ tsp salt",
         "1 large shallot or ½ large onion, finely grated or chopped",
         "a good grind of black pepper, adjust to taste"
@@ -7152,22 +6911,6 @@
         "  ½ teaspoon ginger grated",
         "  ½ tablespoon lime juice",
         "  1 tablespoon cilantro (optional)"
-      ]
-    },
-    {
-      "id": 8261,
-      "title": "Chilled Cantaloupe and Mint Soup",
-      "pct": 80,
-      "haveCount": 4,
-      "needCount": 1,
-      "needNames": [
-        "cantaloupe"
-      ],
-      "haveNames": [
-        "fresh mint",
-        "lime juice",
-        "coconut cream",
-        "ginger"
       ]
     },
     {
@@ -7367,7 +7110,7 @@
         "160 ml / ½ cup + 2½ tbsp almond milk (or any other thin plant milk)"
       ],
       "haveNames": [
-        "250 g / 2 cups all purpose white wheat flour or GF plain flour (I use this one)",
+        "250 g / 2 cups all purpose white wheat flour or GF plain flour",
         "¾ tsp xantham gum (for GF version only)",
         "3 level tsp baking powder",
         "25 g / 2 tbsp caster (super fine) sugar or coconut sugar",
@@ -7380,22 +7123,6 @@
         "2 tsp maple syrup",
         "demerara sugar or coconut sugar, to sprinkle (optional)",
         "thick vegan coconut yoghurt (I like The Coconut Collaborative) or homemade cashew cream**"
-      ]
-    },
-    {
-      "id": 8239,
-      "title": "Hojicha Roasted Green Tea Latte",
-      "pct": 80,
-      "haveCount": 4,
-      "needCount": 1,
-      "needNames": [
-        "hojicha powder"
-      ],
-      "haveNames": [
-        "oat milk",
-        "maple syrup",
-        "vanilla extract",
-        "cinnamon"
       ]
     },
     {
@@ -7575,6 +7302,27 @@
       ]
     },
     {
+      "id": 6009,
+      "title": "Salted Caramel Mocha Coffee",
+      "pct": 80,
+      "haveCount": 8,
+      "needCount": 2,
+      "needNames": [
+        "1 1/2 cups pre-made coffee or two shots of espresso, plus one cup of water",
+        "2-2 1/2 tbsp salted caramel (recipe below)"
+      ],
+      "haveNames": [
+        "2 tbsp cocoa powder",
+        "1 1/2 cups of non dairy milk such as oat milk (or soy milk or cashew milk)",
+        "generous pinches of sea salt",
+        "4 tbsp coconut sugar",
+        "1 tbsp maple syrup",
+        "1 tsp coconut oil",
+        "1/8 tsp sea salt",
+        "1 tbsp coconut cream or oat milk"
+      ]
+    },
+    {
       "id": 6993,
       "title": "Shredded Portobello Open-Face Sandwiches",
       "pct": 80,
@@ -7602,7 +7350,7 @@
       "haveCount": 4,
       "needCount": 1,
       "needNames": [
-        "15 ml / 1 tbsp 100% natural nut butter of choice (I used smooth almond butter)"
+        "15 ml / 1 tbsp 100% natural nut butter of choice"
       ],
       "haveNames": [
         "1 cup sprouted buckwheat*",
@@ -7680,14 +7428,14 @@
         "4 tsp maple syrup, more to serve"
       ],
       "haveNames": [
-        "160 g / 1 heaped cup GF flour mix (I used Dove's Farm free from) or all purpose flour",
+        "160 g / 1 heaped cup GF flour mix or all purpose flour",
         "½ tsp cinnamon",
         "2 tsp (gluten-free if required) baking powder",
         "½ tsp (gluten-free if required) baking soda",
         "2 tbsp smooth almond butter (or any nut butter)",
         "2 tsp lemon juice",
         "1½ cup / 150 g fresh blueberries, divided",
-        "1-2 tbsp oil for frying (I used mild coconut oil)"
+        "1-2 tbsp oil for frying"
       ]
     },
     {
@@ -7782,7 +7530,7 @@
       "haveCount": 8,
       "needCount": 2,
       "needNames": [
-        "bob’s red mill egg replacer egg substitutes*",
+        "egg replacer egg substitutes*",
         "gluten free vegan pie crust recipe"
       ],
       "haveNames": [
@@ -7948,12 +7696,12 @@
       "needCount": 4,
       "needNames": [
         "juice of ½ lime (about 2 tbsp)",
-        "15 ml / 1 tbsp hot smoke oil (I use rice bran oil)",
+        "15 ml / 1 tbsp hot smoke oil",
         "1 corn on the cob, kernels shaved off",
         "1 carrot, ribboned or julienned"
       ],
       "haveNames": [
-        "100 g / ½ cup peanut butter (I used this brand)",
+        "100 g / ½ cup peanut butter",
         "4 tsp tamari (if GF) or soy sauce",
         "1 tbsp maple syrup or coconut sugar",
         "1 heaped tsp tamarind paste (strength varies)",
@@ -8041,7 +7789,7 @@
         "4 large potatoes, cooked",
         "small bunch of rocket*",
         "30 cherry tomatoes",
-        "15 black olives (I used Kalamata)",
+        "15 black olives",
         "2 tbsp of capers, chopped roughly",
         "4 tbsp of extra virgin olive oil",
         "2 tsp of wholegrain mustard",
@@ -8499,7 +8247,7 @@
         "½ tsp cinnamon",
         "50 g / ½ cup pecans or walnuts",
         "10 ml / 2 tsp maple syrup",
-        "50 g / 1.75 oz vegan feta, optional (I used Violife)"
+        "50 g / 1.75 oz vegan feta, optional"
       ]
     },
     {
@@ -8720,12 +8468,12 @@
       "haveCount": 9,
       "needCount": 2,
       "needNames": [
-        "favourite veggies (I used cabbage, broccoli, butternut squash and runner beans)",
+        "favourite veggies",
         "1-2 tbsp / 15-30 ml water, to thin"
       ],
       "haveNames": [
         "200 g wholemeal (gluten-free if necessary) spaghetti*",
-        "2 tbsp oil, for frying (I used peanut oil)",
+        "2 tbsp oil, for frying",
         "2 spring onions, sliced finely",
         "4 tsp finely grated ginger",
         "1 large garlic clove, finely grated",
@@ -8746,7 +8494,7 @@
         "65 g / ½ cup raw cashews, soaked in boiling water for 30 minutes"
       ],
       "haveNames": [
-        "125 g / 1 cup all purpose flour OR GF all purpose flour mix (I used Dove's Farm)",
+        "125 g / 1 cup all purpose flour OR GF all purpose flour mix",
         "8 g / 1 tbsp icing sugar, fine sugar or maple syrup",
         "2 pinches of fine sea salt",
         "1 tsp xantham gum (for GF version only)",
@@ -8777,7 +8525,7 @@
         "75 g / heaped ½ cup dried cranberries or more nuts",
         "1 tbsp vanilla paste or extract",
         "zest 1 large orange (optional)",
-        "neutral oil (I used grapeseed)",
+        "neutral oil",
         "cornflour / cornstarch",
         "edible rice paper or wafer sheets (optional)"
       ]
@@ -8793,12 +8541,12 @@
         "1/2 to 2/3 cup additions, like chocolate chips, chopped pecans, dried fruit or other nuts or seeds, (plus more for topping)"
       ],
       "haveNames": [
-        "1/3 cup pumpkin puree ((pure pumpkin puree, not pumpkin pie filling. Use a well filled 1/3 cup.))",
+        "1/3 cup pumpkin puree",
         "1  tsp vanilla extract",
         "1/4 cup maple syrup",
-        "2 to 3 tbsp sugar ((I usually use a mix of coconut and raw sugar))",
+        "2 to 3 tbsp sugar",
         "1 1/2 tsp pumpkin pie spice",
-        "3/4 cup flour ((I use a mix of whole wheat and unbleached all purpose))",
+        "3/4 cup flour ( )",
         "1/2 cup almond flour",
         "1/2 tsp baking powder",
         "1/4 tsp salt"
@@ -8819,7 +8567,7 @@
         "50 g / ¼ cup caster sugar or maple syrup",
         "½ tsp salt",
         "7 g / 2¼ oz instant / fast-action dried yeast*",
-        "approx. 285 ml / 1 cup + 3 tbsp warm plant milk (I used soy milk)",
+        "approx. 285 ml / 1 cup + 3 tbsp warm plant milk",
         "25 g / 2 tbsp coconut oil (optional but highly recommended)",
         "2 tsp maple syrup / sugar + 2 tsp plant milk for glazing",
         "50 g / 4 tbsp sugar, stem ginger syrup or maple syrup",
@@ -8914,7 +8662,7 @@
       "haveCount": 16,
       "needCount": 3,
       "needNames": [
-        "2 tsp oil, suitable for stir-frying (I used rice bran oil)",
+        "2 tsp oil, suitable for stir-frying",
         "radishes, fresh or pickled",
         "assorted salad leaves"
       ],
@@ -8932,7 +8680,7 @@
         "100 g / 3.5 oz tenderstem broccoli",
         "2 spring onions, sliced",
         "1 ripe avocado, sliced",
-        "sprouts (I used radish and mung bean sprouts)",
+        "sprouts",
         "½ lemon",
         "salt and pepper"
       ]
@@ -9001,7 +8749,7 @@
         "3 tbsp lemon juice + zest",
         "smoked salt, to taste",
         "black pepper, to taste",
-        "mild-heat chilli flakes (I used Turkish pul biber)",
+        "mild-heat chilli flakes",
         "2 tsbp of toasted breadcrumbs from crusty white bread**, seasoned with salt",
         "a handful of fresh mint leaves",
         "1 tbsp pine nuts, toasted on a dry pan"
@@ -9193,23 +8941,6 @@
       ]
     },
     {
-      "id": 8149,
-      "title": "Dominican Mangú (Mashed Green Plantains)",
-      "pct": 83,
-      "haveCount": 5,
-      "needCount": 1,
-      "needNames": [
-        "green plantains"
-      ],
-      "haveNames": [
-        "red onion",
-        "apple cider vinegar",
-        "olive oil",
-        "garlic",
-        "salt"
-      ]
-    },
-    {
       "id": 4636,
       "title": "Easiest Bok Choy Stir-Fry - 炒奶油白菜",
       "pct": 83,
@@ -9267,30 +8998,13 @@
       ]
     },
     {
-      "id": 8231,
-      "title": "Japanese Seaweed and Avocado Rice Bowl",
-      "pct": 83,
-      "haveCount": 5,
-      "needCount": 1,
-      "needNames": [
-        "umeboshi paste"
-      ],
-      "haveNames": [
-        "short grain rice",
-        "avocado",
-        "nori sheets",
-        "furikake seasoning",
-        "sesame seeds"
-      ]
-    },
-    {
       "id": 5408,
       "title": "Lentil and roast pepper salad with vegan feta",
       "pct": 83,
       "haveCount": 17,
       "needCount": 3,
       "needNames": [
-        "100 g / 3½ oz salad mix (I used red leaf and rocket / arugula)",
+        "100 g / 3½ oz salad mix",
         "vegan feta, homemade (see below) or shop-bought",
         "100 g / 1 cup flaked almonds, soaked in boiling water for at least 30 min"
       ],
@@ -9329,23 +9043,6 @@
         "cilantro",
         "lime",
         "large handful of mini peppers"
-      ]
-    },
-    {
-      "id": 8206,
-      "title": "Roasted Beet and Orange Salad with Dukkah",
-      "pct": 83,
-      "haveCount": 5,
-      "needCount": 1,
-      "needNames": [
-        "dukkah"
-      ],
-      "haveNames": [
-        "golden beets",
-        "navel oranges",
-        "arugula",
-        "red wine vinegar",
-        "extra virgin olive oil"
       ]
     },
     {
@@ -9441,29 +9138,6 @@
       ]
     },
     {
-      "id": 2576,
-      "title": "Vegan New Potato Salad Creamy Dressing",
-      "pct": 83,
-      "haveCount": 10,
-      "needCount": 2,
-      "needNames": [
-        "garden peas, boiled",
-        "new potatoes, boiled"
-      ],
-      "haveNames": [
-        "black pepper",
-        "capers, chopped finely",
-        "chives, chopped finely",
-        "cucumber, sliced thinly",
-        "dill, to garnish",
-        "garlic clove",
-        "gem lettuce",
-        "maple syrup",
-        "nutritional yeast",
-        "white / shiro miso paste"
-      ]
-    },
-    {
       "id": 3048,
       "title": "Vegan Pulled Mushroom Sandwiches",
       "pct": 83,
@@ -9525,23 +9199,6 @@
         "  3 medium russet potatoes",
         "  1 cup fresh, canned or frozen green peas",
         "  2 teaspoons finely chopped fresh cilantro (optional)"
-      ]
-    },
-    {
-      "id": 8207,
-      "title": "Baharat-Spiced Sweet Potato Mash",
-      "pct": 83,
-      "haveCount": 5,
-      "needCount": 1,
-      "needNames": [
-        "baharat spice blend"
-      ],
-      "haveNames": [
-        "sweet potatoes",
-        "coconut cream",
-        "garlic",
-        "olive oil",
-        "salt"
       ]
     },
     {
@@ -9656,23 +9313,6 @@
       ]
     },
     {
-      "id": 8257,
-      "title": "Coconut Yogurt Parfait with Tropical Granola",
-      "pct": 83,
-      "haveCount": 5,
-      "needCount": 1,
-      "needNames": [
-        "passion fruit"
-      ],
-      "haveNames": [
-        "coconut yogurt",
-        "dried mango",
-        "macadamia nuts",
-        "coconut flakes",
-        "buckwheat groats"
-      ]
-    },
-    {
       "id": 5167,
       "title": "Cold matcha slice",
       "pct": 83,
@@ -9687,7 +9327,7 @@
         "90 ml / 6 tbsp plant milk or water",
         "15 ml / 1 tbsp maple syrup or other sweetener",
         "30 g / 2 tbsp + 1 tsp fragrance-free coconut oil, divided",
-        "100 g / 3.5 oz vegan white chocolate (I used ALDI one)",
+        "100 g / 3.5 oz vegan white chocolate",
         "100 g / 3.5 oz (heaped ¾ cup) raw cashews, soaked",
         "50 g / ¼ cup fragrance-free coconut oil, divided",
         "45 ml / 3 tbsp maple syrup or other sweetener",
@@ -9989,23 +9629,6 @@
       ]
     },
     {
-      "id": 8209,
-      "title": "Pistachio and Rose Date Balls",
-      "pct": 83,
-      "haveCount": 5,
-      "needCount": 1,
-      "needNames": [
-        "rose water"
-      ],
-      "haveNames": [
-        "medjool dates",
-        "pistachios",
-        "desiccated coconut",
-        "cardamom",
-        "sea salt"
-      ]
-    },
-    {
       "id": 6334,
       "title": "Ponzu Noodle Salad",
       "pct": 83,
@@ -10263,37 +9886,13 @@
       ]
     },
     {
-      "id": 6219,
-      "title": "Tiramisu Chia Seed Pudding",
-      "pct": 83,
-      "haveCount": 11,
-      "needCount": 2,
-      "needNames": [
-        "3/4 cup warm non milk (such as almond, soy, oat milk or light coconut milk)",
-        "1 tbsp brewed coffee (or 1/4 tsp instant coffee)"
-      ],
-      "haveNames": [
-        "1/2 tsp vanilla extract",
-        "2.5 tbsp cocoa powder",
-        "2 tbsp maple syrup",
-        "3.5 tbsp chia seeds",
-        "1/2 cup warm non dairy milk (, such as almond, soy, oat or light coconut milk)",
-        "a few drops almond extract (, or vanilla extract, or both)",
-        "a good pinch of salt",
-        "3 tbsp chia seeds",
-        "1/2 tsp lemon juice",
-        "2-3 tbsp whipped coconut cream ((optional))",
-        "Topping: whipped coconut cream, (cocoa powder)"
-      ]
-    },
-    {
       "id": 5765,
       "title": "Valentine's amaretto truffles",
       "pct": 83,
       "haveCount": 6,
       "needCount": 1,
       "needNames": [
-        "8 tsp / 40 ml amaretto liqueur (I used Disaronno)"
+        "8 tsp / 40 ml amaretto liqueur"
       ],
       "haveNames": [
         "125 g of dark chocolate (70% cocoa solids)",
@@ -10315,7 +9914,7 @@
       ],
       "haveNames": [
         "3 to 8 tbsp water",
-        "1/3 cup sugar ((cane sugar,conut sugar, or jaggery powder))",
+        "1/3 cup sugar",
         "3 drops of lime juice",
         "1/8 tsp salt",
         "1 cup almond flour"
@@ -10371,7 +9970,7 @@
       "haveNames": [
         "150 g / 1 and ½ cups of all purpose white flour",
         "2 tbsp raw cacao powder",
-        "about 360 ml / 1 and ½ cups plant milk (I used hazelnut milk)",
+        "about 360 ml / 1 and ½ cups plant milk",
         "¼ cup / 60 ml reduced aquafaba, from a tin of chickpeas or homemade",
         "2 tsp melted coconut oil, plus more for frying",
         "80 g hazelnuts, roasted",
@@ -10393,7 +9992,7 @@
       ],
       "haveNames": [
         "180 g / 1 ½ cup* white all-purpose flour",
-        "100 g / 1 cup cacao (I used raw)",
+        "100 g / 1 cup cacao",
         "1 tsp baking powder",
         "½ tsp baking soda",
         "¼ tsp salt",
@@ -10534,7 +10133,7 @@
       "haveCount": 17,
       "needCount": 3,
       "needNames": [
-        "2½ tbsp chipotle paste (I used Santa Maria brand), adjust to taste",
+        "2½ tbsp chipotle paste , adjust to taste",
         "shop-bought guacamole, to serve",
         "hot sauce (I like Cholula), to serve"
       ],
@@ -10599,23 +10198,6 @@
       ]
     },
     {
-      "id": 8235,
-      "title": "Yuzu Miso Dressing Grain Bowl",
-      "pct": 83,
-      "haveCount": 5,
-      "needCount": 1,
-      "needNames": [
-        "yuzu juice"
-      ],
-      "haveNames": [
-        "brown rice",
-        "edamame",
-        "shredded carrot",
-        "maple syrup",
-        "toasted sesame oil"
-      ]
-    },
-    {
       "id": 5063,
       "title": "Zunka Bhakar",
       "pct": 83,
@@ -10650,7 +10232,7 @@
         "sesame seeds, to decorate"
       ],
       "haveNames": [
-        "2 tbsp oil (I use rice bran)",
+        "2 tbsp oil",
         "2 banana shallots (or 1 medium onion), very finely diced",
         "4 large garlic cloves, finely diced",
         "4 tsp fresh ginger, grated finely",
@@ -10689,7 +10271,7 @@
         "150 g / 2 celery ribs",
         "200 g / 2 large carrots",
         "225 g / 8 oz pressed smoked tofu* (see NOTES)",
-        "500 g / 17½ oz mushrooms (I used chestnut/cremini)",
+        "500 g / 17½ oz mushrooms",
         "½ tbsp chopped rosemary leaves or ½ tsp dry",
         "½ tsp dry rubbed sage",
         "½ tsp dry oregano",
@@ -10699,11 +10281,11 @@
         "400 g / 14 oz can peeled plum tomatoes*, crushed",
         "2 tbsp tomato paste / concentrate",
         "2 dry bay leaves",
-        "240 ml / 1 cup creamy plant milk (I used Oatly barista)",
+        "240 ml / 1 cup creamy plant milk",
         "¾ tsp salt, adjust to taste* (see NOTES)",
         "½ tsp ground black pepper, to taste",
         "½ tsp date nectar or brown sugar",
-        "780 ml / 3¼ cups plant milk (I used Oatly barista)",
+        "780 ml / 3¼ cups plant milk",
         "80 ml / 1/3 cup mild olive oil (or 100 g / 3½ oz vegan butter)",
         "85 g / 2/3 cup AP flour (or GF flour mix)",
         "3 tbsp nutritional yeast",
@@ -10733,7 +10315,7 @@
         "3 tbsp maple syrup",
         "1 tbsp lemon or lime juice / vinegar",
         "1 level tbsp cinnamon",
-        "1 tbsp oil for frying (I used sunflower oil)",
+        "1 tbsp oil for frying",
         "5 fresh plums, quartered",
         "2 tbsp maple syrup or sugar",
         "1 star anise",
@@ -10756,7 +10338,7 @@
       ],
       "haveNames": [
         "120 g / ¼ lb carrots, coarsely grated (1½ cups grated)",
-        "80 ml / 1/3 cup oil (I used mild olive oil)",
+        "80 ml / 1/3 cup oil",
         "180 g / 1½ cup buckwheat flour**",
         "1 tbsp ground chia or flax seeds",
         "1 level tsp baking soda",
@@ -10769,7 +10351,7 @@
         "195 g / 1½ cups cashews, soaked overnight",
         "4 tbsp maple syrup, adjust to taste",
         "3 tbsp lemon juice",
-        "2-3 tbsp coconut milk (I use this brand) or thin plant milk",
+        "2-3 tbsp coconut milk or thin plant milk",
         "chopped pistachios, for decoration"
       ]
     },
@@ -10794,7 +10376,7 @@
         "vegan egg wash: 1 tbsp plant milk, 1 tsp maple syrup (or sugar) and 1 tsp neutral oil",
         "50 g / ½ cup slivered (flaked or simply chopped) almonds",
         "35 g / 3 tbsp refined coconut oil or vegan butter",
-        "35 g / 3 tbsp sugar* (I used a mixture of light and dark muscovado), maple syrup or coconut sugar will work too",
+        "35 g / 3 tbsp sugar* , maple syrup or coconut sugar will work too",
         "75 g / ¾ loosely packed cup raisins (sultanas or currants)",
         "75g / ¾ loosely packed cup cranberries (sour cherries would also work well)",
         "50 g / ¼ cup diced stem ginger (3 balls) or crystallised ginger",
@@ -10951,7 +10533,7 @@
       "haveCount": 11,
       "needCount": 2,
       "needNames": [
-        "2-3 lemongrass stalks (I used 3), tender inner part only",
+        "2-3 lemongrass stalks , tender inner part only",
         "1 medium heat chilli, adjust to taste"
       ],
       "haveNames": [
@@ -10960,12 +10542,12 @@
         "2 garlic cloves, chopped very finely",
         "2 spring onions",
         "15 g / 0.5 oz fresh coriander",
-        "1 tbsp neutral oil (I used rice bran oil), plus more for frying",
+        "1 tbsp neutral oil , plus more for frying",
         "1 tsp toasted sesame oil",
         "zest of 1 lime",
         "½ tsp white pepper, to taste",
         "¾ tsp salt, adjust to taste",
-        "approximately 30 g / ¼ cup any flour (I used brown rice flour)"
+        "approximately 30 g / ¼ cup any flour"
       ]
     },
     {
@@ -11004,7 +10586,7 @@
         "2 x 270 g / 9.5 oz vegan (a lot of them are!) phyllo pastry**, thawed in the fridge"
       ],
       "haveNames": [
-        "100 g / 3 oz firm silken tofu (I use Clearspring), drained",
+        "100 g / 3 oz firm silken tofu , drained",
         "1 tsp salt",
         "4 tbsp lemon juice",
         "200 g / 2 cups flaked almonds",
@@ -11270,7 +10852,7 @@
       "needCount": 2,
       "needNames": [
         "juice of ½ lime (about 2 tbsp), adjust to taste",
-        "1-2 tsp chilli sauce (I used sambal oelek)"
+        "1-2 tsp chilli sauce"
       ],
       "haveNames": [
         "120 ml / ½ cup all natural almond butter (or peanut if you prefer)",
@@ -11342,7 +10924,7 @@
       "needCount": 2,
       "needNames": [
         "1 tsp harissa spice blend  (or 2 to 3 tsp paste)",
-        "1.5 cup or more chopped baby greens (I use 1 cup chopped frozen baby spinach)"
+        "1.5 cup or more chopped baby greens"
       ],
       "haveNames": [
         "1 tsp oil",
@@ -11400,7 +10982,7 @@
         "1/2 cup -  3/4 cup chopped nuts and seeds such as pecans. walnuts,"
       ],
       "haveNames": [
-        "1 1/2 cups flour (I used all purpose but you can also use a mix of all purpose and whole wheat)",
+        "1 1/2 cups flour",
         "1/4 cup almond flour",
         "2 teaspoons baking powder",
         "1/4 teaspoon baking soda",
@@ -11493,7 +11075,7 @@
       "needCount": 2,
       "needNames": [
         "salt, to season",
-        "shop bought chutney (I used tomato and chilli)"
+        "shop bought chutney"
       ],
       "haveNames": [
         "165 g / 1 cup red split lentils*, soaked overnight",
@@ -11634,6 +11216,30 @@
       ]
     },
     {
+      "id": 6219,
+      "title": "Tiramisu Chia Seed Pudding",
+      "pct": 85,
+      "haveCount": 11,
+      "needCount": 2,
+      "needNames": [
+        "3/4 cup warm non milk (such as almond, soy, oat milk or light coconut milk)",
+        "1 tbsp brewed coffee (or 1/4 tsp instant coffee)"
+      ],
+      "haveNames": [
+        "1/2 tsp vanilla extract",
+        "2.5 tbsp cocoa powder",
+        "2 tbsp maple syrup",
+        "3.5 tbsp chia seeds",
+        "1/2 cup warm non dairy milk (, such as almond, soy, oat or light coconut milk)",
+        "a few drops almond extract (, or vanilla extract, or both)",
+        "a good pinch of salt",
+        "3 tbsp chia seeds",
+        "1/2 tsp lemon juice",
+        "2-3 tbsp whipped coconut cream",
+        "Topping: whipped coconut cream, (cocoa powder)"
+      ]
+    },
+    {
       "id": 5969,
       "title": "Turmeric Miso Soup With Ginger, Garlic and Tofu",
       "pct": 85,
@@ -11668,7 +11274,7 @@
         "2 tsp acid (lemon, lime juice, apple cider vinegar)"
       ],
       "haveNames": [
-        "30 ml / 2 tbsp smooth nut or seed butter (I use almond butter)",
+        "30 ml / 2 tbsp smooth nut or seed butter",
         "1 tbsp ground flax",
         "approx. 135 ml / ½ cup + 1 tbsp almond (or other plant) milk",
         "125 g / 1 cup buckwheat flour*",
@@ -11694,7 +11300,7 @@
       "haveNames": [
         "2 tsp ground chia (or flax) or 1½ tbsp of reduced* aquafaba",
         "180 ml / ¾ cup beetroot puree** (approx. 300 g / 0.65 lb beetroot)",
-        "180 g / 1 scant cup sugar (I used demerara sugar)        60 ml / ¼ cup espresso or strong coffee",
+        "180 g / 1 scant cup sugar 60 ml / ¼ cup espresso or strong coffee",
         "120 g / 1 cup buckwheat flour",
         "30 g / 3 level tbsp rice flour",
         "30 g / ¼ cup cornflour / cornstarch",
@@ -11722,7 +11328,7 @@
         "¾ tsp salt",
         "1 small garlic clove, finely grated",
         "1/3 cup natural walnut butter** (or tahini)",
-        "¾ tsp liquid smoke*** (I used hickory BBQ flavour)",
+        "¾ tsp liquid smoke***",
         "about ½ - ¾ cup / 120 - 180 ml of fridge cold aquafaba or water",
         "¼ cup / 4 tbsp balsamic reduction",
         "1/8 cup / 2 tbsp maple syrup",
@@ -11972,24 +11578,6 @@
       ]
     },
     {
-      "id": 8302,
-      "title": "Charred Corn Esquites with Tajin and Lime",
-      "pct": 86,
-      "haveCount": 6,
-      "needCount": 1,
-      "needNames": [
-        "tajin seasoning"
-      ],
-      "haveNames": [
-        "corn kernels",
-        "vegan mayo",
-        "lime juice",
-        "cilantro",
-        "red onion",
-        "avocado"
-      ]
-    },
-    {
       "id": 7226,
       "title": "French Green Lentil Stew",
       "pct": 86,
@@ -12189,28 +11777,10 @@
         "1 small garlic clove",
         "1½ tbsp lemon juice (or 2 for a more lemony taste)",
         "½ ripe avocado (or 2 tbsp extra virgin olive oil)",
-        "fresh mint or basil leaves (I used 15 medium mint leaves)",
+        "fresh mint or basil leaves",
         "½ tsp fine sea salt",
         "freshly ground pepper, to taste",
         "fine chilli flakes, to taste (optional)"
-      ]
-    },
-    {
-      "id": 8303,
-      "title": "Chilean Pebre Salsa with Baked Plantain Chips",
-      "pct": 86,
-      "haveCount": 6,
-      "needCount": 1,
-      "needNames": [
-        "aji chili"
-      ],
-      "haveNames": [
-        "ripe plantains",
-        "tomatoes",
-        "cilantro",
-        "red onion",
-        "red wine vinegar",
-        "olive oil"
       ]
     },
     {
@@ -12283,24 +11853,6 @@
         "  Zest and juice of 1 lemon",
         "  Sea salt",
         "  1 lemon, quartered"
-      ]
-    },
-    {
-      "id": 8208,
-      "title": "Ful Medames with Tahini and Lemon",
-      "pct": 86,
-      "haveCount": 6,
-      "needCount": 1,
-      "needNames": [
-        "fava beans"
-      ],
-      "haveNames": [
-        "tahini",
-        "lemon juice",
-        "garlic",
-        "cumin",
-        "fresh parsley",
-        "cherry tomatoes"
       ]
     },
     {
@@ -12392,24 +11944,6 @@
       ]
     },
     {
-      "id": 8306,
-      "title": "Mediterranean Roasted Fennel and White Bean Stew",
-      "pct": 86,
-      "haveCount": 6,
-      "needCount": 1,
-      "needNames": [
-        "white cannellini beans"
-      ],
-      "haveNames": [
-        "fennel bulb",
-        "cherry tomatoes",
-        "kalamata olives",
-        "capers",
-        "vegetable broth",
-        "fresh thyme"
-      ]
-    },
-    {
       "id": 6748,
       "title": "Mini Apple-Raisin Muffins",
       "pct": 86,
@@ -12445,7 +11979,7 @@
       ],
       "haveNames": [
         "4 medium bulbous aubergines*",
-        "neutral tasting (I used peanut) oil, for brushing (optional)",
+        "neutral tasting oil, for brushing (optional)",
         "fresh coriander, to garnish",
         "spring onion, to garnish",
         "sesame seeds, to garnish",
@@ -12649,24 +12183,6 @@
       ]
     },
     {
-      "id": 8251,
-      "title": "Spicy Jicama and Mango Slaw",
-      "pct": 86,
-      "haveCount": 6,
-      "needCount": 1,
-      "needNames": [
-        "tajin seasoning"
-      ],
-      "haveNames": [
-        "jicama",
-        "mango",
-        "red cabbage",
-        "serrano chili",
-        "orange juice",
-        "chili powder"
-      ]
-    },
-    {
       "id": 6899,
       "title": "Sweet Potato and Veggie Wraps",
       "pct": 86,
@@ -12714,7 +12230,7 @@
         "2 spring onions, white parts sliced finely"
       ],
       "haveNames": [
-        "1 large red pepper (I used Romano pepper)",
+        "1 large red pepper",
         "a handful of Cos lettuce leaves",
         "1 courgette",
         "1 red chilli, diced finely",
@@ -12809,7 +12325,7 @@
       "needCount": 3,
       "needNames": [
         "1  green chile (chopped)",
-        "2 cups of veggies (I used bell pepper, carrots, broccoflower(Romanesco broccoli))",
+        "2 cups of veggies",
         "3.5 cups water for pressure cooker (4 to 4.5 cups for saucepan)"
       ],
       "haveNames": [
@@ -12920,7 +12436,7 @@
       "needCount": 2,
       "needNames": [
         "1/4 cup sugar ((coconut sugar, date sugar, regular or use maple syrup), 1/3 cup for sweeter)",
-        "1 cup flour ((I use a mix of 1/4 cup whole wheat and 3/4 cup all purpose), see note for gluten-free)"
+        "1 cup flour ( , see note for gluten-free)"
       ],
       "haveNames": [
         "1.5 cups  + 2 tbsp apple cider (not vinegar, but the fermented apple drink)",
@@ -12931,7 +12447,7 @@
         "1/4 tsp salt",
         "1 tsp baking powder",
         "1/4 tsp baking soda",
-        "1 tbsp oil or applesauce ((or both for extra moisture when using whole grain flours))",
+        "1 tbsp oil or applesauce",
         "1 tbsp cane sugar",
         "1 tbsp coconut sugar or brown sugar",
         "1/2 tsp cinnamon"
@@ -13275,24 +12791,6 @@
       ]
     },
     {
-      "id": 8237,
-      "title": "Crispy Vegetable Kakiage (Rice Flour Tempura)",
-      "pct": 86,
-      "haveCount": 6,
-      "needCount": 1,
-      "needNames": [
-        "sparkling water"
-      ],
-      "haveNames": [
-        "sweet potato",
-        "onion",
-        "carrot",
-        "rice flour",
-        "tamari",
-        "grated daikon"
-      ]
-    },
-    {
       "id": 6662,
       "title": "Easy Date Barbecue Sauce",
       "pct": 86,
@@ -13405,24 +12903,6 @@
         "peppadew peppers",
         "tomato",
         "white beans"
-      ]
-    },
-    {
-      "id": 8233,
-      "title": "Kinpira Gobo (Braised Burdock Root and Carrot)",
-      "pct": 86,
-      "haveCount": 6,
-      "needCount": 1,
-      "needNames": [
-        "burdock root"
-      ],
-      "haveNames": [
-        "carrot",
-        "sesame oil",
-        "tamari",
-        "mirin",
-        "red chili pepper",
-        "sesame seeds"
       ]
     },
     {
@@ -13541,42 +13021,6 @@
       ]
     },
     {
-      "id": 8198,
-      "title": "Roasted Carrot and Harissa Soup with Dukkah",
-      "pct": 86,
-      "haveCount": 6,
-      "needCount": 1,
-      "needNames": [
-        "dukkah"
-      ],
-      "haveNames": [
-        "carrots",
-        "harissa paste",
-        "coconut cream",
-        "vegetable stock",
-        "onion",
-        "cumin"
-      ]
-    },
-    {
-      "id": 8204,
-      "title": "Saffron and Cardamom Rice Pudding",
-      "pct": 86,
-      "haveCount": 6,
-      "needCount": 1,
-      "needNames": [
-        "rose water"
-      ],
-      "haveNames": [
-        "arborio rice",
-        "coconut milk",
-        "saffron",
-        "cardamom pods",
-        "maple syrup",
-        "pistachios"
-      ]
-    },
-    {
       "id": 5352,
       "title": "Skordalia with roasted beetroots",
       "pct": 86,
@@ -13594,24 +13038,6 @@
         "salt and pepper, to taste",
         "approx. 80 ml / 1/3 cup almond milk",
         "fresh thyme leaves, to garnish (optional)"
-      ]
-    },
-    {
-      "id": 8314,
-      "title": "Spanish Patatas Bravas with Smoky Tomato Sauce",
-      "pct": 86,
-      "haveCount": 6,
-      "needCount": 1,
-      "needNames": [
-        "vegan aioli"
-      ],
-      "haveNames": [
-        "potatoes",
-        "smoked paprika",
-        "crushed tomatoes",
-        "garlic",
-        "olive oil",
-        "cayenne pepper"
       ]
     },
     {
@@ -13700,8 +13126,8 @@
       "haveNames": [
         "1/2 cup non dairy milk such as almond milk (,soy milk, oat milk or light coconut milk)",
         "1 tsp lime juice",
-        "1 3/4 cup flour ((I use 1/2 cup whole wheat and 1 1/4 cup unbleached all purpose))",
-        "1/4 cup almond flour ((Nut-free: use more flour for nutfree, and use full fat coconut milk for the non dairy milk))",
+        "1 3/4 cup flour ( )",
+        "1/4 cup almond flour",
         "2 tsp baking powder",
         "1/4 tsp baking soda",
         "3 tbsp brown sugar or coconut sugar",
@@ -13721,7 +13147,7 @@
       "haveCount": 10,
       "needCount": 1,
       "needNames": [
-        "90 ml / ¼ cup + 2 tbsp quality tahini (I used hulled)"
+        "90 ml / ¼ cup + 2 tbsp quality tahini"
       ],
       "haveNames": [
         "3 cups cooked chickpeas (approx. 1½ cups dry), peeled",
@@ -13773,7 +13199,7 @@
       ],
       "haveNames": [
         "150 g / 5.3 oz vegan butter block",
-        "200 g / 7 oz vegan cream cheese (I used Violife)",
+        "200 g / 7 oz vegan cream cheese",
         "400 g / 14 oz (3¼ cups) icing / powdered sugar*",
         "150 g / 5.3 oz vegan butter block",
         "100 g / ¾ cup raw cashews, soaked",
@@ -13813,11 +13239,11 @@
       "haveNames": [
         "100 g / 1 cup slivered, flaked or chopped blanched almonds",
         "70 g / 6 tbsp vegan butter refined coconut oil",
-        "70 g / 6 tbsp sugar* (I used a mixture of light and dark muscovado)",
+        "70 g / 6 tbsp sugar*",
         "150 g / 1½ loosely packed cup sultanas, raisins or currants",
         "150 g / 1½ loosely packed cup cranberries",
         "100 g / ½ cup diced stem ginger (6 balls) or crystallised ginger",
-        "1 sour apple (I used Bramley), finely diced",
+        "1 sour apple , finely diced",
         "1½ tsp cinnamon",
         "½ tsp ground ginger",
         "½ tsp ground cardamom",
@@ -13853,24 +13279,6 @@
         "  Pinch sea salt",
         "  1 cup thinly sliced strawberries",
         "  1 cup fresh blueberries"
-      ]
-    },
-    {
-      "id": 8296,
-      "title": "Vegan Pupusas with Refried Black Beans",
-      "pct": 86,
-      "haveCount": 6,
-      "needCount": 1,
-      "needNames": [
-        "curtido slaw"
-      ],
-      "haveNames": [
-        "masa harina",
-        "black beans",
-        "onion",
-        "garlic",
-        "cumin",
-        "salsa roja"
       ]
     },
     {
@@ -14063,7 +13471,7 @@
       "haveCount": 13,
       "needCount": 2,
       "needNames": [
-        "approx. 100 g of other neutral tasting salad leaves (I used baby spinach and lollo rosso)",
+        "approx. 100 g of other neutral tasting salad leaves",
         "2 tbsp ouzo"
       ],
       "haveNames": [
@@ -14078,7 +13486,7 @@
         "salt and pepper, to taste",
         "1 small red onion, sliced very thinly",
         "½ cup / 120 ml apple cider vinegar or white wine vinegar",
-        "2 tbsp sugar (I used brown)",
+        "2 tbsp sugar",
         "½ tsp salt"
       ]
     },
@@ -14090,7 +13498,7 @@
       "needCount": 2,
       "needNames": [
         "a large handful / 150 g green flat beans, sliced diagonally",
-        "1 tbsp oil with high smoke point (I used peanut oil)"
+        "1 tbsp oil with high smoke point"
       ],
       "haveNames": [
         "200 g flat rice noodles",
@@ -14100,7 +13508,7 @@
         "3 garlic cloves, sliced thinly",
         "lime wedges, to serve",
         "fresh coriander, to garnish",
-        "1 tbsp of oil (I used peanut oil)",
+        "1 tbsp of oil",
         "2 tsp sesame oil (for flavour)",
         "1½ tbsp soft brown sugar or maple syrup",
         "1½ tbsp rice vinegar or lime juice",
@@ -14145,7 +13553,7 @@
         "45 ml / 3 tbsp lime juice and zest of 1 lime"
       ],
       "haveNames": [
-        "100 g / 3.5 oz rice noodles (I used rice bun noodles)",
+        "100 g / 3.5 oz rice noodles",
         "½ sweetheart cabbage",
         "1 small cucumber",
         "2 small spring onions / scallions, finely sliced",
@@ -14193,7 +13601,7 @@
       "haveCount": 13,
       "needCount": 2,
       "needNames": [
-        "120 g / 4.25 oz mixed nuts (I used hazelnuts, pecans and brazil nuts)",
+        "120 g / 4.25 oz mixed nuts",
         "1 tbsp each, chopped rosemary, sage and thyme"
       ],
       "haveNames": [
@@ -14431,32 +13839,6 @@
       ]
     },
     {
-      "id": 2578,
-      "title": "Vegan Caesar Salad Charred Lettuce",
-      "pct": 87,
-      "haveCount": 13,
-      "needCount": 2,
-      "needNames": [
-        "clove",
-        "gem"
-      ],
-      "haveNames": [
-        "cashews",
-        "coarse breadcrumbs",
-        "lemon juice",
-        "maple syrup",
-        "nutritional yeast",
-        "olive oil",
-        "roasted head of garlic",
-        "romaine lettuce",
-        "salt",
-        "sugar",
-        "sunflower seeds",
-        "white / shiro miso",
-        "wholegrain mustard"
-      ]
-    },
-    {
       "id": 5483,
       "title": "Vegan zucchini bread",
       "pct": 87,
@@ -14470,12 +13852,12 @@
         "180 ml / ¾ cup maple syrup or other liquid sweetener",
         "50 g / ¼ cup refined coconut oil, melted but cooled or 60 g / ¼ cup smooth almond butter",
         "60 ml / ¼ cup lime juice",
-        "190 g / 1½ cups all purpose flour or GF all purpose flour mix (I use this one)",
+        "190 g / 1½ cups all purpose flour or GF all purpose flour mix",
         "¾ tsp baking soda",
         "1¾ tsp baking powder",
         "zest of 3 limes",
         "100 g / 1 lightly packed cup finely ground pistachios / pistachio meal*",
-        "30-45 ml / 2-3 tbsp coconut milk (I use this brand) or thin plant milk",
+        "30-45 ml / 2-3 tbsp coconut milk or thin plant milk",
         "4 tbsp maple syrup, adjust to taste",
         "3 tbsp lime juice",
         "1 tsp vanilla extract",
@@ -14660,7 +14042,7 @@
         "200 ml / ¾ cup + 2 tbsp maple syrup or other liquid sweetener",
         "60 ml / ¼ cup smooth tahini",
         "220 g / 7¾ oz coarsely grated carrot (2 cups, lightly packed)",
-        "250 g / 2 cups all purpose flour or GF all purpose flour mix (I use this one)",
+        "250 g / 2 cups all purpose flour or GF all purpose flour mix",
         "¾ tsp baking soda",
         "1¼ tsp baking powder",
         "1½ tsp cinnamon + ½ tsp cardamom OR 2 tsp cinnamon",
@@ -14909,7 +14291,7 @@
         "2 tsp ground cumin and coriander",
         "1 tsp baking powder",
         "zest 1-2 lemons (optional but recommended)",
-        "30 g / 1 oz fresh herbs (I used parsley and cilantro)",
+        "30 g / 1 oz fresh herbs",
         "24 g / 4 tbsp ground flaxseeds",
         "70 g / ½ cup rice flour (or other flour)",
         "sesame seeds, to coat (optional)",
@@ -14943,25 +14325,6 @@
         "smoked paprika",
         "thyme",
         "zucchini"
-      ]
-    },
-    {
-      "id": 8278,
-      "title": "Indonesian Nasi Goreng (Fried Rice) with Tempeh",
-      "pct": 88,
-      "haveCount": 7,
-      "needCount": 1,
-      "needNames": [
-        "kecap manis"
-      ],
-      "haveNames": [
-        "jasmine rice",
-        "tempeh",
-        "shallots",
-        "garlic",
-        "chili paste",
-        "cucumber",
-        "fried shallots"
       ]
     },
     {
@@ -15425,7 +14788,7 @@
         "salt and pepper, to taste",
         "2 tbsp wild garlic pesto, for decoration (optional)",
         "5 g / 1 tsp white miso paste",
-        "600 ml / 2½ cups plant milk (I used Oatly barista)",
+        "600 ml / 2½ cups plant milk",
         "60 ml / ¼ cup mild olive oil (or vegan butter)",
         "60 g / ½ cup AP flour (or GF flour mix)",
         "6 g / 2 tbsp nutritional yeast",
@@ -15536,25 +14899,6 @@
         "  1 tablespoon reduced-sodium tamari",
         "  1 tablespoon brown rice vinegar",
         "  6 heads baby bok choy, halved lengthwise"
-      ]
-    },
-    {
-      "id": 8318,
-      "title": "Caribbean Jerk-Spiced Cauliflower Steaks",
-      "pct": 88,
-      "haveCount": 7,
-      "needCount": 1,
-      "needNames": [
-        "jerk seasoning"
-      ],
-      "haveNames": [
-        "cauliflower steaks",
-        "coconut aminos",
-        "lime juice",
-        "scotch bonnet pepper",
-        "allspice",
-        "thyme",
-        "coconut oil"
       ]
     },
     {
@@ -15696,44 +15040,6 @@
         "  1 avocado, diced",
         "  ½ cup prepared salsa",
         "  ½ cup fresh cilantro, finely chopped (parsley or lettuce can substitute)"
-      ]
-    },
-    {
-      "id": 8313,
-      "title": "Indian Tadka Dal with Crispy Shallots",
-      "pct": 88,
-      "haveCount": 7,
-      "needCount": 1,
-      "needNames": [
-        "dried red chilies"
-      ],
-      "haveNames": [
-        "yellow split peas",
-        "shallots",
-        "cumin seeds",
-        "mustard seeds",
-        "curry leaves",
-        "turmeric",
-        "ghee-style coconut oil"
-      ]
-    },
-    {
-      "id": 8266,
-      "title": "Indonesian Tempeh Rendang",
-      "pct": 88,
-      "haveCount": 7,
-      "needCount": 1,
-      "needNames": [
-        "dried chilies"
-      ],
-      "haveNames": [
-        "tempeh",
-        "coconut cream",
-        "lemongrass",
-        "galangal",
-        "turmeric",
-        "shallots",
-        "toasted coconut flakes"
       ]
     },
     {
@@ -16056,25 +15362,6 @@
       ]
     },
     {
-      "id": 8268,
-      "title": "Thai Basil and Mushroom Larb",
-      "pct": 88,
-      "haveCount": 7,
-      "needCount": 1,
-      "needNames": [
-        "toasted rice powder"
-      ],
-      "haveNames": [
-        "oyster mushrooms",
-        "thai basil",
-        "shallots",
-        "lime juice",
-        "tamari",
-        "chili flakes",
-        "butter lettuce"
-      ]
-    },
-    {
       "id": 6737,
       "title": "Thai Fruit Skewers with Coconut and Lime",
       "pct": 88,
@@ -16186,7 +15473,7 @@
       "haveCount": 7,
       "needCount": 1,
       "needNames": [
-        "45 ml / 3 tbsp 100% natural nut butter (I used smooth almond butter)"
+        "45 ml / 3 tbsp 100% natural nut butter"
       ],
       "haveNames": [
         "90 g / 1 cup rolled jumbo oats",
@@ -16262,7 +15549,7 @@
         "8 sprigs of thyme, leaves picked",
         "250 g / 9 oz chestnut / cremini mushrooms",
         "125 g / 4½ oz fresh shiitake mushrooms",
-        "4 medium starchy potatoes (I used Maris Piper)",
+        "4 medium starchy potatoes",
         "1 large carrot, chopped large",
         "30 ml / 2 tbsp soy sauce or tamari",
         "¼ tsp black pepper",
@@ -16357,25 +15644,6 @@
       ]
     },
     {
-      "id": 8286,
-      "title": "Vietnamese Caramelized Coconut Braised Jackfruit",
-      "pct": 88,
-      "haveCount": 7,
-      "needCount": 1,
-      "needNames": [
-        "coconut water"
-      ],
-      "haveNames": [
-        "young jackfruit",
-        "palm sugar",
-        "tamari",
-        "black pepper",
-        "shallots",
-        "lemongrass",
-        "star anise"
-      ]
-    },
-    {
       "id": 6467,
       "title": "2-Ingredient Chocolate Banana Ice Cream",
       "pct": 88,
@@ -16392,25 +15660,6 @@
         "  kiwi",
         "  coconut flakes",
         "  cacao nibs"
-      ]
-    },
-    {
-      "id": 8226,
-      "title": "Agedashi-Style Crispy Tofu in Dashi Broth",
-      "pct": 88,
-      "haveCount": 7,
-      "needCount": 1,
-      "needNames": [
-        "shiso leaves"
-      ],
-      "haveNames": [
-        "firm tofu",
-        "potato starch",
-        "shiitake dashi",
-        "tamari",
-        "grated daikon",
-        "ginger",
-        "bonito-style mushroom flakes"
       ]
     },
     {
@@ -16507,25 +15756,6 @@
         "  1 tablespoon reduced-sodium soy sauce or tamari",
         "  1 teaspoon pure cane sugar",
         "  ⅛ teaspoon sea salt"
-      ]
-    },
-    {
-      "id": 8299,
-      "title": "Brazilian Moqueca (Coconut and Tomato Stew with Hearts of Palm)",
-      "pct": 88,
-      "haveCount": 7,
-      "needCount": 1,
-      "needNames": [
-        "dendê oil"
-      ],
-      "haveNames": [
-        "hearts of palm",
-        "coconut milk",
-        "diced tomatoes",
-        "red bell pepper",
-        "onion",
-        "cilantro",
-        "rice"
       ]
     },
     {
@@ -16789,7 +16019,7 @@
         "2 tsp oil (optional)",
         "1/2 tsp vinegar",
         "1/2 tsp pumpkin pie spice (optional)",
-        "1 3/4 cup almond flour ( I use Bob's Red Mill)",
+        "1 3/4 cup almond flour",
         "2 tbsp coconut sugar",
         "1/3 tsp fine sea salt"
       ]
@@ -16857,25 +16087,6 @@
         "a few slices of ginger",
         "sugar",
         "salt"
-      ]
-    },
-    {
-      "id": 8301,
-      "title": "Ecuadorian Llapingachos (Potato Patties with Peanut Sauce)",
-      "pct": 88,
-      "haveCount": 7,
-      "needCount": 1,
-      "needNames": [
-        "achiote powder"
-      ],
-      "haveNames": [
-        "potatoes",
-        "onion",
-        "peanut butter",
-        "cumin",
-        "coconut oil",
-        "tomato",
-        "lettuce"
       ]
     },
     {
@@ -16959,7 +16170,7 @@
         "1.5 Tablespoons coconut oil",
         "1 Tablespoon  organic canola oil",
         "1 Tablespoon agave syrup",
-        "4 Tablespoons raw sugar (I use granulated sugar in the raw)",
+        "4 Tablespoons raw sugar",
         "1/8 teaspoon salt",
         "3/4 teaspoon baking powder",
         "1/4 cup Bob's gf all purpose flour (substitute with Oats flour or Sorghum flour if you dont like the garbanzo bean flour after taste)",
@@ -17082,7 +16293,7 @@
         "2 tbsp smooth almond butter (100% almonds)",
         "½ tsp baking soda",
         "½-¾ tsp fine sea salt",
-        "2 level tbsp miso paste (I used red)"
+        "2 level tbsp miso paste"
       ]
     },
     {
@@ -17330,7 +16541,7 @@
         "1/4 cup warm water",
         "1/4 cup ground raw sugar   (2 Tablespoons more for sweeter)",
         "2 Tablespoons oil (organic canola or coconut)",
-        "1 teaspoon vinegar (I use apple cider vinegar)",
+        "1 teaspoon vinegar",
         "2 Tbsps maple syrup",
         "1 cup spelt flour",
         "1 Tablespoon cornstarch or arrowroot starch",
@@ -17617,7 +16828,7 @@
         "150 ml / ½ cup + 2 tbsp maple syrup"
       ],
       "haveNames": [
-        "100 g / ½ cup softened coconut oil (I use this one)",
+        "100 g / ½ cup softened coconut oil",
         "300 g / 2 cups brown rice flour*",
         "75 g / ¾ cup cocoa (not cacao!!) powder",
         "½ tsp fine sea salt",
@@ -17641,7 +16852,7 @@
         "50 g / ¼ cup refined coconut oil or vegan butter block, melted and cooled",
         "zest of 3 lemons + 60 ml / ¼ cup lemon juice",
         "60 ml / ¼ cup soy (or other) milk",
-        "180 g / 1½ cups all purpose flour or GF all purpose flour mix (I use this one)",
+        "180 g / 1½ cups all purpose flour or GF all purpose flour mix",
         "¾ tsp baking soda",
         "1¾ tsp baking powder",
         "100 g / 1 lightly packed cup pistachio meal* or almond meal",
@@ -17833,25 +17044,6 @@
       ]
     },
     {
-      "id": 8229,
-      "title": "Vegan Okonomiyaki with Rice Flour",
-      "pct": 88,
-      "haveCount": 7,
-      "needCount": 1,
-      "needNames": [
-        "aonori"
-      ],
-      "haveNames": [
-        "rice flour",
-        "shredded cabbage",
-        "scallions",
-        "pickled ginger",
-        "tamari",
-        "vegan mayo",
-        "nori flakes"
-      ]
-    },
-    {
       "id": 5101,
       "title": "Vegan pasta bake with blender bechamel",
       "pct": 88,
@@ -17914,8 +17106,8 @@
       "haveCount": 15,
       "needCount": 2,
       "needNames": [
-        "75 g / heaped 1/3 cup sugar (I used 50% demerara and 50% dark muscovado)",
-        "175 g / ¾ cup + 2 tbsp sugar (I used 50% demerara and 50% dark muscovado)"
+        "75 g / heaped 1/3 cup sugar",
+        "175 g / ¾ cup + 2 tbsp sugar"
       ],
       "haveNames": [
         "55 g / ¼ cup vegan butter or coconut oil",
@@ -17923,7 +17115,7 @@
         "¼ tsp salt",
         "¾ tsp cinnamon",
         "50 g / ½ cup pecans, chopped smallWET INGREDIENTS \t300 g / 10.5 oz (approx. 1¼ cup) pumpkin purée*",
-        "120 ml / ½ cup plant milk (I used oat)",
+        "120 ml / ½ cup plant milk",
         "60 ml / ¼ cup mild tasting oil (if using coconut oil, melted)",
         "10 ml / 2 tsp lemon / lime juice",
         "220 g / 1¾ cups all purpose white flour or GF flour mix",
@@ -18015,7 +17207,7 @@
         "a good pinch of ground cardamom",
         "½ tsp almond extract",
         "1 tsp vanilla extract",
-        "350 g / heaped 1½ cups thick coconut yoghurt (I used The Coconut Collaborative), chilled or whipped coconut cream*",
+        "350 g / heaped 1½ cups thick coconut yoghurt , chilled or whipped coconut cream*",
         "2 tbsp icing sugar (optional)",
         "210 g / 1 cup coconut cream*",
         "2 tbsp icing sugar or maple syrup (optional)",
@@ -18132,7 +17324,7 @@
         "½ avocado",
         "15-20 cherry tomatoes (they tend to be sweeter)",
         "½ small red onion",
-        "½ bell pepper (I used orange and yellow)",
+        "½ bell pepper",
         "¼ small red cabbage",
         "2 tbsp / 30 ml extra virgin olive oil",
         "2 tbsp / 30 ml lime juice",
@@ -18225,8 +17417,8 @@
         "2-4 tbsp of black olive tapenade (shop-bought* or homemade)"
       ],
       "haveNames": [
-        "4 slices of good quality bread (I used sourdough)",
-        "2 red peppers (I used romano)",
+        "4 slices of good quality bread",
+        "2 red peppers",
         "1 large aubergine",
         "1 medium courgette",
         "1 handful of rocket leaves",
@@ -18322,7 +17514,7 @@
       "haveCount": 17,
       "needCount": 2,
       "needNames": [
-        "1 vegan umami stock cube (I used mushroom cube)",
+        "1 vegan umami stock cube",
         "300 g / 10.5 oz your favourite tofu"
       ],
       "haveNames": [
@@ -18353,7 +17545,7 @@
       "needCount": 2,
       "needNames": [
         "1 sheet frozen (vegan!) puff pastry*, defrosted",
-        "coarse sea salt (I used black), poppy or sesame seeds, to decorate"
+        "coarse sea salt , poppy or sesame seeds, to decorate"
       ],
       "haveNames": [
         "½ cup walnuts",
@@ -18371,7 +17563,7 @@
         "approx. ½ cup breadcrumbs",
         "1 tbsp soy milk mixed with 1 tbsp of reduced aquafaba**, to glaze",
         "240 ml / 1 cup balsamic vinegar",
-        "about 100 g / ½ cup sugar (I used raw cane)"
+        "about 100 g / ½ cup sugar"
       ]
     },
     {
@@ -18616,7 +17808,7 @@
       "haveNames": [
         "2 tbsp / 30 ml olive oil",
         "1 red onion, finely diced",
-        "300 g / 10.5 oz mushrooms* (I used chestnut / cremini mushroom)",
+        "300 g / 10.5 oz mushrooms*",
         "225 g / 8 oz smoked Tofoo tofu OR 400 g / 14 oz smoked tofu*",
         "2 garlic cloves, grated",
         "spices: 1½ tsp cumin, 1½ tsp smoked paprika",
@@ -19095,7 +18287,7 @@
       ],
       "haveNames": [
         "300 g / 10.5 chestnut/cremini mushrooms",
-        "15 ml / 1 tbsp oil, for frying (I used peanut oil)",
+        "15 ml / 1 tbsp oil, for frying",
         "5 spring onions / scallions, white & light green parts chopped finely",
         "4 garlic cloves, finely chopped",
         "2 tsp grated ginger, adjust to taste",
@@ -19172,7 +18364,7 @@
         "400 g / 14 oz cherry tomatoes, halved",
         "30 ml / 2 tbsp quality balsamic vinegar*",
         "2 x 400 g / 14 oz cans of chickpeas",
-        "soft vegan cheese (I used ricotta) to serve (optional)",
+        "soft vegan cheese to serve (optional)",
         "chilli oil* or extra virgin olive oil, to serve (optional)",
         "favourite bread, to serve (optional)"
       ]
@@ -19507,7 +18699,7 @@
         "½ tsp baking powder",
         "2 tsp harissa paste*",
         "15 ml / 1 tbsp quality balsamic (or lemon juice)",
-        "15 g / 0.5 oz fresh herbs (I used parsely and cilantro)",
+        "15 g / 0.5 oz fresh herbs",
         "1 tbsp psyllium husks OR 2 tbsp ground flaxseeds",
         "35 g / ¼ cup rice flour (or other flour)",
         "sesame seeds, to coat (optional)",
@@ -19593,7 +18785,7 @@
         "1 1/4 tsp baking powder",
         "1/4 tsp baking soda",
         "1/4 tsp salt",
-        "1/4 cup powdered sugar ((Blend up any unrefined sugar in a blender to make it fine))",
+        "1/4 cup powdered sugar",
         "1 1/2 tsp pumpkin pie spice",
         "1  very ripe banana (medium size)",
         "1/4 cup sugar (raw, coconut or other)",
@@ -19718,7 +18910,7 @@
         "2 small pak choi / bok choi",
         "½ bell pepper",
         "1 carrot",
-        "4 tsp high smoke point oil (I use rice bran)",
+        "4 tsp high smoke point oil",
         "400 g / 14 oz precooked udon noodles or 200 g / 7 oz dry, cooked per packet instructions",
         "1 tbsp toasted sesame seeds, to garnish"
       ]
@@ -19861,7 +19053,7 @@
       "haveCount": 18,
       "needCount": 2,
       "needNames": [
-        "stir-fried veggies (I used broccoli)",
+        "stir-fried veggies",
         "chilli sauce, to serve"
       ],
       "haveNames": [
@@ -19880,8 +19072,8 @@
         "1 tsp white sesame seeds",
         "120 ml / ½ cup reduced aquafaba**",
         "4 tbsp / ¼ cup cornflour / cornstarch",
-        "3 tbsp oil for frying (I used peanut)",
-        "favourite rice, cooked (I used sushi rice)",
+        "3 tbsp oil for frying",
+        "favourite rice, cooked",
         "tamari or soy sauce, to serve"
       ]
     },
@@ -20044,7 +19236,7 @@
         "ice cold water",
         "60 g / ¼ cup refined coconut oil, melted and cooled or other neutral tasting oil",
         "110 g / heaped ½ cup caster sugar, coconut sugar OR maple syrup",
-        "15 g / 2 tbsp all purpose flour (I use this one for GF version)",
+        "15 g / 2 tbsp all purpose flour",
         "150 g / 1½ cups almond meal",
         "zest of 2 oranges",
         "¾-1 tsp ground cardamom",
@@ -20222,7 +19414,7 @@
         "¼ tsp fine sea salt",
         "1½ tsp baking powder",
         "¾ tsp baking soda",
-        "120 g / 1 cup all purpose wheat flour or GF all purpose flour mix (I use this one)",
+        "120 g / 1 cup all purpose wheat flour or GF all purpose flour mix",
         "150 g / 5¼ oz chopped vegan chocolate or chocolate chips (optional but recommended!)"
       ]
     },
@@ -20284,7 +19476,7 @@
         "generous pinch of turmeric (optional, just for a brighter yellow color)",
         "1 teaspoon grated ginger or 1/2 tsp paste",
         "1/2 teaspoon grated green chili",
-        "3 Tablespoons non dairy yogurt (I used SoDelicious plain coconut milk yogurt)",
+        "3 Tablespoons non dairy yogurt",
         "2 Tablespoons water",
         "1/2 teaspoon vinegar",
         "a generous pinch of baking soda",
@@ -20465,7 +19657,7 @@
         "1/8 teaspoon baking soda",
         "1/4 teaspoon salt",
         "3 tablespoons maple syrup (or more, as needed)",
-        "1 1/2 tablespoons melted coconut oil (I use refined coconut oil.)",
+        "1 1/2 tablespoons melted coconut oil",
         "1/2 teaspoon vanilla extract (less or more to preference)",
         "2 tablespoons smooth peanut butter"
       ]
@@ -20482,7 +19674,7 @@
       "haveNames": [
         "600 g / 21 oz parsnips",
         "2 tbsp olive oil, divided",
-        "1 tbsp / 15 g vegan butter (I used Naturli)",
+        "1 tbsp / 15 g vegan butter",
         "10 sage leaves",
         "1 tbsp / 15 ml maple syrup",
         "1 heaped tbsp / 20 g white miso*",
@@ -20591,7 +19783,7 @@
         "2 tbsp / 30 ml soy sauce",
         "1 tbsp rice vinegar",
         "½-1 tsp hot chilli flakes / 2-3 tsp Sriracha sauce",
-        "1 tbsp of high smoke point oil, for frying (I used peanut oil)",
+        "1 tbsp of high smoke point oil, for frying",
         "2 tbsp / 30 ml dark soy sauce",
         "1½ tsp sesame oil",
         "1 tbsp rice vinegar",
@@ -20693,7 +19885,7 @@
         "3 Tablespoons raw sugar or equivalent sweetener (a Tbsp more if you like the cookies sweeter)",
         "4 Tablespoons raw or brown sugar",
         "2 Teaspoons water",
-        "1.5-2 Tablespoons Coconut creamer or thick non dairy Cream (I used So Delicious hazelnut coconut)",
+        "1.5-2 Tablespoons Coconut creamer or thick non dairy Cream",
         "1/2 teaspoon virgin coconut oil",
         "1 teaspoon cornstarch",
         "1 teaspoon or more instant coffee"
@@ -20895,11 +20087,11 @@
       "haveCount": 9,
       "needCount": 1,
       "needNames": [
-        "100 ml / 1/3 cup + 4 tsp amaretto liqueur* (I used Disaronno)"
+        "100 ml / 1/3 cup + 4 tsp amaretto liqueur*"
       ],
       "haveNames": [
-        "200 g / 7 oz vegan dark chocolate (I used 70% cacao)",
-        "300 g / 10.5 oz silken tofu (I used Clearspring)",
+        "200 g / 7 oz vegan dark chocolate",
+        "300 g / 10.5 oz silken tofu",
         "¼ tsp salt",
         "60 g / ¼ cup smooth almond butter",
         "25 g / ¼ cup cacao powder",
@@ -20920,7 +20112,7 @@
       ],
       "haveNames": [
         "200 g / 2 cups of all purpose white flour, sifted*",
-        "about 540 ml / 2 and ¼ cups plant milk (I used rice milk which is naturally sweet)",
+        "about 540 ml / 2 and ¼ cups plant milk",
         "½ tbsp maple syrup (optional - if milk isn't sweet already)",
         "¼ cup / 60 ml maple syrup",
         "a fat pinch of salt",
@@ -20980,7 +20172,7 @@
         "1/2 teaspoon instant coffee or equivalent brewed coffee"
       ],
       "haveNames": [
-        "2 tablespoons chocolate chips (I used 1 Tablespoon Chocolate chips and 1 Tablespoon Carob chips)",
+        "2 tablespoons chocolate chips",
         "2 teaspoons almond milk (So Delicious unsweetened or other brand)",
         "1 tablespoon ground raw sugar (or use soaked Medjool dates)",
         "3/4 cup almond milk",
@@ -21008,7 +20200,7 @@
         "45 ml / 3 tbsp olive oil, divided",
         "2 medium onions, diced finely",
         "2 large garlic cloves, diced finely",
-        "250 g / 9 oz fresh mushrooms (I used chestnut / cremini), diced very finely",
+        "250 g / 9 oz fresh mushrooms , diced very finely",
         "150 g / 5.3 oz white or savoy cabbage, chopped very finely",
         "150 g / 5.3 oz sauerkraut, chopped very finely",
         "½ tsp salt, adjust to taste",
@@ -21128,12 +20320,12 @@
         "1 tbsp brandy"
       ],
       "haveNames": [
-        "1.2 kg / 2.6 lb apples (I used Granny Smith)",
+        "1.2 kg / 2.6 lb apples",
         "130 g / ½ cup + 2 tbsp caster sugar OR 150 ml / ½ cup + 2 tbsp maple syrup",
         "45 ml / 3 tbsp olive oil (mild tasting)",
         "1 star anise",
         "3 cardamom pods",
-        "1-2 cinnamon sticks (I used 2 Ceylon cinnamon sticks)",
+        "1-2 cinnamon sticks",
         "½ vanilla pod",
         "400 g vegan puff pastry*"
       ]
@@ -21358,7 +20550,7 @@
         "3  large cloves of garlic",
         "1  loaded cup asparagus (chopped into 1 inch size bites)",
         "2 cups chopped veggies. I use a cup cauliflower (small florets, 1/2 cup chopped carrots and some red bell pepper, peas, mushrooms etc.)",
-        "1/2 cup packed baby spinach (I used spinach + celery leaves + 1/4 cup chopped cilantro)",
+        "1/2 cup packed baby spinach",
         "1/3 tsp salt or to taste",
         "1/4-1/2 tsp each oregano and thyme"
       ]
@@ -21652,8 +20844,8 @@
         "100 g / 3½ oz tenderstem broccoli",
         "1 carrot",
         "4 small spring onions / scallions",
-        "30 ml / 2 tbsp stir-fry oil (I use rice bran)",
-        "400 g / 14 oz pre-cooked noodles* (I used ramen)"
+        "30 ml / 2 tbsp stir-fry oil",
+        "400 g / 14 oz pre-cooked noodles*"
       ]
     },
     {
@@ -21798,7 +20990,7 @@
         "2 fresh or dried bay leaves",
         "2 tsp liquid smoke (optional)",
         "approx. ½ tsp coarse salt, adjust to taste",
-        "750 g / 27 oz mushrooms (I used chestnut and plain)",
+        "750 g / 27 oz mushrooms",
         "6 lacinato kale / cavolo nero leaves, chopped (optional)",
         "black pepper, to taste",
         "2 tsp balsamic vinegar, to taste",
@@ -21910,7 +21102,7 @@
         "2 tbsp nutritional yeast",
         "juice of ½ lemon",
         "salt and black pepper, to taste",
-        "a good pinch of chilli flakes (I used fine Korean chilli flakes)",
+        "a good pinch of chilli flakes",
         "2 tbsp toasted pine nuts, to garnish",
         "fresh chopped mint, to garnish (optional)"
       ]
@@ -21991,7 +21183,7 @@
       ],
       "haveNames": [
         "1 cup of dry green or Puy lentils (optional)",
-        "½ butternut squash (I used bottom part only)",
+        "½ butternut squash",
         "2 small red onions",
         "1 Granny Smith apple, sliced thinly",
         "small bunch of rocket, chopped",
@@ -22119,7 +21311,7 @@
         "zest and juice from 1 small lemon"
       ],
       "haveNames": [
-        "200 g spaghetti (I used wholemeal)",
+        "200 g spaghetti",
         "5 baby courgettes",
         "2 garlic cloves, finely chopped",
         "½ hot chilli, finely chopped",
@@ -22290,7 +21482,7 @@
         "2 teaspoons oil",
         "1 cup chopped Okra",
         "1 cup small broccoli florets",
-        "4 oz cubed Tempeh,  ((Steam to reduce the bitter tempeh taste for 10 mins))",
+        "4 oz cubed Tempeh,",
         "1/2 cup sliced sweet peppers or red bell pepper",
         "1/2 tsp garlic powder",
         "salt to taste",
@@ -22312,7 +21504,7 @@
       "haveNames": [
         "1/2 cup chopped onion",
         "4 cloves of garlic (finely chopped)",
-        "1 cup sliced mushrooms (I used cremini)",
+        "1 cup sliced mushrooms",
         "1 to 2 tsp fresh ginger (minced)",
         "1/2  cup chopped carrots",
         "1/2  cup cooked chickpeas",
@@ -22382,9 +21574,9 @@
         "a generous pinch of spices of choice (I am currently on a ginger and clove binge)"
       ],
       "haveNames": [
-        "1/4 cup chocolate (chips, chopped bar, dark. I use enjoy life semi sweet or whole foods vegan)",
+        "1/4 cup chocolate (chips, chopped bar, dark. I use semi sweet or vegan)",
         "2-3 Tablespoons raw sugar or other sweetener (depends on sweetness of the chocolate)",
-        "2 Tablespoons Coconut milk or non dairy milk/creamer (I used SoDelicious plain coconut milk,)",
+        "2 Tablespoons Coconut milk or non dairy milk/creamer",
         "1 Tablespoon agave syrup",
         "1/2 teaspoon coconut oil",
         "1/2 cup coarsely ground almonds",
@@ -22488,7 +21680,7 @@
       "haveCount": 18,
       "needCount": 2,
       "needNames": [
-        "300 g / 10.5 oz already pressed tofu (I used Tofoo), see NOTES*",
+        "300 g / 10.5 oz already pressed tofu , see NOTES*",
         "approx. 4 tsp chipotle paste, adjust to taste*"
       ],
       "haveNames": [
@@ -22662,7 +21854,7 @@
         "salt & pepper, to taste",
         "30 ml / 2 tbsp olive oil, plus more to brush",
         "16 g / 2 tbsp psyllium husk powder*",
-        "120 ml / ½ cup stock (I used porcini stock)",
+        "120 ml / ½ cup stock",
         "400 g / 14 oz smoked firm tofu, well pressed!",
         "1 tbsp chopped rosemary leaves or 1 tsp dry",
         "1 tbsp chopped sage leaves or 1 tsp dry",
@@ -22764,7 +21956,7 @@
       ],
       "haveNames": [
         "6 nori sheets",
-        "1½ cup quinoa (I used black)",
+        "1½ cup quinoa",
         "3 tbsp white miso paste*, adjust to taste",
         "1 flax or chia egg (optional, see NOTES)",
         "1 small avocado, peeled & sliced",
@@ -23371,7 +22563,7 @@
         "25 g / 1 oz pecans (or almond bacon)",
         "1 heaped tbsp white miso paste",
         "2 tbsp nutritional yeast*",
-        "approx. 80 ml / 1/3 cup vegan single cream (I used Oatly)",
+        "approx. 80 ml / 1/3 cup vegan single cream",
         "salt and pepper, to taste",
         "10 ml / 2 tsp lemon juice or balsamic vinegar, adjust to taste",
         "toasted breadcrumbs (optional)",
@@ -23583,7 +22775,7 @@
         "¾ tsp baking soda",
         "1¼ tsp cinnamon",
         "6 green cardamom pods, seeds crushed (or ½ heaped tsp ground)",
-        "60 ml / ¼ cup mild tasting oil (I used mild olive oil)",
+        "60 ml / ¼ cup mild tasting oil",
         "80 ml / 1/3 cup almond milk (or other thin plant milk)",
         "150 g / ¾ cup coconut sugar or demerara sugar**",
         "1½ tsp vanilla essence",
@@ -23622,12 +22814,12 @@
       ],
       "haveNames": [
         "1 head of garlic",
-        "750 g / 26 oz medium mushrooms (I used chestnut / cremini)",
+        "750 g / 26 oz medium mushrooms",
         "approx. 60 ml / 4 tbsp olive oil, divided",
         "salt & pepper",
         "a small bunch of fresh thyme",
-        "1 tsp miso paste (I used red miso)",
-        "120 ml / ½ cup plant milk (I use soy)",
+        "1 tsp miso paste",
+        "120 ml / ½ cup plant milk",
         "3 tbsp nutritional yeast",
         "4 tbsp breadcrumbs*"
       ]
@@ -23861,7 +23053,7 @@
         "a good pinch of salt",
         "2 1/2-3 tbsp unbleached white flour",
         "a good pinch of baking soda (about a 1/16th tsp)",
-        "1 1/2 tbsp or more vegan chocolate chunks or chips (I use enjoy life brand, that uses cocoa butter, no palm oil)"
+        "1 1/2 tbsp or more vegan chocolate chunks or chips"
       ]
     },
     {
@@ -24035,7 +23227,7 @@
         "120 ml / ½ cup pumpkin puree**",
         "120 ml / ½ cup almond milk (or any plant milk)*",
         "2 tsp lemon juice",
-        "128 g / 1 cup GF flour mix (I use Dove's Farm free from), buckwheat flour OR all purpose white flour",
+        "128 g / 1 cup GF flour mix , buckwheat flour OR all purpose white flour",
         "1 tsp cinnamon or pumpkin pie spice",
         "1½ tsp (gluten-free if required) baking powder",
         "½ tsp (gluten-free if required) baking soda",
@@ -24232,13 +23424,13 @@
         "½ small cucumber, sliced",
         "a handful of baby spinach leaves",
         "250 g / 9 oz firm or extra firm (cotton not silken) tofu, pressed",
-        "1 tbsp ground flax (I used golden flax seeds) or chia seeds",
+        "1 tbsp ground flax or chia seeds",
         "2 tbsp soy sauce / tamari (GF)",
         "4 tsp rice wine vinegar",
         "2 tsp maple syrup or sugar",
         "2 tsp toasted sesame oil",
         "2 tsp finely grated ginger",
-        "oil (I use rice bran), for greasing the tray",
+        "oil , for greasing the tray",
         "100 g / 3.5 oz radishes, sliced thickly or 2 carrots, shaved into ribbons",
         "½ cup rice vinegar",
         "2 tbsp sugar or maple syrup",
@@ -24281,7 +23473,7 @@
         "2 celery sticks, roughly diced",
         "a good pinch of caraway seeds",
         "1 tbsp tomato paste",
-        "20 g / 0.7 oz dry mushrooms (I used a mixture of porcini and shiitake), well rinsed",
+        "20 g / 0.7 oz dry mushrooms , well rinsed",
         "1 bay leaf",
         "10 black peppercorns",
         "salt, to taste",
@@ -24609,7 +23801,7 @@
       "haveCount": 11,
       "needCount": 1,
       "needNames": [
-        "your favorite cheese (I use vegan ricotta)"
+        "your favorite cheese"
       ],
       "haveNames": [
         "30 ml / 2 tbsp olive oil",
@@ -24712,7 +23904,7 @@
         "4 dried shiitake mushrooms*, soaked in 240 ml / 1 cup water overnight"
       ],
       "haveNames": [
-        "1 tbsp / 15 ml high smoke point oil (I used rice bran)",
+        "1 tbsp / 15 ml high smoke point oil",
         "15 g / 0.5 fresh ginger",
         "200 g / 7 oz tenderstem broccoli (or other veg)",
         "1 garlic clove",
@@ -24725,28 +23917,6 @@
         "5 ml / 1 tsp maple syrup or sugar",
         "10 ml / 2 rice vinegar",
         "5 ml / 1 tsp toasted sesame oil (optional)"
-      ]
-    },
-    {
-      "id": 4033,
-      "title": "Vegan Tempura Vegetables",
-      "pct": 91,
-      "haveCount": 10,
-      "needCount": 1,
-      "needNames": [
-        "sparkling water"
-      ],
-      "haveNames": [
-        "baking powder",
-        "broccoli",
-        "cornstarch",
-        "eggplant",
-        "flour",
-        "mushroom",
-        "nori sheet",
-        "soy sauce",
-        "sweet potato",
-        "vegetable oil"
       ]
     },
     {
@@ -25026,7 +24196,7 @@
       ],
       "haveNames": [
         "1 vegan stock cube or 480 ml / 2 cups veggie stock",
-        "2 tbsp / 30 ml oil (I used olive oil)",
+        "2 tbsp / 30 ml oil",
         "1 yellow onion, finely chopped",
         "4 large garlic cloves, finely chopped",
         "1 red bell pepper, diced finely",
@@ -25710,7 +24880,7 @@
         "150 g / 5.25 oz fresh blueberries",
         "2 tsp vegetable oil, for frying",
         "maple syrup",
-        "nuts (I used toasted almond flakes)",
+        "nuts",
         "thick vegan yogurt"
       ]
     },
@@ -25746,7 +24916,7 @@
         "135 ml / ½ cup + 1 tbsp plant milk"
       ],
       "haveNames": [
-        "250 g / 2 cups all purpose white wheat flour or GF plain flour (I use this one)",
+        "250 g / 2 cups all purpose white wheat flour or GF plain flour",
         "¾ tsp xantham gum (for GF version only)",
         "9 g / 1 tbsp baking powder",
         "¼ tsp fine salt",
@@ -25836,7 +25006,7 @@
         "2 tbsp pine nuts, dry-roasted in a pan"
       ],
       "haveNames": [
-        "350 g (gluten-free) penne pasta (I used wholemeal)",
+        "350 g (gluten-free) penne pasta",
         "3 tbsp / 45 ml olive oil",
         "3 garlic cloves, finely diced",
         "3 aubergines, diced",
@@ -25859,7 +25029,7 @@
         "3/4 cup frozen spinach thawed and squeezed lightly"
       ],
       "haveNames": [
-        "3/4 cup plus 2 tablespoons flour (I use all-purpose. You can also use oat flour to make it gluten-free.)",
+        "3/4 cup plus 2 tablespoons flour",
         "1/2 teaspoon salt",
         "2 teaspoons  flaxseed meal  (mixed with 2 tablespoons of water)",
         "1/2 teaspoon oregano",
@@ -26111,7 +25281,7 @@
       "haveCount": 12,
       "needCount": 1,
       "needNames": [
-        "1/4 cup chopped nuts and seeds, (I use a mix of chopped pistachios, chia seeds and hemp seeds.)"
+        "1/4 cup chopped nuts and seeds,"
       ],
       "haveNames": [
         "1 cup almond flour",
@@ -26120,7 +25290,7 @@
         "2 tablespoons shredded coconut (, optional )",
         "1/3 cup old fashioned oats",
         "1/4 teaspoon baking soda",
-        "1 1/2 tablespoons melted coconut oil (I use refined coconut oil for a less coconutty flavor)",
+        "1 1/2 tablespoons melted coconut oil",
         "1/2 teaspoon vanilla extract (or more, to taste)",
         "4 to 5 tablespoons maple syrup",
         "1 tablespoon applesauce",
@@ -26184,7 +25354,7 @@
       "haveNames": [
         "100 g / 3.5 oz (heaped ¾ cup) raw cashews, soaked",
         "60 ml / ¼ cup maple syrup or other sweetener",
-        "60 ml / ¼ cup plant milk (I used almond)",
+        "60 ml / ¼ cup plant milk",
         "¼ tsp salt",
         "2-3 tsp instant coffee, more to taste",
         "90 g / 3.2 oz vegan dark chocolate",
@@ -26205,11 +25375,11 @@
         "1 tbsp Corn syrup"
       ],
       "haveNames": [
-        "1/2 cup (30g) Almond meal ((I skinned and ground almonds at home))",
+        "1/2 cup (30g) Almond meal",
         "1/2 cup (30g) Macadamia nuts (ground )",
-        "1/2 cup (51g) Water Chestnut flour ((Singhada atta ))",
+        "1/2 cup (51g) Water Chestnut flour",
         "1/2 cup less 1 tbsp (55g) Raw cane sugar",
-        "1  large carrot ((grated in medium size – 1 cup, packed))",
+        "1 large carrot",
         "A pinch of salt",
         "1 tsp Baking powder",
         "1/4 cup (41g) Olive oil (or any neutral flavoured oil )",
@@ -26691,12 +25861,12 @@
       ],
       "haveNames": [
         "60 ml / ¼ cup smooth almond butter",
-        "125 g / ½ cup thick vegan yoghurt (I used peach and passionfruit KOKO)",
+        "125 g / ½ cup thick vegan yoghurt",
         "120 ml / ½ cup almond milk",
         "150 ml / ½ cup + 2 tbsp maple syrup or other neutral-tasting liquid sweetener",
         "2 tsp lemon or lime juice",
         "2 tsp vanilla extract",
-        "240 g / scant 2 cups all purpose flour or GF all purpose flour mix* (I use this one)",
+        "240 g / scant 2 cups all purpose flour or GF all purpose flour mix*",
         "80 g / slightly heaped ¾ cup ground almonds (aka almond flour)",
         "1 tsp baking powder",
         "½ tsp baking soda",
@@ -26728,7 +25898,7 @@
         "1/2 of a bell pepper (thinly sliced. You can use just green or a mix of red and green.)",
         "2 tablespoons tomato paste",
         "1 teaspoon garam masala",
-        "1 teaspoon dried fenugreek leaves ((kasuri methi))",
+        "1 teaspoon dried fenugreek leaves",
         "15 ounce can full-fat coconut milk",
         "1/2 teaspoon salt",
         "1 tablespoon maple syrup",
@@ -26790,11 +25960,11 @@
       "haveCount": 10,
       "needCount": 1,
       "needNames": [
-        "2-3 tbsp / 30-45 ml amaretto liqueur* (I used Disaronno), adjust to taste"
+        "2-3 tbsp / 30-45 ml amaretto liqueur* , adjust to taste"
       ],
       "haveNames": [
         "120 ml / ½ cup maple syrup",
-        "80 ml / 1/3 cup oil (I use grapeseed oil or mild coconut oil, melted and cooled)",
+        "80 ml / 1/3 cup oil",
         "1 tsp vanilla extract",
         "½ tsp almond essence",
         "180 gr / approx. 1½ cup all purpose flour, GF all purpose flour mix or buckwheat flour",
@@ -26828,29 +25998,6 @@
       ]
     },
     {
-      "id": 6204,
-      "title": "Vegan Gluten free Christmas Cake - Fruit Cake",
-      "pct": 91,
-      "haveCount": 11,
-      "needCount": 1,
-      "needNames": [
-        "1.25 to 1.5 cups dried fruits and nuts"
-      ],
-      "haveNames": [
-        "1 cup orange juice or a combination with liquor ((upto half cup of rum, brandy, whiskey or a mix))",
-        "1 tbsp chia seeds ((not optional as they help thicken the leftover orange juice. You an use 1.5 tbsp flax seed meal as a sub))",
-        "1/4 to 1/3 cup light brown sugar",
-        "2 tbsp oil ((I use organic safflower))",
-        "1/2 tsp vanilla extract",
-        "1/2 cup white rice flour",
-        "3/4 cup almond flour",
-        "1/4 cup potato starch",
-        "1.5 tsp baking powder",
-        "1/4 tsp salt",
-        "1 tsp pumpkin pie spice"
-      ]
-    },
-    {
       "id": 5342,
       "title": "Vegan granola cups with peanut caramel",
       "pct": 91,
@@ -26862,14 +26009,14 @@
       "haveNames": [
         "½ tsp fine sea salt",
         "60 ml / ¼ cup maple syrup or other liquid sweetener",
-        "40 g / 3 tbsp coconut oil, melted (I use this one), another neutral-tasting oil or vegan butter",
+        "40 g / 3 tbsp coconut oil, melted , another neutral-tasting oil or vegan butter",
         "120 ml / ½ cup maple syrup or other liquid sweetener",
         "100 g / 1/3 cup + 1 heaped tbsp peanut butter*",
-        "80 ml / 1/3 cup vegan single cream* (I used Oatly)",
+        "80 ml / 1/3 cup vegan single cream*",
         "salt, to taste",
         "75 g / ½ cup roasted peanuts, chopped",
         "85 g / 3 oz 70% dark vegan chocolate",
-        "80 ml / 1/3 cup vegan single cream* (I used Oatly)"
+        "80 ml / 1/3 cup vegan single cream*"
       ]
     },
     {
@@ -26904,7 +26051,7 @@
         "1 tbsp nigella seeds (adds onion-y flavour)"
       ],
       "haveNames": [
-        "2-3 tbsp ground flax seeds (I use golden flax)",
+        "2-3 tbsp ground flax seeds",
         "120 g / 1 cup raw sunflower seeds",
         "140 g / 1 cup raw pumpkin seeds",
         "17 g / 2 tbsp white sesame seeds",
@@ -26914,7 +26061,7 @@
         "½ tsp crushed dry rosemary*",
         "2 tbsp nutritional yeast (optional)",
         "18 g / 2 tbsp rice flour (any flour should do!)",
-        "30 ml / 2 tbsp oil (I used olive oil)**"
+        "30 ml / 2 tbsp oil **"
       ]
     },
     {
@@ -26928,7 +26075,7 @@
       ],
       "haveNames": [
         "2 tbsp ground up flax (or chia) seeds",
-        "120 ml / ½ cup thin plant milk (I used almond) or water",
+        "120 ml / ½ cup thin plant milk or water",
         "50 g / ¼ cup fragrance-free coconut oil, solid*",
         "1 tsp vanilla essence",
         "63 g / ¼ cup peanut butter (or any other nut butter or tahini) (optional, see NOTES)",
@@ -26947,10 +26094,10 @@
       "haveCount": 10,
       "needCount": 1,
       "needNames": [
-        "140 g / scant ¾ cup sugar (I used light muscovado)"
+        "140 g / scant ¾ cup sugar"
       ],
       "haveNames": [
-        "55 g / ¼ cup vegan butter (I used Naturli), softened",
+        "55 g / ¼ cup vegan butter , softened",
         "115 g / ½ cup pumpkin puree",
         "1½ tsp vanilla extract",
         "1½ tsp cinnamon, ½ tsp cardamom, ½ tsp ginger, ¼ tsp nutmeg, pinch of cloves",
@@ -27278,7 +26425,7 @@
         "1 tsp Sriracha (optional)",
         "½-1 nori sheet (optional)",
         "200 g / 7 oz 3 mm flat rice noodles (medium size)",
-        "2 tbsp / 30 ml stir-frying oil (I use rice bran)",
+        "2 tbsp / 30 ml stir-frying oil",
         "100 g / 3½ oz tenderstem or regular broccoli, cut small",
         "1 carrot, cut into matchsticks or sliced",
         "½ red pepper, sliced thinly",
@@ -28062,7 +27209,7 @@
         "1  tomato (thinly sliced)",
         "1  ripe pear (thinly sliced)",
         "1  large clove of garlic pressed or 1/2 tsp garlic powder",
-        "1/4 tsp or more black pepper (i use more)",
+        "1/4 tsp or more black pepper",
         "1/4-1/2 tsp dried oregano or parsley or other dried herbs of choice",
         "1 tbsp really good extra virgin olive oil",
         "2 tsp or more lemon juice",
@@ -28152,11 +27299,11 @@
       "haveNames": [
         "3/4  + cup bread flour",
         "3/4  white whole wheat flour",
-        "1/2 cup almond or coconut milk (I used So delicious vanilla)",
+        "1/2 cup almond or coconut milk",
         "3 Tablespoons coconut oil or organic canola oil",
         "2 Tablespoons water",
         "2 teaspoons active yeast",
-        "3 Tablespoons raw sugar (I use sugar in the raw, and that is sweeter than regular white sugar)",
+        "3 Tablespoons raw sugar",
         "1/8 teaspoon cardamom",
         "1/2 teaspoon pumpkin pie spice (or spices of choice like ginger bread blend)",
         "1/4 teaspoon salt",
@@ -28336,7 +27483,7 @@
         "1 large garlic clove, grated (or ½ tsp garlic powder)",
         "½ tsp flaky salt, more to taste",
         "1 tbsp nutritional yeast",
-        "½ tsp mild chilli flakes (I use pul biber), optional",
+        "½ tsp mild chilli flakes , optional",
         "2 tsp thyme leaves (about 3 sprigs)",
         "zest of 1 small lemon",
         "15 ml / 1 tbsp extra virgin olive oil",
@@ -28453,11 +27600,11 @@
         "1  small head of cauliflower or 1/2 a large head",
         "1/2  small onion",
         "4 cloves of garlic (4 small cloves or 2 large)",
-        "1/2  red bell pepper ((or use roasted red bell pepper for variation))",
+        "1/2 red bell pepper",
         "1.5 cup water (or veggie broth)",
         "1/2 tsp smoked paprika",
         "1/4 to 1/2 tsp red pepper flakes",
-        "a good dash of all spice or cinnamon ((optional, but adds great depth of flavor))",
+        "a good dash of all spice or cinnamon",
         "1/2 tsp dried thyme",
         "3/4 tsp salt",
         "1 tbsp nutritional yeast",
@@ -28706,7 +27853,7 @@
       "haveCount": 12,
       "needCount": 1,
       "needNames": [
-        "15 ml / 1 tbsp veg oil (I used mild olive oil)"
+        "15 ml / 1 tbsp veg oil"
       ],
       "haveNames": [
         "100 g / 3.5 oz noodles",
@@ -28979,7 +28126,7 @@
         "1 tbsp maple syrup",
         "wasabi",
         "tamari (for GF version) or soy sauce",
-        "3 tbsp miso paste (I used red)",
+        "3 tbsp miso paste",
         "1½ tbsp rice vinegar",
         "1 tbsp maple syrup",
         "2 tsp sesame oil"
@@ -29219,12 +28366,12 @@
         "juice of 2 limes (about 90 ml / 6 tbsp juice)"
       ],
       "haveNames": [
-        "240 ml / 1 cup thin plant milk (I used almond), room temperature",
+        "240 ml / 1 cup thin plant milk , room temperature",
         "80 g / 1/3 cup mild coconut oil (measured unmelted)",
         "125 g / 2/3 cup caster sugar OR 160 ml / 2/3 cup maple syrup*             30 ml / 2 tbsp lime juice (approx. ½ lime)",
         "zest of 4 limes",
         "80 g / 1 cup desiccated coconut, ground up finely in a coffee grinder or food processor",
-        "210 g / 1¾ cups GF cake flour mix (I used this one) or all purpose white flour, sifted",
+        "210 g / 1¾ cups GF cake flour mix or all purpose white flour, sifted",
         "1 tsp baking powder",
         "¾ tsp baking soda",
         "70 g / 1/3 cup caster sugar (fine sugar) or maple syrup, adjust to taste",
@@ -29439,7 +28586,7 @@
         "¾ tsp black pepper, adjust to taste",
         "1¼-½ tsp fine salt, adjust to taste",
         "5 g / 1 tsp white miso paste",
-        "780 ml / 3¼ cups plant milk (I used Oatly barista)",
+        "780 ml / 3¼ cups plant milk",
         "80 ml / 1/3 cup mild olive oil (or 100 g / 3½ oz vegan butter)",
         "80 g / scant 2/3 cup AP flour (or GF flour mix)",
         "3 tbsp nutritional yeast",
@@ -29859,7 +29006,7 @@
       "haveCount": 12,
       "needCount": 1,
       "needNames": [
-        "1.5 cups or more veggies chopped small (I used sliced carrots, small cauliflower florets and cubed butternut squash)"
+        "1.5 cups or more veggies chopped small"
       ],
       "haveNames": [
         "1/2 cup chana dal (split chickpeas, washed or use yellow split peas (preferably soaked for half an hour))",
@@ -30541,7 +29688,7 @@
       "needCount": 2,
       "needNames": [
         "rose essence  (or rose water to taste or a few strands of saffron.)",
-        "2 Tablespoons nuts ground (I use 1 Tbsp cashew 1 Tbsp almond.)"
+        "2 Tablespoons nuts ground"
       ],
       "haveNames": [
         "6-7 Tablespoons Raw sugar (raw sugar is sweeter than regular white varieties and makes a brown-ish syrup)",
@@ -30554,7 +29701,7 @@
         "pinch of cardamom powder",
         "pinch of salt",
         "pinch of rock salt",
-        "1 teaspoon oil (I use organic canola)",
+        "1 teaspoon oil",
         "1 Tablespoon water or almond milk",
         "Oil for frying",
         "2 Tablespoons ground Oats",
@@ -30566,7 +29713,7 @@
         "pinch of salt",
         "pinch of rock salt",
         "pinch of cardamom powder",
-        "2 teaspoons oil (I use organic Canola)",
+        "2 teaspoons oil",
         "2 teaspoons water  (or almond milk)"
       ]
     },
@@ -30632,8 +29779,8 @@
         "1/2 cup red lentils",
         "3 tbsp oil",
         "3 tbsp maple syrup",
-        "1/2 cup vegan semi sweet chocolate chips (( or a mix of semi sweet and dark))",
-        "4 tbsp sugar ((1 tbsp more for sweeter))",
+        "1/2 cup vegan semi sweet chocolate chips",
+        "4 tbsp sugar",
         "1/3 cup nut butter (heaping cup) ((I like cashew butter), Use sunflower seed butter for Nutfree )",
         "1.5 tsp vanilla extract",
         "1/4 cup flour of choice (All purpose, oat or glutenfree blend for gluten-free (add a tbsp starch if using gf flour and not a blend)  )",
@@ -30774,9 +29921,9 @@
       "haveNames": [
         "150 g / 5.3 oz (1¼) cups flour*",
         "¾ tsp fine salt",
-        "75 g / 2.6 oz (1/3 cup) chilled vegan butter (I used Naturli) or odourless coconut oil",
+        "75 g / 2.6 oz (1/3 cup) chilled vegan butter or odourless coconut oil",
         "2 tsp apple cider vinegar (or other acid)",
-        "600 g / 21.5 oz mushrooms (I used chestnut / cremini)",
+        "600 g / 21.5 oz mushrooms",
         "30 ml / 2 tbsp olive oil",
         "2 garlic cloves, finely grated",
         "45 ml / 3 tbsp quality balsamic vinegar",
@@ -30920,7 +30067,7 @@
         "3/4 cup ground raw sugar (2 Tbsp more for sweeter)",
         "1/3 cup oil (use a combination of oils. I use half organic canola and half coconut)",
         "1/3 cup coconut milk or almond milk",
-        "1 Tbsp vinegar (I used apple cider vinegar)",
+        "1 Tbsp vinegar",
         "1.5 cup Spelt flour",
         "2 Tbsps cornstarch",
         "1.5 teaspoon baking powder",
@@ -30982,7 +30129,7 @@
         "approx. ½ cup / 120 ml fridge-cold aquafaba* or water",
         "½ tsp hot chilli powder",
         "2 tsp olive oil",
-        "¼ cup dry quinoa (I used a mixture of black and white)",
+        "¼ cup dry quinoa",
         "½ cup wholewheat flour OR chickpea flour (for GF crackers)",
         "1¼ tsp fine sea salt",
         "2 tsp ground cumin"
@@ -30998,7 +30145,7 @@
         "2 tablespoons  or more seeds (such as hemp, sesame, sunflower or pumpkin)"
       ],
       "haveNames": [
-        "1/2 cup uncooked split red lentils ((masoor dal))",
+        "1/2 cup uncooked split red lentils",
         "2 cups water",
         "1.5 tablespoon  sugar (divided)",
         "a pinch of salt",
@@ -31164,7 +30311,7 @@
       "haveCount": 11,
       "needCount": 1,
       "needNames": [
-        "1 cup flour ((I use a mix of whole wheat and unbleached white), see notes for glutenfree)"
+        "1 cup flour ( , see notes for glutenfree)"
       ],
       "haveNames": [
         "1/3 cup pumpkin puree ( (pure pumpkin puree, not pumpkin pie filling. Use a well filled 1/3 cup))",
@@ -31172,7 +30319,7 @@
         "1 tbsp flax seed meal",
         "1/2 tsp vanilla",
         "2 tbsp molasses",
-        "1/2 cup sugar (( I usually use a mix of coconut and raw sugar))",
+        "1/2 cup sugar",
         "1.5 to 2 tsp ginger bread spice blend",
         "1/2 cup almond flour  (, see note for nutfree)",
         "3/4 tsp baking soda",
@@ -31498,7 +30645,7 @@
       ],
       "haveNames": [
         "300 g / 10.5 oz eating apples, plus 1 more to decorate",
-        "100 g / ½ cup neutral oil (I used mild olive oil)",
+        "100 g / ½ cup neutral oil",
         "7 ml / ½ tbsp apple cider vinegar",
         "7 ml / ½ tbsp vanilla extract, (optional)",
         "240 ml / 1 cup soy milk (oat or almond work too)",
@@ -31508,7 +30655,7 @@
         "¾ tsp baking soda (GF certified if needed)",
         "1½ tsp baking powder (GF certified if needed)",
         "45 g / 1/3 cup flour",
-        "25 g / 2 tbsp sugar (I used demerara sugar)",
+        "25 g / 2 tbsp sugar",
         "35 g / 2 heaped tbsp softened vegan butter, I used Violife"
       ]
     },
@@ -31554,7 +30701,7 @@
         "½ tsp salt",
         "1 tsp baking powder",
         "¾ tsp baking soda",
-        "160 g / 1¼ cups white all-purpose flour or GF flour mix (I use this one)",
+        "160 g / 1¼ cups white all-purpose flour or GF flour mix",
         "100 g / 3½ oz dark (70%) vegan chocolate**",
         "100 ml / 1/3 cup + 1 tbsp  full fat coconut milk"
       ]
@@ -31625,7 +30772,7 @@
         "4 tbsp sugar (you can use maple syrup, but use less orange juice to compensate)",
         "1 tsp salt",
         "180 ml / ¾ cup orange juice or almond milk, lukewarm",
-        "180 ml / ¾ cup thick vegan yogurt (I used The Coconut Collective), at room temperature",
+        "180 ml / ¾ cup thick vegan yogurt , at room temperature",
         "2 tbsp olive oil (or any other vegetable oil) + a little extra for pan glazing",
         "75 g / 10 dried apricots",
         "70 g / 1/3 cup sultanas",
@@ -31672,7 +30819,7 @@
         "6 level tsp raw cacao powder",
         "40 ml / 2½ tbsp olive oil",
         "20-30 ml / 1½-2 tbsp water (at room temperature)",
-        "½ cup sugar (I used brown raw cane)",
+        "½ cup sugar",
         "¾ level tsp fine salt",
         "100 g / 3.5 oz dark (70% cocoa) chocolate",
         "60 ml / ¼ cup full fat coconut milk",
@@ -31721,7 +30868,7 @@
         "50 g / ¼ cup caster (superfine) sugar",
         "120 g / 4.25 oz (heaped ½ cup) vegan butter or odourless coconut oil",
         "300 g / 10.5 oz 70% dark vegan chocolate",
-        "120 ml / ½ cup vegan single cream (I used Oatly)",
+        "120 ml / ½ cup vegan single cream",
         "120 ml / ½ cup maple syrup",
         "60 ml / ¼ cup hazelnut liqueur (like Frangelico) or plant milk",
         "180 g / ¾ cup smooth hazelnut butter*",
@@ -31816,7 +30963,7 @@
         "zest of 1 orange",
         "1½ tsp ground cinnamon",
         "¼ tsp fine sea salt",
-        "3 tbsp mild tasting oil (I used mild olive oil)",
+        "3 tbsp mild tasting oil",
         "2 tbsp shelled pistachios, very finely chopped"
       ]
     },
@@ -31830,12 +30977,12 @@
         "50 g / 1.75 oz stem ginger in syrup, finely diced"
       ],
       "haveNames": [
-        "45 g / 3 tbsp smooth almond butter* (I used this one) OR 35 g / 3 tbsp refined coconut oil",
+        "45 g / 3 tbsp smooth almond butter* OR 35 g / 3 tbsp refined coconut oil",
         "120 ml / ½ cup maple syrup",
         "35 g / 2 tbsp coconut cream (from a can)",
         "200 g / 2 heaped cups untoasted flaked or slivered almonds",
         "40 g / 1/3 cup low-sugar (if available) dried cranberries, chopped small",
-        "1 tbsp ground (I used golden) flax seeds",
+        "1 tbsp ground flax seeds",
         "¼ tsp baking soda",
         "¼ tsp fine sea salt",
         "150 g / 5 oz vegan chocolate",
@@ -31865,6 +31012,29 @@
         "2 tsp oil",
         "1/2 tsp vanilla extract",
         "1/2 cup almond milk or oat milk"
+      ]
+    },
+    {
+      "id": 6204,
+      "title": "Vegan Gluten free Christmas Cake - Fruit Cake",
+      "pct": 92,
+      "haveCount": 11,
+      "needCount": 1,
+      "needNames": [
+        "1.25 to 1.5 cups dried fruits and nuts"
+      ],
+      "haveNames": [
+        "1 cup orange juice or a combination with liquor",
+        "1 tbsp chia seeds",
+        "1/4 to 1/3 cup light brown sugar",
+        "2 tbsp oil ( )",
+        "1/2 tsp vanilla extract",
+        "1/2 cup white rice flour",
+        "3/4 cup almond flour",
+        "1/4 cup potato starch",
+        "1.5 tsp baking powder",
+        "1/4 tsp salt",
+        "1 tsp pumpkin pie spice"
       ]
     },
     {
@@ -31949,7 +31119,7 @@
         "100 g / ½ cup finely chopped stem ginger syrup or dried apricots"
       ],
       "haveNames": [
-        "500g / 4 cups wheat flour* (I used 50% bread flour and 50% all purpose)",
+        "500g / 4 cups wheat flour*",
         "½ tsp salt",
         "7 g / 2¼ tsp instant dried yeast",
         "75 g / 6 tbsp caster sugar or coconut sugar",
@@ -31997,7 +31167,7 @@
         "125 g / ½ cup + 2 tbsp caster sugar, plus more to sprinkle"
       ],
       "haveNames": [
-        "50 g / ¼ cup vegan butter (I used Naturli) or odourless coconut oil",
+        "50 g / ¼ cup vegan butter or odourless coconut oil",
         "185 g / 1½ cups plain all purpose flour",
         "60 g / ½ cup cornflour / cornstarch or potato starch",
         "1 tsp baking powder",
@@ -32008,8 +31178,8 @@
         "10 ml / 2 tsp vanilla extract*",
         "2.5 ml / ½ tsp almond essence",
         "icing sugar, to sprinkle",
-        "50 g / ¼ cup vegan butter (I used Naturli) or odourless coconut oil",
-        "185 g / 1½ cups plain gluten-free flour mix (I used this one)",
+        "50 g / ¼ cup vegan butter or odourless coconut oil",
+        "185 g / 1½ cups plain gluten-free flour mix",
         "60 g / ½ cup cornflour / cornstarch or potato starch",
         "1 tsp baking powder",
         "¼ tsp baking soda",
@@ -32033,7 +31203,7 @@
         "175 g / ¾ cup +  2 tbsp sugar (caster sugar is best but coconut sugar works too)"
       ],
       "haveNames": [
-        "115 g / ½ cup thick vegan yoghurt (I use coconut by The Coconut Collaborative)",
+        "115 g / ½ cup thick vegan yoghurt",
         "30 ml / 2 tbsp mild tasting oil",
         "2 tsp quality vanilla extract",
         "zest of 2 lemons*",
@@ -32320,14 +31490,14 @@
         "3 spring onions / scallions, white part thickly sliced and green part thinly sliced"
       ],
       "haveNames": [
-        "75 ml / 5 tbsp all purpose soy sauce (I use Kikkoman)",
+        "75 ml / 5 tbsp all purpose soy sauce",
         "75 ml / 5 tbsp mirin",
         "15 ml / 1 tbsp rice wine vinegar",
         "1 garlic clove, finely grated",
         "2 tsp finely grated ginger",
         "2 tsp Sriracha, adjust to taste (optional)",
         "200 g / 7 oz firm (cotton not silken) smoked tofu, pressed",
-        "2 tbsp high smoke point oil (I use rice bran)",
+        "2 tbsp high smoke point oil",
         "200 g / 7 oz savoy cabbage, chopped",
         "100 g / 3.5 oz shiitake mushrooms (or chestnut mushrooms), sliced",
         "400 g / 14 oz wok ready / precooked udon noodles (or 200 g / 7 oz dry)",
@@ -32366,7 +31536,7 @@
       "haveCount": 11,
       "needCount": 1,
       "needNames": [
-        "170 g / heaped ¾ cup sugar (I used mixture of caster and demerara)"
+        "170 g / heaped ¾ cup sugar"
       ],
       "haveNames": [
         "100 g / ½ cup softened fragrance-free coconut oil or vegan butter",
@@ -32401,7 +31571,7 @@
         "1 small garlic clove (optional)***",
         "zest of 1 unwaxed lemon + 15 ml / 1 tbsp lemon juice",
         "1 tbsp nutritional yeast",
-        "ground nutmeg (I used about 1/8 tsp), adjust to taste",
+        "ground nutmeg , adjust to taste",
         "heaped ¼ tsp sea salt, adjust to taste",
         "black pepper, adjust to taste",
         "25 g / ¼ cup almond flour (or breadcrumbs)",
@@ -33009,7 +32179,7 @@
         "15 g / ½ oz mint leaves",
         "15 g / ½ oz dill leaves",
         "15 g / ½ oz parsley leaves",
-        "freshly ground nutmeg (I use about ½ nutmeg), to taste",
+        "freshly ground nutmeg , to taste",
         "½ tsp black pepper, to taste",
         "sesame seeds, to garnish (optional)"
       ]
@@ -33407,7 +32577,7 @@
       "haveCount": 27,
       "needCount": 2,
       "needNames": [
-        "cooked noodles (GF if needed), 80 g per person (I used buckwheat soba)",
+        "cooked noodles (GF if needed), 80 g per person",
         "2 tbsp red miso paste (choose gluten-free miso for GF version)"
       ],
       "haveNames": [
@@ -33420,15 +32590,15 @@
         "4 garlic cloves, peeled and crushed",
         "½ sheet of kombu (15 cm x 5 cm / 5 in x 2 in )",
         "large knob of ginger (50g), peeled and sliced",
-        "a handful / 10 g of dried mushrooms, rinsed (I used porcini)",
+        "a handful / 10 g of dried mushrooms, rinsed",
         "a bunch of fresh coriander stalks, rinsed well",
         "2 tsp black peppercorns",
         "½ head of broccoli, divided into larger florets",
         "1 sweet potato, peeled and sliced into ½ cm / 1/8 in slices",
-        "a few mushrooms (I used small chestnuts), sliced thickly",
+        "a few mushrooms , sliced thickly",
         "200 g firm or extra firm tofu (optional), pressed*",
         "2 tbsp cornflour / cornstarch (optional)",
-        "oil (I used peanut, for frying)",
+        "oil",
         "sesame oil",
         "about 3 tbsp soy sauce or tamari (if GF), more taste",
         "1 tbsp rice vinegar",
@@ -33485,7 +32655,7 @@
         "1-2 tsp Sriracha, sambal oelek or other chilli paste",
         "200 g / 7 oz dry udon noodles* or flat rice noodles (for GF option)",
         "200 g / 7 oz your favourite marinated tofu (optional)",
-        "20 ml / 4 tsp stir-frying oil** (I use rice bran)",
+        "20 ml / 4 tsp stir-frying oil**",
         "100 g / 3½ oz broccoli, cut into same size florets",
         "1 bell pepper, julienned",
         "1 small carrot, julienned",
@@ -33513,7 +32683,7 @@
         "2 tbsp cornflour / cornstarch, sifted",
         "1½ cup + 2 tbsp rice or white cake flour, sifted + more for dusting",
         "about 20 ice cubes",
-        "about 2 cups of neutral-tasting oil, for frying (I used sunflower oil)",
+        "about 2 cups of neutral-tasting oil, for frying",
         "4 tsp maple syrup",
         "1 tsp toasted sesame oil",
         "1 tbsp rice wine vinegar",
@@ -33592,8 +32762,8 @@
         "1/2 teaspoon baking powder",
         "1/2 cup raisins",
         "2 tablespoons quinoa (blended coarsely or quinoa flour ( or use oats coarse flour, if you don't have quinoa))",
-        "3 tablespoons Oats flour ((Oats blended coarsely or Oats flour))",
-        "5 tablespoons Oats ((Bob’s Red Mill Organic Old Fashioned))",
+        "3 tablespoons Oats flour",
+        "5 tablespoons Oats",
         "1/2 cup Unbleached White flour or Spelt flour or Whole wheat pastry flour"
       ]
     },
@@ -33657,7 +32827,7 @@
         "2 to 3  Tablespoons of dough from above"
       ],
       "haveNames": [
-        "1 1/4 cup almond flour (I use blanched super fine almond flour)",
+        "1 1/4 cup almond flour",
         "1/3 cup tapioca starch",
         "1/4 teaspoon baking soda",
         "1/8 teaspoon salt",
@@ -33731,10 +32901,10 @@
       "haveCount": 14,
       "needCount": 1,
       "needNames": [
-        "3 -4 Tablespoons sweet syrup ((from the candied lime))"
+        "3 -4 Tablespoons sweet syrup"
       ],
       "haveNames": [
-        "1/2  medium lime ((sliced into 1-2mm slices))",
+        "1/2 medium lime",
         "3/4 cup water",
         "4 Tablespoon raw sugar or jaggery or any sweetener that can caramelize a bit",
         "2 teaspoons flax meal",
@@ -33745,7 +32915,7 @@
         "1/8 teaspoon salt",
         "1/4 teaspoon baking powder",
         "2 Tablespoons dried coconut flakes",
-        "2 Tablespoons oat flour ((Bob’s Red Mill Organic Old Fashioned))",
+        "2 Tablespoons oat flour",
         "2 Tablespoons Almond meal",
         "1/2 - 2/3 cup self rising flour or all purpose + 1/4 tsp baking powder"
       ]
@@ -34772,7 +33942,7 @@
         "a few pinches of hot chilli (or a squeeze of harissa paste)"
       ],
       "haveNames": [
-        "2 tbsp / 30 ml oil (I used olive oil)",
+        "2 tbsp / 30 ml oil",
         "1 large onion, finely chopped",
         "565 g / 20 oz tin of young jackfruit in brine, drained",
         "6 garlic cloves, finely chopped",
@@ -34794,7 +33964,7 @@
         "1-2 garlic cloves",
         "½ tsp ground cardamom",
         "½ tsp ground cumin",
-        "a good pinch of chilli flakes (I used pul biber)",
+        "a good pinch of chilli flakes",
         "½ tsp salt, more to taste",
         "olive oil",
         "squeeze of lemon (adding zest is nice too)"
@@ -34875,8 +34045,8 @@
       "haveCount": 27,
       "needCount": 2,
       "needNames": [
-        "1-2 tsp date nectar (I use homemade) or sugar",
-        "dried Greek herbs (I used thyme)"
+        "1-2 tsp date nectar or sugar",
+        "dried Greek herbs"
       ],
       "haveNames": [
         "130 g / 2 cups of fine organic soy mince*",
@@ -34904,7 +34074,7 @@
         "4 tbsp / ¼ cup nutritional yeast",
         "½ tsp ground nutmeg, adjust to taste",
         "½ tsp salt, adjust to taste",
-        "pepper (I used white pepper), adjust to taste",
+        "pepper , adjust to taste",
         "1 slighly heaped tbsp tapioca starch"
       ]
     },
@@ -35131,7 +34301,7 @@
         "1/8 tsp salt",
         "2 tsps flaxmeal",
         "2 Tbsp almond milk",
-        "3 Tbsp almond butter (I used Justin's classic almond butter)",
+        "3 Tbsp almond butter",
         "3 Tbsp Oil (organic canola or virgin coconut)",
         "1/2 tsp vanilla extract",
         "1/4 tsp cinnamon powder",
@@ -35348,7 +34518,7 @@
       "haveCount": 14,
       "needCount": 1,
       "needNames": [
-        "1 tablespoon high fat oil (I used virgin coconut oil)"
+        "1 tablespoon high fat oil"
       ],
       "haveNames": [
         "2/3 cup blueberries",
@@ -35416,7 +34586,7 @@
         "480-600 ml / 2-2½ cups almond milk (see method #2)",
         "1 tbsp smooth almond butter (or other smooth nut butter or oil)",
         "1 tbsp maple syrup",
-        "oil (I used coconut oil), for frying"
+        "oil , for frying"
       ]
     },
     {
@@ -35465,7 +34635,7 @@
         "10  baby carrots",
         "1/2 cup water",
         "1/2 teaspoon vinegar",
-        "1/4 teaspoon cardamom powder ((substitute with fave spice if you don't like cardamom))",
+        "1/4 teaspoon cardamom powder",
         "pinch of nutmeg",
         "1.75 cups self rising flour",
         "1/4 cup whole wheat pastry flour",
@@ -35476,7 +34646,7 @@
         "2 Tablespoons coconut oil",
         "2 Tablespoons Organic canola oil",
         "2 cups baby carrots or chopped carrots.",
-        "1 cup 1 cup water ((roughly))",
+        "1 cup 1 cup water",
         "1 cup raw sugar",
         "1/2 teaspoon cardamom powder",
         "1/2 teaspoon cinnamon powder",
@@ -35594,7 +34764,7 @@
         "60 ml / ¼ cup Amaretto liqueur (or more plant milk for alcohol-free version)"
       ],
       "haveNames": [
-        "2 tbsp ground (I use golden) flax seeds (for GF version only)",
+        "2 tbsp ground flax seeds (for GF version only)",
         "250 g / 2 cups all purpose white flour or GF flour mix (I tested this one*)",
         "140 g / scant ¾ cup caster sugar (or coconut sugar for unrefined sugar version)",
         "1 tsp baking powder",
@@ -35606,7 +34776,7 @@
         "100 g / ¾ cup hazelnuts or almonds, chopped roughly",
         "5 stem ginger balls (in syrup), finely diced",
         "75 ml / ¼ cup + 1 tbsp soy or almond milk",
-        "50 g / ¼ cup coconut oil (I use the odourless one) or vegan butter, melted",
+        "50 g / ¼ cup coconut oil or vegan butter, melted",
         "1½ tsp vanilla extract",
         "100 g / 3½ oz vegan chocolate"
       ]
@@ -35711,7 +34881,7 @@
         "pepper, to taste",
         "generous pinch of hot chilli flakes",
         "generous pinch of saffron (optional)",
-        "200 g of your favourite pasta* (I used wholemeal spaghetti), cooked al dente",
+        "200 g of your favourite pasta* , cooked al dente",
         "1 tbsp chopped fresh parsley"
       ]
     },
@@ -35748,7 +34918,7 @@
       "haveCount": 14,
       "needCount": 1,
       "needNames": [
-        "45 ml / 3 tbsp oil (I used mild olive oil) + more to grease the pan"
+        "45 ml / 3 tbsp oil + more to grease the pan"
       ],
       "haveNames": [
         "140 g / 1 heaped cup buckwheat flour*",
@@ -35756,7 +34926,7 @@
         "1 tsp fine salt",
         "2 tbsp ground chia seeds or flax seeds",
         "85 g / heaped ½ cup almonds (walnuts or hazelnuts)",
-        "40 g / ¼ cup flax seeds (I used golden flax seeds), more to decorate",
+        "40 g / ¼ cup flax seeds , more to decorate",
         "35 g / ¼ cup sesame seeds, more to decorate",
         "65 g / ½ cup pumpkin seeds, more to decorate",
         "70 g / ½ cup sunflower seeds, more to decorate",
@@ -35810,7 +34980,7 @@
         "1/8 tsp baking soda",
         "seeds from 2 cardamom pods (or use 1/4 tsp ground, I prefer seeds for best flavor )",
         "1.5 tbsp potato starch (or cornstarch )",
-        "3 tbsp bread crumbs (i use panko)",
+        "3 tbsp bread crumbs",
         "3.5 tbsp or more thick non dairy milk such as oat milk or cashew milk",
         "1 1/4 cup of water",
         "seeds from 4 cardamom pods",
@@ -36005,7 +35175,7 @@
       "haveCount": 13,
       "needCount": 1,
       "needNames": [
-        "jam or chutney for filling ((I used cranberry pear chutney))"
+        "jam or chutney for filling ( )"
       ],
       "haveNames": [
         "1/2 cup raw pistachioes",
@@ -36030,13 +35200,13 @@
       "haveCount": 14,
       "needCount": 1,
       "needNames": [
-        "1 cup pistachio butter ((or other natural nut butter))"
+        "1 cup pistachio butter"
       ],
       "haveNames": [
         "2 cups roasted, unsalted, shelled pistachios",
         "1/4 tsp maple syrup (optional)",
         "pinch of sea salt",
-        "1 cup oat flour ((1 heaping cup rolled oats, blended into flour))",
+        "1 cup oat flour",
         "1/2 cup brown rice flour",
         "1/4 cup tapioca starch",
         "1 tsp baking soda",
@@ -36159,7 +35329,7 @@
         "50g - 100g / ¼ - ½ cup sugar*, coconut sugar for refined sugar-free version"
       ],
       "haveNames": [
-        "250 g / 2 cups all purpose flour OR a tried and tested GF flour mix (I use this one)",
+        "250 g / 2 cups all purpose flour OR a tried and tested GF flour mix",
         "1 tsp instant yeast",
         "¾ tsp baking soda",
         "½ tsp baking powder",
@@ -36382,7 +35552,7 @@
       "haveCount": 13,
       "needCount": 1,
       "needNames": [
-        "75 g / ¼ cup + 2 tbsp vegan butter* (I used Naturli), cut into small cubes"
+        "75 g / ¼ cup + 2 tbsp vegan butter* , cut into small cubes"
       ],
       "haveNames": [
         "125 g / 1 cup bread (strong) flour",
@@ -36390,9 +35560,9 @@
         "¼ tsp fine salt",
         "50 g / ¼ cup caster (superfine) sugar",
         "8 g / 2¼ tsp (1 sachet) instant dried yeast*",
-        "160 ml / 2/3 cup cold plant milk (I used soy)",
-        "80 g / 2.8 oz vegan dark chocolate (I used 70% cacao)",
-        "50 g / ¼ cup vegan butter* (I used Naturli)",
+        "160 ml / 2/3 cup cold plant milk",
+        "80 g / 2.8 oz vegan dark chocolate",
+        "50 g / ¼ cup vegan butter*",
         "30 g / 2 tbsp icing sugar, more to taste",
         "15 g / 0.5 oz cocoa powder",
         "¼ tsp fine salt (skip if using salted vegan butter)",
@@ -36683,7 +35853,7 @@
       "haveNames": [
         "2 tbsp ground up flax (or chia) seeds",
         "120 ml / ½ cup soy milk (oat milk works well too)",
-        "50 g / ¼ cup vegan butter (I used Naturli) or fragrance-free coconut oil, softened*",
+        "50 g / ¼ cup vegan butter or fragrance-free coconut oil, softened*",
         "60 ml / ¼ cup neutral oil, like mild olive oil",
         "50 g / ¼ cup caster sugar",
         "2 tsp vanilla essence",
@@ -36739,7 +35909,7 @@
         "¼ tsp fine sea salt",
         "450 g / 1 lb bag of frozen or fresh raspberries*",
         "3 tbsp ground chia (or flax seeds)",
-        "240 ml / 1 cup smooth sugar-free peanut butter (I used this brand)**",
+        "240 ml / 1 cup smooth sugar-free peanut butter **",
         "120 ml / ½ cup coconut cream (from a tin of full fat coconut milk)",
         "240 ml / 1 cup aquafaba",
         "2/3 tsp vinegar or lemon juice",
@@ -36868,7 +36038,7 @@
         "1 tsp baking powder",
         "1 tsp baking soda",
         "1 tsp vanilla extract",
-        "100 g / ½ cup sugar (I used brown, unrefined)",
+        "100 g / ½ cup sugar",
         "120 ml / ½ cup + 60 ml / ¼ cup full fat coconut milk",
         "a few pinches of salt"
       ]
@@ -36981,7 +36151,7 @@
       "haveCount": 16,
       "needCount": 1,
       "needNames": [
-        "approx. 100 g / 3.5 oz green salad (I used baby spinach and lollo rosso)"
+        "approx. 100 g / 3.5 oz green salad"
       ],
       "haveNames": [
         "1 cup quinoa",
@@ -37092,7 +36262,7 @@
       "haveCount": 17,
       "needCount": 1,
       "needNames": [
-        "favourite hot sauce (I use this one)"
+        "favourite hot sauce"
       ],
       "haveNames": [
         "450 g / 1 lb sweet potato*, cubed",
@@ -37299,7 +36469,7 @@
         "60 ml / ¼ cup olive oil, divided",
         "800 g / 28 oz trimmed leeks* (approx. 4 leeks)",
         "25 g / 3 tbsp all purpose flour (or chickpea flour for GF version)",
-        "500 ml / 2 cups plant milk (I used almond)",
+        "500 ml / 2 cups plant milk",
         "10 g / 2 tsp white miso paste*",
         "1 tbsp wholegrain mustard, adjust to taste",
         "4 tbsp nutritional yeast*",
@@ -37325,7 +36495,7 @@
       "haveNames": [
         "200 g / 7 oz firm or extra firm tofu, I used smoked (pressed)",
         "2 tbsp soy sauce or tamari (if GF)",
-        "2-3 tbsp neutral tasting oil (I used rice bran oil)",
+        "2-3 tbsp neutral tasting oil",
         "100 g / 3 oz vermicelli noodles, cooked",
         "100 g / 3 oz tenderstem broccoli, stir-fried or steamed",
         "sliced spring onions / scallions, to serve",
@@ -37632,11 +36802,11 @@
         "2 cups (200g) finely chopped broccoli, cauliflower, mushrooms, bell peppers (any color), or zucchini (or a combination)",
         "1/4 cup (30g) finely chopped red onion",
         "1/4 teaspoon salt",
-        "1 1/2 cups (135g) chickpea flour ((garbanzo bean flour))",
+        "1 1/2 cups (135g) chickpea flour",
         "1 1/2 cups (360ml) water",
         "1/4 cup (60g) plain unsweetened or lightly sweetened yogurt or thick cashew cream",
         "1/2 teaspoon salt",
-        "1/4  heaping teaspoon kala namak ((Indian sulphur black salt))",
+        "1/4 heaping teaspoon kala namak",
         "1/2 teaspoon ground turmeric",
         "1/4 teaspoon cayenne",
         "1/4 teaspoon black pepper (or to taste)",
@@ -37714,7 +36884,7 @@
         "1 onion, diced finely",
         "bunch of spring onions / scallions, diced finely",
         "4 garlic cloves, diced finely",
-        "400 g / 2 cups short grain rice (I used paella rice, risotto rice works too)",
+        "400 g / 2 cups short grain rice",
         "30 g / 1 oz dill, finely chopped",
         "15 g / ½ oz mint, leaves only - finely chopped",
         "60 g / 2 oz fresh parsley, finely chopped",
@@ -37905,10 +37075,10 @@
         "150 g / 5.25 oz cabbage, I used red and white"
       ],
       "haveNames": [
-        "250 g / 8.8 oz pressed tofu (I used Tofoo)*",
+        "250 g / 8.8 oz pressed tofu *",
         "30 ml / 2 tbsp soy sauce, divided",
         "30 g / 2 tbsp gochujang paste",
-        "30 g / 2 tbsp thick vegan yoghurt (I used The Coconut Collaborative)",
+        "30 g / 2 tbsp thick vegan yoghurt",
         "15 ml / 1 tbsp maple syrup",
         "7 ml / 1½ tsp rice vinegar",
         "½ tsp cornstarch",
@@ -37987,7 +37157,7 @@
       "haveCount": 16,
       "needCount": 1,
       "needNames": [
-        "2 tbsp of oil with high smoke point (I used peanut oil)"
+        "2 tbsp of oil with high smoke point"
       ],
       "haveNames": [
         "200 g rice noodles",
@@ -38159,23 +37329,23 @@
       "haveCount": 17,
       "needCount": 1,
       "needNames": [
-        "1 tbsp oil with high smoke point (I used rice bran oil)"
+        "1 tbsp oil with high smoke point"
       ],
       "haveNames": [
         "100 g / 3.5 oz tenderstem broccoli",
         "10 radishes",
         "1 courgette / small zucchini",
         "100 g / 3.5 oz sugar snap peas",
-        "180 g / 1 cup rice (I used brown)",
+        "180 g / 1 cup rice",
         "2 tbsp cashews",
         "3 small spring onions, sliced",
         "140 g / 1 cup edamame",
-        "fresh sprouts (I used broccoli sprouts) or coriander, to garnish",
+        "fresh sprouts or coriander, to garnish",
         "2 tbsp tamari (for GF version) or soy sauce",
         "2 tsp toasted sesame oil (for flavour)",
         "4 tsp rice vinegar or lime juice",
         "2 tsp mirin or maple syrup",
-        "1 tsp chilli paste (I used sambal oelek)",
+        "1 tsp chilli paste",
         "1-2 tsp finely grated ginger, adjust to taste",
         "1 small garlic clove, finely grated",
         "1 tsp cornflour / cornstarch (optional)"
@@ -38361,7 +37531,7 @@
         "1 medium onion, finely chopped",
         "2 cloves garlic, finely chopped",
         "15 cm leek (green part), sliced thinly",
-        "300 g risotto rice (I used Arborio)",
+        "300 g risotto rice",
         "175 ml glass dry white wine",
         "500 g asparagus",
         "salt",
@@ -38611,7 +37781,7 @@
       "haveCount": 17,
       "needCount": 1,
       "needNames": [
-        "approx. 4 tbsp vegan crème fraiche (I used Oalty)"
+        "approx. 4 tbsp vegan crème fraiche"
       ],
       "haveNames": [
         "1 English cucumber",
@@ -38778,7 +37948,7 @@
       "haveCount": 19,
       "needCount": 1,
       "needNames": [
-        "handful of beansprouts (I used mung bean sprouts)"
+        "handful of beansprouts"
       ],
       "haveNames": [
         "200 g rice flour",
@@ -38788,7 +37958,7 @@
         "½ tsp salt",
         "1½ tsp turmeric",
         "about 240 ml / 1 cup of cold water",
-        "oil (I used peanut oil), for frying",
+        "oil , for frying",
         "2 carrots, julienned",
         "1 red pepper, julienned",
         "1 cucumber, julienned",
@@ -38903,7 +38073,7 @@
         "1 cup brown rice, cooked",
         "a few slices of pickled sushi ginger, finely sliced",
         "1 spring onion, finely sliced",
-        "2-4 tsp oil (I used rice bran oil)",
+        "2-4 tsp oil",
         "5 nori (toasted seeweed) sheets",
         "30 g / ¼ cup sesame seeds",
         "salt, to taste (optional, I didn't add any)",
@@ -38911,7 +38081,7 @@
         "4 tsp rice wine vinegar",
         "2 tsp toasted sesame oil",
         "2 tsp maple syrup",
-        "1 tsp chilli paste (I used sambal oelek)"
+        "1 tsp chilli paste"
       ]
     },
     {
@@ -39105,7 +38275,7 @@
         "2 sprigs of fresh thyme or a pinch of dried",
         "½ tsp salt, adjust to taste",
         "pepper, to taste",
-        "180 g / 6 oz fire-roasted peppers in a jar (I used 2 large)",
+        "180 g / 6 oz fire-roasted peppers in a jar",
         "240 ml / 1 cup veggie stock or a veggie stock cube",
         "fresh parsley, to garnish"
       ]
@@ -39297,7 +38467,7 @@
         "2 tbsp nutritional yeast",
         "3 garlic cloves, finely diced",
         "a couple sprigs of thyme, leaves picked",
-        "120 ml / ½ cup vegan cream (I used Oatly*)",
+        "120 ml / ½ cup vegan cream",
         "salt and pepper, to taste",
         "toasted breadcrumbs, to finish (optional)",
         "fine chilli flakes, to finish (optional)"
@@ -39372,7 +38542,7 @@
       "haveNames": [
         "15 ml / 1 tbsp olive oil",
         "1½ banana shallots, diced finely",
-        "300 g / 10½ oz fresh mushrooms (I used chestnut / cremini)",
+        "300 g / 10½ oz fresh mushrooms",
         "4 large garlic cloves, diced finely",
         "1 large rosemary sprig, leaves chopped (or a few sprigs of thyme)",
         "salt and pepper, to taste",
@@ -39472,7 +38642,7 @@
         "½ tsp salt, adjust to taste",
         "¼ tsp hot chilli flakes (skip if you don't like spicy food)",
         "1 chia / flax egg (optional, see notes)*",
-        "30 g / ¼ cup any flour (I used wholemeal), the exact quantity may differ slightly"
+        "30 g / ¼ cup any flour , the exact quantity may differ slightly"
       ]
     },
     {
@@ -39485,7 +38655,7 @@
         "150 g / 1 cup raw sunflower seeds, soaked in boiling water for 30 minutes"
       ],
       "haveNames": [
-        "500 g / 1 lb new potatoes, boiled (I used Maris Piper)",
+        "500 g / 1 lb new potatoes, boiled",
         "10 asparagus spears + 1 tsp olive oil",
         "1 Gem lettuce",
         "½ large cucumber, sliced thinly",
@@ -39530,7 +38700,7 @@
         "65 g / ¾ cup breadcrumbs, divided",
         "1 sheet vegan puff pastry**",
         "120 ml / 1 cup balsamic vinegar",
-        "80 g / 2/3 cup sugar (I used raw cane)"
+        "80 g / 2/3 cup sugar"
       ]
     },
     {
@@ -39582,10 +38752,10 @@
         "½ bell pepper",
         "1 cob of corn OR ½ cup canned/defrosted corn kernels",
         "150 g / 5.3 oz green beans",
-        "15 ml / 3 tsp high smoke point oil (I use bran rice)",
+        "15 ml / 3 tsp high smoke point oil",
         "100 g / 3.5 oz rice vermicelli noodles",
         "60 g / scant ½ cup roasted peanuts (or cashews)",
-        "300 g / 10.5 firm tofu (I use smoked tofu but regular works well too), pressed",
+        "300 g / 10.5 firm tofu , pressed",
         "20 ml / 1½ tbsp soy sauce (or tamari if GF)",
         "10 ml / 2 tsp oil"
       ]
@@ -39916,13 +39086,13 @@
       ],
       "haveNames": [
         "2 tsp maple syrup",
-        "2 tsp oil (I used olive oil)",
+        "2 tsp oil",
         "¾ tsp smoked (sweet not spicy) paprika",
         "1 packed cup raw coconut flakes",
         "olive oil",
         "15 fresh sage leaves",
         "finely ground sea salt",
-        "600 g / 21 oz firm pumpkin (I used butternut pumpkin), cubed*",
+        "600 g / 21 oz firm pumpkin , cubed*",
         "1 tbsp olive oil",
         "3 garlic cloves",
         "120 ml / ½ cup plant milk (water or veggie stock)",
@@ -39932,7 +39102,7 @@
         "1/8 tsp ground nutmeg",
         "½ tsp salt, more to taste",
         "black pepper, to taste",
-        "320 g / 11 oz of your favourite pasta, cooked (I used bucatini)",
+        "320 g / 11 oz of your favourite pasta, cooked",
         "a handful of fried fresh sage leaves (optional)"
       ]
     },
@@ -40066,7 +39236,7 @@
         "2 tsp garam masala, divided",
         "¼ tsp ground turmeric",
         "¼ tsp ground black pepper",
-        "½ tsp chilli powder (I used Kashmiri chilli for colour), adjust to taste",
+        "½ tsp chilli powder , adjust to taste",
         "3 large garlic cloves, finely chopped",
         "3 tsp finely grated ginger",
         "5 dry or fresh curry leaves",
@@ -40112,10 +39282,10 @@
       "haveCount": 15,
       "needCount": 1,
       "needNames": [
-        "80 ml / 1/3 cup amaretto (I used Disaronno)*"
+        "80 ml / 1/3 cup amaretto *"
       ],
       "haveNames": [
-        "65 g / scant 1/3 cup coconut oil (I use this one) or vegan butter",
+        "65 g / scant 1/3 cup coconut oil or vegan butter",
         "220 g / 1 + 2/3 cup all purpose flour*",
         "2 level tsp ground ginger",
         "2 level tsp ground cinnamon",
@@ -40126,7 +39296,7 @@
         "65 g / 1/3 cup dark muscovado sugar",
         "30 ml / 2 tbsp aquafaba or lukewarm plant milk",
         "75 ml / ¼ cup + 1 tbsp maple syrup or molasses*",
-        "300 g / 10.5 oz 70% dark vegan chocolate (I used Green & Blacks cooking chocolate)",
+        "300 g / 10.5 oz 70% dark vegan chocolate",
         "120 ml / ½ cup coconut cream (solid part of full fat coconut milk* only)",
         "120 ml / ½ cup tbsp almond milk",
         "80 ml / 1/3 cup maple syrup"
@@ -40228,7 +39398,7 @@
       "haveNames": [
         "1 1/4 cup pumpkin puree (not pumpkin pie mix)",
         "1/4 cup maple syrup",
-        "1/2 cup non dairy milk (i use almond milk)",
+        "1/2 cup non dairy milk",
         "3 tbsp oil",
         "1 tsp lime  juice (or lemon)",
         "2 cups flour",
@@ -40271,6 +39441,33 @@
       ]
     },
     {
+      "id": 5913,
+      "title": "Oatmeal Chocolate Chip Gluten Free Cookies (with a secret ingredient)",
+      "pct": 94,
+      "haveCount": 15,
+      "needCount": 1,
+      "needNames": [
+        "1/2 tsp guar gum"
+      ],
+      "haveNames": [
+        "2/3 cup old fashioned oats ground.",
+        "1/3 cup oats",
+        "1/2 tsp baking powder",
+        "1/2 cup puffed rice",
+        "1/2 cup vegan chocolate chips",
+        "2 tablespoons virgin coconut oil",
+        "1 tablespoon organic canola oil",
+        "2 tablespoons agave",
+        "3 Tablespoons raw sugar",
+        "1/8 teaspoon salt",
+        "1 tablespoon flaxmeal",
+        "4 tablespoons water",
+        "1 teaspoon lemon juice",
+        "1/2 teaspoon cinnamon",
+        "1/4 teaspoon pumpkin pie spice or other spices of choice"
+      ]
+    },
+    {
       "id": 5252,
       "title": "Pecan pie cups (vegan)",
       "pct": 94,
@@ -40286,7 +39483,7 @@
         "45 g / 3 tbsp vegan butter or coconut oil",
         "120 ml / ½ cup maple syrup or other liquid sweetener",
         "90 g / ½ packed cup light (or dark) muscovado sugar",
-        "80 ml / 1/3 cup vegan single cream* (I used Oatly) or canned coconut milk",
+        "80 ml / 1/3 cup vegan single cream* or canned coconut milk",
         "50 g / ¼ cup vegan butter or coconut oil",
         "¼ tsp salt, adjust to taste",
         "1 tsp vanilla extract",
@@ -40294,7 +39491,7 @@
         "zest of 1 orange, adjust to taste",
         "100 g / 1 cup roasted pecans, chopped + 12 more for decoration",
         "85 g / 3 oz 70% dark vegan chocolate",
-        "80 ml / 1/3 cup vegan single cream* (I used Oatly) or canned coconut milk"
+        "80 ml / 1/3 cup vegan single cream* or canned coconut milk"
       ]
     },
     {
@@ -40484,13 +39681,13 @@
         "1/4 tsp salt",
         "2 tsp flaxmeal",
         "3 Tbsp almond milk",
-        "3 tbsp loaded almond butter (I used Justin's classic almond butter or use other nut butter or seed butter)",
+        "3 tbsp loaded almond butter",
         "3 Tbsp Oil (organic canola or coconut)",
         "1 Tbsp maple syrup",
         "1 Tbsp light molasses (or 1 Tbsp maple syrup if you don't like molasses)",
         "1 tsp vanilla extract",
         "1/2 cup ground raw sugar or brown sugar (any other fine vegan sugar (1/3 cup for less sweet, brown sugar makes the cookies more chewy))",
-        "1/2 cup or more dark drinking chocolate chunks (I use Theo's, or Enjoy life chunks or other vegan semi sweet chocolate chunks)",
+        "1/2 cup or more dark drinking chocolate chunks",
         "2-3 Tbsp mini chocolate chips or regular size chocolate chips"
       ]
     },
@@ -40648,7 +39845,7 @@
       "haveNames": [
         "1 tbsp psyllium husks (for GF version only)",
         "100 g / 1 cup almond flour",
-        "125 g / 1 cup GF flour mix (I used this one) or regular all purpose flour",
+        "125 g / 1 cup GF flour mix or regular all purpose flour",
         "50 g / ¼ cup caster sugar or coconut sugar",
         "½ tsp fine salt",
         "65-75 g / 5-6 tbsp odourless coconut oil or vegan butter, melted",
@@ -40701,7 +39898,7 @@
       ],
       "haveNames": [
         "1/2 tsp salt",
-        "3/4 tsp kala namak ((Indian sulphur salt))",
+        "3/4 tsp kala namak",
         "1/4 tsp each garlic powder, onion powder",
         "1/8 tsp black pepper",
         "1/4 tsp turmeric (for color. too much will add flavor)",
@@ -40740,7 +39937,7 @@
         "2 tablespoons almond butter",
         "1/2 cup non-dairy milk such as almond milk or oat milk (or more, if needed)",
         "1/8 teaspoon salt",
-        "1 cup pecans halves and chopped (I use and 1/2 cup of halves and 1/2 cup chopped)",
+        "1 cup pecans halves and chopped",
         "1 tablespoon maple syrup",
         "2 teaspoons coconut sugar (or brown sugar )",
         "1/8 teaspoon cinnamon"
@@ -40770,7 +39967,7 @@
         "1½ cup (loosely packed) raw coconut flakes",
         "2 tsp olive oil",
         "1 tbsp maple syrup",
-        "½ tsp liquid smoke (I use hickory flavour)",
+        "½ tsp liquid smoke",
         "3 tbsp soy sauce"
       ]
     },
@@ -40788,7 +39985,7 @@
         "120 ml / ½ cup almond (or other thin plant) milk",
         "2 tsp coconut oil or vegan butter",
         "2 tbsp coconut cream",
-        "70 g / 1/3 cup sugar (I used demerara)             ½ tsp ground cinnamon",
+        "70 g / 1/3 cup sugar ½ tsp ground cinnamon",
         "1 tsp vanilla paste or extract",
         "30 g / ¼ cup chopped walnuts",
         "20 g / ¼ cup chopped candied orange peel",
@@ -40816,7 +40013,7 @@
         "1 tbsp raw pistachios (about 6-7)",
         "1 cup water (Use scant cup)",
         "3 -4   strands of saffron",
-        "5-6 tbsp  sugar ( I used half cane and half powdered sugar so that it doesn't add color to the sauce.)",
+        "5-6 tbsp sugar",
         "1/8 tsp salt",
         "1  cardamom pod,seeds",
         "1/2 cup raw cashews (Use a heaping cup )",
@@ -40824,7 +40021,7 @@
         "3-4  saffron strands",
         "1/2 cup almond flour",
         "1 big pinch of salt",
-        "3 tbsp vegan cream cheese (I use kite hill plain )",
+        "3 tbsp vegan cream cheese",
         "2 tsp vegan butter (or use oil)",
         "1/4 cup powdered sugar",
         "1 tbsp almond slivers",
@@ -40843,7 +40040,7 @@
       "haveNames": [
         "200 g / 7 oz (heaped 1½) cups wholemeal spelt flour*",
         "1 tsp flaky salt",
-        "100 g / 3.5 oz (½ cup) chilled vegan butter (I used Naturli) or odourless coconut oil",
+        "100 g / 3.5 oz (½ cup) chilled vegan butter or odourless coconut oil",
         "2 tsp apple cider vinegar (or other acid)",
         "ice-cold water",
         "500 g / 17.5 oz ripe tomatoes",
@@ -40960,7 +40157,7 @@
       "haveCount": 19,
       "needCount": 1,
       "needNames": [
-        "2 tbsp oil suitable for stir-frying (I used peanut oil)"
+        "2 tbsp oil suitable for stir-frying"
       ],
       "haveNames": [
         "2 tbsp neutral vegetable oil",
@@ -40968,8 +40165,8 @@
         "2 large garlic cloves, diced",
         "1 small red onion, diced finely",
         "2-3 tsp finely grated ginger",
-        "2 tsp chilli paste (I used sambal oelek) or 1 red chilli, sliced",
-        "2 tsp sugar (I used brown cane sugar)",
+        "2 tsp chilli paste or 1 red chilli, sliced",
+        "2 tsp sugar",
         "1½ tbsp all purpose soy sauce or tamari (if gluten-free)",
         "1 red bell pepper, diced",
         "¼ cup / 4 tbsp tomato sauce or passata",
@@ -40977,7 +40174,7 @@
         "200 g / 7 oz 100% buckwheat soba noodles",
         "1 small red onion, sliced",
         "a handful of broccoli florets",
-        "a large handful of your favourite green beans (I used snake beans)",
+        "a large handful of your favourite green beans",
         "1 small zucchini, sliced",
         "1 red bell pepper, chopped",
         "1 spring onion, sliced thinly",
@@ -41005,12 +40202,12 @@
         "1 tbsp maple syrup or sugar",
         "1 tbsp rice vinegar",
         "½ tsp toasted sesame oil",
-        "¼ tsp liquid smoke (I used hickory flavour)",
+        "¼ tsp liquid smoke",
         "1 tbsp neutral vegetable oil",
         "½ cup brown rice, cooked",
-        "½ head broccoli (I used regular and purple sprouting variety), divided into florets",
+        "½ head broccoli , divided into florets",
         "½ English cucumber",
-        "½ cup sprouts (I used mung bean)",
+        "½ cup sprouts",
         "small wedge of red cabbage, shredded thinly",
         "½ small avocado, sliced",
         "2 tbsp roasted and unsalted peanuts, chopped"
@@ -41380,41 +40577,11 @@
         "4 burger buns",
         "quick-pickled red onion",
         "a handful of rocket / arugula",
-        "a handful of lettuce (I used lollo rosso)",
+        "a handful of lettuce",
         "a handful of fresh coriander",
         "1 small avocado, sliced",
         "1 small cucumber, sliced",
         "ketchup, vegan mayo or / and Sriracha"
-      ]
-    },
-    {
-      "id": 2584,
-      "title": "Vegan Traybake Spring Veggies",
-      "pct": 95,
-      "haveCount": 18,
-      "needCount": 1,
-      "needNames": [
-        "petit pois"
-      ],
-      "haveNames": [
-        "black pepper",
-        "capers",
-        "capers, chopped",
-        "cashews",
-        "extra thick asparagus spears*",
-        "garlic clove, minced",
-        "green peas",
-        "heaped ½ tsp fine salt",
-        "italian herbs",
-        "medium-large basil leaves",
-        "nutritional yeast",
-        "nutritional yeast salt and pepper",
-        "olive oil",
-        "potatoes*",
-        "shiro / white miso paste",
-        "tenderstem broccoli*",
-        "tofu, pressed",
-        "zest of 1 lemon"
       ]
     },
     {
@@ -41533,13 +40700,13 @@
         "200 g / 7 oz firm tofu, pressed",
         "20 ml / 4 tsp soy sauce (or tamari)",
         "5 g / 2 tsp cornflour/cornstarch",
-        "10 ml / 2 tsp frying oil (I use rice bran oil)",
+        "10 ml / 2 tsp frying oil",
         "40 g / heaped ¼ cup raw cashews",
         "200 g / 7 oz zucchini / courgette",
         "100 g / 3.5 oz fine green beans",
         "4 spring onions / scallions",
         "120 g / ¾ cup corn kernels, fresh or defrosted*",
-        "10 ml / 2 tsp frying oil (I use rice bran oil)",
+        "10 ml / 2 tsp frying oil",
         "cooked rice, to serve"
       ]
     },
@@ -41711,7 +40878,7 @@
         "chipotle sauce"
       ],
       "haveNames": [
-        "2 tsp oil (I used olive oil)",
+        "2 tsp oil",
         "2 tbsp pumpkin seeds",
         "2 tbsp sunflower seeds",
         "1 tbsp hemp seeds",
@@ -41919,7 +41086,7 @@
         "85 g / 2/3 cup AP flour (or GF flour mix)",
         "1 tsp salt, adjust to taste",
         "¼ tsp pepper, adjust to taste",
-        "freshly ground nutmeg (I used 1/3 whole nutmeg), to taste"
+        "freshly ground nutmeg , to taste"
       ]
     },
     {
@@ -41938,7 +41105,7 @@
         "2 large garlic cloves, diced finely",
         "5 cm / 2 \" piece of ginger, peeled and diced finely",
         "1 tsp black mustard seeds",
-        "24 curry leaves, fresh or dried (I used dried)",
+        "24 curry leaves, fresh or dried",
         "½ tsp fenugreek seeds",
         "½ tsp turmeric",
         "1½-2 tsp hot chilli powder",
@@ -41965,7 +41132,7 @@
         "15 g / ½ oz dried porcini, soaked overnight (ideally)"
       ],
       "haveNames": [
-        "250 g / 8¾ oz mushrooms (I used cremini / chestnut mushrooms)",
+        "250 g / 8¾ oz mushrooms",
         "30 ml / 2 tbsp olive oil",
         "2 banana shallots (or 1 medium onion), very finely diced",
         "6 garlic cloves, finely diced",
@@ -42198,7 +41365,7 @@
         "½ tsp ground coriander seeds",
         "¼ tsp ground cloves",
         "1 ripe tomato, peeled and diced",
-        "1 sour apple (I used Granny Smith), peeled and diced",
+        "1 sour apple , peeled and diced",
         "2 tbsp sugarcane molasses",
         "1 tbsp maple syrup",
         "¾-1 tsp liquid smoke*",
@@ -42760,14 +41927,14 @@
         "sweetened soy milk, to glaze"
       ],
       "haveNames": [
-        "60 ml / ¼ cup thick vegan yoghurt (I used coconut)",
+        "60 ml / ¼ cup thick vegan yoghurt",
         "1½ tsp apple cider vinegar (or other acid)",
         "150 g / slightly heaped 1¼ cups spelt flour*",
         "½ tsp salt",
         "75 g / 1/3 cup solid (not melted!) refined coconut oil, chopped up into small pieces",
         "500 g / 18 oz peeled and cored pumpkin or squash**",
         "1 tbsp olive oil",
-        "100 g / 3.5 oz silken tofu (I used Clearspring)",
+        "100 g / 3.5 oz silken tofu",
         "2 tbsp nutritional yeast",
         "½-1 raw garlic clove, finely grated",
         "4 tsp lemon juice",
@@ -42992,7 +42159,7 @@
         "1 lb / 450 g (about 3 small) sweet potatoes, cubed small",
         "juice of ½-1 lime, adjust to taste",
         "½ tsp salt, adjust to taste",
-        "140 g / 1 cup rice flour (I use brown rice flour)",
+        "140 g / 1 cup rice flour",
         "1 tbsp cornflour / cornstarch",
         "½ tsp salt",
         "a pinch of ground turmeric (for colour, optional)",
@@ -43182,7 +42349,7 @@
         "1/3 cup almond milk",
         "1/3 cup water",
         "1 tsp lemon juice",
-        "1/4 cup non dairy yogurt (I used So Delicious Vanilla coconut milk yogurt or vegan cream cheese)",
+        "1/4 cup non dairy yogurt",
         "1/3 cup coconut cream (the thick cream that settles on the top of the can after refrigerating for a few hours or cashew cream)",
         "1 Tbsp coconut oil (softened)",
         "1/4 cup ground raw sugar  (or other sweetener of choice)",
@@ -43261,7 +42428,7 @@
       "haveCount": 20,
       "needCount": 1,
       "needNames": [
-        "1 tsp date nectar (I use homemade) or sugar"
+        "1 tsp date nectar or sugar"
       ],
       "haveNames": [
         "8 medium eggplants (approx. 2.5 kg / 5.5 lb)",
@@ -43282,7 +42449,7 @@
         "1 tbsp nutritional yeast",
         "1 tbsp lemon juice",
         "¼ tsp salt, adjust to taste",
-        "pepper (I used white pepper), adjust to taste",
+        "pepper , adjust to taste",
         "1½ tsp tapioca starch or 1 tsp cornflour / cornstarch"
       ]
     },
@@ -43323,7 +42490,7 @@
       "haveCount": 20,
       "needCount": 1,
       "needNames": [
-        "oil for shallow frying (I used rice bran oil)"
+        "oil for shallow frying"
       ],
       "haveNames": [
         "400 g / 14 oz firm (cotton) tofu, pressed*",
@@ -43338,7 +42505,7 @@
         "3 tsp ginger, finely grated",
         "2 medium carrots, peeled and sliced",
         "1 small Granny Smith apple, peeled and diced",
-        "4 tsp curry powder (I used hot madras curry powder)",
+        "4 tsp curry powder",
         "1 tsp garam masala",
         "1 heaped tbsp white miso paste (GF miso for gluten-intolerance)",
         "2 tsp rice vinegar",
@@ -43679,7 +42846,7 @@
         "1 tbsp maple syrup",
         "1 tbsp rice vinegar or lime juice",
         "2 tsp toasted sesame oil",
-        "1-2 tsp hot chilli paste (I used Indonesian sambal oelek), adjust to taste"
+        "1-2 tsp hot chilli paste , adjust to taste"
       ]
     },
     {
@@ -44274,19 +43441,19 @@
         "1 hot red chilli, sliced (deseeded for milder version)",
         "salt",
         "2 tsp finely grated ginger",
-        "50 g / ½ cup desiccated coconut (I used a mixture of flakes and desiccated)",
+        "50 g / ½ cup desiccated coconut",
         "1 tsp garam masala",
         "lime juice",
         "a large handful of fresh coriander, finely chopped",
         "200 g / 7 oz firm tofu, pressed",
-        "2 tbsp ground flax (I used golden flax seeds) or chia seeds",
+        "2 tbsp ground flax or chia seeds",
         "2 tsp maple syrup or sugar",
         "1 tsp finely grated ginger",
         "1 tsp salt",
         "1 tsp garam masala",
         "2 tbsp rice flour, any flour",
         "approx. 75 g / ¾ cup desiccated coconut",
-        "oil (I use rice bran), for greasing the tray"
+        "oil , for greasing the tray"
       ]
     },
     {
@@ -44621,7 +43788,7 @@
       "haveNames": [
         "150 g of all purpose flour, sifted",
         "¼ tsp salt",
-        "1 tbsp / 15 ml of oil (I used olive oil)",
+        "1 tbsp / 15 ml of oil",
         "about 75 ml / 5 tbsp of boiling water",
         "2 tsp of grated ginger",
         "2 garlic cloves, chopped finely",
@@ -44636,7 +43803,7 @@
         "about 1-2 tbsp / 15-30 ml of lemon juice",
         "1 cup of fresh coriander",
         "about ½ cup / 120 ml full fat coconut milk",
-        "lime juice to taste (I used ½ lime)",
+        "lime juice to taste",
         "2 tsp grated ginger",
         "½ tsp cumin",
         "½ tsp garam masala",
@@ -44779,9 +43946,9 @@
         "¼ cup flour (I tested tapioca starch and rice flour)",
         "1 sheet vegan puff pastry",
         "vegan egg wash: 2 tsp plant milk, 1 tsp olive oil + 1 tsp maple syrup or sugar",
-        "20 g / 0.7 oz dry mushrooms (I used a mixture of porcini and shiitake), well rinsed",
+        "20 g / 0.7 oz dry mushrooms , well rinsed",
         "2 tbsp olive oil",
-        "2 large shallots (I used scallion type), roughly diced",
+        "2 large shallots , roughly diced",
         "6 garlic cloves, unpeeled and crushed",
         "2 small carrots, scrubbed clean and roughly diced",
         "2 celery sticks, roughly diced",
@@ -44827,7 +43994,7 @@
         "30 baby plum tomatoes*",
         "1 red Romano pepper",
         "a small handful of fresh parsley",
-        "¼-½ red onion (I used ¼ for milder flavour)",
+        "¼-½ red onion",
         "1 tbsp olive oil",
         "1 tbsp pomegranate molasses",
         "2 garlic cloves, finely grated",
