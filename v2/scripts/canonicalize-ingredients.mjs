@@ -72,10 +72,15 @@ function detectCanned(rawIng) {
 //   "X cans of", "X jars of" multipliers
 function preClean(rawIng) {
   let s = rawIng.trim(); // strip leading/trailing whitespace so ^ anchors work
-  // Strip ", or X" alternatives ("...artichoke hearts, thawed, or one 14-oz can, drained")
-  // anything after ", or" is almost always an alternative form/quantity
+  // Strip " or X" alternatives, with or without leading comma. Anything after
+  // "or" + a quantity is almost always an alternative form/quantity:
+  //   "...thawed, or one 14-oz can, drained"          (with comma)
+  //   "...cooked black lentils or one 15-oz can..."   (no comma — same intent)
   let prevOr = '';
-  while (s !== prevOr) { prevOr = s; s = s.replace(/\s*,\s*or\s+(?:\d|one|two|three|a\b|an\b).*$/i, ''); }
+  while (s !== prevOr) {
+    prevOr = s;
+    s = s.replace(/\s*,?\s+or\s+(?:\d|½|¼|¾|⅓|⅔|one|two|three|four|five|a\b|an\b)[\s\S]*$/i, '');
+  }
   // Strip emphatic ALL-CAPS or punctuation tails ("WELL!", "ENJOY!")
   s = s.replace(/\s+[A-Z]{2,}!*\s*$/, '');
   s = s.replace(/!+$/g, '');
@@ -84,7 +89,7 @@ function preClean(rawIng) {
   // Strip leading spelled-out small numbers
   s = s.replace(/^(?:one|two|three|four|five|six|seven|eight|nine|ten|a)\s+(?=\d|[a-z])/i, '');
   // "X cans/tins/jars/packages/blocks of " → strip
-  s = s.replace(/^[\d½¼¾⅓⅔⅛⅜⅝⅞.,/\-–\s]*(?:cans?|tins?|jars?|packages?|packets?|blocks?|bunches?|heads?|cloves?|sprigs?|sheets?|pieces?|slices?|stalks?|ears?)\s+(?:of\s+)?/i, '');
+  s = s.replace(/^[\d½¼¾⅓⅔⅛⅜⅝⅞.,/\-–\s]*(?:cans?|tins?|jars?|packages?|packets?|pouches?|sachets?|sticks?|blocks?|bunches?|heads?|cloves?|sprigs?|sheets?|pieces?|slices?|stalks?|ears?|loaves?|bottles?|tubes?|bars?)\s+(?:of\s+)?/i, '');
   // Lone "of " left over after measurements stripped
   s = s.replace(/^of\s+/i, '');
   // "such as X, Y, Z" — recipe author's example list, not the ingredient

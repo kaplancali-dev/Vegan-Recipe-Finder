@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-05-07T20:14:27.970Z",
+  "generatedAt": "2026-05-07T22:24:24.116Z",
   "pantrySize": 317,
   "total": 4193,
-  "at100": 2499,
-  "at80": 4020,
+  "at100": 2503,
+  "at80": 4022,
   "failPatterns": [
     {
       "normalized": "apple juice",
@@ -25,13 +25,13 @@
       "normalized": "ginger garlic paste",
       "count": 8,
       "examples": [
-        "2 tablespoons ginger garlic paste (or use 3 cloves of garlic, minced and 1/2” of ginger, minced)",
         "1 tablespoon ginger-garlic paste (or minced ginger and garlic (1 1/2 teaspoons each))",
+        "2 tablespoons ginger garlic paste (or use 3 cloves of garlic, minced and 1/2” of ginger, minced)",
         "1 tablespoon ginger-garlic paste"
       ],
       "sampleRecipeIds": [
-        6108,
         6055,
+        6108,
         6206,
         6177,
         5076
@@ -370,6 +370,22 @@
       ]
     },
     {
+      "normalized": "adzuki beans",
+      "count": 5,
+      "examples": [
+        "1 15-oz. can no-salt-added adzuki beans, rinsed and drained (1½ cups)",
+        "1 15-oz. can adzuki beans, rinsed and drained (1½ cups)",
+        "2 cups cooked adzuki beans, or one 15-ounce can, drained and rinsed"
+      ],
+      "sampleRecipeIds": [
+        7201,
+        7070,
+        6422,
+        7793,
+        7326
+      ]
+    },
+    {
       "normalized": "mirepoix",
       "count": 5,
       "examples": [
@@ -672,6 +688,21 @@
       ]
     },
     {
+      "normalized": "club soda",
+      "count": 4,
+      "examples": [
+        "1/2 cup club soda or a neutral flavored carbonated beverage",
+        "1/4 cup club soda",
+        "1/4 cup plus 1-2 tablespoons of club soda"
+      ],
+      "sampleRecipeIds": [
+        5942,
+        5920,
+        6018,
+        5930
+      ]
+    },
+    {
       "normalized": "coarse mustard",
       "count": 4,
       "examples": [
@@ -772,20 +803,6 @@
         5548,
         5157,
         5358
-      ]
-    },
-    {
-      "normalized": "adzuki beans",
-      "count": 4,
-      "examples": [
-        "1 15-oz. can no-salt-added adzuki beans, rinsed and drained (1½ cups)",
-        "1 15-oz. can adzuki beans, rinsed and drained (1½ cups)"
-      ],
-      "sampleRecipeIds": [
-        7201,
-        7070,
-        7793,
-        7326
       ]
     },
     {
@@ -991,18 +1008,17 @@
       ]
     },
     {
-      "normalized": "urad dal",
+      "normalized": "agar flakes",
       "count": 4,
       "examples": [
-        "urad dal )",
-        "1/2 tsp urad dal (split black gram or use mung dal (petite yellow lentils))",
-        "urad dal"
+        "1½ tsp agar flakes OR ½ tsp agar powder",
+        "4 teaspoons agar flakes",
+        "3 tsp agar flakes (approx. 1 tsp agar powder)"
       ],
       "sampleRecipeIds": [
-        5079,
-        5873,
-        2788,
-        5073
+        5712,
+        7245,
+        5630
       ]
     },
     {
@@ -1033,6 +1049,20 @@
         6072,
         5981,
         5922
+      ]
+    },
+    {
+      "normalized": "kasoori methi",
+      "count": 4,
+      "examples": [
+        "kasoori methi",
+        "kasoori methi )"
+      ],
+      "sampleRecipeIds": [
+        2788,
+        5068,
+        5073,
+        2099
       ]
     },
     {
@@ -1076,20 +1106,6 @@
         4620,
         4637,
         4647
-      ]
-    },
-    {
-      "normalized": "kasoori methi",
-      "count": 4,
-      "examples": [
-        "kasoori methi",
-        "kasoori methi )"
-      ],
-      "sampleRecipeIds": [
-        5068,
-        2788,
-        5073,
-        2099
       ]
     },
     {
@@ -1216,6 +1232,20 @@
       ]
     },
     {
+      "normalized": "smoked firm cotton tofu",
+      "count": 3,
+      "examples": [
+        "225 g / 8 oz smoked firm cotton tofu* OR 175 g / 1 packed cup cooked brown rice",
+        "lb smoked firm cotton tofu*",
+        "225 g / 8 oz smoked firm cotton tofu OR 175 g / 1 packed cup cooked brown rice"
+      ],
+      "sampleRecipeIds": [
+        5383,
+        4834,
+        5476
+      ]
+    },
+    {
       "normalized": "garlic + unpeeled",
       "count": 3,
       "examples": [
@@ -1255,6 +1285,19 @@
         5464,
         5612,
         5468
+      ]
+    },
+    {
+      "normalized": "pinch",
+      "count": 3,
+      "examples": [
+        "pinch or two crushed red pepper flakes (or more/less to taste, see note)",
+        "pinch"
+      ],
+      "sampleRecipeIds": [
+        6367,
+        2716,
+        348
       ]
     },
     {
@@ -1687,20 +1730,6 @@
       ]
     },
     {
-      "normalized": "paddles nopales",
-      "count": 3,
-      "examples": [
-        "3 paddles nopales, cleaned and cut into ½-inch squares (3 cups)",
-        "2 paddles nopales, cleaned (see tip in intro)",
-        "4 paddles nopales, cleaned"
-      ],
-      "sampleRecipeIds": [
-        7329,
-        7120,
-        7174
-      ]
-    },
-    {
       "normalized": "no cook vegan lasagne",
       "count": 3,
       "examples": [
@@ -1764,20 +1793,6 @@
         7159,
         7606,
         6521
-      ]
-    },
-    {
-      "normalized": "club soda",
-      "count": 3,
-      "examples": [
-        "1/4 cup club soda",
-        "1/4 cup plus 1-2 tablespoons of club soda",
-        "1/4 cup club soda (or use more milk)"
-      ],
-      "sampleRecipeIds": [
-        5920,
-        6018,
-        5930
       ]
     },
     {
@@ -1889,6 +1904,20 @@
         4925,
         6295,
         6419
+      ]
+    },
+    {
+      "normalized": "paddles nopales",
+      "count": 3,
+      "examples": [
+        "2 paddles nopales, cleaned (see tip in intro)",
+        "3 paddles nopales, cleaned and cut into ½-inch squares (3 cups)",
+        "4 paddles nopales, cleaned"
+      ],
+      "sampleRecipeIds": [
+        7120,
+        7329,
+        7174
       ]
     },
     {
@@ -2195,20 +2224,6 @@
       ]
     },
     {
-      "normalized": "brewed coffee",
-      "count": 3,
-      "examples": [
-        "1 tbsp brewed coffee (or 1/4 tsp instant coffee)",
-        "60 ml / ¼ cup brewed coffee",
-        "3/4 cup brewed coffee  (or 1.5 to 2 tsp coffee in 3/4 cup water)"
-      ],
-      "sampleRecipeIds": [
-        6219,
-        5595,
-        6059
-      ]
-    },
-    {
       "normalized": "espresso",
       "count": 3,
       "examples": [
@@ -2233,6 +2248,20 @@
         7153,
         7236,
         7088
+      ]
+    },
+    {
+      "normalized": "brewed coffee",
+      "count": 3,
+      "examples": [
+        "1 tbsp brewed coffee (or 1/4 tsp instant coffee)",
+        "60 ml / ¼ cup brewed coffee",
+        "3/4 cup brewed coffee  (or 1.5 to 2 tsp coffee in 3/4 cup water)"
+      ],
+      "sampleRecipeIds": [
+        6219,
+        5595,
+        6059
       ]
     },
     {
@@ -2336,18 +2365,6 @@
       ]
     },
     {
-      "normalized": "moong dal",
-      "count": 2,
-      "examples": [
-        "1 cup dried moong dal,  (split and skinned mung beans or petite yellow lentils)",
-        "1 cup moong dal (split Mung beans)"
-      ],
-      "sampleRecipeIds": [
-        5947,
-        6139
-      ]
-    },
-    {
       "normalized": "oil for stir frying",
       "count": 2,
       "examples": [
@@ -2390,6 +2407,18 @@
       "sampleRecipeIds": [
         2508,
         2501
+      ]
+    },
+    {
+      "normalized": "broad beans",
+      "count": 2,
+      "examples": [
+        "baby broad beans",
+        "½ cup cooked broad beans"
+      ],
+      "sampleRecipeIds": [
+        4467,
+        5636
       ]
     },
     {
@@ -2604,18 +2633,7 @@
       ]
     },
     {
-      "normalized": "pinch",
-      "count": 2,
-      "examples": [
-        "pinch"
-      ],
-      "sampleRecipeIds": [
-        2716,
-        348
-      ]
-    },
-    {
-      "normalized": "cooked black rice",
+      "normalized": "black rice",
       "count": 2,
       "examples": [
         "3 cups cooked black rice",
@@ -2671,17 +2689,6 @@
       "sampleRecipeIds": [
         2636,
         2726
-      ]
-    },
-    {
-      "normalized": "sesame or poppy seeds + to decorate",
-      "count": 2,
-      "examples": [
-        "1 tbsp sesame or poppy seeds, to decorate"
-      ],
-      "sampleRecipeIds": [
-        5476,
-        5095
       ]
     },
     {
@@ -2937,22 +2944,6 @@
       "haveNames": [
         "pumpkin puree )",
         "sugar"
-      ]
-    },
-    {
-      "id": 5486,
-      "title": "Easy vegan ricotta cheese - 2 ways",
-      "pct": 50,
-      "haveCount": 3,
-      "needCount": 2,
-      "needNames": [
-        "2 tbsp lemon juice OR 2 tbsp plant milk and 1 vegan probiotic capsule",
-        "approx. ¼-½ tsp salt, adjust to taste and application (i.e. sweet vs savoury)"
-      ],
-      "haveNames": [
-        "135 g / 1 cup raw cashews",
-        "90 ml / ¼ cup + 2 tbsp unsweetened plant milk (I like to use almond milk, oat milk is also great)",
-        "1 tbsp nutritional yeast (optional, but recommended)"
       ]
     },
     {
@@ -3417,26 +3408,6 @@
         "any thin plant milk or full fat coconut milk thinned with 50% water",
         "seeds from ½ pomegranate (optional)",
         "maple or agave syrup, to serve (optional)"
-      ]
-    },
-    {
-      "id": 6386,
-      "title": "Burrito Bowl",
-      "pct": 67,
-      "haveCount": 6,
-      "needCount": 3,
-      "needNames": [
-        "  Baked tortilla chips ",
-        "  2-4 cups cooked grains ",
-        "  2-4 cups cooked beans "
-      ],
-      "haveNames": [
-        "  2-4 cups chopped romaine lettuce or steamed kale",
-        "  2-4 chopped tomatoes",
-        "  1-2 chopped green onions",
-        "  1-2 cups corn kernels (see notes)",
-        "  1 avocado, chopped",
-        "  Fresh salsa"
       ]
     },
     {
@@ -4885,6 +4856,22 @@
       ]
     },
     {
+      "id": 5486,
+      "title": "Easy vegan ricotta cheese - 2 ways",
+      "pct": 75,
+      "haveCount": 4,
+      "needCount": 1,
+      "needNames": [
+        "approx. ¼-½ tsp salt, adjust to taste and application (i.e. sweet vs savoury)"
+      ],
+      "haveNames": [
+        "135 g / 1 cup raw cashews",
+        "90 ml / ¼ cup + 2 tbsp unsweetened plant milk (I like to use almond milk, oat milk is also great)",
+        "2 tbsp lemon juice OR 2 tbsp plant milk and 1 vegan probiotic capsule",
+        "1 tbsp nutritional yeast (optional, but recommended)"
+      ]
+    },
+    {
       "id": 5364,
       "title": "Edamame potstickers with wasabi",
       "pct": 75,
@@ -6135,31 +6122,6 @@
         "20 ml / 4 tsp Dijon mustard, adjust to taste",
         "15 ml / 1 tbsp soy sauce (or tamari if GF)",
         "chopped fresh coriander (or parsley) to garnish"
-      ]
-    },
-    {
-      "id": 5073,
-      "title": "Dhaba Dal",
-      "pct": 79,
-      "haveCount": 11,
-      "needCount": 3,
-      "needNames": [
-        "urad dal",
-        "rajma )",
-        "kasoori methi )"
-      ],
-      "haveNames": [
-        "chana dal",
-        "turmeric )",
-        "avocado oil or any neutral oil",
-        "onion )",
-        "tomatoes )",
-        "cumin",
-        "coriander",
-        "cayenne .)",
-        "garam masala",
-        "vegan butter",
-        "salt"
       ]
     },
     {
@@ -7885,6 +7847,33 @@
       ]
     },
     {
+      "id": 5630,
+      "title": "Vegan matcha strawberry tart",
+      "pct": 81,
+      "haveCount": 13,
+      "needCount": 3,
+      "needNames": [
+        "3 tsp agar flakes (approx. 1 tsp agar powder)",
+        "2¼ tsp agar flakes OR ¾ tsp agar powder",
+        "edible flowers"
+      ],
+      "haveNames": [
+        "150 g / 1 cup dried dates, halved and pitted",
+        "140 g / 1 cup almonds*",
+        "90 g / 1 cup rolled oats (GF certified if required)",
+        "3 tbsp cacao powder",
+        "¼ tsp fine sea salt",
+        "1 tbsp coconut oil, melted",
+        "1½ cups pureed strawberries (about 350-400 g / 12-14 oz fresh strawberries)",
+        "110 g / ¾ cup raw cashews, soaked overnight",
+        "360 ml / 1½ cups coconut cream (separated from full-fat coconut milk)",
+        "3 tsp matcha powder",
+        "4-5 tbsp maple syrup, adjust to taste",
+        "coconut shavings",
+        "fresh strawberries"
+      ]
+    },
+    {
       "id": 5628,
       "title": "Vegan tiramisu jars",
       "pct": 81,
@@ -8440,28 +8429,6 @@
       ]
     },
     {
-      "id": 6025,
-      "title": "Pumpkin spice Frappuccino Vegan Recipe",
-      "pct": 82,
-      "haveCount": 9,
-      "needCount": 2,
-      "needNames": [
-        "a generous pinch of nutmeg and allspice",
-        "1 tsp instant coffee or a shot of espresso"
-      ],
-      "haveNames": [
-        "1/4 tsp ground cinnamon",
-        "1/4 tsp ground ginger",
-        "1/8 tsp ground cloves",
-        "1/4 to 1/2 tsp vanilla extract",
-        "1 cup almond milk",
-        "1 cup almond milk ice cubes (frozen almond milk or 1/2 cup vegan vanilla ice cream)",
-        "1/2 cup ice cubes",
-        "sweetener to taste (coconut sugar, stevia or 4 to 5 soaked dates)",
-        "Variation: add a Tbsp of pumpkin puree."
-      ]
-    },
-    {
       "id": 5733,
       "title": "Quick sesame and ginger noodles",
       "pct": 82,
@@ -8504,6 +8471,34 @@
         "15-30 ml / 1-2 tbsp lemon juice (I like 2 tbsp)",
         "1 tsp vanilla extract",
         "freshly grated nutmeg (optional)"
+      ]
+    },
+    {
+      "id": 5272,
+      "title": "Vegan gluten-free ravioli",
+      "pct": 82,
+      "haveCount": 14,
+      "needCount": 3,
+      "needNames": [
+        "½ small leek, white and light green part only, sliced",
+        "1-2 tbsp breadcrumbs or ground almonds, to thicken (if needed)",
+        "a dollop of vegan pesto (I like wild garlic or basil) or a drizzle of extra virgin olive oil"
+      ],
+      "haveNames": [
+        "130 g / 1 cup frozen petit pois or green peas",
+        "10 ml / 2 tsp olive oil",
+        "1 garlic clove, diced finely",
+        "a few fresh mint (or basil) leaves",
+        "zest of ½ lemon + 15-30 ml / 1-2 tbsp lemon juice",
+        "salt and pepper, to taste",
+        "1 tsp psyllium husk powder",
+        "100 g / 3.5 oz (1 slightly heaped cup) chickpea flour",
+        "60 g / 2.1 oz (approx. ½ cup) tapioca starch",
+        "½ tsp sea salt",
+        "30 ml / 2 tbsp oil, I used mild olive oil",
+        "approx. 60 ml / ¼ cup water",
+        "rice flour, for dusting",
+        "salad leaves, I used pea shoots"
       ]
     },
     {
@@ -9393,6 +9388,23 @@
       ]
     },
     {
+      "id": 5556,
+      "title": "Flourless chocolate hazelnut cookies",
+      "pct": 83,
+      "haveCount": 5,
+      "needCount": 1,
+      "needNames": [
+        "80 g / heaped 1/3 cup sugar (caster / superfine sugar works best) OR 80 ml / 1/3 cup maple syrup*"
+      ],
+      "haveNames": [
+        "150 g / 1 cup hazelnuts, divided",
+        "100 g / just under 1 cup hazelnut meal (or finely ground hazelnuts)",
+        "heaped ¼ tsp fine sea salt",
+        "2 tbsp cacao powder",
+        "45 ml / 3 tbsp aquafaba / chickpea brine"
+      ]
+    },
+    {
       "id": 5532,
       "title": "Fluffy vegan banana pancakes",
       "pct": 83,
@@ -9886,6 +9898,29 @@
       ]
     },
     {
+      "id": 6219,
+      "title": "Tiramisu Chia Seed Pudding",
+      "pct": 83,
+      "haveCount": 10,
+      "needCount": 2,
+      "needNames": [
+        "3/4 cup warm non milk (such as almond, soy, oat milk or light coconut milk)",
+        "1 tbsp brewed coffee (or 1/4 tsp instant coffee)"
+      ],
+      "haveNames": [
+        "1/2 tsp vanilla extract",
+        "2.5 tbsp cocoa powder",
+        "2 tbsp maple syrup",
+        "3.5 tbsp chia seeds",
+        "1/2 cup warm non dairy milk (, such as almond, soy, oat or light coconut milk)",
+        "a few drops almond extract (, or vanilla extract, or both)",
+        "a good pinch of salt",
+        "3 tbsp chia seeds",
+        "1/2 tsp lemon juice",
+        "Topping: whipped coconut cream, (cocoa powder)"
+      ]
+    },
+    {
       "id": 5765,
       "title": "Valentine's amaretto truffles",
       "pct": 83,
@@ -10218,6 +10253,36 @@
         "salt",
         "cilantro )",
         "millet flour"
+      ]
+    },
+    {
+      "id": 5127,
+      "title": "Oven vegan tacos",
+      "pct": 84,
+      "haveCount": 16,
+      "needCount": 3,
+      "needNames": [
+        "225 g / 8 oz smoked Tofoo tofu OR 400 g / 14 oz smoked tofu*",
+        "2-3 tsp chipotle paste, adjust to taste*",
+        "shop-bought or homemade guacamole"
+      ],
+      "haveNames": [
+        "2 tbsp / 30 ml olive oil",
+        "1 red onion, finely diced",
+        "300 g / 10.5 oz mushrooms*",
+        "2 garlic cloves, grated",
+        "spices: 1½ tsp cumin, 1½ tsp smoked paprika",
+        "400 g / 14 oz tomato passata or canned plum tomatoes",
+        "15 ml / 1 tbsp all purpose soy sauce or tamari",
+        "15 ml / 1 tbsp lime juice",
+        "5 ml / 1 tsp sugar or maple syrup",
+        "200 g / 7 oz radishes",
+        "small bunch of coriander / cilantro",
+        "1-2 spring onions / scallions",
+        "salt and pepper",
+        "1-2 limes",
+        "15 ml / 1 tbsp maple syrup",
+        "10 corn tortillas"
       ]
     },
     {
@@ -10735,6 +10800,30 @@
       ]
     },
     {
+      "id": 7329,
+      "title": "Nopales and Potatoes Breakfast Hash",
+      "pct": 85,
+      "haveCount": 11,
+      "needCount": 2,
+      "needNames": [
+        "  3 paddles nopales, cleaned and cut into ½-inch squares (3 cups)",
+        "  8 or 9 cloves garlic, minced"
+      ],
+      "haveNames": [
+        "  2 tablespoons lemon juice",
+        "  1 lb. Yukon gold potatoes, peeled and cut into ¾-inch cubes (3 cups)",
+        "  1 cup finely chopped onion",
+        "  1 cup finely chopped red bell pepper",
+        "  1 fresh jalapeño chile, seeded and chopped",
+        "  2 teaspoons ground chipotle chile pepper",
+        "  1 cup finely chopped fresh kale",
+        "  Sea salt, to taste",
+        "  Freshly ground black pepper, to taste",
+        "  2 tablespoons chopped fresh cilantro",
+        "  Whole grain bread, toasted, or crackers"
+      ]
+    },
+    {
       "id": 4662,
       "title": "Spicy Garlic Eggplant (鱼香茄子)",
       "pct": 85,
@@ -11020,30 +11109,6 @@
       ]
     },
     {
-      "id": 8353,
-      "title": "Instant Pot Dal Bukhara (Creamy Black Lentils)",
-      "pct": 85,
-      "haveCount": 11,
-      "needCount": 2,
-      "needNames": [
-        "1 cup whole urad dal (black gram lentils), soaked overnight or at least 4 hours",
-        "Pinch of asafoetida (hing)"
-      ],
-      "haveNames": [
-        "3 cups water",
-        "0.5 cup tomato puree",
-        "0.5 tsp ground turmeric",
-        "1 tsp ground cumin",
-        "1 inch fresh ginger, grated",
-        "0.5 tsp smoked paprika",
-        "1 tsp garam masala",
-        "1 tsp dried fenugreek leaves (kasuri methi)",
-        "0.75 tsp salt",
-        "2 tbsp vegan butter",
-        "0.25 cup non-dairy cream (cashew cream, coconut cream, or non-dairy yogurt)"
-      ]
-    },
-    {
       "id": 4703,
       "title": "Mexican Pizza Recipe",
       "pct": 85,
@@ -11065,33 +11130,6 @@
         "vegan cheese )",
         "salt and pepper",
         "salsa )"
-      ]
-    },
-    {
-      "id": 5375,
-      "title": "Red lentil pancakes",
-      "pct": 85,
-      "haveCount": 14,
-      "needCount": 2,
-      "needNames": [
-        "salt, to season",
-        "shop bought chutney"
-      ],
-      "haveNames": [
-        "165 g / 1 cup red split lentils*, soaked overnight",
-        "scant 1 tsp salt",
-        "½ tsp baking powder*",
-        "1½ tsp chickpea flour*",
-        "OPTIONAL: 1 tsp each cumin, turmeric, coriander and ½ tsp ground chilli powder",
-        "OPTIONAL: garlic clove + thick slice of ginger",
-        "vegetable oil, for frying",
-        "15 ml / 1 tbsp mild olive oil",
-        "2 zucchinis, sliced thinly",
-        "½ tsp garam masala",
-        "vegan yoghurt / cream (or see below)",
-        "small bunch of coriander / cilantro, choppedHOMEADE CASHEW CREAM (optional)\t70 g / ½ cup raw cashews, soaked overnight",
-        "½ lime, zest and juice (about 2 tbsp)",
-        "salt and pepper, to taste"
       ]
     },
     {
@@ -11216,30 +11254,6 @@
       ]
     },
     {
-      "id": 6219,
-      "title": "Tiramisu Chia Seed Pudding",
-      "pct": 85,
-      "haveCount": 11,
-      "needCount": 2,
-      "needNames": [
-        "3/4 cup warm non milk (such as almond, soy, oat milk or light coconut milk)",
-        "1 tbsp brewed coffee (or 1/4 tsp instant coffee)"
-      ],
-      "haveNames": [
-        "1/2 tsp vanilla extract",
-        "2.5 tbsp cocoa powder",
-        "2 tbsp maple syrup",
-        "3.5 tbsp chia seeds",
-        "1/2 cup warm non dairy milk (, such as almond, soy, oat or light coconut milk)",
-        "a few drops almond extract (, or vanilla extract, or both)",
-        "a good pinch of salt",
-        "3 tbsp chia seeds",
-        "1/2 tsp lemon juice",
-        "2-3 tbsp whipped coconut cream",
-        "Topping: whipped coconut cream, (cocoa powder)"
-      ]
-    },
-    {
       "id": 5969,
       "title": "Turmeric Miso Soup With Ginger, Garlic and Tofu",
       "pct": 85,
@@ -11334,6 +11348,30 @@
         "1/8 cup / 2 tbsp maple syrup",
         "8-16 pieces of toasted sourdough (or other) bread",
         "a handful of crushed pistachios, to decorate"
+      ]
+    },
+    {
+      "id": 6034,
+      "title": "Vegan Egg Drop Soup",
+      "pct": 85,
+      "haveCount": 11,
+      "needCount": 2,
+      "needNames": [
+        "32 oz or 4 cups of low sodium veggie broth or no chicken broth",
+        "1/2 tsp no chickin seasoning or a dash of celery seed/salt"
+      ],
+      "haveNames": [
+        "1/2 to 1 tsp grated ginger",
+        "1/4 tsp garlic powder",
+        "1/4 to 1/2 tsp sesame oil",
+        "2.5 tbsp cornstarch",
+        "1/8 tsp black pepper and more for garnish",
+        "1/8 tsp white pepper",
+        "1/8 tsp or more kala namak Indian sulphur black salt for eggy flavor",
+        "1/4 to 1/2 tsp sugar or other sweetener",
+        "6  oz jackfruit (young green Jackfruit in canned water or brine or fresh young jackfruit)",
+        "4 oz firm tofu (1/2 cup or more)",
+        "1/4 cup green onions (divided)"
       ]
     },
     {
@@ -11536,6 +11574,24 @@
       ]
     },
     {
+      "id": 6959,
+      "title": "Blueberry-Banana Wraps",
+      "pct": 86,
+      "haveCount": 6,
+      "needCount": 1,
+      "needNames": [
+        "  4 or 5 fresh mint leaves, finely chopped"
+      ],
+      "haveNames": [
+        "  1 cup fresh blueberries",
+        "  ½ cup chopped celery",
+        "  ¼ cup crushed walnuts or peanuts",
+        "  4 8-inch whole wheat tortillas",
+        "  2 cups fresh baby spinach",
+        "  4 ripe bananas, peeled"
+      ]
+    },
+    {
       "id": 5327,
       "title": "Celeriac vegan shepherd's pie",
       "pct": 86,
@@ -11600,6 +11656,31 @@
         "  Sea salt, to taste",
         "  Freshly cracked black pepper, to taste",
         "  Chopped fresh parsley"
+      ]
+    },
+    {
+      "id": 5011,
+      "title": "hemp crusted tofu cobb salad",
+      "pct": 86,
+      "haveCount": 12,
+      "needCount": 2,
+      "needNames": [
+        "x 350 g or 400 g brick of firm tofu",
+        "c hemp hearts"
+      ],
+      "haveNames": [
+        "c gluten-free bread crumbs",
+        "chili powder",
+        "garlic powder",
+        "salt",
+        "pepper",
+        "dijon mustard",
+        "plant milk",
+        "c romaine lettuce",
+        "green beans",
+        "c tomato wedges or cherry tomatoes",
+        "c corn",
+        "avocados"
       ]
     },
     {
@@ -11765,6 +11846,31 @@
       ]
     },
     {
+      "id": 6446,
+      "title": "Avocado & White Bean Salad Wraps",
+      "pct": 86,
+      "haveCount": 12,
+      "needCount": 2,
+      "needNames": [
+        "  2 tablespoons fresh parsley or cilantro, if preferred",
+        "  1 tablespoon diced canned green chiles"
+      ],
+      "haveNames": [
+        "  1½ cups cooked great northern beans or 1 (15-ounce) can, rinsed and drained",
+        "  1 tablespoon liquid aminos (or tamari or soy sauce)",
+        "  1 tablespoon white balsamic vinegar",
+        "  2 tablespoons fresh lime juice",
+        "  1 teaspoon garlic powder",
+        "  1 teaspoon smoked paprika",
+        "  ½ teaspoon onion powder",
+        "  Sea salt",
+        "  Freshly gound black pepper",
+        "  2 lavash wraps or large wheat tortillas",
+        "  1 to 2 Roma tomatoes, thinly sliced",
+        "  2 large handfuls of baby spinach"
+      ]
+    },
+    {
       "id": 5517,
       "title": "Broad bean dip",
       "pct": 86,
@@ -11896,6 +12002,25 @@
         "  2 cups cooked brown rice",
         "  ½ cup chopped dried apricots",
         "  ½ cup sliced scallions"
+      ]
+    },
+    {
+      "id": 5965,
+      "title": "Lemon Curd Chia Pudding",
+      "pct": 86,
+      "haveCount": 7,
+      "needCount": 1,
+      "needNames": [
+        "13.5 or 15 oz can full fat coconut milk (about 1.5 cups)"
+      ],
+      "haveNames": [
+        "Zest of a large lemon (or 2 small lemons)",
+        "Juice of 2 large lemons",
+        "1/4 cup water (optional)",
+        "3 tbsp or more sweetener",
+        "a good pinch of salt",
+        "1/4 tsp or more turmeric",
+        "3 tbsp or more chia seeds (5 to 6 tbsp for well set pudding)"
       ]
     },
     {
@@ -12097,31 +12222,6 @@
       ]
     },
     {
-      "id": 5873,
-      "title": "Quinoa Upma Recipe",
-      "pct": 86,
-      "haveCount": 12,
-      "needCount": 2,
-      "needNames": [
-        "1 tsp organic canola or safflower oil",
-        "1/2 tsp urad dal (split black gram or use mung dal (petite yellow lentils))"
-      ],
-      "haveNames": [
-        "1 cup uncooked quinoa",
-        "1/2 tsp mustard seeds",
-        "1  green chili chopped (remove seeds to adjust spice if needed)",
-        "10  curry leaves (fresh or frozen)",
-        "1/2 cup finely chopped red onion",
-        "2 Tbsp chopped cashews",
-        "1/2 inch ginger minced (1 tsp grated)",
-        "1/2 cup chopped carrots",
-        "1/2 cup peas (fresh or frozen (thawed))",
-        "1/2 to 3/4 tsp salt",
-        "2 cups water",
-        "cilantro and lemon juice for garnish"
-      ]
-    },
-    {
       "id": 7284,
       "title": "Red Onion Confit",
       "pct": 86,
@@ -12278,46 +12378,6 @@
       ]
     },
     {
-      "id": 2788,
-      "title": "Vegan Dal Makhani",
-      "pct": 86,
-      "haveCount": 25,
-      "needCount": 4,
-      "needNames": [
-        "kasoori methi",
-        "lump charcoal",
-        "neutral-flavored oil",
-        "urad dal"
-      ],
-      "haveNames": [
-        "baking soda",
-        "bay leaf",
-        "black pepper",
-        "cardamom",
-        "cashews",
-        "chili powder",
-        "cilantro",
-        "cinnamon",
-        "coriander",
-        "cumin seeds",
-        "garam masala",
-        "garlic",
-        "ginger",
-        "grapeseed oil",
-        "kidney beans",
-        "lemon juice",
-        "liquid",
-        "nutmeg",
-        "red onion",
-        "salt",
-        "sugar",
-        "tomato paste",
-        "tomatoes",
-        "vegan butter",
-        "vegan cream"
-      ]
-    },
-    {
       "id": 6001,
       "title": "Vegan Lentil Brown Rice Soup",
       "pct": 86,
@@ -12426,31 +12486,6 @@
         "soy sauce",
         "sugar",
         "white pepper"
-      ]
-    },
-    {
-      "id": 6124,
-      "title": "Baked Apple Cider Donuts Vegan",
-      "pct": 86,
-      "haveCount": 12,
-      "needCount": 2,
-      "needNames": [
-        "1/4 cup sugar ((coconut sugar, date sugar, regular or use maple syrup), 1/3 cup for sweeter)",
-        "1 cup flour ( , see note for gluten-free)"
-      ],
-      "haveNames": [
-        "1.5 cups  + 2 tbsp apple cider (not vinegar, but the fermented apple drink)",
-        "1 tbsp almond flour (, or use more flour)",
-        "3/4 tsp cinnamon",
-        "1/8 tsp cardamom or nutmeg",
-        "dash of black pepper",
-        "1/4 tsp salt",
-        "1 tsp baking powder",
-        "1/4 tsp baking soda",
-        "1 tbsp oil or applesauce",
-        "1 tbsp cane sugar",
-        "1 tbsp coconut sugar or brown sugar",
-        "1/2 tsp cinnamon"
       ]
     },
     {
@@ -12788,6 +12823,31 @@
         "  ¼ teaspoon sea salt",
         "  Freshly ground black pepper, to taste",
         "  1 tablespoon finely chopped fresh parsley"
+      ]
+    },
+    {
+      "id": 5073,
+      "title": "Dhaba Dal",
+      "pct": 86,
+      "haveCount": 12,
+      "needCount": 2,
+      "needNames": [
+        "rajma )",
+        "kasoori methi )"
+      ],
+      "haveNames": [
+        "chana dal",
+        "urad dal",
+        "turmeric )",
+        "avocado oil or any neutral oil",
+        "onion )",
+        "tomatoes )",
+        "cumin",
+        "coriander",
+        "cayenne .)",
+        "garam masala",
+        "vegan butter",
+        "salt"
       ]
     },
     {
@@ -13674,32 +13734,6 @@
       ]
     },
     {
-      "id": 6446,
-      "title": "Avocado & White Bean Salad Wraps",
-      "pct": 87,
-      "haveCount": 13,
-      "needCount": 2,
-      "needNames": [
-        "  2 tablespoons fresh parsley or cilantro, if preferred",
-        "  1 tablespoon diced canned green chiles"
-      ],
-      "haveNames": [
-        "  1½ cups cooked great northern beans or 1 (15-ounce) can, rinsed and drained",
-        "  1 tablespoon liquid aminos (or tamari or soy sauce)",
-        "  1 tablespoon white balsamic vinegar",
-        "  1 large or 2 small avocados, halved",
-        "  2 tablespoons fresh lime juice",
-        "  1 teaspoon garlic powder",
-        "  1 teaspoon smoked paprika",
-        "  ½ teaspoon onion powder",
-        "  Sea salt",
-        "  Freshly gound black pepper",
-        "  2 lavash wraps or large wheat tortillas",
-        "  1 to 2 Roma tomatoes, thinly sliced",
-        "  2 large handfuls of baby spinach"
-      ]
-    },
-    {
       "id": 6268,
       "title": "Fiesta Quinoa Salad",
       "pct": 87,
@@ -13862,6 +13896,32 @@
         "3 tbsp lime juice",
         "1 tsp vanilla extract",
         "chopped nuts, for decoration"
+      ]
+    },
+    {
+      "id": 4661,
+      "title": "Baked Curry Puffs - 咖喱角",
+      "pct": 87,
+      "haveCount": 13,
+      "needCount": 2,
+      "needNames": [
+        "pack [1.1lbs or 490g] vegan puff pastry of your choice",
+        "a few pandan leaves )"
+      ],
+      "haveNames": [
+        "sized potato",
+        "onion or 2 shallots",
+        "garlic",
+        "carrot",
+        "peas",
+        "curry powder",
+        "sambal",
+        "coconut sugar",
+        "veggie stock",
+        "oil for cooking",
+        "salt",
+        "unsweetened plant-based milk",
+        "maple syrup"
       ]
     },
     {
@@ -15062,6 +15122,33 @@
       ]
     },
     {
+      "id": 5476,
+      "title": "Mini vegan sausage rolls",
+      "pct": 88,
+      "haveCount": 14,
+      "needCount": 2,
+      "needNames": [
+        "225 g / 8 oz smoked firm cotton tofu OR 175 g / 1 packed cup cooked brown rice",
+        "1 tbsp sesame or poppy seeds, to decorate"
+      ],
+      "haveNames": [
+        "250 g / 9 oz chestnut or portobello mushrooms (large if you can get them)",
+        "3 tbsp olive oil",
+        "2 large shallots, finely diced",
+        "3 garlic cloves, finely diced",
+        "8 fresh sage leaves and 4 thyme springs, leaves picked",
+        "2 tsp mushroom soy sauce or plain soy sauce / tamari (for GF version)",
+        "¼-1/3 tsp salt, adjust to taste",
+        "generous grind of black pepper",
+        "2 tbsp nutritional yeast",
+        "2 tsp tomato paste",
+        "1½ tsp wholegrain mustard, more to taste",
+        "1 tsp smoked sweet paprika (if using rice), more to taste",
+        "1 sheet vegan puff pastry*",
+        "vegan egg wash: 2 tsp plant milk, 1 tsp olive oil + 1 tsp maple syrup or sugar"
+      ]
+    },
+    {
       "id": 6845,
       "title": "Mixed Fruit Soup",
       "pct": 88,
@@ -15737,6 +15824,25 @@
         "  6 cups mixed salad greens",
         "  ½ cup pecan halves, toasted, optional",
         "  2 crisp apples, peeled, cored, and cut into ½-inch dice"
+      ]
+    },
+    {
+      "id": 7260,
+      "title": "Banana Blueberry Bars",
+      "pct": 88,
+      "haveCount": 7,
+      "needCount": 1,
+      "needNames": [
+        "  1½ cups apple juice"
+      ],
+      "haveNames": [
+        "  1 cup dates, pitted and halved",
+        "  3 cups rolled oats, divided",
+        "  ¾ teaspoon ground cinnamon",
+        "  ¼ teaspoon ground nutmeg",
+        "  1 teaspoon vanilla extract",
+        "  1 cup fresh blueberries (frozen also works)",
+        "  ½ cup walnuts"
       ]
     },
     {
@@ -16885,34 +16991,6 @@
       ]
     },
     {
-      "id": 5272,
-      "title": "Vegan gluten-free ravioli",
-      "pct": 88,
-      "haveCount": 15,
-      "needCount": 2,
-      "needNames": [
-        "½ small leek, white and light green part only, sliced",
-        "1-2 tbsp breadcrumbs or ground almonds, to thicken (if needed)"
-      ],
-      "haveNames": [
-        "130 g / 1 cup frozen petit pois or green peas",
-        "10 ml / 2 tsp olive oil",
-        "1 garlic clove, diced finely",
-        "a few fresh mint (or basil) leaves",
-        "zest of ½ lemon + 15-30 ml / 1-2 tbsp lemon juice",
-        "salt and pepper, to taste",
-        "1 tsp psyllium husk powder",
-        "100 g / 3.5 oz (1 slightly heaped cup) chickpea flour",
-        "60 g / 2.1 oz (approx. ½ cup) tapioca starch",
-        "½ tsp sea salt",
-        "30 ml / 2 tbsp oil, I used mild olive oil",
-        "approx. 60 ml / ¼ cup water",
-        "rice flour, for dusting",
-        "a dollop of vegan pesto (I like wild garlic or basil) or a drizzle of extra virgin olive oil",
-        "salad leaves, I used pea shoots"
-      ]
-    },
-    {
       "id": 5067,
       "title": "Vegan Golden Milk Recipe",
       "pct": 88,
@@ -17014,33 +17092,6 @@
         "½ cup unsweetened soy milk",
         "vegan butter",
         "pure vanilla extract"
-      ]
-    },
-    {
-      "id": 5630,
-      "title": "Vegan matcha strawberry tart",
-      "pct": 88,
-      "haveCount": 14,
-      "needCount": 2,
-      "needNames": [
-        "3 tsp agar flakes (approx. 1 tsp agar powder)",
-        "edible flowers"
-      ],
-      "haveNames": [
-        "150 g / 1 cup dried dates, halved and pitted",
-        "140 g / 1 cup almonds*",
-        "90 g / 1 cup rolled oats (GF certified if required)",
-        "3 tbsp cacao powder",
-        "¼ tsp fine sea salt",
-        "1 tbsp coconut oil, melted",
-        "1½ cups pureed strawberries (about 350-400 g / 12-14 oz fresh strawberries)",
-        "110 g / ¾ cup raw cashews, soaked overnight",
-        "360 ml / 1½ cups coconut cream (separated from full-fat coconut milk)",
-        "3 tsp matcha powder",
-        "4-5 tbsp maple syrup, adjust to taste",
-        "2¼ tsp agar flakes OR ¾ tsp agar powder",
-        "coconut shavings",
-        "fresh strawberries"
       ]
     },
     {
@@ -17567,6 +17618,26 @@
       ]
     },
     {
+      "id": 6386,
+      "title": "Burrito Bowl",
+      "pct": 89,
+      "haveCount": 8,
+      "needCount": 1,
+      "needNames": [
+        "  Baked tortilla chips "
+      ],
+      "haveNames": [
+        "  2-4 cups cooked grains ",
+        "  2-4 cups cooked beans ",
+        "  2-4 cups chopped romaine lettuce or steamed kale",
+        "  2-4 chopped tomatoes",
+        "  1-2 chopped green onions",
+        "  1-2 cups corn kernels (see notes)",
+        "  1 avocado, chopped",
+        "  Fresh salsa"
+      ]
+    },
+    {
       "id": 3047,
       "title": "Chickpea Chopped Kale Salad with Adobo Dressing",
       "pct": 89,
@@ -17793,36 +17864,6 @@
         "chilli flakes",
         "thyme",
         "rosemary"
-      ]
-    },
-    {
-      "id": 5127,
-      "title": "Oven vegan tacos",
-      "pct": 89,
-      "haveCount": 17,
-      "needCount": 2,
-      "needNames": [
-        "2-3 tsp chipotle paste, adjust to taste*",
-        "shop-bought or homemade guacamole"
-      ],
-      "haveNames": [
-        "2 tbsp / 30 ml olive oil",
-        "1 red onion, finely diced",
-        "300 g / 10.5 oz mushrooms*",
-        "225 g / 8 oz smoked Tofoo tofu OR 400 g / 14 oz smoked tofu*",
-        "2 garlic cloves, grated",
-        "spices: 1½ tsp cumin, 1½ tsp smoked paprika",
-        "400 g / 14 oz tomato passata or canned plum tomatoes",
-        "15 ml / 1 tbsp all purpose soy sauce or tamari",
-        "15 ml / 1 tbsp lime juice",
-        "5 ml / 1 tsp sugar or maple syrup",
-        "200 g / 7 oz radishes",
-        "small bunch of coriander / cilantro",
-        "1-2 spring onions / scallions",
-        "salt and pepper",
-        "1-2 limes",
-        "15 ml / 1 tbsp maple syrup",
-        "10 corn tortillas"
       ]
     },
     {
@@ -19007,26 +19048,6 @@
       ]
     },
     {
-      "id": 7260,
-      "title": "Banana Blueberry Bars",
-      "pct": 89,
-      "haveCount": 8,
-      "needCount": 1,
-      "needNames": [
-        "  1½ cups apple juice"
-      ],
-      "haveNames": [
-        "  1 cup dates, pitted and halved",
-        "  3 cups rolled oats, divided",
-        "  ¾ teaspoon ground cinnamon",
-        "  ¼ teaspoon ground nutmeg",
-        "  2 large or 3 small ripe bananas",
-        "  1 teaspoon vanilla extract",
-        "  1 cup fresh blueberries (frozen also works)",
-        "  ½ cup walnuts"
-      ]
-    },
-    {
       "id": 7606,
       "title": "Banana Pancake Casserole with Chocolate Chips",
       "pct": 89,
@@ -19865,7 +19886,7 @@
       "id": 6175,
       "title": "Tiramisu Cookies",
       "pct": 89,
-      "haveCount": 17,
+      "haveCount": 16,
       "needCount": 2,
       "needNames": [
         "1 Tablespoon rum (or use 1/2 tsp rum extract)",
@@ -19885,7 +19906,6 @@
         "3 Tablespoons raw sugar or equivalent sweetener (a Tbsp more if you like the cookies sweeter)",
         "4 Tablespoons raw or brown sugar",
         "2 Teaspoons water",
-        "1.5-2 Tablespoons Coconut creamer or thick non dairy Cream",
         "1/2 teaspoon virgin coconut oil",
         "1 teaspoon cornstarch",
         "1 teaspoon or more instant coffee"
@@ -21790,6 +21810,46 @@
       ]
     },
     {
+      "id": 2788,
+      "title": "Vegan Dal Makhani",
+      "pct": 90,
+      "haveCount": 26,
+      "needCount": 3,
+      "needNames": [
+        "kasoori methi",
+        "lump charcoal",
+        "neutral-flavored oil"
+      ],
+      "haveNames": [
+        "baking soda",
+        "bay leaf",
+        "black pepper",
+        "cardamom",
+        "cashews",
+        "chili powder",
+        "cilantro",
+        "cinnamon",
+        "coriander",
+        "cumin seeds",
+        "garam masala",
+        "garlic",
+        "ginger",
+        "grapeseed oil",
+        "kidney beans",
+        "lemon juice",
+        "liquid",
+        "nutmeg",
+        "red onion",
+        "salt",
+        "sugar",
+        "tomato paste",
+        "tomatoes",
+        "urad dal",
+        "vegan butter",
+        "vegan cream"
+      ]
+    },
+    {
       "id": 4312,
       "title": "Vegan Matzo Ball Soup",
       "pct": 90,
@@ -21922,27 +21982,6 @@
         "¼ tsp pepper, to taste",
         "a generous amount of grated nutmeg, adjust to taste",
         "100 g / approx. 2 cups coarse (panko style is ideal) breadcrumbs** (GF if required)"
-      ]
-    },
-    {
-      "id": 6983,
-      "title": "Vegan Stuffed Peppers with Lentils and Herbed Rice",
-      "pct": 90,
-      "haveCount": 9,
-      "needCount": 1,
-      "needNames": [
-        "  1 cup cooked black (beluga) lentils, rinsed and drained"
-      ],
-      "haveNames": [
-        "  ¾ cup dry instant brown rice",
-        "  1 cup finely chopped onion",
-        "  3 cloves garlic, minced",
-        "  1 medium zucchini (8 oz.), chopped",
-        "  ⅓ cup chopped raisins",
-        "  ½ cup chopped fresh mint",
-        "  ¼ cup chopped fresh dill or 2 tablespoons dried dill",
-        "  6 medium orange bell peppers",
-        "  4 tablespoons lemon juice"
       ]
     },
     {
@@ -23795,29 +23834,6 @@
       ]
     },
     {
-      "id": 5136,
-      "title": "Savoury tofu pancakes",
-      "pct": 91,
-      "haveCount": 11,
-      "needCount": 1,
-      "needNames": [
-        "your favorite cheese"
-      ],
-      "haveNames": [
-        "30 ml / 2 tbsp olive oil",
-        "4 spring onions / scallions",
-        "200 g / 7 oz baby spinach",
-        "500 g / 17.6 oz mushrooms",
-        "salt and pepper",
-        "300 g / 10.5 oz silken tofu, I use Clearspring",
-        "70 g / heaped ½ cup chickpea/gram/besan flour",
-        "½ tsp salt",
-        "¼ tsp garlic powder, optional",
-        "½ tsp baking soda",
-        "oil, for frying"
-      ]
-    },
-    {
       "id": 4461,
       "title": "Smoky Smashed Chickpea Tacos",
       "pct": 91,
@@ -24127,39 +24143,6 @@
         "vegetable broth",
         "white pepper",
         "white rice"
-      ]
-    },
-    {
-      "id": 6080,
-      "title": "Creamy Tahini Ramen",
-      "pct": 91,
-      "haveCount": 20,
-      "needCount": 2,
-      "needNames": [
-        "2 teaspoons ginger garlic paste (or use minced ginger and garlic)",
-        "4 ounces dried ramen (or noodles of choice, such as udon)"
-      ],
-      "haveNames": [
-        "2 tablespoons soy sauce (or use tamari for gluten free)",
-        "1 tablespoon brown sugar",
-        "1 teaspoon rice wine vinegar",
-        "1/4 teaspoon corn starch",
-        "1/4 teaspoon red pepper flakes",
-        "7 ounces firm or extra firm tofu (pressed for at least 15 minutes and sliced into 3/4” thick slabs)",
-        "1 teaspoon oil",
-        "1 tablespoon oil",
-        "3 cloves garlic (finely chopped)",
-        "1 inch of ginger (finely chopped)",
-        "1 teaspoon gochugaru pepper flakes",
-        "1/4 cup sliced or chopped onion",
-        "1/4 cup sliced or chopped red bell pepper",
-        "1/4 cup sliced or chopped green bell pepper",
-        "1 tablespoon yellow miso",
-        "1 tablespoon sambal oelek (or other Asian chili paste, use less for less heat)",
-        "1 tablespoon tahini",
-        "3 cups water (or stock, divided)",
-        "1/4 to 1/2 teaspoon salt (depends on sat content of stock )",
-        "1 or 2  bunches baby bok choy (or other fresh veggies)"
       ]
     },
     {
@@ -25253,6 +25236,39 @@
       ]
     },
     {
+      "id": 6080,
+      "title": "Creamy Tahini Ramen",
+      "pct": 91,
+      "haveCount": 20,
+      "needCount": 2,
+      "needNames": [
+        "2 teaspoons ginger garlic paste (or use minced ginger and garlic)",
+        "4 ounces dried ramen (or noodles of choice, such as udon)"
+      ],
+      "haveNames": [
+        "2 tablespoons soy sauce (or use tamari for gluten free)",
+        "1 tablespoon brown sugar",
+        "1 teaspoon rice wine vinegar",
+        "1/4 teaspoon corn starch",
+        "1/4 teaspoon red pepper flakes",
+        "7 ounces firm or extra firm tofu (pressed for at least 15 minutes and sliced into 3/4” thick slabs)",
+        "1 teaspoon oil",
+        "1 tablespoon oil",
+        "3 cloves garlic (finely chopped)",
+        "1 inch of ginger (finely chopped)",
+        "1 teaspoon gochugaru pepper flakes",
+        "1/4 cup sliced or chopped onion",
+        "1/4 cup sliced or chopped red bell pepper",
+        "1/4 cup sliced or chopped green bell pepper",
+        "1 tablespoon yellow miso",
+        "1 tablespoon sambal oelek (or other Asian chili paste, use less for less heat)",
+        "1 tablespoon tahini",
+        "3 cups water (or stock, divided)",
+        "1/4 to 1/2 teaspoon salt (depends on sat content of stock )",
+        "1 or 2  bunches baby bok choy (or other fresh veggies)"
+      ]
+    },
+    {
       "id": 5803,
       "title": "Crispy potato wedges with wasabi dip",
       "pct": 91,
@@ -25477,6 +25493,28 @@
       ]
     },
     {
+      "id": 7722,
+      "title": "Maple Mustard Lentils, Sweet Potatoes, and Herbs",
+      "pct": 91,
+      "haveCount": 10,
+      "needCount": 1,
+      "needNames": [
+        "  1 cup dried green lentils, picked over (200 g)"
+      ],
+      "haveNames": [
+        "  2 sweet potatoes, peeled and cut into ½-inch /1.3cm cubes (about 1 pound / 455 g)",
+        "  ¼ cup snipped fresh chives (10 g)",
+        "  2 tablespoons chopped fresh parsley",
+        "  ¼ cup tahini (60 g)",
+        "  2 tablespoons Dijon mustard, or more as needed",
+        "  2½ tablespoons reduced-sodium tamari sauce or liquid coconut aminos, or more as needed",
+        "  2½ tablespoons apple cider vinegar, or more as needed",
+        "  1 tablespoon pure maple syrup",
+        "  2 tablespoons water",
+        "  8 slices whole-grain bread"
+      ]
+    },
+    {
       "id": 6738,
       "title": "Mediterranean Green Beans and Potato Toss",
       "pct": 91,
@@ -25606,6 +25644,28 @@
         "  1 cup chopped fresh plums",
         "1½ cups Spicy Pickled Green Beans, chopped",
         "  ¼ cup chopped fresh dill or ½ cup chopped fresh flat-leaf parsley"
+      ]
+    },
+    {
+      "id": 6025,
+      "title": "Pumpkin spice Frappuccino Vegan Recipe",
+      "pct": 91,
+      "haveCount": 10,
+      "needCount": 1,
+      "needNames": [
+        "a generous pinch of nutmeg and allspice"
+      ],
+      "haveNames": [
+        "1/4 tsp ground cinnamon",
+        "1/4 tsp ground ginger",
+        "1/8 tsp ground cloves",
+        "1/4 to 1/2 tsp vanilla extract",
+        "1 cup almond milk",
+        "1 tsp instant coffee or a shot of espresso",
+        "1 cup almond milk ice cubes (frozen almond milk or 1/2 cup vegan vanilla ice cream)",
+        "1/2 cup ice cubes",
+        "sweetener to taste (coconut sugar, stevia or 4 to 5 soaked dates)",
+        "Variation: add a Tbsp of pumpkin puree."
       ]
     },
     {
@@ -26085,6 +26145,28 @@
         "½ tsp fine sea salt",
         "150 g / scant 1¾ cup jumbo rolled oats",
         "100 g / 3.5 oz vegan chocolate, diced small or dried fruit (for refined sugar-free version)"
+      ]
+    },
+    {
+      "id": 5862,
+      "title": "Vegan Pistachio Cookies",
+      "pct": 91,
+      "haveCount": 10,
+      "needCount": 1,
+      "needNames": [
+        "seeds of 1 or 2 green cardamom pods"
+      ],
+      "haveNames": [
+        "1 cup flour",
+        "1/3 cup almond flour",
+        "1/8 teaspoon salt",
+        "1/4 teaspoon baking soda",
+        "1/3 cup raw pistachios",
+        "1/2 cup  sugar",
+        "4  saffron strands ( or you can use 2 teaspoons of lemon zest)",
+        "3 tablespoons neutral oil",
+        "2-3 tablespoons non-dairy milk such as almond milk (coconut milk, cashew milk, or soy milk)",
+        "almond slivers (or pistachios)"
       ]
     },
     {
@@ -27196,29 +27278,6 @@
       ]
     },
     {
-      "id": 6087,
-      "title": "Bagel Avocado Toast with Pears, Tomato & Mediterranean Garlic Lemon olive oil dressing",
-      "pct": 92,
-      "haveCount": 11,
-      "needCount": 1,
-      "needNames": [
-        "2  or 3 lightly toasted bagels"
-      ],
-      "haveNames": [
-        "1  ripe large Avocado or 2 regular size avocados.",
-        "1  tomato (thinly sliced)",
-        "1  ripe pear (thinly sliced)",
-        "1  large clove of garlic pressed or 1/2 tsp garlic powder",
-        "1/4 tsp or more black pepper",
-        "1/4-1/2 tsp dried oregano or parsley or other dried herbs of choice",
-        "1 tbsp really good extra virgin olive oil",
-        "2 tsp or more lemon juice",
-        "a generous pinch of salt",
-        "sprouts",
-        "thin ribbons of basil"
-      ]
-    },
-    {
       "id": 2552,
       "title": "Banana Chocolate Chip Breakfast Cookies",
       "pct": 92,
@@ -27753,29 +27812,6 @@
       ]
     },
     {
-      "id": 7722,
-      "title": "Maple Mustard Lentils, Sweet Potatoes, and Herbs",
-      "pct": 92,
-      "haveCount": 11,
-      "needCount": 1,
-      "needNames": [
-        "  1 cup dried green lentils, picked over (200 g)"
-      ],
-      "haveNames": [
-        "  2 sweet potatoes, peeled and cut into ½-inch /1.3cm cubes (about 1 pound / 455 g)",
-        "  1 large or 2 small shallots, trimmed and minced",
-        "  ¼ cup snipped fresh chives (10 g)",
-        "  2 tablespoons chopped fresh parsley",
-        "  ¼ cup tahini (60 g)",
-        "  2 tablespoons Dijon mustard, or more as needed",
-        "  2½ tablespoons reduced-sodium tamari sauce or liquid coconut aminos, or more as needed",
-        "  2½ tablespoons apple cider vinegar, or more as needed",
-        "  1 tablespoon pure maple syrup",
-        "  2 tablespoons water",
-        "  8 slices whole-grain bread"
-      ]
-    },
-    {
       "id": 7430,
       "title": "Middle Eastern Red Rice Pilaf",
       "pct": 92,
@@ -27820,30 +27856,6 @@
         "  ¼ teaspoon freshly ground black pepper",
         "  2 15-oz. cans chickpeas (garbanzo beans), rinsed and drained",
         "  1½ lb. Yukon gold potatoes, peeled and cut into 1½-inch pieces (4 cups)"
-      ]
-    },
-    {
-      "id": 7329,
-      "title": "Nopales and Potatoes Breakfast Hash",
-      "pct": 92,
-      "haveCount": 12,
-      "needCount": 1,
-      "needNames": [
-        "  3 paddles nopales, cleaned and cut into ½-inch squares (3 cups)"
-      ],
-      "haveNames": [
-        "  2 tablespoons lemon juice",
-        "  1 lb. Yukon gold potatoes, peeled and cut into ¾-inch cubes (3 cups)",
-        "  1 cup finely chopped onion",
-        "  1 cup finely chopped red bell pepper",
-        "  8 or 9 cloves garlic, minced",
-        "  1 fresh jalapeño chile, seeded and chopped",
-        "  2 teaspoons ground chipotle chile pepper",
-        "  1 cup finely chopped fresh kale",
-        "  Sea salt, to taste",
-        "  Freshly ground black pepper, to taste",
-        "  2 tablespoons chopped fresh cilantro",
-        "  Whole grain bread, toasted, or crackers"
       ]
     },
     {
@@ -29399,6 +29411,29 @@
       ]
     },
     {
+      "id": 5905,
+      "title": "Gujiya Peda (Indian Almond Fudge With Coconut Pistachio Raisin Swirls)",
+      "pct": 92,
+      "haveCount": 11,
+      "needCount": 1,
+      "needNames": [
+        "8 or 9 saffron strands"
+      ],
+      "haveNames": [
+        "1 1/2 cups blanched almond flour",
+        "1/4 cup powdered sugar",
+        "1/2 teaspoon ground cardamom",
+        "1/4 teaspoon salt",
+        "1/4 cup oat milk (or other thick non dairy milk )",
+        "1 tablespoon sugar",
+        "1 teaspoon corn starch (or any other starch of choice)",
+        "1/4 cup raw pistachios",
+        "1  green cardamom pod",
+        "1/3 cup shredded coconut",
+        "1/4 to 1/3 cup raisins"
+      ]
+    },
+    {
       "id": 4666,
       "title": "Guo Kui (pot helmet) - streetfood",
       "pct": 92,
@@ -29563,26 +29598,27 @@
       ]
     },
     {
-      "id": 8025,
-      "title": "Instant Pot Dal Makhani",
+      "id": 8353,
+      "title": "Instant Pot Dal Bukhara (Creamy Black Lentils)",
       "pct": 92,
-      "haveCount": 11,
+      "haveCount": 12,
       "needCount": 1,
       "needNames": [
-        "black lentils"
+        "Pinch of asafoetida (hing)"
       ],
       "haveNames": [
-        "kidney beans",
-        "diced tomatoes",
-        "onion",
-        "garlic",
-        "ginger",
-        "garam masala",
-        "cumin",
-        "turmeric",
-        "chili powder",
-        "coconut cream",
-        "cilantro"
+        "1 cup whole urad dal (black gram lentils), soaked overnight or at least 4 hours",
+        "3 cups water",
+        "0.5 cup tomato puree",
+        "0.5 tsp ground turmeric",
+        "1 tsp ground cumin",
+        "1 inch fresh ginger, grated",
+        "0.5 tsp smoked paprika",
+        "1 tsp garam masala",
+        "1 tsp dried fenugreek leaves (kasuri methi)",
+        "0.75 tsp salt",
+        "2 tbsp vegan butter",
+        "0.25 cup non-dairy cream (cashew cream, coconut cream, or non-dairy yogurt)"
       ]
     },
     {
@@ -30159,6 +30195,32 @@
       ]
     },
     {
+      "id": 5375,
+      "title": "Red lentil pancakes",
+      "pct": 92,
+      "haveCount": 14,
+      "needCount": 1,
+      "needNames": [
+        "salt, to season"
+      ],
+      "haveNames": [
+        "165 g / 1 cup red split lentils*, soaked overnight",
+        "scant 1 tsp salt",
+        "½ tsp baking powder*",
+        "1½ tsp chickpea flour*",
+        "OPTIONAL: 1 tsp each cumin, turmeric, coriander and ½ tsp ground chilli powder",
+        "OPTIONAL: garlic clove + thick slice of ginger",
+        "vegetable oil, for frying",
+        "15 ml / 1 tbsp mild olive oil",
+        "2 zucchinis, sliced thinly",
+        "½ tsp garam masala",
+        "vegan yoghurt / cream (or see below)",
+        "small bunch of coriander / cilantro, choppedHOMEADE CASHEW CREAM (optional)\t70 g / ½ cup raw cashews, soaked overnight",
+        "½ lime, zest and juice (about 2 tbsp)",
+        "salt and pepper, to taste"
+      ]
+    },
+    {
       "id": 7518,
       "title": "Rhubarb and Pear Tart",
       "pct": 92,
@@ -30302,29 +30364,6 @@
         "salt",
         "sweet potato",
         "vegan-friendly hamburger buns"
-      ]
-    },
-    {
-      "id": 6062,
-      "title": "Soft Pumpkin Ginger Snaps",
-      "pct": 92,
-      "haveCount": 11,
-      "needCount": 1,
-      "needNames": [
-        "1 cup flour ( , see notes for glutenfree)"
-      ],
-      "haveNames": [
-        "1/3 cup pumpkin puree ( (pure pumpkin puree, not pumpkin pie filling. Use a well filled 1/3 cup))",
-        "1/4 cup neutral oil",
-        "1 tbsp flax seed meal",
-        "1/2 tsp vanilla",
-        "2 tbsp molasses",
-        "1/2 cup sugar",
-        "1.5 to 2 tsp ginger bread spice blend",
-        "1/2 cup almond flour  (, see note for nutfree)",
-        "3/4 tsp baking soda",
-        "3/4 tsp baking powder",
-        "1/4 tsp salt"
       ]
     },
     {
@@ -30586,29 +30625,6 @@
         "  ¼ teaspoon pure almond extract ",
         "  ¼ cup aquafaba (liquid from canned chickpeas) ",
         "  1 tablespoon date syrup"
-      ]
-    },
-    {
-      "id": 5079,
-      "title": "Vangi Bath",
-      "pct": 92,
-      "haveCount": 11,
-      "needCount": 1,
-      "needNames": [
-        "urad dal )"
-      ],
-      "haveNames": [
-        "rice",
-        "coconut oil )",
-        "mustard seeds",
-        "curry leaves",
-        "eggplants",
-        "peanuts",
-        "salt",
-        "coriander seeds",
-        "chana dal )",
-        "dry red chili peppers )",
-        "turmeric )"
       ]
     },
     {
@@ -31242,6 +31258,30 @@
       ]
     },
     {
+      "id": 5712,
+      "title": "Vegan matcha coconut tarts",
+      "pct": 92,
+      "haveCount": 12,
+      "needCount": 1,
+      "needNames": [
+        "1½ tsp agar flakes OR ½ tsp agar powder"
+      ],
+      "haveNames": [
+        "½ cup buckwheat flour",
+        "½ cup (gluten-free if required) oats or oat flour (packed ½ cup)",
+        "¼ cup / 4 tbsp desiccated coconut",
+        "a good pinch of fine salt",
+        "4 tsp tapioca starch or cornstarch",
+        "2 tbsp raw cacao powder",
+        "3 tbsp / 45 ml melted coconut oil",
+        "3 tbsp / 45 ml maple syrup",
+        "½ cup / 75 g raw cashews, soaked",
+        "240 ml / 1 cup coconut cream (separated from a tin of full fat coconut milk)",
+        "2 tsp matcha powder",
+        "¼ cup / 4 tbsp maple syrup, more to taste"
+      ]
+    },
+    {
       "id": 5390,
       "title": "Vegan miso mushroom pasta",
       "pct": 92,
@@ -31311,30 +31351,6 @@
         "  Sea salt, to taste",
         "  Freshly ground black pepper, to taste",
         "  ¼ cup chopped fresh parsley"
-      ]
-    },
-    {
-      "id": 7021,
-      "title": "Vegan Potato Gnocchi with Mushrooms and Greens",
-      "pct": 92,
-      "haveCount": 12,
-      "needCount": 1,
-      "needNames": [
-        "  4 cups fresh baby spinach or a mix of baby spinach and arugula"
-      ],
-      "haveNames": [
-        "  2 lb. russet potatoes, peeled and cut into 1-inch pieces",
-        "  1 tablespoon flaxseed meal",
-        "  1 cup white whole wheat flour, plus more for dusting",
-        "  ½ teaspoon regular or sodium-free baking powder",
-        "  Sea salt, to taste",
-        "  Freshly ground black pepper, to taste",
-        "  1½ lb. assorted fresh mushrooms, sliced (9 cups)",
-        "  ½ cup chopped fresh parsley",
-        "  ⅓ cup tahini",
-        "  ¼ cup lemon juice",
-        "  3 cloves garlic",
-        "  Crushed red pepper (optional)"
       ]
     },
     {
@@ -32182,31 +32198,6 @@
         "freshly ground nutmeg , to taste",
         "½ tsp black pepper, to taste",
         "sesame seeds, to garnish (optional)"
-      ]
-    },
-    {
-      "id": 5011,
-      "title": "hemp crusted tofu cobb salad",
-      "pct": 93,
-      "haveCount": 13,
-      "needCount": 1,
-      "needNames": [
-        "c hemp hearts"
-      ],
-      "haveNames": [
-        "x 350 g or 400 g brick of firm tofu",
-        "c gluten-free bread crumbs",
-        "chili powder",
-        "garlic powder",
-        "salt",
-        "pepper",
-        "dijon mustard",
-        "plant milk",
-        "c romaine lettuce",
-        "green beans",
-        "c tomato wedges or cherry tomatoes",
-        "c corn",
-        "avocados"
       ]
     },
     {
@@ -33506,6 +33497,31 @@
       ]
     },
     {
+      "id": 5873,
+      "title": "Quinoa Upma Recipe",
+      "pct": 93,
+      "haveCount": 13,
+      "needCount": 1,
+      "needNames": [
+        "1 tsp organic canola or safflower oil"
+      ],
+      "haveNames": [
+        "1 cup uncooked quinoa",
+        "1/2 tsp mustard seeds",
+        "1/2 tsp urad dal (split black gram or use mung dal (petite yellow lentils))",
+        "1  green chili chopped (remove seeds to adjust spice if needed)",
+        "10  curry leaves (fresh or frozen)",
+        "1/2 cup finely chopped red onion",
+        "2 Tbsp chopped cashews",
+        "1/2 inch ginger minced (1 tsp grated)",
+        "1/2 cup chopped carrots",
+        "1/2 cup peas (fresh or frozen (thawed))",
+        "1/2 to 3/4 tsp salt",
+        "2 cups water",
+        "cilantro and lemon juice for garnish"
+      ]
+    },
+    {
       "id": 5005,
       "title": "raw apple crumble",
       "pct": 93,
@@ -34309,29 +34325,28 @@
       ]
     },
     {
-      "id": 4661,
-      "title": "Baked Curry Puffs - 咖喱角",
+      "id": 6124,
+      "title": "Baked Apple Cider Donuts Vegan",
       "pct": 93,
-      "haveCount": 14,
+      "haveCount": 13,
       "needCount": 1,
       "needNames": [
-        "a few pandan leaves )"
+        "1/4 cup sugar ((coconut sugar, date sugar, regular or use maple syrup), 1/3 cup for sweeter)"
       ],
       "haveNames": [
-        "pack [1.1lbs or 490g] vegan puff pastry of your choice",
-        "sized potato",
-        "onion or 2 shallots",
-        "garlic",
-        "carrot",
-        "peas",
-        "curry powder",
-        "sambal",
-        "coconut sugar",
-        "veggie stock",
-        "oil for cooking",
-        "salt",
-        "unsweetened plant-based milk",
-        "maple syrup"
+        "1.5 cups  + 2 tbsp apple cider (not vinegar, but the fermented apple drink)",
+        "1 cup flour ( , see note for gluten-free)",
+        "1 tbsp almond flour (, or use more flour)",
+        "3/4 tsp cinnamon",
+        "1/8 tsp cardamom or nutmeg",
+        "dash of black pepper",
+        "1/4 tsp salt",
+        "1 tsp baking powder",
+        "1/4 tsp baking soda",
+        "1 tbsp oil or applesauce",
+        "1 tbsp cane sugar",
+        "1 tbsp coconut sugar or brown sugar",
+        "1/2 tsp cinnamon"
       ]
     },
     {
@@ -35777,45 +35792,6 @@
       ]
     },
     {
-      "id": 5611,
-      "title": "Vegan masala dosa",
-      "pct": 93,
-      "haveCount": 26,
-      "needCount": 2,
-      "needNames": [
-        "100 g / heaped ½ cup urid dal (split husked black lentils), I used unhusked",
-        "1 small green chilli, deseeded"
-      ],
-      "haveNames": [
-        "300 g / 1½ cups basmati rice",
-        "½ tsp fenugreek seeds",
-        "1 tsp salt",
-        "4 medium potatoes",
-        "2 tbsp vegetable oil",
-        "1 tsp black mustard seeds",
-        "10 fresh or dried curry leaves",
-        "1 large onion, diced finely",
-        "2 small green chillies, diced finely",
-        "3 garlic cloves, diced finely",
-        "2.5 cm / 1\" ginger root, diced finely",
-        "1 tsp ground turmeric",
-        "chilli flakes or powder, to taste",
-        "1/3 cup frozen peas",
-        "½ tsp salt, adjust to taste",
-        "2 tbsp cashew nuts, pan-roasted",
-        "fresh coriander, to serve",
-        "sambal oelek, to serve",
-        "100 g / 1 cup desiccated coconut",
-        "1-2 tsp finely grated ginger root",
-        "salt, to taste",
-        "juice of ½ lime",
-        "2 tsp vegetable oil",
-        "½ tsp black mustard seeds",
-        "½ tsp cumin seeds",
-        "4 dried curry leaves"
-      ]
-    },
-    {
       "id": 3059,
       "title": "Vegan Meatballs (Lentil-Walnut)",
       "pct": 93,
@@ -36253,35 +36229,6 @@
         "  Sea salt, to taste",
         "  Freshly ground black pepper, to taste",
         "  Orange, lemon, and/or lime wedges (optional)"
-      ]
-    },
-    {
-      "id": 5492,
-      "title": "Sweet potato bowl",
-      "pct": 94,
-      "haveCount": 17,
-      "needCount": 1,
-      "needNames": [
-        "favourite hot sauce"
-      ],
-      "haveNames": [
-        "450 g / 1 lb sweet potato*, cubed",
-        "30 ml / 2 tbsp olive oil, divided (optional)",
-        "1½ tsp cumin",
-        "1½ tsp smoked paprika",
-        "salt and pepper",
-        "185 g / 1 cup quinoa (or brown rice)",
-        "2 small corn ears",
-        "120 ml / ½ cup apple cider vinegar",
-        "½ red onion, finely diced",
-        "90 g / ¾ cup shelled pumpkin seeds / pepitas",
-        "½ tsp garlic powder",
-        "small fennel, shredded very thinly",
-        "1 red pepper, cubed small",
-        "small cucumber, cut into half and sliced thinly",
-        "12 radishes, cut into matchsticks",
-        "1 ripe avocado, cubed",
-        "1 lime"
       ]
     },
     {
@@ -38030,33 +37977,6 @@
       ]
     },
     {
-      "id": 5476,
-      "title": "Mini vegan sausage rolls",
-      "pct": 94,
-      "haveCount": 15,
-      "needCount": 1,
-      "needNames": [
-        "1 tbsp sesame or poppy seeds, to decorate"
-      ],
-      "haveNames": [
-        "250 g / 9 oz chestnut or portobello mushrooms (large if you can get them)",
-        "225 g / 8 oz smoked firm cotton tofu OR 175 g / 1 packed cup cooked brown rice",
-        "3 tbsp olive oil",
-        "2 large shallots, finely diced",
-        "3 garlic cloves, finely diced",
-        "8 fresh sage leaves and 4 thyme springs, leaves picked",
-        "2 tsp mushroom soy sauce or plain soy sauce / tamari (for GF version)",
-        "¼-1/3 tsp salt, adjust to taste",
-        "generous grind of black pepper",
-        "2 tbsp nutritional yeast",
-        "2 tsp tomato paste",
-        "1½ tsp wholegrain mustard, more to taste",
-        "1 tsp smoked sweet paprika (if using rice), more to taste",
-        "1 sheet vegan puff pastry*",
-        "vegan egg wash: 2 tsp plant milk, 1 tsp olive oil + 1 tsp maple syrup or sugar"
-      ]
-    },
-    {
       "id": 5597,
       "title": "Miso tofu bowl",
       "pct": 94,
@@ -38221,35 +38141,6 @@
         "3/4 tsp salt",
         "1/2 cup packed chopped spinach.",
         "lemon juice and pepper flakes for garnish"
-      ]
-    },
-    {
-      "id": 4885,
-      "title": "Quick Dal Makhani",
-      "pct": 94,
-      "haveCount": 17,
-      "needCount": 1,
-      "needNames": [
-        "uncooked black lentils **"
-      ],
-      "haveNames": [
-        "avocado oil or extra-virgin olive oil",
-        "onion",
-        "garlic",
-        "ginger",
-        "jalapeño pepper",
-        "½ teaspoons frontier co-op garam masala*",
-        "½ teaspoon frontier co-op cumin",
-        "½ teaspoon frontier co-op coriander",
-        "½ teaspoon salt",
-        "pepper",
-        "canned tomatoes",
-        "kidney beans",
-        "bay leaf",
-        "lime",
-        "optional (for additional creaminess): half-and-half, or regular or light coconut milk",
-        "cilantro",
-        "suggested accompaniments: brown basmati rice or toasted naan"
       ]
     },
     {
@@ -38819,34 +38710,6 @@
         "Cashew cream made with 1/3 cup of cashews + 3/4 cup of water (See notes for nut-free)",
         "2-3 oz Chopped spinach or baby kale (or other chopped greens )",
         "green onion, pepper flakes for garnish"
-      ]
-    },
-    {
-      "id": 7753,
-      "title": "15-Minute Lentil Burgers (No Cooking Required!)",
-      "pct": 94,
-      "haveCount": 16,
-      "needCount": 1,
-      "needNames": [
-        "  2 8-oz. pouches cooked black lentils or one 15-oz. can no-salt-added black lentils (1½ cups)"
-      ],
-      "haveNames": [
-        "  ¼ cup sun-dried tomatoes (not oil-packed)",
-        "  1 cup coarsely shredded carrots",
-        "  ½ cup dry whole wheat bread crumbs (see tip, recipe intro)",
-        "  ¼ cup chopped walnuts, toasted if desired",
-        "  ¼ cup thinly sliced scallions",
-        "  2 tablespoons chia seeds",
-        "  1 tablespoon reduced-sodium coconut aminos",
-        "  2 teaspoons smoked paprika",
-        "  3 cloves garlic, minced",
-        "  ½ teaspoon freshly ground black pepper",
-        "  ⅛ teaspoon sea salt",
-        "  6 teaspoons Dijon mustard",
-        "  4 whole wheat hamburger buns, toasted if desired",
-        "  4 lettuce leaves",
-        "  4 slices tomato",
-        "  4 tablespoons no-sugar-added ketchup"
       ]
     },
     {
@@ -39888,35 +39751,6 @@
       ]
     },
     {
-      "id": 6139,
-      "title": "Vegan Omelet with Mung Bean Egg Substitute",
-      "pct": 94,
-      "haveCount": 17,
-      "needCount": 1,
-      "needNames": [
-        "1 cup moong dal (split Mung beans)"
-      ],
-      "haveNames": [
-        "1/2 tsp salt",
-        "3/4 tsp kala namak",
-        "1/4 tsp each garlic powder, onion powder",
-        "1/8 tsp black pepper",
-        "1/4 tsp turmeric (for color. too much will add flavor)",
-        "1 tsp oil",
-        "1 to 1 1/4 cup non dairy milk such as  (unsweetened almond milk,light coconut milk, or use cashew milk**)",
-        "2  potatoes (, peeled and cubed to a 1/4 inch )",
-        "1/2  onion (, finely chopped)",
-        "3 cloves garlic (, finely chopped)",
-        "1 cup bell pepper (, finely chopped, red or green or both)",
-        "1/2 tsp salt",
-        "1/2 tsp dried thyme + rosemary (or both, or use 2 tsp fresh )",
-        "1/4 tsp cayenne",
-        "a good dash of black pepper",
-        "2 tsp oil",
-        "optional add ins: 1/2 teaspoon baking powder for fluffier, 1-2  tablespoons tapioca starch for reducing lentil texture"
-      ]
-    },
-    {
       "id": 6056,
       "title": "Vegan Pecan Pie Bars - Date Sweetened Glutenfree",
       "pct": 94,
@@ -40003,7 +39837,7 @@
       "id": 5909,
       "title": "Vegan Rasmalai Cake",
       "pct": 94,
-      "haveCount": 17,
+      "haveCount": 16,
       "needCount": 1,
       "needNames": [
         "1  cardamom pod seeds"
@@ -40021,7 +39855,6 @@
         "3-4  saffron strands",
         "1/2 cup almond flour",
         "1 big pinch of salt",
-        "3 tbsp vegan cream cheese",
         "2 tsp vegan butter (or use oil)",
         "1/4 cup powdered sugar",
         "1 tbsp almond slivers",
@@ -40333,6 +40166,55 @@
         "  1 cup cooked cannellini or navy beans",
         "  Sea salt",
         "  Freshly ground black pepper"
+      ]
+    },
+    {
+      "id": 5383,
+      "title": "Giant vegan sausage roll",
+      "pct": 95,
+      "haveCount": 36,
+      "needCount": 2,
+      "needNames": [
+        "225 g / 8 oz smoked firm cotton tofu* OR 175 g / 1 packed cup cooked brown rice",
+        "2 tsp sesame or / and poppy seeds, to decorate"
+      ],
+      "haveNames": [
+        "250 g / 9 oz chestnut / baby bella mushrooms",
+        "3 tbsp olive oil",
+        "2 large shallots, finely diced",
+        "3 garlic cloves, finely diced",
+        "8 fresh sage leaves, finely chopped",
+        "4 thyme springs, leaves picked",
+        "1 tbsp soy sauce / tamari (for GF version)",
+        "¼-1/3 tsp salt, adjust to taste",
+        "generous grind of black pepper",
+        "2 tbsp nutritional yeast",
+        "2 tsp tomato paste",
+        "1½ tsp wholegrain mustard, more to taste",
+        "1 tsp smoked sweet paprika (if using rice), more to taste",
+        "¼ cup flour (I tested tapioca starch and rice flour)",
+        "1 sheet vegan puff pastry",
+        "vegan egg wash: 2 tsp plant milk, 1 tsp olive oil + 1 tsp maple syrup or sugar",
+        "20 g / 0.7 oz dry mushrooms , well rinsed",
+        "2 tbsp olive oil",
+        "2 large shallots , roughly diced",
+        "6 garlic cloves, unpeeled and crushed",
+        "2 small carrots, scrubbed clean and roughly diced",
+        "2 celery sticks, roughly diced",
+        "2 tsp tomato paste",
+        "1 sprig of fresh rosemary, whole",
+        "6 sprigs of fresh thyme, whole",
+        "4 sage leaves, roughly chopped",
+        "120 ml / ½ cup vegan white wine",
+        "1 fresh or dried bay leaf",
+        "10 black peppercorns",
+        "1 tbsp white / shiro miso",
+        "1 tbsp nutritional yeast",
+        "1 tbsp soy sauce",
+        "1 tbsp balsamic vinegar",
+        "1 tsp maple syrup or sugar",
+        "salt, to taste (if needed)",
+        "2 tsp cornstarch / cornflour"
       ]
     },
     {
@@ -42171,6 +42053,37 @@
       ]
     },
     {
+      "id": 6367,
+      "title": "Fragrant Kidney Bean Lentil Dal",
+      "pct": 95,
+      "haveCount": 19,
+      "needCount": 1,
+      "needNames": [
+        "  pinch or two crushed red pepper flakes (or more/less to taste, see note)"
+      ],
+      "haveNames": [
+        "  1½ - 2 tablespoons water",
+        "  1 cup onions, diced",
+        "  1¼ teaspoon sea salt",
+        "  freshly ground black pepper to taste",
+        "  2 teaspoons cumin seeds",
+        "  2 teaspoons mustard seeds",
+        "  ½ teaspoon fennel seeds (see note)",
+        "  1 teaspoon coriander powder",
+        "  1 teaspoon turmeric powder",
+        "  ½ teaspoon allspice",
+        "  1 cinnamon stick (or ½ teaspoon cinnamon)",
+        "  2½ - 3 cups water (see note)",
+        "  ½ cup freshly squeezed or good quality orange juice (see note)",
+        "  2 large cloves garlic, minced",
+        "  1½ tablespoons freshly grated ginger",
+        "  1 cup red lentils (rinse before adding to pot)",
+        "  1 can (14 ounce) red kidney beans, rinsed and drained (or black beans)",
+        "  2 dried or fresh bay leaves",
+        "  Hot sauce to taste (optional, see note)"
+      ]
+    },
+    {
       "id": 4486,
       "title": "Jackfruit Katsu Curry",
       "pct": 95,
@@ -43319,40 +43232,6 @@
       ]
     },
     {
-      "id": 6108,
-      "title": "Vegan Tonkotsu Ramen",
-      "pct": 96,
-      "haveCount": 22,
-      "needCount": 1,
-      "needNames": [
-        "2 tablespoons ginger garlic paste (or use 3 cloves of garlic, minced and 1/2” of ginger, minced)"
-      ],
-      "haveNames": [
-        "1 tablespoon soy sauce (, tamari for gluten-free )",
-        "1 tablespoon hoisin sauce",
-        "2 teaspoons maple syrup",
-        "1/4 teaspoon white pepper",
-        "1 teaspoon sesame oil",
-        "1/2 teaspoon garlic powder",
-        "7 ounces firm or extra firm tofu (pressed for at least 15 minutes and then sliced into two slabs)",
-        "1 teaspoon oil",
-        "3 ounces mushrooms",
-        "1/2  jalapeño (thinly sliced)",
-        "1 tablespoon yellow miso",
-        "2 teaspoons sesame oil",
-        "2 tablespoons sambal oelek (or any Asian chili garlic sauce)",
-        "2.5 to 3.5 cups vegetable broth ((depends on noodles used and consistency preference) )",
-        "1 cup full-fat coconut milk",
-        "4 ounces noodles of choice (such as thin udon or ramen)",
-        "1 or 2  baby bok choy (washed really well and then sliced in half)",
-        "chopped green onion",
-        "sliced jalapeño",
-        "sesame seeds",
-        "chili oil or crushed pepper flakes",
-        "lime wedges"
-      ]
-    },
-    {
       "id": 7858,
       "title": "2-Bean Chili and Cornbread",
       "pct": 96,
@@ -43533,42 +43412,6 @@
       ]
     },
     {
-      "id": 5947,
-      "title": "Moong Dal Frittata/Lentil ”egg” bake",
-      "pct": 96,
-      "haveCount": 24,
-      "needCount": 1,
-      "needNames": [
-        "1 cup dried moong dal,  (split and skinned mung beans or petite yellow lentils)"
-      ],
-      "haveNames": [
-        "¼ teaspoon salt",
-        "½ teaspoon garlic powder",
-        "½ teaspoon onion powder",
-        "½ to ¾ teaspoon kala namak (Indian sulfur salt, optional)",
-        "½ teaspoon black pepper",
-        "1 teaspoon baking powder",
-        "1 tablespoon nutritional yeast",
-        "2 tablespoons cashews,  (or use hemp or pumpkin seeds for nut-free)",
-        "1 cup water (or stock)",
-        "2 teaspoons oil",
-        "2 ounces thinly sliced mushrooms",
-        "1/2 cup thinly sliced red bell pepper",
-        "1/4 cup thinly sliced green bell pepper",
-        "1/2 cup sliced onion",
-        "1 teaspoon smoked paprika",
-        "½ teaspoon thyme (or oregano or both)",
-        "1/8 teaspoon salt",
-        "pepper flakes or black pepper (to taste)",
-        "1 tablespoon chopped sun-dried tomato",
-        "2 tablespoons green onion",
-        "2 oz crumbled firm tofu",
-        "1 oz chopped baby spinach (or thawed and squeezed frozen spinach)",
-        "reserved cooked mushrooms, (peppers, and onions)",
-        "black pepper, green onion, vegan Parmesan"
-      ]
-    },
-    {
       "id": 4519,
       "title": "Peanut Butter Curry",
       "pct": 96,
@@ -43669,6 +43512,40 @@
         "1 teaspoon julienne ginger",
         "10  curry leaves (fresh or frozen)",
         "1 tablespoon chopped cilantro leaves"
+      ]
+    },
+    {
+      "id": 6108,
+      "title": "Vegan Tonkotsu Ramen",
+      "pct": 96,
+      "haveCount": 22,
+      "needCount": 1,
+      "needNames": [
+        "2 tablespoons ginger garlic paste (or use 3 cloves of garlic, minced and 1/2” of ginger, minced)"
+      ],
+      "haveNames": [
+        "1 tablespoon soy sauce (, tamari for gluten-free )",
+        "1 tablespoon hoisin sauce",
+        "2 teaspoons maple syrup",
+        "1/4 teaspoon white pepper",
+        "1 teaspoon sesame oil",
+        "1/2 teaspoon garlic powder",
+        "7 ounces firm or extra firm tofu (pressed for at least 15 minutes and then sliced into two slabs)",
+        "1 teaspoon oil",
+        "3 ounces mushrooms",
+        "1/2  jalapeño (thinly sliced)",
+        "1 tablespoon yellow miso",
+        "2 teaspoons sesame oil",
+        "2 tablespoons sambal oelek (or any Asian chili garlic sauce)",
+        "2.5 to 3.5 cups vegetable broth ((depends on noodles used and consistency preference) )",
+        "1 cup full-fat coconut milk",
+        "4 ounces noodles of choice (such as thin udon or ramen)",
+        "1 or 2  baby bok choy (washed really well and then sliced in half)",
+        "chopped green onion",
+        "sliced jalapeño",
+        "sesame seeds",
+        "chili oil or crushed pepper flakes",
+        "lime wedges"
       ]
     },
     {
@@ -43880,6 +43757,45 @@
       ]
     },
     {
+      "id": 5611,
+      "title": "Vegan masala dosa",
+      "pct": 96,
+      "haveCount": 27,
+      "needCount": 1,
+      "needNames": [
+        "1 small green chilli, deseeded"
+      ],
+      "haveNames": [
+        "300 g / 1½ cups basmati rice",
+        "100 g / heaped ½ cup urid dal (split husked black lentils), I used unhusked",
+        "½ tsp fenugreek seeds",
+        "1 tsp salt",
+        "4 medium potatoes",
+        "2 tbsp vegetable oil",
+        "1 tsp black mustard seeds",
+        "10 fresh or dried curry leaves",
+        "1 large onion, diced finely",
+        "2 small green chillies, diced finely",
+        "3 garlic cloves, diced finely",
+        "2.5 cm / 1\" ginger root, diced finely",
+        "1 tsp ground turmeric",
+        "chilli flakes or powder, to taste",
+        "1/3 cup frozen peas",
+        "½ tsp salt, adjust to taste",
+        "2 tbsp cashew nuts, pan-roasted",
+        "fresh coriander, to serve",
+        "sambal oelek, to serve",
+        "100 g / 1 cup desiccated coconut",
+        "1-2 tsp finely grated ginger root",
+        "salt, to taste",
+        "juice of ½ lime",
+        "2 tsp vegetable oil",
+        "½ tsp black mustard seeds",
+        "½ tsp cumin seeds",
+        "4 dried curry leaves"
+      ]
+    },
+    {
       "id": 3132,
       "title": "Vegan Bibimbap with Crispy Gochujang Cauliflower",
       "pct": 97,
@@ -43917,55 +43833,6 @@
         "vegan kimchi",
         "vegetable oil",
         "yellow bell pepper"
-      ]
-    },
-    {
-      "id": 5383,
-      "title": "Giant vegan sausage roll",
-      "pct": 97,
-      "haveCount": 37,
-      "needCount": 1,
-      "needNames": [
-        "2 tsp sesame or / and poppy seeds, to decorate"
-      ],
-      "haveNames": [
-        "250 g / 9 oz chestnut / baby bella mushrooms",
-        "225 g / 8 oz smoked firm cotton tofu* OR 175 g / 1 packed cup cooked brown rice",
-        "3 tbsp olive oil",
-        "2 large shallots, finely diced",
-        "3 garlic cloves, finely diced",
-        "8 fresh sage leaves, finely chopped",
-        "4 thyme springs, leaves picked",
-        "1 tbsp soy sauce / tamari (for GF version)",
-        "¼-1/3 tsp salt, adjust to taste",
-        "generous grind of black pepper",
-        "2 tbsp nutritional yeast",
-        "2 tsp tomato paste",
-        "1½ tsp wholegrain mustard, more to taste",
-        "1 tsp smoked sweet paprika (if using rice), more to taste",
-        "¼ cup flour (I tested tapioca starch and rice flour)",
-        "1 sheet vegan puff pastry",
-        "vegan egg wash: 2 tsp plant milk, 1 tsp olive oil + 1 tsp maple syrup or sugar",
-        "20 g / 0.7 oz dry mushrooms , well rinsed",
-        "2 tbsp olive oil",
-        "2 large shallots , roughly diced",
-        "6 garlic cloves, unpeeled and crushed",
-        "2 small carrots, scrubbed clean and roughly diced",
-        "2 celery sticks, roughly diced",
-        "2 tsp tomato paste",
-        "1 sprig of fresh rosemary, whole",
-        "6 sprigs of fresh thyme, whole",
-        "4 sage leaves, roughly chopped",
-        "120 ml / ½ cup vegan white wine",
-        "1 fresh or dried bay leaf",
-        "10 black peppercorns",
-        "1 tbsp white / shiro miso",
-        "1 tbsp nutritional yeast",
-        "1 tbsp soy sauce",
-        "1 tbsp balsamic vinegar",
-        "1 tsp maple syrup or sugar",
-        "salt, to taste (if needed)",
-        "2 tsp cornstarch / cornflour"
       ]
     },
     {

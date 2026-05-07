@@ -152,7 +152,7 @@ export const INGREDIENT_ALIASES = {
   'vegan worcestershire': ['worcestershire sauce','worcestershire','vegan worcestershire sauce'],
   'hoisin sauce': ['hoisin'],
   'active dry yeast': ['yeast','instant yeast','dry yeast','rapid rise yeast'],
-  'lentils': ['red lentils','green lentils','brown lentils','french lentils','yellow lentils','split red lentils','split lentils'],
+  'lentils': ['red lentils','green lentils','brown lentils','french lentils','yellow lentils','black lentils','beluga lentils','split red lentils','split lentils','dal','dahl'],
   'flax seeds': ['flax egg','ground flaxseed','flaxseed meal','ground flax','flax meal'],
   'jackfruit': ['young jackfruit','canned jackfruit','green jackfruit'],
   'fresh ginger': ['ginger root','fresh ginger root','minced ginger','grated ginger','1 inch ginger','2 inch ginger'],

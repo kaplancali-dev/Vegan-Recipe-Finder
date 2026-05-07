@@ -104,7 +104,7 @@ export function stripMeasure(s) {
   str = str.replace(/^(?:can|cans|tin|tins|jar|jars|bag|bags|pack|packs|packet|packets|block|blocks)\s+(?:of\s+)?/i, '');
 
   // 5. Strip quantities and units iteratively
-  const UNIT = String.raw`(?:g|kg|oz|lb|lbs|ml|l|dl|cups?|tsp|tbsp|teaspoons?|tablespoons?|ounces?|pounds?|grams?|inch(?:es)?|cm|cloves?|bunch(?:es)?|handfuls?|pieces?|cans?|tins?|heads?|stalks?|sprigs?|pinch(?:es)?|dash(?:es)?|slices?|sheets?|blocks?|packets?|packages?|bags?|jars?|bottles?|portions?|servings?|leaves?|drops?|packs?)`;
+  const UNIT = String.raw`(?:g|kg|oz|lb|lbs|ml|l|dl|cups?|tsp|tbsp|teaspoons?|tablespoons?|ounces?|pounds?|grams?|inch(?:es)?|cm|cloves?|bunch(?:es)?|handfuls?|pieces?|cans?|tins?|heads?|stalks?|sprigs?|pinch(?:es)?|dash(?:es)?|slices?|sheets?|blocks?|packets?|packages?|pouches?|sachets?|sticks?|loaves?|tubes?|bars?|bags?|jars?|bottles?|portions?|servings?|leaves?|drops?|packs?)`;
   const UNIT_ADJ = String.raw`(?:heaped|rounded|level|packed|generous|scant|good)`;
 
   str = str.replace(/^[\d½¼¾⅓⅔⅛⅜⅝⅞.,/\-–~≈+×x\s]+/, '');
@@ -151,7 +151,7 @@ export function stripMeasure(s) {
     .trim();
 
   // 7. Strip prep/descriptor noise words
-  const NOISE = /\b(?:fresh|freshly|ground|organic|raw|dried|dry|frozen|thawed|shredded|chopped|diced|minced|sliced|grated|crushed|mashed|sifted|julienned|trimmed|stemmed|peeled|pitted|deseeded|seeded|cored|halved|quartered|torn|packed|pressed|softened|melted|warm|cold|hot|chilled|lightly|roughly|finely|thinly|coarsely|undrained|toasted|roasted|leftover|ready-rolled)\s+/gi;
+  const NOISE = /\b(?:fresh|freshly|ground|organic|raw|dried|dry|frozen|thawed|shredded|chopped|diced|minced|sliced|grated|crushed|mashed|sifted|julienned|trimmed|stemmed|peeled|pitted|deseeded|seeded|cored|halved|quartered|torn|packed|pressed|softened|melted|warm|cold|hot|chilled|lightly|roughly|finely|thinly|coarsely|undrained|toasted|roasted|cooked|leftover|ready-rolled|smashed|scrubbed)\s+/gi;
   let prev = '';
   while (str !== prev) { prev = str; str = str.replace(NOISE, '').trim(); }
   str = str.replace(/\s+(?:warm|cold|hot|chilled|thawed|softened|melted|chopped|diced|minced|sliced|shredded|grated|crushed|mashed|peeled|pitted|trimmed|stemmed|quartered|halved|toasted|roasted)$/i, '');
