@@ -292,11 +292,13 @@ function _wordBoundaryMatch(haystack, needle, strictPrefix = true) {
     // "AND X" requires BOTH components — single-component user pantry can't
     // satisfy "salt and pepper" via just having "salt". Reject the substring
     // match so the scoring loop's combined-ingredient logic kicks in to
-    // verify user has all components. Same for "&" and "+". Check both
-    // directions (needle at start OR end of multi-component string):
-    //   "salt and pepper" matched by "salt" → remainder "and pepper" → reject
-    //   "salt and pepper" matched by "pepper" → prefix ends in "and" → reject
-    if (/^(?:and|&|\+)\s+/i.test(remainder)) return false;
+    // verify user has all components. Same for "&" and "+".
+    //
+    // Check ANYWHERE in remainder (catches "X and Y" with needle at start)
+    // AND in prefix (catches "X and Y" with needle at end). This handles
+    // multi-item lists like "cumin, coriander, and turmeric" too (after
+    // norm strips commas → "cumin coriander and turmeric").
+    if (/^(?:and|&|\+)\s+/i.test(remainder) || /\s+(?:and|&|\+)\s+/i.test(remainder)) return false;
     const prefixForCombined = haystack.slice(0, idx).trim();
     if (/\s+(?:and|&|\+)$/i.test(prefixForCombined) || /^(?:and|&|\+)$/i.test(prefixForCombined)) return false;
 
@@ -411,33 +413,59 @@ function _stripUsageNotes(rawIng) {
   s = s.replace(/\s*[,\-]?\s*\bfor\s+(cooking|frying|sauté|sauteing|sautéing|greasing|brushing|drizzling|garnish|garnishing|serving|topping|finishing|dusting|sprinkling|coating|baking|roasting|the\s+top|extra)\b.*$/i, '');
   // "to taste"
   s = s.replace(/\s*[,\-]?\s*\bto\s+taste\b.*$/i, '');
-  // Prep state suffixes that don't change identity
-  s = s.replace(/\s*,\s*(?:divided|melted|softened|room\s+temperature|chilled|warmed|cooled|drained|rinsed|drained\s+and\s+rinsed|cubed|diced|chopped|sliced|minced|crushed|grated|shredded|peeled|cooked|raw|toasted|frozen|thawed|optional)\b.*$/i, '');
+  // Prep state suffixes that don't change identity. Handles compound prep
+  // states like "drained and rinsed", "rolled and toasted", "halved and pitted"
+  // by allowing any sequence of prep words joined by "and" or commas.
+  const PREP = '(?:divided|melted|softened|room\\s+temperature|chilled|warmed|cooled|drained|rinsed|cubed|diced|chopped|sliced|minced|crushed|grated|shredded|peeled|seeded|deseeded|cooked|raw|toasted|rolled|frozen|thawed|optional|halved|quartered|pitted|stemmed|trimmed|cleaned|patted\\s+dry|squeezed|drained\\s+well|finely\\s+chopped|finely\\s+diced|thinly\\s+sliced|roughly\\s+chopped|coarsely\\s+chopped|cut\\s+into\\s+\\w+(?:\\s+\\w+)*)';
+  const prepRegex = new RegExp(`\\s*,\\s*${PREP}(?:\\s*(?:,|and)\\s*${PREP})*\\b.*$`, 'i');
+  s = s.replace(prepRegex, '');
   return s.trim();
 }
 
 /**
- * Detect combined ingredients ("salt and pepper", "salt & pepper") and split
- * into components. The matcher treats these as a single ingredient line that
- * requires ALL components to be in the user's pantry.
+ * Detect combined ingredients (e.g. "salt and pepper", "garlic powder and
+ * onion powder", "salt, pepper, and onion powder") and split into components.
+ * The matcher treats these as a single ingredient line that requires ALL
+ * components to be in the user's pantry.
  *
- * Returns an array of normalized component names, or null if not combined.
+ * Returns an array of component names, or null if not combined.
  */
 function _splitCombined(rawIng) {
-  const cleaned = rawIng.toLowerCase()
-    .replace(/\bto\s+taste\b/g, '')
-    .replace(/\(.*?\)/g, '')
-    .replace(/\boptional\b/g, '')
-    .trim();
+  let cleaned = rawIng.toLowerCase();
+  // Strip parens, footnote markers, "to taste", "optional" qualifier
+  cleaned = cleaned.replace(/\(.*?\)/g, '').replace(/[*†‡]+/g, '').trim();
+  cleaned = cleaned.replace(/\bto\s+taste\b/g, '').replace(/\boptional\b/g, '').trim();
+  // Strip leading measurements/quantities ("3 ½ cups", "1 tbsp", etc.)
+  cleaned = cleaned.replace(/^[\d½¼¾⅓⅔.,/\s-]+/, '').trim();
+  cleaned = cleaned.replace(/^(?:tbsp|tsp|teaspoons?|tablespoons?|cups?|pinch(?:es)?|dash(?:es)?|splash(?:es)?|sprigs?|leaves?|cloves?|pieces?|grams?|g|ml|l|oz|lb|lbs|ounces?|pounds?)\.?\s+(?:of\s+)?/i, '').trim();
+  cleaned = cleaned.replace(/^pinch\s+of\s+/i, '').replace(/^splash\s+of\s+/i, '');
 
-  // The most common combined pattern: salt + pepper (with various phrasings)
-  // "salt and pepper", "salt & pepper", "kosher salt and black pepper", etc.
-  const saltPepper = cleaned.match(/^(?:[\d½¼¾⅓⅔.,/\s-]+)?(?:freshly\s+(?:cracked|ground)\s+|fine\s+|coarse\s+|kosher\s+|sea\s+)?(?:salt|pepper)\s+(?:and|&|\+)\s+(?:freshly\s+(?:cracked|ground)\s+|fine\s+|coarse\s+|black\s+|white\s+)?(?:pepper|salt)\b/i);
-  if (saltPepper) {
-    return ['salt', 'pepper'];
-  }
+  // Normalize "X, Y, and Z" → "X and Y and Z" so we can split uniformly
+  cleaned = cleaned.replace(/,\s*(?:and\s+)?/g, ' and ').trim();
 
-  return null;
+  // Split on connector words. Use lookahead so we don't split inside compounds
+  // that legitimately contain "and" (rare for ingredient names).
+  const parts = cleaned.split(/\s+(?:and|&|\+)\s+/i)
+    .map(p => p.trim())
+    .filter(Boolean);
+
+  if (parts.length < 2) return null;
+
+  // Reject if any component is too long (likely an instruction like
+  // "drained and rinsed", "stirred and warmed", "minced and ready").
+  // Real ingredient names are 1-4 words.
+  if (parts.some(p => p.split(/\s+/).length > 4)) return null;
+
+  // Reject if any component is just a prep word (e.g., "drained", "rinsed",
+  // "warmed") — those are usage notes, not separate ingredients.
+  const PREP_WORDS = new Set([
+    'drained','rinsed','chopped','diced','sliced','minced','crushed','grated',
+    'shredded','peeled','seeded','cooked','warmed','cooled','melted','softened',
+    'cubed','quartered','halved','divided','rolled','beaten','whipped','sifted',
+  ]);
+  if (parts.some(p => PREP_WORDS.has(p))) return null;
+
+  return parts;
 }
 
 /**
