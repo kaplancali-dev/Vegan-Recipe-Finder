@@ -8,6 +8,9 @@ export const INGREDIENT_ALIASES = {
   'nut butter (any)':       ['peanut butter','almond butter','sunflower butter','cashew butter','hazelnut butter','walnut butter','pecan butter','macadamia butter','mixed nut butter','seed butter'],
   'pasta (any)':            ['pasta','gluten-free pasta','spaghetti','penne','fusilli','farfalle','rigatoni','linguine','fettuccine','tagliatelle','orzo','macaroni','rotini','angel hair','lasagna noodles','noodles'],
   'soy sauce / tamari / coconut aminos':     ['soy sauce','tamari','coconut aminos','liquid aminos','aminos'],
+  // Combined staple "sriracha / hot sauce" needs to expand to both sides
+  // (and to common substitutes: sambal oelek, chili garlic sauce, gochujang)
+  'sriracha / hot sauce':                    ['sriracha','hot sauce','sambal oelek','chili garlic sauce','gochujang','rooster sauce'],
   'sweetener (any)': ['maple syrup','agave','coconut sugar','brown sugar','sugar','date syrup'],
   'leafy greens (any)': ['spinach','kale','chard','arugula','collard greens','beet greens','bok choy','baby spinach'],
   'lettuce (any)': ['lettuce','romaine','romaine lettuce','iceberg','iceberg lettuce','butter lettuce','bibb lettuce','red leaf lettuce','green leaf lettuce','mixed greens','spring mix','mesclun','mixed salad greens'],
@@ -161,9 +164,15 @@ export const INGREDIENT_SUBS = {
   // bottled juice does NOT cover whole fruit (no zest, no slices, no wedges).
   // Lemon ↔ lime: cross-acceptable since they're similar acidity (with a
   // small flavor adjustment).
-  'lemon':  ['lime','lemons','lemon juice','fresh lemon juice','juice of 1 lemon','juice of a lemon','juice of half a lemon','lemon zest','lemon wedges'],
-  'lime':   ['lemon','limes','lime juice','fresh lime juice','juice of 1 lime','juice of a lime','lime zest','lime wedges'],
-  'orange': ['oranges','orange juice','fresh orange juice','juice of 1 orange','orange zest','orange wedges'],
+  // Lemon ↔ lime cross-substitution: similar acidity, common swap. User with
+  // either covers BOTH the whole fruit AND juice/zest forms of either.
+  'lemon':  ['lime','lemons','lemon juice','fresh lemon juice','juice of 1 lemon','juice of a lemon','juice of half a lemon','lemon zest','lemon wedges',
+             'lime juice','fresh lime juice','juice of 1 lime','juice of a lime','lime zest','lime wedges','tablespoons lemon juice','tbsp lemon juice','tablespoons lime juice','tbsp lime juice'],
+  'lime':   ['lemon','limes','lime juice','fresh lime juice','juice of 1 lime','juice of a lime','lime zest','lime wedges',
+             'lemon juice','fresh lemon juice','juice of 1 lemon','juice of a lemon','lemon zest','lemon wedges','tablespoons lime juice','tbsp lime juice','tablespoons lemon juice','tbsp lemon juice'],
+  'lemon juice': ['lime juice','fresh lemon juice','fresh lime juice','tablespoons lemon juice','tbsp lemon juice','tablespoons lime juice','tbsp lime juice'],
+  'lime juice':  ['lemon juice','fresh lime juice','fresh lemon juice','tablespoons lime juice','tbsp lime juice','tablespoons lemon juice','tbsp lemon juice'],
+  'orange': ['oranges','orange juice','fresh orange juice','juice of 1 orange','orange zest','orange wedges','tablespoons orange juice','tbsp orange juice'],
   // Cilantro and parsley LOOK alike but taste nothing alike. Cilantro has
   // a citrus-soapy note; parsley is grassy. Substituting changes the dish.
   // Basil is a third totally different herb. No aliases.
