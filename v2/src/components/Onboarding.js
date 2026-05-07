@@ -140,18 +140,18 @@ const STAPLE_SECTIONS = [
     'coconut cream','shredded coconut',
     'date sugar','allulose','stevia / monk fruit',
   ]},
-  // 13 — Asian Specialty (GF-safe items only — verify labels for celiacs)
+  // 13 — Asian Specialty (GF-safe items only)
+  // EXCLUDED: shaoxing wine (traditional contains wheat — celiac safety)
+  // VERIFY LABELS: vegan oyster sauce, mirin (some brands have wheat additives)
   { label: '🍱 Asian Specialty', sub: 'unlock Japanese, Korean & Chinese recipes', items: [
-    { name: 'mirin', hint: 'sweet rice wine — Japanese cooking' },
+    { name: 'mirin', hint: 'sweet rice wine — verify GF label' },
     { name: 'gochugaru', hint: 'Korean chili flakes' },
-    'vegan oyster sauce',
+    { name: 'vegan oyster sauce', hint: 'verify GF label' },
     { name: 'shichimi togarashi', hint: 'Japanese 7-spice' },
     'furikake',
     'kombu',
     'daikon','yuzu','wakame',
-    'shaoxing wine',
     'rice paper',
-    { name: 'edamame', hint: 'soy beans, snack-ready' },
   ]},
 ];
 

@@ -513,7 +513,7 @@ export const QA_ITEMS = [
   {cat:'🧂 Baking & Flours',    items:['baking soda','baking powder','cornstarch','arrowroot powder','gluten-free flour','almond flour','coconut flour','oat flour','tapioca flour','brown rice flour','chickpea flour','cassava flour','flaxseed meal','applesauce','xanthan gum','cream of tartar','active dry yeast','protein powder']},
   {cat:'🌿 Spices & Herbs',     items:['turmeric','cumin','smoked paprika','cinnamon','chili powder','ginger','curry powder','black pepper','white pepper','garlic powder','onion powder','oregano','basil','thyme','sage','coriander','cayenne','cilantro','parsley','cardamom','cloves','allspice','bay leaves','five spice','nutmeg','sea salt','garam masala','lemongrass','star anise','dill','mint','chives','rosemary','red pepper flakes','fennel seeds','sumac','italian seasoning']},
   {cat:'🍨 Dessert Pantry',     items:['vanilla extract','cocoa powder','chocolate chips (any)','white chocolate chips','dark chocolate','cacao nibs','coconut cream','shredded coconut','date sugar','allulose','stevia / monk fruit']},
-  {cat:'🍱 Asian Specialty',    items:['mirin','gochugaru','vegan oyster sauce','shichimi togarashi','furikake','kombu','daikon','yuzu','wakame','shaoxing wine','rice paper']},
+  {cat:'🍱 Asian Specialty',    items:['mirin','gochugaru','vegan oyster sauce','shichimi togarashi','furikake','kombu','daikon','yuzu','wakame','rice paper']},
 ];
 
 /**
