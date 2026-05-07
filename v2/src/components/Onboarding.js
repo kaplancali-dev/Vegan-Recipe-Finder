@@ -35,10 +35,10 @@ const STAPLE_SECTIONS = [
   // 2 — Vegetables
   { label: '🥦 Vegetables', sub: 'the main event', items: [
     { name: 'garlic', hint: 'always more' },
-    'onions','yellow onion','white onion','red onion','fresh ginger','spinach',
+    'yellow onion','white onion','red onion','fresh ginger','spinach',
     { name: 'kale', hint: 'we know' },
     'carrots','celery','broccoli','cauliflower','bell peppers',
-    'mushrooms (any)','tomatoes',
+    'mushrooms (any)','tomatoes','cherry tomatoes',
     { name: 'avocado', hint: "yes it's a fruit, no we don't care" },
     'zucchini','corn','cucumber','green onions','eggplant','cabbage',
     'lettuce (any)','green beans','asparagus',
@@ -48,7 +48,7 @@ const STAPLE_SECTIONS = [
   // 3 — Fruits
   { label: '🍋 Fruits', sub: "for snacking, smoothies, and pretending you're virtuous", items: [
     'lemon','lime','banana','berries (any)','cranberries','cherries',
-    'mango','apple','oranges','pineapple','peaches','pears',
+    'mango','apple','oranges','orange juice','pineapple','peaches','pears',
     'kiwi','papaya',
     { name: 'pomegranate', hint: 'worth the mess' },
     'plantain','figs','grapes','watermelon','coconut',
@@ -99,7 +99,7 @@ const STAPLE_SECTIONS = [
   // 9 — Sweeteners & Vinegars
   { label: '🍯 Sweeteners & Vinegars', sub: 'the sweet-and-sour squad', items: [
     { name: 'maple syrup', hint: 'not just for pancakes' },
-    'natural sweetener (any)','agave nectar','coconut sugar',
+    'natural sweetener (any)','agave nectar','coconut sugar','brown sugar','cane sugar','powdered sugar',
     'date syrup','molasses','coconut nectar','allulose','stevia / monk fruit',
     'apple cider vinegar','rice vinegar','balsamic vinegar',
     'white vinegar','red wine vinegar','white wine vinegar','sherry vinegar',
@@ -107,8 +107,10 @@ const STAPLE_SECTIONS = [
   // 10 — Baking & Flours
   { label: '🧂 Baking & Flours', sub: 'for your ambitious Sunday self', items: [
     'baking soda','baking powder','cornstarch','arrowroot powder',
+    'all-purpose flour','whole wheat flour',
     'gluten-free flour','almond flour','coconut flour','oat flour',
     'tapioca flour','brown rice flour','chickpea flour','cassava flour',
+    'flaxseed meal','applesauce',
     { name: 'xanthan gum', hint: 'tiny amount, big difference' },
     'cream of tartar','active dry yeast','protein powder',
   ]},
@@ -119,6 +121,7 @@ const STAPLE_SECTIONS = [
     'cinnamon','chili powder','ginger','curry powder',
     'black pepper','garlic powder','onion powder',
     'oregano','basil','thyme','sage','coriander','cayenne',
+    'cilantro','parsley',
     'cardamom','cloves','allspice','bay leaves','five spice','nutmeg',
     'sea salt',
     { name: 'garam masala', hint: 'instant warmth' },
