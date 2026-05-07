@@ -46,6 +46,9 @@ export const INGREDIENT_ALIASES = {
   // most commonly). Red/dark miso is saltier and deeper-flavored, kept
   // separate so recipes calling for "white miso paste" don't falsely match.
   'miso paste': ['miso','white miso','white miso paste','light miso','yellow miso','yellow miso paste','shiro miso','sweet miso'],
+  // Vegan butter, plant butter, vegan margarine — same product family
+  // (designed to behave like dairy butter). Bidirectional category.
+  'vegan butter': ['plant butter','plant-based butter','dairy-free butter','vegan margarine','non-dairy butter'],
   'red pepper flakes': ['chili flakes','crushed red pepper','crushed red pepper flakes','red chili flakes'],
   // White beans is a true CATEGORY — these are all members. Bidirectional:
   // any of these ↔ "white beans" so recipes calling for the category match
@@ -147,11 +150,13 @@ export const INGREDIENT_SUBS = {
   // thing (umami-heavy). Removing those false claims.
   'vegetable broth': ['vegetable stock','veggie broth','veggie stock','veg broth','veg stock'],
   'coconut cream': ['coconut milk'],
-  // Citrus juice is only loosely substitutable — lemon and lime can swap
-  // in many recipes (similar acidity), but vinegar is a different flavor
-  // profile entirely. Removing ACV cross-alias.
-  'lemon': ['lime'],
-  'lime': ['lemon'],
+  // Whole citrus fruit covers juice (you can squeeze it). One-way:
+  // bottled juice does NOT cover whole fruit (no zest, no slices, no wedges).
+  // Lemon ↔ lime: cross-acceptable since they're similar acidity (with a
+  // small flavor adjustment).
+  'lemon':  ['lime','lemons','lemon juice','fresh lemon juice','juice of 1 lemon','juice of a lemon','juice of half a lemon','lemon zest','lemon wedges'],
+  'lime':   ['lemon','limes','lime juice','fresh lime juice','juice of 1 lime','juice of a lime','lime zest','lime wedges'],
+  'orange': ['oranges','orange juice','fresh orange juice','juice of 1 orange','orange zest','orange wedges'],
   // Cilantro and parsley LOOK alike but taste nothing alike. Cilantro has
   // a citrus-soapy note; parsley is grassy. Substituting changes the dish.
   // Basil is a third totally different herb. No aliases.
