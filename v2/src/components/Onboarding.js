@@ -31,6 +31,7 @@ const STAPLE_SECTIONS = [
     'oats','millet','sweet potatoes','potatoes',
     'corn tortillas','polenta','cornmeal','masa harina','buckwheat',
     'rice noodles','glass noodles','nori',
+    { name: 'gnocchi', hint: 'verify GF (most are wheat)' },
     'GF bread','GF breadcrumbs','GF tortillas',
   ]},
   // 2 — Vegetables
@@ -124,7 +125,7 @@ const STAPLE_SECTIONS = [
     'tapioca flour','brown rice flour','chickpea flour','cassava flour',
     'flaxseed meal','applesauce','aquafaba','agar powder','psyllium husk',
     { name: 'xanthan gum', hint: 'tiny amount, big difference' },
-    'almond extract','matcha','cacao butter','vegan puff pastry','gnocchi',
+    'almond extract','matcha',
     'cream of tartar','active dry yeast','protein powder',
   ]},
   // 11 — Spices & Herbs
@@ -149,6 +150,7 @@ const STAPLE_SECTIONS = [
     'vanilla extract','cocoa powder',
     'chocolate chips (any)','white chocolate chips','dark chocolate',
     { name: 'cacao nibs', hint: 'chocolate for grown-ups' },
+    { name: 'cacao butter', hint: 'for raw chocolate making' },
     'coconut cream','shredded coconut',
     'date sugar','allulose','stevia / monk fruit',
   ]},
