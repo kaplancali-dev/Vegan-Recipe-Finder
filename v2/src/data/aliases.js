@@ -100,7 +100,13 @@ export const INGREDIENT_ALIASES = {
   // Almond extract (specialty flavoring, doesn't have an alias yet)
   'almond extract': ['pure almond extract','natural almond extract'],
   // Vegan parmesan ↔ plant-based parmesan
-  'vegan parmesan': ['plant-based parmesan','plant based parmesan','dairy-free parmesan','dairy free parmesan','non-dairy parmesan','vegan parmesan cheese'],
+  'vegan parmesan': ['plant-based parmesan','plant based parmesan','dairy-free parmesan','dairy free parmesan','non-dairy parmesan','vegan parmesan cheese','vegan parm','plant-based parm','plant based parm'],
+  // Curry paste types — bidirectional with generic "curry paste"
+  'curry paste': ['red curry paste','green curry paste','yellow curry paste','massaman curry paste','panang curry paste','thai curry paste'],
+  // Vegetable broth covers bouillon (concentrated form), stock, etc.
+  'vegetable broth': ['vegetable stock','veggie broth','veggie stock','veg broth','veg stock','vegetable bouillon','vegetable bouillon cube','vegetable bouillon cubes','veggie bouillon','bouillon cube','vegan bouillon','vegetable base'],
+  // Sriracha aliases — including bare "sriracha sauce"
+  'sriracha / hot sauce': ['sriracha','hot sauce','sambal oelek','chili garlic sauce','gochujang','rooster sauce','sriracha sauce','hot pepper sauce','tabasco'],
   // Vegan cheese variants
   'vegan cheese': ['plant-based cheese','plant based cheese','dairy-free cheese','dairy free cheese','non-dairy cheese','vegan cheese shreds','plant-based cheese shreds'],
   // Vegan feta variants
@@ -126,7 +132,7 @@ export const INGREDIENT_ALIASES = {
   // Vegan butter, plant butter, vegan margarine — same product family
   // (designed to behave like dairy butter). Bidirectional category.
   'vegan butter': ['plant butter','plant-based butter','dairy-free butter','vegan margarine','non-dairy butter'],
-  'red pepper flakes': ['chili flakes','crushed red pepper','crushed red pepper flakes','red chili flakes'],
+  // 'red pepper flakes' is defined earlier in this section with the FULL alias list — duplicate removed
   // White beans is a true CATEGORY — these are all members. Bidirectional:
   // any of these ↔ "white beans" so recipes calling for the category match
   // user's specific bean and vice versa. Lima beans/butter beans are
@@ -153,7 +159,7 @@ export const INGREDIENT_ALIASES = {
   'lettuce (any)': ['lettuce','romaine','romaine lettuce','iceberg','iceberg lettuce','butter lettuce','bibb lettuce','red leaf lettuce','green leaf lettuce','mixed greens','spring mix','mesclun','mixed salad greens'],
   'vegan yogurt': ['vegan yogurt','plant-based yogurt','coconut yogurt','soy yogurt','non-dairy yogurt','dairy-free yogurt'],
   'vegan cream cheese': ['vegan cream cheese','dairy-free cream cheese','plant-based cream cheese'],
-  'vegan parmesan': ['vegan parmesan','dairy-free parmesan','cashew parmesan','nutritional yeast parmesan'],
+  // 'vegan parmesan' duplicate removed — full alias defined earlier in this section
   'chickpea flour': ['besan','gram flour','garbanzo bean flour'],
   'soba noodles': ['buckwheat noodles'],
   'sambal oelek': ['sambal','chili garlic sauce'],
@@ -296,8 +302,7 @@ export const INGREDIENT_SUBS = {
   'bell peppers': ['bell pepper','red bell pepper','green bell pepper','yellow bell pepper','orange bell pepper','red pepper','green pepper'],
   // 'miso paste' bidirectional alias is now in INGREDIENT_ALIASES above.
   // Red/dark miso intentionally NOT in the default group (saltier, bolder).
-  'red pepper flakes': ['chili flakes','crushed red pepper','crushed red pepper flakes','red chili flakes'],
-  'white beans': ['cannellini beans','great northern beans'],
+  // 'red pepper flakes' and 'white beans' duplicates removed — full aliases earlier
   'tapioca flour': ['tapioca starch','arrowroot powder','arrowroot starch','arrowroot','tapioca','potato starch'],
   'jalapeño': ['jalapeno','jalapeños','jalapenos'],
   'balsamic vinegar': ['balsamic glaze','balsamic reduction'],
@@ -558,7 +563,7 @@ export const ALLERGY_KEYWORDS = {
  */
 export const QA_ITEMS = [
   {cat:'🫘 Beans & Legumes',     items:['chickpeas','black beans','lentils','kidney beans','cannellini beans','great northern beans','navy beans','butter beans','lima beans','pinto beans','mung beans','split peas','black-eyed peas','firm tofu','extra-firm tofu','soft tofu','silken tofu','tempeh','edamame','jackfruit','TVP','soy curls']},
-  {cat:'🌾 Grains & Starches',  items:['GF pasta (any)','rice (any)','quinoa','oats','millet','sweet potatoes','potatoes','corn tortillas','polenta','buckwheat','rice noodles','glass noodles','nori','GF bread','GF breadcrumbs','GF tortillas']},
+  {cat:'🌾 Grains & Starches',  items:['GF pasta (any)','rice (any)','quinoa','oats','millet','sweet potatoes','potatoes','corn tortillas','polenta','cornmeal','masa harina','buckwheat','rice noodles','glass noodles','nori','GF bread','GF breadcrumbs','GF tortillas']},
   {cat:'🥦 Vegetables',         items:['garlic','yellow onion','white onion','red onion','fresh ginger','spinach','kale','carrots','celery','broccoli','cauliflower','bell peppers','mushrooms (any)','tomatoes','cherry tomatoes','avocado','zucchini','corn','cucumber','green onions','eggplant','cabbage','butternut squash','pumpkin','pumpkin puree','arugula','leeks','collard greens','lettuce (any)','green beans','asparagus','jalapeño','beets','radishes','artichoke hearts','bean sprouts','bamboo shoots','shallots']},
   {cat:'🍋 Fruits',             items:['lemon','lime','banana','berries (any)','cranberries','cherries','mango','apple','oranges','orange juice','pineapple','peaches','pears','kiwi','papaya','pomegranate','plantain','figs','grapes','watermelon','coconut','dates','raisins','dried apricots','date paste']},
   {cat:'🥜 Nuts & Seeds',       items:['nut butter (any)','cashews','almonds','walnuts','pecans','brazil nuts','macadamia nuts','hazelnuts','pistachio','peanuts','sesame seeds','pine nuts','tahini','hemp seeds','chia seeds','flax seeds','pumpkin seeds','sunflower seeds','protein powder']},
@@ -567,7 +572,7 @@ export const QA_ITEMS = [
   {cat:'🥫 Canned & Jarred',    items:['canned tomatoes (any)','tomato sauce','tomato paste','vegetable broth','coconut milk','olives','artichoke hearts','roasted red peppers','sun-dried tomatoes','capers','salsa','hummus']},
   {cat:'🫙 Sauces & Condiments', items:['tamari / coconut aminos','miso paste','vegan mayo','ketchup','yellow mustard','dijon mustard','BBQ sauce','hoisin sauce','vegan worcestershire','tamarind paste','harissa paste','gochujang','sriracha / hot sauce','sambal oelek','curry paste','liquid smoke','vegan sour cream','nutritional yeast']},
   {cat:'🍯 Sweeteners & Vinegars', items:['maple syrup','natural sweetener (any)','agave nectar','coconut sugar','brown sugar','cane sugar','powdered sugar','date syrup','molasses','coconut nectar','allulose','stevia / monk fruit','apple cider vinegar','rice vinegar','balsamic vinegar','white vinegar','red wine vinegar','white wine vinegar','sherry vinegar','red wine','white wine']},
-  {cat:'🧂 Baking & Flours',    items:['baking soda','baking powder','cornstarch','arrowroot powder','gluten-free flour','almond flour','coconut flour','oat flour','tapioca flour','brown rice flour','chickpea flour','cassava flour','flaxseed meal','applesauce','xanthan gum','cream of tartar','active dry yeast','protein powder']},
+  {cat:'🧂 Baking & Flours',    items:['baking soda','baking powder','cornstarch','arrowroot powder','gluten-free flour','almond flour','coconut flour','oat flour','tapioca flour','brown rice flour','chickpea flour','cassava flour','flaxseed meal','applesauce','aquafaba','agar powder','xanthan gum','cream of tartar','active dry yeast','protein powder']},
   {cat:'🌿 Spices & Herbs',     items:['turmeric','cumin','smoked paprika','cinnamon','chili powder','ginger','curry powder','black pepper','white pepper','garlic powder','onion powder','oregano','basil','thyme','sage','coriander','cayenne','cilantro','parsley','cardamom','cloves','allspice','bay leaves','five spice','nutmeg','sea salt','garam masala','lemongrass','star anise','dill','mint','chives','rosemary','red pepper flakes','fennel seeds','sumac','italian seasoning','pumpkin pie spice','taco seasoning']},
   {cat:'🍨 Dessert Pantry',     items:['vanilla extract','cocoa powder','chocolate chips (any)','white chocolate chips','dark chocolate','cacao nibs','coconut cream','shredded coconut','date sugar','allulose','stevia / monk fruit']},
   {cat:'🍱 Asian Specialty',    items:['mirin','gochugaru','vegan oyster sauce','shichimi togarashi','furikake','kombu','daikon','yuzu','wakame','rice paper']},

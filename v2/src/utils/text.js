@@ -39,7 +39,19 @@ export function stem(w) {
   if (w.endsWith('ves') && w.length > 4) return w.slice(0, -3) + 'f';
   if (w.endsWith('ing') && w.length > 5) return w.slice(0, -3);
   if (w.endsWith('ed')  && w.length > 4) return w.slice(0, -2);
-  if (w.endsWith('es')  && w.length > 4) return w.slice(0, -2);
+  // English plural rule: only strip 'es' when the singular form ends with
+  // s/x/z/ch/sh/o (boxes→box, tomatoes→tomato). Otherwise just strip 's'.
+  // Without this, "apples" becomes "appl" instead of "apple".
+  if (w.endsWith('es') && w.length > 4) {
+    const stem3 = w.slice(0, -2);  // word minus "es"
+    const lastChar = stem3.slice(-1);
+    const last2 = stem3.slice(-2);
+    if (lastChar === 's' || lastChar === 'x' || lastChar === 'z' || lastChar === 'o' ||
+        last2 === 'ch' || last2 === 'sh') {
+      return stem3;  // boxes → box, tomatoes → tomato
+    }
+    // Fall through to just stripping 's' for words like "apples" → "apple"
+  }
   if (w.endsWith('s')   && w.length > 3) return w.slice(0, -1);
   return w;
 }
