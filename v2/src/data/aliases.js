@@ -3,7 +3,9 @@
  * If a user has "mushrooms (any)", they match any of the 20+ variants.
  */
 export const INGREDIENT_ALIASES = {
-  'plant-based milk (any)': ['almond milk','oat milk','soy milk','cashew milk','rice milk','hemp milk','macadamia milk','pistachio milk','plant milk','nondairy milk','non-dairy milk'],
+  // Plant-based milk: after norm dash→space, "plant-based milk" becomes
+  // "plant based milk" (3 words). MUST include both 2-word and 3-word forms.
+  'plant-based milk (any)': ['almond milk','oat milk','soy milk','cashew milk','rice milk','hemp milk','macadamia milk','pistachio milk','plant milk','plant-based milk','plant based milk','nondairy milk','non-dairy milk','non dairy milk','dairy-free milk','dairy free milk','unsweetened plant milk','unsweetened plant-based milk','unsweetened plant based milk','unflavored plant milk','unflavored plant-based milk','unflavored plant based milk'],
   // "Any cooking oil" covers all liquid neutral oils. Includes bare "oil"
   // so recipes saying just "1 tsp oil" or "oil for cooking" match.
   'any cooking oil':        ['coconut oil','olive oil','avocado oil','vegetable oil','canola oil','sunflower oil','grapeseed oil','light oil','neutral oil','oil','cooking oil','frying oil'],
@@ -78,6 +80,25 @@ export const INGREDIENT_ALIASES = {
   'smoked paprika': ['paprika','sweet paprika','hot paprika','spanish paprika','hungarian paprika','smoked paprika powder','paprika powder','smoked sweet paprika'],
   // UK ↔ US chili spelling: "chilli" is British, "chili" is American
   'chili powder': ['chilli powder','red chili powder','red chilli powder','hot chili powder','hot chilli powder','mild chili powder','mild chilli powder','ground chili','ground chilli'],
+  // Ground spices ARE powders. "X powder" = "X" for these. Same fix pattern
+  // as smoked paprika powder. The IDENTITY_SUFFIXES guard would otherwise
+  // reject these as different products.
+  'cumin': ['cumin powder','ground cumin','jeera','ground cumin powder'],
+  'coriander': ['coriander powder','ground coriander','dhania','ground coriander powder'],
+  'turmeric': ['turmeric powder','ground turmeric','haldi'],
+  'cinnamon': ['cinnamon powder','ground cinnamon'],
+  'ginger': ['ginger powder','ground ginger','dried ginger'],
+  'cardamom': ['cardamom powder','ground cardamom','green cardamom','green cardamom powder'],
+  'cloves': ['ground cloves','clove powder','cloves powder'],
+  'nutmeg': ['nutmeg powder','ground nutmeg'],
+  'allspice': ['allspice powder','ground allspice'],
+  'cayenne': ['cayenne powder','ground cayenne','cayenne pepper','ground cayenne pepper'],
+  'fennel seeds': ['fennel powder','ground fennel'],
+  'mustard': ['mustard powder','ground mustard','dry mustard'],
+  // Citrus zest is part of the whole fruit
+  'oranges': ['orange zest','orange peel','grated orange zest','orange rind'],
+  // Almond extract (specialty flavoring, doesn't have an alias yet)
+  'almond extract': ['pure almond extract','natural almond extract'],
   // Vegan parmesan ↔ plant-based parmesan
   'vegan parmesan': ['plant-based parmesan','plant based parmesan','dairy-free parmesan','dairy free parmesan','non-dairy parmesan','vegan parmesan cheese'],
   // Vegan cheese variants

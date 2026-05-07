@@ -117,8 +117,17 @@ export function stripMeasure(s) {
   }
 
   // 6. Clean up
+  // CRITICAL: only strip after-comma content if it looks like prep/usage
+  // notes. Don't blanket-strip "unsweetened, unflavored plant-based milk"
+  // → "unsweetened" (loses the actual ingredient identity).
+  // PREP_VERBS: only verbs/states that are clearly POST-INGREDIENT prep notes,
+  // never adjective forms of the ingredient itself.
+  // EXCLUDED on purpose: raw, cooked, toasted, rolled, frozen, thawed —
+  // these often describe the ingredient form ("raw cashews", "rolled oats")
+  // not a prep step. The NOISE regex below handles them as leading words.
+  const PREP_VERBS = '(?:chopped|diced|minced|sliced|crushed|grated|shredded|peeled|seeded|deseeded|halved|quartered|pitted|stemmed|trimmed|cleaned|cubed|drained|rinsed|melted|softened|divided|sifted|julienned|mashed|cored|torn|packed|pressed|warmed|cooled|chilled|squeezed|finely|roughly|coarsely|thinly|thickly|optional|to\\s+taste|for\\s+\\w+|see\\s+\\w+|or\\s+more|or\\s+less|plus\\s+more|approximately|about|approx|cut\\s+into\\s+\\w+|stems\\s+removed|leaves\\s+only|drained\\s+and\\s+rinsed|peeled\\s+and\\s+\\w+|halved\\s+and\\s+\\w+|seeded\\s+and\\s+\\w+|finely\\s+\\w+|roughly\\s+\\w+|coarsely\\s+\\w+|thinly\\s+\\w+|thickly\\s+\\w+)';
   str = str
-    .replace(/,.*$/, '')
+    .replace(new RegExp(`,\\s*${PREP_VERBS}.*$`, 'i'), '')  // only strip prep-like after-comma
     .replace(/\s+-\s+.*$/, '')
     .replace(/\s*\([^)]*\)?\s*/g, '')
     .replace(/\*+/g, '')
