@@ -6,7 +6,7 @@
  * Includes memoization for expensive alias expansion.
  */
 
-import { norm, stem } from '../utils/text.js';
+import { norm, stem, stripMeasure } from '../utils/text.js';
 import { INGREDIENT_ALIASES, INGREDIENT_SUBS, ALLERGY_KEYWORDS, PERISHABLES } from '../data/aliases.js';
 
 /** Flat set of all perishable ingredient names (normed) for fast lookup */
@@ -288,6 +288,18 @@ function _wordBoundaryMatch(haystack, needle, strictPrefix = true) {
   // suffix anywhere in the remainder).
   if (haystack.length > needle.length) {
     let remainder = haystack.slice(idx + needle.length).trim().replace(/^-/, '').trim();
+
+    // "AND X" requires BOTH components — single-component user pantry can't
+    // satisfy "salt and pepper" via just having "salt". Reject the substring
+    // match so the scoring loop's combined-ingredient logic kicks in to
+    // verify user has all components. Same for "&" and "+". Check both
+    // directions (needle at start OR end of multi-component string):
+    //   "salt and pepper" matched by "salt" → remainder "and pepper" → reject
+    //   "salt and pepper" matched by "pepper" → prefix ends in "and" → reject
+    if (/^(?:and|&|\+)\s+/i.test(remainder)) return false;
+    const prefixForCombined = haystack.slice(0, idx).trim();
+    if (/\s+(?:and|&|\+)$/i.test(prefixForCombined) || /^(?:and|&|\+)$/i.test(prefixForCombined)) return false;
+
     // Strip "or X" alternative qualifiers — recipes like "vegetable stock
     // or water" present an EITHER/OR choice; the "or water" doesn't change
     // the identity of "vegetable stock". Match both "...word or X" and
@@ -303,9 +315,14 @@ function _wordBoundaryMatch(haystack, needle, strictPrefix = true) {
     // means the haystack is a derived form of something else.
     const remainderWords = remainder ? remainder.split(/\s+/) : [];
     if (remainderWords.some(w => IDENTITY_SUFFIXES.has(w))) return false;
-    // Also check if needle is the suffix and the prefix changes identity
+    // Also check if needle is the suffix and the prefix changes identity.
+    // ONLY apply in strict direction (recipe-as-haystack):
+    //   STRICT: recipe needs "olive oil", user has "oil" → user's plain "oil"
+    //   doesn't satisfy recipe's specific "olive oil". REJECT.
+    //   LOOSE: user has "olive oil", recipe needs generic "oil" → user has
+    //   a specific instance of what recipe wants. ACCEPT.
     const prefix = haystack.slice(0, idx).trim().replace(/-$/, '').trim();
-    if (prefix && IDENTITY_SUFFIXES.has(needle)) return false;
+    if (strictPrefix && prefix && IDENTITY_SUFFIXES.has(needle)) return false;
 
     // Color/type modifier guard: if the word immediately before `needle` in
     // the haystack is a color/type modifier ("white", "dark", "red", etc.),
@@ -330,6 +347,97 @@ function _wordBoundaryMatch(haystack, needle, strictPrefix = true) {
     }
   }
   return true;
+}
+
+/**
+ * Detect ingredients marked as optional. These shouldn't count toward the
+ * recipe's required ingredient total — a cook who's missing them can still
+ * make the recipe. Patterns recognized:
+ *   "tomatoes (optional)"
+ *   "1 jalapeño, optional"
+ *   "optional toppings: berries, cacao nibs"
+ *   "optional add-ins: nuts"
+ *   "optional, for heat: 1 jalapeño"
+ */
+function _isOptional(rawIng) {
+  return /\boptional\b/i.test(rawIng);
+}
+
+/**
+ * Universal ingredients: things every kitchen has by default. These should
+ * never count against a user's match %. Includes water (660 recipes use it
+ * as a measured ingredient), ice, etc. Detected by exact-match against the
+ * ingredient name after stripping measurements.
+ */
+const UNIVERSAL_INGREDIENTS = new Set([
+  'water', 'tap water', 'cold water', 'warm water', 'hot water',
+  'boiling water', 'filtered water', 'cool water', 'lukewarm water',
+  'room temperature water', 'iced water', 'ice water',
+  'ice', 'ice cubes', 'crushed ice',
+  'air',
+]);
+
+function _isUniversal(rawOrNormalized) {
+  // Strip measurements first ("3 ½ cups water" → "water")
+  const stripped = norm(stripMeasure(rawOrNormalized));
+  if (UNIVERSAL_INGREDIENTS.has(stripped)) return true;
+  // Stem-aware (handles "ice cubes" → "ice cube")
+  const stemmed = stripped.split(/\s+/).map(stem).join(' ');
+  return UNIVERSAL_INGREDIENTS.has(stemmed);
+}
+
+/**
+ * Strip recipe ingredient noise that doesn't affect ingredient identity:
+ *   - "for cooking/frying/serving/garnish/drizzling/etc." (usage instructions)
+ *   - "to taste"
+ *   - ", divided" / ", melted" / ", softened" / ", room temperature"
+ *   - footnote markers (*, **, †)
+ *   - parenthetical notes
+ *   - bracketed measurements
+ *
+ * Example: "oil for cooking" → "oil"
+ *          "olive oil for drizzling" → "olive oil"
+ *          "salt to taste" → "salt"
+ *          "vegan butter, melted" → "vegan butter"
+ *          "almond milk* (see notes)" → "almond milk"
+ */
+function _stripUsageNotes(rawIng) {
+  let s = rawIng;
+  // Footnote markers
+  s = s.replace(/[*†‡]+/g, '');
+  // Bracketed/parenthetical notes
+  s = s.replace(/\s*\([^)]*\)/g, '').replace(/\s*\[[^\]]*\]/g, '');
+  // "for X" usage instructions (cooking, frying, serving, garnish, etc.)
+  s = s.replace(/\s*[,\-]?\s*\bfor\s+(cooking|frying|sauté|sauteing|sautéing|greasing|brushing|drizzling|garnish|garnishing|serving|topping|finishing|dusting|sprinkling|coating|baking|roasting|the\s+top|extra)\b.*$/i, '');
+  // "to taste"
+  s = s.replace(/\s*[,\-]?\s*\bto\s+taste\b.*$/i, '');
+  // Prep state suffixes that don't change identity
+  s = s.replace(/\s*,\s*(?:divided|melted|softened|room\s+temperature|chilled|warmed|cooled|drained|rinsed|drained\s+and\s+rinsed|cubed|diced|chopped|sliced|minced|crushed|grated|shredded|peeled|cooked|raw|toasted|frozen|thawed|optional)\b.*$/i, '');
+  return s.trim();
+}
+
+/**
+ * Detect combined ingredients ("salt and pepper", "salt & pepper") and split
+ * into components. The matcher treats these as a single ingredient line that
+ * requires ALL components to be in the user's pantry.
+ *
+ * Returns an array of normalized component names, or null if not combined.
+ */
+function _splitCombined(rawIng) {
+  const cleaned = rawIng.toLowerCase()
+    .replace(/\bto\s+taste\b/g, '')
+    .replace(/\(.*?\)/g, '')
+    .replace(/\boptional\b/g, '')
+    .trim();
+
+  // The most common combined pattern: salt + pepper (with various phrasings)
+  // "salt and pepper", "salt & pepper", "kosher salt and black pepper", etc.
+  const saltPepper = cleaned.match(/^(?:[\d½¼¾⅓⅔.,/\s-]+)?(?:freshly\s+(?:cracked|ground)\s+|fine\s+|coarse\s+|kosher\s+|sea\s+)?(?:salt|pepper)\s+(?:and|&|\+)\s+(?:freshly\s+(?:cracked|ground)\s+|fine\s+|coarse\s+|black\s+|white\s+)?(?:pepper|salt)\b/i);
+  if (saltPepper) {
+    return ['salt', 'pepper'];
+  }
+
+  return null;
 }
 
 /**
@@ -429,24 +537,68 @@ export function findRecipes({
 
   // Score each recipe
   const results = pool.map(r => {
-    const rIngs = r.ing.map(norm);
-    // Compute matches once and partition into have/need
-    const have = [];
-    const need = [];
-    for (const ri of rIngs) {
-      (ingredientMatches(ri, allIngs, allIngSet) ? have : need).push(ri);
-    }
-    const userHave = rIngs.filter(ri => ingredientMatches(ri, userNorm, userNormSet));
-    const pct   = rIngs.length ? Math.round(have.length / rIngs.length * 100) : 0;
+    const have = [];          // normalized ingredients user has
+    const need = [];          // normalized ingredients user is missing (REQUIRED only)
+    const haveNames = [];     // original ingredient strings user has
+    const needNames = [];     // original ingredient strings user needs
+    let requiredCount = 0;    // count of ingredients excluding "(optional)"
+    let userHaveCount = 0;    // count of recipe ings matched against user-typed ingredients only
 
-    // Preserve original ingredient names for display
-    const haveNames = r.ing.filter(ing => have.includes(norm(ing)));
-    const needNames = r.ing.filter(ing => need.includes(norm(ing)));
+    for (let i = 0; i < r.ing.length; i++) {
+      const rawIng = r.ing[i];
+      const optional = _isOptional(rawIng);
+      // Pre-process for matching:
+      //   1. Strip usage notes ("for cooking", "to taste", ", melted", footnotes, parens)
+      //   2. Convert "&" and "+" connectors to "and" so that "salt & pepper"
+      //      → "salt and pepper" survives norm's punctuation stripping
+      //   3. Apply norm (lowercase, strip remaining punctuation)
+      const cleaned = _stripUsageNotes(rawIng).replace(/\s*&\s*/g, ' and ').replace(/\s*\+\s*/g, ' and ');
+      const ri = norm(cleaned);
+
+      // Universal ingredients (water, ice) — always count as "have"
+      // since every kitchen has them. Use the raw string so stripMeasure
+      // can strip measurements before checking against the universal set.
+      let matched = _isUniversal(rawIng);
+
+      // Otherwise, try direct match against expanded pantry
+      if (!matched) {
+        matched = ingredientMatches(ri, allIngs, allIngSet);
+      }
+
+      // If no direct match, check if this is a combined ingredient (e.g.
+      // "salt and pepper") that requires ALL components in user's pantry
+      if (!matched) {
+        const components = _splitCombined(rawIng);
+        if (components) {
+          matched = components.every(c => ingredientMatches(c, allIngs, allIngSet));
+        }
+      }
+
+      if (matched) {
+        have.push(ri);
+        haveNames.push(rawIng);
+        // Also count toward "user's typed ingredients" subset for sort tie-breaking
+        if (ingredientMatches(ri, userNorm, userNormSet)) userHaveCount++;
+      }
+
+      // Optional ingredients don't count against the user — skip the require/need logic
+      if (!optional) {
+        requiredCount++;
+        if (!matched) {
+          need.push(ri);
+          needNames.push(rawIng);
+        }
+      }
+    }
+
+    // pct: how much of the REQUIRED (non-optional) ingredients does user have
+    const haveRequiredCount = requiredCount - need.length;
+    const pct = requiredCount ? Math.round(haveRequiredCount / requiredCount * 100) : 100;
 
     // Count how many of the user's perishable ingredients this recipe uses
     const perishHave = have.filter(h => isPerishableIng(h)).length;
 
-    return { ...r, have, need, haveNames, needNames, pct, userHave: userHave.length, perishHave };
+    return { ...r, have, need, haveNames, needNames, pct, userHave: userHaveCount, perishHave };
   });
 
   // Default sort: best match first, then perishable priority, then alphabetical

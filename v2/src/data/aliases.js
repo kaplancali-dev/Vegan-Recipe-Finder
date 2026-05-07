@@ -33,7 +33,11 @@ export const INGREDIENT_ALIASES = {
   'vegan mayo': ['vegan mayo','vegan mayonnaise','mayo','mayonnaise','vegan mayo*'],
   'canned tomatoes (any)': ['crushed tomatoes','diced tomatoes','tomato sauce','tomato puree','tomato purée','fire roasted tomatoes','fire-roasted tomatoes','fire roasted diced tomatoes','fire-roasted diced tomatoes','diced fire-roasted tomatoes','diced fire roasted tomatoes','whole peeled tomatoes','canned tomatoes','chopped tomatoes','stewed tomatoes','tinned tomatoes','petite diced tomatoes','plum tomatoes','can diced tomatoes','can crushed tomatoes','can tomato sauce','best-quality peeled tomatoes','canned chopped tomato','canned chopped tomatoes','canned diced tomatoes juice','chopped canned tomato with juice','tomato sauce puree','tomatoes their juice'],
   'cabbage (any)': ['cabbage','red cabbage','green cabbage','purple cabbage','napa cabbage','savoy cabbage','shredded cabbage','shredded red cabbage','shredded green cabbage','shredded purple cabbage','shredded napa cabbage','chopped purple cabbage','chopped napa cabbage'],
-  'sea salt': ['kosher salt','fine salt','salt','salt and pepper','salt and pepper to taste','salt to taste','coarse salt','fine sea salt','flaky salt','table salt','teaspoon kosher salt','teaspoons kosher salt','kosher salt + more to taste'],
+  // Sea salt covers all forms of salt. The old hack also claimed "salt and
+  // pepper" was a salt synonym to work around the matcher not handling
+  // combined ingredients — that's now handled properly by the matcher's
+  // combined-ingredient logic, so removing the false claim.
+  'sea salt': ['kosher salt','fine salt','salt','salt to taste','coarse salt','fine sea salt','flaky salt','table salt','teaspoon kosher salt','teaspoons kosher salt','kosher salt + more to taste'],
   'vegetable broth': ['vegetable stock','veggie broth','veggie stock','veg broth','veg stock'],
   'bay leaves': ['bay leaf'],
   'bell peppers (any)': ['bell pepper','red bell pepper','green bell pepper','yellow bell pepper','orange bell pepper','bell peppers','red pepper','green pepper'],
@@ -46,6 +50,9 @@ export const INGREDIENT_ALIASES = {
   // most commonly). Red/dark miso is saltier and deeper-flavored, kept
   // separate so recipes calling for "white miso paste" don't falsely match.
   'miso paste': ['miso','white miso','white miso paste','light miso','yellow miso','yellow miso paste','shiro miso','sweet miso'],
+  // Pepper: black pepper is the DEFAULT form (what most recipes mean by "pepper").
+  // Bidirectional with all the common forms — ground, cracked, freshly ground, etc.
+  'pepper': ['black pepper','ground pepper','ground black pepper','cracked pepper','cracked black pepper','freshly ground black pepper','freshly cracked black pepper','fresh ground pepper','fresh ground black pepper','peppercorns','black peppercorns'],
   // Vegan butter, plant butter, vegan margarine — same product family
   // (designed to behave like dairy butter). Bidirectional category.
   'vegan butter': ['plant butter','plant-based butter','dairy-free butter','vegan margarine','non-dairy butter'],
@@ -281,9 +288,13 @@ export const INGREDIENT_SUBS = {
   'dijon mustard': ['whole grain mustard','yellow mustard','stone-ground mustard'],
   'vegan worcestershire sauce': ['soy sauce','tamari','coconut aminos'],
   'vegan mayo': ['vegan sour cream'],
-  'red wine vinegar': ['sherry vinegar','balsamic vinegar','white wine vinegar','apple cider vinegar'],
-  'sherry vinegar': ['red wine vinegar','white wine vinegar','apple cider vinegar'],
-  'white wine vinegar': ['rice vinegar','sherry vinegar','apple cider vinegar','red wine vinegar'],
+  // Wine vinegars are NOT all interchangeable. Red wine vinegar is fruity
+  // and bold; white wine is milder; sherry is nutty/sweet; champagne is
+  // delicate. Subbing changes the dish notably. Only keep same-category
+  // synonyms (champagne ↔ white wine vinegar are very close).
+  'red wine vinegar': [],
+  'sherry vinegar': ['sherry wine vinegar'],
+  'white wine vinegar': ['champagne vinegar'],
 
   // ── Vegetables ──
   'zucchini': ['yellow squash','summer squash','eggplant'],
