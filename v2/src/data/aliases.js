@@ -37,7 +37,15 @@ export const INGREDIENT_ALIASES = {
   'vegetable broth': ['vegetable stock','veggie broth','veggie stock','veg broth','veg stock'],
   'bay leaves': ['bay leaf'],
   'bell peppers (any)': ['bell pepper','red bell pepper','green bell pepper','yellow bell pepper','orange bell pepper','bell peppers','red pepper','green pepper'],
-  'miso paste': ['white miso','light miso','red miso','yellow miso','miso'],
+  // Onions: yellow, white, sweet, spanish, vidalia are the default cooking
+  // onions and ARE interchangeable with generic "onion". Red onion is
+  // DELIBERATELY excluded — it's sharper, sweeter, often eaten raw, and
+  // not a substitute for default cooking onion. Same with shallots/leeks.
+  'onion': ['onions','yellow onion','yellow onions','white onion','white onions','sweet onion','sweet onions','spanish onion','vidalia onion','cooking onion','cooking onions'],
+  // Miso paste — white/yellow/light/shiro are the default mild miso (used
+  // most commonly). Red/dark miso is saltier and deeper-flavored, kept
+  // separate so recipes calling for "white miso paste" don't falsely match.
+  'miso paste': ['miso','white miso','white miso paste','light miso','yellow miso','yellow miso paste','shiro miso','sweet miso'],
   'red pepper flakes': ['chili flakes','crushed red pepper','crushed red pepper flakes','red chili flakes'],
   // White beans is a true CATEGORY — these are all members. Bidirectional:
   // any of these ↔ "white beans" so recipes calling for the category match
@@ -121,16 +129,23 @@ export const INGREDIENT_SUBS = {
   // rice vinegar pairing since they're effectively the same product.
   'apple cider vinegar': [],
   'rice vinegar': ['seasoned rice vinegar'],
-  'flour': ['oat flour','almond flour','spelt flour','rice flour','gluten-free flour','gf flour','all-purpose flour','1:1 gluten-free flour'],
-  'all-purpose flour': ['gluten-free flour','1:1 gluten-free flour','gf flour','oat flour','almond flour','rice flour','spelt flour'],
-  'gluten-free flour': ['1:1 gluten-free flour','gf flour','oat flour','almond flour','rice flour','all-purpose flour','flour','whole wheat flour','spelt flour','cassava flour'],
-  'cassava flour': ['gluten-free flour','tapioca flour','oat flour','almond flour','rice flour'],
-  'almond flour': ['oat flour','coconut flour','rice flour','gluten-free flour'],
-  'oat flour': ['almond flour','rice flour','gluten-free flour','1:1 gluten-free flour'],
-  'rice flour': ['oat flour','almond flour','gluten-free flour','1:1 gluten-free flour'],
+  // Flours behave VERY differently in baking — gluten content, density,
+  // moisture absorption all vary. Almond flour can't sub for all-purpose
+  // without recipe adjustments. The only safe bidirectional sub is between
+  // 1:1 gluten-free blends (which are designed to behave like AP flour).
+  'flour': ['all-purpose flour'],
+  'all-purpose flour': ['flour'],
+  'gluten-free flour': ['1:1 gluten-free flour','gf flour'],
+  'cassava flour': [],
+  'almond flour': [],
+  'oat flour': [],
+  'rice flour': [],
   'cornstarch': ['arrowroot powder','tapioca flour','tapioca starch','potato starch','corn starch'],
   'arrowroot powder': ['cornstarch','tapioca flour','tapioca starch','tapioca','arrowroot starch','arrowroot','potato starch'],
-  'vegetable broth': ['water','mushroom broth','miso water','vegetable stock','veggie broth','veggie stock','veg broth','veg stock'],
+  // Vegetable broth/stock are interchangeable. WATER is NOT a substitute —
+  // recipes calling for broth want the flavor. Mushroom broth is a different
+  // thing (umami-heavy). Removing those false claims.
+  'vegetable broth': ['vegetable stock','veggie broth','veggie stock','veg broth','veg stock'],
   'coconut cream': ['coconut milk'],
   // Citrus juice is only loosely substitutable — lemon and lime can swap
   // in many recipes (similar acidity), but vinegar is a different flavor
@@ -154,8 +169,13 @@ export const INGREDIENT_SUBS = {
   // Arugula is its own peppery thing — not interchangeable with spinach
   // or generic lettuce in dishes where the flavor matters.
   'arugula':            [],
-  'fresh ginger': ['ginger','ginger powder'],
-  'ginger': ['fresh ginger','ginger powder'],
+  // Fresh ginger and ground ginger powder are NOT 1:1 substitutes —
+  // ratio is roughly 1 tsp grated fresh = 1/4 tsp powdered. Different
+  // intensity, different flavor (fresh is brighter, powder is mellower).
+  // Recipes calling for one specifically want it. Only alias the
+  // synonymous "ginger root" forms.
+  'fresh ginger': ['ginger root','fresh ginger root','minced ginger','grated ginger'],
+  'ginger': ['ginger root','minced ginger','grated ginger'],
   'cocoa powder': ['cacao powder','raw cacao powder','cacao','cocoa','unsweetened cocoa powder','dutch process cocoa'],
   'cacao powder': ['cocoa powder','raw cacao powder','cacao','cocoa','unsweetened cocoa powder'],
   'chocolate chips (any)': ['dark chocolate chips','dark chocolate','semi-sweet chocolate chips','vegan chocolate chips','bittersweet chocolate','chocolate','chocolate chips'],
@@ -180,7 +200,8 @@ export const INGREDIENT_SUBS = {
   'bay leaves': ['bay leaf'],
   'bell peppers (any)': ['bell pepper','red bell pepper','green bell pepper','yellow bell pepper','orange bell pepper','red pepper','green pepper'],
   'bell peppers': ['bell pepper','red bell pepper','green bell pepper','yellow bell pepper','orange bell pepper','red pepper','green pepper'],
-  'miso paste': ['white miso','light miso','red miso','yellow miso','miso'],
+  // 'miso paste' bidirectional alias is now in INGREDIENT_ALIASES above.
+  // Red/dark miso intentionally NOT in the default group (saltier, bolder).
   'red pepper flakes': ['chili flakes','crushed red pepper','crushed red pepper flakes','red chili flakes'],
   'white beans': ['cannellini beans','great northern beans'],
   'tapioca flour': ['tapioca starch','arrowroot powder','arrowroot starch','arrowroot','tapioca','potato starch'],
@@ -206,13 +227,22 @@ export const INGREDIENT_SUBS = {
   'silken tofu': ['soft tofu'],
   'soft tofu': ['silken tofu'],
   'tempeh': ['soy curls'],
-  'green lentils': ['brown lentils','french lentils'],
-  'brown lentils': ['green lentils','french lentils'],
-  'red lentils': ['yellow lentils','split peas'],
+  // Lentil types behave differently:
+  //   - Red/yellow lentils dissolve into mush (good for dal, soups)
+  //   - Green/brown/french lentils HOLD their shape (good for salads)
+  // Cross-substituting changes the dish texture significantly. Only group
+  // the truly-equivalent same-color types.
+  'green lentils': ['french lentils','french green lentils','du puy lentils'],
+  'brown lentils': [],
+  'red lentils': ['yellow lentils','split red lentils','masoor dal'],
 
   // ── Grains / Pasta ──
-  'quinoa': ['couscous','bulgur','farro','millet'],
-  'farro': ['quinoa','barley','bulgur','freekeh'],
+  // Grains are NOT freely substitutable. Quinoa is a seed (gluten-free,
+  // protein-rich, fluffy); couscous is wheat pasta (chewy); farro is wheat
+  // berry (chewy, nutty); millet is a grain (mild). Cooking times differ.
+  // Subbing changes texture and dietary profile (gluten content matters).
+  'quinoa': ['white quinoa','red quinoa','black quinoa','tri-color quinoa'],
+  'farro': ['pearled farro','semi-pearled farro'],
   'rolled oats': ['quick oats','oats','steel-cut oats'],
   'spaghetti': ['linguine','angel hair','thin spaghetti','pasta'],
   'linguine': ['spaghetti','fettuccine','pasta'],
@@ -283,7 +313,12 @@ export const INGREDIENT_SUBS = {
   'vegan parmesan': ['nutritional yeast','vegan cheese'],
   'vegan cream cheese': ['cashew cream cheese','vegan cream','vegan sour cream'],
   'vegan sour cream': ['vegan yogurt','cashew cream','vegan cream cheese'],
-  'vegan butter': ['coconut oil','olive oil','avocado oil'],
+  // Vegan butter is purpose-built to behave like dairy butter (creamy,
+  // solid at room temp, similar fat ratio). It does NOT substitute for
+  // liquid oils (olive, avocado) or vice versa. Even coconut oil — which
+  // also solidifies — has a different flavor and consistency than vegan
+  // butter, so we keep them separate.
+  'vegan butter': ['plant butter','plant-based butter','dairy-free butter','vegan margarine'],
   'nutritional yeast': ['vegan parmesan','vegan cheese'],
   'coconut milk': ['coconut cream'],
 
@@ -295,9 +330,16 @@ export const INGREDIENT_SUBS = {
   'medjool dates': ['dates','date paste','date syrup','prunes'],
 
   // ── Oils (gaps) ──
-  'sesame oil': ['toasted sesame oil','peanut oil','neutral oil'],
-  'toasted sesame oil': ['sesame oil','peanut oil'],
-  'avocado oil': ['olive oil','coconut oil','vegetable oil','grapeseed oil'],
+  // Sesame oil has a distinct nutty flavor — it's NOT a substitute for
+  // neutral cooking oils. Toasted sesame is even more distinct (used as
+  // finisher/condiment). Peanut oil has its own flavor and is an allergen.
+  // Each stays standalone except for the same-product pair.
+  'sesame oil': ['untoasted sesame oil'],
+  'toasted sesame oil': [],
+  // Avocado oil is a liquid neutral oil — interchangeable with other liquid
+  // neutral oils for cooking. NOT interchangeable with coconut oil (which
+  // solidifies and is needed for set-firm baking).
+  'avocado oil': ['vegetable oil','grapeseed oil','canola oil','sunflower oil','light oil','neutral oil'],
   'vegetable oil': ['canola oil','grapeseed oil','sunflower oil','avocado oil','neutral oil'],
   'sunflower oil': ['vegetable oil','grapeseed oil','canola oil','avocado oil'],
   'grapeseed oil': ['sunflower oil','vegetable oil','avocado oil','canola oil'],

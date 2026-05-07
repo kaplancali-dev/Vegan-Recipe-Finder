@@ -71,6 +71,12 @@ const ONE_WAY_CATCHALLS = new Set([
   'flour any',
   'fresh herbs any',
   'soy sauce  tamari  coconut aminos',
+  // Lentils: types behave very differently (red dissolve, green hold shape).
+  // User picking generic "lentils" wants flexibility, but having red lentils
+  // shouldn't claim green lentils coverage.
+  'lentils',
+  // Generic "flour" same logic — different flours bake differently.
+  'flour',
 ]);
 
 /** Memoization cache for expandWithAliases */
@@ -302,16 +308,23 @@ function _wordBoundaryMatch(haystack, needle, strictPrefix = true) {
     if (prefix && IDENTITY_SUFFIXES.has(needle)) return false;
 
     // Color/type modifier guard: if the word immediately before `needle` in
-    // the haystack is a color/type modifier ("white", "dark", etc.), the
-    // recipe is calling for a specifically-modified ingredient that the
-    // unmodified user ingredient can't satisfy. E.g., recipe needs "white
-    // chocolate chips" but user only has "chocolate chips" — reject.
+    // the haystack is a color/type modifier ("white", "dark", "red", etc.),
+    // the haystack is a specifically-modified version that isn't equivalent
+    // to the unmodified base. Apply in BOTH directions:
     //
-    // ONLY apply this guard when haystack is the recipe ingredient
-    // (strictPrefix=true). When the user has the specific version (e.g.
-    // "red onion") and the recipe asks for the generic ("onion"), the user
-    // legitimately HAS what the recipe wants — accept that match.
-    if (strictPrefix && prefix) {
+    //   STRICT (recipe-as-haystack): recipe needs "white chocolate chips",
+    //   user has plain "chocolate chips" → user's plain doesn't satisfy
+    //   recipe's specific. REJECT.
+    //
+    //   LOOSE (user-as-haystack): user has "red onion", recipe needs plain
+    //   "onion" → red onion is sharp/sweet/raw-friendly and NOT the default
+    //   cooking onion. Don't pretend it satisfies generic "onion". REJECT.
+    //
+    // Where colors ARE interchangeable (red bell pepper IS a bell pepper,
+    // jasmine rice IS rice), the explicit INGREDIENT_ALIASES groups handle
+    // the match via Set lookup BEFORE this guard runs. So this guard only
+    // fires for ingredients without an explicit "color is default" alias.
+    if (prefix) {
       const lastPrefixWord = prefix.split(/\s+/).pop();
       if (COLOR_TYPE_MODIFIERS.has(lastPrefixWord)) return false;
     }
