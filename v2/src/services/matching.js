@@ -522,8 +522,45 @@ function _splitCombined(rawIng) {
   cleaned = cleaned.replace(/^(?:tbsp|tsp|teaspoons?|tablespoons?|cups?|pinch(?:es)?|dash(?:es)?|splash(?:es)?|sprigs?|leaves?|cloves?|pieces?|grams?|g|ml|l|oz|lb|lbs|ounces?|pounds?)\.?\s+(?:of\s+)?/i, '').trim();
   cleaned = cleaned.replace(/^pinch\s+of\s+/i, '').replace(/^splash\s+of\s+/i, '');
 
+  // Hyphen-combined ingredients followed by a compound product noun:
+  //   "ginger-garlic paste", "lemon-herb sauce", "soy-ginger marinade"
+  // The trailing noun (paste/sauce/etc.) signals a BLEND, so the two
+  // hyphenated parts are distinct ingredients that need to BOTH be in
+  // pantry. Convert hyphen to " and " so the splitter below sees them
+  // as components.
+  // (This is different from "extra-firm tofu" or "plant-based milk" where
+  // the hyphenated part is a single modifier; those don't end in a blend
+  // suffix so this regex won't fire.)
+  cleaned = cleaned.replace(
+    /\b([a-z]+)-([a-z]+)\s+(?:paste|sauce|blend|mix|mixture|marinade|rub|seasoning|dressing|glaze|relish|chutney|salsa|pesto)\b/g,
+    '$1 and $2'
+  );
+  // Same idea for known space-separated combined-product names. These are
+  // narrowly-scoped two-word combos that read as a single product but are
+  // really blends of the two named ingredients.
+  const KNOWN_BLENDS = [
+    /\bginger\s+garlic\s+(?:paste|sauce)\b/g,
+    /\bgarlic\s+ginger\s+(?:paste|sauce)\b/g,
+    /\blemon\s+garlic\s+(?:sauce|dressing|marinade)\b/g,
+    /\bgarlic\s+herb\s+(?:butter|seasoning|blend|sauce)\b/g,
+  ];
+  for (const re of KNOWN_BLENDS) {
+    cleaned = cleaned.replace(re, m => {
+      const words = m.split(/\s+/);
+      // Keep the first two ingredient words, drop the trailing product noun
+      return words[0] + ' and ' + words[1];
+    });
+  }
+
   // Normalize "X, Y, and Z" → "X and Y and Z" so we can split uniformly
   cleaned = cleaned.replace(/,\s*(?:and\s+)?/g, ' and ').trim();
+  // Strip a trailing connector word that the split regex below can't consume
+  // (split needs \s+ on BOTH sides of "and"; .trim() above removes trailing
+  // whitespace, leaving e.g. "...pepper and" — the lone "and" then survives
+  // into the last part and inflates its word count, tripping the
+  // too-many-words guard. Real example: "Sea salt and freshly ground black
+  // pepper, to taste" comma-replaced becomes "...pepper and" after trim.)
+  cleaned = cleaned.replace(/\s+(?:and|&|\+)\s*$/i, '').trim();
 
   // Split on connector words. Use lookahead so we don't split inside compounds
   // that legitimately contain "and" (rare for ingredient names).
@@ -661,6 +698,23 @@ export function findRecipes({
 
     for (let i = 0; i < r.ing.length; i++) {
       const rawIng = r.ing[i];
+      // Skip empty / whitespace-only ingredient lines (data quality issue —
+      // some scraped recipes have stray "  " entries that shouldn't count
+      // against required ingredients).
+      if (!rawIng || !rawIng.trim()) continue;
+      // Skip section headers ("for the topping:", "for serving:", "optional toppings")
+      // that contain no actual ingredient — they're list dividers.
+      const trimmedLower = rawIng.trim().toLowerCase().replace(/[:*]+$/, '');
+      if (/^(?:for\s+(?:the\s+)?(?:topping|serving|garnish|sauce|dressing|filling|base|crust|frosting|glaze|drizzle|coating|marinade|dough|crumble|streusel|assembly|the\s+\w+))$/i.test(trimmedLower) ||
+          /^optional\s+(?:topping|toppings|add\s*-?\s*ins?|extras?|garnish(?:es)?)$/i.test(trimmedLower)) {
+        continue;
+      }
+      // Skip cross-recipe references like "1 recipe Homemade Pizza Dough" or
+      // "1 batch Vegan Caesar Dressing". These are author-defined sub-recipes
+      // not actual ingredients; users can swap a store-bought equivalent.
+      if (/^[\d½¼¾⅓⅔.,/\s-]*(?:recipe|batch|portion)\s+\w+/i.test(rawIng.trim())) {
+        continue;
+      }
       const optional = _isOptional(rawIng);
       // Pre-process for matching:
       //   1. Strip leading measurements ("1 tsp", "1 cup", "½ pound", etc.)

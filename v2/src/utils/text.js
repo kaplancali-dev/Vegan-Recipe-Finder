@@ -141,7 +141,9 @@ export function stripMeasure(s) {
   str = str
     .replace(new RegExp(`,\\s*${PREP_VERBS}.*$`, 'i'), '')  // only strip prep-like after-comma
     .replace(/\s+-\s+.*$/, '')
-    .replace(/\s*\([^)]*\)?\s*/g, '')
+    // Replace parens with single space so "caster (superfine) sugar"
+    // becomes "caster sugar" not "castersugar". Step 15 collapses extra space.
+    .replace(/\s*\([^)]*\)?\s*/g, ' ')
     .replace(/\*+/g, '')
     .replace(/\.\s*$/, '')
     .replace(/\s+instead\s+of\s+.*$/i, '')
@@ -164,6 +166,13 @@ export function stripMeasure(s) {
 
   // 10. Strip trailing purpose phrases
   str = str.replace(/\s*,?\s*(?:for\s+(?:frying|serving|garnish|topping|drizzling|dipping|coating|dusting)|as\s+needed|to\s+taste|if\s+needed|if\s+desired)\s*$/i, '');
+  // 10b. Strip plant-part descriptors after a comma:
+  //   "scallions, white and green parts"
+  //   "fresh sweet corn, husks and silks removed"
+  //   "kale, stems removed"
+  //   "lemongrass, white parts only"
+  // These are prep descriptions, not part of the ingredient identity.
+  str = str.replace(/\s*,\s*(?:white\s+and\s+green\s+parts?|green\s+parts?\s+only|white\s+parts?\s+only|husks?\s+and\s+silks?\s+removed|stems?\s+removed|leaves?\s+only|stem\s+ends?\s+(?:removed|trimmed)|root\s+ends?\s+(?:removed|trimmed)|tough\s+(?:stems?|outer\s+leaves?)\s+removed|woody\s+ends?\s+removed|outer\s+leaves?\s+removed)\s*$/i, '');
 
   // 11. Strip leading "each of"
   str = str.replace(/^each\s+of\s+/i, '');

@@ -43,8 +43,11 @@ const STAPLE_SECTIONS = [
     { name: 'avocado', hint: "yes it's a fruit, no we don't care" },
     'zucchini','corn','cucumber','green onions','eggplant','cabbage',
     'butternut squash','pumpkin','pumpkin puree','arugula','leeks','collard greens',
-    'lettuce (any)','green beans','asparagus',
+    'lettuce (any)','green beans','asparagus','green peas','brussels sprouts',
+    'parsnips','swiss chard','bok choy','turnip','pickles','okra','jicama',
+    { name: 'kimchi', hint: 'Korean, look for vegan label' },
     { name: 'jalapeño', hint: 'proceed with caution' },
+    { name: 'green chili', hint: 'Indian/Thai heat' },
     'beets','radishes','artichoke hearts','bean sprouts','bamboo shoots','shallots',
   ]},
   // 3 — Fruits
@@ -78,7 +81,7 @@ const STAPLE_SECTIONS = [
   { label: '🫒 Oils & Fats', sub: 'the slip-and-slide section', items: [
     'olive oil','coconut oil','avocado oil','sesame oil','chili oil',
     { name: 'vegan butter', hint: "yes it melts, yes it's real" },
-    'vegetable oil','toasted sesame oil','sunflower oil','grapeseed oil',
+    'vegetable oil','toasted sesame oil','sunflower oil','grapeseed oil','peanut oil',
   ]},
   // 7 — Canned & Jarred (these were here, now adding salsa/hummus/wine/wine vinegar to existing)
 
@@ -86,7 +89,7 @@ const STAPLE_SECTIONS = [
     'canned tomatoes (any)','tomato sauce','tomato paste','vegetable broth',
     'coconut milk','olives','artichoke hearts','roasted red peppers',
     { name: 'sun-dried tomatoes', hint: 'umami bombs' },
-    'capers','salsa','hummus',
+    'capers','salsa','hummus','sauerkraut','instant coffee','cooking spray',
   ]},
   // 8 — Sauces & Condiments (GLUTEN-FREE focus — items where most brands
   // contain wheat/malt have a "verify GF" hint. Users with certified GF
@@ -118,9 +121,9 @@ const STAPLE_SECTIONS = [
     'baking soda','baking powder','cornstarch','arrowroot powder',
     'gluten-free flour','almond flour','coconut flour','oat flour',
     'tapioca flour','brown rice flour','chickpea flour','cassava flour',
-    'flaxseed meal','applesauce','aquafaba','agar powder',
+    'flaxseed meal','applesauce','aquafaba','agar powder','psyllium husk',
     { name: 'xanthan gum', hint: 'tiny amount, big difference' },
-    'cream of tartar','active dry yeast','protein powder',
+    'almond extract','matcha','cream of tartar','active dry yeast','protein powder',
   ]},
   // 11 — Spices & Herbs
   { label: '🌿 Spices & Herbs', sub: 'the flavor council', items: [
@@ -130,8 +133,9 @@ const STAPLE_SECTIONS = [
     'black pepper','garlic powder','onion powder',
     'oregano','basil','thyme','sage','coriander','cayenne',
     'cilantro','parsley','white pepper','pumpkin pie spice','taco seasoning',
+    'cumin seeds','coriander seeds','mustard seeds','poppy seeds','caraway seeds',
     'cardamom','cloves','allspice','bay leaves','five spice','nutmeg',
-    'sea salt',
+    'sea salt','poultry seasoning','saffron','za\'atar','berbere',
     { name: 'garam masala', hint: 'instant warmth' },
     'lemongrass','star anise','dill','mint','chives','rosemary',
     'red pepper flakes','fennel seeds',
@@ -149,13 +153,17 @@ const STAPLE_SECTIONS = [
   // 13 — Asian Specialty (GF-safe items only)
   // EXCLUDED: shaoxing wine (traditional contains wheat — celiac safety)
   // VERIFY LABELS: vegan oyster sauce, mirin (some brands have wheat additives)
-  { label: '🍱 Asian Specialty', sub: 'unlock Japanese, Korean & Chinese recipes', items: [
-    { name: 'mirin', hint: 'sweet rice wine — verify GF label' },
+  { label: '🍱 Asian Specialty', sub: 'unlock Japanese, Korean, Chinese & Indian recipes', items: [
+    { name: 'mirin', hint: 'sweet rice wine, verify GF label' },
     { name: 'gochugaru', hint: 'Korean chili flakes' },
     { name: 'vegan oyster sauce', hint: 'verify GF label' },
     { name: 'shichimi togarashi', hint: 'Japanese 7-spice' },
     'furikake',
     'kombu',
+    { name: 'kala namak', hint: 'Indian black salt, eggy flavor for tofu scrambles' },
+    { name: 'curry leaves', hint: 'Indian aromatic, fresh or dried' },
+    { name: 'galangal', hint: 'Thai ginger cousin' },
+    { name: 'fenugreek', hint: 'leaves or seeds, Indian' },
     'daikon','yuzu','wakame',
     'rice paper',
   ]},

@@ -177,6 +177,143 @@ export const INGREDIENT_ALIASES = {
   'GF breadcrumbs': ['gluten-free breadcrumbs','gf breadcrumbs','breadcrumbs','panko','panko breadcrumbs','bread crumbs'],
   'GF tortillas': ['gluten-free tortillas','gf tortillas','flour tortillas','tortillas','wraps','gf wraps'],
   'glass noodles': ['cellophane noodles','bean thread noodles','mung bean noodles','crystal noodles','sweet potato noodles','japchae noodles'],
+  // ── British / regional names ──
+  // Bidirectional so US recipes match UK pantries and vice versa.
+  'eggplant': ['aubergine','aubergines','eggplants','baby eggplant','japanese eggplant','italian eggplant','chinese eggplant'],
+  'arugula': ['rocket','rocket leaves','baby rocket','wild rocket','baby arugula'],
+  'beets': ['beetroot','beetroots','red beets','golden beets','cooked beets','grated beets'],
+  'vegan yogurt': ['vegan yogurt','vegan yoghurt','plant-based yogurt','plant-based yoghurt','coconut yogurt','coconut yoghurt','soy yogurt','soy yoghurt','non-dairy yogurt','non-dairy yoghurt','dairy-free yogurt','dairy-free yoghurt','vanilla vegan yogurt','vanilla vegan yoghurt'],
+  // Italian "herbs" / "italian herbs" used as shorthand for italian seasoning
+  'italian seasoning': ['italian herbs','italian seasoning blend','italian seasoning mix','italian herb blend','italian herb mix','herbes de provence'],
+  // Generic "neutral oil" / "neutral tasting oil" / "mild tasting oil" — recipe shorthand
+  // for any non-flavored cooking oil. Already covered by 'any cooking oil' but the
+  // catch-all is one-way (parent → variants) so we need the reverse mapping here.
+  'vegetable oil': ['neutral oil','neutral tasting oil','neutral-tasting oil','mild oil','mild tasting oil','mild-tasting oil','flavorless oil','flavourless oil','light oil','rice bran oil','peanut oil','cooking oil','frying oil','high smoke point oil','high-smoke-point oil','any oil','any cooking oil'],
+  // Common typo — xantham (extra H) for xanthan gum
+  'xanthan gum': ['xantham gum','xantham','xanthan'],
+  // Olives — the colors are interchangeable enough for matching purposes.
+  // Recipes calling for "black olives" or "green olives" are satisfied by
+  // having "olives" in pantry. (kalamata is a specific cultivar, but if a
+  // user has olives, the recipe is salvageable with substitution.)
+  'olives': ['black olives','green olives','kalamata olives','castelvetrano olives','castelvetrano','manzanilla olives','spanish olives','greek olives','pitted olives','sliced olives','chopped olives','mixed olives'],
+  // Smoked tofu — pre-flavored firm tofu, used like firm tofu in stir-fries
+  // and grain bowls. Reasonable cross-match for matching purposes.
+  'firm tofu': ['extra-firm tofu','super-firm tofu','smoked tofu','baked tofu','marinated tofu','pressed tofu','high-protein tofu'],
+  // Indian black salt (kala namak) — sulfurous "eggy" salt used in tofu scrambles.
+  'kala namak': ['black salt','indian black salt','himalayan black salt'],
+  // Almond extract is a flavoring; pantry entry needed but also alias spelling
+  'almond extract': ['pure almond extract','natural almond extract','almond flavoring','almond essence'],
+  // Vanilla → vanilla extract is already aliased above; add additional forms
+  // Common produce duplicates / spellings
+  'sweet potatoes': ['sweet potato','yams','japanese sweet potato','japanese sweet potatoes','garnet yams','jewel yams','orange sweet potato'],
+  'green peas': ['peas','frozen peas','frozen green peas','fresh peas','fresh green peas','english peas','garden peas','sweet peas','shelled peas','sugar snap peas','snap peas'],
+  // Brussels sprouts spelling variants
+  'brussels sprouts': ['brussel sprouts','brussels sprout','sprouts','shaved brussels sprouts','shredded brussels sprouts','halved brussels sprouts','trimmed brussels sprouts'],
+  // Parsnips
+  'parsnips': ['parsnip','baby parsnips','peeled parsnips','chopped parsnips','diced parsnips','medium parsnips'],
+  // Swiss chard
+  'swiss chard': ['chard','rainbow chard','red chard','green chard','silverbeet','silver beet'],
+  // Green chili — Indian/SE Asian recipes
+  'green chili': ['green chilli','green chilies','green chillies','hot green chili','hot green chilli','thai green chili','thai green chilli','serrano','serrano pepper','serranos','green thai chili','indian green chili','indian green chilli','bird\'s eye chili','bird\'s eye chilli'],
+  // Curry leaves — fresh/dried both work
+  'curry leaves': ['curry leaf','fresh curry leaves','dried curry leaves','curry leaf sprig','indian curry leaves'],
+  // Whole spice seeds — added to picker as separate entries because they're
+  // genuinely different from the ground form (used for tempering, not blending)
+  'cumin seeds': ['whole cumin','whole cumin seeds','jeera seeds'],
+  'coriander seeds': ['whole coriander','whole coriander seeds'],
+  'mustard seeds': ['black mustard seeds','brown mustard seeds','yellow mustard seeds','rai','indian mustard seeds'],
+  'poppy seeds': ['blue poppy seeds','white poppy seeds','khus khus'],
+  // Poultry seasoning — vegan-friendly herb blend (sage, thyme, marjoram)
+  'poultry seasoning': ['vegan poultry seasoning','herb blend','sage thyme blend'],
+  // Peanut oil — used for high-heat frying, mainly Asian recipes
+  'peanut oil': ['groundnut oil'],
+  // ── Wave 2 alias additions ──
+  // British "courgette" = zucchini (US). Critical UK alias.
+  'zucchini': ['courgette','courgettes','baby zucchini','baby courgette','small zucchini','small courgette','medium zucchini','green zucchini','yellow zucchini'],
+  // Balsamic vinegar variants — white balsamic is a milder, paler version
+  // but used the same way; substituting is acceptable for matching purposes.
+  'balsamic vinegar': ['white balsamic vinegar','white balsamic','aged balsamic','balsamic glaze','balsamic reduction','balsamic'],
+  // Potato variants — red, yukon, fingerling, baby are all interchangeable
+  // for matching ("recipe needs red potatoes, user has potatoes" → match).
+  'potatoes': ['potato','red potatoes','red potato','yukon gold potatoes','yukon potatoes','yukon gold','fingerling potatoes','baby potatoes','new potatoes','russet potatoes','russet potato','idaho potatoes','white potatoes','small potatoes','medium potatoes','large potatoes','waxy potatoes','floury potatoes','starchy potatoes'],
+  // Sesame seeds — white, black, toasted are all sesame seeds for matching
+  'sesame seeds': ['white sesame seeds','black sesame seeds','toasted sesame seeds','toasted white sesame seeds','toasted black sesame seeds','raw sesame seeds','hulled sesame seeds','unhulled sesame seeds'],
+  // Chile powders — ancho, chipotle, guajillo are technically distinct but
+  // serve the same role (smoky/mild heat). For matching, allow a "chili
+  // powder" pantry to satisfy these specific chile powder calls.
+  'chili powder': ['chilli powder','red chili powder','red chilli powder','hot chili powder','hot chilli powder','mild chili powder','mild chilli powder','ground chili','ground chilli','ancho chile powder','ancho chili powder','ancho powder','chipotle chile powder','chipotle chili powder','chipotle powder','guajillo chile powder','guajillo powder','new mexico chile powder','pasilla chile powder','arbol chile powder'],
+  // Bok choy — baby bok choy is just smaller; matches generic bok choy
+  'bok choy': ['baby bok choy','pak choi','pak choy','baby pak choi','shanghai bok choy','tatsoi'],
+  // Sugar — palm sugar / coconut sugar / jaggery are unrefined sugars used
+  // similarly. For matching, the "natural sweetener (any)" catch-all already
+  // covers most, but recipes specifying "palm sugar" need the alias.
+  'coconut sugar': ['brown sugar','maple syrup','date sugar','raw sugar','palm sugar','jaggery','panela','rapadura','muscovado'],
+  // Vegan single cream / heavy cream / whipping cream — all plant cream
+  // products usable interchangeably; coconut cream is the most common stand-in.
+  'coconut cream': ['vegan single cream','vegan double cream','vegan heavy cream','vegan whipping cream','vegan cream','plant-based cream','plant based cream','dairy-free cream','dairy free cream','non-dairy cream','cashew cream','soy cream','oat cream','full-fat coconut milk thick part'],
+  // "cooking oil" bare — falls under any cooking oil but the catch-all is
+  // one-way. Make it a direct alias to vegetable oil so it matches.
+  // (Already handled by 'any cooking oil' parent → variants. But user without
+  // 'any cooking oil' selected still needs match. Adding 'cooking oil' to
+  // the vegetable oil group fixes this.)
+  // ── Wave 3 ──
+  // Rice paper wrappers — same product as rice paper. Brown rice paper too.
+  'rice paper': ['rice paper wrappers','rice paper wrapper','spring roll wrappers','spring roll wrapper','summer roll wrappers','vietnamese rice paper','brown rice paper','brown rice paper wrappers','round rice paper'],
+  // Vegetable broth ↔ stock cubes / bouillon (bidirectional). Already covered
+  // above but adding "vegan stock cube" specifically.
+  // (No edit needed — 'vegetable bouillon cube' alias exists)
+  // High smoke point oil — generic "use any neutral oil" recipe shorthand
+  // Already partially covered by 'vegetable oil' group via wave 2 additions
+  // Delicata squash — close cousin of butternut, similar use
+  'butternut squash': ['kabocha squash','delicata squash','acorn squash','winter squash','squash','peeled squash','cubed squash','roasted squash'],
+  // Red miso paste is distinct from white miso (saltier, more fermented).
+  // Recipes specifying red miso want that specifically. Don't auto-equate.
+  // But add the "miso paste" parent alias so generic miso pantry covers it.
+  'red miso paste': ['red miso','dark miso','aged miso','barley miso','genmai miso'],
+  // Cooking oil bare = neutral oil (already in vegetable oil group above)
+  // Add 'cooking oil' to vegetable oil group via dedicated entry:
+  'any cooking oil': ['coconut oil','olive oil','avocado oil','vegetable oil','canola oil','sunflower oil','grapeseed oil','light oil','neutral oil','oil','cooking oil','frying oil','high smoke point oil','high-smoke-point oil'],
+  // Suffix-form aliases — recipes often say "X powder/spice" where the bare
+  // form is what we have in the pantry. Identity suffix guard would otherwise
+  // reject these as different products.
+  'matcha': ['matcha powder','matcha green tea','matcha green tea powder','culinary matcha','ceremonial matcha'],
+  'berbere': ['berbere spice','berbere powder','berbere blend','berbere seasoning'],
+  'za\'atar': ['zaatar','za atar','zaatar spice','za\'atar spice','zaatar blend','za\'atar blend'],
+  'psyllium husk': ['psyllium husk powder','psyllium powder','psyllium','whole psyllium husk','psyllium husks'],
+  'saffron': ['saffron threads','saffron strands','saffron stamens','spanish saffron','iranian saffron'],
+  // Guacamole — most recipes calling for guacamole are dips/toppings; if
+  // user has avocado + lime + salt, they can make it. Combined match.
+  'guacamole': ['homemade guacamole','prepared guacamole','store-bought guacamole'],
+  // Jicama — root vegetable used raw in slaws. No close substitute. Add
+  // alias for pluralizations.
+  'jicama': ['jicamas','jicama matchsticks','sliced jicama','julienned jicama'],
+  // Vegan stock cube — same as vegetable bouillon cube, already aliased
+  // under 'vegetable broth' but adding directly:
+  'vegetable broth': ['vegetable stock','veggie broth','veggie stock','veg broth','veg stock','vegetable bouillon','vegetable bouillon cube','vegetable bouillon cubes','veggie bouillon','bouillon cube','vegan bouillon','vegetable base','vegan stock cube','vegan stock cubes','vegetable stock cube','vegetable stock cubes','stock cube','stock cubes'],
+  // Coconut butter — different from coconut oil but close enough; recipes
+  // calling for it can use coconut oil (with adjustment). Match for pantry purposes.
+  'coconut oil': ['refined coconut oil','unrefined coconut oil','virgin coconut oil','extra virgin coconut oil','coconut butter','manna coconut'],
+  // Celery seed — distinct from celery itself; small jar in spice pantry
+  // most cooks don't have. Pure alias for matching when user has celery
+  // (recipes typically use it with celery anyway, treat as same family).
+  // (Adding to picker may be cleaner — kept here as fallback)
+
+  // Dark muscovado / demerara / turbinado / raw sugar all serve same role
+  // as brown sugar in baking. Already partially covered in coconut sugar
+  // group — adding "brown sugar" parent group:
+  'brown sugar': ['light brown sugar','dark brown sugar','muscovado sugar','dark muscovado sugar','light muscovado sugar','demerara sugar','demerara','turbinado sugar','turbinado','raw cane sugar','rapadura','panela','jaggery','sucanat'],
+  // Pul biber = Turkish red pepper flakes (Aleppo / Maras pepper variants)
+  // Same product family as red pepper flakes
+  'red pepper flakes': ['chili flakes','chilli flakes','crushed red pepper','crushed red pepper flakes','red chili flakes','red chilli flakes','aleppo pepper','red chilli','red chili','hot chilli powder','hot chili powder','pul biber','maras pepper','marash pepper','urfa biber','aleppo flakes','korean chili flakes'],
+  // Ginger garlic paste — also matches space-separated form, not just hyphenated
+  // (Hyphen→combined regex in matching.js handles "ginger-garlic paste".
+  // For "ginger garlic paste" we add a direct combined entry.)
+
+  // Sauerkraut — fermented cabbage, used in topping role similar to kimchi
+  // Has standalone identity but recipes can use kimchi as substitute
+  'sauerkraut': ['fermented cabbage','raw sauerkraut','unpasteurized sauerkraut'],
+  // Chilli paste — blanket category that includes sambal, sriracha, gochujang
+  'sriracha / hot sauce': ['sriracha','hot sauce','sambal oelek','chili garlic sauce','gochujang','rooster sauce','sriracha sauce','hot pepper sauce','tabasco','chilli paste','chili paste','red chilli paste','red chili paste','asian chilli paste','asian chili paste'],
 };
 
 /**
@@ -564,18 +701,18 @@ export const ALLERGY_KEYWORDS = {
 export const QA_ITEMS = [
   {cat:'🫘 Beans & Legumes',     items:['chickpeas','black beans','lentils','kidney beans','cannellini beans','great northern beans','navy beans','butter beans','lima beans','pinto beans','mung beans','split peas','black-eyed peas','firm tofu','extra-firm tofu','soft tofu','silken tofu','tempeh','edamame','jackfruit','TVP','soy curls']},
   {cat:'🌾 Grains & Starches',  items:['GF pasta (any)','rice (any)','quinoa','oats','millet','sweet potatoes','potatoes','corn tortillas','polenta','cornmeal','masa harina','buckwheat','rice noodles','glass noodles','nori','GF bread','GF breadcrumbs','GF tortillas']},
-  {cat:'🥦 Vegetables',         items:['garlic','yellow onion','white onion','red onion','fresh ginger','spinach','kale','carrots','celery','broccoli','cauliflower','bell peppers','mushrooms (any)','tomatoes','cherry tomatoes','avocado','zucchini','corn','cucumber','green onions','eggplant','cabbage','butternut squash','pumpkin','pumpkin puree','arugula','leeks','collard greens','lettuce (any)','green beans','asparagus','jalapeño','beets','radishes','artichoke hearts','bean sprouts','bamboo shoots','shallots']},
+  {cat:'🥦 Vegetables',         items:['garlic','yellow onion','white onion','red onion','fresh ginger','spinach','kale','carrots','celery','broccoli','cauliflower','bell peppers','mushrooms (any)','tomatoes','cherry tomatoes','avocado','zucchini','corn','cucumber','green onions','eggplant','cabbage','butternut squash','pumpkin','pumpkin puree','arugula','leeks','collard greens','lettuce (any)','green beans','asparagus','green peas','brussels sprouts','parsnips','swiss chard','bok choy','turnip','pickles','okra','jicama','kimchi','jalapeño','green chili','beets','radishes','artichoke hearts','bean sprouts','bamboo shoots','shallots']},
   {cat:'🍋 Fruits',             items:['lemon','lime','banana','berries (any)','cranberries','cherries','mango','apple','oranges','orange juice','pineapple','peaches','pears','kiwi','papaya','pomegranate','plantain','figs','grapes','watermelon','coconut','dates','raisins','dried apricots','date paste']},
   {cat:'🥜 Nuts & Seeds',       items:['nut butter (any)','cashews','almonds','walnuts','pecans','brazil nuts','macadamia nuts','hazelnuts','pistachio','peanuts','sesame seeds','pine nuts','tahini','hemp seeds','chia seeds','flax seeds','pumpkin seeds','sunflower seeds','protein powder']},
   {cat:'🥛 Plant-Based Dairy',  items:['almond milk','soy milk','rice milk','hemp milk','macadamia milk','pistachio milk','oat milk','cashew milk','vegan yogurt','vegan cream cheese','vegan parmesan','vegan feta','vegan cheese']},
-  {cat:'🫒 Oils & Fats',         items:['olive oil','coconut oil','avocado oil','sesame oil','chili oil','vegan butter','vegetable oil','toasted sesame oil','sunflower oil','grapeseed oil']},
-  {cat:'🥫 Canned & Jarred',    items:['canned tomatoes (any)','tomato sauce','tomato paste','vegetable broth','coconut milk','olives','artichoke hearts','roasted red peppers','sun-dried tomatoes','capers','salsa','hummus']},
+  {cat:'🫒 Oils & Fats',         items:['olive oil','coconut oil','avocado oil','sesame oil','chili oil','vegan butter','vegetable oil','toasted sesame oil','sunflower oil','grapeseed oil','peanut oil']},
+  {cat:'🥫 Canned & Jarred',    items:['canned tomatoes (any)','tomato sauce','tomato paste','vegetable broth','coconut milk','olives','artichoke hearts','roasted red peppers','sun-dried tomatoes','capers','salsa','hummus','sauerkraut','instant coffee','cooking spray']},
   {cat:'🫙 Sauces & Condiments', items:['tamari / coconut aminos','miso paste','vegan mayo','ketchup','yellow mustard','dijon mustard','BBQ sauce','hoisin sauce','vegan worcestershire','tamarind paste','harissa paste','gochujang','sriracha / hot sauce','sambal oelek','curry paste','liquid smoke','vegan sour cream','nutritional yeast']},
   {cat:'🍯 Sweeteners & Vinegars', items:['maple syrup','natural sweetener (any)','agave nectar','coconut sugar','brown sugar','cane sugar','powdered sugar','date syrup','molasses','coconut nectar','allulose','stevia / monk fruit','apple cider vinegar','rice vinegar','balsamic vinegar','white vinegar','red wine vinegar','white wine vinegar','sherry vinegar','red wine','white wine']},
-  {cat:'🧂 Baking & Flours',    items:['baking soda','baking powder','cornstarch','arrowroot powder','gluten-free flour','almond flour','coconut flour','oat flour','tapioca flour','brown rice flour','chickpea flour','cassava flour','flaxseed meal','applesauce','aquafaba','agar powder','xanthan gum','cream of tartar','active dry yeast','protein powder']},
-  {cat:'🌿 Spices & Herbs',     items:['turmeric','cumin','smoked paprika','cinnamon','chili powder','ginger','curry powder','black pepper','white pepper','garlic powder','onion powder','oregano','basil','thyme','sage','coriander','cayenne','cilantro','parsley','cardamom','cloves','allspice','bay leaves','five spice','nutmeg','sea salt','garam masala','lemongrass','star anise','dill','mint','chives','rosemary','red pepper flakes','fennel seeds','sumac','italian seasoning','pumpkin pie spice','taco seasoning']},
+  {cat:'🧂 Baking & Flours',    items:['baking soda','baking powder','cornstarch','arrowroot powder','gluten-free flour','almond flour','coconut flour','oat flour','tapioca flour','brown rice flour','chickpea flour','cassava flour','flaxseed meal','applesauce','aquafaba','agar powder','psyllium husk','xanthan gum','almond extract','matcha','cream of tartar','active dry yeast','protein powder']},
+  {cat:'🌿 Spices & Herbs',     items:['turmeric','cumin','smoked paprika','cinnamon','chili powder','ginger','curry powder','black pepper','white pepper','garlic powder','onion powder','oregano','basil','thyme','sage','coriander','cayenne','cilantro','parsley','cardamom','cloves','allspice','bay leaves','five spice','nutmeg','sea salt','garam masala','lemongrass','star anise','dill','mint','chives','rosemary','red pepper flakes','fennel seeds','cumin seeds','coriander seeds','mustard seeds','poppy seeds','caraway seeds','poultry seasoning','saffron','za\'atar','berbere','sumac','italian seasoning','pumpkin pie spice','taco seasoning']},
   {cat:'🍨 Dessert Pantry',     items:['vanilla extract','cocoa powder','chocolate chips (any)','white chocolate chips','dark chocolate','cacao nibs','coconut cream','shredded coconut','date sugar','allulose','stevia / monk fruit']},
-  {cat:'🍱 Asian Specialty',    items:['mirin','gochugaru','vegan oyster sauce','shichimi togarashi','furikake','kombu','daikon','yuzu','wakame','rice paper']},
+  {cat:'🍱 Asian Specialty',    items:['mirin','gochugaru','vegan oyster sauce','shichimi togarashi','furikake','kombu','kala namak','curry leaves','galangal','fenugreek','daikon','yuzu','wakame','rice paper']},
 ];
 
 /**
