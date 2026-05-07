@@ -4,7 +4,9 @@
  */
 export const INGREDIENT_ALIASES = {
   'plant-based milk (any)': ['almond milk','oat milk','soy milk','cashew milk','rice milk','hemp milk','macadamia milk','pistachio milk','plant milk','nondairy milk','non-dairy milk'],
-  'any cooking oil':        ['coconut oil','olive oil','avocado oil','vegetable oil','canola oil','sunflower oil','grapeseed oil','light oil','neutral oil'],
+  // "Any cooking oil" covers all liquid neutral oils. Includes bare "oil"
+  // so recipes saying just "1 tsp oil" or "oil for cooking" match.
+  'any cooking oil':        ['coconut oil','olive oil','avocado oil','vegetable oil','canola oil','sunflower oil','grapeseed oil','light oil','neutral oil','oil','cooking oil','frying oil'],
   'nut butter (any)':       ['peanut butter','almond butter','sunflower butter','cashew butter','hazelnut butter','walnut butter','pecan butter','macadamia butter','mixed nut butter','seed butter'],
   // GF pasta (any) — GLUTEN-FREE pasta varieties only. HARVEST is GF-focused.
   // Includes red lentil, chickpea, brown rice, quinoa, edamame pasta, etc.
@@ -62,6 +64,14 @@ export const INGREDIENT_ALIASES = {
   // Pepper: black pepper is the DEFAULT form (what most recipes mean by "pepper").
   // Bidirectional with all the common forms — ground, cracked, freshly ground, etc.
   'pepper': ['black pepper','ground pepper','ground black pepper','cracked pepper','cracked black pepper','freshly ground black pepper','freshly cracked black pepper','fresh ground pepper','fresh ground black pepper','peppercorns','black peppercorns'],
+  // Scallions / green onions — same plant, used interchangeably.
+  // Spring onions are similar enough to also include.
+  'green onions': ['scallions','green onion','scallion','spring onions','spring onion'],
+  // Pumpkin: whole pumpkin → puree (you can make puree from a pumpkin).
+  // One-way only: someone with canned puree shouldn't claim whole pumpkin.
+  'pumpkin': ['pumpkin puree','pumpkin purée','canned pumpkin','pumpkin pulp'],
+  // Red pepper flakes / chili flakes / crushed red pepper — same product.
+  'red pepper flakes': ['chili flakes','chilli flakes','crushed red pepper','crushed red pepper flakes','red chili flakes','red chilli flakes','aleppo pepper'],
   // Vegan butter, plant butter, vegan margarine — same product family
   // (designed to behave like dairy butter). Bidirectional category.
   'vegan butter': ['plant butter','plant-based butter','dairy-free butter','vegan margarine','non-dairy butter'],
@@ -335,8 +345,9 @@ export const INGREDIENT_SUBS = {
   'celery': ['fennel bulb','celery ribs'],
   'shallot': ['shallots','red onion'],
   'shallots': ['shallot','red onion'],
-  'scallions': ['green onion','green onions','scallion','spring onion'],
-  'green onion': ['scallions','green onions','scallion','spring onion'],
+  // Scallions / green onions / spring onions are the same thing.
+  // Bidirectional handled in INGREDIENT_ALIASES above (search for 'green onions').
+  // Removed from INGREDIENT_SUBS to avoid one-way coverage gaps.
 
   // ── Dairy Alternatives ──
   'vegan yogurt': ['coconut yogurt','soy yogurt','cashew yogurt','plant-based yogurt'],
@@ -491,7 +502,7 @@ export const ALLERGY_KEYWORDS = {
 export const QA_ITEMS = [
   {cat:'🫘 Beans & Legumes',     items:['chickpeas','black beans','lentils','kidney beans','cannellini beans','great northern beans','navy beans','butter beans','lima beans','pinto beans','mung beans','split peas','black-eyed peas','firm tofu','extra-firm tofu','soft tofu','silken tofu','tempeh','edamame','jackfruit','TVP','soy curls']},
   {cat:'🌾 Grains & Starches',  items:['GF pasta (any)','rice (any)','quinoa','oats','millet','sweet potatoes','potatoes','corn tortillas','polenta','buckwheat','rice noodles','glass noodles','nori','GF bread','GF breadcrumbs','GF tortillas']},
-  {cat:'🥦 Vegetables',         items:['garlic','yellow onion','white onion','red onion','fresh ginger','spinach','kale','carrots','celery','broccoli','cauliflower','bell peppers','mushrooms (any)','tomatoes','cherry tomatoes','avocado','zucchini','corn','cucumber','green onions','eggplant','cabbage','lettuce (any)','green beans','asparagus','jalapeño','beets','radishes','artichoke hearts','bean sprouts','bamboo shoots','shallots']},
+  {cat:'🥦 Vegetables',         items:['garlic','yellow onion','white onion','red onion','fresh ginger','spinach','kale','carrots','celery','broccoli','cauliflower','bell peppers','mushrooms (any)','tomatoes','cherry tomatoes','avocado','zucchini','corn','cucumber','green onions','eggplant','cabbage','butternut squash','pumpkin','pumpkin puree','arugula','lettuce (any)','green beans','asparagus','jalapeño','beets','radishes','artichoke hearts','bean sprouts','bamboo shoots','shallots']},
   {cat:'🍋 Fruits',             items:['lemon','lime','banana','berries (any)','cranberries','cherries','mango','apple','oranges','orange juice','pineapple','peaches','pears','kiwi','papaya','pomegranate','plantain','figs','grapes','watermelon','coconut','dates','raisins']},
   {cat:'🥜 Nuts & Seeds',       items:['nut butter (any)','cashews','almonds','walnuts','pecans','brazil nuts','macadamia nuts','hazelnuts','pistachio','peanuts','sesame seeds','pine nuts','tahini','hemp seeds','chia seeds','flax seeds','pumpkin seeds','sunflower seeds','protein powder']},
   {cat:'🥛 Plant-Based Dairy',  items:['almond milk','soy milk','rice milk','hemp milk','macadamia milk','pistachio milk','oat milk','cashew milk','vegan yogurt','vegan cream cheese','vegan parmesan']},
@@ -500,8 +511,9 @@ export const QA_ITEMS = [
   {cat:'🫙 Sauces & Condiments', items:['tamari / coconut aminos','miso paste','vegan mayo','ketchup','yellow mustard','dijon mustard','tamarind paste','gochujang','sriracha / hot sauce','sambal oelek','curry paste','liquid smoke','vegan sour cream','nutritional yeast']},
   {cat:'🍯 Sweeteners & Vinegars', items:['maple syrup','natural sweetener (any)','agave nectar','coconut sugar','brown sugar','cane sugar','powdered sugar','date syrup','molasses','coconut nectar','allulose','stevia / monk fruit','apple cider vinegar','rice vinegar','balsamic vinegar','white vinegar','red wine vinegar','white wine vinegar','sherry vinegar']},
   {cat:'🧂 Baking & Flours',    items:['baking soda','baking powder','cornstarch','arrowroot powder','gluten-free flour','almond flour','coconut flour','oat flour','tapioca flour','brown rice flour','chickpea flour','cassava flour','flaxseed meal','applesauce','xanthan gum','cream of tartar','active dry yeast','protein powder']},
-  {cat:'🌿 Spices & Herbs',     items:['turmeric','cumin','smoked paprika','cinnamon','chili powder','ginger','curry powder','black pepper','garlic powder','onion powder','oregano','basil','thyme','sage','coriander','cayenne','cilantro','parsley','cardamom','cloves','allspice','bay leaves','five spice','nutmeg','sea salt','garam masala','lemongrass','star anise','dill','mint','chives','rosemary','red pepper flakes','fennel seeds','sumac','italian seasoning']},
+  {cat:'🌿 Spices & Herbs',     items:['turmeric','cumin','smoked paprika','cinnamon','chili powder','ginger','curry powder','black pepper','white pepper','garlic powder','onion powder','oregano','basil','thyme','sage','coriander','cayenne','cilantro','parsley','cardamom','cloves','allspice','bay leaves','five spice','nutmeg','sea salt','garam masala','lemongrass','star anise','dill','mint','chives','rosemary','red pepper flakes','fennel seeds','sumac','italian seasoning']},
   {cat:'🍨 Dessert Pantry',     items:['vanilla extract','cocoa powder','chocolate chips (any)','white chocolate chips','dark chocolate','cacao nibs','coconut cream','shredded coconut','date sugar','allulose','stevia / monk fruit']},
+  {cat:'🍱 Asian Specialty',    items:['mirin','gochugaru','vegan oyster sauce','shichimi togarashi','furikake','kombu','daikon','yuzu','wakame','shaoxing wine','rice paper']},
 ];
 
 /**

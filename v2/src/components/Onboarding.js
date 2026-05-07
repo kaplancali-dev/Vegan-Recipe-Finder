@@ -42,6 +42,7 @@ const STAPLE_SECTIONS = [
     'mushrooms (any)','tomatoes','cherry tomatoes',
     { name: 'avocado', hint: "yes it's a fruit, no we don't care" },
     'zucchini','corn','cucumber','green onions','eggplant','cabbage',
+    'butternut squash','pumpkin','pumpkin puree','arugula',
     'lettuce (any)','green beans','asparagus',
     { name: 'jalapeño', hint: 'proceed with caution' },
     'beets','radishes','artichoke hearts','bean sprouts','bamboo shoots','shallots',
@@ -122,7 +123,7 @@ const STAPLE_SECTIONS = [
     'cinnamon','chili powder','ginger','curry powder',
     'black pepper','garlic powder','onion powder',
     'oregano','basil','thyme','sage','coriander','cayenne',
-    'cilantro','parsley',
+    'cilantro','parsley','white pepper',
     'cardamom','cloves','allspice','bay leaves','five spice','nutmeg',
     'sea salt',
     { name: 'garam masala', hint: 'instant warmth' },
@@ -138,6 +139,19 @@ const STAPLE_SECTIONS = [
     { name: 'cacao nibs', hint: 'chocolate for grown-ups' },
     'coconut cream','shredded coconut',
     'date sugar','allulose','stevia / monk fruit',
+  ]},
+  // 13 — Asian Specialty (GF-safe items only — verify labels for celiacs)
+  { label: '🍱 Asian Specialty', sub: 'unlock Japanese, Korean & Chinese recipes', items: [
+    { name: 'mirin', hint: 'sweet rice wine — Japanese cooking' },
+    { name: 'gochugaru', hint: 'Korean chili flakes' },
+    'vegan oyster sauce',
+    { name: 'shichimi togarashi', hint: 'Japanese 7-spice' },
+    'furikake',
+    'kombu',
+    'daikon','yuzu','wakame',
+    'shaoxing wine',
+    'rice paper',
+    { name: 'edamame', hint: 'soy beans, snack-ready' },
   ]},
 ];
 
@@ -164,6 +178,7 @@ const STAPLE_PAGES = [
   { sections: [9, 10], label: 'Sweeteners & Baking' },
   { sections: [11],    label: 'Spices & Herbs' },
   { sections: [12],    label: 'Dessert Pantry' },
+  { sections: [13],    label: 'Asian Specialty' },
 ];
 
 /* ── Page prompts (one per staple sub-page) ────────────────── */
@@ -178,7 +193,8 @@ const PAGE_PROMPTS = [
   "The pantry shelf essentials. Canned goods, sauces, the stuff that turns 'I have nothing' into an actual meal.",
   "Sweeteners and vinegars — the sweet-and-sour backbone. A splash of vinegar or drizzle of maple can save almost anything.",
   "Spices are where the magic happens. This is the difference between 'I ate' and 'I COOKED.' Go wild.",
-  "Last stop — the dessert pantry. Because sometimes dinner is just the opening act. You're almost done!",
+  "The dessert pantry. Because sometimes dinner is just the opening act.",
+  "Last stop — Asian specialty items. Skip if Japanese/Korean/Chinese cooking isn't your thing. Otherwise, these unlock a whole new world.",
 ];
 
 /* ── State ──────────────────────────────────────────────────── */
