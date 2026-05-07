@@ -16,9 +16,10 @@ import { startTour } from './GuidedTour.js';
 const STAPLE_SECTIONS = [
   // 0 — Beans & Legumes
   { label: '🫘 Beans & Legumes', sub: 'the workhorses', items: [
-    'chickpeas','black beans','lentils','kidney beans','navy beans','pinto beans','white beans',
+    'chickpeas','black beans','lentils','kidney beans',
+    'cannellini beans','great northern beans','navy beans','butter beans','lima beans','pinto beans',
     { name: 'mung beans', hint: 'sprout-worthy' },
-    'split peas','black-eyed peas','lima beans',
+    'split peas','black-eyed peas',
     'firm tofu','extra-firm tofu','soft tofu','silken tofu','tempeh','edamame',
     { name: 'jackfruit', hint: 'the pulled pork impersonator' },
     { name: 'TVP', hint: 'ground beef/chicken impersonator' },'soy curls',
