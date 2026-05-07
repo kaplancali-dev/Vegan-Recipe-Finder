@@ -87,14 +87,17 @@ const STAPLE_SECTIONS = [
     { name: 'sun-dried tomatoes', hint: 'umami bombs' },
     'capers',
   ]},
-  // 8 — Sauces & Condiments (GLUTEN-FREE — regular soy sauce, BBQ sauce,
-  // hoisin sauce, and worcestershire typically contain wheat/malt and are
-  // EXCLUDED. Users with GF versions can add them via My Ingredients.)
+  // 8 — Sauces & Condiments (GLUTEN-FREE focus — items where most brands
+  // contain wheat/malt have a "verify GF" hint. Users with certified GF
+  // versions can confidently select them.)
   { label: '🫙 Sauces & Condiments', sub: 'the personality section', items: [
     'tamari / coconut aminos','miso paste','vegan mayo',
     'ketchup','yellow mustard','dijon mustard',
+    { name: 'BBQ sauce', hint: 'verify GF label' },
+    { name: 'hoisin sauce', hint: 'verify GF label' },
+    { name: 'vegan worcestershire', hint: 'verify GF label' },
     'tamarind paste',
-    { name: 'gochujang', hint: 'Korean heat, instant depth' },
+    { name: 'gochujang', hint: 'Korean heat, verify GF label' },
     'sriracha / hot sauce','sambal oelek','curry paste','liquid smoke',
     'vegan sour cream',
     { name: 'nutritional yeast', hint: 'cheese flavor, zero guilt' },

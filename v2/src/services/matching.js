@@ -7,7 +7,64 @@
  */
 
 import { norm, stem, stripMeasure } from '../utils/text.js';
-import { INGREDIENT_ALIASES, INGREDIENT_SUBS, ALLERGY_KEYWORDS, PERISHABLES } from '../data/aliases.js';
+import { INGREDIENT_ALIASES, INGREDIENT_SUBS, ALLERGY_KEYWORDS, PERISHABLES, GF_SWAPS } from '../data/aliases.js';
+
+/**
+ * GF substitution map for MATCHING (not display).
+ * If recipe needs the LEFT (gluten-containing) ingredient and user has any of
+ * the RIGHT (GF alternatives), count as MATCH. The display chip already shows
+ * the swap suggestion; this just makes the match accurate so users with GF
+ * pantries can see they CAN make wheat-based recipes via substitution.
+ */
+const _GF_MATCH_SWAPS = {
+  // Pasta family
+  'pasta': ['gf pasta','gluten-free pasta','red lentil pasta','red lentil penne','chickpea pasta','brown rice pasta','quinoa pasta','rice noodles'],
+  'whole wheat pasta': ['gf pasta','gluten-free pasta','red lentil pasta','chickpea pasta','brown rice pasta','rice noodles'],
+  'whole wheat short pasta': ['gf pasta','gluten-free pasta'],
+  'wheat pasta': ['gf pasta','gluten-free pasta'],
+  'spaghetti': ['gf spaghetti','gluten-free spaghetti','rice noodles'],
+  'penne pasta': ['gf penne','gluten-free penne','red lentil penne','chickpea penne'],
+  'penne': ['gf penne','gluten-free penne','red lentil penne','chickpea penne'],
+  'linguine': ['gf linguine','rice noodles'],
+  'fettuccine': ['gf fettuccine','rice noodles'],
+  'macaroni': ['gf macaroni','gf elbow pasta'],
+  'elbow macaroni': ['gf macaroni','gf elbow pasta'],
+  'noodles': ['rice noodles','gf noodles','glass noodles'],
+  'egg noodles': ['rice noodles','gf noodles'],
+  'ramen noodles': ['rice noodles','gf ramen','rice ramen'],
+  'udon noodles': ['rice noodles'],
+  // Bread family
+  'bread': ['gf bread','gluten-free bread'],
+  'whole wheat bread': ['gf bread','gluten-free bread'],
+  'sandwich bread': ['gf bread'],
+  'sourdough bread': ['gf bread'],
+  'breadcrumbs': ['gf breadcrumbs','gluten-free breadcrumbs','gf panko'],
+  'bread crumbs': ['gf breadcrumbs','gluten-free breadcrumbs','gf panko'],
+  'panko': ['gf panko','gf breadcrumbs'],
+  'panko breadcrumbs': ['gf panko','gf breadcrumbs'],
+  'hamburger buns': ['gf buns','gf hamburger buns','gf bread'],
+  'whole wheat hamburger buns': ['gf buns','gf hamburger buns','gf bread'],
+  'burger buns': ['gf buns','gf hamburger buns','gf bread'],
+  'tortillas': ['gf tortillas','corn tortillas'],
+  'flour tortillas': ['gf tortillas','corn tortillas'],
+  'wraps': ['gf tortillas','gf wraps'],
+  'pita bread': ['gf pita','gf bread'],
+  'naan': ['gf naan','gf bread'],
+  // Flour family — wheat-based recipes match if user has GF flour
+  'flour': ['gluten-free flour','gf flour','almond flour','oat flour','rice flour','coconut flour','cassava flour','chickpea flour','tapioca flour'],
+  'all-purpose flour': ['gluten-free flour','gf flour','1:1 gf flour','1:1 gluten-free flour'],
+  'plain flour': ['gluten-free flour','gf flour'],
+  'whole wheat flour': ['gluten-free flour','gf flour'],
+  'whole wheat pastry flour': ['gluten-free flour','gf flour'],
+  'white whole wheat flour': ['gluten-free flour','gf flour'],
+  'bread flour': ['gluten-free flour','gf flour'],
+  'spelt flour': ['gluten-free flour','gf flour'],
+  'cake flour': ['gluten-free flour','gf flour'],
+  'pastry flour': ['gluten-free flour','gf flour'],
+  'self-rising flour': ['gluten-free flour','gf flour'],
+  // Soy sauce → tamari (already handled in tamari alias above)
+  'soy sauce': ['tamari','coconut aminos','liquid aminos','gluten-free soy sauce','gf soy sauce'],
+};
 
 /** Flat set of all perishable ingredient names (normed) for fast lookup */
 const _perishableSet = new Set();
@@ -606,11 +663,22 @@ export function findRecipes({
       const rawIng = r.ing[i];
       const optional = _isOptional(rawIng);
       // Pre-process for matching:
-      //   1. Strip usage notes ("for cooking", "to taste", ", melted", footnotes, parens)
-      //   2. Convert "&" and "+" connectors to "and" so that "salt & pepper"
+      //   1. Strip leading measurements ("1 tsp", "1 cup", "½ pound", etc.)
+      //      so recipes like "1 tsp oil" match user's "oil" cleanly.
+      //   2. Strip usage notes ("for cooking", "to taste", ", melted", footnotes, parens)
+      //   3. Convert "&" and "+" connectors to "and" so that "salt & pepper"
       //      → "salt and pepper" survives norm's punctuation stripping
-      //   3. Apply norm (lowercase, strip remaining punctuation)
-      const cleaned = _stripUsageNotes(rawIng).replace(/\s*&\s*/g, ' and ').replace(/\s*\+\s*/g, ' and ');
+      //   4. Apply norm (lowercase, strip remaining punctuation)
+      const measureStripped = stripMeasure(rawIng);
+      // Convert connectors before norm strips them:
+      //   "/" → " or "  (so "parsley/cilantro" stays as "parsley or cilantro"
+      //                  rather than collapsing to "parsleycilantro")
+      //   "&" → " and "
+      //   "+" → " and "
+      const cleaned = _stripUsageNotes(measureStripped)
+        .replace(/\s*\/\s*/g, ' or ')
+        .replace(/\s*&\s*/g, ' and ')
+        .replace(/\s*\+\s*/g, ' and ');
       const ri = norm(cleaned);
 
       // Universal ingredients (water, ice) — always count as "have"
@@ -629,6 +697,23 @@ export function findRecipes({
         const components = _splitCombined(rawIng);
         if (components) {
           matched = components.every(c => ingredientMatches(c, allIngs, allIngSet, allIngsStems));
+        }
+      }
+
+      // GF substitution match — for a GF-focused app, if recipe needs a wheat
+      // ingredient (pasta, bread, flour, etc.) and user has the GF version,
+      // count as match. The GF chip will inform user to substitute.
+      if (!matched) {
+        // Try matching against the GF swap targets for any wheat ingredient
+        // that appears in the recipe ingredient
+        for (const [wheatItem, gfAlts] of Object.entries(_GF_MATCH_SWAPS)) {
+          if (ri.includes(wheatItem)) {
+            // Recipe has a wheat ingredient. Does user have a GF version?
+            if (gfAlts.some(alt => allIngSet.has(alt) || allIngs.some(ai => ai.includes(alt)))) {
+              matched = true;
+              break;
+            }
+          }
         }
       }
 

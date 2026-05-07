@@ -71,7 +71,28 @@ export const INGREDIENT_ALIASES = {
   // One-way only: someone with canned puree shouldn't claim whole pumpkin.
   'pumpkin': ['pumpkin puree','pumpkin purée','canned pumpkin','pumpkin pulp'],
   // Red pepper flakes / chili flakes / crushed red pepper — same product.
-  'red pepper flakes': ['chili flakes','chilli flakes','crushed red pepper','crushed red pepper flakes','red chili flakes','red chilli flakes','aleppo pepper'],
+  'red pepper flakes': ['chili flakes','chilli flakes','crushed red pepper','crushed red pepper flakes','red chili flakes','red chilli flakes','aleppo pepper','red chilli','red chili','hot chilli powder','hot chili powder'],
+  // Smoked paprika ↔ paprika: smoked is the preferred form in vegan recipes
+  // (adds depth) but plain paprika is interchangeable in most uses.
+  'smoked paprika': ['paprika','sweet paprika','hot paprika','spanish paprika','hungarian paprika'],
+  // UK ↔ US sugar naming: caster = superfine = granulated, icing = powdered
+  'powdered sugar': ['icing sugar','confectioners sugar','confectioner\'s sugar','10x sugar'],
+  'cane sugar': ['caster sugar','superfine sugar','caster superfine sugar','granulated sugar','white sugar','raw sugar','organic cane sugar'],
+  // Rice vinegar variants — same product
+  'rice vinegar': ['rice wine vinegar','brown rice vinegar','seasoned rice vinegar','japanese rice vinegar'],
+  // For a GF app: when a recipe calls for soy sauce, having tamari counts.
+  // (Recipes calling for soy sauce in a GF context expect substitution.)
+  'tamari': ['soy sauce','reduced sodium soy sauce','low sodium soy sauce','low-sodium soy sauce','dark soy sauce','light soy sauce','shoyu','gluten-free soy sauce','gf soy sauce','liquid aminos','coconut aminos'],
+  // Flaxseed meal naming variations
+  'flaxseed meal': ['flax meal','flaxmeal','ground flaxseed','ground flax','milled flaxseed','linseed meal'],
+  // Vanilla extract is what most recipes mean when they say "vanilla"
+  'vanilla extract': ['vanilla','pure vanilla extract','vanilla bean paste','vanilla paste'],
+  // Pomegranate fruit covers seeds (you get seeds FROM the fruit)
+  'pomegranate': ['pomegranate seeds','pomegranate arils'],
+  // Mustard variants
+  'dijon mustard': ['dijon-style mustard','dijon style mustard','grainy dijon','wholegrain mustard','whole grain mustard','stone-ground mustard','stoneground mustard','dry mustard','mustard powder','ground mustard'],
+  // Generic "vinegar" — user with any specific vinegar can satisfy
+  'apple cider vinegar': ['vinegar','any vinegar'],
   // Vegan butter, plant butter, vegan margarine — same product family
   // (designed to behave like dairy butter). Bidirectional category.
   'vegan butter': ['plant butter','plant-based butter','dairy-free butter','vegan margarine','non-dairy butter'],
@@ -81,6 +102,12 @@ export const INGREDIENT_ALIASES = {
   // user's specific bean and vice versa. Lima beans/butter beans are
   // technically white but textural differences make them less interchangeable.
   'white beans': ['cannellini beans','great northern beans','navy beans','butter beans','lima beans'],
+  // Kidney beans default to RED variety. Recipes saying "red kidney beans"
+  // are the same product as generic "kidney beans". White kidney beans = cannellini
+  // (in the white beans group above, NOT in this kidney bean group).
+  'kidney beans': ['red kidney beans','dark red kidney beans','light red kidney beans','dark kidney beans','light kidney beans'],
+  // Black beans = black turtle beans (same product, different name)
+  'black beans': ['black turtle beans','turtle beans'],
   'arrowroot powder': ['tapioca starch','tapioca flour','tapioca','arrowroot starch','arrowroot'],
   'cornstarch': ['potato starch','corn starch'],
   'jalapeño': ['jalapeno','jalapeños','jalapenos'],
@@ -508,7 +535,7 @@ export const QA_ITEMS = [
   {cat:'🥛 Plant-Based Dairy',  items:['almond milk','soy milk','rice milk','hemp milk','macadamia milk','pistachio milk','oat milk','cashew milk','vegan yogurt','vegan cream cheese','vegan parmesan']},
   {cat:'🫒 Oils & Fats',         items:['olive oil','coconut oil','avocado oil','sesame oil','chili oil','vegan butter','vegetable oil','toasted sesame oil','sunflower oil','grapeseed oil']},
   {cat:'🥫 Canned & Jarred',    items:['canned tomatoes (any)','tomato sauce','tomato paste','vegetable broth','coconut milk','olives','artichoke hearts','roasted red peppers','sun-dried tomatoes','capers']},
-  {cat:'🫙 Sauces & Condiments', items:['tamari / coconut aminos','miso paste','vegan mayo','ketchup','yellow mustard','dijon mustard','tamarind paste','gochujang','sriracha / hot sauce','sambal oelek','curry paste','liquid smoke','vegan sour cream','nutritional yeast']},
+  {cat:'🫙 Sauces & Condiments', items:['tamari / coconut aminos','miso paste','vegan mayo','ketchup','yellow mustard','dijon mustard','BBQ sauce','hoisin sauce','vegan worcestershire','tamarind paste','gochujang','sriracha / hot sauce','sambal oelek','curry paste','liquid smoke','vegan sour cream','nutritional yeast']},
   {cat:'🍯 Sweeteners & Vinegars', items:['maple syrup','natural sweetener (any)','agave nectar','coconut sugar','brown sugar','cane sugar','powdered sugar','date syrup','molasses','coconut nectar','allulose','stevia / monk fruit','apple cider vinegar','rice vinegar','balsamic vinegar','white vinegar','red wine vinegar','white wine vinegar','sherry vinegar']},
   {cat:'🧂 Baking & Flours',    items:['baking soda','baking powder','cornstarch','arrowroot powder','gluten-free flour','almond flour','coconut flour','oat flour','tapioca flour','brown rice flour','chickpea flour','cassava flour','flaxseed meal','applesauce','xanthan gum','cream of tartar','active dry yeast','protein powder']},
   {cat:'🌿 Spices & Herbs',     items:['turmeric','cumin','smoked paprika','cinnamon','chili powder','ginger','curry powder','black pepper','white pepper','garlic powder','onion powder','oregano','basil','thyme','sage','coriander','cayenne','cilantro','parsley','cardamom','cloves','allspice','bay leaves','five spice','nutmeg','sea salt','garam masala','lemongrass','star anise','dill','mint','chives','rosemary','red pepper flakes','fennel seeds','sumac','italian seasoning']},
