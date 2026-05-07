@@ -39,7 +39,11 @@ export const INGREDIENT_ALIASES = {
   'bell peppers (any)': ['bell pepper','red bell pepper','green bell pepper','yellow bell pepper','orange bell pepper','bell peppers','red pepper','green pepper'],
   'miso paste': ['white miso','light miso','red miso','yellow miso','miso'],
   'red pepper flakes': ['chili flakes','crushed red pepper','crushed red pepper flakes','red chili flakes'],
-  'white beans': ['cannellini beans','great northern beans','navy beans'],
+  // White beans is a true CATEGORY — these are all members. Bidirectional:
+  // any of these ↔ "white beans" so recipes calling for the category match
+  // user's specific bean and vice versa. Lima beans/butter beans are
+  // technically white but textural differences make them less interchangeable.
+  'white beans': ['cannellini beans','great northern beans','navy beans','butter beans','lima beans'],
   'arrowroot powder': ['tapioca starch','tapioca flour','tapioca','arrowroot starch','arrowroot'],
   'cornstarch': ['potato starch','corn starch'],
   'jalapeño': ['jalapeno','jalapeños','jalapenos'],
@@ -95,8 +99,11 @@ export const INGREDIENT_SUBS = {
   'pistachio milk': ['almond milk','soy milk','rice milk','hemp milk','macadamia milk','oat milk','cashew milk','plant milk','plant-based milk'],
   'oat milk':       ['almond milk','soy milk','rice milk','hemp milk','macadamia milk','pistachio milk','cashew milk','plant milk','plant-based milk'],
   'cashew milk':    ['almond milk','soy milk','rice milk','hemp milk','macadamia milk','pistachio milk','oat milk','plant milk','plant-based milk'],
-  'peanut butter':  ['almond butter','nut butter'],
-  'almond butter':  ['peanut butter','nut butter'],
+  // Nut butters have distinct flavors. Peanut butter is iconic; almond
+  // butter is mellower and slightly bitter; cashew is sweet and mild.
+  // Substituting changes the dish noticeably. No automatic cross-coverage.
+  'peanut butter':  [],
+  'almond butter':  [],
   'maple syrup': ['agave','agave nectar','agave syrup','coconut sugar','brown sugar','date syrup','monk fruit','allulose','stevia','sweetener','maple','sugar','coconut nectar','honey'],
   'agave': ['maple syrup','maple','coconut sugar','brown sugar','date syrup','monk fruit','allulose','stevia','sweetener','agave nectar','agave syrup','sugar','coconut nectar'],
   'natural sweetener (any)': ['maple syrup','maple','agave','agave nectar','agave syrup','coconut sugar','brown sugar','date syrup','monk fruit','allulose','stevia','sweetener','sugar','coconut nectar','raw sugar','cane sugar'],
@@ -181,7 +188,13 @@ export const INGREDIENT_SUBS = {
   'balsamic vinegar': ['balsamic glaze','balsamic reduction'],
 
   // ── Proteins / Beans ──
-  'chickpeas': ['white beans','cannellini beans','great northern beans','butter beans'],
+  // Chickpeas (garbanzo beans) are a DIFFERENT species from white beans
+  // — different shape, color, texture, flavor. Not interchangeable.
+  'chickpeas': [],
+  // Black/pinto/kidney beans are different beans with different colors and
+  // mild flavor differences. They DO substitute well in chilis, soups, and
+  // burrito bowls — so keep these soft subs. If users want strict, they
+  // can add the specific bean they have.
   'black beans': ['pinto beans','kidney beans','red beans'],
   'pinto beans': ['black beans','kidney beans','red beans'],
   'kidney beans': ['black beans','pinto beans','red beans'],
@@ -247,8 +260,11 @@ export const INGREDIENT_SUBS = {
   'sweet potato': ['sweet potatoes'],
   'sweet potatoes': ['sweet potato'],
   'butternut squash': ['kabocha squash'],
-  'cauliflower': ['broccoli','cauliflower florets'],
-  'broccoli': ['cauliflower','broccolini','broccoli florets'],
+  // Broccoli and cauliflower are different vegetables. They sometimes
+  // cross-substitute in roasted-veg dishes, but they have different flavors,
+  // textures, and cooking times. Keep only same-plant variants.
+  'cauliflower': ['cauliflower florets'],
+  'broccoli': ['broccolini','broccoli florets'],
   // Eggplant is a nightshade; mushrooms are fungi; zucchini is a squash.
   // Three completely different ingredients. Removing cross-aliases.
   'eggplant': [],

@@ -47,6 +47,32 @@ export function isPerishableIng(normedIng) {
   return false;
 }
 
+/**
+ * Convenience catch-all alias keys. Variants under these are NOT equivalents
+ * — the user explicitly opts into broad coverage by selecting the catch-all.
+ * The matcher only does parent → variants for these (not variant → parent).
+ *
+ * Example: "any cooking oil" → olive, coconut, avocado, etc. The user picks
+ * "any cooking oil" to mean "I have several cooking oils, any will do."
+ * But having JUST olive oil does NOT mean the user has "any cooking oil"
+ * — coconut oil's solidify-at-room-temp property isn't satisfied by olive.
+ */
+// Listed in NORMALIZED form (parens/punctuation stripped by norm()).
+const ONE_WAY_CATCHALLS = new Set([
+  'any cooking oil',
+  'plant-based milk any',
+  'nut butter any',
+  'pasta any',
+  'sweetener any',
+  'natural sweetener any',
+  'leafy greens any',
+  'lettuce any',
+  'vinegar any',
+  'flour any',
+  'fresh herbs any',
+  'soy sauce  tamari  coconut aminos',
+]);
+
 /** Memoization cache for expandWithAliases */
 const _aliasCache = new Map();
 const ALIAS_CACHE_MAX = 64;
@@ -69,12 +95,36 @@ export function expandWithAliases(ings) {
   ings.forEach(ing => {
     const key = norm(ing);
 
-    // Expand generic aliases (bidirectional)
+    // Expand generic aliases.
+    //
+    // Some alias keys are TRUE CATEGORIES (members are equivalents):
+    //   "white beans" ↔ cannellini, navy, great northern
+    //   "vegetable broth" ↔ vegetable stock
+    //   "bell peppers (any)" ↔ red/green/yellow bell peppers
+    //   These are bidirectional — having any member counts as having the
+    //   category, AND having the category counts as having any member.
+    //
+    // Other alias keys are CONVENIENCE CATCH-ALLS (user explicitly opting
+    // into broad coverage — "I'm flexible about leafy greens"). Variants
+    // are NOT equivalents:
+    //   "leafy greens (any)" → spinach, kale, etc. (kale ≠ spinach)
+    //   "any cooking oil"     → olive, coconut, etc. (olive ≠ coconut)
+    //   These are ONE-WAY — only parent → variants. Variant does not
+    //   imply parent.
     Object.entries(INGREDIENT_ALIASES).forEach(([alias, variants]) => {
-      if (norm(alias) === key) variants.forEach(v => result.add(norm(v)));
+      const aliasKey = norm(alias);
+      if (aliasKey === key) {
+        // Parent → variants (always works for both kinds)
+        variants.forEach(v => result.add(norm(v)));
+      } else if (!ONE_WAY_CATCHALLS.has(aliasKey) && variants.some(v => norm(v) === key)) {
+        // Variant → parent (only for true categories, NOT catch-alls)
+        result.add(aliasKey);
+        variants.forEach(v => result.add(norm(v)));
+      }
     });
 
-    // Expand one-way substitutions
+    // Expand one-way substitutions (loose substitutes — only fire if user
+    // has the LEFT side, never reverse)
     Object.entries(INGREDIENT_SUBS).forEach(([sub, covers]) => {
       if (norm(sub) === key) covers.forEach(v => result.add(norm(v)));
     });
@@ -106,9 +156,21 @@ export function clearAliasCache() {
  * @param {Set<string>} [userIngSet] - Optional pre-built Set for O(1) exact lookup
  * @returns {boolean}
  */
+/**
+ * Stem each word in a multi-word ingredient. Handles plural/singular and
+ * common verb forms so "onions" matches "onion", "tomatoes" matches "tomato",
+ * "walnuts" matches "walnut", "seeds" matches "seed", etc.
+ */
+function _stemAll(ing) {
+  return ing.split(/\s+/).map(stem).join(' ');
+}
+
 export function ingredientMatches(recipeIng, userIngs, userIngSet) {
   // Fast path: exact match via Set (avoids all string ops for ~40% of cases)
   if (userIngSet && userIngSet.has(recipeIng)) return true;
+
+  // Pre-compute stemmed recipe ingredient (one allocation per recipe ing)
+  const recipeStem = _stemAll(recipeIng);
 
   // Two checks per user ingredient:
   //   1) Recipe-as-haystack: applies STRICT modifier guard. If the recipe is
@@ -118,10 +180,20 @@ export function ingredientMatches(recipeIng, userIngs, userIngSet) {
   //   2) User-as-haystack: applies LOOSE modifier guard. If the user has
   //      "red onion" and recipe asks for "onion", the user has a specific
   //      instance of what the recipe wants — ACCEPT.
-  return userIngs.some(ai =>
-    _wordBoundaryMatch(recipeIng, ai, /* strictPrefix */ true) ||
-    _wordBoundaryMatch(ai, recipeIng, /* strictPrefix */ false)
-  );
+  // Each check is also tried against STEMMED forms so plural/singular
+  // mismatches don't cause false negatives ("onions" matches "onion").
+  return userIngs.some(ai => {
+    if (_wordBoundaryMatch(recipeIng, ai, /* strictPrefix */ true)) return true;
+    if (_wordBoundaryMatch(ai, recipeIng, /* strictPrefix */ false)) return true;
+
+    // Stem-aware fallback for plural/singular (and verb form) variations
+    const aiStem = _stemAll(ai);
+    if (aiStem !== ai || recipeStem !== recipeIng) {
+      if (_wordBoundaryMatch(recipeStem, aiStem, /* strictPrefix */ true)) return true;
+      if (_wordBoundaryMatch(aiStem, recipeStem, /* strictPrefix */ false)) return true;
+    }
+    return false;
+  });
 }
 
 /**
@@ -133,38 +205,40 @@ export function ingredientMatches(recipeIng, userIngs, userIngSet) {
  * blends of OTHER spices (cinnamon, nutmeg, ginger, clove) — they contain zero
  * pumpkin. Same for "apple pie spice", "chinese five spice", etc.
  */
+// All entries listed in BOTH singular and plural to survive stemming
+// (the matcher applies stem() to handle plural/singular variants).
 const IDENTITY_SUFFIXES = new Set([
   // Liquid/oil/dairy forms — base ingredient ≠ derived liquid/fat
-  'oil', 'milk', 'butter', 'cream', 'water', 'juice', 'nectar',
+  'oil', 'oils', 'milk', 'milks', 'butter', 'butters',
+  'cream', 'creams', 'water', 'waters', 'juice', 'juices', 'nectar',
   // Powdered/ground/processed forms — base ≠ processed form
-  'flour', 'powder', 'paste', 'starch', 'extract',
+  'flour', 'flours', 'powder', 'powders', 'paste', 'pastes',
+  'starch', 'starches', 'extract', 'extracts',
   // Sweet/sour derivatives
-  'sugar', 'syrup', 'vinegar',
-  // Seeds (e.g. "pumpkin seeds" vs "pumpkin", "sunflower seeds" vs "sunflower")
+  'sugar', 'sugars', 'syrup', 'syrups', 'vinegar', 'vinegars',
+  // Seeds
   'seed', 'seeds',
   // Spice mixes — base ≠ blend
-  'spice', 'pie spice', 'spice blend', 'spice mix', 'seasoning',
+  'spice', 'spices', 'pie spice', 'spice blend', 'spice mix', 'seasoning', 'seasonings',
   // Sauces and condiments — base ≠ derived sauce
-  'sauce', 'aminos', 'mayo', 'mayonnaise', 'mustard',
+  'sauce', 'sauces', 'aminos', 'mayo', 'mayonnaise', 'mustard',
   // Wrappers/papers (rice paper, etc.) — base ≠ derived sheet
-  'paper', 'wrapper', 'wrappers',
+  'paper', 'papers', 'wrapper', 'wrappers',
   // Soup/broth derivatives — base ≠ liquid
-  'broth', 'stock', 'bouillon', 'bisque', 'consommé', 'consomme',
+  'broth', 'broths', 'stock', 'stocks', 'bouillon', 'bisque', 'consommé', 'consomme',
   // Preserves/spreads — base ≠ jam/jelly form
-  'jam', 'jelly', 'preserves', 'marmalade', 'compote', 'butter',
-  // Dried/snack/baking-chip forms — base ≠ derived chip product
-  // "Chips" is a distinct manufactured form. Even chocolate chips, while
-  // similar to chocolate, are a specific shape that doesn't exist as a
-  // generic chocolate property. Confection chips (peanut butter chips,
-  // butterscotch chips, caramel chips) are MUCH further from their base.
-  // Users who have "chocolate chips (any)" via the staples picker get the
-  // chip alias automatically; users who have just "chocolate" can chop a
-  // bar but the matcher should be honest about what they actually have.
-  'leather', 'jerky', 'crisps', 'chips',
+  'jam', 'jams', 'jelly', 'jellies', 'preserve', 'preserves',
+  'marmalade', 'compote',
+  // Dried/snack/baking-chip forms — base ≠ derived chip product.
+  // Confection chips (peanut butter chips, butterscotch chips, caramel
+  // chips) are NOT actual chips OF those ingredients — they're manufactured
+  // baking products. Users who have "chocolate chips (any)" via the
+  // staples picker get the chip alias automatically.
+  'leather', 'jerky', 'crisp', 'crisps', 'chip', 'chips',
   // Alcohol and infusions
-  'wine', 'liqueur', 'beer', 'tea',
+  'wine', 'wines', 'liqueur', 'liqueurs', 'beer', 'beers', 'tea', 'teas',
   // Pasta/noodle forms
-  'noodles', 'pasta',
+  'noodle', 'noodles', 'pasta', 'pastas',
 ]);
 
 /**
@@ -207,11 +281,21 @@ function _wordBoundaryMatch(haystack, needle, strictPrefix = true) {
   // "pie spice" if explicitly listed) AND each individual word (catches any
   // suffix anywhere in the remainder).
   if (haystack.length > needle.length) {
-    const remainder = haystack.slice(idx + needle.length).trim().replace(/^-/, '').trim();
+    let remainder = haystack.slice(idx + needle.length).trim().replace(/^-/, '').trim();
+    // Strip "or X" alternative qualifiers — recipes like "vegetable stock
+    // or water" present an EITHER/OR choice; the "or water" doesn't change
+    // the identity of "vegetable stock". Match both "...word or X" and
+    // remainder starting with "or X" (after needle the rest is alternatives).
+    // Also strip parenthetical notes like "(drained and rinsed)".
+    remainder = remainder
+      .replace(/^or\s+.*$/i, '')
+      .replace(/\s+or\s+.*$/i, '')
+      .replace(/\s*\(.*$/, '')
+      .trim();
     if (IDENTITY_SUFFIXES.has(remainder)) return false;
     // Word-by-word check: any identity-changing suffix in the remainder
     // means the haystack is a derived form of something else.
-    const remainderWords = remainder.split(/\s+/);
+    const remainderWords = remainder ? remainder.split(/\s+/) : [];
     if (remainderWords.some(w => IDENTITY_SUFFIXES.has(w))) return false;
     // Also check if needle is the suffix and the prefix changes identity
     const prefix = haystack.slice(0, idx).trim().replace(/-$/, '').trim();
