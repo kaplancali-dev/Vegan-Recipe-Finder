@@ -179,7 +179,18 @@ function _stemAll(ing) {
   return ing.split(/\s+/).map(stem).join(' ');
 }
 
-export function ingredientMatches(recipeIng, userIngs, userIngSet) {
+/**
+ * Optionally pre-stem user ingredients ONCE per render. Pass the stems
+ * array as the 4th arg to ingredientMatches to avoid re-stemming for every
+ * recipe ingredient match. Big perf win on large pantries (the same user
+ * pantry is used for all 4,500 recipes; without caching, _stemAll runs
+ * ~9 million times per page render).
+ */
+export function precomputeUserStems(userIngs) {
+  return userIngs.map(_stemAll);
+}
+
+export function ingredientMatches(recipeIng, userIngs, userIngSet, userIngStems) {
   // Fast path: exact match via Set (avoids all string ops for ~40% of cases)
   if (userIngSet && userIngSet.has(recipeIng)) return true;
 
@@ -196,18 +207,20 @@ export function ingredientMatches(recipeIng, userIngs, userIngSet) {
   //      instance of what the recipe wants — ACCEPT.
   // Each check is also tried against STEMMED forms so plural/singular
   // mismatches don't cause false negatives ("onions" matches "onion").
-  return userIngs.some(ai => {
+  for (let i = 0; i < userIngs.length; i++) {
+    const ai = userIngs[i];
     if (_wordBoundaryMatch(recipeIng, ai, /* strictPrefix */ true)) return true;
     if (_wordBoundaryMatch(ai, recipeIng, /* strictPrefix */ false)) return true;
 
-    // Stem-aware fallback for plural/singular (and verb form) variations
-    const aiStem = _stemAll(ai);
+    // Stem-aware fallback. Use pre-stemmed array if provided (perf win)
+    // otherwise compute on-demand.
+    const aiStem = userIngStems ? userIngStems[i] : _stemAll(ai);
     if (aiStem !== ai || recipeStem !== recipeIng) {
       if (_wordBoundaryMatch(recipeStem, aiStem, /* strictPrefix */ true)) return true;
       if (_wordBoundaryMatch(aiStem, recipeStem, /* strictPrefix */ false)) return true;
     }
-    return false;
-  });
+  }
+  return false;
 }
 
 /**
@@ -413,23 +426,25 @@ function _isUniversal(rawOrNormalized) {
  *          "vegan butter, melted" → "vegan butter"
  *          "almond milk* (see notes)" → "almond milk"
  */
+// Pre-compiled regexes (huge perf win — these used to compile on every call,
+// running up to 45,000 times per recipe-list render).
+const _RE_FOOTNOTE = /[*†‡]+/g;
+const _RE_PARENS = /\s*\([^)]*\)/g;
+const _RE_BRACKETS = /\s*\[[^\]]*\]/g;
+const _RE_FOR_USAGE = /\s*[,\-]?\s*\bfor\s+(cooking|frying|sauté|sauteing|sautéing|greasing|brushing|drizzling|garnish|garnishing|serving|topping|finishing|dusting|sprinkling|coating|baking|roasting|the\s+top|extra)\b.*$/i;
+const _RE_TO_TASTE = /\s*[,\-]?\s*\bto\s+taste\b.*$/i;
+const _PREP = '(?:divided|melted|softened|room\\s+temperature|chilled|warmed|cooled|drained|rinsed|cubed|diced|chopped|sliced|minced|crushed|grated|shredded|peeled|seeded|deseeded|cooked|raw|toasted|rolled|frozen|thawed|optional|halved|quartered|pitted|stemmed|trimmed|cleaned|patted\\s+dry|squeezed|drained\\s+well|finely\\s+chopped|finely\\s+diced|thinly\\s+sliced|roughly\\s+chopped|coarsely\\s+chopped|cut\\s+into\\s+\\w+(?:\\s+\\w+)*)';
+const _RE_PREP_STATE = new RegExp(`\\s*,\\s*${_PREP}(?:\\s*(?:,|and)\\s*${_PREP})*\\b.*$`, 'i');
+
 function _stripUsageNotes(rawIng) {
-  let s = rawIng;
-  // Footnote markers
-  s = s.replace(/[*†‡]+/g, '');
-  // Bracketed/parenthetical notes
-  s = s.replace(/\s*\([^)]*\)/g, '').replace(/\s*\[[^\]]*\]/g, '');
-  // "for X" usage instructions (cooking, frying, serving, garnish, etc.)
-  s = s.replace(/\s*[,\-]?\s*\bfor\s+(cooking|frying|sauté|sauteing|sautéing|greasing|brushing|drizzling|garnish|garnishing|serving|topping|finishing|dusting|sprinkling|coating|baking|roasting|the\s+top|extra)\b.*$/i, '');
-  // "to taste"
-  s = s.replace(/\s*[,\-]?\s*\bto\s+taste\b.*$/i, '');
-  // Prep state suffixes that don't change identity. Handles compound prep
-  // states like "drained and rinsed", "rolled and toasted", "halved and pitted"
-  // by allowing any sequence of prep words joined by "and" or commas.
-  const PREP = '(?:divided|melted|softened|room\\s+temperature|chilled|warmed|cooled|drained|rinsed|cubed|diced|chopped|sliced|minced|crushed|grated|shredded|peeled|seeded|deseeded|cooked|raw|toasted|rolled|frozen|thawed|optional|halved|quartered|pitted|stemmed|trimmed|cleaned|patted\\s+dry|squeezed|drained\\s+well|finely\\s+chopped|finely\\s+diced|thinly\\s+sliced|roughly\\s+chopped|coarsely\\s+chopped|cut\\s+into\\s+\\w+(?:\\s+\\w+)*)';
-  const prepRegex = new RegExp(`\\s*,\\s*${PREP}(?:\\s*(?:,|and)\\s*${PREP})*\\b.*$`, 'i');
-  s = s.replace(prepRegex, '');
-  return s.trim();
+  return rawIng
+    .replace(_RE_FOOTNOTE, '')
+    .replace(_RE_PARENS, '')
+    .replace(_RE_BRACKETS, '')
+    .replace(_RE_FOR_USAGE, '')
+    .replace(_RE_TO_TASTE, '')
+    .replace(_RE_PREP_STATE, '')
+    .trim();
 }
 
 /**
@@ -519,6 +534,11 @@ export function findRecipes({
   const allIngSet = new Set(allIngs);
   const userNorm = expandWithAliases(ingredients);
   const userNormSet = new Set(userNorm);
+  // Pre-compute stems ONCE per render (huge perf win — used to re-stem
+  // user pantry ingredients for every recipe ingredient match attempt,
+  // millions of redundant calls per page load).
+  const allIngsStems = precomputeUserStems(allIngs);
+  const userNormStems = precomputeUserStems(userNorm);
 
   // Apply filters
   let pool = recipes;
@@ -600,7 +620,7 @@ export function findRecipes({
 
       // Otherwise, try direct match against expanded pantry
       if (!matched) {
-        matched = ingredientMatches(ri, allIngs, allIngSet);
+        matched = ingredientMatches(ri, allIngs, allIngSet, allIngsStems);
       }
 
       // If no direct match, check if this is a combined ingredient (e.g.
@@ -608,7 +628,7 @@ export function findRecipes({
       if (!matched) {
         const components = _splitCombined(rawIng);
         if (components) {
-          matched = components.every(c => ingredientMatches(c, allIngs, allIngSet));
+          matched = components.every(c => ingredientMatches(c, allIngs, allIngSet, allIngsStems));
         }
       }
 
@@ -616,7 +636,7 @@ export function findRecipes({
         have.push(ri);
         haveNames.push(rawIng);
         // Also count toward "user's typed ingredients" subset for sort tie-breaking
-        if (ingredientMatches(ri, userNorm, userNormSet)) userHaveCount++;
+        if (ingredientMatches(ri, userNorm, userNormSet, userNormStems)) userHaveCount++;
       }
 
       // Optional ingredients don't count against the user — skip the require/need logic
