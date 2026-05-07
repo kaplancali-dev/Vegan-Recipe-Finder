@@ -40,6 +40,16 @@ const _gfSafe = new Set([
   'gf breadcrumbs', 'gf panko', 'gf pasta', 'gf bread', 'gluten-free bread',
   'gf naan', 'gf pita', 'gf buns', 'gf tortillas', 'corn tortillas',
   'miso', 'white miso', 'red miso', 'yellow miso', 'light miso', 'miso paste',
+  // Naturally gluten-free pasta types — don't suggest a GF swap for these
+  'red lentil pasta', 'red lentil penne', 'red lentil penne pasta',
+  'lentil pasta', 'lentil penne',
+  'chickpea pasta', 'chickpea penne',
+  'brown rice pasta', 'brown rice penne', 'brown rice penne pasta',
+  'rice pasta', 'rice penne',
+  'edamame pasta', 'edamame spaghetti',
+  'black bean pasta', 'black bean spaghetti',
+  'quinoa pasta',
+  'buckwheat pasta', 'soba noodles',
 ].map(norm));
 
 /**

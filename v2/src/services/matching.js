@@ -57,10 +57,18 @@ export function isPerishableIng(normedIng) {
  * But having JUST olive oil does NOT mean the user has "any cooking oil"
  * — coconut oil's solidify-at-room-temp property isn't satisfied by olive.
  */
-// Listed in NORMALIZED form (parens/punctuation stripped by norm()).
+// Listed in NORMALIZED form. norm() lowercases, STRIPS punctuation
+// (including dashes — "plant-based" becomes "plantbased" with no space),
+// and collapses whitespace. Test entries against norm() output, not raw.
+//
+// Plant-based milks DELIBERATELY EXCLUDED from one-way: almond, soy, oat,
+// cashew, rice, hemp, macadamia, pistachio milks are widely interchangeable
+// for the vast majority of uses (smoothies, baking, sauces, savory cooking).
+// User with any one milk should match recipes calling for any other.
+// (Coconut milk is correctly excluded from the "plant-based milk (any)"
+// alias group because canned coconut milk is genuinely different.)
 const ONE_WAY_CATCHALLS = new Set([
   'any cooking oil',
-  'plant-based milk any',
   'nut butter any',
   'pasta any',
   'sweetener any',
@@ -70,7 +78,7 @@ const ONE_WAY_CATCHALLS = new Set([
   'vinegar any',
   'flour any',
   'fresh herbs any',
-  'soy sauce  tamari  coconut aminos',
+  'soy sauce tamari coconut aminos',
   // Lentils: types behave very differently (red dissolve, green hold shape).
   // User picking generic "lentils" wants flexibility, but having red lentils
   // shouldn't claim green lentils coverage.
@@ -243,8 +251,10 @@ const IDENTITY_SUFFIXES = new Set([
   'leather', 'jerky', 'crisp', 'crisps', 'chip', 'chips',
   // Alcohol and infusions
   'wine', 'wines', 'liqueur', 'liqueurs', 'beer', 'beers', 'tea', 'teas',
-  // Pasta/noodle forms
-  'noodle', 'noodles', 'pasta', 'pastas',
+  // (Note: "pasta" and "noodles" deliberately EXCLUDED from this list.
+  // They're collective nouns for a category, not identity-changing suffixes.
+  // Penne IS pasta; rice noodles ARE noodles. User with "pasta" or "noodles"
+  // should match recipes ending in "X pasta" or "X noodles".)
 ]);
 
 /**

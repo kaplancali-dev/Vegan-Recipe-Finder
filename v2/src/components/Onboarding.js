@@ -35,7 +35,7 @@ const STAPLE_SECTIONS = [
   // 2 — Vegetables
   { label: '🥦 Vegetables', sub: 'the main event', items: [
     { name: 'garlic', hint: 'always more' },
-    'onions','fresh ginger','spinach',
+    'onions','yellow onion','white onion','red onion','fresh ginger','spinach',
     { name: 'kale', hint: 'we know' },
     'carrots','celery','broccoli','cauliflower','bell peppers',
     'mushrooms (any)','tomatoes',

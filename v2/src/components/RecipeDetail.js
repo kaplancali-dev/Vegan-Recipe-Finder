@@ -30,8 +30,44 @@ for (const [key, val] of Object.entries(SUGAR_SWAPS)) {
   _sugarLookup.set(norm(key), val);
 }
 
+/** Ingredients already gluten-free — never suggest a GF swap. */
+const _gfSafe = new Set([
+  'almond flour', 'oat flour', 'rice flour', 'coconut flour',
+  'chickpea flour', 'buckwheat flour', 'cassava flour', 'tapioca flour',
+  'brown rice flour', 'gluten-free flour', 'gf flour',
+  'cornstarch', 'arrowroot powder', 'arrowroot starch', 'potato starch',
+  'tapioca starch', 'corn tortilla', 'rice noodles', 'rice paper',
+  'rice paper wrappers', 'tamari', 'coconut aminos',
+  'gf breadcrumbs', 'gf panko', 'gf pasta', 'gf bread', 'gluten-free bread',
+  'gf naan', 'gf pita', 'gf buns', 'gf tortillas', 'corn tortillas',
+  'miso', 'white miso', 'red miso', 'yellow miso', 'light miso', 'miso paste',
+  // Naturally gluten-free pasta types
+  'red lentil pasta', 'red lentil penne', 'red lentil penne pasta',
+  'lentil pasta', 'lentil penne',
+  'chickpea pasta', 'chickpea penne',
+  'brown rice pasta', 'brown rice penne', 'brown rice penne pasta',
+  'rice pasta', 'rice penne',
+  'edamame pasta', 'edamame spaghetti',
+  'black bean pasta', 'black bean spaghetti',
+  'quinoa pasta',
+  'buckwheat pasta', 'soba noodles',
+].map(norm));
+
 function _gfSwap(name) {
-  return _gfLookup.get(norm(name)) || null;
+  const n = norm(name);
+  if (_gfSafe.has(n)) return null;
+  for (const safe of _gfSafe) { if (n.includes(safe)) return null; }
+  const exact = _gfLookup.get(n);
+  if (exact) return exact;
+  // Substring match with longest-match preference
+  let bestMatch = null, bestLen = 0;
+  for (const [key, val] of _gfLookup) {
+    if (n.includes(key) && key.length > 3 && key.length > bestLen) {
+      bestMatch = val;
+      bestLen = key.length;
+    }
+  }
+  return bestMatch;
 }
 
 /** Natural sweeteners that should never get a sugar swap hint */
