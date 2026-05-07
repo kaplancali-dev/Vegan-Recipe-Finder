@@ -22,7 +22,7 @@ const STEPS = [
   {
     target: '#btn-browse',
     tab: 'browse',
-    title: '4,500+ recipes. Zero guilt trips.',
+    title: '4,000+ gluten-free recipes. Zero guilt trips.',
     body: "Every card shows how many ingredients you already own. Search for anything — \"tacos,\" \"comfort food,\" \"impress someone\" — and a new Recipe of the Day drops at the top.",
     arrow: 'top',
   },

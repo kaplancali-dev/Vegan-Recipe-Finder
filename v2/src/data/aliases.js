@@ -682,6 +682,54 @@ export const VEGAN_SWAPS = [
 ];
 
 /**
+ * Hard-gluten ingredient regex — matches structural gluten ingredients with no
+ * viable GF substitute. Recipes containing any of these are excluded from
+ * results because HARVEST is gluten-free by default.
+ *
+ * EXCLUDED from filter (these have working GF substitutes via _GF_MATCH_SWAPS):
+ *   spelt flour, all-purpose flour, whole wheat flour, bread flour, etc.
+ *   pasta variants (penne, fusilli, tagliatelle, orzo, etc.)
+ *   bread, breadcrumbs, panko, tortillas, pita
+ *   noodles (ramen, udon, soba)
+ *
+ * INCLUDED in filter (no viable GF version, OR substitution changes the dish):
+ *   farro, bulgur, barley, wheat berries, freekeh, kamut, einkorn
+ *   couscous (all variants), seitan, vital wheat gluten
+ *   semolina, durum, rye, spelt berries
+ *   shaoxing wine, beer/lager/ale/stout/pilsner/ipa, malt
+ */
+export const HARD_GLUTEN_REGEX = (() => {
+  const terms = [
+    'farro', 'pearled farro',
+    'bulgur', 'bulgur wheat', 'cracked wheat',
+    'barley', 'pearl barley', 'pearled barley',
+    'wheat berries', 'wheat berry',
+    'freekeh', 'kamut', 'einkorn',
+    'couscous', 'whole wheat couscous', 'pearl couscous', 'israeli couscous', 'moroccan couscous',
+    'seitan', 'vital wheat gluten', 'wheat gluten',
+    'semolina', 'durum wheat', 'durum flour',
+    'spelt berries', 'spelt grain',
+    'rye flour', 'rye bread', 'rye berries', 'rye',
+    'shaoxing wine', 'shaoxing rice wine', 'chinese cooking wine',
+    'beer', 'lager', 'stout', 'pilsner',
+    'malt extract', 'malt syrup', 'malted barley',
+  ];
+  const escape = s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const parts = [
+    ...terms.map(t => `\\b${escape(t)}\\b`),
+    // Bare "spelt" only when NOT followed by "flour" (spelt flour swaps fine)
+    String.raw`\bspelt\b(?!\s+flour)`,
+    // "ale" but not "ginger ale" (soda, no gluten)
+    String.raw`(?<!ginger\s)\bale\b`,
+    // "ipa" beer
+    String.raw`\bipa\b`,
+    // bare "malt" but not "malt vinegar" (vinegar is GF in practice)
+    String.raw`\bmalt\b(?!\s+vinegar)`,
+  ];
+  return new RegExp(parts.join('|'), 'i');
+})();
+
+/**
  * Allergy keyword map — used to filter recipes by allergen.
  */
 export const ALLERGY_KEYWORDS = {

@@ -156,6 +156,15 @@ export function stripMeasure(s) {
   while (str !== prev) { prev = str; str = str.replace(NOISE, '').trim(); }
   str = str.replace(/\s+(?:warm|cold|hot|chilled|thawed|softened|melted|chopped|diced|minced|sliced|shredded|grated|crushed|mashed|peeled|pitted|trimmed|stemmed|quartered|halved|toasted|roasted)$/i, '');
   str = str.replace(/[-–]\s*rough$/i, '');
+  // Strip multi-word trailing prep phrases WITHOUT requiring a leading comma.
+  // Recipe authors are inconsistent about commas: "black beans drained and
+  // rinsed" should match "black beans" the same as "black beans, drained
+  // and rinsed". The combined-AND guard in the matcher would otherwise
+  // wrongly reject these as combined ingredients.
+  // Loop until stable so multiple trailing phrases all get stripped.
+  const TRAILING_PREP_PHRASES = /\s+(?:drained\s+and\s+rinsed|rinsed\s+and\s+drained|drained\s+well|drained\s+very\s+well|patted\s+dry|peeled\s+and\s+(?:diced|chopped|sliced|minced|cubed|grated|halved|quartered)|halved\s+and\s+(?:diced|chopped|sliced|minced|cubed)|seeded\s+and\s+(?:diced|chopped|sliced|minced))$/i;
+  let prevPrep = '';
+  while (str !== prevPrep) { prevPrep = str; str = str.replace(TRAILING_PREP_PHRASES, '').trim(); }
 
   // 8. Strip size descriptors
   str = str.replace(/^(?:large|small|medium|big|thin|thick|extra-?large|extra-?small|mini|tiny|generous|good|fine)\s+/i, '');
@@ -198,7 +207,12 @@ export function stripMeasure(s) {
   str = str.replace(/^[-–]\s*/, '').replace(/\s*[-–]$/, '');
   str = str.replace(/[)\]]+\s*$/, '').trim();
 
-  if (/^(?:pinch|dash|cup|cups|can|cans|tin|tins|slice|slices|clove|cloves|head|heads|bunch|piece|pieces|ounce|ounces|pound|package|tsp|tbsp|teaspoon|tablespoon|scoops?)$/i.test(str)) {
+  // Safety net: if stripMeasure ate too much and the result is just a unit
+  // word, fall back to the original. NOTE: "cloves" / "clove" are EXCLUDED
+  // because cloves is also a real spice ingredient — recipes saying "ground
+  // cloves" should canonicalize to "cloves" not the full original. Garlic
+  // cloves get their own handling via identity rewrites.
+  if (/^(?:pinch|dash|cup|cups|can|cans|tin|tins|slice|slices|head|heads|bunch|piece|pieces|ounce|ounces|pound|package|tsp|tbsp|teaspoon|tablespoon|scoops?)$/i.test(str)) {
     return s.trim();
   }
 

@@ -274,7 +274,7 @@ function _buildHTML() {
         <div class="obd-title">Welcome to HARVEST</div>
         <div class="obd-hook">Right now, something in your fridge is quietly giving up on you. Let's prove it wrong.</div>
         <div class="obd-sub">Tell us what's lurking in there — the sad half-onion, the mystery jar, the kale you bought with good intentions — and we'll match you to plant-based recipes you can actually make tonight.</div>
-        <div class="obd-stat">Takes about a minute. Unlocks 4,500+ recipes from the world's top plant-based cooks.</div>
+        <div class="obd-stat">Takes about a minute. Unlocks over 4,000 gluten-free recipes from the world's top plant-based cooks.</div>
         <button class="obd-btn obd-btn-primary" data-obd-go="2">Let's go</button><br>
         <button class="obd-btn-skip" data-obd-skip>Skip — I trust my chaos <span class="obd-skip-note">(you can come back anytime)</span></button>
       </div>
@@ -283,7 +283,7 @@ function _buildHTML() {
       <div class="obd-step" data-obd-step="2">
         <div class="obd-title">What's always in your kitchen?</div>
         <div class="obd-why" id="obdWhyCallout">
-          <strong>Quick game:</strong> tap what usually lives in your kitchen — across <strong>10 quick categories</strong>, about a minute total. The reward: from here on, we filter 4,500+ recipes down to <em>only</em> the ones you can cook tonight. No taunting you with ingredients you don't have.
+          <strong>Quick game:</strong> tap what usually lives in your kitchen — across <strong>10 quick categories</strong>, about a minute total. The reward: from here on, we filter over 4,000 gluten-free recipes down to <em>only</em> the ones you can cook tonight. No taunting you with ingredients you don't have.
         </div>
         <div class="obd-sub obd-page-prompt" id="obdPagePrompt">${PAGE_PROMPTS[0]}</div>
         <div class="obd-sub-progress" id="obdSubProgress">${_buildSubProgress()}</div>

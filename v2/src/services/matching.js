@@ -7,7 +7,25 @@
  */
 
 import { norm, stem, stripMeasure } from '../utils/text.js';
-import { INGREDIENT_ALIASES, INGREDIENT_SUBS, ALLERGY_KEYWORDS, PERISHABLES, GF_SWAPS } from '../data/aliases.js';
+import { INGREDIENT_ALIASES, INGREDIENT_SUBS, ALLERGY_KEYWORDS, PERISHABLES, GF_SWAPS, HARD_GLUTEN_REGEX } from '../data/aliases.js';
+
+/**
+ * Returns true if a recipe contains a structural gluten ingredient with no
+ * viable GF substitute (farro, couscous, barley, seitan, beer, etc.).
+ * HARVEST is gluten-free by default — these recipes are excluded from
+ * results so users never see something they can't make.
+ *
+ * Wheat-based ingredients with GF alternatives (pasta, bread, flour,
+ * tortillas) are NOT filtered — those count as matches when the user has
+ * the GF version, via _GF_MATCH_SWAPS below.
+ */
+export function isGlutenRecipe(recipe) {
+  if (!recipe || !recipe.ing) return false;
+  for (const ing of recipe.ing) {
+    if (HARD_GLUTEN_REGEX.test(ing)) return true;
+  }
+  return false;
+}
 
 /**
  * GF substitution map for MATCHING (not display).
@@ -29,6 +47,20 @@ const _GF_MATCH_SWAPS = {
   'fettuccine': ['gf fettuccine','rice noodles'],
   'macaroni': ['gf macaroni','gf elbow pasta'],
   'elbow macaroni': ['gf macaroni','gf elbow pasta'],
+  'tagliatelle': ['gf tagliatelle','gluten-free tagliatelle','gf pasta','rice noodles'],
+  'pappardelle': ['gf pappardelle','gluten-free pappardelle','gf pasta'],
+  'orzo': ['gf orzo','gluten-free orzo','gf pasta'],
+  'orecchiette': ['gf orecchiette','gf pasta'],
+  'ditalini': ['gf ditalini','gf pasta'],
+  'rotini': ['gf rotini','gf pasta'],
+  'fusilli': ['gf fusilli','gf pasta'],
+  'rigatoni': ['gf rigatoni','gf pasta'],
+  'farfalle': ['gf farfalle','gf pasta'],
+  'angel hair': ['gf angel hair','gf pasta'],
+  'lasagna': ['gf lasagna','gf lasagna sheets','gf lasagna noodles'],
+  'lasagna noodles': ['gf lasagna noodles','gf lasagna sheets','gf lasagna'],
+  'lasagna sheets': ['gf lasagna sheets','gf lasagna'],
+  'gnocchi': ['gf gnocchi','gluten-free gnocchi','potato gnocchi','cauliflower gnocchi'],
   'noodles': ['rice noodles','gf noodles','glass noodles'],
   'egg noodles': ['rice noodles','gf noodles'],
   'ramen noodles': ['rice noodles','gf ramen','rice ramen'],
@@ -378,7 +410,21 @@ function _wordBoundaryMatch(haystack, needle, strictPrefix = true) {
     // AND in prefix (catches "X and Y" with needle at end). This handles
     // multi-item lists like "cumin, coriander, and turmeric" too (after
     // norm strips commas → "cumin coriander and turmeric").
-    if (/^(?:and|&|\+)\s+/i.test(remainder) || /\s+(?:and|&|\+)\s+/i.test(remainder)) return false;
+    //
+    // EXCEPTION: if the words around the connector are PREP STATES (drained,
+    // rinsed, chopped, etc.) it's a prep description, not combined ingredients
+    // ("black beans drained and rinsed" should match "black beans"). Skip the
+    // combined guard for these.
+    const PREP_WORD_RE = /^(?:drained|rinsed|chopped|diced|minced|sliced|crushed|grated|shredded|peeled|seeded|cooked|warmed|cooled|melted|softened|cubed|quartered|halved|divided|rolled|beaten|whipped|sifted|toasted|roasted|trimmed|stemmed|cleaned|squeezed|patted)$/i;
+    const hasCombinedAndInRemainder = /^(?:and|&|\+)\s+/i.test(remainder) || /\s+(?:and|&|\+)\s+/i.test(remainder);
+    if (hasCombinedAndInRemainder) {
+      // Inspect the words around the connector — if they're all prep words,
+      // it's prep noise like "drained and rinsed", not a combined ingredient.
+      const remainderWords = remainder.split(/\s+/);
+      const allPrep = remainderWords.every(w => PREP_WORD_RE.test(w) || /^(?:and|&|\+)$/i.test(w));
+      if (!allPrep) return false;
+      // else: fall through, treat as prep noise and continue with normal checks
+    }
     const prefixForCombined = haystack.slice(0, idx).trim();
     if (/\s+(?:and|&|\+)$/i.test(prefixForCombined) || /^(?:and|&|\+)$/i.test(prefixForCombined)) return false;
 
@@ -635,7 +681,10 @@ export function findRecipes({
   const userNormStems = precomputeUserStems(userNorm);
 
   // Apply filters
-  let pool = recipes;
+  // Always exclude recipes containing structural gluten ingredients with no
+  // viable GF substitute (farro, couscous, barley, seitan, beer, etc.).
+  // HARVEST is gluten-free by default — these never surface to users.
+  let pool = recipes.filter(r => !isGlutenRecipe(r));
 
   if (selectedCats.length) {
     pool = pool.filter(r => r.cats && selectedCats.every(c => {
@@ -696,73 +745,103 @@ export function findRecipes({
     let requiredCount = 0;    // count of ingredients excluding "(optional)"
     let userHaveCount = 0;    // count of recipe ings matched against user-typed ingredients only
 
+    // Use pre-canonicalized iclean array if present (built by
+    // scripts/canonicalize-ingredients.mjs at build time). Each iclean[i]
+    // is an array of canonical ingredient names for ing[i]:
+    //   normal:    ["onion"]
+    //   combined:  ["salt", "pepper"]
+    //   dropped:   []  (was a section header / empty / cross-recipe reference)
+    //
+    // For a recipe ing[i] to count as MATCHED, ALL canonical names in
+    // iclean[i] must be in user's expanded pantry (combined ingredients
+    // need every component).
+    //
+    // Falls back to runtime stripMeasure if iclean is missing (legacy
+    // recipes that haven't been re-canonicalized yet).
+    const hasICleanField = Array.isArray(r.iclean) && r.iclean.length === r.ing.length;
+
     for (let i = 0; i < r.ing.length; i++) {
       const rawIng = r.ing[i];
-      // Skip empty / whitespace-only ingredient lines (data quality issue —
-      // some scraped recipes have stray "  " entries that shouldn't count
-      // against required ingredients).
       if (!rawIng || !rawIng.trim()) continue;
-      // Skip section headers ("for the topping:", "for serving:", "optional toppings")
-      // that contain no actual ingredient — they're list dividers.
+
+      // ─── New iclean-based path ───────────────────────────────
+      if (hasICleanField) {
+        const components = r.iclean[i];
+        if (!components || components.length === 0) continue; // dropped
+
+        const optional = _isOptional(rawIng);
+
+        // Universal ingredients still get a free pass
+        let matched = _isUniversal(rawIng);
+
+        if (!matched) {
+          // For each canonical component, check user pantry.
+          // Combined (multi-component) ingredients need ALL satisfied.
+          matched = components.every(c => {
+            if (allIngSet.has(c)) return true;
+            // Word-boundary fallback for partial matches (e.g., "olive oil"
+            // pantry covering "extra virgin olive oil" components etc.)
+            if (ingredientMatches(c, allIngs, allIngSet, allIngsStems)) return true;
+            // GF auto-swap: if a wheat ingredient and user has GF variant
+            for (const [wheatItem, gfAlts] of Object.entries(_GF_MATCH_SWAPS)) {
+              if (c.includes(wheatItem) || c === wheatItem) {
+                if (gfAlts.some(alt => allIngSet.has(alt) || allIngs.some(ai => ai.includes(alt)))) {
+                  return true;
+                }
+              }
+            }
+            return false;
+          });
+        }
+
+        const displayCanonical = components.join(' + ');
+        if (matched) {
+          have.push(displayCanonical);
+          haveNames.push(rawIng);
+          if (components.some(c => userNormSet.has(c) || ingredientMatches(c, userNorm, userNormSet, userNormStems))) {
+            userHaveCount++;
+          }
+        }
+        if (!optional) {
+          requiredCount++;
+          if (!matched) {
+            need.push(displayCanonical);
+            needNames.push(rawIng);
+          }
+        }
+        continue;
+      }
+
+      // ─── Legacy fallback path (when iclean missing) ──────────
       const trimmedLower = rawIng.trim().toLowerCase().replace(/[:*]+$/, '');
       if (/^(?:for\s+(?:the\s+)?(?:topping|serving|garnish|sauce|dressing|filling|base|crust|frosting|glaze|drizzle|coating|marinade|dough|crumble|streusel|assembly|the\s+\w+))$/i.test(trimmedLower) ||
           /^optional\s+(?:topping|toppings|add\s*-?\s*ins?|extras?|garnish(?:es)?)$/i.test(trimmedLower)) {
         continue;
       }
-      // Skip cross-recipe references like "1 recipe Homemade Pizza Dough" or
-      // "1 batch Vegan Caesar Dressing". These are author-defined sub-recipes
-      // not actual ingredients; users can swap a store-bought equivalent.
       if (/^[\d½¼¾⅓⅔.,/\s-]*(?:recipe|batch|portion)\s+\w+/i.test(rawIng.trim())) {
         continue;
       }
       const optional = _isOptional(rawIng);
-      // Pre-process for matching:
-      //   1. Strip leading measurements ("1 tsp", "1 cup", "½ pound", etc.)
-      //      so recipes like "1 tsp oil" match user's "oil" cleanly.
-      //   2. Strip usage notes ("for cooking", "to taste", ", melted", footnotes, parens)
-      //   3. Convert "&" and "+" connectors to "and" so that "salt & pepper"
-      //      → "salt and pepper" survives norm's punctuation stripping
-      //   4. Apply norm (lowercase, strip remaining punctuation)
       const measureStripped = stripMeasure(rawIng);
-      // Convert connectors before norm strips them:
-      //   "/" → " or "  (so "parsley/cilantro" stays as "parsley or cilantro"
-      //                  rather than collapsing to "parsleycilantro")
-      //   "&" → " and "
-      //   "+" → " and "
       const cleaned = _stripUsageNotes(measureStripped)
         .replace(/\s*\/\s*/g, ' or ')
         .replace(/\s*&\s*/g, ' and ')
         .replace(/\s*\+\s*/g, ' and ');
       const ri = norm(cleaned);
 
-      // Universal ingredients (water, ice) — always count as "have"
-      // since every kitchen has them. Use the raw string so stripMeasure
-      // can strip measurements before checking against the universal set.
       let matched = _isUniversal(rawIng);
-
-      // Otherwise, try direct match against expanded pantry
       if (!matched) {
         matched = ingredientMatches(ri, allIngs, allIngSet, allIngsStems);
       }
-
-      // If no direct match, check if this is a combined ingredient (e.g.
-      // "salt and pepper") that requires ALL components in user's pantry
       if (!matched) {
         const components = _splitCombined(rawIng);
         if (components) {
           matched = components.every(c => ingredientMatches(c, allIngs, allIngSet, allIngsStems));
         }
       }
-
-      // GF substitution match — for a GF-focused app, if recipe needs a wheat
-      // ingredient (pasta, bread, flour, etc.) and user has the GF version,
-      // count as match. The GF chip will inform user to substitute.
       if (!matched) {
-        // Try matching against the GF swap targets for any wheat ingredient
-        // that appears in the recipe ingredient
         for (const [wheatItem, gfAlts] of Object.entries(_GF_MATCH_SWAPS)) {
           if (ri.includes(wheatItem)) {
-            // Recipe has a wheat ingredient. Does user have a GF version?
             if (gfAlts.some(alt => allIngSet.has(alt) || allIngs.some(ai => ai.includes(alt)))) {
               matched = true;
               break;
@@ -774,11 +853,9 @@ export function findRecipes({
       if (matched) {
         have.push(ri);
         haveNames.push(rawIng);
-        // Also count toward "user's typed ingredients" subset for sort tie-breaking
         if (ingredientMatches(ri, userNorm, userNormSet, userNormStems)) userHaveCount++;
       }
 
-      // Optional ingredients don't count against the user — skip the require/need logic
       if (!optional) {
         requiredCount++;
         if (!matched) {
@@ -856,7 +933,10 @@ export function computePantryPower(recipes, ingredients, staples) {
   let canMakeNow = 0;
   let eightyPercent = 0;
 
-  recipes.forEach(r => {
+  // Match findRecipes — exclude un-GF-able recipes from the catalog.
+  const pool = recipes.filter(r => !isGlutenRecipe(r));
+
+  pool.forEach(r => {
     const rIngs = r.ing.map(norm);
     const have = rIngs.filter(ri => ingredientMatches(ri, allIngs, allIngSet));
     const pct = rIngs.length ? have.length / rIngs.length : 0;
@@ -864,5 +944,5 @@ export function computePantryPower(recipes, ingredients, staples) {
     if (pct >= 0.8) eightyPercent++;
   });
 
-  return { canMakeNow, eightyPercent, totalRecipes: recipes.length };
+  return { canMakeNow, eightyPercent, totalRecipes: pool.length };
 }

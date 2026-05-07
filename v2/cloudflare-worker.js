@@ -36,7 +36,7 @@ function buildOGPage(recipe, recipeId) {
   if (recipe.cal) parts.push(`${recipe.cal} cal`);
   const meta = parts.length ? parts.join(' · ') : '';
   const site = recipe.s ? `From ${escHTML(recipe.s)} — ` : '';
-  const description = `${site}${meta ? meta + '. ' : ''}On HARVEST — over 4,500 plant-based recipes matched to what's in your kitchen.`;
+  const description = `${site}${meta ? meta + '. ' : ''}On HARVEST — over 4,000 gluten-free recipes matched to what's in your kitchen.`;
   const redirectUrl = `${SITE_URL}#r=${recipeId}`;
   const ogUrl = `${SITE_URL}?r=${recipeId}`;
 
