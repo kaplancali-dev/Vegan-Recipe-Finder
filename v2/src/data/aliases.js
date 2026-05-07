@@ -6,8 +6,14 @@ export const INGREDIENT_ALIASES = {
   'plant-based milk (any)': ['almond milk','oat milk','soy milk','cashew milk','rice milk','hemp milk','macadamia milk','pistachio milk','plant milk','nondairy milk','non-dairy milk'],
   'any cooking oil':        ['coconut oil','olive oil','avocado oil','vegetable oil','canola oil','sunflower oil','grapeseed oil','light oil','neutral oil'],
   'nut butter (any)':       ['peanut butter','almond butter','sunflower butter','cashew butter','hazelnut butter','walnut butter','pecan butter','macadamia butter','mixed nut butter','seed butter'],
-  'pasta (any)':            ['pasta','gluten-free pasta','spaghetti','penne','fusilli','farfalle','rigatoni','linguine','fettuccine','tagliatelle','orzo','macaroni','rotini','angel hair','lasagna noodles','noodles'],
-  'soy sauce / tamari / coconut aminos':     ['soy sauce','tamari','coconut aminos','liquid aminos','aminos'],
+  // GF pasta (any) — GLUTEN-FREE pasta varieties only. HARVEST is GF-focused.
+  // Includes red lentil, chickpea, brown rice, quinoa, edamame pasta, etc.
+  'GF pasta (any)':         ['gluten-free pasta','gf pasta','red lentil pasta','red lentil penne','lentil pasta','chickpea pasta','chickpea penne','brown rice pasta','brown rice penne','rice pasta','rice penne','edamame pasta','edamame spaghetti','black bean pasta','black bean spaghetti','quinoa pasta','buckwheat pasta','soba noodles','rice noodles','glass noodles','spaghetti','penne','fusilli','farfalle','rigatoni','linguine','fettuccine','orzo','macaroni','rotini','angel hair'],
+  // Renamed: HARVEST is GF, so the staple no longer offers regular soy sauce
+  // (which contains wheat). Tamari and coconut aminos are both GF.
+  'tamari / coconut aminos':                 ['tamari','coconut aminos','liquid aminos','aminos','gluten-free soy sauce','gf soy sauce'],
+  // Keep the old key for users whose pantry already has the legacy staple
+  'soy sauce / tamari / coconut aminos':     ['tamari','coconut aminos','liquid aminos','aminos'],
   // Combined staple "sriracha / hot sauce" needs to expand to both sides
   // (and to common substitutes: sambal oelek, chili garlic sauce, gochujang)
   'sriracha / hot sauce':                    ['sriracha','hot sauce','sambal oelek','chili garlic sauce','gochujang','rooster sauce'],
@@ -484,16 +490,16 @@ export const ALLERGY_KEYWORDS = {
  */
 export const QA_ITEMS = [
   {cat:'🫘 Beans & Legumes',     items:['chickpeas','black beans','lentils','kidney beans','cannellini beans','great northern beans','navy beans','butter beans','lima beans','pinto beans','mung beans','split peas','black-eyed peas','firm tofu','extra-firm tofu','soft tofu','silken tofu','tempeh','edamame','jackfruit','TVP','soy curls']},
-  {cat:'🌾 Grains & Starches',  items:['pasta (any)','rice (any)','quinoa','oats','millet','sweet potatoes','potatoes','corn tortillas','polenta','buckwheat','rice noodles','glass noodles','nori','GF bread','GF breadcrumbs','GF tortillas']},
+  {cat:'🌾 Grains & Starches',  items:['GF pasta (any)','rice (any)','quinoa','oats','millet','sweet potatoes','potatoes','corn tortillas','polenta','buckwheat','rice noodles','glass noodles','nori','GF bread','GF breadcrumbs','GF tortillas']},
   {cat:'🥦 Vegetables',         items:['garlic','yellow onion','white onion','red onion','fresh ginger','spinach','kale','carrots','celery','broccoli','cauliflower','bell peppers','mushrooms (any)','tomatoes','cherry tomatoes','avocado','zucchini','corn','cucumber','green onions','eggplant','cabbage','lettuce (any)','green beans','asparagus','jalapeño','beets','radishes','artichoke hearts','bean sprouts','bamboo shoots','shallots']},
   {cat:'🍋 Fruits',             items:['lemon','lime','banana','berries (any)','cranberries','cherries','mango','apple','oranges','orange juice','pineapple','peaches','pears','kiwi','papaya','pomegranate','plantain','figs','grapes','watermelon','coconut','dates','raisins']},
   {cat:'🥜 Nuts & Seeds',       items:['nut butter (any)','cashews','almonds','walnuts','pecans','brazil nuts','macadamia nuts','hazelnuts','pistachio','peanuts','sesame seeds','pine nuts','tahini','hemp seeds','chia seeds','flax seeds','pumpkin seeds','sunflower seeds','protein powder']},
   {cat:'🥛 Plant-Based Dairy',  items:['almond milk','soy milk','rice milk','hemp milk','macadamia milk','pistachio milk','oat milk','cashew milk','vegan yogurt','vegan cream cheese','vegan parmesan']},
   {cat:'🫒 Oils & Fats',         items:['olive oil','coconut oil','avocado oil','sesame oil','chili oil','vegan butter','vegetable oil','toasted sesame oil','sunflower oil','grapeseed oil']},
   {cat:'🥫 Canned & Jarred',    items:['canned tomatoes (any)','tomato sauce','tomato paste','vegetable broth','coconut milk','olives','artichoke hearts','roasted red peppers','sun-dried tomatoes','capers']},
-  {cat:'🫙 Sauces & Condiments', items:['soy sauce / tamari / coconut aminos','miso paste','vegan mayo','ketchup','yellow mustard','dijon mustard','BBQ sauce','hoisin sauce','vegan worcestershire','tamarind paste','gochujang','sriracha / hot sauce','sambal oelek','curry paste','liquid smoke','vegan sour cream','nutritional yeast']},
+  {cat:'🫙 Sauces & Condiments', items:['tamari / coconut aminos','miso paste','vegan mayo','ketchup','yellow mustard','dijon mustard','tamarind paste','gochujang','sriracha / hot sauce','sambal oelek','curry paste','liquid smoke','vegan sour cream','nutritional yeast']},
   {cat:'🍯 Sweeteners & Vinegars', items:['maple syrup','natural sweetener (any)','agave nectar','coconut sugar','brown sugar','cane sugar','powdered sugar','date syrup','molasses','coconut nectar','allulose','stevia / monk fruit','apple cider vinegar','rice vinegar','balsamic vinegar','white vinegar','red wine vinegar','white wine vinegar','sherry vinegar']},
-  {cat:'🧂 Baking & Flours',    items:['baking soda','baking powder','cornstarch','arrowroot powder','all-purpose flour','whole wheat flour','gluten-free flour','almond flour','coconut flour','oat flour','tapioca flour','brown rice flour','chickpea flour','cassava flour','flaxseed meal','applesauce','xanthan gum','cream of tartar','active dry yeast','protein powder']},
+  {cat:'🧂 Baking & Flours',    items:['baking soda','baking powder','cornstarch','arrowroot powder','gluten-free flour','almond flour','coconut flour','oat flour','tapioca flour','brown rice flour','chickpea flour','cassava flour','flaxseed meal','applesauce','xanthan gum','cream of tartar','active dry yeast','protein powder']},
   {cat:'🌿 Spices & Herbs',     items:['turmeric','cumin','smoked paprika','cinnamon','chili powder','ginger','curry powder','black pepper','garlic powder','onion powder','oregano','basil','thyme','sage','coriander','cayenne','cilantro','parsley','cardamom','cloves','allspice','bay leaves','five spice','nutmeg','sea salt','garam masala','lemongrass','star anise','dill','mint','chives','rosemary','red pepper flakes','fennel seeds','sumac','italian seasoning']},
   {cat:'🍨 Dessert Pantry',     items:['vanilla extract','cocoa powder','chocolate chips (any)','white chocolate chips','dark chocolate','cacao nibs','coconut cream','shredded coconut','date sugar','allulose','stevia / monk fruit']},
 ];

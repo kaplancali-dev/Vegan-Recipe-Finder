@@ -24,9 +24,9 @@ const STAPLE_SECTIONS = [
     { name: 'jackfruit', hint: 'the pulled pork impersonator' },
     { name: 'TVP', hint: 'ground beef/chicken impersonator' },'soy curls',
   ]},
-  // 1 — Grains & Starches
+  // 1 — Grains & Starches (GLUTEN-FREE — HARVEST is GF by default)
   { label: '🌾 Grains & Starches', sub: 'the carb committee', items: [
-    'pasta (any)','rice (any)',
+    'GF pasta (any)','rice (any)',
     { name: 'quinoa', hint: 'still pronouncing it wrong' },
     'oats','millet','sweet potatoes','potatoes',
     'corn tortillas','polenta','buckwheat',
@@ -86,12 +86,13 @@ const STAPLE_SECTIONS = [
     { name: 'sun-dried tomatoes', hint: 'umami bombs' },
     'capers',
   ]},
-  // 8 — Sauces & Condiments
+  // 8 — Sauces & Condiments (GLUTEN-FREE — regular soy sauce, BBQ sauce,
+  // hoisin sauce, and worcestershire typically contain wheat/malt and are
+  // EXCLUDED. Users with GF versions can add them via My Ingredients.)
   { label: '🫙 Sauces & Condiments', sub: 'the personality section', items: [
-    'soy sauce / tamari / coconut aminos','miso paste','vegan mayo',
-    'ketchup','yellow mustard','dijon mustard','BBQ sauce',
-    { name: 'hoisin sauce', hint: 'stir-fry cheat code' },
-    'vegan worcestershire','tamarind paste',
+    'tamari / coconut aminos','miso paste','vegan mayo',
+    'ketchup','yellow mustard','dijon mustard',
+    'tamarind paste',
     { name: 'gochujang', hint: 'Korean heat, instant depth' },
     'sriracha / hot sauce','sambal oelek','curry paste','liquid smoke',
     'vegan sour cream',
@@ -105,10 +106,9 @@ const STAPLE_SECTIONS = [
     'apple cider vinegar','rice vinegar','balsamic vinegar',
     'white vinegar','red wine vinegar','white wine vinegar','sherry vinegar',
   ]},
-  // 10 — Baking & Flours
+  // 10 — Baking & Flours (GLUTEN-FREE ONLY — HARVEST is GF by default)
   { label: '🧂 Baking & Flours', sub: 'for your ambitious Sunday self', items: [
     'baking soda','baking powder','cornstarch','arrowroot powder',
-    'all-purpose flour','whole wheat flour',
     'gluten-free flour','almond flour','coconut flour','oat flour',
     'tapioca flour','brown rice flour','chickpea flour','cassava flour',
     'flaxseed meal','applesauce',
