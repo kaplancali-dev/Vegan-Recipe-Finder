@@ -9,7 +9,7 @@
  * Shopping tab (shopRecipes state). Recipes are NOT auto-added.
  */
 
-import { get, set, subscribe, getRef } from '../state/store.js';
+import { get, set, subscribe, subscribeForTab, getRef } from '../state/store.js';
 import { autoSync } from '../services/sync.js';
 import { findRecipes } from '../services/matching.js';
 import { escHTML, norm, applyGfSwap } from '../utils/text.js';
@@ -41,12 +41,8 @@ export function initWantToMake(recipes) {
   renderWantToMake();
   wireEvents();
 
-  subscribe('makelist', renderWantToMake);
-  subscribe('shopRecipes', renderWantToMake);
-  subscribe('ingredients', renderWantToMake);
-  subscribe('staples', renderWantToMake);
-  subscribe('favorites', renderWantToMake);
-  subscribe('cookHistory', renderWantToMake);
+  // PERF: defer renders when this tab isn't visible
+  subscribeForTab(['makelist','shopRecipes','ingredients','staples','favorites','cookHistory'], 'wantmake', renderWantToMake);
 }
 
 /* ── GF substitution (shared helper) ────────────────────────── */

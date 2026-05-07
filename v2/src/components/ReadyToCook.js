@@ -5,7 +5,7 @@
  * sorted by match percentage descending. Includes search bar and category filters.
  */
 
-import { get, set, subscribe, getRef } from '../state/store.js';
+import { get, set, subscribe, subscribeForTab, getRef } from '../state/store.js';
 import { autoSync } from '../services/sync.js';
 import { findRecipes, sortResults } from '../services/matching.js';
 import { $ } from '../utils/dom.js';
@@ -59,15 +59,12 @@ export function initReadyToCook(recipes) {
   buildAllergenFilterChips('#readyAllergenChips', scheduleReadyRender);
   renderReadyList();
 
-  subscribe('ingredients', scheduleReadyRender);
-  subscribe('staples', scheduleReadyRender);
-  subscribe('favorites', scheduleReadyRender);
-  subscribe('makelist', scheduleReadyRender);
+  // PERF: defer renders when this tab isn't visible
+  subscribeForTab(['ingredients','staples','favorites','makelist','cookHistory'], 'canmake', renderReadyList);
   subscribe('allergies', () => {
     buildAllergenFilterChips('#readyAllergenChips', scheduleReadyRender);
-    scheduleReadyRender();
+    if (get('activeTab') === 'canmake') scheduleReadyRender();
   });
-  subscribe('cookHistory', scheduleReadyRender);
 }
 
 /**

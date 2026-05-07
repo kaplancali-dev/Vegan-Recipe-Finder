@@ -6,7 +6,7 @@
  * the Web Share API (iOS share sheet) with clipboard fallback.
  */
 
-import { get, set, subscribe, getRef } from '../state/store.js';
+import { get, set, subscribe, subscribeForTab, getRef } from '../state/store.js';
 import { autoSync } from '../services/sync.js';
 import { findRecipes } from '../services/matching.js';
 import { escHTML, norm, applyGfSwap } from '../utils/text.js';
@@ -45,11 +45,8 @@ export function initShopping(recipes) {
   wireTopControls();
   renderShopTab();
 
-  subscribe('shopList', renderShopTab);
-  subscribe('shopChecked', renderShopTab);
-  subscribe('shopRecipes', renderShopTab);
-  subscribe('ingredients', renderShopTab);
-  subscribe('staples', renderShopTab);
+  // PERF: defer render when Shopping tab not visible
+  subscribeForTab(['shopList','shopChecked','shopRecipes','ingredients','staples'], 'shopping', renderShopTab);
 }
 
 /**

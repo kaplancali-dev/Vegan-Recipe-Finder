@@ -5,7 +5,7 @@
  * and renders the filtered/sorted recipe card list.
  */
 
-import { get, set, subscribe, getRef } from '../state/store.js';
+import { get, set, subscribe, subscribeForTab, getRef } from '../state/store.js';
 import { autoSync } from '../services/sync.js';
 import { findRecipes, sortResults } from '../services/matching.js';
 import { escHTML } from '../utils/text.js';
@@ -79,16 +79,15 @@ export function initBrowse(recipes) {
   initRefreshTip();
   renderResults();
 
-  // Re-render when ingredients or staples change
-  subscribe('ingredients', renderResults);
-  subscribe('staples', renderResults);
-  subscribe('favorites', renderResults);
-  subscribe('makelist', renderResults);
-  subscribe('cookHistory', renderResults);
+  // Re-render when ingredients/staples/etc. change.
+  // PERF: skip-and-mark-dirty when Browse tab isn't visible — re-running
+  // findRecipes against 4,193 recipes on every pantry-click was causing
+  // the multi-second lag. Heavy work defers until user opens Browse.
+  subscribeForTab(['ingredients','staples','favorites','makelist','cookHistory'], 'browse', renderResults);
   subscribe('allergies', (val) => {
     _allergies = new Set(val);
     buildAllergenFilterChips('#browseAllergenChips', renderResults);
-    renderResults();
+    if (get('activeTab') === 'browse') renderResults();
   });
 }
 

@@ -81,11 +81,18 @@ export function initROTD(recipes) {
 
   renderROTD();
 
-  subscribe('ingredients', renderROTD);
-  subscribe('staples', renderROTD);
-  subscribe('favorites', renderROTD);
-  subscribe('makelist', renderROTD);
-  subscribe('cookHistory', renderROTD);
+  // PERF: RAF-debounce so multiple rapid clicks coalesce. ROTD only scores
+  // ONE recipe (cheap), but the chained renderROTD calls were piling up.
+  let _pending = 0;
+  const schedule = () => {
+    cancelAnimationFrame(_pending);
+    _pending = requestAnimationFrame(renderROTD);
+  };
+  subscribe('ingredients', schedule);
+  subscribe('staples', schedule);
+  subscribe('favorites', schedule);
+  subscribe('makelist', schedule);
+  subscribe('cookHistory', schedule);
 }
 
 function renderROTD() {

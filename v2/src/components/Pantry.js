@@ -48,17 +48,24 @@ export function initPantry(recipes) {
   renderPantryPower();
   checkHero();
 
-  // Re-render on state changes (tracked for cleanup)
+  // PERF: chip-render runs sync (cheap, visible feedback);
+  // PantryPower compute runs against full catalog so it's RAF-debounced.
+  let _powerPending = 0;
+  const schedulePantryPower = () => {
+    cancelAnimationFrame(_powerPending);
+    _powerPending = requestAnimationFrame(renderPantryPower);
+  };
+
   _unsubs.push(subscribe('ingredients', () => {
     renderMyIngs();
-    renderPantryPower();
+    schedulePantryPower();
   }));
   _unsubs.push(subscribe('inactiveIngs', () => {
     renderMyIngs();
   }));
   _unsubs.push(subscribe('staples', () => {
     renderStapleChips();
-    renderPantryPower();
+    schedulePantryPower();
   }));
   _unsubs.push(subscribe('allergies', renderAllergyChips));
 }

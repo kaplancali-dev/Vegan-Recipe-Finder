@@ -169,6 +169,37 @@ export function subscribe(key, fn) {
 }
 
 /**
+ * Subscribe to a state key, but DEFER expensive renders for tabs that
+ * aren't currently visible. The render fn fires:
+ *   - immediately (RAF-debounced) when the user is on `tabKey`
+ *   - skipped + flagged dirty when on a different tab
+ *   - once, on tab activation, if dirty
+ *
+ * Used by Browse/Shopping/WantToMake/Favorites/RecipeOfTheDay/ReadyToCook
+ * to avoid recomputing thousands of recipe matches on every pantry click
+ * when the user can't even see the result.
+ *
+ * @param {string[]} stateKeys - state keys to watch (e.g. ['ingredients','staples'])
+ * @param {string} tabKey - the tab id this component renders on
+ * @param {Function} render - the render function (no args)
+ * @returns {Function} unsubscribe
+ */
+export function subscribeForTab(stateKeys, tabKey, render) {
+  let dirty = false;
+  let pending = 0;
+  const schedule = () => {
+    if (state.activeTab !== tabKey) { dirty = true; return; }
+    cancelAnimationFrame(pending);
+    pending = requestAnimationFrame(() => { dirty = false; render(); });
+  };
+  const unsubs = stateKeys.map(k => subscribe(k, schedule));
+  unsubs.push(subscribe('activeTab', (tab) => {
+    if (tab === tabKey && dirty) { dirty = false; render(); }
+  }));
+  return () => unsubs.forEach(u => u());
+}
+
+/**
  * Gather all syncable data into one object (for Supabase cloud sync).
  * @returns {Object}
  */

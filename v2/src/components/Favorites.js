@@ -6,7 +6,7 @@
  * where users can organize recipes.
  */
 
-import { get, set, subscribe, getRef } from '../state/store.js';
+import { get, set, subscribe, subscribeForTab, getRef } from '../state/store.js';
 import { autoSync } from '../services/sync.js';
 import { findRecipes } from '../services/matching.js';
 import { escHTML } from '../utils/text.js';
@@ -41,12 +41,13 @@ export function initFavorites(recipes) {
   const backBtn = $('#favCollBack');
   if (backBtn) backBtn.addEventListener('click', closeCollection);
 
+  // Always-visible (collections grid always shows when on Favorites tab)
   subscribe('favorites', () => { renderCollections(); if (_activeColl) renderFavList(); });
   subscribe('collections', () => { renderCollections(); if (_activeColl) renderFavList(); });
-  subscribe('ingredients', () => { if (_activeColl) renderFavList(); });
-  subscribe('staples', () => { if (_activeColl) renderFavList(); });
-  subscribe('makelist', () => { if (_activeColl) renderFavList(); });
-  subscribe('cookHistory', () => { if (_activeColl) renderFavList(); });
+  // PERF: defer match-heavy renders when not on the Favorites tab
+  subscribeForTab(['ingredients','staples','makelist','cookHistory'], 'favorites', () => {
+    if (_activeColl) renderFavList();
+  });
 }
 
 /* ── Collections Grid ────────────────────────────────────────── */
