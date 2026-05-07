@@ -6,9 +6,19 @@
 /**
  * Normalize an ingredient name: lowercase, strip punctuation (preserving
  * accented/unicode letters like ñ, é, ü), collapse whitespace.
+ *
+ * IMPORTANT: dashes (-, –, —) are converted to SPACES before stripping
+ * other punctuation. Without this, "plant-based" becomes "plantbased"
+ * (joined) instead of "plant based" (two words), which breaks word-boundary
+ * matching for many hyphenated ingredients ("low-sodium", "gluten-free",
+ * "fire-roasted", "non-dairy", "self-rising", "plant-based").
  */
 export function norm(s) {
-  return s.toLowerCase().replace(/[^\p{L}\p{N} ]/gu, '').replace(/\s+/g, ' ').trim();
+  return s.toLowerCase()
+    .replace(/[-–—]/g, ' ')
+    .replace(/[^\p{L}\p{N} ]/gu, '')
+    .replace(/\s+/g, ' ')
+    .trim();
 }
 
 /**

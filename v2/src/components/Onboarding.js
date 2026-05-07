@@ -42,7 +42,7 @@ const STAPLE_SECTIONS = [
     'mushrooms (any)','tomatoes','cherry tomatoes',
     { name: 'avocado', hint: "yes it's a fruit, no we don't care" },
     'zucchini','corn','cucumber','green onions','eggplant','cabbage',
-    'butternut squash','pumpkin','pumpkin puree','arugula',
+    'butternut squash','pumpkin','pumpkin puree','arugula','leeks','collard greens',
     'lettuce (any)','green beans','asparagus',
     { name: 'jalapeño', hint: 'proceed with caution' },
     'beets','radishes','artichoke hearts','bean sprouts','bamboo shoots','shallots',
