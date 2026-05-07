@@ -58,6 +58,8 @@ const _GF_MATCH_SWAPS = {
   'farfalle': ['gf farfalle','gf pasta'],
   'angel hair': ['gf angel hair','gf pasta'],
   'lasagna': ['gf lasagna','gf lasagna sheets','gf lasagna noodles'],
+  'lasagne': ['gf lasagna','gf lasagne','gf lasagna sheets','gf lasagne sheets'],
+  'lasagne sheets': ['gf lasagna sheets','gf lasagne sheets'],
   'lasagna noodles': ['gf lasagna noodles','gf lasagna sheets','gf lasagna'],
   'lasagna sheets': ['gf lasagna sheets','gf lasagna'],
   'gnocchi': ['gf gnocchi','gluten-free gnocchi','potato gnocchi','cauliflower gnocchi'],

@@ -188,7 +188,7 @@ export const INGREDIENT_ALIASES = {
   // Generic "neutral oil" / "neutral tasting oil" / "mild tasting oil" — recipe shorthand
   // for any non-flavored cooking oil. Already covered by 'any cooking oil' but the
   // catch-all is one-way (parent → variants) so we need the reverse mapping here.
-  'vegetable oil': ['neutral oil','neutral tasting oil','neutral-tasting oil','mild oil','mild tasting oil','mild-tasting oil','flavorless oil','flavourless oil','light oil','rice bran oil','peanut oil','cooking oil','frying oil','high smoke point oil','high-smoke-point oil','any oil','any cooking oil'],
+  'vegetable oil': ['neutral oil','neutral tasting oil','neutral-tasting oil','neutral flavored oil','neutral-flavored oil','neutral flavoured oil','neutral-flavoured oil','mild oil','mild tasting oil','mild-tasting oil','flavorless oil','flavourless oil','light oil','rice bran oil','peanut oil','cooking oil','frying oil','high smoke point oil','high-smoke-point oil','any oil','any cooking oil'],
   // Common typo — xantham (extra H) for xanthan gum
   'xanthan gum': ['xantham gum','xantham','xanthan'],
   // Olives — the colors are interchangeable enough for matching purposes.
@@ -273,6 +273,50 @@ export const INGREDIENT_ALIASES = {
   // Cooking oil bare = neutral oil (already in vegetable oil group above)
   // Add 'cooking oil' to vegetable oil group via dedicated entry:
   'any cooking oil': ['coconut oil','olive oil','avocado oil','vegetable oil','canola oil','sunflower oil','grapeseed oil','light oil','neutral oil','oil','cooking oil','frying oil','high smoke point oil','high-smoke-point oil'],
+  // ── Wave 4 (final tightening) ──
+  // British / regional / spelling variants that don't change identity
+  'green chili': ['green chilli','green chilies','green chillies','hot green chili','hot green chilli','thai green chili','thai green chilli','serrano','serrano pepper','serranos','green thai chili','indian green chili','indian green chilli','bird\'s eye chili','bird\'s eye chilli','green chile','green chiles','poblano','poblano chile','poblano pepper','hatch green chile','anaheim chile','anaheim pepper'],
+  'allspice': ['all-spice','all spice','jamaican allspice','allspice powder','ground allspice'],
+  'sunflower seeds': ['sunflower kernels','hulled sunflower seeds','raw sunflower seeds','toasted sunflower seeds','sunflower seed kernels'],
+  'green peas': ['peas','frozen peas','frozen green peas','fresh peas','fresh green peas','english peas','garden peas','sweet peas','shelled peas','sugar snap peas','snap peas','snow peas','mangetout','mange tout','sugarsnap peas'],
+  'vegan mayo': ['vegan mayo','vegan mayonnaise','mayo','mayonnaise','vegan mayo*','plant-based mayo','plant based mayo','plant-based mayonnaise','plant based mayonnaise','dairy-free mayo','vegan aioli'],
+  'vegan cream cheese': ['vegan cream cheese','dairy-free cream cheese','plant-based cream cheese','vegan ricotta','plant-based ricotta','dairy-free ricotta','vegan cream','cashew cream','tofu ricotta'],
+  'pumpkin pie spice': ['pumpkin spice','pumpkin pie spice mix','apple pie spice','mixed spice','speculaas spice','chai spice','warm spice mix','warming spices'],
+  'pinto beans': ['pinto bean','pintos','refried beans','refried pinto beans','vegan refried beans'],
+  'corn tortillas': ['corn tortilla','blue corn tortillas','yellow corn tortillas','tortilla chips','corn chips','tostadas','tostada shells'],
+  // Apple juice — common ingredient especially in baking / sauces.
+  // Bidirectional with apple (whole fruit covers juice — you can juice it).
+  'apple': ['apples','apple juice','fresh apple juice','unsweetened apple juice','cloudy apple juice','clear apple juice','apple sauce','applesauce','unsweetened applesauce','fresh apple','fuji apple','gala apple','honeycrisp apple','granny smith apple','red apple','green apple'],
+  'apple juice': ['unsweetened apple juice','fresh apple juice','cloudy apple juice','clear apple juice'],
+  'pineapple': ['fresh pineapple','canned pineapple','pineapple chunks','pineapple rings','pineapple juice','fresh pineapple juice','canned pineapple juice','unsweetened pineapple juice'],
+  'pineapple juice': ['fresh pineapple juice','canned pineapple juice','unsweetened pineapple juice'],
+  // Kiwi spelling variants
+  'kiwi': ['kiwifruit','kiwifruits','kiwi fruit','golden kiwi'],
+  // Adzuki / red beans family
+  'red beans': ['red bean','adzuki beans','aduki beans','azuki beans','small red beans'],
+  // Five-spice alias chain
+  'five spice': ['chinese five spice','chinese 5 spice','5-spice','five-spice','five spice powder','chinese five spice powder','5 spice powder'],
+  // Apple sauce / applesauce naming
+  'applesauce': ['apple sauce','unsweetened applesauce','unsweetened apple sauce','fresh apple sauce'],
+  // Coffee variants
+  'instant coffee': ['coffee granules','coffee crystals','instant espresso','espresso powder','instant coffee granules','coffee powder'],
+  // Salad greens / mixed greens
+  'mixed greens': ['salad greens','spring mix','mesclun','assorted salad','assorted salad leaves','salad mix','baby greens','field greens','italian salad mix','mediterranean salad mix'],
+  // Salsa / pico de gallo
+  'salsa': ['pico de gallo','tomato salsa','red salsa','green salsa','salsa verde','purchased salsa','purchased pico de gallo','jarred salsa','prepared salsa'],
+  // Neutral oil expanded (already in vegetable oil group via wave 1)
+  // Just add "neutral flavored oil" / "neutral-flavoured oil" UK spelling
+  // (vegetable oil already includes 'neutral oil','neutral tasting oil',etc)
+  // No new entry needed — let me extend the existing vegetable oil group:
+  // Jackfruit in water / brine — same as jackfruit
+  'jackfruit': ['young jackfruit','canned jackfruit','green jackfruit','jackfruit in water','jackfruit in brine','jackfruit in salt water'],
+  // Mirepoix = onion + carrot + celery (the holy trinity). Best treated as
+  // "onion" since onion is the bulk and the most-likely-on-hand component.
+  // (We could split into all 3 but combined-ingredient logic complicates
+  // matching — simpler to canonicalize to onion.)
+  'onion': ['onions','yellow onion','yellow onions','white onion','white onions','sweet onion','sweet onions','spanish onion','vidalia onion','cooking onion','cooking onions','mirepoix','frozen mirepoix','soffritto'],
+  // Lasagne (UK spelling) — pasta variant
+  // (handled by GF auto-swap which now includes 'lasagna')
   // Suffix-form aliases — recipes often say "X powder/spice" where the bare
   // form is what we have in the pantry. Identity suffix guard would otherwise
   // reject these as different products.

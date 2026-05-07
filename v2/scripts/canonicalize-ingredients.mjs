@@ -160,6 +160,10 @@ function postClean(s) {
   s = s.replace(/\s+and\s+(?:ground|chopped|diced|sliced|minced|crushed|grated|toasted|roasted|cooked|warmed|cooled|melted|softened|cubed|quartered|halved|squeezed|drained|rinsed|patted\s+dry)$/i, '');
   // "kernels removed" / "stems removed" trailing
   s = s.replace(/\s+(?:kernels?|stems?|leaves?|husks?)\s+removed$/i, '');
+  // "in water/brine/oil" trailing — preservation medium, not identity
+  s = s.replace(/\s+in\s+(?:water|brine|oil|salt\s+water|its\s+(?:own\s+)?(?:juice|liquid))$/i, '');
+  // Trailing orphan paren ")" with no matching "(" left
+  if (s.endsWith(')') && !s.includes('(')) s = s.replace(/\s*\)\s*$/, '');
   // Collapse spaces
   s = s.replace(/\s+/g, ' ').trim();
   return s;
@@ -299,7 +303,7 @@ function splitCombined(rawIng) {
   // CRITICAL: strip trailing comma-prep BEFORE comma normalization, so
   // "salt, adjust to taste" doesn't become ["salt", "adjust to taste"]
   // (we want it to stay as bare "salt" → no split → fall through to single).
-  const PREP_AFTER_COMMA = /\s*,\s*(?:to\s+taste|adjust(?:\s+to\s+taste)?|or\s+to\s+taste|or\s+more(?:\s+to\s+taste)?|or\s+less|or\s+as\s+needed|as\s+needed|if\s+needed|if\s+desired|optional|drained|rinsed|drained\s+and\s+rinsed|rinsed\s+and\s+drained|drained\s+well|drained\s+very\s+well|chopped|diced|sliced|minced|crushed|grated|shredded|peeled|seeded|softened|melted|warm|cold|undrained|toasted|roasted|cooked|warmed|cooled|squeezed|patted\s+dry|halved|quartered|cubed|divided|sifted|smashed|scrubbed|trimmed|stemmed|cleaned|skin\s+on|peel\s+on|ends?\s+trimmed|ends?\s+removed|tops?\s+removed|tops?\s+trimmed|thawed(?:\s+and\s+\w+)?|soaked(?:\s+overnight)?|soaked\s+and\s+drained|chopped\s+into\s+\w+(?:\s+\w+)*|sliced\s+into\s+\w+(?:\s+\w+)*|cut\s+into\s+\w+(?:\s+\w+)*|finely\s+\w+(?:\s+\w+)?|roughly\s+\w+(?:\s+\w+)?|thinly\s+\w+(?:\s+\w+)?|thickly\s+\w+(?:\s+\w+)?|coarsely\s+\w+(?:\s+\w+)?|very\s+\w+(?:\s+\w+)*|for\s+\w+(?:\s+\w+)?|to\s+(?:serve|garnish|drizzle|sprinkle|finish|top|coat|brush|grease|fry|cook|sauté|sautee|sprinkle\s+on\s+top)|in\s+(?:a\s+)?(?:dry\s+)?(?:skillet|pan|pot)\s+(?:and\s+\w+)?|kernels?\s+removed|stems?\s+removed|leaves?\s+only|leaves?\s+picked|stem\s+ends?\s+(?:removed|trimmed)|root\s+ends?\s+(?:removed|trimmed)|husks?\s+(?:and\s+silks?\s+)?removed|white\s+and\s+green\s+parts?|green\s+parts?\s+only|white\s+parts?\s+only|woody\s+ends?\s+removed|tough\s+(?:stems?|outer\s+leaves?)\s+removed|outer\s+leaves?\s+removed|plus\s+\w+).*$/i;
+  const PREP_AFTER_COMMA = /\s*,\s*(?:to\s+taste|adjust(?:\s+to\s+taste)?|or\s+to\s+taste|or\s+more(?:\s+to\s+taste)?|or\s+less|or\s+as\s+needed|as\s+needed|if\s+needed|if\s+desired|optional|drained|rinsed|drained\s+and\s+rinsed|rinsed\s+and\s+drained|drained\s+well|drained\s+very\s+well|chopped|diced|sliced|minced|crushed|grated|shredded|peeled|seeded|softened|melted|warm|cold|undrained|toasted|roasted|cooked|warmed|cooled|squeezed|patted\s+dry|halved|quartered|cubed|divided|sifted|smashed|scrubbed|trimmed|stemmed|cleaned|hulled|deveined|skin\s+on|peel\s+on|ends?\s+trimmed|ends?\s+removed|tops?\s+removed|tops?\s+trimmed|thawed(?:\s+and\s+\w+)?|soaked[\s\S]*|chopped\s+into\s+\w+(?:\s+\w+)*|sliced\s+into\s+\w+(?:\s+\w+)*|any\s+color|any\s+colour|leaves\s+chopped\s+finely|leaves\s+chopped|leaves\s+picked|seeds?\s+scraped|seeds?\s+removed|in\s+water|in\s+brine|in\s+salt\s+water|in\s+oil|packed\s+in\s+water|plus\s+more[\s\S]*|cut\s+into\s+\w+(?:\s+\w+)*|finely\s+\w+(?:\s+\w+)?|roughly\s+\w+(?:\s+\w+)?|thinly\s+\w+(?:\s+\w+)?|thickly\s+\w+(?:\s+\w+)?|coarsely\s+\w+(?:\s+\w+)?|very\s+\w+(?:\s+\w+)*|for\s+\w+(?:\s+\w+)?|to\s+(?:serve|garnish|drizzle|sprinkle|finish|top|coat|brush|grease|fry|cook|sauté|sautee|sprinkle\s+on\s+top)|in\s+(?:a\s+)?(?:dry\s+)?(?:skillet|pan|pot)\s+(?:and\s+\w+)?|kernels?\s+removed|stems?\s+removed|leaves?\s+only|leaves?\s+picked|stem\s+ends?\s+(?:removed|trimmed)|root\s+ends?\s+(?:removed|trimmed)|husks?\s+(?:and\s+silks?\s+)?removed|white\s+and\s+green\s+parts?|green\s+parts?\s+only|white\s+parts?\s+only|woody\s+ends?\s+removed|tough\s+(?:stems?|outer\s+leaves?)\s+removed|outer\s+leaves?\s+removed|plus\s+\w+).*$/i;
   let prevPrep = '';
   while (s !== prevPrep) { prevPrep = s; s = s.replace(PREP_AFTER_COMMA, ''); }
   // Normalize remaining commas (e.g., "salt, pepper, and onion powder")
@@ -346,7 +350,9 @@ const NON_INGREDIENT_RESULTS = new Set([
   'cold pressed','low sodium','low fat','reduced sodium','reduced fat',
   'no salt added','no sugar added','optional','divided','to taste','adjust',
   'or','and','plus','more','less','about','approximately','garnish','topping',
-  'serving','seasoning','well','small','medium','large','extra','soaked','squeezed',
+  'toppings','serving','servings','seasoning','well','small','medium','large','extra','soaked','squeezed',
+  'finely','roughly','coarsely','thinly','thickly','any color','any','color',
+  'leaves only','stems removed','etc','as needed','as desired','if using',
 ]);
 
 function canonicalizeOne(rawIng, isCanned) {
