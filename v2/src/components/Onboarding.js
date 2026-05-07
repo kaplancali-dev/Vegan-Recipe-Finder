@@ -55,7 +55,7 @@ const STAPLE_SECTIONS = [
     { name: 'pomegranate', hint: 'worth the mess' },
     'plantain','figs','grapes','watermelon','coconut',
     { name: 'dates', hint: "nature's caramel, no notes" },
-    'raisins',
+    'raisins','dried apricots','date paste',
   ]},
   // 4 — Nuts & Seeds
   { label: '🥜 Nuts & Seeds', sub: 'creamy dreams', items: [
@@ -72,7 +72,7 @@ const STAPLE_SECTIONS = [
     'almond milk','soy milk','rice milk','hemp milk',
     'macadamia milk','pistachio milk',
     { name: 'oat milk', hint: "the people's champion" },
-    'cashew milk','vegan yogurt','vegan cream cheese','vegan parmesan',
+    'cashew milk','vegan yogurt','vegan cream cheese','vegan parmesan','vegan feta','vegan cheese',
   ]},
   // 6 — Oils & Fats
   { label: '🫒 Oils & Fats', sub: 'the slip-and-slide section', items: [
@@ -80,12 +80,13 @@ const STAPLE_SECTIONS = [
     { name: 'vegan butter', hint: "yes it melts, yes it's real" },
     'vegetable oil','toasted sesame oil','sunflower oil','grapeseed oil',
   ]},
-  // 7 — Canned & Jarred
+  // 7 — Canned & Jarred (these were here, now adding salsa/hummus/wine/wine vinegar to existing)
+
   { label: '🥫 Canned & Jarred', sub: 'shelf-stable MVPs', items: [
     'canned tomatoes (any)','tomato sauce','tomato paste','vegetable broth',
     'coconut milk','olives','artichoke hearts','roasted red peppers',
     { name: 'sun-dried tomatoes', hint: 'umami bombs' },
-    'capers',
+    'capers','salsa','hummus',
   ]},
   // 8 — Sauces & Condiments (GLUTEN-FREE focus — items where most brands
   // contain wheat/malt have a "verify GF" hint. Users with certified GF
@@ -96,7 +97,7 @@ const STAPLE_SECTIONS = [
     { name: 'BBQ sauce', hint: 'verify GF label' },
     { name: 'hoisin sauce', hint: 'verify GF label' },
     { name: 'vegan worcestershire', hint: 'verify GF label' },
-    'tamarind paste',
+    'tamarind paste','harissa paste',
     { name: 'gochujang', hint: 'Korean heat, verify GF label' },
     'sriracha / hot sauce','sambal oelek','curry paste','liquid smoke',
     'vegan sour cream',
@@ -109,6 +110,8 @@ const STAPLE_SECTIONS = [
     'date syrup','molasses','coconut nectar','allulose','stevia / monk fruit',
     'apple cider vinegar','rice vinegar','balsamic vinegar',
     'white vinegar','red wine vinegar','white wine vinegar','sherry vinegar',
+    { name: 'red wine', hint: 'cooking wine' },
+    { name: 'white wine', hint: 'cooking wine' },
   ]},
   // 10 — Baking & Flours (GLUTEN-FREE ONLY — HARVEST is GF by default)
   { label: '🧂 Baking & Flours', sub: 'for your ambitious Sunday self', items: [
@@ -126,7 +129,7 @@ const STAPLE_SECTIONS = [
     'cinnamon','chili powder','ginger','curry powder',
     'black pepper','garlic powder','onion powder',
     'oregano','basil','thyme','sage','coriander','cayenne',
-    'cilantro','parsley','white pepper',
+    'cilantro','parsley','white pepper','pumpkin pie spice','taco seasoning',
     'cardamom','cloves','allspice','bay leaves','five spice','nutmeg',
     'sea salt',
     { name: 'garam masala', hint: 'instant warmth' },
