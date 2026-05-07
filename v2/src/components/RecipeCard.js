@@ -177,14 +177,19 @@ export function renderCard(result, opts = {}) {
     ? `<div class="card-cats">${cats.map(c => `<span class="card-cat">${escHTML(c)}</span>`).join('')}</div>`
     : '';
 
-  // Ingredient chips (have / need)
-  const haveNames = r.haveNames || [];
+  // Ingredient chips (have / need) — show clean canonical names from
+  // the matcher (e.g., "kidney beans"), not the raw recipe strings
+  // (e.g., "1 15-oz can kidney beans, drained and rinsed"). Falls back
+  // to raw names if the canonical arrays aren't populated.
+  const haveDisplay = (r.have && r.have.length) ? r.have : (r.haveNames || []);
+  const needDisplay = (r.need && r.need.length) ? r.need : (r.needNames || []);
+  const haveNames = r.haveNames || [];  // kept for substitution lookup below
   const needNames = r.needNames || [];
-  const haveChips = haveNames.length
-    ? `<div class="chip-label-sm">You have</div><div class="chips">${haveNames.map(n => ingChip(n, 'c-have')).join('')}</div>`
+  const haveChips = haveDisplay.length
+    ? `<div class="chip-label-sm">You have</div><div class="chips">${haveDisplay.map(n => ingChip(n, 'c-have')).join('')}</div>`
     : '';
-  const needChips = needNames.length
-    ? `<div class="chip-label-sm" style="margin-top:4px">You need</div><div class="chips">${needNames.map(n => ingChip(n, 'c-need')).join('')}</div>`
+  const needChips = needDisplay.length
+    ? `<div class="chip-label-sm" style="margin-top:4px">You need</div><div class="chips">${needDisplay.map(n => ingChip(n, 'c-need')).join('')}</div>`
     : '';
 
   // Substitution hint: only when exactly 1 missing ingredient

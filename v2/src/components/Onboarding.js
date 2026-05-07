@@ -90,6 +90,7 @@ const STAPLE_SECTIONS = [
     'coconut milk','olives','artichoke hearts','roasted red peppers',
     { name: 'sun-dried tomatoes', hint: 'umami bombs' },
     'capers','salsa','hummus','sauerkraut','instant coffee','cooking spray',
+    'hearts of palm','yellow cornmeal',
   ]},
   // 8 — Sauces & Condiments (GLUTEN-FREE focus — items where most brands
   // contain wheat/malt have a "verify GF" hint. Users with certified GF
@@ -123,7 +124,8 @@ const STAPLE_SECTIONS = [
     'tapioca flour','brown rice flour','chickpea flour','cassava flour',
     'flaxseed meal','applesauce','aquafaba','agar powder','psyllium husk',
     { name: 'xanthan gum', hint: 'tiny amount, big difference' },
-    'almond extract','matcha','cream of tartar','active dry yeast','protein powder',
+    'almond extract','matcha','cacao butter','vegan puff pastry','gnocchi',
+    'cream of tartar','active dry yeast','protein powder',
   ]},
   // 11 — Spices & Herbs
   { label: '🌿 Spices & Herbs', sub: 'the flavor council', items: [
@@ -164,6 +166,11 @@ const STAPLE_SECTIONS = [
     { name: 'curry leaves', hint: 'Indian aromatic, fresh or dried' },
     { name: 'galangal', hint: 'Thai ginger cousin' },
     { name: 'fenugreek', hint: 'leaves or seeds, Indian' },
+    { name: 'fenugreek seeds', hint: 'Indian' },
+    { name: 'chana dal', hint: 'split chickpeas, Indian' },
+    { name: 'gochujang paste', hint: 'Korean fermented chili, verify GF' },
+    { name: 'wasabi', hint: 'Japanese horseradish' },
+    { name: 'vegan fish sauce', hint: 'umami booster' },
     'daikon','yuzu','wakame',
     'rice paper',
   ]},

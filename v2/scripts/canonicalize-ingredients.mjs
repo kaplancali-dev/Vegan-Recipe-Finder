@@ -72,6 +72,10 @@ function detectCanned(rawIng) {
 //   "X cans of", "X jars of" multipliers
 function preClean(rawIng) {
   let s = rawIng.trim(); // strip leading/trailing whitespace so ^ anchors work
+  // Strip ", or X" alternatives ("...artichoke hearts, thawed, or one 14-oz can, drained")
+  // anything after ", or" is almost always an alternative form/quantity
+  let prevOr = '';
+  while (s !== prevOr) { prevOr = s; s = s.replace(/\s*,\s*or\s+(?:\d|one|two|three|a\b|an\b).*$/i, ''); }
   // Strip emphatic ALL-CAPS or punctuation tails ("WELL!", "ENJOY!")
   s = s.replace(/\s+[A-Z]{2,}!*\s*$/, '');
   s = s.replace(/!+$/g, '');
@@ -105,6 +109,12 @@ function postClean(s) {
   // (these often appear after parenthetical can-size annotations get stripped,
   // or after NOISE strips a leading prep word leaving "and X")
   s = s.replace(/^(?:of|and|or|plus|with|can|cans|tin|tins|jar|jars|package|packages|packet|packets|block|blocks|bunch|bunches|pack|packs)\s+(?:of\s+)?/i, '');
+  // Leading "a NN unit" / "a NN-oz can" leftover from incomplete strip
+  // ("a 15 oz can no salt added pinto beans" → "no salt added pinto beans")
+  s = s.replace(/^a\s+\d+(?:[.,]\d+)?\s*(?:oz|ounce|ounces|g|grams|gram|ml|l|lb|lbs|pound|pounds|cup|cups)\s+(?:cans?|tins?|jars?|packages?|packets?|blocks?)?\s*/i, '');
+  s = s.replace(/^\d+(?:[.,]\d+)?\s*(?:oz|ounce|ounces|g|grams|gram|ml|l|lb|lbs|pound|pounds)\s+/i, '');
+  // "no salt added" / "no sugar added" anywhere in the string
+  s = s.replace(/\bno\s+(?:salt|sugar|oil|sodium|fat)\s+added\s+/gi, '');
   // "no salt added" / "no sugar added" / "no oil added" descriptors
   s = s.replace(/^no\s+(?:salt|sugar|oil|sodium|fat)\s+added\s+/i, '');
   // Trailing "undrained" / "drained" / "rinsed" leftover
@@ -133,7 +143,18 @@ function postClean(s) {
   // "cut into X-inch dice" / "cut to X" / "diced into X" trailing prep
   s = s.replace(/\s+(?:cut\s+(?:in|into|to)\s+.*|diced\s+(?:in|into|to)\s+.*|sliced\s+(?:in|into|to)\s+.*|chopped\s+(?:in|into|to)\s+.*)$/i, '');
   // Bare "cut", "diced", "sliced", "chopped" trailing
-  s = s.replace(/\s+(?:cut|diced|sliced|chopped|minced|grated|peeled|halved|quartered|cubed|crushed|mashed|trimmed)$/i, '');
+  s = s.replace(/\s+(?:cut|diced|sliced|chopped|minced|grated|peeled|halved|quartered|cubed|crushed|mashed|trimmed|smashed|scrubbed)$/i, '');
+  // Trailing "or" / "or to taste" / lone "or" leftovers
+  s = s.replace(/\s+or(?:\s+to\s+taste)?\s*$/i, '');
+  s = s.replace(/\s+and\s*$/i, '');
+  // "and X" leading or trailing
+  s = s.replace(/^and\s+/i, '');
+  // "in a/the (dry) skillet/pan/pot ..." prep descriptions
+  s = s.replace(/\s+in\s+(?:a|the)\s+(?:\w+\s+)?(?:skillet|pan|pot|bowl|oven|microwave|food\s+processor|blender)(?:\s+.*)?$/i, '');
+  // Trailing "and X" where X is a single prep verb
+  s = s.replace(/\s+and\s+(?:ground|chopped|diced|sliced|minced|crushed|grated|toasted|roasted|cooked|warmed|cooled|melted|softened|cubed|quartered|halved|squeezed|drained|rinsed|patted\s+dry)$/i, '');
+  // "kernels removed" / "stems removed" trailing
+  s = s.replace(/\s+(?:kernels?|stems?|leaves?|husks?)\s+removed$/i, '');
   // Collapse spaces
   s = s.replace(/\s+/g, ' ').trim();
   return s;
@@ -154,6 +175,19 @@ const IDENTITY_REWRITES = [
   [/^pepper\s+to\s+taste$/, 'pepper'],
   // ── KIDNEY BEANS (red is the default — color doesn't add identity) ──
   [/^(?:red|dark\s+red|light\s+red|dark|light)\s+kidney\s+beans?$/, 'kidney beans'],
+  // ── BELL PEPPERS — color doesn't add identity (red/yellow/green/orange all = bell peppers) ──
+  [/^(?:red|yellow|green|orange|purple)\s+(?:bell\s+)?peppers?$/, 'bell peppers'],
+  [/^bell\s+peppers?$/, 'bell peppers'],
+  // ── GUACAMOLE — at its core, avocado. If user has avocado, count as match ──
+  [/^(?:homemade\s+|store[\s-]*bought\s+|prepared\s+)?guacamole$/, 'avocado'],
+  // ── POTATOES — type doesn't matter for matching purposes ──
+  // Russet/yukon/red/baby/fingerling/new/yellow/white potatoes all become "potatoes".
+  // (Sweet potatoes stay distinct — different vegetable entirely.)
+  [/^(?:russet|yukon\s+gold|yukon|idaho|red|baby|fingerling|new|yellow|white|waxy|floury|starchy|small|medium|large)\s+potatoes?$/, 'potatoes'],
+  [/^potato$/, 'potatoes'],
+  // ── COOKED-prefix beans/grains — "cooked black beans" is just "black beans" ──
+  // The user has the bean; cooking is a step, not an identity change.
+  [/^cooked\s+(black\s+beans?|kidney\s+beans?|pinto\s+beans?|navy\s+beans?|cannellini\s+beans?|great\s+northern\s+beans?|red\s+beans?|white\s+beans?|chickpeas|garbanzos|garbanzo\s+beans?|lentils|red\s+lentils|green\s+lentils|brown\s+lentils|french\s+lentils|farro|quinoa|brown\s+rice|white\s+rice|rice|pasta|noodles)$/, '$1'],
   // ── ONION default — yellow/white/sweet/spanish/vidalia are interchangeable ──
   // Red onion stays distinct (sharper, often raw).
   [/^(?:yellow|white|sweet|spanish|vidalia|cooking|brown)\s+onions?$/, 'onion'],
@@ -253,10 +287,14 @@ function splitCombined(rawIng) {
   // Strip leading quantity/units BEFORE splitting on connectors
   s = s.replace(/^[\d½¼¾⅓⅔⅛⅜⅝⅞.,/\-–~≈+×x\s]+/, '').trim();
   s = s.replace(/^(?:tbsp|tsp|teaspoons?|tablespoons?|cups?|pinch(?:es)?|dash(?:es)?|splash(?:es)?|sprigs?|leaves?|cloves?|pieces?|cans?|tins?|grams?|g|ml|l|oz|lb|lbs|ounces?|pounds?)\.?\s+(?:of\s+)?/i, '').trim();
+  // Strip ", or X" alternative quantities ("cooked black beans, or 1 can, drained")
+  // Anything after ", or" is almost always an alternative form/quantity.
+  let prevOr = '';
+  while (s !== prevOr) { prevOr = s; s = s.replace(/\s*,\s*or\s+.+$/i, ''); }
   // CRITICAL: strip trailing comma-prep BEFORE comma normalization, so
   // "salt, adjust to taste" doesn't become ["salt", "adjust to taste"]
   // (we want it to stay as bare "salt" → no split → fall through to single).
-  const PREP_AFTER_COMMA = /\s*,\s*(?:to\s+taste|adjust(?:\s+to\s+taste)?|or\s+to\s+taste|or\s+more(?:\s+to\s+taste)?|or\s+less|or\s+as\s+needed|as\s+needed|if\s+needed|if\s+desired|optional|drained|rinsed|drained\s+and\s+rinsed|rinsed\s+and\s+drained|drained\s+well|drained\s+very\s+well|chopped|diced|sliced|minced|crushed|grated|shredded|peeled|seeded|softened|melted|warm|cold|undrained|toasted|roasted|cooked|warmed|cooled|squeezed|patted\s+dry|halved|quartered|cubed|divided|sifted|soaked(?:\s+overnight)?|cut\s+into\s+\w+(?:\s+\w+)*|finely\s+\w+(?:\s+\w+)?|roughly\s+\w+(?:\s+\w+)?|thinly\s+\w+(?:\s+\w+)?|thickly\s+\w+(?:\s+\w+)?|coarsely\s+\w+(?:\s+\w+)?|very\s+\w+(?:\s+\w+)*|for\s+\w+(?:\s+\w+)?|to\s+(?:serve|garnish|drizzle|sprinkle|finish|top|coat|brush|grease|fry|cook|sauté|sautee|sprinkle\s+on\s+top)|stems?\s+removed|leaves?\s+only|leaves?\s+picked|stem\s+ends?\s+(?:removed|trimmed)|root\s+ends?\s+(?:removed|trimmed)|husks?\s+(?:and\s+silks?\s+)?removed|white\s+and\s+green\s+parts?|green\s+parts?\s+only|white\s+parts?\s+only|woody\s+ends?\s+removed|tough\s+(?:stems?|outer\s+leaves?)\s+removed|outer\s+leaves?\s+removed|plus\s+\w+).*$/i;
+  const PREP_AFTER_COMMA = /\s*,\s*(?:to\s+taste|adjust(?:\s+to\s+taste)?|or\s+to\s+taste|or\s+more(?:\s+to\s+taste)?|or\s+less|or\s+as\s+needed|as\s+needed|if\s+needed|if\s+desired|optional|drained|rinsed|drained\s+and\s+rinsed|rinsed\s+and\s+drained|drained\s+well|drained\s+very\s+well|chopped|diced|sliced|minced|crushed|grated|shredded|peeled|seeded|softened|melted|warm|cold|undrained|toasted|roasted|cooked|warmed|cooled|squeezed|patted\s+dry|halved|quartered|cubed|divided|sifted|smashed|scrubbed|trimmed|stemmed|cleaned|skin\s+on|peel\s+on|ends?\s+trimmed|ends?\s+removed|tops?\s+removed|tops?\s+trimmed|thawed(?:\s+and\s+\w+)?|soaked(?:\s+overnight)?|soaked\s+and\s+drained|chopped\s+into\s+\w+(?:\s+\w+)*|sliced\s+into\s+\w+(?:\s+\w+)*|cut\s+into\s+\w+(?:\s+\w+)*|finely\s+\w+(?:\s+\w+)?|roughly\s+\w+(?:\s+\w+)?|thinly\s+\w+(?:\s+\w+)?|thickly\s+\w+(?:\s+\w+)?|coarsely\s+\w+(?:\s+\w+)?|very\s+\w+(?:\s+\w+)*|for\s+\w+(?:\s+\w+)?|to\s+(?:serve|garnish|drizzle|sprinkle|finish|top|coat|brush|grease|fry|cook|sauté|sautee|sprinkle\s+on\s+top)|in\s+(?:a\s+)?(?:dry\s+)?(?:skillet|pan|pot)\s+(?:and\s+\w+)?|kernels?\s+removed|stems?\s+removed|leaves?\s+only|leaves?\s+picked|stem\s+ends?\s+(?:removed|trimmed)|root\s+ends?\s+(?:removed|trimmed)|husks?\s+(?:and\s+silks?\s+)?removed|white\s+and\s+green\s+parts?|green\s+parts?\s+only|white\s+parts?\s+only|woody\s+ends?\s+removed|tough\s+(?:stems?|outer\s+leaves?)\s+removed|outer\s+leaves?\s+removed|plus\s+\w+).*$/i;
   let prevPrep = '';
   while (s !== prevPrep) { prevPrep = s; s = s.replace(PREP_AFTER_COMMA, ''); }
   // Normalize remaining commas (e.g., "salt, pepper, and onion powder")
@@ -308,8 +346,26 @@ const NON_INGREDIENT_RESULTS = new Set([
 
 function canonicalizeOne(rawIng, isCanned) {
   if (!rawIng || !rawIng.trim()) return '';
-  // Drop cross-recipe references entirely ("1 recipe Homemade Pizza Dough")
-  if (/^[\d½¼¾⅓⅔.,/\s-]*(?:recipe|batch|portion)\s+\w+/i.test(rawIng.trim())) return '';
+  // Drop cross-recipe references entirely. Patterns:
+  //   "1 recipe Homemade Pizza Dough"
+  //   "One recipe No-Cheese Sauce Recipe"
+  //   "1 batch Vegan Caesar Dressing"
+  //   "see X recipe" / "homemade X recipe"
+  const trimmed = rawIng.trim();
+  if (/^(?:[\d½¼¾⅓⅔.,/\s-]*|one|two|three|a|an)\s*(?:recipe|batch|portion|serving)\s+\w+/i.test(trimmed)) return '';
+  if (/\brecipe\s*$/i.test(trimmed) && /[A-Z]/.test(trimmed)) return ''; // "X Recipe" capitalized
+  // Drop "for garnish" / "for topping" / "for serving" ingredients entirely —
+  // these are decoration, not requirements ("Chopped peanuts and cilantro for garnish").
+  if (/\bfor\s+(?:garnish|garnishing|topping|toppings|serving|sprinkling|drizzling|finishing)\b/i.test(trimmed)) return '';
+  // Drop in-house sub-recipe references — Title-Cased phrases ending in
+  // sauce/dressing/dough/cheese/glaze/marinade are nearly always sub-recipes
+  // ("Vegan Potato Cheese Sauce", "Cashew Caesar Dressing"). The user can
+  // make or substitute these; the recipe shouldn't penalize for not having
+  // a pre-made one in pantry.
+  const cleanedForCaps = trimmed
+    .replace(/^[\d½¼¾⅓⅔.,/\s-]*(?:cup|cups|tbsp|tsp|teaspoons?|tablespoons?|oz|ml|g|kg)\.?\s+(?:of\s+)?/i, '')
+    .replace(/[“”‘’"']/g, '');  // strip quote chars so "Vegan Potato "Cheese" Sauce" still matches
+  if (/^(?:[A-Z][\w-]*\s+){2,}(?:sauce|dressing|dough|cream|cheese|glaze|marinade|pesto|aioli|chutney|relish|salsa|spread|dip|hummus|paste|reduction|jam|jelly|drizzle|topping|frosting|filling|crust|crumble|streusel|batter|puree|purée|bisque|broth|stock)$/i.test(cleanedForCaps)) return '';
   // Pre-clean (handles slashes, spelled-out numbers, "such as", "or X" alternatives)
   let pre = preClean(rawIng);
   let s = stripMeasure(pre);

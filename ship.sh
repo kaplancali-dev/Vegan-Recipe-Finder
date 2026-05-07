@@ -17,6 +17,9 @@ cd "$(dirname "$0")"
 
 MSG="${1:-Update}"
 
+echo "→ Canonicalizing recipes (cleans iclean field for any newly-scraped recipes)…"
+( cd v2 && node scripts/canonicalize-ingredients.mjs --apply >/dev/null )
+
 echo "→ Building v2…"
 ( cd v2 && npm run build )
 
