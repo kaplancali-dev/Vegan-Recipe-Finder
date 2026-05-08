@@ -152,7 +152,7 @@ function postClean(s) {
   let prevDesc = '';
   while (s !== prevDesc) {
     prevDesc = s;
-    s = s.replace(/^(?:low\s+sodium|low\s+fat|reduced\s+sodium|reduced\s+fat|no\s+salt\s+added|no\s+sugar\s+added|unsweetened|unsalted|salted|sweetened|unflavored|unflavoured|flavored|flavoured|extra\s+virgin|cold[\s-]*pressed|virgin|refined|unrefined|raw|whole|young|baby|fresh|frozen|dried|dry|plain|original|natural|organic|active|instant)\s+/i, '');
+    s = s.replace(/^(?:low\s+sodium|low\s+fat|reduced\s+sodium|reduced\s+fat|no\s+salt\s+added|no\s+sugar\s+added|unsweetened|unsalted|salted|sweetened|unflavored|unflavoured|flavored|flavoured|extra\s+virgin|cold[\s-]*pressed|virgin|refined|unrefined|raw|whole\s+grain|whole\s+wheat|whole|young|baby|fresh|frozen|dried|dry|plain|original|natural|organic|active|instant|cracked|ground|slivered|julienned|shaved|smashed|scrubbed|hulled|toasted|roasted|mixed|grain|multi\s*grain|multigrain|stone\s*ground|seeded|crusty|hearty|artisan)\s+/i, '');
   }
   // Trailing form-words ("tomato slices" → "tomato")
   s = s.replace(/\s+(?:slices?|chunks?|pieces?|bites?|matchsticks?|wedges?|halves?|quarters?|cubes?|sticks?|rings?|rounds?|strips?|fillets?|dollops?|spoonfuls?|spears?)$/i, '');
@@ -195,7 +195,10 @@ const IDENTITY_REWRITES = [
   [/^pinch\s+of\s+salt$/, 'salt'],
   // ── PEPPER (default = black, ground, cracked, etc.) ──
   // White pepper preserved as a distinct ingredient.
-  [/^(?:black|ground|cracked|freshly\s+ground|freshly\s+cracked|fresh\s+ground|fresh\s+cracked|coarsely\s+cracked|finely\s+ground)\s+pepper$/, 'pepper'],
+  // Multi-modifier pattern: "(cracked|ground|...) (black) pepper" → "pepper"
+  [/^(?:freshly\s+|fresh\s+|coarsely\s+|finely\s+)?(?:cracked|ground)(?:\s+black)?\s+pepper$/, 'pepper'],
+  [/^black\s+(?:cracked|ground|crushed|coarse|fine)?\s*pepper$/, 'pepper'],
+  [/^(?:cracked|ground|crushed|fresh|freshly\s+ground|freshly\s+cracked|fresh\s+ground|fresh\s+cracked|coarsely\s+cracked|finely\s+ground)\s+pepper$/, 'pepper'],
   [/^(?:black|ground|fresh|whole)\s+peppercorns?$/, 'pepper'],
   [/^peppercorns?$/, 'pepper'],
   [/^pepper\s+to\s+taste$/, 'pepper'],

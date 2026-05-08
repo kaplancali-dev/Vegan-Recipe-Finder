@@ -104,7 +104,7 @@ export function stripMeasure(s) {
   str = str.replace(/^(?:can|cans|tin|tins|jar|jars|bag|bags|pack|packs|packet|packets|block|blocks)\s+(?:of\s+)?/i, '');
 
   // 5. Strip quantities and units iteratively
-  const UNIT = String.raw`(?:g|kg|oz|lb|lbs|ml|l|dl|cups?|tsp|tbsp|teaspoons?|tablespoons?|ounces?|pounds?|grams?|inch(?:es)?|cm|cloves?|bunch(?:es)?|handfuls?|pieces?|cans?|tins?|heads?|stalks?|sprigs?|pinch(?:es)?|dash(?:es)?|slices?|sheets?|blocks?|packets?|packages?|pouches?|sachets?|sticks?|loaves?|tubes?|bars?|bags?|jars?|bottles?|portions?|servings?|leaves?|drops?|packs?)`;
+  const UNIT = String.raw`(?:g|kg|oz|lb|lbs|ml|l|dl|cups?|tsp|tbsp|teaspoons?|tablespoons?|ounces?|pounds?|grams?|inch(?:es)?|cm|cloves?|bunch(?:es)?|handfuls?|pieces?|cans?|tins?|heads?|stalks?|sprigs?|pinch(?:es)?|dash(?:es)?|slices?|sheets?|blocks?|packets?|packages?|pouches?|sachets?|sticks?|loaves?|loafs?|loaf|tubes?|bars?|bags?|jars?|bottles?|portions?|servings?|leaves?|drops?|packs?|ears?|squares?|fillets?|rounds?)`;
   const UNIT_ADJ = String.raw`(?:heaped|rounded|level|packed|generous|scant|good)`;
 
   str = str.replace(/^[\d½¼¾⅓⅔⅛⅜⅝⅞.,/\-–~≈+×x\s]+/, '');
@@ -137,7 +137,7 @@ export function stripMeasure(s) {
   // EXCLUDED on purpose: raw, cooked, toasted, rolled, frozen, thawed —
   // these often describe the ingredient form ("raw cashews", "rolled oats")
   // not a prep step. The NOISE regex below handles them as leading words.
-  const PREP_VERBS = '(?:chopped|diced|minced|sliced|crushed|grated|shredded|peeled|seeded|deseeded|halved|quartered|pitted|stemmed|trimmed|cleaned|cubed|drained|rinsed|melted|softened|divided|sifted|julienned|mashed|cored|torn|packed|pressed|warmed|cooled|chilled|squeezed|finely|roughly|coarsely|thinly|thickly|optional|to\\s+taste|for\\s+\\w+|see\\s+\\w+|or\\s+more|or\\s+less|plus\\s+more|approximately|about|approx|cut\\s+into\\s+\\w+|stems\\s+removed|leaves\\s+only|drained\\s+and\\s+rinsed|peeled\\s+and\\s+\\w+|halved\\s+and\\s+\\w+|seeded\\s+and\\s+\\w+|finely\\s+\\w+|roughly\\s+\\w+|coarsely\\s+\\w+|thinly\\s+\\w+|thickly\\s+\\w+)';
+  const PREP_VERBS = '(?:chopped|diced|minced|sliced|slivered|crushed|grated|shredded|peeled|seeded|deseeded|halved|quartered|pitted|stemmed|trimmed|cleaned|cubed|drained|rinsed|melted|softened|divided|sifted|julienned|shaved|ribboned|mashed|cored|torn|packed|pressed|warmed|cooled|chilled|squeezed|smashed|scrubbed|hulled|deveined|finely|roughly|coarsely|thinly|thickly|optional|to\\s+taste|for\\s+\\w+|see\\s+\\w+|or\\s+more|or\\s+less|plus\\s+more|approximately|about|approx|cut\\s+into\\s+\\w+|stems\\s+removed|leaves\\s+only|drained\\s+and\\s+rinsed|peeled\\s+and\\s+\\w+|halved\\s+and\\s+\\w+|seeded\\s+and\\s+\\w+|finely\\s+\\w+|roughly\\s+\\w+|coarsely\\s+\\w+|thinly\\s+\\w+|thickly\\s+\\w+)';
   str = str
     .replace(new RegExp(`,\\s*${PREP_VERBS}.*$`, 'i'), '')  // only strip prep-like after-comma
     .replace(/\s+-\s+.*$/, '')
@@ -151,7 +151,7 @@ export function stripMeasure(s) {
     .trim();
 
   // 7. Strip prep/descriptor noise words
-  const NOISE = /\b(?:fresh|freshly|ground|organic|raw|dried|dry|frozen|thawed|shredded|chopped|diced|minced|sliced|slivered|grated|crushed|mashed|sifted|julienned|shaved|ribboned|trimmed|stemmed|peeled|pitted|deseeded|seeded|cored|halved|quartered|torn|packed|pressed|softened|melted|warm|cold|hot|chilled|lightly|roughly|finely|thinly|coarsely|undrained|toasted|roasted|cooked|leftover|ready-rolled|smashed|scrubbed|cubed|whole)\s+/gi;
+  const NOISE = /\b(?:fresh|freshly|ground|cracked|organic|raw|dried|dry|frozen|thawed|shredded|chopped|diced|minced|sliced|slivered|grated|crushed|mashed|sifted|julienned|shaved|ribboned|trimmed|stemmed|peeled|pitted|deseeded|seeded|cored|halved|quartered|torn|packed|pressed|softened|melted|warm|cold|hot|chilled|lightly|roughly|finely|thinly|coarsely|undrained|toasted|roasted|cooked|leftover|ready-rolled|smashed|scrubbed|cubed|whole|cooled|warmed|squeezed|patted)\s+/gi;
   let prev = '';
   while (str !== prev) { prev = str; str = str.replace(NOISE, '').trim(); }
   str = str.replace(/\s+(?:warm|cold|hot|chilled|thawed|softened|melted|chopped|diced|minced|sliced|shredded|grated|crushed|mashed|peeled|pitted|trimmed|stemmed|quartered|halved|toasted|roasted)$/i, '');
