@@ -151,7 +151,7 @@ export function stripMeasure(s) {
     .trim();
 
   // 7. Strip prep/descriptor noise words
-  const NOISE = /\b(?:fresh|freshly|ground|organic|raw|dried|dry|frozen|thawed|shredded|chopped|diced|minced|sliced|grated|crushed|mashed|sifted|julienned|trimmed|stemmed|peeled|pitted|deseeded|seeded|cored|halved|quartered|torn|packed|pressed|softened|melted|warm|cold|hot|chilled|lightly|roughly|finely|thinly|coarsely|undrained|toasted|roasted|cooked|leftover|ready-rolled|smashed|scrubbed)\s+/gi;
+  const NOISE = /\b(?:fresh|freshly|ground|organic|raw|dried|dry|frozen|thawed|shredded|chopped|diced|minced|sliced|slivered|grated|crushed|mashed|sifted|julienned|shaved|ribboned|trimmed|stemmed|peeled|pitted|deseeded|seeded|cored|halved|quartered|torn|packed|pressed|softened|melted|warm|cold|hot|chilled|lightly|roughly|finely|thinly|coarsely|undrained|toasted|roasted|cooked|leftover|ready-rolled|smashed|scrubbed|cubed|whole)\s+/gi;
   let prev = '';
   while (str !== prev) { prev = str; str = str.replace(NOISE, '').trim(); }
   str = str.replace(/\s+(?:warm|cold|hot|chilled|thawed|softened|melted|chopped|diced|minced|sliced|shredded|grated|crushed|mashed|peeled|pitted|trimmed|stemmed|quartered|halved|toasted|roasted)$/i, '');

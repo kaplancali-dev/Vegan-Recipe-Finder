@@ -97,7 +97,11 @@ function preClean(rawIng) {
   // Strip emphatic ALL-CAPS or punctuation tails ("WELL!", "ENJOY!")
   s = s.replace(/\s+[A-Z]{2,}!*\s*$/, '');
   s = s.replace(/!+$/g, '');
-  // Replace slashes between alpha words with " or " (keep numeric slashes intact)
+  // CRITICAL: handle "and/or" BEFORE the generic slash-to-or rule, otherwise
+  // "and/or" becomes "and or or" (bug: the slash rule fires on the / between
+  // "d" and "o", inserting " or " in the middle).
+  s = s.replace(/\band\s*\/\s*or\b/gi, 'or');
+  // Replace remaining slashes between alpha words with " or " (numeric slashes intact)
   s = s.replace(/(?<=[a-z])\s*\/\s*(?=[a-z])/gi, ' or ');
   // Strip leading spelled-out small numbers
   s = s.replace(/^(?:one|two|three|four|five|six|seven|eight|nine|ten|a)\s+(?=\d|[a-z])/i, '');
@@ -316,7 +320,7 @@ function splitCombined(rawIng) {
   // CRITICAL: strip trailing comma-prep BEFORE comma normalization, so
   // "salt, adjust to taste" doesn't become ["salt", "adjust to taste"]
   // (we want it to stay as bare "salt" → no split → fall through to single).
-  const PREP_AFTER_COMMA = /\s*,\s*(?:to\s+taste|adjust(?:\s+to\s+taste)?|or\s+to\s+taste|or\s+more(?:\s+to\s+taste)?|or\s+less|or\s+as\s+needed|as\s+needed|if\s+needed|if\s+desired|optional|drained|rinsed|drained\s+and\s+rinsed|rinsed\s+and\s+drained|drained\s+well|drained\s+very\s+well|chopped|diced|sliced|minced|crushed|grated|shredded|peeled|seeded|softened|melted|warm|cold|undrained|toasted|roasted|cooked|warmed|cooled|squeezed|patted\s+dry|halved|quartered|cubed|divided|sifted|smashed|scrubbed|trimmed|stemmed|cleaned|hulled|deveined|skin\s+on|peel\s+on|ends?\s+trimmed|ends?\s+removed|tops?\s+removed|tops?\s+trimmed|thawed(?:\s+and\s+\w+)?|soaked[\s\S]*|chopped\s+into\s+\w+(?:\s+\w+)*|sliced\s+into\s+\w+(?:\s+\w+)*|any\s+color|any\s+colour|leaves\s+chopped\s+finely|leaves\s+chopped|leaves\s+picked|seeds?\s+scraped|seeds?\s+removed|in\s+water|in\s+brine|in\s+salt\s+water|in\s+oil|packed\s+in\s+water|plus\s+more[\s\S]*|cut\s+into\s+\w+(?:\s+\w+)*|finely\s+\w+(?:\s+\w+)?|roughly\s+\w+(?:\s+\w+)?|thinly\s+\w+(?:\s+\w+)?|thickly\s+\w+(?:\s+\w+)?|coarsely\s+\w+(?:\s+\w+)?|very\s+\w+(?:\s+\w+)*|for\s+\w+(?:\s+\w+)?|to\s+(?:serve|garnish|drizzle|sprinkle|finish|top|coat|brush|grease|fry|cook|sauté|sautee|sprinkle\s+on\s+top)|in\s+(?:a\s+)?(?:dry\s+)?(?:skillet|pan|pot)\s+(?:and\s+\w+)?|kernels?\s+removed|stems?\s+removed|leaves?\s+only|leaves?\s+picked|stem\s+ends?\s+(?:removed|trimmed)|root\s+ends?\s+(?:removed|trimmed)|husks?\s+(?:and\s+silks?\s+)?removed|white\s+and\s+green\s+parts?|green\s+parts?\s+only|white\s+parts?\s+only|woody\s+ends?\s+removed|tough\s+(?:stems?|outer\s+leaves?)\s+removed|outer\s+leaves?\s+removed|plus\s+\w+).*$/i;
+  const PREP_AFTER_COMMA = /\s*,\s*(?:to\s+taste|adjust(?:\s+to\s+taste)?|or\s+to\s+taste|or\s+more(?:\s+to\s+taste)?|or\s+less|or\s+as\s+needed|as\s+needed|if\s+needed|if\s+desired|optional|drained|rinsed|drained\s+and\s+rinsed|rinsed\s+and\s+drained|drained\s+well|drained\s+very\s+well|chopped|diced|sliced|minced|crushed|grated|shredded|peeled|seeded|softened|melted|warm|cold|undrained|toasted|roasted|cooked|warmed|cooled|squeezed|patted\s+dry|halved|quartered|cubed|divided|sifted|smashed|scrubbed|slivered|julienned|shaved|ribboned|cubed|trimmed|stemmed|cleaned|hulled|deveined|skin\s+on|peel\s+on|ends?\s+trimmed|ends?\s+removed|tops?\s+removed|tops?\s+trimmed|thawed(?:\s+and\s+\w+)?|soaked[\s\S]*|chopped\s+into\s+\w+(?:\s+\w+)*|sliced\s+into\s+\w+(?:\s+\w+)*|any\s+color|any\s+colour|leaves\s+chopped\s+finely|leaves\s+chopped|leaves\s+picked|seeds?\s+scraped|seeds?\s+removed|in\s+water|in\s+brine|in\s+salt\s+water|in\s+oil|packed\s+in\s+water|plus\s+more[\s\S]*|cut\s+into\s+\w+(?:\s+\w+)*|finely\s+\w+(?:\s+\w+)?|roughly\s+\w+(?:\s+\w+)?|thinly\s+\w+(?:\s+\w+)?|thickly\s+\w+(?:\s+\w+)?|coarsely\s+\w+(?:\s+\w+)?|very\s+\w+(?:\s+\w+)*|for\s+\w+(?:\s+\w+)?|to\s+(?:serve|garnish|drizzle|sprinkle|finish|top|coat|brush|grease|fry|cook|sauté|sautee|sprinkle\s+on\s+top)|in\s+(?:a\s+)?(?:dry\s+)?(?:skillet|pan|pot)\s+(?:and\s+\w+)?|kernels?\s+removed|stems?\s+removed|leaves?\s+only|leaves?\s+picked|stem\s+ends?\s+(?:removed|trimmed)|root\s+ends?\s+(?:removed|trimmed)|husks?\s+(?:and\s+silks?\s+)?removed|white\s+and\s+green\s+parts?|green\s+parts?\s+only|white\s+parts?\s+only|woody\s+ends?\s+removed|tough\s+(?:stems?|outer\s+leaves?)\s+removed|outer\s+leaves?\s+removed|plus\s+\w+).*$/i;
   let prevPrep = '';
   while (s !== prevPrep) { prevPrep = s; s = s.replace(PREP_AFTER_COMMA, ''); }
   // Normalize remaining commas (e.g., "salt, pepper, and onion powder")
@@ -328,10 +332,10 @@ function splitCombined(rawIng) {
   if (parts.length < 2) return null;
   // Sanity: skip if any "component" is too long or is a prep word/phrase
   const PREP_WORDS = new Set([
-    'drained','rinsed','chopped','diced','sliced','minced','crushed','grated',
+    'drained','rinsed','chopped','diced','sliced','slivered','minced','crushed','grated',
     'shredded','peeled','seeded','cooked','warmed','cooled','melted','softened',
     'cubed','quartered','halved','divided','rolled','beaten','whipped','sifted',
-    'roasted','toasted','well',
+    'roasted','toasted','julienned','shaved','ribboned','well','smashed','scrubbed',
   ]);
   // Reject splits where the first component is a bare descriptor adjective
   // ("unsweetened", "unflavored", "low sodium") — these belong with the
@@ -366,6 +370,14 @@ const NON_INGREDIENT_RESULTS = new Set([
   'toppings','serving','servings','seasoning','well','small','medium','large','extra','soaked','squeezed',
   'finely','roughly','coarsely','thinly','thickly','any color','any','color',
   'leaves only','stems removed','etc','as needed','as desired','if using',
+  // Generic placeholders that signal "use any/whatever you have on hand" —
+  // these aren't strict requirements, they're suggestions. Treat as
+  // unrequired (drop from match count).
+  'herbs','herb','fresh herbs','herb sprigs','fresh herb sprigs','mixed herbs',
+  'spices','spice','spice blend','seasonings','dried spices',
+  'nuts','nuts and seeds','seeds','dried fruit','dried fruits','toppings of choice',
+  'vegetables','veggies','greens','grains','protein','starch',
+  'sugar substitute','sweetener of choice','milk of choice','flour of choice',
 ]);
 
 function canonicalizeOne(rawIng, isCanned) {
@@ -389,7 +401,11 @@ function canonicalizeOne(rawIng, isCanned) {
   const cleanedForCaps = trimmed
     .replace(/^[\d½¼¾⅓⅔.,/\s-]*(?:cup|cups|tbsp|tsp|teaspoons?|tablespoons?|oz|ml|g|kg)\.?\s+(?:of\s+)?/i, '')
     .replace(/[“”‘’"']/g, '');  // strip quote chars so "Vegan Potato "Cheese" Sauce" still matches
-  if (/^(?:[A-Z][\w-]*\s+){2,}(?:sauce|dressing|dough|cream|cheese|glaze|marinade|pesto|aioli|chutney|relish|salsa|spread|dip|hummus|paste|reduction|jam|jelly|drizzle|topping|frosting|filling|crust|crumble|streusel|batter|puree|purée|bisque|broth|stock)$/i.test(cleanedForCaps)) return '';
+  // Sub-recipe detection: require ACTUAL capital letters (no /i flag).
+  // Pattern: 2+ Title-Cased words ending with sauce/dressing/etc.
+  // Without the cap requirement this wrongly matched normal lowercase
+  // ingredients like "white wine or low-sodium vegetable broth".
+  if (/^(?:[A-Z][\w-]*\s+){2,}(?:Sauce|Dressing|Dough|Cream|Cheese|Glaze|Marinade|Pesto|Aioli|Chutney|Relish|Salsa|Spread|Dip|Hummus|Paste|Reduction|Jam|Jelly|Drizzle|Topping|Frosting|Filling|Crust|Crumble|Streusel|Batter|Puree|Purée|Bisque|Broth|Stock)$/.test(cleanedForCaps)) return '';
   // Pre-clean (handles slashes, spelled-out numbers, "such as", "or X" alternatives)
   let pre = preClean(rawIng);
   let s = stripMeasure(pre);
@@ -414,8 +430,13 @@ function canonicalizeOne(rawIng, isCanned) {
 
 function canonicalizeIngredient(rawIng) {
   const isCanned = detectCanned(rawIng);
+  // Run preClean BEFORE splitCombined so:
+  //   - "such as X, Y, Z" gets stripped before comma-splitting
+  //   - "wheat or rice X" gets reduced to "rice X" before any split
+  //   - "and/or" gets normalized to "or" (preClean handles this)
+  const preCleaned = preClean(rawIng);
   // Combined ingredients become individual canonical entries
-  const split = splitCombined(rawIng);
+  const split = splitCombined(preCleaned);
   if (split) {
     const cleaned = split.map(p => canonicalizeOne(p, false)).filter(Boolean);
     return [...new Set(cleaned)];
