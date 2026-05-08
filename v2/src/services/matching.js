@@ -773,8 +773,12 @@ export function findRecipes({
 
         const optional = _isOptional(rawIng);
 
-        // Universal ingredients still get a free pass
-        let matched = _isUniversal(rawIng);
+        // Universal ingredients (water, ice) are SKIPPED entirely — don't
+        // show in have/need chips, don't count toward required total.
+        // Showing "water" in a recipe's "you have" list looks absurd.
+        if (_isUniversal(rawIng)) continue;
+
+        let matched = false;
 
         if (!matched) {
           // For each canonical component, check user pantry.
@@ -823,6 +827,9 @@ export function findRecipes({
       if (/^[\d½¼¾⅓⅔.,/\s-]*(?:recipe|batch|portion)\s+\w+/i.test(rawIng.trim())) {
         continue;
       }
+      // Universal ingredients (water, ice) — skip entirely
+      if (_isUniversal(rawIng)) continue;
+
       const optional = _isOptional(rawIng);
       const measureStripped = stripMeasure(rawIng);
       const cleaned = _stripUsageNotes(measureStripped)
@@ -831,7 +838,7 @@ export function findRecipes({
         .replace(/\s*\+\s*/g, ' and ');
       const ri = norm(cleaned);
 
-      let matched = _isUniversal(rawIng);
+      let matched = false;
       if (!matched) {
         matched = ingredientMatches(ri, allIngs, allIngSet, allIngsStems);
       }

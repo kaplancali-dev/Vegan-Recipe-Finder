@@ -72,6 +72,19 @@ function detectCanned(rawIng) {
 //   "X cans of", "X jars of" multipliers
 function preClean(rawIng) {
   let s = rawIng.trim(); // strip leading/trailing whitespace so ^ anchors work
+
+  // CELIAC SAFETY: when a recipe offers "wheat X or GF-grain X" as alternatives,
+  // canonicalize to the GF option. Recipes like "whole wheat or brown rice penne"
+  // must NOT canonicalize to "wheat ... penne" — that would suggest celiac users
+  // can use wheat pasta. Detect "<wheat-word> or <gf-grain-word> X" patterns and
+  // strip the wheat side, keeping just the GF side.
+  // Examples handled:
+  //   "whole wheat or brown rice penne pasta"  → "brown rice penne pasta"
+  //   "wheat or rice noodles"                  → "rice noodles"
+  //   "wheat or chickpea pasta"                → "chickpea pasta"
+  //   "spelt or oat flour"                     → "oat flour"
+  s = s.replace(/\b(?:whole\s+wheat|wheat|spelt|rye|barley)\s+or\s+(brown\s+rice|rice|chickpea|red\s+lentil|lentil|almond|oat|coconut|cassava|tapioca|buckwheat|quinoa)\b/gi, '$1');
+
   // Strip " or X" alternatives, with or without leading comma. Anything after
   // "or" + a quantity is almost always an alternative form/quantity:
   //   "...thawed, or one 14-oz can, drained"          (with comma)
