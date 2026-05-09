@@ -51,7 +51,7 @@ const STEPS = [
     target: '#btn-favorites',
     tab: 'favorites',
     title: "Your hall of fame",
-    body: "Heart any recipe to save it. Organize into collections — \"Weeknight Wins,\" \"Game Day,\" whatever. Your Made It journal tracks everything you've cooked, with star ratings and everything.",
+    body: "Heart any recipe to save it. Organize into collections — \"Weeknight Wins,\" \"Date Night,\" whatever. Your Made It journal tracks everything you've cooked, with star ratings and everything.",
     arrow: 'top',
   },
   {
