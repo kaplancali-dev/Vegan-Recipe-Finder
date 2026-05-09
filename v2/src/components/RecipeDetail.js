@@ -10,7 +10,7 @@ import { GF_SWAPS, SUGAR_SWAPS } from '../data/aliases.js';
 import { openRecipeLink } from '../utils/safe-link.js';
 import { get, set } from '../state/store.js';
 import { autoSync, reportBrokenLink } from '../services/sync.js';
-import { ingredientMatches, expandWithAliases } from '../services/matching.js';
+import { ingredientMatches, expandWithAliases, findRecipes, isPerishableIng } from '../services/matching.js';
 import { shareRecipe } from '../actions/share.js';
 import { toggleFavorite } from '../actions/favorites.js';
 import { showToast } from '../utils/toast.js';
@@ -344,14 +344,25 @@ function _renderFullDetail(recipe, ings, staples) {
   const instructions = get('instructions');
   const notes = instructions[id] || '';
 
-  // Categorize ingredients
-  const ingList = (recipe.ing || []).map(ing => {
-    const have = ingredientMatches(ing, userIngs);
-    return { name: ing, have };
-  });
+  // Categorize ingredients — use the same pipeline as Browse/cards (findRecipes
+  // with the recipe's iclean canonical names) so detail-page checkmarks
+  // match what the card shows. Without this, the detail page silently
+  // diverged: card said "have black beans" while detail said "missing
+  // no-salt-added black beans".
+  const userIngSet = new Set(userIngs);
+  const scored = findRecipes({ recipes: [recipe], ingredients: ings, staples })[0];
+  const haveSet = new Set(scored ? scored.haveNames : []);
+  const ingList = (recipe.ing || []).map(ing => ({
+    name: ing,
+    have: haveSet.has(ing),
+  }));
 
-  const haveCount = ingList.filter(i => i.have).length;
-  const pct = ingList.length ? Math.round(haveCount / ingList.length * 100) : 0;
+  // Count using the matcher's own logic so it agrees with the card.
+  // findRecipes already excludes universal ingredients (water, ice) and
+  // dropped iclean entries (section headers, cross-recipe references) from
+  // the required total — so haveCount/total here matches the card's pct.
+  const haveCount = scored ? scored.have.length : 0;
+  const pct = scored ? scored.pct : 0;
 
   // Nutrition
   const nut = recipe.nut || {};

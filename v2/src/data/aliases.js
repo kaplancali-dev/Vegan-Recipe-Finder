@@ -691,6 +691,17 @@ export const GF_SWAPS = {
   'panko':'GF panko (e.g. Jeff Nathan)','pie crust':'GF pie crust (e.g. Wholly Wholesome)','pizza dough':'GF pizza dough (e.g. Simple Mills)','pastry':'GF pastry',
   'ramen':'rice ramen (e.g. Lotus Foods)','orzo':'GF orzo (e.g. DeLallo GF)',
   'farro':'quinoa or brown rice',
+  // Macaroni / pasta variants — must always trigger purple GF swap chip
+  'macaroni':'GF macaroni (e.g. Banza or Barilla GF)','wheat macaroni':'GF macaroni (e.g. Banza or Barilla GF)','whole wheat macaroni':'GF macaroni (e.g. Banza or Barilla GF)',
+  'wheat pasta':'GF pasta (e.g. Banza or Barilla GF)','whole wheat pasta':'GF pasta (e.g. Banza or Barilla GF)',
+  'wheat penne':'GF penne (e.g. Barilla GF)','whole wheat penne':'GF penne (e.g. Barilla GF)',
+  'wheat spaghetti':'GF spaghetti (e.g. Banza or Barilla GF)','whole wheat spaghetti':'GF spaghetti (e.g. Banza or Barilla GF)',
+  'wheat noodles':'rice noodles or GF noodles','whole wheat noodles':'rice noodles or GF noodles',
+  'wheat tortillas':'GF or corn tortillas (e.g. Siete)','whole wheat tortillas':'GF or corn tortillas (e.g. Siete)',
+  'lasagne':'GF lasagne (e.g. Barilla GF)','lasagne sheets':'GF lasagne sheets',
+  'tagliatelle':'GF tagliatelle (e.g. Le Veneziane)','pappardelle':'GF pappardelle','rigatoni':'GF rigatoni (e.g. Barilla GF)','rotini':'GF rotini (e.g. Barilla GF)',
+  'angel hair':'GF angel hair (e.g. Barilla GF)','farfalle':'GF farfalle (e.g. Barilla GF)','ditalini':'GF ditalini',
+  'gnocchi':'GF gnocchi (e.g. Cappello\'s) or potato gnocchi',
 };
 
 /**
