@@ -141,9 +141,17 @@ export const INGREDIENT_ALIASES = {
   // Kidney beans default to RED variety. Recipes saying "red kidney beans"
   // are the same product as generic "kidney beans". White kidney beans = cannellini
   // (in the white beans group above, NOT in this kidney bean group).
-  'kidney beans': ['red kidney beans','dark red kidney beans','light red kidney beans','dark kidney beans','light kidney beans'],
+  'kidney beans': ['red kidney beans','dark red kidney beans','light red kidney beans','dark kidney beans','light kidney beans','canned beans','canned kidney beans','beans'],
   // Black beans = black turtle beans (same product, different name)
-  'black beans': ['black turtle beans','turtle beans'],
+  'black beans': ['black turtle beans','turtle beans','canned black beans','canned beans'],
+  // Pinto beans
+  'pinto beans': ['pinto bean','pintos','refried beans','refried pinto beans','vegan refried beans','canned pinto beans','canned beans'],
+  // Cannellini and white beans cover "canned beans" too
+  'white beans': ['cannellini beans','great northern beans','navy beans','butter beans','lima beans','canned white beans','canned beans'],
+  // Chickpeas / garbanzos
+  'chickpeas': ['canned chickpeas','canned beans','canned garbanzo beans','garbanzo beans','garbanzos'],
+  // Generic "canned beans" parent — picker entry; bidirectional so any specific bean covers it
+  'canned beans': ['canned kidney beans','canned black beans','canned pinto beans','canned white beans','canned cannellini beans','canned chickpeas','canned navy beans','canned great northern beans','canned red beans','beans','red beans','navy beans','great northern beans','butter beans'],
   'arrowroot powder': ['tapioca starch','tapioca flour','tapioca','arrowroot starch','arrowroot'],
   'cornstarch': ['potato starch','corn starch'],
   'jalapeño': ['jalapeno','jalapeños','jalapenos'],
@@ -747,7 +755,7 @@ export const HARD_GLUTEN_REGEX = (() => {
     'farro', 'pearled farro',
     'bulgur', 'bulgur wheat', 'cracked wheat',
     'barley', 'pearl barley', 'pearled barley',
-    'wheat berries', 'wheat berry',
+    'wheat berries', 'wheat berry', 'hard wheat', 'soft wheat',
     'freekeh', 'kamut', 'einkorn',
     'couscous', 'whole wheat couscous', 'pearl couscous', 'israeli couscous', 'moroccan couscous',
     'seitan', 'vital wheat gluten', 'wheat gluten',

@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-05-08T18:09:57.957Z",
+  "generatedAt": "2026-05-09T00:26:55.242Z",
   "pantrySize": 316,
-  "total": 4193,
-  "at100": 2589,
-  "at80": 4025,
+  "total": 4192,
+  "at100": 2618,
+  "at80": 4030,
   "failPatterns": [
     {
       "normalized": "ginger garlic paste",
@@ -225,22 +225,6 @@
       ]
     },
     {
-      "normalized": "adzuki beans",
-      "count": 5,
-      "examples": [
-        "1 15-oz. can no-salt-added adzuki beans, rinsed and drained (1½ cups)",
-        "1 15-oz. can adzuki beans, rinsed and drained (1½ cups)",
-        "2 cups cooked adzuki beans, or one 15-ounce can, drained and rinsed"
-      ],
-      "sampleRecipeIds": [
-        7201,
-        7070,
-        6422,
-        7793,
-        7326
-      ]
-    },
-    {
       "normalized": "puff pastry",
       "count": 5,
       "examples": [
@@ -252,22 +236,6 @@
         8090,
         4245,
         2803
-      ]
-    },
-    {
-      "normalized": "celeriac",
-      "count": 5,
-      "examples": [
-        "1 small celeriac or 2 medium parsnips, peeled and cut into ½-inch pieces (about 2 cups)",
-        "1 kg / 35 oz celeriac",
-        "700 g / 24 oz celeriac, peeled and cubed"
-      ],
-      "sampleRecipeIds": [
-        7806,
-        5327,
-        5607,
-        6685,
-        5605
       ]
     },
     {
@@ -284,6 +252,22 @@
         6175,
         4970,
         5820
+      ]
+    },
+    {
+      "normalized": "celeriac",
+      "count": 5,
+      "examples": [
+        "1 small celeriac or 2 medium parsnips, peeled and cut into ½-inch pieces (about 2 cups)",
+        "1 kg / 35 oz celeriac",
+        "700 g / 24 oz celeriac, peeled and cubed"
+      ],
+      "sampleRecipeIds": [
+        7806,
+        5327,
+        5607,
+        6685,
+        5605
       ]
     },
     {
@@ -903,6 +887,20 @@
       ]
     },
     {
+      "normalized": "tomatillos",
+      "count": 3,
+      "examples": [
+        "2 fresh tomatillos, peeled and chopped (½ cup)",
+        "tomatillos",
+        "6 tomatillos, husks removed, cut into halves"
+      ],
+      "sampleRecipeIds": [
+        7096,
+        8070,
+        7182
+      ]
+    },
+    {
       "normalized": "cajun seasoning",
       "count": 3,
       "examples": [
@@ -955,20 +953,6 @@
         7155,
         7395,
         6613
-      ]
-    },
-    {
-      "normalized": "pot o beans",
-      "count": 3,
-      "examples": [
-        "2 cups Instant Pot o’ Beans, undrained (see tip, recipe intro)",
-        "3 cups Instant Pot o' Beans, drained",
-        "2 cups Instant Pot O' Beans"
-      ],
-      "sampleRecipeIds": [
-        7809,
-        7096,
-        7122
       ]
     },
     {
@@ -1172,20 +1156,6 @@
       ]
     },
     {
-      "normalized": "wheat pita",
-      "count": 3,
-      "examples": [
-        "3 whole wheat pita rounds, halved crosswise and warmed",
-        "6 6- to 7-inch whole wheat pita rounds",
-        "2 6-inch whole wheat pita rounds"
-      ],
-      "sampleRecipeIds": [
-        7089,
-        6621,
-        7364
-      ]
-    },
-    {
       "normalized": "petit pois",
       "count": 3,
       "examples": [
@@ -1361,17 +1331,16 @@
       ]
     },
     {
-      "normalized": "tomatillos",
+      "normalized": "english muffins",
       "count": 3,
       "examples": [
-        "tomatillos",
-        "2 fresh tomatillos, peeled and chopped (½ cup)",
-        "6 tomatillos, husks removed, cut into halves"
+        "wheat english muffins",
+        "english muffins"
       ],
       "sampleRecipeIds": [
-        8070,
-        7096,
-        7182
+        5043,
+        4521,
+        2706
       ]
     },
     {
@@ -1974,6 +1943,18 @@
       ]
     },
     {
+      "normalized": "tamarind purée",
+      "count": 2,
+      "examples": [
+        "1½ tbsp tamarind purée (or lime juice)",
+        "2 tbsp tamarind purée*"
+      ],
+      "sampleRecipeIds": [
+        5787,
+        5782
+      ]
+    },
+    {
       "normalized": "plant based chicken",
       "count": 2,
       "examples": [
@@ -2044,17 +2025,6 @@
       ]
     },
     {
-      "normalized": "seasonal vegetables",
-      "count": 2,
-      "examples": [
-        "seasonal vegetables"
-      ],
-      "sampleRecipeIds": [
-        2508,
-        2501
-      ]
-    },
-    {
       "normalized": "bottled pepper sauce",
       "count": 2,
       "examples": [
@@ -2064,18 +2034,6 @@
       "sampleRecipeIds": [
         6664,
         6903
-      ]
-    },
-    {
-      "normalized": "broad beans",
-      "count": 2,
-      "examples": [
-        "baby broad beans",
-        "½ cup cooked broad beans"
-      ],
-      "sampleRecipeIds": [
-        4467,
-        5636
       ]
     },
     {
@@ -2264,18 +2222,6 @@
       ]
     },
     {
-      "normalized": "podded beans",
-      "count": 2,
-      "examples": [
-        "cups podded beans",
-        "550 g / 3 cups podded beans (=400 g / 2 cups of shelled one)"
-      ],
-      "sampleRecipeIds": [
-        4865,
-        5833
-      ]
-    },
-    {
       "normalized": "skewers",
       "count": 2,
       "examples": [
@@ -2366,6 +2312,18 @@
       "sampleRecipeIds": [
         5223,
         5150
+      ]
+    },
+    {
+      "normalized": "dog buns",
+      "count": 2,
+      "examples": [
+        "4 to 6 whole grain hot dog buns, such as Ezekiel brand",
+        "8 whole wheat hot dog buns, toasted if desired"
+      ],
+      "sampleRecipeIds": [
+        7651,
+        6822
       ]
     },
     {
@@ -2493,6 +2451,18 @@
       "sampleRecipeIds": [
         7451,
         4256
+      ]
+    },
+    {
+      "normalized": "english muffins split",
+      "count": 2,
+      "examples": [
+        "2 whole wheat English muffins, split and toasted",
+        "4 whole grain English muffins, split and toasted"
+      ],
+      "sampleRecipeIds": [
+        7511,
+        7574
       ]
     },
     {
@@ -2656,6 +2626,30 @@
       "sampleRecipeIds": [
         2025,
         7561
+      ]
+    },
+    {
+      "normalized": "other sugar",
+      "count": 2,
+      "examples": [
+        "1/2 cup raw or other sugar (I usually use 1/3 cup for a less sweet breakfast loaf)",
+        "1/2 cup raw or other sugar (add 2 tbsp more for sweeter esp if using whole grain flours)"
+      ],
+      "sampleRecipeIds": [
+        6193,
+        5989
+      ]
+    },
+    {
+      "normalized": "few pinches of chilli",
+      "count": 2,
+      "examples": [
+        "a few pinches of hot chilli (or a squeeze of harissa paste)",
+        "a few pinches of chilli (or smoked paprika)"
+      ],
+      "sampleRecipeIds": [
+        5397,
+        5256
       ]
     }
   ],
@@ -3954,29 +3948,6 @@
       ]
     },
     {
-      "id": 5399,
-      "title": "Basil tofu steak dinner",
-      "pct": 73,
-      "haveCount": 9,
-      "needCount": 3,
-      "needNames": [
-        "200 g / 7 oz firm smoked or neutral tofu, pressed*",
-        "1 heaped tbsp vegan pesto + more to coat the beans",
-        "100 g / 3½ oz green beans, topped and tailed"
-      ],
-      "haveNames": [
-        "¾ tsp fine sea salt",
-        "2 tbsp lemon juice + zest of 1 lemon",
-        "1 garlic clove, minced",
-        "¼ tsp black pepper",
-        "1 large zucchini",
-        "1 tsp Italian seasoning**",
-        "1-3 tsp olive oil",
-        "400 g / 14 oz boiled, cold baby potatoes",
-        "1-2 tbsp toasted coarse breadcrumbs (optional)"
-      ]
-    },
-    {
       "id": 4575,
       "title": "Totally Tomato Grains",
       "pct": 73,
@@ -4117,28 +4088,6 @@
         "30-45 ml / 2-3 tbsp lemon juice, adjust to taste",
         "4 tsp chilli oil, to serve (optional)",
         "fresh parsley, to serve (optional)"
-      ]
-    },
-    {
-      "id": 4667,
-      "title": "Vegan Pad Kee Mao (Drunken Noodles)",
-      "pct": 73,
-      "haveCount": 8,
-      "needCount": 3,
-      "needNames": [
-        "of vegetable of choice",
-        "thai chilies",
-        "stir fry sauce"
-      ],
-      "haveNames": [
-        "servings of flat rice noodles*",
-        "a handful of thai basil leaves",
-        "garlic",
-        "tofu",
-        "soy sauce",
-        "soy sauce/tamari",
-        "homemade vegan 'fish' sauce",
-        "sugar"
       ]
     },
     {
@@ -4421,25 +4370,6 @@
       ]
     },
     {
-      "id": 6459,
-      "title": "Basic Veggie Burger Recipe",
-      "pct": 75,
-      "haveCount": 6,
-      "needCount": 2,
-      "needNames": [
-        "  1 15-ounce can beans (any kind, rinsed and drained (1½ cups)",
-        "  1–2 tablespoons of your preferred spices and seasonings, to taste"
-      ],
-      "haveNames": [
-        "  1 cup cooked short-grain brown rice (see note)",
-        "  1 cup quick-cooking rolled oats, or bread crumbs",
-        "  2 cloves garlic, crushed, or ½ teaspoon garlic powder",
-        "  ½ teaspoon sea salt",
-        "  2–3 tablespoons unsweetened, unflavored plant milk or vegetable broth, as needed",
-        "  ¼ cup cornmeal or chickpea flour (more as needed)"
-      ]
-    },
-    {
       "id": 5605,
       "title": "Celeriac chips",
       "pct": 75,
@@ -4453,30 +4383,6 @@
         "½ tsp smoky paprika",
         "coarse sea salt",
         "ketchup, to serve (optional)"
-      ]
-    },
-    {
-      "id": 7058,
-      "title": "Clean-Your-Pantry Lentil-Vegetable Stew",
-      "pct": 75,
-      "haveCount": 10,
-      "needCount": 3,
-      "needNames": [
-        "  1 to 2 teaspoons spice blend of your choice, such as Italian, Cajun, Mexican, Thai, or ras el hanout",
-        "  2 cups chopped fresh or frozen assorted vegetables",
-        "  Steamed grains, whole grain crackers, or bread"
-      ],
-      "haveNames": [
-        "  2 cups finely chopped onions",
-        "  2 cups finely chopped mushrooms",
-        "  1½ cups assorted dry lentils and/or legumes",
-        "  4 cloves garlic, minced",
-        "  4½ teaspoons grated fresh ginger",
-        "  1 2-inch strip kombu (optional)",
-        "  ⅔ cup canned diced tomato",
-        "  2 tablespoons lemon juice",
-        "  Sea salt, to taste",
-        "  Freshly ground black pepper, to taste"
       ]
     },
     {
@@ -5113,39 +5019,6 @@
         "soy sauce",
         "sugar",
         "white pepper"
-      ]
-    },
-    {
-      "id": 5595,
-      "title": "Vegan walnut cake with coffee frosting",
-      "pct": 76,
-      "haveCount": 17,
-      "needCount": 5,
-      "needNames": [
-        "3 tsp instant coffee, dissolved in 2 tsp warm water",
-        "175 g / ¾ cup + 2 tbsp caster sugar",
-        "175 g / ¾ cup + 2 tbsp caster sugar",
-        "60 ml / ¼ cup brewed coffee",
-        "coffee beans"
-      ],
-      "haveNames": [
-        "120 ml / ½ cup maple syrup or other liquid sweetener",
-        "1½ tsp vanilla extract or 1 vanilla pod, seeds scraped",
-        "16 g / 2 tbsp refined coconut oil, melted",
-        "300 g / 2 cups raw cashews, soaked overnight*",
-        "30-60 ml / 2-4 tbsp plant milk (optional, see instructions)",
-        "200 g / 1½ cups + 1½ tbsp** all purpose white flour",
-        "100 g / 1 cup finely ground walnuts",
-        "½ heaped tsp baking soda",
-        "1 level tsp baking powder",
-        "180 g / 1½ cups buckwheat flour",
-        "20 g / 2 tbsp cornflour / cornstarch",
-        "100 g / 1 cup finely ground walnuts",
-        "½ heaped tsp baking soda",
-        "1 tsp GF baking powder",
-        "240 ml / 1 cup plant milk, lukewarm",
-        "60 ml / ¼ cup melted refined coconut oil (or other mild tasting oil)",
-        "walnuts, halves and chopped"
       ]
     },
     {
@@ -5947,36 +5820,6 @@
       ]
     },
     {
-      "id": 5305,
-      "title": "Baked potatoes with smoky beans",
-      "pct": 79,
-      "haveCount": 15,
-      "needCount": 4,
-      "needNames": [
-        "30 ml / 2 tbsp maple syrup* or light and dark muscovado sugar, adjust to taste",
-        "10 ml / 2 tsp vegan Worcester sauce",
-        "2 x 400 g canned white kidney beans or homecooked*",
-        "vegan cream to garnish, shop-bought or homemade"
-      ],
-      "haveNames": [
-        "4 tbsp / 60 ml olive oil, divided",
-        "4 large baking potatoes (approx. 350 g / 12½ oz each)",
-        "coarse salt",
-        "1 medium onion, very finely chopped",
-        "4 garlic cloves, very finely chopped (plus one extra* for potatoes)",
-        "2 small bay leaves",
-        "1 tsp cumin powder",
-        "2-3 tsp smoked paprika (I like them smoky so I use 3)",
-        "salt and pepper, to taste",
-        "2 x 400 g / 14 oz canned tomatoes (I like plum tomatoes best)",
-        "5 ml / 1 tsp backstrap molasses",
-        "20 ml / 4 tsp apple cider vinegar, adjust to taste",
-        "20 ml / 4 tsp Dijon mustard, adjust to taste",
-        "15 ml / 1 tbsp soy sauce (or tamari if GF)",
-        "chopped fresh coriander (or parsley) to garnish"
-      ]
-    },
-    {
       "id": 6356,
       "title": "BBQ Beans & Greens",
       "pct": 79,
@@ -6311,32 +6154,6 @@
         "1/4 cup packed chopped cilantro",
         "1/2 cup shredded zucchini or other vegetables (optional)",
         "1/8 tsp Indian Black Salt (kala namak)"
-      ]
-    },
-    {
-      "id": 5815,
-      "title": "Vegan nicoise salad with fried potatoes",
-      "pct": 80,
-      "haveCount": 12,
-      "needCount": 3,
-      "needNames": [
-        "2 large handfuls of french beans",
-        "small bunch of mint, finley chopped",
-        "small bunch of dill, finley chopped"
-      ],
-      "haveNames": [
-        "4 large potatoes, cooked",
-        "small bunch of rocket*",
-        "30 cherry tomatoes",
-        "15 black olives",
-        "2 tbsp of capers, chopped roughly",
-        "4 tbsp of extra virgin olive oil",
-        "2 tsp of wholegrain mustard",
-        "small garlic clove, pressed",
-        "1 tbsp lemon juice",
-        "2 pinches of sugar",
-        "salt",
-        "black pepper"
       ]
     },
     {
@@ -6873,22 +6690,6 @@
       ]
     },
     {
-      "id": 4457,
-      "title": "Homemade Pie Crust",
-      "pct": 80,
-      "haveCount": 4,
-      "needCount": 1,
-      "needNames": [
-        "dry beans or pie weights"
-      ],
-      "haveNames": [
-        "½ cup all-purpose flour",
-        "vegan butter",
-        "½ tsp salt",
-        "sugar"
-      ]
-    },
-    {
       "id": 2121,
       "title": "Miso Soup with Tofu and Wakame",
       "pct": 80,
@@ -7165,24 +6966,24 @@
       ]
     },
     {
-      "id": 7364,
-      "title": "Vegan French Onion Dip",
+      "id": 4667,
+      "title": "Vegan Pad Kee Mao (Drunken Noodles)",
       "pct": 80,
       "haveCount": 8,
       "needCount": 2,
       "needNames": [
-        "  2 6-inch whole wheat pita rounds",
-        "  Crudités: carrot and celery sticks, broccoli and cauliflower florets, jicama chips, and bell pepper strips"
+        "thai chilies",
+        "stir fry sauce"
       ],
       "haveNames": [
-        "  1½ cups chopped sweet onion",
-        "  1 sprig fresh thyme",
-        "  1 12-oz. package soft silken tofu",
-        "  2 teaspoons red wine vinegar",
-        "  ½ teaspoon dry mustard",
-        "  ½ teaspoon garlic powder",
-        "  ¼ teaspoon sea salt, or to taste",
-        "  2 tablespoons chopped fresh chives"
+        "servings of flat rice noodles*",
+        "a handful of thai basil leaves",
+        "garlic",
+        "tofu",
+        "soy sauce",
+        "soy sauce/tamari",
+        "homemade vegan 'fish' sauce",
+        "sugar"
       ]
     },
     {
@@ -7220,27 +7021,6 @@
         "nutritional yeast",
         "oil",
         "salt"
-      ]
-    },
-    {
-      "id": 4609,
-      "title": "Vegan Tomato 'Meat' Sauce",
-      "pct": 80,
-      "haveCount": 8,
-      "needCount": 2,
-      "needNames": [
-        "long beans or vegetable of choice",
-        "chili oil and toasted sesame oil"
-      ],
-      "haveNames": [
-        "tofu",
-        "tomato purée from 6-8 large tomatoes",
-        "oil",
-        "soy sauce or tamari",
-        "toasted sesame oil",
-        "sugar",
-        "salt",
-        "servings of noodles"
       ]
     },
     {
@@ -7411,6 +7191,39 @@
       ]
     },
     {
+      "id": 5595,
+      "title": "Vegan walnut cake with coffee frosting",
+      "pct": 81,
+      "haveCount": 18,
+      "needCount": 4,
+      "needNames": [
+        "3 tsp instant coffee, dissolved in 2 tsp warm water",
+        "175 g / ¾ cup + 2 tbsp caster sugar",
+        "175 g / ¾ cup + 2 tbsp caster sugar",
+        "60 ml / ¼ cup brewed coffee"
+      ],
+      "haveNames": [
+        "120 ml / ½ cup maple syrup or other liquid sweetener",
+        "1½ tsp vanilla extract or 1 vanilla pod, seeds scraped",
+        "16 g / 2 tbsp refined coconut oil, melted",
+        "300 g / 2 cups raw cashews, soaked overnight*",
+        "30-60 ml / 2-4 tbsp plant milk (optional, see instructions)",
+        "200 g / 1½ cups + 1½ tbsp** all purpose white flour",
+        "100 g / 1 cup finely ground walnuts",
+        "½ heaped tsp baking soda",
+        "1 level tsp baking powder",
+        "180 g / 1½ cups buckwheat flour",
+        "20 g / 2 tbsp cornflour / cornstarch",
+        "100 g / 1 cup finely ground walnuts",
+        "½ heaped tsp baking soda",
+        "1 tsp GF baking powder",
+        "240 ml / 1 cup plant milk, lukewarm",
+        "60 ml / ¼ cup melted refined coconut oil (or other mild tasting oil)",
+        "coffee beans",
+        "walnuts, halves and chopped"
+      ]
+    },
+    {
       "id": 4796,
       "title": "Easy & Healthy Lo Mein Vegan Recipe",
       "pct": 82,
@@ -7491,6 +7304,29 @@
         "oregano",
         "soy curls",
         "tamari"
+      ]
+    },
+    {
+      "id": 5399,
+      "title": "Basil tofu steak dinner",
+      "pct": 82,
+      "haveCount": 10,
+      "needCount": 2,
+      "needNames": [
+        "200 g / 7 oz firm smoked or neutral tofu, pressed*",
+        "100 g / 3½ oz green beans, topped and tailed"
+      ],
+      "haveNames": [
+        "¾ tsp fine sea salt",
+        "2 tbsp lemon juice + zest of 1 lemon",
+        "1 garlic clove, minced",
+        "1 heaped tbsp vegan pesto + more to coat the beans",
+        "¼ tsp black pepper",
+        "1 large zucchini",
+        "1 tsp Italian seasoning**",
+        "1-3 tsp olive oil",
+        "400 g / 14 oz boiled, cold baby potatoes",
+        "1-2 tbsp toasted coarse breadcrumbs (optional)"
       ]
     },
     {
@@ -7661,28 +7497,6 @@
       ]
     },
     {
-      "id": 7326,
-      "title": "Vegan Sushi Tacos",
-      "pct": 82,
-      "haveCount": 9,
-      "needCount": 2,
-      "needNames": [
-        "  1 15-oz. can no-salt-added adzuki beans, rinsed and drained (1½ cups)",
-        "  6 cups shredded or matchstick-cut assorted vegetables (radishes, carrots, cabbage, cucumber, and/or scallions)"
-      ],
-      "haveNames": [
-        "  3 cups no-salt-added vegetable broth",
-        "  1½ cups dry short grain brown rice",
-        "  ¼ cup brown rice vinegar",
-        "  2 tablespoons pure maple syrup",
-        "  1½ cups chopped fresh mango",
-        "  1 tablespoon lime juice",
-        "  1 tablespoon sriracha sauce",
-        "  16 8-inch toasted nori sheets",
-        "  1 small avocado, halved, seeded, peeled, and thinly sliced"
-      ]
-    },
-    {
       "id": 5358,
       "title": "Vegan zucchini galette",
       "pct": 82,
@@ -7731,6 +7545,29 @@
         "  ½ teaspoon garlic powder",
         "  1 Granny Smith apple, cored and cut into 1-inch pieces",
         "  1 shallot, sliced"
+      ]
+    },
+    {
+      "id": 7058,
+      "title": "Clean-Your-Pantry Lentil-Vegetable Stew",
+      "pct": 82,
+      "haveCount": 10,
+      "needCount": 2,
+      "needNames": [
+        "  1 to 2 teaspoons spice blend of your choice, such as Italian, Cajun, Mexican, Thai, or ras el hanout",
+        "  Steamed grains, whole grain crackers, or bread"
+      ],
+      "haveNames": [
+        "  2 cups finely chopped onions",
+        "  2 cups finely chopped mushrooms",
+        "  1½ cups assorted dry lentils and/or legumes",
+        "  4 cloves garlic, minced",
+        "  4½ teaspoons grated fresh ginger",
+        "  1 2-inch strip kombu (optional)",
+        "  ⅔ cup canned diced tomato",
+        "  2 tablespoons lemon juice",
+        "  Sea salt, to taste",
+        "  Freshly ground black pepper, to taste"
       ]
     },
     {
@@ -8371,29 +8208,6 @@
       ]
     },
     {
-      "id": 7634,
-      "title": "Flexible Pasta and Bean Soup",
-      "pct": 83,
-      "haveCount": 10,
-      "needCount": 2,
-      "needNames": [
-        "  1½ cups chopped peeled root vegetables (carrots, turnips, parsnips, sweet potato)",
-        "  3 cups cooked no-salt-added beans (white, kidney, black, chickpeas) or two 15-oz. cans no-salt-added beans, rinsed and drained"
-      ],
-      "haveNames": [
-        "  2 cups chopped onion ",
-        "  1 cup chopped celery or bell pepper (any color)",
-        "  6 cloves garlic, minced",
-        "  8 cups low-sodium vegetable broth",
-        "  1 teaspoon poultry seasoning",
-        "  1 teaspoon herbes de Provence or Italian seasoning",
-        "  8 oz. whole wheat short pasta or broken long pasta",
-        "  1 to 2 tablespoons lemon juice, lime juice, white wine vinegar, or red wine vinegar",
-        "  Sea salt ",
-        "  Freshly ground black pepper, to taste"
-      ]
-    },
-    {
       "id": 7765,
       "title": "Forbidden Rice Bowl with Quick-Pickled Cabbage",
       "pct": 83,
@@ -8610,49 +8424,6 @@
         "  1 tablespoon sliced almonds, toasted",
         "  1 tablespoon turbinado (raw) sugar ",
         "  Fresh mint (optional)"
-      ]
-    },
-    {
-      "id": 5183,
-      "title": "Borscht (beetroot soup)",
-      "pct": 83,
-      "haveCount": 12,
-      "needCount": 2,
-      "needNames": [
-        "2 x 400 g / 14 oz cans haricot beans",
-        "approx. 120 ml / ½ cup fermented/sour beet juice (or sauerkraut brine), to taste*"
-      ],
-      "haveNames": [
-        "1 kg / 35 oz beetroots",
-        "2 tbsp / 30 ml olive oil",
-        "1 large onion, finely diced",
-        "5 garlic cloves, 4 finely sliced + 1 whole",
-        "½ tsp dried marjoram and thyme",
-        "3 all spice berries",
-        "2 bay leaves",
-        "salt and pepper to taste",
-        "1 litre / 4 cups veggie stock*",
-        "sugar or neutral sweetener, to taste",
-        "fresh dill, to serve (optional)",
-        "vegan cream*, to serve (optional)"
-      ]
-    },
-    {
-      "id": 5833,
-      "title": "Broad bean hummus",
-      "pct": 83,
-      "haveCount": 6,
-      "needCount": 1,
-      "needNames": [
-        "550 g / 3 cups podded beans (=400 g / 2 cups of shelled one)"
-      ],
-      "haveNames": [
-        "3 and ½ tbsp lemon juice",
-        "1 garlic clove, pressed",
-        "1 level tsp of fine sea salt",
-        "about 12 fresh mint leaves",
-        "a few grinds of fresh pepper",
-        "2 tbsp extra virgin olive oil (optional)"
       ]
     },
     {
@@ -9156,24 +8927,6 @@
         "  1 15-oz. can no-salt-added navy beans, rinsed and drained (1½ cups)",
         "  Sea salt, to taste",
         "  Freshly ground black pepper, to taste"
-      ]
-    },
-    {
-      "id": 7793,
-      "title": "Red Bean Ice Cream",
-      "pct": 83,
-      "haveCount": 6,
-      "needCount": 1,
-      "needNames": [
-        "  1 15-oz. can no-salt-added adzuki beans, rinsed and drained (1½ cups)"
-      ],
-      "haveNames": [
-        "⅔ cup Date Paste",
-        "  ⅛ teaspoon sea salt",
-        "  1 cup frozen blueberries",
-        "  ¾ to 1 cup unsweetened, unflavored plant-based milk",
-        "  1 teaspoon pure vanilla extract",
-        "  1 cup fresh blueberries (optional)"
       ]
     },
     {
@@ -9860,6 +9613,36 @@
       ]
     },
     {
+      "id": 5305,
+      "title": "Baked potatoes with smoky beans",
+      "pct": 84,
+      "haveCount": 16,
+      "needCount": 3,
+      "needNames": [
+        "30 ml / 2 tbsp maple syrup* or light and dark muscovado sugar, adjust to taste",
+        "10 ml / 2 tsp vegan Worcester sauce",
+        "vegan cream to garnish, shop-bought or homemade"
+      ],
+      "haveNames": [
+        "4 tbsp / 60 ml olive oil, divided",
+        "4 large baking potatoes (approx. 350 g / 12½ oz each)",
+        "coarse salt",
+        "1 medium onion, very finely chopped",
+        "4 garlic cloves, very finely chopped (plus one extra* for potatoes)",
+        "2 small bay leaves",
+        "1 tsp cumin powder",
+        "2-3 tsp smoked paprika (I like them smoky so I use 3)",
+        "salt and pepper, to taste",
+        "2 x 400 g / 14 oz canned tomatoes (I like plum tomatoes best)",
+        "5 ml / 1 tsp backstrap molasses",
+        "20 ml / 4 tsp apple cider vinegar, adjust to taste",
+        "20 ml / 4 tsp Dijon mustard, adjust to taste",
+        "15 ml / 1 tbsp soy sauce (or tamari if GF)",
+        "2 x 400 g canned white kidney beans or homecooked*",
+        "chopped fresh coriander (or parsley) to garnish"
+      ]
+    },
+    {
       "id": 5310,
       "title": "Masala potatoes on red lentil pancakes",
       "pct": 84,
@@ -10023,30 +9806,6 @@
         "a good pinch of nutmeg",
         "2 tbsp breadcrumbs",
         "2 tbsp chopped pecans"
-      ]
-    },
-    {
-      "id": 2720,
-      "title": "Instant Pot Minestrone",
-      "pct": 85,
-      "haveCount": 11,
-      "needCount": 2,
-      "needNames": [
-        "beans- kidney",
-        "gremolata"
-      ],
-      "haveNames": [
-        "black pepper",
-        "carrots",
-        "chili flakes",
-        "couple chopped lacinato kale",
-        "fennel bulb",
-        "garlic cloves- rough",
-        "italian seasoning",
-        "olive oil",
-        "onion",
-        "salt",
-        "veggie broth"
       ]
     },
     {
@@ -11039,24 +10798,6 @@
         "spinach",
         "tahini",
         "vegan mozzarella"
-      ]
-    },
-    {
-      "id": 6464,
-      "title": "Egyptian Breakfast Beans (Ful Medames)",
-      "pct": 86,
-      "haveCount": 6,
-      "needCount": 1,
-      "needNames": [
-        "  1½ pounds dried fava beans, soaked for 8 to 10 hours"
-      ],
-      "haveNames": [
-        "  1 medium yellow onion, peeled and diced small",
-        "  4 cloves garlic, peeled and minced",
-        "  1 teaspoon ground cumin",
-        "  Zest and juice of 1 lemon",
-        "  Sea salt",
-        "  1 lemon, quartered"
       ]
     },
     {
@@ -12642,32 +12383,6 @@
       ]
     },
     {
-      "id": 5757,
-      "title": "Green detox stir-fry",
-      "pct": 87,
-      "haveCount": 13,
-      "needCount": 2,
-      "needNames": [
-        "a large handful / 150 g green flat beans, sliced diagonally",
-        "1 tbsp oil with high smoke point"
-      ],
-      "haveNames": [
-        "200 g flat rice noodles",
-        "small broccoli head, chopped into small pieces",
-        "4 large spring onions, sliced",
-        "½ red chilli, sliced thinly or ½ tsp hot chilli flakes",
-        "3 garlic cloves, sliced thinly",
-        "lime wedges, to serve",
-        "fresh coriander, to garnish",
-        "1 tbsp of oil",
-        "2 tsp sesame oil (for flavour)",
-        "1½ tbsp soft brown sugar or maple syrup",
-        "1½ tbsp rice vinegar or lime juice",
-        "3 tbsp tamari (for gluten-free version) or soy sauce",
-        "2 tsp finely grated ginger"
-      ]
-    },
-    {
       "id": 6804,
       "title": "Roasted Beet Salad with Baby Leeks",
       "pct": 87,
@@ -12797,6 +12512,32 @@
         "soy milk",
         "squeeze of lemon",
         "vegan yoghurt"
+      ]
+    },
+    {
+      "id": 5815,
+      "title": "Vegan nicoise salad with fried potatoes",
+      "pct": 87,
+      "haveCount": 13,
+      "needCount": 2,
+      "needNames": [
+        "small bunch of mint, finley chopped",
+        "small bunch of dill, finley chopped"
+      ],
+      "haveNames": [
+        "4 large potatoes, cooked",
+        "small bunch of rocket*",
+        "30 cherry tomatoes",
+        "2 large handfuls of french beans",
+        "15 black olives",
+        "2 tbsp of capers, chopped roughly",
+        "4 tbsp of extra virgin olive oil",
+        "2 tsp of wholegrain mustard",
+        "small garlic clove, pressed",
+        "1 tbsp lemon juice",
+        "2 pinches of sugar",
+        "salt",
+        "black pepper"
       ]
     },
     {
@@ -14061,25 +13802,6 @@
       ]
     },
     {
-      "id": 7122,
-      "title": "Vegan Bean Gorditas",
-      "pct": 88,
-      "haveCount": 7,
-      "needCount": 1,
-      "needNames": [
-        "2 cups Instant Pot O' Beans"
-      ],
-      "haveNames": [
-        "  2 cups masa harina",
-        "  ½ teaspoon sea salt",
-        "  4 cups shredded lettuce",
-        "  ½ cup thinly sliced radishes",
-        "  ½ cup chopped fresh cilantro",
-        "  ⅓ cup slivered red onion",
-        "  Lime wedges"
-      ]
-    },
-    {
       "id": 5437,
       "title": "Vegan bean stew with spring veggies",
       "pct": 88,
@@ -14409,25 +14131,6 @@
       ]
     },
     {
-      "id": 6422,
-      "title": "Ethiopian Wild Rice Pilaf",
-      "pct": 88,
-      "haveCount": 7,
-      "needCount": 1,
-      "needNames": [
-        "  2 cups cooked adzuki beans, or one 15-ounce can, drained and rinsed"
-      ],
-      "haveNames": [
-        "  2 medium leeks (white and light green parts), diced and rinsed",
-        "  2 cloves garlic, peeled and minced",
-        "  ¾ teaspoon berbere spice Blend, or to taste",
-        "  4 cups cooked wild rice blend",
-        "  Zest of 1 orange",
-        "  Salt and freshly ground black pepper to taste",
-        "  4 green onions (white and green parts), thinly sliced"
-      ]
-    },
-    {
       "id": 5179,
       "title": "Gluten-free gyoza (vegan)",
       "pct": 88,
@@ -14635,33 +14338,6 @@
       ]
     },
     {
-      "id": 2501,
-      "title": "Quinoa Vegetable Soup",
-      "pct": 88,
-      "haveCount": 14,
-      "needCount": 2,
-      "needNames": [
-        "cup",
-        "seasonal vegetables"
-      ],
-      "haveNames": [
-        "bay leaf",
-        "black pepper",
-        "carrots",
-        "celery",
-        "diced tomatoes",
-        "garlic",
-        "great northern beans",
-        "lemon juice",
-        "olive oil",
-        "quinoa",
-        "red pepper flakes",
-        "salt",
-        "thyme",
-        "vegetable broth"
-      ]
-    },
-    {
       "id": 8347,
       "title": "Raspberry Lemonade Smoothie Bowl",
       "pct": 88,
@@ -14802,34 +14478,6 @@
         "  2 scallions (white and green parts), chopped",
         "  2 to 4 cups fresh spinach",
         "  Hot sauce"
-      ]
-    },
-    {
-      "id": 5700,
-      "title": "Spiced carrot and chickpea salad",
-      "pct": 88,
-      "haveCount": 15,
-      "needCount": 2,
-      "needNames": [
-        "1 cup peeled hard wheat* (use red / brown rice or toasted buckwheat for GF version)",
-        "handful of mint leaves, torn"
-      ],
-      "haveNames": [
-        "600 g / 1.3 lb young carrots with green tops",
-        "1 cup cumin-roasted chickpeas (recommended) or cooked chickpeas",
-        "10 green Kalamata olives, de-stoned and sliced",
-        "100 g / 3.5 oz baby spinach",
-        "handful of fresh coriander OR parsley, torn",
-        "¼ cup hazelnuts (raw or roasted), chopped",
-        "1½ tbsp maple syrup",
-        "2 tbsp extra virgin olive oil",
-        "2 tsp coriander seeds OR 1 tsp coriander powder",
-        "2 tsp cumin seeds OR 1 tsp cumin coriander powder",
-        "½ tsp chilli flakes OR ½ tsp chilli powder",
-        "3 tbsp extra virgin olive oil",
-        "¼ cup / 4 tbsp pomegranate molasses OR lemon juice (both work well!)",
-        "1 small garlic clove, grated",
-        "salt and pepper, to taste"
       ]
     },
     {
@@ -15152,6 +14800,25 @@
         "  6 cups mixed salad greens",
         "  ½ cup pecan halves, toasted, optional",
         "  2 crisp apples, peeled, cored, and cut into ½-inch dice"
+      ]
+    },
+    {
+      "id": 6459,
+      "title": "Basic Veggie Burger Recipe",
+      "pct": 88,
+      "haveCount": 7,
+      "needCount": 1,
+      "needNames": [
+        "  1–2 tablespoons of your preferred spices and seasonings, to taste"
+      ],
+      "haveNames": [
+        "  1 15-ounce can beans (any kind, rinsed and drained (1½ cups)",
+        "  1 cup cooked short-grain brown rice (see note)",
+        "  1 cup quick-cooking rolled oats, or bread crumbs",
+        "  2 cloves garlic, crushed, or ½ teaspoon garlic powder",
+        "  ½ teaspoon sea salt",
+        "  2–3 tablespoons unsweetened, unflavored plant milk or vegetable broth, as needed",
+        "  ¼ cup cornmeal or chickpea flour (more as needed)"
       ]
     },
     {
@@ -15901,33 +15568,6 @@
         "cucumbers",
         "carrot",
         "coriander"
-      ]
-    },
-    {
-      "id": 4620,
-      "title": "Stuffed Long Beans",
-      "pct": 88,
-      "haveCount": 14,
-      "needCount": 2,
-      "needNames": [
-        "long beans",
-        "thai chilis"
-      ],
-      "haveNames": [
-        "firm tofu*",
-        "carrots",
-        "king oyster mushrooms",
-        "a handful of cilantro",
-        "salt",
-        "a few shakes of white pepper",
-        "garlic",
-        "oil for cooking",
-        "toasted sesame oil",
-        "cornstarch",
-        "toasted sesame seeds",
-        "soy sauce",
-        "hoisin sauce",
-        "bean paste"
       ]
     },
     {
@@ -17275,26 +16915,6 @@
       ]
     },
     {
-      "id": 2681,
-      "title": "Garlic Lemon Kale Salad",
-      "pct": 89,
-      "haveCount": 8,
-      "needCount": 1,
-      "needNames": [
-        "white northern beans"
-      ],
-      "haveNames": [
-        "almond butter",
-        "baby carrots",
-        "black pepper",
-        "garlic powder",
-        "kale",
-        "lemon juice",
-        "maple syrup",
-        "salt"
-      ]
-    },
-    {
       "id": 7147,
       "title": "Microwave Sweet Potato and Kale Chili",
       "pct": 89,
@@ -17352,36 +16972,6 @@
         "  1 cup sliced cucumber",
         "  ½ cup thinly sliced scallions",
         "  ½ cup diced red or orange bell pepper"
-      ]
-    },
-    {
-      "id": 5950,
-      "title": "Mung Bean Omelet (Vegan Omelet No Chickpea Flour } Dal Chilla",
-      "pct": 89,
-      "haveCount": 17,
-      "needCount": 2,
-      "needNames": [
-        "1/2 cup yellow mung beans (, split mung bean (moong dal))",
-        "1-2 tsps blackening spice or creole spice blend"
-      ],
-      "haveNames": [
-        "1/2 cup pink/red/orange lentils (, Masoor dal )",
-        "1 tsp salt (less or more to taste)",
-        "1 clove of garlic",
-        "1/4 tsp kala namak (black salt)",
-        "1-2 Tbsp nutrional yeast",
-        "1 tsp baking powder",
-        "1 tsp apple cider vinegar",
-        "2 teaspoons oil",
-        "1 cup chopped Okra",
-        "1 cup small broccoli florets",
-        "4 oz cubed Tempeh,",
-        "1/2 cup sliced sweet peppers or red bell pepper",
-        "1/2 tsp garlic powder",
-        "salt to taste",
-        "Havarti Cream Sauce (See notes) or Or use Daiya Garlic Jalapeno havarti Wedge (, or vegan ranch or mayo)",
-        "oil for cooking",
-        "chickpea flour"
       ]
     },
     {
@@ -18662,26 +18252,6 @@
       ]
     },
     {
-      "id": 4811,
-      "title": "Vegan Bindaetteok: Korean Mung Bean Pancakes",
-      "pct": 89,
-      "haveCount": 8,
-      "needCount": 1,
-      "needNames": [
-        "split yellow mung beans"
-      ],
-      "haveNames": [
-        "corn",
-        "sweet white rice flour",
-        "soy sauce",
-        "vegan kimchi liquid",
-        "salt",
-        "pepper",
-        "oil",
-        "vegan kimchi"
-      ]
-    },
-    {
       "id": 2675,
       "title": "Vegan Breakfast Cookies Oil Free and Gluten Free",
       "pct": 89,
@@ -19256,6 +18826,29 @@
       ]
     },
     {
+      "id": 7806,
+      "title": "Butternut Squash and Red Lentil Soup",
+      "pct": 90,
+      "haveCount": 11,
+      "needCount": 1,
+      "needNames": [
+        "  1 small celeriac or 2 medium parsnips, peeled and cut into ½-inch pieces (about 2 cups)"
+      ],
+      "haveNames": [
+        "1 tablespoon extra-virgin olive oil (optional, learn more)",
+        "  ½ teaspoon sea salt",
+        "  4 cups low-sodium vegetable broth",
+        "  3 cups 1-inch pieces peeled butternut squash (1 lb.)",
+        "  1 cup dried red or yellow lentils, rinsed and drained",
+        "  2 teaspoons chopped fresh thyme or ½ teaspoon dried thyme, crushed",
+        "  ½ of a 13.5-oz. can unsweetened light coconut milk (about ¾ cup) (see tip, recipe intro)",
+        "  1 teaspoon lemon zest",
+        "  3 tablespoons lemon juice",
+        "  Freshly ground black pepper, to taste",
+        "  Lemon wedges (optional)"
+      ]
+    },
+    {
       "id": 5327,
       "title": "Celeriac vegan shepherd's pie",
       "pct": 90,
@@ -19295,38 +18888,6 @@
         "1/3 tsp freshly grated nutmeg, adjust to taste",
         "fine sea salt, more to taste",
         "black pepper, to taste"
-      ]
-    },
-    {
-      "id": 7096,
-      "title": "Cilantro Ranch Bean Salad",
-      "pct": 90,
-      "haveCount": 19,
-      "needCount": 2,
-      "needNames": [
-        "  2 fresh tomatillos, peeled and chopped (½ cup)",
-        "3 cups Instant Pot o' Beans, drained"
-      ],
-      "haveNames": [
-        "  6 to 7 oz. extra-firm lite silken tofu",
-        "  ½ cup unsweetened, unflavored plant-based milk",
-        "  ½ cup lightly packed cilantro leaves",
-        "  1 tablespoon lime juice",
-        "  1 clove garlic",
-        "  ¼ teaspoon onion powder",
-        "  ¼ teaspoon dry mustard",
-        "  ¼ teaspoon freshly ground black pepper",
-        "  Sea salt, to taste",
-        "  1 15-oz. can no-salt-added chickpeas, rinsed and drained (1½ cups)",
-        "  3 tablespoons nutritional yeast",
-        "  2 teaspoons chili powder",
-        "  2 cups frozen roasted corn",
-        "  4 cups chopped romaine lettuce",
-        "  4 cups fresh baby spinach",
-        "  2 cups chopped tomatoes",
-        "  ½ cup slivered scallions",
-        "  ¼ cup sliced pitted ripe olives",
-        "  1 fresh jalapeño chile, thinly sliced and seeded"
       ]
     },
     {
@@ -20069,27 +19630,6 @@
       ]
     },
     {
-      "id": 6488,
-      "title": "Fava Bean Salad",
-      "pct": 90,
-      "haveCount": 9,
-      "needCount": 1,
-      "needNames": [
-        "  4 cups cooked fava beans, or two 15-ounce cans, drained and rinsed"
-      ],
-      "haveNames": [
-        "  2 large tomatoes, chopped",
-        "  4 scallions (white and green parts), sliced",
-        "  1 large cucumber, peeled, halved, seeded, and diced",
-        "  ½ cup finely chopped cilantro",
-        "  1 jalapeño pepper, minced (for less heat, remove the seeds)",
-        "  Zest of 1 lemon and juice of 2 lemons",
-        "  2 cloves garlic, peeled and minced",
-        "  1 teaspoon cumin seeds, toasted and ground",
-        "  Salt and freshly ground black pepper to taste"
-      ]
-    },
-    {
       "id": 6111,
       "title": "Golden Red Lentil Dal (Turmeric Spinach Dal)",
       "pct": 90,
@@ -20553,48 +20093,6 @@
         "vegetable broth",
         "yukon gold potato",
         "zucchini"
-      ]
-    },
-    {
-      "id": 7070,
-      "title": "Teriyaki Jackfruit and Rice Stacks",
-      "pct": 90,
-      "haveCount": 9,
-      "needCount": 1,
-      "needNames": [
-        "  1 15-oz. can adzuki beans, rinsed and drained (1½ cups)"
-      ],
-      "haveNames": [
-        "  3 cups dry short-grain brown rice",
-        "  2 tablespoons arrowroot powder",
-        "  1 15-oz. can jackfruit, rinsed and drained",
-        "  2 cups finely chopped onions",
-        "  2 cups finely chopped sweet potato",
-        "  6 cloves garlic, minced",
-        "  1 tablespoon grated fresh ginger",
-        "  4 nori sheets, each cut into four 2½ -inch-diameter rounds",
-        "  6 romaine lettuce leaves, cut into 2-inch pieces"
-      ]
-    },
-    {
-      "id": 6621,
-      "title": "Tex-Mex Pita Pizzas",
-      "pct": 90,
-      "haveCount": 9,
-      "needCount": 1,
-      "needNames": [
-        "  6 6- to 7-inch whole wheat pita rounds"
-      ],
-      "haveNames": [
-        "  1 cup chopped onion",
-        "  1 cup chopped bell pepper, any color",
-        "  2 cloves garlic, minced",
-        "  ½ teaspoon ground cumin",
-        "  1 15-ounce can black beans, rinsed and drained",
-        "  1 cup fresh or frozen corn kernels",
-        "  1 cup chopped avocado",
-        "  1 cup oil-free salsa",
-        "  2 tablespoons snipped fresh cilantro"
       ]
     },
     {
@@ -21541,27 +21039,6 @@
       ]
     },
     {
-      "id": 7294,
-      "title": "Skordalia (Greek Potato Garlic Dip)",
-      "pct": 90,
-      "haveCount": 9,
-      "needCount": 1,
-      "needNames": [
-        "  6 cups assorted fresh vegetables (asparagus, bell pepper strips, carrots, celery, endive, kohlrabi, radishes, and/or snap peas)"
-      ],
-      "haveNames": [
-        "  2 medium (12 oz. total) russet potatoes, peeled and cut into 1-inch pieces",
-        "  10 cloves garlic",
-        "  ¼ cup almond meal",
-        "  2 tablespoons unsweetened, unflavored plant-based milk",
-        "  1 tablespoon red wine vinegar",
-        "  Sea salt, to taste",
-        "  Freshly ground black pepper, to taste",
-        "  1 tablespoon chopped Kalamata olives",
-        "  Chopped fresh parsley"
-      ]
-    },
-    {
       "id": 448,
       "title": "Southern Potato Salad",
       "pct": 90,
@@ -22050,6 +21527,27 @@
       ]
     },
     {
+      "id": 7364,
+      "title": "Vegan French Onion Dip",
+      "pct": 90,
+      "haveCount": 9,
+      "needCount": 1,
+      "needNames": [
+        "  Crudités: carrot and celery sticks, broccoli and cauliflower florets, jicama chips, and bell pepper strips"
+      ],
+      "haveNames": [
+        "  2 6-inch whole wheat pita rounds",
+        "  1½ cups chopped sweet onion",
+        "  1 sprig fresh thyme",
+        "  1 12-oz. package soft silken tofu",
+        "  2 teaspoons red wine vinegar",
+        "  ½ teaspoon dry mustard",
+        "  ½ teaspoon garlic powder",
+        "  ¼ teaspoon sea salt, or to taste",
+        "  2 tablespoons chopped fresh chives"
+      ]
+    },
+    {
       "id": 2668,
       "title": "Vegan Garlic Alfredo Sauce",
       "pct": 90,
@@ -22218,6 +21716,27 @@
       ]
     },
     {
+      "id": 4609,
+      "title": "Vegan Tomato 'Meat' Sauce",
+      "pct": 90,
+      "haveCount": 9,
+      "needCount": 1,
+      "needNames": [
+        "chili oil and toasted sesame oil"
+      ],
+      "haveNames": [
+        "tofu",
+        "tomato purée from 6-8 large tomatoes",
+        "oil",
+        "soy sauce or tamari",
+        "toasted sesame oil",
+        "sugar",
+        "salt",
+        "servings of noodles",
+        "long beans or vegetable of choice"
+      ]
+    },
+    {
       "id": 2664,
       "title": "Vegan Vanilla Cake",
       "pct": 90,
@@ -22358,30 +21877,6 @@
         "onion powder",
         "rib celery",
         "vegetable broth"
-      ]
-    },
-    {
-      "id": 7806,
-      "title": "Butternut Squash and Red Lentil Soup",
-      "pct": 91,
-      "haveCount": 12,
-      "needCount": 1,
-      "needNames": [
-        "  1 small celeriac or 2 medium parsnips, peeled and cut into ½-inch pieces (about 2 cups)"
-      ],
-      "haveNames": [
-        "1 tablespoon extra-virgin olive oil (optional, learn more)",
-        "  2 cups fresh or frozen mirepoix (10 to 12 oz.)",
-        "  ½ teaspoon sea salt",
-        "  4 cups low-sodium vegetable broth",
-        "  3 cups 1-inch pieces peeled butternut squash (1 lb.)",
-        "  1 cup dried red or yellow lentils, rinsed and drained",
-        "  2 teaspoons chopped fresh thyme or ½ teaspoon dried thyme, crushed",
-        "  ½ of a 13.5-oz. can unsweetened light coconut milk (about ¾ cup) (see tip, recipe intro)",
-        "  1 teaspoon lemon zest",
-        "  3 tablespoons lemon juice",
-        "  Freshly ground black pepper, to taste",
-        "  Lemon wedges (optional)"
       ]
     },
     {
@@ -23182,28 +22677,6 @@
       ]
     },
     {
-      "id": 6283,
-      "title": "Pumpkin and Anasazi Bean Stew",
-      "pct": 91,
-      "haveCount": 10,
-      "needCount": 1,
-      "needNames": [
-        "  4 cups cooked Anasazi beans, or two 15-ounce cans, drained and rinsed"
-      ],
-      "haveNames": [
-        "  1 large yellow onion, peeled and diced",
-        "  2 large carrots, peeled and diced",
-        "  2 celery stalks, diced",
-        "  2 cloves garlic, peeled and minced",
-        "  2 tablespoons cumin seeds, toasted and ground",
-        "  2 tablespoons tomato paste",
-        "  1 small pumpkin (about 1 pound), peeled, seeded, and cut into 1-inch cubes",
-        "6 cups Vegetable Stock or low-sodium vegetable stock",
-        "  Salt and freshly ground black pepper to taste",
-        "  6 green onions (white and green parts), thinly sliced"
-      ]
-    },
-    {
       "id": 5414,
       "title": "Roasted grape and fennel salad",
       "pct": 91,
@@ -23651,6 +23124,28 @@
       ]
     },
     {
+      "id": 7326,
+      "title": "Vegan Sushi Tacos",
+      "pct": 91,
+      "haveCount": 10,
+      "needCount": 1,
+      "needNames": [
+        "  6 cups shredded or matchstick-cut assorted vegetables (radishes, carrots, cabbage, cucumber, and/or scallions)"
+      ],
+      "haveNames": [
+        "  3 cups no-salt-added vegetable broth",
+        "  1½ cups dry short grain brown rice",
+        "  1 15-oz. can no-salt-added adzuki beans, rinsed and drained (1½ cups)",
+        "  ¼ cup brown rice vinegar",
+        "  2 tablespoons pure maple syrup",
+        "  1½ cups chopped fresh mango",
+        "  1 tablespoon lime juice",
+        "  1 tablespoon sriracha sauce",
+        "  16 8-inch toasted nori sheets",
+        "  1 small avocado, halved, seeded, peeled, and thinly sliced"
+      ]
+    },
+    {
       "id": 7432,
       "title": "Air-Fried Arancini",
       "pct": 91,
@@ -23759,28 +23254,6 @@
         "  1½ tablespoons ground cumin",
         "  1½ teaspoon chili powder",
         "  8 100% corn tortillas, no salt or oil added"
-      ]
-    },
-    {
-      "id": 8116,
-      "title": "Chakalaka (South African Vegetable Relish)",
-      "pct": 91,
-      "haveCount": 10,
-      "needCount": 1,
-      "needNames": [
-        "baked beans"
-      ],
-      "haveNames": [
-        "carrots",
-        "red bell pepper",
-        "green bell pepper",
-        "onion",
-        "garlic",
-        "tomatoes",
-        "curry powder",
-        "paprika",
-        "vegetable oil",
-        "salt"
       ]
     },
     {
@@ -24810,82 +24283,6 @@
       ]
     },
     {
-      "id": 5741,
-      "title": "Green minestrone with mint pesto",
-      "pct": 92,
-      "haveCount": 24,
-      "needCount": 2,
-      "needNames": [
-        "½ cup of fresh broad beans, podded",
-        "2 cups of favourite beans (chickpeas, cannellini, black-eyed peas), cooked"
-      ],
-      "haveNames": [
-        "2 tbsp / 30 ml olive oil",
-        "3 garlic cloves, finely sliced",
-        "3 small shallots, finely diced",
-        "6 in / 10 cm leek (green part), finely sliced",
-        "2 carrots, diced finely",
-        "2 celery stalks, diced finely",
-        "½ small fennel bulb, finely sliced",
-        "8 small new potatoes",
-        "a few broccoli florets",
-        "small bunch of asparagus, cut into 2 cm pieces",
-        "½ cup fresh garden peas",
-        "6 baby courgettes, sliced into 1 cm slices",
-        "about 2 tsp salt (less if your stock contains salt)",
-        "black pepper, to taste",
-        "fresh lemon juice, to taste",
-        "1½ litres of vegetable stock, unsalted",
-        "toasted sourdough bread, to serve (optional)",
-        "10 almonds, chopped roughly",
-        "1 small garlic clove, sliced",
-        "pinch of coarse salt",
-        "leaves from 5 sprigs of mint, roughly chopped",
-        "juice of approx. ½ lemon",
-        "about 4 tbsp / 60 ml extra virgin olive oil",
-        "grind of black pepper"
-      ]
-    },
-    {
-      "id": 5787,
-      "title": "Indonesian gado-gado salad",
-      "pct": 92,
-      "haveCount": 26,
-      "needCount": 2,
-      "needNames": [
-        "handful of flat beans, cut into strips",
-        "1½ tbsp tamarind purée (or lime juice)"
-      ],
-      "haveNames": [
-        "1 carrot, julienned",
-        "1 red pepper, julienned",
-        "1 small courgette, shaved into ribbons with speed peeler",
-        "wedge of cabbage, shredded finely",
-        "a few cherry tomatoes",
-        "handful of spinach",
-        "½ small broccoli, divided into florets",
-        "100 g firm tofu, drained*",
-        "100 g vermicelli rice noodles (optional)",
-        "handful of fresh coriander (optional)",
-        "hot red chilli, finely sliced (optional)",
-        "2 wedges of lime",
-        "4 tbsp tamari (for GF version) or soy sauce",
-        "2 tbsp rice vinegar",
-        "2 tsp brown sugar",
-        "1 tsp sesame oil",
-        "1 garlic clove, minced",
-        "2 tsp grated ginger",
-        "125 g / ½ cup crunchy 100% natural peanut butter**",
-        "¼ cup / 60 ml coconut milk",
-        "1 tbsp tamari (for GF version) or soy sauce",
-        "½ tsp ground turmeric",
-        "½-¾ tsp hot ground chilli",
-        "1 garlic clove, minced",
-        "2 tsp grated ginger",
-        "1 tsp maple syrup or sugar"
-      ]
-    },
-    {
       "id": 6823,
       "title": "Garlicky Bok Choy Noodle Soup",
       "pct": 92,
@@ -24953,43 +24350,6 @@
         "  1 zucchini, quartered and sliced",
         "  1½ bunches Swiss chard leaves, thinly sliced (about 6 cups)",
         "  2 cups cooked elbow or fusilli pasta (eggless)"
-      ]
-    },
-    {
-      "id": 5771,
-      "title": "Chickpea and vegetable soup with pesto",
-      "pct": 92,
-      "haveCount": 24,
-      "needCount": 2,
-      "needNames": [
-        "2 small garlic cloves, finley chopped",
-        "a large handful of flat beans, cut into 3 cm pieces"
-      ],
-      "haveNames": [
-        "2 tbsp / 30 ml olive oil",
-        "1 red onion, finely sliced",
-        "1 medium fennel bulb, finely sliced",
-        "2 carrots, sliced in 1 cm pieces",
-        "4 celery stalks, sliced in 2 cm pieces",
-        "2-3 cups of cooked chickpeas",
-        "1 tbsp / 15 ml tomato paste",
-        "¼-½ tsp of hot chilli powder (depending on tolerance)",
-        "about 1½ tsp salt",
-        "2 tsp sugar",
-        "good grind of black pepper",
-        "1 tsp dried thyme",
-        "2 tsp dried oregano",
-        "1 litre of vegetable stock, unsalted",
-        "1 x 400g tin of plum tomatoes",
-        "toasted sourdough bread, to serve (optional)",
-        "1 small garlic clove, sliced",
-        "2 tbsp fresh parsley leaves",
-        "2 tbsp fresh basil leaves",
-        "pinch of coarse salt",
-        "handful of walnuts",
-        "3 tbsp / 45 ml extra virgin olive oil",
-        "squeeze of lemon",
-        "grind of black pepper"
       ]
     },
     {
@@ -26065,31 +25425,6 @@
       ]
     },
     {
-      "id": 5224,
-      "title": "Green beans with breadcrumbs",
-      "pct": 92,
-      "haveCount": 13,
-      "needCount": 1,
-      "needNames": [
-        "450 g / 15.8 oz runner beans"
-      ],
-      "haveNames": [
-        "60 g / ½ cup almonds",
-        "40 ml / 2½ tbsp olive oil, divided",
-        "40 g / ¾ cup coarse breadcrumbs (GF if needed)",
-        "1 large garlic clove, grated (or ½ tsp garlic powder)",
-        "½ tsp flaky salt, more to taste",
-        "1 tbsp nutritional yeast",
-        "½ tsp mild chilli flakes , optional",
-        "2 tsp thyme leaves (about 3 sprigs)",
-        "zest of 1 small lemon",
-        "15 ml / 1 tbsp extra virgin olive oil",
-        "15 ml / 1 tbsp lemon juice",
-        "7 ml /  ½ tbsp maple syrup",
-        "2 tbsp capers, drained and roughly chopped (optional)"
-      ]
-    },
-    {
       "id": 6972,
       "title": "Grilled Mushroom Burgers with Tarragon Crema",
       "pct": 92,
@@ -26205,6 +25540,30 @@
         "3/4 tsp salt",
         "1 tbsp nutritional yeast",
         "1 cup cashew milk ( 1/3 cup cashews  (and 1 tsp flour blended with 1 cup of water (use rice flour for gluten-free)))"
+      ]
+    },
+    {
+      "id": 2720,
+      "title": "Instant Pot Minestrone",
+      "pct": 92,
+      "haveCount": 12,
+      "needCount": 1,
+      "needNames": [
+        "gremolata"
+      ],
+      "haveNames": [
+        "beans- kidney",
+        "black pepper",
+        "carrots",
+        "chili flakes",
+        "couple chopped lacinato kale",
+        "fennel bulb",
+        "garlic cloves- rough",
+        "italian seasoning",
+        "olive oil",
+        "onion",
+        "salt",
+        "veggie broth"
       ]
     },
     {
@@ -26945,29 +26304,6 @@
       ]
     },
     {
-      "id": 2252,
-      "title": "Vegan Bánh Mì",
-      "pct": 92,
-      "haveCount": 11,
-      "needCount": 1,
-      "needNames": [
-        "bean curd"
-      ],
-      "haveNames": [
-        "butter baguette",
-        "carrots baguette",
-        "cilantro baguette",
-        "cucumber",
-        "do chua quick pickled daikon",
-        "olive oil",
-        "onion",
-        "red chili flakes",
-        "soy sauce",
-        "sugar",
-        "vegan mayo baguette"
-      ]
-    },
-    {
       "id": 5487,
       "title": "Vegan beetroot risotto",
       "pct": 92,
@@ -27551,6 +26887,31 @@
         "  ½ teaspoon ground nutmeg",
         "  ¼ teaspoon ground ginger",
         "  1 cup fresh or frozen blueberries"
+      ]
+    },
+    {
+      "id": 5183,
+      "title": "Borscht (beetroot soup)",
+      "pct": 92,
+      "haveCount": 13,
+      "needCount": 1,
+      "needNames": [
+        "approx. 120 ml / ½ cup fermented/sour beet juice (or sauerkraut brine), to taste*"
+      ],
+      "haveNames": [
+        "1 kg / 35 oz beetroots",
+        "2 tbsp / 30 ml olive oil",
+        "1 large onion, finely diced",
+        "5 garlic cloves, 4 finely sliced + 1 whole",
+        "½ tsp dried marjoram and thyme",
+        "3 all spice berries",
+        "2 bay leaves",
+        "salt and pepper to taste",
+        "1 litre / 4 cups veggie stock*",
+        "sugar or neutral sweetener, to taste",
+        "2 x 400 g / 14 oz cans haricot beans",
+        "fresh dill, to serve (optional)",
+        "vegan cream*, to serve (optional)"
       ]
     },
     {
@@ -28850,41 +28211,6 @@
         "salt",
         "tahini",
         "turmeric"
-      ]
-    },
-    {
-      "id": 4589,
-      "title": "Spanish Stew",
-      "pct": 92,
-      "haveCount": 22,
-      "needCount": 2,
-      "needNames": [
-        "x 400g can of haricot beans",
-        "plant-based sausages at"
-      ],
-      "haveNames": [
-        "oil",
-        "smoked paprika",
-        "coriander",
-        "fennel seeds",
-        "tomato purée",
-        "onion",
-        "garlic",
-        "x 400g can of tomatoes",
-        "red bell peppers",
-        "x 400g can of butter beans",
-        "peppercorns",
-        "cayenne",
-        "of thyme",
-        "thyme",
-        "garlic bulb",
-        "of parsley",
-        "vegan butter",
-        "salt & pepper",
-        "tiger bread bloomer",
-        "orange",
-        "parsley",
-        "lemons"
       ]
     },
     {
@@ -30278,31 +29604,6 @@
       ]
     },
     {
-      "id": 7089,
-      "title": "Middle Eastern Pita Pocket Sandwiches",
-      "pct": 93,
-      "haveCount": 13,
-      "needCount": 1,
-      "needNames": [
-        "  3 whole wheat pita rounds, halved crosswise and warmed"
-      ],
-      "haveNames": [
-        "  1 cup chopped yellow onion",
-        "  7 cloves garlic, minced",
-        "  1¼ cups cubed zucchini (1-inch cubes)",
-        "  1 cup cubed eggplant (1-inch cubes)",
-        "  1 cup bite-size strips red bell pepper",
-        "  1 teaspoon ground sumac",
-        "  ½ teaspoon ground cumin",
-        "  ¼ cup tahini",
-        "  2 tablespoons lemon juice",
-        "  2 tablespoons finely chopped fresh parsley",
-        "  Sea salt, to taste",
-        "  2 cups oil-free hummus",
-        "  2 cups shredded romaine lettuce"
-      ]
-    },
-    {
       "id": 2522,
       "title": "Quinoa Salad",
       "pct": 93,
@@ -30640,6 +29941,32 @@
       ]
     },
     {
+      "id": 5757,
+      "title": "Green detox stir-fry",
+      "pct": 93,
+      "haveCount": 14,
+      "needCount": 1,
+      "needNames": [
+        "1 tbsp oil with high smoke point"
+      ],
+      "haveNames": [
+        "200 g flat rice noodles",
+        "a large handful / 150 g green flat beans, sliced diagonally",
+        "small broccoli head, chopped into small pieces",
+        "4 large spring onions, sliced",
+        "½ red chilli, sliced thinly or ½ tsp hot chilli flakes",
+        "3 garlic cloves, sliced thinly",
+        "lime wedges, to serve",
+        "fresh coriander, to garnish",
+        "1 tbsp of oil",
+        "2 tsp sesame oil (for flavour)",
+        "1½ tbsp soft brown sugar or maple syrup",
+        "1½ tbsp rice vinegar or lime juice",
+        "3 tbsp tamari (for gluten-free version) or soy sauce",
+        "2 tsp finely grated ginger"
+      ]
+    },
+    {
       "id": 5308,
       "title": "Kale and green pea fritters",
       "pct": 93,
@@ -30870,33 +30197,6 @@
         "  4 cups fresh baby spinach",
         "  3 tablespoons chopped roasted pistachios",
         "  2 tablespoons chopped fresh chives"
-      ]
-    },
-    {
-      "id": 7201,
-      "title": "Rice Vermicelli Bowls with Bok Choy and Adzuki Beans",
-      "pct": 93,
-      "haveCount": 15,
-      "needCount": 1,
-      "needNames": [
-        "  1 15-oz. can no-salt-added adzuki beans, rinsed and drained (1½ cups)"
-      ],
-      "haveNames": [
-        "  1 32-oz. carton low-sodium vegetable broth",
-        "  4 cloves garlic, minced",
-        "  1 tablespoon grated fresh ginger",
-        "  ¼ teaspoon crushed red pepper",
-        "  3 to 4 heads baby bok choy, roughly chopped (1 lb. total)",
-        "  1 cup matchstick-cut red bell pepper",
-        "  ½ of a 14-oz. package lite firm tofu, drained, cut into ¼-inch cubes",
-        "  1 tablespoon miso paste, mixed with 2 tablespoons water",
-        "  1 8-oz. package dry thin brown rice noodles (rice vermicelli), broken",
-        "  4 oz. fresh enoki mushrooms",
-        "  ¼ cup bias-sliced scallions",
-        "  ¼ cup shredded radishes",
-        "  ¼ cup thinly sliced fresh Thai basil",
-        "  2 teaspoons black sesame seeds",
-        "  Sriracha sauce (optional)"
       ]
     },
     {
@@ -31813,6 +31113,32 @@
       ]
     },
     {
+      "id": 2501,
+      "title": "Quinoa Vegetable Soup",
+      "pct": 93,
+      "haveCount": 14,
+      "needCount": 1,
+      "needNames": [
+        "cup"
+      ],
+      "haveNames": [
+        "bay leaf",
+        "black pepper",
+        "carrots",
+        "celery",
+        "diced tomatoes",
+        "garlic",
+        "great northern beans",
+        "lemon juice",
+        "olive oil",
+        "quinoa",
+        "red pepper flakes",
+        "salt",
+        "thyme",
+        "vegetable broth"
+      ]
+    },
+    {
       "id": 5005,
       "title": "raw apple crumble",
       "pct": 93,
@@ -32701,57 +32027,6 @@
         "  1 cup frozen peas",
         "  Sea salt and freshly ground black pepper, to taste",
         "  1 tablespoon unsweetened plant milk, such as almond, soy, cashew, or rice"
-      ]
-    },
-    {
-      "id": 2744,
-      "title": "Vegetarian 15 Bean Soup",
-      "pct": 93,
-      "haveCount": 14,
-      "needCount": 1,
-      "needNames": [
-        "bean soup mix"
-      ],
-      "haveNames": [
-        "apple cider vinegar",
-        "black pepper",
-        "carrots",
-        "cayenne pepper",
-        "coconut oil",
-        "cumin",
-        "diced tomatoes",
-        "garlic",
-        "onion",
-        "oregano",
-        "parsley",
-        "ribs celery",
-        "salt",
-        "smoked paprika"
-      ]
-    },
-    {
-      "id": 6794,
-      "title": "Warm Roasted Vegetable Mixed Grain Salad with Creamy Vegan Dressing",
-      "pct": 93,
-      "haveCount": 13,
-      "needCount": 1,
-      "needNames": [
-        "  ½ cup canned no-salt-added garbanzo beans (chickpeas)"
-      ],
-      "haveNames": [
-        "  ½ cup unsweetened, unflavored plant-based milk",
-        "  2 tablespoons lemon juice",
-        "  1 tablespoon nutritional yeast",
-        "  1 teaspoon Dijon-style mustard",
-        "  ½ teaspoon dried thyme, crushed",
-        "  12 oz. whole cremini mushrooms, large mushrooms halved",
-        "  1½ cups fresh Brussels sprouts, halved",
-        "  1½ cups grape tomatoes",
-        "  2 large shallots, quartered",
-        "  1 head garlic, cloves separated and peeled",
-        "  Sea salt and freshly ground black pepper, to taste",
-        "  3 cups cooked whole grain blend",
-        "  2 tablespoons pine nuts, toasted"
       ]
     },
     {
@@ -34483,37 +33758,6 @@
       ]
     },
     {
-      "id": 5636,
-      "title": "Vegan chickpea pancake with spring veggies",
-      "pct": 94,
-      "haveCount": 19,
-      "needCount": 1,
-      "needNames": [
-        "½ cup cooked broad beans"
-      ],
-      "haveNames": [
-        "½ cup chickpea flour",
-        "¼ tsp baking soda",
-        "2 tsp lemon juice",
-        "1 tbsp nutritional yeast",
-        "white or black pepper",
-        "1/3 tsp salt",
-        "3 tbsp aquafaba",
-        "50 g silken tofu (optional)",
-        "1 tbsp olive oil",
-        "2 tbsp olive oil",
-        "2 garlic cloves, finely chopped",
-        "½ red chilli, deseeded and finely chopped",
-        "1 baby zucchini, sliced",
-        "5 asparagus spears, cut into smaller pieces",
-        "1-2 tbsp fresh dill, finely chopped",
-        "1 tbsp capers",
-        "a squeeze of lemon",
-        "2 tsp basil pesto (optional)",
-        "fresh rocket"
-      ]
-    },
-    {
       "id": 4530,
       "title": "Wusthof Roasted Five-Veg Pasta",
       "pct": 94,
@@ -34568,34 +33812,6 @@
         "1 ripe avocado",
         "50 g / 1.5 oz fresh spinach",
         "fresh coriander / cilantro leaves"
-      ]
-    },
-    {
-      "id": 7809,
-      "title": "Bean and Sweet Potato Enchiladas with Cilantro-Orange Crema",
-      "pct": 94,
-      "haveCount": 16,
-      "needCount": 1,
-      "needNames": [
-        "2 cups Instant Pot o’ Beans, undrained (see tip, recipe intro)"
-      ],
-      "haveNames": [
-        "  ½ cup raw cashews",
-        "  ¼ cup fresh cilantro",
-        "  2 tablespoons lime juice",
-        "  1 scallion, chopped",
-        "  2 teaspoons orange zest",
-        "  2 cups cubed peeled sweet potato",
-        "  1 8-oz. can no-salt-added tomato sauce",
-        "  2 teaspoons ancho chili powder",
-        "  1 teaspoon onion powder",
-        "  1 teaspoon garlic powder",
-        "  ½ teaspoon paprika",
-        "  8 6-inch whole wheat tortillas",
-        "  4 cups fresh baby kale, shredded",
-        "  4 cups fresh baby spinach, shredded",
-        "  ½ cup slivered red onion",
-        "  2 medium oranges, peeled and sectioned"
       ]
     },
     {
@@ -34793,33 +34009,6 @@
         "  1 cup thinly sliced cucumber",
         "  ½ cup thinly sliced red onion",
         "  1 tablespoon apple cider vinegar"
-      ]
-    },
-    {
-      "id": 4865,
-      "title": "Vegan ravioli with broad beans",
-      "pct": 94,
-      "haveCount": 15,
-      "needCount": 1,
-      "needNames": [
-        "cups podded beans"
-      ],
-      "haveNames": [
-        "oz 00 flour or all purpose flour",
-        "turmeric",
-        "+ 2 tbsp / 150 ml reduced aquafaba",
-        "garlic",
-        "mint leaves",
-        "lemon",
-        "nutritional yeast",
-        "¼ cup fine breadcrumbs",
-        "zest of 1 unwaxed lemon",
-        "chilli powder",
-        "salt & pepper",
-        "olive oil",
-        "lemon zest",
-        "chilli flakes",
-        "basil pesto"
       ]
     },
     {
@@ -35124,34 +34313,6 @@
         "¾ cucumber",
         "red cabbage",
         "green onion"
-      ]
-    },
-    {
-      "id": 5692,
-      "title": "Greek fava with caramelised onions",
-      "pct": 94,
-      "haveCount": 16,
-      "needCount": 1,
-      "needNames": [
-        "250g / 1¼ cups of Greek fava beans"
-      ],
-      "haveNames": [
-        "½ medium red onion, cut into smaller pieces",
-        "2 small garlic cloves, grated finely",
-        "¾-1 tsp fine salt, more to taste",
-        "1 bay leaf",
-        "2 tbsp of lemon juice",
-        "1 tsp dried thyme",
-        "freshly ground pepper",
-        "extra virgin olive oil",
-        "a few pinches of sweet paprika",
-        "2 tbsp capers, to serve",
-        "caramelised onions OR raw red onion, very finely sliced",
-        "2 medium red onions",
-        "1-2 tsp brown sugar",
-        "1 tbsp balsamic vinegar",
-        "30 ml / 2 tbsp olive oil",
-        "pinch of salt"
       ]
     },
     {
@@ -35771,35 +34932,6 @@
         "tahini",
         "thinly sliced red onion",
         "yellow squash"
-      ]
-    },
-    {
-      "id": 5821,
-      "title": "Vegan risotto with gremolata",
-      "pct": 94,
-      "haveCount": 17,
-      "needCount": 1,
-      "needNames": [
-        "200 g podded broad beans*"
-      ],
-      "haveNames": [
-        "3 tbsp olive oil",
-        "1 medium onion, finely chopped",
-        "2 cloves garlic, finely chopped",
-        "15 cm leek (green part), sliced thinly",
-        "750 ml hot vegetable stock",
-        "300 g risotto rice",
-        "175 ml glass dry white wine",
-        "500 g asparagus",
-        "salt",
-        "pepper",
-        "20 almonds",
-        "10 mint leaves",
-        "zest of 1 small lemon",
-        "2 tbsp lemon juice",
-        "1 heaped tbsp of nutritional yeast** (optional)",
-        "a pinch of salt",
-        "a small pinch of pepper"
       ]
     },
     {
@@ -37644,6 +36776,33 @@
       ]
     },
     {
+      "id": 4620,
+      "title": "Stuffed Long Beans",
+      "pct": 94,
+      "haveCount": 15,
+      "needCount": 1,
+      "needNames": [
+        "thai chilis"
+      ],
+      "haveNames": [
+        "long beans",
+        "firm tofu*",
+        "carrots",
+        "king oyster mushrooms",
+        "a handful of cilantro",
+        "salt",
+        "a few shakes of white pepper",
+        "garlic",
+        "oil for cooking",
+        "toasted sesame oil",
+        "cornstarch",
+        "toasted sesame seeds",
+        "soy sauce",
+        "hoisin sauce",
+        "bean paste"
+      ]
+    },
+    {
       "id": 4544,
       "title": "Super Quick Vegan 'Chicken' Biryani",
       "pct": 94,
@@ -38715,34 +37874,35 @@
       ]
     },
     {
-      "id": 2508,
-      "title": "Classic Minestrone Soup",
+      "id": 7096,
+      "title": "Cilantro Ranch Bean Salad",
       "pct": 95,
-      "haveCount": 19,
+      "haveCount": 20,
       "needCount": 1,
       "needNames": [
-        "seasonal vegetables"
+        "  2 fresh tomatillos, peeled and chopped (½ cup)"
       ],
       "haveNames": [
-        "bay leaf",
-        "black pepper",
-        "carrots",
-        "diced tomatoes",
-        "garlic",
-        "grain orecchiette",
-        "great northern beans",
-        "lemon juice",
-        "olive oil",
-        "onion",
-        "oregano",
-        "red pepper flakes",
-        "ribs celery",
-        "salt",
-        "spinach",
-        "thyme",
-        "tomato paste",
-        "vegan parmesan",
-        "vegetable broth"
+        "  6 to 7 oz. extra-firm lite silken tofu",
+        "  ½ cup unsweetened, unflavored plant-based milk",
+        "  ½ cup lightly packed cilantro leaves",
+        "  1 tablespoon lime juice",
+        "  1 clove garlic",
+        "  ¼ teaspoon onion powder",
+        "  ¼ teaspoon dry mustard",
+        "  ¼ teaspoon freshly ground black pepper",
+        "  Sea salt, to taste",
+        "  1 15-oz. can no-salt-added chickpeas, rinsed and drained (1½ cups)",
+        "  3 tablespoons nutritional yeast",
+        "  2 teaspoons chili powder",
+        "  2 cups frozen roasted corn",
+        "  4 cups chopped romaine lettuce",
+        "  4 cups fresh baby spinach",
+        "3 cups Instant Pot o' Beans, drained",
+        "  2 cups chopped tomatoes",
+        "  ½ cup slivered scallions",
+        "  ¼ cup sliced pitted ripe olives",
+        "  1 fresh jalapeño chile, thinly sliced and seeded"
       ]
     },
     {
@@ -38898,36 +38058,6 @@
         "  1 teaspoon paprika",
         "  1 tablespoon fresh lemon juice",
         "  Sea salt"
-      ]
-    },
-    {
-      "id": 4467,
-      "title": "Herby Spring Scramble",
-      "pct": 95,
-      "haveCount": 18,
-      "needCount": 1,
-      "needNames": [
-        "baby broad beans"
-      ],
-      "haveNames": [
-        "pack of extra firm tofu",
-        "vegan butter",
-        "silken tofu",
-        "almond milk",
-        "nutritional yeast",
-        "cornflour",
-        "turmeric",
-        "zest of 1 lemon",
-        "black salt",
-        "sea salt and black pepper",
-        "asparagus",
-        "plant-based feta",
-        "the juice of half a lemon",
-        "olive oil",
-        "thick slices crusty brown bread",
-        "za'atar",
-        "pinch of chilli flakes",
-        "pepper"
       ]
     },
     {
@@ -39216,39 +38346,6 @@
         "1 tsp salt, adjust to taste",
         "¼ tsp pepper, adjust to taste",
         "freshly ground nutmeg , to taste"
-      ]
-    },
-    {
-      "id": 5697,
-      "title": "Vegan Malabar curry",
-      "pct": 95,
-      "haveCount": 21,
-      "needCount": 1,
-      "needNames": [
-        "a handful of green flat beans, sliced thinly, on the diagonal"
-      ],
-      "haveNames": [
-        "2 medium tomatoes (400 g / 14 oz)",
-        "vegetable or coconut oil, for frying",
-        "2 small onions, diced finely",
-        "2 large garlic cloves, diced finely",
-        "5 cm / 2 \" piece of ginger, peeled and diced finely",
-        "1 tsp black mustard seeds",
-        "24 curry leaves, fresh or dried",
-        "½ tsp fenugreek seeds",
-        "½ tsp turmeric",
-        "1½-2 tsp hot chilli powder",
-        "2 tsp ground coriander",
-        "½-1 tbsp tamarind paste",
-        "240 ml / 1 cup full fat coconut milk",
-        "½ small cauliflower, divided into florets",
-        "50 g / 2 oz fresh spinach",
-        "1 cup cooked chickpeas",
-        "approx. ¾ tsp fine sea salt, adjust to taste",
-        "2 tsp sugar, I used coconut",
-        "favourite rice, to serve",
-        "toasted cashews, to serve (optional)",
-        "fresh coriander, to serve (optional)"
       ]
     },
     {
@@ -39735,6 +38832,36 @@
         "toasted sliced almonds",
         "white wine vinegar",
         "kale"
+      ]
+    },
+    {
+      "id": 5950,
+      "title": "Mung Bean Omelet (Vegan Omelet No Chickpea Flour } Dal Chilla",
+      "pct": 95,
+      "haveCount": 18,
+      "needCount": 1,
+      "needNames": [
+        "1-2 tsps blackening spice or creole spice blend"
+      ],
+      "haveNames": [
+        "1/2 cup pink/red/orange lentils (, Masoor dal )",
+        "1/2 cup yellow mung beans (, split mung bean (moong dal))",
+        "1 tsp salt (less or more to taste)",
+        "1 clove of garlic",
+        "1/4 tsp kala namak (black salt)",
+        "1-2 Tbsp nutrional yeast",
+        "1 tsp baking powder",
+        "1 tsp apple cider vinegar",
+        "2 teaspoons oil",
+        "1 cup chopped Okra",
+        "1 cup small broccoli florets",
+        "4 oz cubed Tempeh,",
+        "1/2 cup sliced sweet peppers or red bell pepper",
+        "1/2 tsp garlic powder",
+        "salt to taste",
+        "Havarti Cream Sauce (See notes) or Or use Daiya Garlic Jalapeno havarti Wedge (, or vegan ranch or mayo)",
+        "oil for cooking",
+        "chickpea flour"
       ]
     },
     {
@@ -40721,6 +39848,82 @@
       ]
     },
     {
+      "id": 5741,
+      "title": "Green minestrone with mint pesto",
+      "pct": 96,
+      "haveCount": 25,
+      "needCount": 1,
+      "needNames": [
+        "½ cup of fresh broad beans, podded"
+      ],
+      "haveNames": [
+        "2 tbsp / 30 ml olive oil",
+        "3 garlic cloves, finely sliced",
+        "3 small shallots, finely diced",
+        "6 in / 10 cm leek (green part), finely sliced",
+        "2 carrots, diced finely",
+        "2 celery stalks, diced finely",
+        "½ small fennel bulb, finely sliced",
+        "8 small new potatoes",
+        "a few broccoli florets",
+        "small bunch of asparagus, cut into 2 cm pieces",
+        "2 cups of favourite beans (chickpeas, cannellini, black-eyed peas), cooked",
+        "½ cup fresh garden peas",
+        "6 baby courgettes, sliced into 1 cm slices",
+        "about 2 tsp salt (less if your stock contains salt)",
+        "black pepper, to taste",
+        "fresh lemon juice, to taste",
+        "1½ litres of vegetable stock, unsalted",
+        "toasted sourdough bread, to serve (optional)",
+        "10 almonds, chopped roughly",
+        "1 small garlic clove, sliced",
+        "pinch of coarse salt",
+        "leaves from 5 sprigs of mint, roughly chopped",
+        "juice of approx. ½ lemon",
+        "about 4 tbsp / 60 ml extra virgin olive oil",
+        "grind of black pepper"
+      ]
+    },
+    {
+      "id": 5787,
+      "title": "Indonesian gado-gado salad",
+      "pct": 96,
+      "haveCount": 27,
+      "needCount": 1,
+      "needNames": [
+        "1½ tbsp tamarind purée (or lime juice)"
+      ],
+      "haveNames": [
+        "1 carrot, julienned",
+        "1 red pepper, julienned",
+        "1 small courgette, shaved into ribbons with speed peeler",
+        "wedge of cabbage, shredded finely",
+        "a few cherry tomatoes",
+        "handful of spinach",
+        "handful of flat beans, cut into strips",
+        "½ small broccoli, divided into florets",
+        "100 g firm tofu, drained*",
+        "100 g vermicelli rice noodles (optional)",
+        "handful of fresh coriander (optional)",
+        "hot red chilli, finely sliced (optional)",
+        "2 wedges of lime",
+        "4 tbsp tamari (for GF version) or soy sauce",
+        "2 tbsp rice vinegar",
+        "2 tsp brown sugar",
+        "1 tsp sesame oil",
+        "1 garlic clove, minced",
+        "2 tsp grated ginger",
+        "125 g / ½ cup crunchy 100% natural peanut butter**",
+        "¼ cup / 60 ml coconut milk",
+        "1 tbsp tamari (for GF version) or soy sauce",
+        "½ tsp ground turmeric",
+        "½-¾ tsp hot ground chilli",
+        "1 garlic clove, minced",
+        "2 tsp grated ginger",
+        "1 tsp maple syrup or sugar"
+      ]
+    },
+    {
       "id": 7146,
       "title": "Roasted Eggplant Gyros with Watermelon Rind Pickles",
       "pct": 96,
@@ -40863,6 +40066,43 @@
         "1 tbsp rice vinegar or lime juice",
         "2 tsp toasted sesame oil",
         "1-2 tsp hot chilli paste , adjust to taste"
+      ]
+    },
+    {
+      "id": 5771,
+      "title": "Chickpea and vegetable soup with pesto",
+      "pct": 96,
+      "haveCount": 25,
+      "needCount": 1,
+      "needNames": [
+        "2 small garlic cloves, finley chopped"
+      ],
+      "haveNames": [
+        "2 tbsp / 30 ml olive oil",
+        "1 red onion, finely sliced",
+        "1 medium fennel bulb, finely sliced",
+        "2 carrots, sliced in 1 cm pieces",
+        "4 celery stalks, sliced in 2 cm pieces",
+        "a large handful of flat beans, cut into 3 cm pieces",
+        "2-3 cups of cooked chickpeas",
+        "1 tbsp / 15 ml tomato paste",
+        "¼-½ tsp of hot chilli powder (depending on tolerance)",
+        "about 1½ tsp salt",
+        "2 tsp sugar",
+        "good grind of black pepper",
+        "1 tsp dried thyme",
+        "2 tsp dried oregano",
+        "1 litre of vegetable stock, unsalted",
+        "1 x 400g tin of plum tomatoes",
+        "toasted sourdough bread, to serve (optional)",
+        "1 small garlic clove, sliced",
+        "2 tbsp fresh parsley leaves",
+        "2 tbsp fresh basil leaves",
+        "pinch of coarse salt",
+        "handful of walnuts",
+        "3 tbsp / 45 ml extra virgin olive oil",
+        "squeeze of lemon",
+        "grind of black pepper"
       ]
     },
     {
@@ -41686,6 +40926,41 @@
         "1/2 teaspoon cinnamon powder",
         "1.5 teaspoon vinegar",
         "raisins and cranberries"
+      ]
+    },
+    {
+      "id": 4589,
+      "title": "Spanish Stew",
+      "pct": 96,
+      "haveCount": 23,
+      "needCount": 1,
+      "needNames": [
+        "plant-based sausages at"
+      ],
+      "haveNames": [
+        "oil",
+        "smoked paprika",
+        "coriander",
+        "fennel seeds",
+        "tomato purée",
+        "onion",
+        "garlic",
+        "x 400g can of tomatoes",
+        "red bell peppers",
+        "x 400g can of butter beans",
+        "x 400g can of haricot beans",
+        "peppercorns",
+        "cayenne",
+        "of thyme",
+        "thyme",
+        "garlic bulb",
+        "of parsley",
+        "vegan butter",
+        "salt & pepper",
+        "tiger bread bloomer",
+        "orange",
+        "parsley",
+        "lemons"
       ]
     },
     {

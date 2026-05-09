@@ -83,7 +83,7 @@ function preClean(rawIng) {
   //   "wheat or rice noodles"                  → "rice noodles"
   //   "wheat or chickpea pasta"                → "chickpea pasta"
   //   "spelt or oat flour"                     → "oat flour"
-  s = s.replace(/\b(?:whole\s+wheat|wheat|spelt|rye|barley)\s+or\s+(brown\s+rice|rice|chickpea|red\s+lentil|lentil|almond|oat|coconut|cassava|tapioca|buckwheat|quinoa)\b/gi, '$1');
+  s = s.replace(/\b(?:whole\s+wheat|wheat|spelt|rye|barley)\s+(?:tortillas?|tortilla|bread|noodles?|noodle|pasta|macaroni|penne|linguine|spaghetti|fettuccine|rotini|fusilli|angel\s+hair|orzo|rigatoni|farfalle|bun|buns|wrap|wraps)?\s*or\s+(\d+\s+)?(brown\s+rice|rice|chickpea|red\s+lentil|lentil|almond|oat|coconut|cassava|tapioca|buckwheat|quinoa|corn)\b/gi, '$2$3');
 
   // Strip " or X" alternatives, with or without leading comma. Anything after
   // "or" + a quantity is almost always an alternative form/quantity:
@@ -127,6 +127,15 @@ function preClean(rawIng) {
 // After stripMeasure + norm, certain stems still need handling.
 function postClean(s) {
   if (!s) return s;
+  // CELIAC SAFETY: strip "wheat" / "whole wheat" prefix entirely. HARVEST
+  // is gluten-free by default. Showing "wheat macaroni" or "wheat bread"
+  // to a celiac user is dangerous misinformation — they'd think they need
+  // wheat. Remaining "wheat X" recipes (after the gluten filter removes
+  // wheat berries / wheat starch / wheat gluten / wheat flakes) are pasta,
+  // bread, flour, tortillas, noodles — all of which have GF equivalents
+  // (covered by _GF_MATCH_SWAPS in matching.js). The bare canonical names
+  // ("macaroni", "bread", "pasta") match the GF pantry items correctly.
+  s = s.replace(/\b(?:whole\s+wheat|wheat)\s+/g, '');
   // Leading "of " / "can " / "cans " / "tin " / "and " etc. that survived earlier stripping
   // (these often appear after parenthetical can-size annotations get stripped,
   // or after NOISE strips a leading prep word leaving "and X")
@@ -379,8 +388,12 @@ const NON_INGREDIENT_RESULTS = new Set([
   'herbs','herb','fresh herbs','herb sprigs','fresh herb sprigs','mixed herbs',
   'spices','spice','spice blend','seasonings','dried spices',
   'nuts','nuts and seeds','seeds','dried fruit','dried fruits','toppings of choice',
-  'vegetables','veggies','greens','grains','protein','starch',
+  'vegetables','veggies','greens','grains','protein','starch','root vegetables',
+  'winter vegetables','summer vegetables','starchy vegetables','leafy vegetables',
+  'frozen vegetables','mixed vegetables','assorted vegetables','seasonal vegetables',
+  'mirepoix','soffritto','holy trinity',
   'sugar substitute','sweetener of choice','milk of choice','flour of choice',
+  'beans of choice','grain of choice','vegetable of choice','protein of choice',
 ]);
 
 function canonicalizeOne(rawIng, isCanned) {
