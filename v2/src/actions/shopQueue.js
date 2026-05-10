@@ -25,18 +25,17 @@ export function shopAndQueue(id, missingNames = []) {
     list.push(id);
     set('makelist', list);
   }
-  // Add recipe id to shopRecipes so the Shopping tab groups its ingredients
-  // under the recipe's name (instead of "Additional Items").
+  // Add recipe id to shopRecipes — the Shopping tab DERIVES this recipe's
+  // missing ingredients from the recipe data and renders them under the
+  // recipe's title. We deliberately do NOT push the ingredients into
+  // shopList here, otherwise they'd appear twice (once in the recipe
+  // section, once duplicated under "Additional Items").
+  // shopList is for AD-HOC items only — things the user types manually
+  // in the Shopping tab that aren't tied to any recipe.
   const shopRecipes = get('shopRecipes') || [];
   if (!shopRecipes.includes(id)) {
     shopRecipes.push(id);
     set('shopRecipes', shopRecipes);
-  }
-  // Add missing ingredients to shopping list (deduped via Set)
-  if (missingNames.length) {
-    const shopSet = new Set(get('shopList') || []);
-    missingNames.forEach(n => shopSet.add(n));
-    set('shopList', [...shopSet]);
   }
   autoSync();
   const n = missingNames.length;

@@ -193,6 +193,11 @@ function _buildShopData() {
   const staples = getRef('staples');
 
   let recipeCards = [];
+  // Build a set of every ingredient that's already covered by a recipe
+  // section, so we can dedupe the manual list against it. This catches
+  // legacy entries left in shopList from before the shopAndQueue fix that
+  // was double-writing ingredients into both shopRecipes and shopList.
+  const coveredByRecipe = new Set();
 
   if (shopIds.length) {
     const makeRecipes = shopIds.map(id => _recipes.find(r => r.id === id)).filter(Boolean);
@@ -210,10 +215,24 @@ function _buildShopData() {
         totalIngs: r.ing ? r.ing.length : 0,
         haveCount: r.ing ? r.ing.length - (r.needNames ? r.needNames.length : 0) : 0,
       }));
+
+      // Add every recipe ingredient (raw and GF-swapped form) to the dedupe set
+      matched.forEach(r => {
+        (r.needNames || []).forEach(n => {
+          coveredByRecipe.add(n);
+          coveredByRecipe.add(_applyGfSwap(n));
+        });
+        (r.ing || []).forEach(n => coveredByRecipe.add(n));
+      });
     }
   }
 
-  return { recipeCards, manualItems: manualItems.map(_applyGfSwap) };
+  // Filter manualItems to drop anything already in a recipe section
+  const dedupedManualItems = manualItems
+    .filter(item => !coveredByRecipe.has(item))
+    .map(_applyGfSwap);
+
+  return { recipeCards, manualItems: dedupedManualItems };
 }
 
 /* ── Main render ─────────────────────────────────────────────── */
