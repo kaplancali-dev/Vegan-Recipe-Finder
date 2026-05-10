@@ -283,17 +283,13 @@ function wireEvents() {
       return;
     }
 
-    // I Made This — when triggered from Make Soon, the recipe completes its
-    // planning → cooking → done lifecycle. handleCook handles the cascade
-    // (cookHistory + remove from makelist + remove from shopRecipes) atomically
-    // so cancelling the rating dialog doesn't leave the lists in a half-state.
+    // I Made This — handleCook handles the cascade unconditionally:
+    // cookHistory entry + remove from makelist + remove from shopRecipes.
+    // Atomic — if user cancels the rating, nothing changes.
     const cookBtn = t.closest('[data-wm-cook]');
     if (cookBtn) {
       const id = Number(cookBtn.dataset.wmCook);
-      handleCook(id, {
-        title: cookBtn.dataset.wmCookTitle,
-        removeFromMakelist: true,
-      });
+      handleCook(id, { title: cookBtn.dataset.wmCookTitle });
       return;
     }
 
