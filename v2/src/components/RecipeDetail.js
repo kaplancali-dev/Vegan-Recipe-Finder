@@ -11,6 +11,7 @@ import { openRecipeLink } from '../utils/safe-link.js';
 import { get, set } from '../state/store.js';
 import { autoSync, reportBrokenLink } from '../services/sync.js';
 import { ingredientMatches, expandWithAliases, findRecipes, isPerishableIng } from '../services/matching.js';
+import { shopAndQueue } from '../actions/shopQueue.js';
 import { shareRecipe } from '../actions/share.js';
 import { toggleFavorite } from '../actions/favorites.js';
 import { showToast } from '../utils/toast.js';
@@ -177,11 +178,9 @@ function _wireActionButtons(recipe, missingIngs = []) {
   const shopBtn = document.getElementById('detailShopBtn');
   if (shopBtn && missingIngs.length) {
     shopBtn.addEventListener('click', () => {
-      const currentShop = get('shopList');
-      const shopSet = new Set(currentShop);
-      missingIngs.forEach(ing => shopSet.add(ing));
-      set('shopList', [...shopSet]);
-      autoSync();
+      // Use the shared helper so the Shopping tab groups ingredients under
+      // this recipe's title (vs falling into "Additional Items").
+      shopAndQueue(recipe.id, missingIngs);
       shopBtn.textContent = '✓ Added!';
       shopBtn.disabled = true;
     });

@@ -25,6 +25,13 @@ export function shopAndQueue(id, missingNames = []) {
     list.push(id);
     set('makelist', list);
   }
+  // Add recipe id to shopRecipes so the Shopping tab groups its ingredients
+  // under the recipe's name (instead of "Additional Items").
+  const shopRecipes = get('shopRecipes') || [];
+  if (!shopRecipes.includes(id)) {
+    shopRecipes.push(id);
+    set('shopRecipes', shopRecipes);
+  }
   // Add missing ingredients to shopping list (deduped via Set)
   if (missingNames.length) {
     const shopSet = new Set(get('shopList') || []);
