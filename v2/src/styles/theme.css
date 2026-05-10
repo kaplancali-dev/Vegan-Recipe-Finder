@@ -3011,13 +3011,19 @@ input, select, textarea {
 
 .detail-actions {
   display: flex;
-  gap: 6px;
-  flex-wrap: wrap;
+  gap: 4px;
+  flex-wrap: nowrap;
+  overflow-x: auto;        /* safety: if it still doesn't fit, scroll instead of wrapping */
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;   /* Firefox: hide scrollbar */
 }
+.detail-actions::-webkit-scrollbar { display: none; }  /* WebKit: hide scrollbar */
 .detail-actions .btn,
 .detail-actions .detail-link {
-  padding: 7px 12px;
-  font-size: 0.82rem;
+  padding: 7px 10px;
+  font-size: 0.78rem;
+  white-space: nowrap;     /* keep each button label on one line */
+  flex: 0 0 auto;
 }
 
 .detail-link {
