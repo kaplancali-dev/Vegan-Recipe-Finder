@@ -328,13 +328,28 @@ function renderShopTab() {
       return;
     }
 
-    // Delete recipe from shopping list
+    // Delete recipe from shopping list — removes BOTH the recipe section
+    // AND that recipe's missing ingredients from the shopping list.
+    // (Without removing the ingredients, they'd silently move to "Additional
+    // Items" and look like they came back on refresh.)
     const deleteBtn = e.target.closest('[data-delete-recipe]');
     if (deleteBtn) {
       e.stopPropagation();
       const id = Number(deleteBtn.dataset.deleteRecipe);
-      const current = get('shopRecipes');
-      set('shopRecipes', current.filter(i => i !== id));
+      // Find this recipe's missing-ingredient strings to remove from shopList
+      const card = recipeCards.find(r => r.id === id);
+      const ingsToRemove = new Set(card ? card.missing : []);
+      // Also include the un-GF-swapped raw versions in case shopList stored them
+      const recipe = _recipes.find(r => r.id === id);
+      if (recipe && recipe.ing) {
+        recipe.ing.forEach(rawIng => ingsToRemove.add(rawIng));
+      }
+      // Update shopRecipes
+      const currentRecipes = get('shopRecipes');
+      set('shopRecipes', currentRecipes.filter(i => i !== id));
+      // Update shopList — remove any ingredient that belonged to this recipe
+      const currentShop = get('shopList') || [];
+      set('shopList', currentShop.filter(ing => !ingsToRemove.has(ing)));
       autoSync();
       showToast('Off the list — one less thing');
       return;

@@ -319,16 +319,29 @@ function wireEvents() {
       return;
     }
 
-    // Remove from Want to Make
+    // Remove from Make Soon — cascade cleanup since the recipe is being
+    // abandoned entirely. Removes:
+    //   - recipe from makelist
+    //   - recipe from shopRecipes (the section header in Shopping)
+    //   - the recipe's missing ingredients from shopList
+    // (vs. Shopping X which only affects the shopping side and leaves
+    // Make Soon intact — for cases like "I have substitutes already")
     const removeBtn = t.closest('[data-wm-remove]');
     if (removeBtn) {
       const id = Number(removeBtn.dataset.wmRemove);
       const current = get('makelist');
       set('makelist', current.filter(i => i !== id));
-      // Also remove from shopRecipes if present
-      const shopCurrent = get('shopRecipes');
+      const shopCurrent = get('shopRecipes') || [];
       if (shopCurrent.includes(id)) {
         set('shopRecipes', shopCurrent.filter(i => i !== id));
+      }
+      // Clean shopList of this recipe's ingredients so they don't linger
+      // under "Additional Items" after the recipe is gone.
+      const recipe = _recipes.find(r => r.id === id);
+      if (recipe && recipe.ing) {
+        const ingsToRemove = new Set(recipe.ing);
+        const currentShop = get('shopList') || [];
+        set('shopList', currentShop.filter(ing => !ingsToRemove.has(ing)));
       }
       autoSync();
       showToast('Unqueued — maybe next week');
