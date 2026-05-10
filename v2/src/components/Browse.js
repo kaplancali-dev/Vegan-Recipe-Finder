@@ -18,6 +18,7 @@ import { openDetail } from './RecipeDetail.js';
 import { showToast } from '../utils/toast.js';
 import { handleCook } from '../actions/cook.js';
 import { shopAndQueue } from '../actions/shopQueue.js';
+import { correctSearchQuery } from '../utils/searchCorrection.js';
 import { buildAllergenFilterChips } from './AllergenChips.js';
 
 /** How many recipes to show per page */
@@ -60,6 +61,9 @@ let _searchTimer = null;
 
 /** Pending render frame ID (for cancelling stale renders) */
 let _pendingRender = 0;
+
+/** When user clicks "use original" in the correction banner, skip correction */
+let _suppressCorrection = false;
 
 /**
  * Initialize the Browse tab.
@@ -147,8 +151,21 @@ function wireControls() {
       clearTimeout(_searchTimer);
       _searchTimer = setTimeout(() => {
         _nameSearch = searchInput.value.trim();
+        _suppressCorrection = false;  // re-enable correction on new typing
         renderResults();
       }, 250);
+    });
+  }
+
+  // "Use original" link in correction banner — disable correction once
+  const banner = $('#searchCorrection');
+  if (banner) {
+    banner.addEventListener('click', (e) => {
+      const undo = e.target.closest('#searchUndoCorrection');
+      if (!undo) return;
+      e.preventDefault();
+      _suppressCorrection = true;
+      renderResults();
     });
   }
 
@@ -212,13 +229,23 @@ function _runRender() {
   const staples = getRef('staples');
   const favs = new Set(getRef('favorites'));
 
+  // Apply typo correction. The user's typed text in #nameSearch is preserved;
+  // we just run the search against the corrected version. If something was
+  // corrected, we'll show a banner above the results.
+  let effectiveSearch = _nameSearch || '';
+  let correction = { corrected: effectiveSearch, original: effectiveSearch, changed: false };
+  if (effectiveSearch && !_suppressCorrection) {
+    correction = correctSearchQuery(effectiveSearch, _recipes);
+    effectiveSearch = correction.corrected;
+  }
+
   let results = findRecipes({
     recipes: _recipes,
     ingredients: ings,
     staples,
     selectedCats: _selectedCats.size ? [..._selectedCats] : [],
     maxTime: _maxTime === Infinity ? undefined : _maxTime,
-    nameSearch: _nameSearch || '',
+    nameSearch: effectiveSearch,
     allergies: _allergies.size ? _allergies : new Set(),
   });
 
@@ -236,6 +263,18 @@ function _runRender() {
   const meta = $('#resultsMeta');
   if (meta) {
     meta.innerHTML = `<strong>${results.length}</strong> <span class="count-label">recipe${results.length !== 1 ? 's' : ''}</span>`;
+  }
+
+  // Render typo-correction banner ("Showing results for X — searched 'Y'")
+  const correctionBanner = $('#searchCorrection');
+  if (correctionBanner) {
+    if (correction.changed) {
+      correctionBanner.innerHTML = `Showing results for <strong>${escHTML(correction.corrected)}</strong> &middot; <a href="#" id="searchUndoCorrection">use "${escHTML(correction.original)}" instead</a>`;
+      correctionBanner.hidden = false;
+    } else {
+      correctionBanner.hidden = true;
+      correctionBanner.innerHTML = '';
+    }
   }
 
   // Render active filter tags

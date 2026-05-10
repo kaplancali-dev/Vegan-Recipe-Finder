@@ -1515,6 +1515,24 @@ input, select, textarea {
   justify-content: flex-start;
   align-items: center;
 }
+
+/* Search-correction banner — shows when typo correction was applied */
+.search-correction {
+  margin: 8px 0 12px;
+  padding: 8px 12px;
+  background: #fff8e8;
+  border: 1px solid #f0d9a4;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  color: #6b5520;
+}
+.search-correction strong { color: var(--green); }
+.search-correction a {
+  color: #8a6f2c;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.search-correction a:hover { color: #6b5520; }
 .r-actions .btn-sm {
   font-size: 0.72rem;
   padding: 5px 10px;
