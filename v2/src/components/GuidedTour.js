@@ -37,7 +37,7 @@ const STEPS = [
     target: '#btn-wantmake',
     tab: 'wantmake',
     title: 'Your cooking intentions live here',
-    body: "Queue up recipes you want to make this week. When it's grocery day, tap the cart to send missing ingredients straight to your shopping list.",
+    body: "Stash recipes here for the next few days. When it's grocery day, pick which ones you'll cook and send their missing ingredients straight to your shopping list.",
     arrow: 'top',
   },
   {

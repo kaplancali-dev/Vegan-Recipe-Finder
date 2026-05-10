@@ -70,7 +70,7 @@
         🍳 Your Matches
         <span id="readyCount" class="badge"></span>
       </button>
-      <button class="tab-btn" data-tab="wantmake" role="tab" aria-selected="false" aria-controls="tab-wantmake" id="btn-wantmake">📌 My Queue</button>
+      <button class="tab-btn" data-tab="wantmake" role="tab" aria-selected="false" aria-controls="tab-wantmake" id="btn-wantmake">📌 Make Soon</button>
       <button class="tab-btn" data-tab="madeit" role="tab" aria-selected="false" aria-controls="tab-madeit" id="btn-madeit">✅ Made It</button>
       <button class="tab-btn" data-tab="favorites" role="tab" aria-selected="false" aria-controls="tab-favorites" id="btn-favorites">❤️ Favorites</button>
       <button class="tab-btn" data-tab="shopping" role="tab" aria-selected="false" aria-controls="tab-shopping" id="btn-shopping">🛒 Shopping</button>
@@ -293,11 +293,11 @@
       </div>
     </section>
 
-    <!-- MY QUEUE TAB -->
+    <!-- MAKE SOON TAB -->
     <section id="tab-wantmake" class="tab-panel" role="tabpanel" aria-labelledby="btn-wantmake" hidden>
       <div class="section-intro">
-        <h2>📌 My Queue</h2>
-        <p style="font-size:0.82rem;color:var(--ink-soft);margin-top:2px">Your meal planning hub. Rate, track, and send to shopping.</p>
+        <h2>📌 Make Soon</h2>
+        <p style="font-size:0.82rem;color:var(--ink-soft);margin-top:2px">Recipes you're planning to cook in the next few days. Pick the ones you'll shop for and send their ingredients to your shopping list.</p>
       </div>
       <div id="wmSubTabs" class="wm-subtab-bar">
         <button class="wm-subtab on" data-wm-sub="recipes">📌 Recipes</button>
@@ -305,7 +305,7 @@
       </div>
       <div id="wantMakeList"></div>
       <div id="wantMakeEmpty" class="empty-state" hidden>
-        <p>Nothing queued up yet. Tap 📌 My Queue on any recipe to start building your week.</p>
+        <p>Nothing queued up yet. Tap 📌 Make Soon on any recipe to start building your week.</p>
       </div>
       <div id="wmHistoryList" hidden></div>
     </section>
@@ -374,7 +374,7 @@
             <button id="clearShopBtn" class="btn btn-outline btn-sm">Clear All</button>
           </div>
         </div>
-        <p style="font-size:0.82rem;color:var(--ink-soft);margin-top:2px">Nothing to buy yet. Queue up recipes and we'll build the list for you.</p>
+        <p style="font-size:0.82rem;color:var(--ink-soft);margin-top:2px">Nothing to buy yet. Add recipes to Make Soon, then send their missing ingredients here.</p>
       </div>
       <div id="shopList" class="shop-list"></div>
       <div id="shopEmpty" class="empty-state" hidden>
@@ -437,7 +437,7 @@
 
             <p style="margin-top:12px"><strong>3. Plan, shop, cook</strong></p>
             <ol class="about-steps">
-              <li>Tap <strong>📌 My Queue</strong> on any recipe card to save it. When you're ready to shop, tap 🛒 to send it to Shopping.</li>
+              <li>Tap <strong>📌 Make Soon</strong> on any recipe card to save it. When you're ready to shop, tap 🛒 to send it to Shopping.</li>
               <li><strong>🛒 Shopping</strong> shows only recipes you've sent, with checkboxes for each missing ingredient. Tap 📤 to share the list.</li>
               <li>After cooking, tap <strong>✅ I Made This</strong> to rate it 1–5 stars and log whether you'd make it again. You'll also get a quick option to share the recipe with a friend.</li>
             </ol>
@@ -446,7 +446,7 @@
             <ol class="about-steps">
               <li><strong>Made It</strong> (inside ❤️ Favorites) is your cooking journal. It shows every recipe you've cooked, the date you first made it, and your star rating.</li>
               <li>Tap the stars to update your rating anytime. Tap ✕ to remove an entry.</li>
-              <li>My Queue's <strong>History</strong> sub-tab shows the same log with sortable columns. Sort by recipe name, rating, date, or "Would make again."</li>
+              <li>Make Soon's <strong>History</strong> sub-tab shows the same log with sortable columns. Sort by recipe name, rating, date, or "Would make again."</li>
             </ol>
 
             <p style="margin-top:12px"><strong>Good to know</strong></p>

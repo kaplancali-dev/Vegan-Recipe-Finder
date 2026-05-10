@@ -207,7 +207,7 @@ function renderROTD() {
         ${benefitsHtml ? `<div class="rotd-benefits"><div class="rotd-benefits-label">🌿 Health Benefits</div>${benefitsHtml}</div>` : ''}
         <div class="rotd-actions">
           ${r.url ? `<a href="#" class="btn-sm btn-link" data-recipe-url="${escHTML(r.url)}" data-recipe-title="${escHTML(r.title)}" data-recipe-site="${escHTML(r.site || '')}">📖 View Instructions</a>` : ''}
-          <button class="btn-sm btn-shop make-btn${isQueued ? ' on' : ''}" data-make-id="${r.id}">${isQueued ? '✓ My Queue' : '📌 My Queue'}</button>
+          <button class="btn-sm btn-shop make-btn${isQueued ? ' on' : ''}" data-make-id="${r.id}">${isQueued ? '✓ Make Soon' : '📌 Make Soon'}</button>
           <button class="btn-sm btn-fav fav-btn${isFav ? ' on' : ''}" data-fav-id="${r.id}">${isFav ? '❤️ Favorited' : '🤍 Favorite'}</button>
           <button class="btn-sm btn-cook cook-btn" data-cook-id="${r.id}">${cookLabel}</button>
           <button class="btn-sm btn-share share-btn" data-share-id="${r.id}" data-share-title="${escHTML(r.title)}" data-share-url="${escHTML(r.url || '')}">📤 Share</button>
@@ -236,7 +236,7 @@ function renderROTD() {
       } else {
         current.push(id);
         set('makelist', current);
-        showToast('Queued — this week is looking good 📌');
+        showToast('Added to Make Soon 📌');
       }
       autoSync();
       return;

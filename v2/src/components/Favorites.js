@@ -236,7 +236,7 @@ function renderFavList() {
       } else {
         current.push(id);
         set('makelist', current);
-        showToast('Queued — this week is looking good 📌');
+        showToast('Added to Make Soon 📌');
       }
       autoSync();
       return;

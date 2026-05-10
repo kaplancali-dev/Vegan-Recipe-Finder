@@ -193,12 +193,12 @@ function _wireActionButtons(recipe, missingIngs = []) {
       const current = get('makelist') || [];
       if (current.includes(id)) {
         set('makelist', current.filter(i => i !== id));
-        queueBtn.textContent = '📌 Queue';
+        queueBtn.textContent = '📌 Make Soon';
         showToast('Unqueued — maybe next week');
       } else {
         current.push(id);
         set('makelist', current);
-        queueBtn.textContent = '✓ Queue';
+        queueBtn.textContent = '✓ Make Soon';
         showToast('Queued — this week is looking good 📌');
       }
       autoSync();
@@ -310,7 +310,7 @@ function _renderNewVisitorDetail(recipe) {
     <div class="detail-actions" style="margin-top:12px">
       ${recipe.url ? `<a href="#" class="detail-link" data-recipe-url="${escHTML(recipe.url)}" data-recipe-title="${escHTML(recipe.title)}" data-recipe-site="${escHTML(recipe.site || '')}">📖 Instructions ↗</a>` : ''}
       <button class="btn btn-primary" id="detailFavBtn">${_isFav(recipe.id) ? '❤️ Fav' : '🤍 Fav'}</button>
-      <button class="btn btn-outline" id="detailQueueBtn">${_isQueued(recipe.id) ? '✓ Queue' : '📌 Queue'}</button>
+      <button class="btn btn-outline" id="detailQueueBtn">${_isQueued(recipe.id) ? '✓ Make Soon' : '📌 Make Soon'}</button>
       <button class="btn btn-outline" id="detailCookBtn">☐ Made It</button>
       <button class="btn btn-outline" id="detailShareBtn">📤 Share</button>
     </div>
@@ -453,7 +453,7 @@ function _renderFullDetail(recipe, ings, staples) {
     <div class="detail-actions">
       ${recipe.url ? `<a href="#" class="detail-link" data-recipe-url="${escHTML(recipe.url)}" data-recipe-title="${escHTML(recipe.title)}" data-recipe-site="${escHTML(recipe.site || '')}">📖 Instructions ↗</a>` : ''}
       <button class="btn btn-primary" id="detailFavBtn">${isFav ? '❤️ Fav' : '🤍 Fav'}</button>
-      <button class="btn btn-outline" id="detailQueueBtn">${isQueued ? '✓ Queue' : '📌 Queue'}</button>
+      <button class="btn btn-outline" id="detailQueueBtn">${isQueued ? '✓ Make Soon' : '📌 Make Soon'}</button>
       ${missingIngs.length ? `<button class="btn btn-outline" id="detailShopBtn">🛒 +${missingIngs.length}</button>` : ''}
       <button class="btn btn-outline" id="detailCookBtn">${lastCook ? `✅ ${new Date(lastCook.date).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}` : '☐ Made It'}</button>
       <button class="btn btn-outline" id="detailShareBtn">📤 Share</button>

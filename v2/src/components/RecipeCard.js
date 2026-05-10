@@ -202,7 +202,7 @@ export function renderCard(result, opts = {}) {
 
   // Action buttons — compact inline (matches ROTD style)
   const favLabel = isFavorite ? '❤️ Fav' : '🤍 Fav';
-  const makeLabel = isOnMakeList ? '✓ Queue' : '📌 Queue';
+  const makeLabel = isOnMakeList ? '✓ Make Soon' : '📌 Make Soon';
 
   // Cook button label — show date and star rating if available
   const lastEntry = cookedDates.length ? cookedDates[cookedDates.length - 1] : null;
