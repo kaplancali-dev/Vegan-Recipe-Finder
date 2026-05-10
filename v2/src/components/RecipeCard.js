@@ -241,12 +241,16 @@ export function renderCard(result, opts = {}) {
         ${needChips}
         ${subHtml}
         <div class="r-actions">
-          ${r.url ? `<a href="#" class="btn-sm btn-link" data-recipe-url="${escHTML(r.url)}" data-recipe-title="${escHTML(r.title)}" data-recipe-site="${escHTML(r.site || '')}">📖 Instructions</a>` : ''}
-          <button class="btn-sm btn-shop make-btn${isOnMakeList ? ' on' : ''}" data-make-id="${r.id}">${makeLabel}</button>
-          ${needNames.length ? `<button class="btn-sm btn-cart shop-queue-btn" data-shop-queue-id="${r.id}" data-shop-queue-missing="${escHTML(JSON.stringify(needNames))}" aria-label="Add to Make Soon and shopping list">🛒 +${needNames.length}</button>` : ''}
-          <button class="btn-sm btn-cook cook-btn" data-cook-id="${r.id}" data-cook-title="${escHTML(r.title)}">${cookLabel}</button>
-          <button class="btn-sm btn-fav fav-btn${isFavorite ? ' on' : ''}" data-fav-id="${r.id}" aria-label="Toggle favorite">${favLabel}</button>
-          <button class="btn-sm btn-share share-btn" data-share-id="${r.id}" data-share-title="${escHTML(r.title)}" data-share-url="${escHTML(r.url || '')}">📤 Share</button>
+          <div class="r-actions-row r-actions-primary">
+            ${r.url ? `<a href="#" class="btn-sm btn-link" data-recipe-url="${escHTML(r.url)}" data-recipe-title="${escHTML(r.title)}" data-recipe-site="${escHTML(r.site || '')}">📖 Instructions</a>` : ''}
+            <button class="btn-sm btn-shop make-btn${isOnMakeList ? ' on' : ''}" data-make-id="${r.id}">${makeLabel}</button>
+            ${needNames.length ? `<button class="btn-sm btn-cart shop-queue-btn" data-shop-queue-id="${r.id}" data-shop-queue-missing="${escHTML(JSON.stringify(needNames))}" aria-label="Add to Make Soon and shopping list">🛒 +${needNames.length}</button>` : ''}
+          </div>
+          <div class="r-actions-row r-actions-secondary">
+            <button class="btn-sm btn-cook cook-btn" data-cook-id="${r.id}" data-cook-title="${escHTML(r.title)}">${cookLabel}</button>
+            <button class="btn-sm btn-fav fav-btn${isFavorite ? ' on' : ''}" data-fav-id="${r.id}" aria-label="Toggle favorite">${favLabel}</button>
+            <button class="btn-sm btn-share share-btn" data-share-id="${r.id}" data-share-title="${escHTML(r.title)}" data-share-url="${escHTML(r.url || '')}">📤 Share</button>
+          </div>
         </div>
       </div>
     </article>

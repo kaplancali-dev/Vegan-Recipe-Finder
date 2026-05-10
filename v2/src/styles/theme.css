@@ -1501,18 +1501,20 @@ input, select, textarea {
 /* Card action buttons */
 .r-actions {
   display: flex;
+  flex-direction: column;
   gap: 5px;
   margin-top: 8px;
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-  justify-content: flex-start;
   position: relative;
   z-index: 2;
 }
 
-.r-actions::-webkit-scrollbar { display: none; }
+.r-actions-row {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+}
 .r-actions .btn-sm {
   font-size: 0.72rem;
   padding: 5px 10px;
