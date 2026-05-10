@@ -54,8 +54,17 @@ export async function handleCook(id, opts = {}) {
   set('cookHistory', [...freshHistory, { id, date: new Date().toISOString(), rating }]);
 
   if (opts.removeFromMakelist) {
+    // Cascade cleanup — recipe is being completed: remove from Make Soon
+    // and any related Shopping entries. Match the Make Soon X behavior
+    // so the lifecycle (planning → cooking → done) is consistent.
     const current = get('makelist');
     set('makelist', current.filter(i => i !== id));
+    const shopRecipes = get('shopRecipes') || [];
+    if (shopRecipes.includes(id)) {
+      set('shopRecipes', shopRecipes.filter(i => i !== id));
+    }
+    // Note: shopList only holds AD-HOC items now (not recipe ingredients),
+    // so there's nothing recipe-specific to clean from shopList here.
   }
 
   autoSync();

@@ -283,11 +283,17 @@ function wireEvents() {
       return;
     }
 
-    // I Made This
+    // I Made This — when triggered from Make Soon, the recipe completes its
+    // planning → cooking → done lifecycle. handleCook handles the cascade
+    // (cookHistory + remove from makelist + remove from shopRecipes) atomically
+    // so cancelling the rating dialog doesn't leave the lists in a half-state.
     const cookBtn = t.closest('[data-wm-cook]');
     if (cookBtn) {
       const id = Number(cookBtn.dataset.wmCook);
-      handleCook(id, { title: cookBtn.dataset.wmCookTitle });
+      handleCook(id, {
+        title: cookBtn.dataset.wmCookTitle,
+        removeFromMakelist: true,
+      });
       return;
     }
 
