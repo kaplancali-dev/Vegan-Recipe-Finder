@@ -16,6 +16,7 @@ import { openDetail } from './RecipeDetail.js';
 import { toggleFavorite } from '../actions/favorites.js';
 import { handleShareClick } from '../actions/share.js';
 import { handleCook } from '../actions/cook.js';
+import { shopAndQueue } from '../actions/shopQueue.js';
 import { showToast } from '../utils/toast.js';
 import { autoSync } from '../services/sync.js';
 import { $ } from '../utils/dom.js';
@@ -208,6 +209,7 @@ function renderROTD() {
         <div class="rotd-actions">
           ${r.url ? `<a href="#" class="btn-sm btn-link" data-recipe-url="${escHTML(r.url)}" data-recipe-title="${escHTML(r.title)}" data-recipe-site="${escHTML(r.site || '')}">📖 View Instructions</a>` : ''}
           <button class="btn-sm btn-shop make-btn${isQueued ? ' on' : ''}" data-make-id="${r.id}">${isQueued ? '✓ Make Soon' : '📌 Make Soon'}</button>
+          ${needNames.length ? `<button class="btn-sm btn-cart shop-queue-btn" data-shop-queue-id="${r.id}" data-shop-queue-missing="${escHTML(JSON.stringify(needNames))}" aria-label="Add to Make Soon and shopping list">🛒 +${needNames.length}</button>` : ''}
           <button class="btn-sm btn-fav fav-btn${isFav ? ' on' : ''}" data-fav-id="${r.id}">${isFav ? '❤️ Favorited' : '🤍 Favorite'}</button>
           <button class="btn-sm btn-cook cook-btn" data-cook-id="${r.id}">${cookLabel}</button>
           <button class="btn-sm btn-share share-btn" data-share-id="${r.id}" data-share-title="${escHTML(r.title)}" data-share-url="${escHTML(r.url || '')}">📤 Share</button>
@@ -224,6 +226,17 @@ function renderROTD() {
 
     const favBtn = e.target.closest('.fav-btn');
     if (favBtn) { e.stopPropagation(); toggleFavorite(Number(favBtn.dataset.favId)); return; }
+
+    // 🛒+N combined Shop+MakeSoon button
+    const sqBtn = e.target.closest('.shop-queue-btn');
+    if (sqBtn) {
+      e.stopPropagation();
+      const id = Number(sqBtn.dataset.shopQueueId);
+      let missing = [];
+      try { missing = JSON.parse(sqBtn.dataset.shopQueueMissing || '[]'); } catch {}
+      shopAndQueue(id, missing);
+      return;
+    }
 
     const makeBtn = e.target.closest('.make-btn');
     if (makeBtn) {

@@ -17,6 +17,7 @@ import { renderCardList } from './RecipeCard.js';
 import { openDetail } from './RecipeDetail.js';
 import { showToast } from '../utils/toast.js';
 import { handleCook } from '../actions/cook.js';
+import { shopAndQueue } from '../actions/shopQueue.js';
 import { buildAllergenFilterChips } from './AllergenChips.js';
 
 /** How many recipes to show per page */
@@ -279,6 +280,17 @@ function _runRender() {
       e.stopPropagation();
       const id = Number(favBtn.dataset.favId);
       toggleFavorite(id);
+      return;
+    }
+
+    // 🛒+N combined Shop+MakeSoon — adds recipe to queue + missing to shopping
+    const sqBtn = e.target.closest('.shop-queue-btn');
+    if (sqBtn) {
+      e.stopPropagation();
+      const id = Number(sqBtn.dataset.shopQueueId);
+      let missing = [];
+      try { missing = JSON.parse(sqBtn.dataset.shopQueueMissing || '[]'); } catch {}
+      shopAndQueue(id, missing);
       return;
     }
 

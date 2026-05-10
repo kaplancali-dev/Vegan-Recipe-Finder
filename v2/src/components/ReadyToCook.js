@@ -8,6 +8,7 @@
 import { get, set, subscribe, subscribeForTab, getRef } from '../state/store.js';
 import { autoSync } from '../services/sync.js';
 import { findRecipes, sortResults } from '../services/matching.js';
+import { shopAndQueue } from '../actions/shopQueue.js';
 import { $ } from '../utils/dom.js';
 import { toggleFavorite } from '../actions/favorites.js';
 import { V1_CATEGORIES } from '../data/categories.js';
@@ -325,6 +326,17 @@ function renderReadyList() {
       e.stopPropagation();
       const id = Number(favBtn.dataset.favId);
       toggleFavorite(id);
+      return;
+    }
+
+    // 🛒+N combined Shop+MakeSoon button
+    const sqBtn = e.target.closest('.shop-queue-btn');
+    if (sqBtn) {
+      e.stopPropagation();
+      const id = Number(sqBtn.dataset.shopQueueId);
+      let missing = [];
+      try { missing = JSON.parse(sqBtn.dataset.shopQueueMissing || '[]'); } catch {}
+      shopAndQueue(id, missing);
       return;
     }
 

@@ -1503,19 +1503,31 @@ input, select, textarea {
   display: flex;
   gap: 5px;
   margin-top: 8px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
   justify-content: flex-start;
   position: relative;
   z-index: 2;
 }
 
+.r-actions::-webkit-scrollbar { display: none; }
 .r-actions .btn-sm {
   font-size: 0.72rem;
   padding: 5px 10px;
   flex: 0 0 auto;
+  white-space: nowrap;
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
 }
+/* 🛒+N combined Shop+MakeSoon button — emphasis on cart icon */
+.r-actions .btn-cart {
+  background: #fef3e6;
+  border: 1px solid #f4cf9b;
+  color: #9a4f1c;
+}
+.r-actions .btn-cart:hover { background: #fdebd1; }
 
 .move-arrow {
   font-size: 0.7rem;

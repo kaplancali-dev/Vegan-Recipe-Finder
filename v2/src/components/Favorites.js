@@ -18,6 +18,7 @@ import { handleShareClick } from '../actions/share.js';
 import { renderCardList } from './RecipeCard.js';
 import { openDetail } from './RecipeDetail.js';
 import { addToShopList } from './Shopping.js';
+import { shopAndQueue } from '../actions/shopQueue.js';
 // Note: Cook history moved to its own MadeIt tab
 
 import { COLLECTIONS } from '../data/collections.js';
@@ -222,6 +223,17 @@ function renderFavList() {
       e.stopPropagation();
       const id = Number(favBtn.dataset.favId);
       toggleFavorite(id);
+      return;
+    }
+
+    // 🛒+N combined Shop+MakeSoon button
+    const sqBtn = e.target.closest('.shop-queue-btn');
+    if (sqBtn) {
+      e.stopPropagation();
+      const id = Number(sqBtn.dataset.shopQueueId);
+      let missing = [];
+      try { missing = JSON.parse(sqBtn.dataset.shopQueueMissing || '[]'); } catch {}
+      shopAndQueue(id, missing);
       return;
     }
 
