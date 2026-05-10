@@ -1516,6 +1516,75 @@ input, select, textarea {
   align-items: center;
 }
 
+/* SW update banner — shown when a new service worker version is ready.
+   Floats at the bottom of the page so it doesn't obscure content. */
+.sw-update-banner {
+  position: fixed;
+  left: 50%;
+  bottom: 16px;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px 10px 16px;
+  background: var(--green);
+  color: #fff;
+  border-radius: 28px;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.18);
+  font-size: 0.88rem;
+  z-index: 9999;
+  max-width: calc(100vw - 24px);
+}
+.sw-update-btn {
+  background: #fff;
+  color: var(--green);
+  border: none;
+  border-radius: 18px;
+  padding: 6px 14px;
+  font-weight: 600;
+  font-size: 0.82rem;
+  cursor: pointer;
+}
+.sw-update-btn:hover { background: #f0f5ed; }
+.sw-update-dismiss {
+  background: transparent;
+  color: #fff;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0 4px;
+  opacity: 0.75;
+}
+.sw-update-dismiss:hover { opacity: 1; }
+
+/* Image fallback — shown when a recipe image fails to load. The broken
+   <img> element is hidden via inline styles; this placeholder takes its
+   visual slot. Subtle gradient + recipe title centered. */
+.img-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 12px 16px;
+  background: linear-gradient(135deg, #e8efe6 0%, #d6e3d2 100%);
+  color: #4a5f43;
+  font-weight: 600;
+  font-size: 0.85rem;
+  line-height: 1.3;
+  border-radius: var(--radius-sm);
+  min-height: 120px;
+  width: 100%;
+  position: relative;
+}
+.img-fallback::before {
+  content: "🌿";
+  position: absolute;
+  top: 8px;
+  left: 10px;
+  font-size: 0.85rem;
+  opacity: 0.4;
+}
+
 /* Search-correction banner — shows when typo correction was applied */
 .search-correction {
   margin: 8px 0 12px;

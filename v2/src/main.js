@@ -26,6 +26,107 @@ const recipesReady = import('./data/recipes.json').then(m => {
   return recipes;
 });
 
+/* ── Global error boundary ──────────────────────────────────── */
+// Catches uncaught JS errors anywhere in the app — instead of letting a
+// component die silently, show a friendly toast and log to console for
+// diagnosis. Throttled so a runaway error loop doesn't spam toasts.
+let _lastErrorAt = 0;
+function _reportRuntimeError(label, err) {
+  console.error('[HARVEST runtime error]', label, err);
+  const now = Date.now();
+  if (now - _lastErrorAt < 5000) return; // throttle: max 1 toast per 5s
+  _lastErrorAt = now;
+  try {
+    showToast('Something hiccupped — try refreshing if it sticks.');
+  } catch {}
+}
+window.addEventListener('error', (e) => {
+  // Resource (image/script) load errors handled separately — skip here
+  if (e.target && e.target !== window && e.target.tagName) return;
+  _reportRuntimeError('error', e.error || e.message);
+});
+
+// Image fallback — when a recipe image 404s or fails to load, swap to a
+// neutral placeholder so the page doesn't show the broken-image icon.
+// Uses capture phase because img error events don't bubble.
+document.addEventListener('error', (e) => {
+  const img = e.target;
+  if (!img || img.tagName !== 'IMG' || img.dataset.fallback === '1') return;
+  img.dataset.fallback = '1';
+  // Hide the broken image
+  img.style.visibility = 'hidden';
+  // Insert a sibling placeholder with the recipe title (from alt attr)
+  const placeholder = document.createElement('div');
+  placeholder.className = 'img-fallback';
+  placeholder.textContent = img.alt || '';
+  // If the placeholder would be inside an existing <a> wrapper, place it after
+  // the image so it inherits the image's slot in the layout.
+  if (img.parentNode) img.parentNode.insertBefore(placeholder, img.nextSibling);
+}, true);
+window.addEventListener('unhandledrejection', (e) => {
+  _reportRuntimeError('unhandledrejection', e.reason);
+});
+
+/* ── Service worker registration + upgrade prompt ──────────────── */
+// Registers /sw.js for image caching, and listens for new SW versions
+// installing in the background. When a new version is ready, we show a
+// non-intrusive banner ("New version available · Reload") so users on
+// open tabs aren't stuck on stale code after a deploy.
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js').then((registration) => {
+      // Detect when a new SW is installed and waiting to activate
+      const onUpdateFound = () => {
+        const installing = registration.installing;
+        if (!installing) return;
+        installing.addEventListener('statechange', () => {
+          if (installing.state === 'installed' && navigator.serviceWorker.controller) {
+            _showUpgradePrompt(registration);
+          }
+        });
+      };
+      registration.addEventListener('updatefound', onUpdateFound);
+      // If a SW was already waiting when the page loaded, prompt now
+      if (registration.waiting && navigator.serviceWorker.controller) {
+        _showUpgradePrompt(registration);
+      }
+    }).catch((err) => {
+      // Registration failure isn't fatal — app still works without caching
+      console.warn('[HARVEST] Service worker registration failed:', err);
+    });
+
+    // When the new SW takes control, reload to load fresh code
+    let _reloadOnControllerChange = false;
+    navigator.serviceWorker.addEventListener('controllerchange', () => {
+      if (_reloadOnControllerChange) {
+        window.location.reload();
+      }
+    });
+
+    function _showUpgradePrompt(registration) {
+      // Inline banner at the top of the page — minimally invasive
+      let banner = document.getElementById('swUpdateBanner');
+      if (banner) return; // already shown
+      banner = document.createElement('div');
+      banner.id = 'swUpdateBanner';
+      banner.className = 'sw-update-banner';
+      banner.innerHTML = `
+        <span>A fresh version of HARVEST is ready.</span>
+        <button class="sw-update-btn">Reload</button>
+        <button class="sw-update-dismiss" aria-label="Dismiss">×</button>
+      `;
+      document.body.appendChild(banner);
+      banner.querySelector('.sw-update-btn').addEventListener('click', () => {
+        _reloadOnControllerChange = true;
+        if (registration.waiting) registration.waiting.postMessage({ type: 'SKIP_WAITING' });
+      });
+      banner.querySelector('.sw-update-dismiss').addEventListener('click', () => {
+        banner.remove();
+      });
+    }
+  });
+}
+
 /* ── Boot sequence ───────────────────────────────────────────── */
 
 /* Swap search placeholders on small screens */
