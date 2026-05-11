@@ -109,8 +109,8 @@ function _showBanner() {
   banner.className = 'install-banner';
   banner.innerHTML = `
     <div class="install-banner-text">
-      <strong>Make HARVEST one tap away</strong>
-      <span>Add to your home screen — full screen, faster, feels like a real app.</span>
+      <strong>More recipes per screen</strong>
+      <span>Add HARVEST to your home screen — drops the browser bar, opens full-screen, one tap to launch.</span>
     </div>
     <button class="install-banner-cta" id="installAddBtn">Add to Home Screen</button>
     <button class="install-banner-dismiss" id="installDismissBtn" aria-label="Dismiss">×</button>
@@ -156,26 +156,32 @@ function _showInstructions() {
       <button class="install-instructions-close" id="installInstrClose" aria-label="Close">×</button>
       <h3 id="installHowTitle">${ios ? '📱 Add HARVEST to your iPhone' : '📱 Add HARVEST to your phone'}</h3>
       <p class="install-instructions-why">
-        Lives on your home screen. Opens full-screen — no browser bar.
-        Faster launch, feels like a real app.
-        Your saved pantry, favorites, and shopping list all carry over.
+        <strong>More room for recipes.</strong> No Safari address bar, no tab bar — just HARVEST,
+        edge to edge. You'll see roughly a third more on every screen.
+        <br><br>
+        <strong>One tap to open.</strong> Lives on your home screen with the leaf icon.
+        No typing the URL, no hunting through tabs.
+        <br><br>
+        <strong>Everything carries over.</strong> Your saved pantry, favorites, and shopping list
+        stay exactly where they are.
       </p>
       <ol class="install-instructions-steps">
         ${ios ? `
         <li>
           <span class="install-step-num">1</span>
           <div>
-            <strong>Tap the Share button</strong>
-            <span class="install-step-hint">It looks like
+            <strong>Tap the <span class="install-step-icon">•••</span> menu</strong>
+            <span class="install-step-hint">It's on the right side of the address bar at the bottom of Safari (top-right on iPad).
+              On older iPhones you may see a Share icon
               <span class="install-step-icon">⬆️</span>
-              at the bottom of Safari (top-right on iPad).</span>
+              instead — tap that.</span>
           </div>
         </li>
         <li>
           <span class="install-step-num">2</span>
           <div>
-            <strong>Scroll and tap "Add to Home Screen"</strong>
-            <span class="install-step-hint">You may need to scroll the share menu down a bit.</span>
+            <strong>Tap "Add to Home Screen"</strong>
+            <span class="install-step-hint">If you don't see it right away, scroll the menu down a bit.</span>
           </div>
         </li>
         <li>
