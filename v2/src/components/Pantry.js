@@ -8,6 +8,7 @@
 import { get, set, subscribe, getRef } from '../state/store.js';
 import { autoSync } from '../services/sync.js';
 import { computePantryPower } from '../services/matching.js';
+import { computeIngredientSuggestions } from '../services/suggestions.js';
 import { QA_ITEMS } from '../data/aliases.js';
 import { escHTML, norm } from '../utils/text.js';
 import { showToast } from '../utils/toast.js';
@@ -40,25 +41,33 @@ export function initPantry(recipes) {
   wireIngredientInput();
   wirePantryScan();
   wireQAGrid();
+  wireSuggestions();
   wireGuideToggle();
   wireSectionToggles();
   renderAllergyChips();
   renderMyIngs();
   renderStapleChips();
   renderPantryPower();
+  renderSuggestions();
   checkHero();
 
   // PERF: chip-render runs sync (cheap, visible feedback);
-  // PantryPower compute runs against full catalog so it's RAF-debounced.
+  // PantryPower + Suggestions compute against full catalog → RAF-debounced.
   let _powerPending = 0;
   const schedulePantryPower = () => {
     cancelAnimationFrame(_powerPending);
     _powerPending = requestAnimationFrame(renderPantryPower);
   };
+  let _suggPending = 0;
+  const scheduleSuggestions = () => {
+    cancelAnimationFrame(_suggPending);
+    _suggPending = requestAnimationFrame(renderSuggestions);
+  };
 
   _unsubs.push(subscribe('ingredients', () => {
     renderMyIngs();
     schedulePantryPower();
+    scheduleSuggestions();
   }));
   _unsubs.push(subscribe('inactiveIngs', () => {
     renderMyIngs();
@@ -66,6 +75,7 @@ export function initPantry(recipes) {
   _unsubs.push(subscribe('staples', () => {
     renderStapleChips();
     schedulePantryPower();
+    scheduleSuggestions();
   }));
   _unsubs.push(subscribe('allergies', renderAllergyChips));
 }
@@ -559,4 +569,71 @@ function renderPantryPower() {
   if (ppUnit) ppUnit.textContent = power.canMakeNow === 1 ? 'recipe ready' : 'recipes ready';
   if (ppNear) ppNear.textContent = `+ ${power.eightyPercent - power.canMakeNow} more you're 1 ingredient away from`;
   if (stats) stats.textContent = `${power.canMakeNow} of ${power.totalRecipes} recipes ready`;
+}
+
+/* ── Quick Wins / Pantry Suggestions ─────────────────────────── */
+
+/**
+ * Render the "✨ Quick Wins" panel — top common ingredients the user
+ * doesn't yet have, ranked by how many additional 100% match recipes
+ * adding each one would unlock.
+ *
+ * Hidden entirely when there are no actionable suggestions (e.g. the
+ * user already has every common ingredient, or no recipes are exactly
+ * one ingredient short).
+ */
+function renderSuggestions() {
+  const card = $('#suggestionsCard');
+  const list = $('#suggestionsList');
+  if (!card || !list) return;
+
+  const ingredients = getRef('ingredients');
+  const staples = getRef('staples');
+  const { currentTotal, suggestions } = computeIngredientSuggestions({
+    recipes: _recipes,
+    ingredients,
+    staples,
+    limit: 5,
+  });
+
+  if (!suggestions.length) {
+    card.hidden = true;
+    return;
+  }
+  card.hidden = false;
+
+  list.innerHTML = suggestions.map(s => {
+    const r = s.unlocks === 1 ? 'recipe' : 'recipes';
+    return `
+      <button class="suggestion-row" type="button" data-add-suggestion="${escHTML(s.item)}">
+        <span class="suggestion-add-icon" aria-hidden="true">+</span>
+        <span class="suggestion-text">
+          Adding <strong>${escHTML(s.item)}</strong> would unlock
+          <strong>${s.unlocks}</strong> more ${r}, bringing your total to
+          <strong>${s.newTotal}</strong>.
+        </span>
+      </button>
+    `;
+  }).join('');
+}
+
+/**
+ * Wire the Quick Wins panel: tapping a row adds that ingredient to the
+ * user's staples, then the live subscription re-renders with a new top 5.
+ */
+function wireSuggestions() {
+  const list = $('#suggestionsList');
+  if (!list) return;
+  list.addEventListener('click', (e) => {
+    const btn = e.target.closest('[data-add-suggestion]');
+    if (!btn) return;
+    const item = btn.dataset.addSuggestion;
+    const allNormed = new Set([...get('ingredients').map(norm), ...get('staples').map(norm)]);
+    if (allNormed.has(norm(item))) return;
+    const staples = get('staples');
+    staples.push(item);
+    set('staples', staples);
+    autoSync();
+    showToast(`Added ${item} — recipes refreshed`);
+  });
 }

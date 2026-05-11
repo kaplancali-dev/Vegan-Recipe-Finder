@@ -2612,6 +2612,67 @@ input, select, textarea {
   white-space: nowrap;
 }
 
+/* ── Quick Wins / Suggestions ────────────────────────────────── */
+/* Personalized "add this to unlock more recipes" panel.
+   Each row is a tap-to-add button. Uses the green accent so it visually
+   reads as "good thing — do it" rather than just an info card. */
+
+.suggestions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.suggestion-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 12px 14px;
+  background: var(--green-soft);
+  border: 1.5px solid var(--green-soft);
+  border-radius: var(--radius-sm);
+  text-align: left;
+  font: inherit;
+  color: var(--ink);
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.suggestion-row:hover,
+.suggestion-row:focus-visible {
+  border-color: var(--green);
+  background: var(--card);
+  outline: none;
+}
+
+.suggestion-add-icon {
+  flex: 0 0 auto;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--green);
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.suggestion-text {
+  flex: 1 1 auto;
+  font-size: 0.92rem;
+  line-height: 1.35;
+  color: var(--ink-soft);
+}
+
+.suggestion-text strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
 /* ── Sync Card ───────────────────────────────────────────────── */
 .sync-card .sync-form {
   display: flex;

@@ -13,7 +13,7 @@ import { startTour } from './GuidedTour.js';
 
 /* ── Staple chips data ──────────────────────────────────────── */
 
-const STAPLE_SECTIONS = [
+export const STAPLE_SECTIONS = [
   // 0 — Beans & Legumes
   { label: '🫘 Beans & Legumes', sub: 'the workhorses', items: [
     'chickpeas','black beans','lentils','kidney beans',
