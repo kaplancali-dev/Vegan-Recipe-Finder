@@ -121,6 +121,9 @@
                 <strong>Sort by what your body needs</strong>, not just what's convenient. Highest protein, most fiber, fastest, lowest calorie, and more.
               </p>
               <p class="intro-hero-sub" style="margin-top:8px;">
+                <strong>Quick Wins on every visit.</strong> HARVEST tracks your pantry and tells you the next 5 ingredients to add that would unlock the most new recipes — so "what should I grab next?" has an actual answer, not just vibes.
+              </p>
+              <p class="intro-hero-sub" style="margin-top:8px;">
                 <strong>Every recipe tells you <em>why</em> it's good for you.</strong> Less "trust us, it's healthy." More receipts, backed by peer-reviewed clinical studies.
               </p>
               <p class="intro-hero-sub" style="margin-top:8px;">
@@ -156,6 +159,16 @@
       <div class="card">
         <h3 class="card-title section-toggle" data-toggle="stapleChips">📌 Staples <span class="muted">(always on hand)</span> <span class="guide-arrow">▾</span></h3>
         <div id="stapleChips" class="chip-wrap section-body"></div>
+      </div>
+
+      <!-- Smart suggestions — top common ingredients to add to unlock more
+           100% recipes. Placed ABOVE Add Staples so it's the first answer
+           to "what should I add?" — before users have to dig through the
+           250+ picker items. Hidden when there are no actionable suggestions
+           (e.g. empty pantry, or user already has every common ingredient). -->
+      <div id="suggestionsCard" class="card" hidden>
+        <h3 class="card-title">✨ Quick Wins <span class="muted">(common ingredients you don't have yet)</span></h3>
+        <div id="suggestionsList" class="suggestions-list"></div>
       </div>
 
       <!-- Add Staples section (collapsible) -->
