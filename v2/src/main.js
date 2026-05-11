@@ -12,6 +12,7 @@ import { showToast } from './utils/toast.js';
 import { $, $$ } from './utils/dom.js';
 import { initSyncPanel } from './components/SyncPanel.js';
 import { initOnboarding } from './components/Onboarding.js';
+import { initInstallPrompt } from './components/InstallPrompt.js';
 import { submitFeedback } from './services/feedback.js';
 import { openRecipeLink } from './utils/safe-link.js';
 
@@ -284,6 +285,7 @@ window.addEventListener('unhandledrejection', (e) => {
 /* ── Initialize shell components (no recipes needed) ─────────── */
 
 initSyncPanel();
+initInstallPrompt();  // mobile users see the home-screen install banner
 
 // Only run onboarding immediately if landing page is NOT showing.
 // If landing is showing, onboarding is triggered after landing is dismissed.

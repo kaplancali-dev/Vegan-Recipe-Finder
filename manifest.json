@@ -1,7 +1,7 @@
 {
   "name": "HARVEST — See What Your Kitchen Already Knows",
   "short_name": "HARVEST",
-  "description": "4,300+ vegan recipes matched to what's already in your pantry.",
+  "description": "Over 4,000 gluten-free, plant-based recipes matched to what's already in your kitchen.",
   "start_url": "./index.html",
   "display": "standalone",
   "orientation": "portrait-primary",
