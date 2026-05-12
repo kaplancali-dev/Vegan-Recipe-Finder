@@ -2660,6 +2660,16 @@ input, select, textarea {
   }
 }
 
+/* Phone vs laptop subtitle text:
+   - Phone gets a shorter version with an explicit <br> after "pantry."
+   - Laptop gets the longer parenthetical that fits one line nicely
+   Toggle the two via display, hiding the wrong one for each width. */
+.qw-sub-laptop { display: none; }
+@media (min-width: 768px) {
+  .qw-sub-phone { display: none; }
+  .qw-sub-laptop { display: inline; }
+}
+
 .suggestion-row {
   /* Compact data-row: [+] ingredient_name        +N
      Each row is one tight line, no wrapped text. */
