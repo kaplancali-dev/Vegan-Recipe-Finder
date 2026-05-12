@@ -456,6 +456,14 @@ const IDENTITY_SUFFIXES = new Set([
   // include generic "beans") should NOT match recipes calling for
   // "bean sprouts". Same logic for alfalfa → alfalfa sprouts, etc.
   'sprout', 'sprouts',
+  // Shoots — "bamboo shoots" is the edible young shoot, sold canned
+  // or fresh, distinct from "bamboo" (which by itself isn't a kitchen
+  // ingredient). Same pattern as sprouts.
+  'shoot', 'shoots',
+  // Pudding — "rice pudding" and "chia pudding" are distinct prepared
+  // dishes, not the base ingredient. Recipe calling for "rice pudding"
+  // or "chia pudding" needs the FINISHED product, not raw rice/chia.
+  'pudding', 'puddings',
   // Alcohol and infusions
   'wine', 'wines', 'liqueur', 'liqueurs', 'beer', 'beers', 'tea', 'teas',
   // (Note: "pasta" and "noodles" deliberately EXCLUDED from this list.
