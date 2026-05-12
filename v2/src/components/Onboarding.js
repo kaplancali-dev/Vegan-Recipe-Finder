@@ -77,6 +77,7 @@ export const STAPLE_SECTIONS = [
     'macadamia milk','pistachio milk',
     { name: 'oat milk', hint: "the people's champion" },
     'cashew milk','vegan yogurt','vegan cream cheese','vegan parmesan','vegan feta','vegan cheese',
+    'nutritional yeast', // cross-listed: cheese substitute role
   ]},
   // 6 — Oils & Fats
   { label: '🫒 Oils & Fats', sub: 'the slip-and-slide section', items: [
@@ -108,6 +109,9 @@ export const STAPLE_SECTIONS = [
     'sriracha / hot sauce','sambal oelek','curry paste','liquid smoke',
     'vegan sour cream',
     { name: 'nutritional yeast', hint: 'cheese flavor, zero guilt' },
+    // Cross-listed from other sections (nut butters, tahini for sauces;
+    // cornstarch/arrowroot for thickening)
+    'tahini','nut butter (any)','cornstarch','arrowroot powder',
   ]},
   // 9 — Sweeteners & Vinegars
   { label: '🍯 Sweeteners & Vinegars', sub: 'the sweet-and-sour squad', items: [
@@ -128,6 +132,9 @@ export const STAPLE_SECTIONS = [
     { name: 'xanthan gum', hint: 'tiny amount, big difference' },
     'almond extract','matcha',
     'cream of tartar','active dry yeast','protein powder',
+    // Cross-listed from Dessert Pantry / Oils & Fats — every baker
+    // reaches for these
+    'vanilla extract','cocoa powder','coconut oil','vegan butter',
   ]},
   // 11 — Spices & Herbs
   { label: '🌿 Spices & Herbs', sub: 'the flavor council', items: [
@@ -148,13 +155,18 @@ export const STAPLE_SECTIONS = [
   ]},
   // 12 — Dessert Pantry
   { label: '🍨 Dessert Pantry', sub: 'treat yourself (responsibly)', items: [
-    'vanilla extract','cocoa powder',
+    'vanilla extract','almond extract','cocoa powder',
     'chocolate chips (any)','white chocolate chips','dark chocolate',
     { name: 'cacao nibs', hint: 'chocolate for grown-ups' },
     { name: 'cacao butter', hint: 'for raw chocolate making' },
     { name: 'coconut milk', hint: 'the canned kind, for puddings, ice cream & baking' },
     { name: 'coconut cream', hint: 'thicker than coconut milk, for whipped toppings & rich desserts' },
-    'shredded coconut',
+    'coconut oil','shredded coconut','almond flour',
+    // Cross-listed from Sweeteners (sweeteners that ARE the dessert
+    // building blocks, not just garnishes)
+    'maple syrup','dates','brown sugar','molasses',
+    // Cross-listed from Spices (the dessert spices)
+    'cinnamon','nutmeg',
     'date sugar','allulose','stevia / monk fruit',
   ]},
   // 13 — Asian Specialty (GF-safe items only)
