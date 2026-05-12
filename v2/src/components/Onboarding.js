@@ -88,7 +88,8 @@ export const STAPLE_SECTIONS = [
 
   { label: '🥫 Canned & Jarred', sub: 'shelf-stable MVPs', items: [
     'canned tomatoes (any)','tomato sauce','tomato paste','vegetable broth',
-    'coconut milk','olives','artichoke hearts','roasted red peppers',
+    { name: 'coconut milk', hint: 'the canned kind, for curries & sauces' },
+    'olives','artichoke hearts','roasted red peppers',
     { name: 'sun-dried tomatoes', hint: 'umami bombs' },
     'capers','salsa','hummus','sauerkraut','instant coffee','cooking spray',
     'hearts of palm','yellow cornmeal',
@@ -151,7 +152,8 @@ export const STAPLE_SECTIONS = [
     'chocolate chips (any)','white chocolate chips','dark chocolate',
     { name: 'cacao nibs', hint: 'chocolate for grown-ups' },
     { name: 'cacao butter', hint: 'for raw chocolate making' },
-    'coconut cream','shredded coconut',
+    { name: 'coconut cream', hint: 'thicker than coconut milk, for whipped toppings & rich desserts' },
+    'shredded coconut',
     'date sugar','allulose','stevia / monk fruit',
   ]},
   // 13 — Asian Specialty (GF-safe items only)
