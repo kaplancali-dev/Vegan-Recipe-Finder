@@ -603,14 +603,16 @@ function renderSuggestions() {
   card.hidden = false;
 
   list.innerHTML = suggestions.map(s => {
-    const r = s.unlocks === 1 ? 'recipe' : 'recipes';
+    // Use "100% matches" (matches the strict pct === 100 metric this
+    // panel is built on) to disambiguate from the looser "Your Matches"
+    // badge, which counts recipes within 1 ingredient.
+    const noun = s.unlocks === 1 ? '100% match' : '100% matches';
     return `
       <button class="suggestion-row" type="button" data-add-suggestion="${escHTML(s.item)}">
         <span class="suggestion-add-icon" aria-hidden="true">+</span>
         <span class="suggestion-text">
           Adding <strong>${escHTML(s.item)}</strong> would unlock
-          <strong>${s.unlocks}</strong> more ${r}, bringing your total to
-          <strong>${s.newTotal}</strong>.
+          <strong>${s.unlocks}</strong> more ${noun}.
         </span>
       </button>
     `;
