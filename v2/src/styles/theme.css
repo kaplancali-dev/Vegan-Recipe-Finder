@@ -2648,44 +2648,6 @@ input, select, textarea {
   }
 }
 
-/* Phone layout: vertical stack — name on top row (gets the full chip
-   width), count centered on bottom row. Solves the truncation problem
-   of the horizontal layout (only ~150-180px per chip on phone wasn't
-   enough for names like "coconut cream" or "mushrooms (any)" alongside
-   the icon and count). */
-@media (max-width: 767px) {
-  .suggestion-row {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    grid-template-areas:
-      "icon name"
-      "count count";
-    gap: 2px 6px;
-    padding: 8px 10px;
-    align-items: center;
-  }
-  .suggestion-add-icon {
-    grid-area: icon;
-    width: 22px;
-    height: 22px;
-    font-size: 0.95rem;
-  }
-  .suggestion-name {
-    grid-area: name;
-    font-size: 0.78rem;
-    line-height: 1.2;
-    white-space: normal;
-    word-break: break-word;
-  }
-  .suggestion-count {
-    grid-area: count;
-    text-align: center;
-    font-size: 0.95rem;
-    font-weight: 700;
-    margin-top: 2px;
-  }
-}
-
 .suggestion-row {
   /* Compact data-row: [+] ingredient_name        +N
      Each row is one tight line, no wrapped text. */
@@ -2744,6 +2706,48 @@ input, select, textarea {
   font-weight: 700;
   color: var(--green);
   font-variant-numeric: tabular-nums;
+}
+
+/* Phone layout: vertical stack — name on top row (gets the full chip
+   width), count centered on bottom row. MUST come AFTER the base
+   .suggestion-row rules above — same specificity means source order
+   wins, and if this block lived before the base rules, the base
+   display:flex would override the media query's display:grid on phone.
+   Also need to reset overflow/text-overflow from the base rule so
+   wrapped text doesn't get clipped. */
+@media (max-width: 767px) {
+  .suggestion-row {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-areas:
+      "icon name"
+      "count count";
+    gap: 2px 6px;
+    padding: 8px 10px;
+    align-items: center;
+  }
+  .suggestion-add-icon {
+    grid-area: icon;
+    width: 22px;
+    height: 22px;
+    font-size: 0.95rem;
+  }
+  .suggestion-name {
+    grid-area: name;
+    font-size: 0.78rem;
+    line-height: 1.2;
+    white-space: normal;
+    word-break: break-word;
+    overflow: visible;
+    text-overflow: clip;
+  }
+  .suggestion-count {
+    grid-area: count;
+    text-align: center;
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-top: 2px;
+  }
 }
 
 /* ── Sync Card ───────────────────────────────────────────────── */
