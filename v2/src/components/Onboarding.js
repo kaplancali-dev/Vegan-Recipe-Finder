@@ -117,7 +117,9 @@ export const STAPLE_SECTIONS = [
   { label: '🍯 Sweeteners & Vinegars', sub: 'the sweet-and-sour squad', items: [
     { name: 'maple syrup', hint: 'not just for pancakes' },
     'natural sweetener (any)','agave nectar','coconut sugar','brown sugar','cane sugar','powdered sugar',
-    'date syrup','molasses','coconut nectar','allulose','stevia / monk fruit',
+    'date syrup','molasses','coconut nectar',
+    { name: 'allulose', hint: 'use like sugar (1:1, bakes & browns)' },
+    { name: 'stevia / monk fruit', hint: 'tiny drops, best for drinks (no bulk for baking)' },
     'apple cider vinegar','rice vinegar','balsamic vinegar',
     'white vinegar','red wine vinegar','white wine vinegar','sherry vinegar',
     { name: 'red wine', hint: 'cooking wine' },
@@ -167,7 +169,9 @@ export const STAPLE_SECTIONS = [
     'maple syrup','dates','brown sugar','molasses',
     // Cross-listed from Spices (the dessert spices)
     'cinnamon','nutmeg',
-    'date sugar','allulose','stevia / monk fruit',
+    'date sugar',
+    { name: 'allulose', hint: 'use like sugar (1:1, bakes & browns)' },
+    { name: 'stevia / monk fruit', hint: 'tiny drops, best for drinks (no bulk for baking)' },
   ]},
   // 13 — Asian Specialty (GF-safe items only)
   // EXCLUDED: shaoxing wine (traditional contains wheat — celiac safety)
