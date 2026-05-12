@@ -455,10 +455,18 @@ function showQAPopup(category, anchorEl) {
     <div class="qa-popup-scroll">
       <div class="chip-wrap">
         ${category.items.map(item => {
-          const n = norm(item);
+          // Items can be plain strings ('almonds') or objects with hint
+          // metadata ({ name: 'coconut milk', hint: 'the canned kind...' }).
+          // Normalize to extract name + optional hint so both formats render.
+          const itemName = typeof item === 'string' ? item : item.name;
+          const itemHint = typeof item === 'object' && item.hint ? item.hint : '';
+          const n = norm(itemName);
           const have = currentIngs.has(n) || currentStaples.has(n);
-          return `<span class="chip${have ? ' staple' : ''}" data-qa-item="${escHTML(item)}" style="cursor:pointer">
-            ${have ? '✓' : '+'} ${escHTML(item)}${have ? ' <span class="chip-x" data-qa-remove="' + escHTML(item) + '" title="Remove">×</span>' : ''}
+          const hintHtml = itemHint
+            ? `<span class="qa-chip-hint">${escHTML(itemHint)}</span>`
+            : '';
+          return `<span class="chip${have ? ' staple' : ''}" data-qa-item="${escHTML(itemName)}" style="cursor:pointer">
+            ${have ? '✓' : '+'} ${escHTML(itemName)}${hintHtml}${have ? ' <span class="chip-x" data-qa-remove="' + escHTML(itemName) + '" title="Remove">×</span>' : ''}
           </span>`;
         }).join('')}
       </div>

@@ -2625,6 +2625,24 @@ input, select, textarea {
   white-space: nowrap;
 }
 
+/* Hint text inside a QA popup chip — small caption underneath the
+   item name. Used for disambiguating items with similar names
+   (coconut milk = canned, coconut cream = thicker, etc). Allows
+   the chip to break wrap rule so the hint can flow to a 2nd line. */
+.qa-popup .chip .qa-chip-hint {
+  display: block;
+  font-size: 0.66rem;
+  font-weight: 400;
+  color: var(--ink-soft);
+  white-space: normal;
+  line-height: 1.2;
+  margin-top: 2px;
+  max-width: 180px;
+}
+.qa-popup .chip:has(.qa-chip-hint) {
+  white-space: normal;
+}
+
 /* ── Quick Wins / Suggestions ────────────────────────────────── */
 /* Personalized "add this to unlock more recipes" panel.
    Each row is a tap-to-add button. Uses the green accent so it visually
