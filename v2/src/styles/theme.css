@@ -2625,22 +2625,34 @@ input, select, textarea {
   white-space: nowrap;
 }
 
-/* Hint text inside a QA popup chip — small caption underneath the
-   item name. Used for disambiguating items with similar names
-   (coconut milk = canned, coconut cream = thicker, etc). Allows
-   the chip to break wrap rule so the hint can flow to a 2nd line. */
-.qa-popup .chip .qa-chip-hint {
-  display: block;
-  font-size: 0.66rem;
+/* Hint chip — when a QA popup item has clarifying hint text below
+   the name (e.g. "coconut milk → the canned kind"). Switches the
+   chip to flex-column so the name+× line sits on top and the hint
+   caption sits below. Without this restructure the hint would
+   collapse alongside the name as another inline-flex item. */
+.qa-popup .chip.chip-with-hint {
+  flex-direction: column;
+  align-items: flex-start;
+  white-space: normal;
+  text-align: left;
+  padding: 6px 12px;
+  max-width: 240px;
+}
+
+.qa-popup .chip.chip-with-hint .chip-line {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+  font-weight: 500;
+}
+
+.qa-popup .chip.chip-with-hint .qa-chip-hint {
+  font-size: 0.68rem;
   font-weight: 400;
   color: var(--ink-soft);
-  white-space: normal;
-  line-height: 1.2;
+  line-height: 1.25;
   margin-top: 2px;
-  max-width: 180px;
-}
-.qa-popup .chip:has(.qa-chip-hint) {
-  white-space: normal;
 }
 
 /* ── Quick Wins / Suggestions ────────────────────────────────── */

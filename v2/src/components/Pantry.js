@@ -462,11 +462,21 @@ function showQAPopup(category, anchorEl) {
           const itemHint = typeof item === 'object' && item.hint ? item.hint : '';
           const n = norm(itemName);
           const have = currentIngs.has(n) || currentStaples.has(n);
-          const hintHtml = itemHint
-            ? `<span class="qa-chip-hint">${escHTML(itemHint)}</span>`
+          const removeBtn = have
+            ? ` <span class="chip-x" data-qa-remove="${escHTML(itemName)}" title="Remove">×</span>`
             : '';
-          return `<span class="chip${have ? ' staple' : ''}" data-qa-item="${escHTML(itemName)}" style="cursor:pointer">
-            ${have ? '✓' : '+'} ${escHTML(itemName)}${hintHtml}${have ? ' <span class="chip-x" data-qa-remove="' + escHTML(itemName) + '" title="Remove">×</span>' : ''}
+          // When a hint is present, structure: chip → flex-column with
+          // (line1: prefix+name+×) on top and (line2: hint caption) below.
+          // Without a hint, fall back to the original flat single-line chip.
+          const chipClasses = `chip${have ? ' staple' : ''}${itemHint ? ' chip-with-hint' : ''}`;
+          if (itemHint) {
+            return `<span class="${chipClasses}" data-qa-item="${escHTML(itemName)}" style="cursor:pointer">
+              <span class="chip-line">${have ? '✓' : '+'} ${escHTML(itemName)}${removeBtn}</span>
+              <span class="qa-chip-hint">${escHTML(itemHint)}</span>
+            </span>`;
+          }
+          return `<span class="${chipClasses}" data-qa-item="${escHTML(itemName)}" style="cursor:pointer">
+            ${have ? '✓' : '+'} ${escHTML(itemName)}${removeBtn}
           </span>`;
         }).join('')}
       </div>
