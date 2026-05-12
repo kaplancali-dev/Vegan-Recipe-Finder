@@ -593,7 +593,10 @@ function renderSuggestions() {
     recipes: _recipes,
     ingredients,
     staples,
-    limit: 5,
+    // 6 fills 2 rows cleanly on both 2-col (tablet) and 3-col (desktop)
+    // grid layouts. The 6th-best suggestion is still a high-impact win
+    // (drop-off doesn't really start until ~#8 in practice).
+    limit: 6,
   });
 
   if (!suggestions.length) {
