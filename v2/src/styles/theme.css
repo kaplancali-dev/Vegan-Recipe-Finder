@@ -2618,22 +2618,27 @@ input, select, textarea {
    reads as "good thing — do it" rather than just an info card. */
 
 .suggestions-list {
-  /* Responsive grid: 1 column on narrow screens, 2 on tablet, 3 on
-     desktop. auto-fit + minmax means the layout adapts to whatever
-     space is available without us hard-coding breakpoints. 280px
-     minimum keeps each row wide enough for the full sentence not to
-     wrap awkwardly. */
+  /* Responsive grid using auto-fit + 200px min-width:
+     - Phone (~375px):       1 column, all 6 stacked
+     - Small tablet (~600px): 2 columns × 3 rows
+     - Tablet (~720-1080px):  3 columns × 2 rows (the "2 lines, 3 items"
+                              layout this is optimized for)
+     - Laptop (~1200px+):     6 columns × 1 row (everything on one line)
+     200px min keeps each row readable without the longest ingredient
+     name (e.g. "mushrooms (any)") wrapping. */
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 8px;
 }
 
 .suggestion-row {
+  /* Compact data-row: [+] ingredient_name        +N
+     Each row is one tight line, no wrapped text. */
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   width: 100%;
-  padding: 12px 14px;
+  padding: 10px 12px;
   background: var(--green-soft);
   border: 1.5px solid var(--green-soft);
   border-radius: var(--radius-sm);
@@ -2642,6 +2647,7 @@ input, select, textarea {
   color: var(--ink);
   cursor: pointer;
   transition: all var(--transition);
+  min-width: 0; /* let flex shrink children inside grid */
 }
 
 .suggestion-row:hover,
@@ -2653,12 +2659,12 @@ input, select, textarea {
 
 .suggestion-add-icon {
   flex: 0 0 auto;
-  width: 28px;
-  height: 28px;
+  width: 26px;
+  height: 26px;
   border-radius: 50%;
   background: var(--green);
   color: #fff;
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   font-weight: 700;
   display: inline-flex;
   align-items: center;
@@ -2666,16 +2672,23 @@ input, select, textarea {
   line-height: 1;
 }
 
-.suggestion-text {
+.suggestion-name {
   flex: 1 1 auto;
+  min-width: 0;
   font-size: 0.92rem;
-  line-height: 1.35;
-  color: var(--ink-soft);
+  font-weight: 600;
+  color: var(--ink);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-.suggestion-text strong {
-  color: var(--ink);
-  font-weight: 600;
+.suggestion-count {
+  flex: 0 0 auto;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--green);
+  font-variant-numeric: tabular-nums;
 }
 
 /* ── Sync Card ───────────────────────────────────────────────── */
