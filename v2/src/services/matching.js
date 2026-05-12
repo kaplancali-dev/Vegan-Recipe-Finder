@@ -100,6 +100,103 @@ const _GF_MATCH_SWAPS = {
   'soy sauce': ['tamari','coconut aminos','liquid aminos','gluten-free soy sauce','gf soy sauce'],
 };
 
+/**
+ * Allergen-conditional substitution map. Only fires when the corresponding
+ * allergy is ACTIVE in the user's settings — these are NOT universal aliases.
+ *
+ * Why allergen-conditional: most cooks who don't have an allergy wouldn't
+ * naturally substitute sunflower butter for almond butter (the flavors differ).
+ * But a tree-nut-allergic user DEFINITELY has the seed-butter/seed-milk
+ * substitutes already in their kitchen — they live with the substitution
+ * every day. So when the allergy is active, the matcher should treat their
+ * substitutes as covering the original.
+ *
+ * Same pattern as _GF_MATCH_SWAPS above (HARVEST is GF by default → wheat
+ * recipes match if user has GF version), but gated on allergy state instead
+ * of always-on.
+ *
+ * Only ingredients with TRUE substitutes are listed. Nut flours (almond,
+ * coconut), tofu, mushrooms, tomatoes — these are structural to their
+ * recipes and a substitution would produce a failed dish, so we don't
+ * pretend otherwise. Recipe stays filtered.
+ */
+const _ALLERGEN_SWAPS = {
+  'tree nut': {
+    // Plant milks: rice/oat/soy/hemp work cleanly in any recipe calling
+    // for almond/cashew/macadamia/pistachio/hazelnut milk.
+    'almond milk':      ['oat milk','soy milk','rice milk','hemp milk'],
+    'cashew milk':      ['oat milk','soy milk','rice milk','hemp milk'],
+    'macadamia milk':   ['oat milk','soy milk','rice milk','hemp milk'],
+    'pistachio milk':   ['oat milk','soy milk','rice milk','hemp milk'],
+    'hazelnut milk':    ['oat milk','soy milk','rice milk','hemp milk'],
+    // Nut butters → seed butters / tahini. Same fat/binding role.
+    'almond butter':    ['sunflower butter','sunflower seed butter','tahini','pumpkin seed butter'],
+    'cashew butter':    ['sunflower butter','sunflower seed butter','tahini','pumpkin seed butter'],
+    'macadamia butter': ['sunflower butter','sunflower seed butter','tahini','pumpkin seed butter'],
+    'hazelnut butter':  ['sunflower butter','sunflower seed butter','tahini','pumpkin seed butter'],
+    'pecan butter':     ['sunflower butter','sunflower seed butter','tahini','pumpkin seed butter'],
+    'walnut butter':    ['sunflower butter','sunflower seed butter','tahini','pumpkin seed butter'],
+  },
+  'peanut': {
+    // Peanut butter → tree-nut butters or seed butters. Pantry check
+    // naturally excludes nut butters for users who ALSO have tree-nut
+    // allergy (they wouldn't have those in their pantry).
+    'peanut butter':    ['sunflower butter','sunflower seed butter','tahini','pumpkin seed butter','almond butter','cashew butter'],
+    'peanut oil':       ['olive oil','avocado oil','sesame oil','vegetable oil','sunflower oil','grapeseed oil'],
+  },
+  'soy': {
+    // Soy milk → other plant milks. NOT tofu/tempeh/edamame which are
+    // structural ingredients with no clean swap.
+    'soy milk':         ['oat milk','almond milk','rice milk','hemp milk','cashew milk','macadamia milk','pistachio milk'],
+  },
+};
+
+/**
+ * Check whether a recipe with a given allergen is "satisfiable" — i.e.,
+ * every allergen-containing ingredient has at least one substitute the
+ * user has available in their pantry.
+ *
+ * Returns true → recipe should be allowed through the allergy filter.
+ * Returns false → at least one allergen ingredient has no available
+ * substitute, so the recipe stays excluded (the user genuinely can't
+ * make it safely).
+ *
+ * @param {{ ing: string[] }} recipe
+ * @param {string} allergenKey - e.g. 'tree nut', 'peanut', 'soy'
+ * @param {Set<string>} userIngSet - Pre-built Set of normed user ingredients
+ * @param {string[]} userIngs - Expanded normed user ingredients (for substring fallback)
+ * @returns {boolean}
+ */
+function _isAllergyRecipeSatisfiable(recipe, allergenKey, userIngSet, userIngs) {
+  const swaps = _ALLERGEN_SWAPS[allergenKey];
+  if (!swaps) return false; // No swap rules → no substitution possible → keep filtered
+
+  const keywords = ALLERGY_KEYWORDS[allergenKey] || [allergenKey];
+
+  for (const ing of recipe.ing) {
+    if (!ing) continue;
+    const ingLow = ing.toLowerCase();
+
+    // Skip ingredients that don't contain the allergen at all
+    if (!keywords.some(kw => ingLow.includes(kw))) continue;
+
+    // This ingredient contains the allergen — does any swap rule cover it
+    // AND does the user have one of the substitutes?
+    let satisfied = false;
+    for (const [allergenItem, alts] of Object.entries(swaps)) {
+      if (ingLow.includes(allergenItem)) {
+        if (alts.some(alt => userIngSet.has(alt) || userIngs.some(ui => ui.includes(alt)))) {
+          satisfied = true;
+          break;
+        }
+      }
+    }
+
+    if (!satisfied) return false;
+  }
+  return true;
+}
+
 /** Flat set of all perishable ingredient names (normed) for fast lookup */
 const _perishableSet = new Set();
 PERISHABLES.forEach(cat => cat.items.forEach(item => _perishableSet.add(norm(item))));
@@ -735,7 +832,18 @@ export function findRecipes({
   }
 
   if (allergies.size) {
-    pool = pool.filter(r => ![...allergies].some(key => recipeHasAllergen(r, key)));
+    pool = pool.filter(r => {
+      // Recipe passes if, for every active allergy, the recipe is either
+      // (a) free of that allergen, OR (b) every allergen-containing
+      // ingredient has a viable substitute the user has in their pantry.
+      // This is the smart-substitution path: a tree-nut-allergic user with
+      // oat milk can still see almond-milk recipes (using their oat milk).
+      for (const key of allergies) {
+        if (!recipeHasAllergen(r, key)) continue;
+        if (!_isAllergyRecipeSatisfiable(r, key, allIngSet, allIngs)) return false;
+      }
+      return true;
+    });
   }
 
   // Score each recipe
@@ -746,6 +854,11 @@ export function findRecipes({
     const needNames = [];     // original ingredient strings user needs
     let requiredCount = 0;    // count of ingredients excluding "(optional)"
     let userHaveCount = 0;    // count of recipe ings matched against user-typed ingredients only
+    // Records ingredients that were matched via allergen substitution. Keyed
+    // by the displayCanonical (same string as appears in r.have), so the
+    // card/detail render layers can look up the swap when drawing chips.
+    //   { 'almond milk': { substitute: 'oat milk', allergen: 'tree nut' } }
+    const allergenSwaps = {};
 
     // Use pre-canonicalized iclean array if present (built by
     // scripts/canonicalize-ingredients.mjs at build time). Each iclean[i]
@@ -779,6 +892,10 @@ export function findRecipes({
         if (_isUniversal(rawIng)) continue;
 
         let matched = false;
+        // Captured allergen swap for this ingredient, if any component
+        // was satisfied only via an allergen substitute. Recorded later
+        // under displayCanonical when matched succeeds.
+        let allergenSwapForThis = null;
 
         if (!matched) {
           // For each canonical component, check user pantry.
@@ -796,6 +913,35 @@ export function findRecipes({
                 }
               }
             }
+            // Allergen-conditional swap: if an allergen ingredient and the
+            // user has a substitute in pantry (only applies when the
+            // matching allergy is active in user settings). Capture which
+            // substitute matched so the UI can show "use your X instead".
+            if (allergies.size) {
+              for (const allergenKey of allergies) {
+                const swaps = _ALLERGEN_SWAPS[allergenKey];
+                if (!swaps) continue;
+                for (const [allergenItem, alts] of Object.entries(swaps)) {
+                  if (c.includes(allergenItem) || c === allergenItem) {
+                    const matchedAlt = alts.find(alt =>
+                      allIngSet.has(alt) || allIngs.some(ai => ai.includes(alt))
+                    );
+                    if (matchedAlt) {
+                      // Record swap for the first allergen-substituted component
+                      // we encounter. Stored under displayCanonical below.
+                      if (!allergenSwapForThis) {
+                        allergenSwapForThis = {
+                          original: allergenItem,
+                          substitute: matchedAlt,
+                          allergen: allergenKey,
+                        };
+                      }
+                      return true;
+                    }
+                  }
+                }
+              }
+            }
             return false;
           });
         }
@@ -804,6 +950,9 @@ export function findRecipes({
         if (matched) {
           have.push(displayCanonical);
           haveNames.push(rawIng);
+          if (allergenSwapForThis) {
+            allergenSwaps[displayCanonical] = allergenSwapForThis;
+          }
           if (components.some(c => userNormSet.has(c) || ingredientMatches(c, userNorm, userNormSet, userNormStems))) {
             userHaveCount++;
           }
@@ -858,10 +1007,39 @@ export function findRecipes({
           }
         }
       }
+      // Allergen-conditional swap (legacy path) — same behavior as the
+      // iclean path above. Only fires when the allergy is active.
+      let legacyAllergenSwap = null;
+      if (!matched && allergies.size) {
+        for (const allergenKey of allergies) {
+          const swaps = _ALLERGEN_SWAPS[allergenKey];
+          if (!swaps) continue;
+          for (const [allergenItem, alts] of Object.entries(swaps)) {
+            if (ri.includes(allergenItem)) {
+              const matchedAlt = alts.find(alt =>
+                allIngSet.has(alt) || allIngs.some(ai => ai.includes(alt))
+              );
+              if (matchedAlt) {
+                matched = true;
+                legacyAllergenSwap = {
+                  original: allergenItem,
+                  substitute: matchedAlt,
+                  allergen: allergenKey,
+                };
+                break;
+              }
+            }
+          }
+          if (matched) break;
+        }
+      }
 
       if (matched) {
         have.push(ri);
         haveNames.push(rawIng);
+        if (legacyAllergenSwap) {
+          allergenSwaps[ri] = legacyAllergenSwap;
+        }
         if (ingredientMatches(ri, userNorm, userNormSet, userNormStems)) userHaveCount++;
       }
 
@@ -881,7 +1059,7 @@ export function findRecipes({
     // Count how many of the user's perishable ingredients this recipe uses
     const perishHave = have.filter(h => isPerishableIng(h)).length;
 
-    return { ...r, have, need, haveNames, needNames, pct, userHave: userHaveCount, perishHave };
+    return { ...r, have, need, haveNames, needNames, pct, userHave: userHaveCount, perishHave, allergenSwaps };
   });
 
   // Default sort: best match first, then perishable priority, then alphabetical

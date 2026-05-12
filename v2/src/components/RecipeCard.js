@@ -113,22 +113,33 @@ export function sugarSwap(name) {
   return null;
 }
 
+/** Label format: "tree nut" → "Tree nut", "peanut" → "Peanut" */
+function _formatAllergen(key) {
+  return key.replace(/\b\w/g, c => c.toUpperCase());
+}
+
 /**
  * Render a single ingredient chip.
  * Perishable "have" ingredients get a distinct visual style.
  * Non-GF ingredients show an inline swap hint.
+ * Allergen-substituted ingredients get an amber swap badge.
  * @param {string} name
  * @param {string} cls - 'c-have' or 'c-need'
+ * @param {Object} [allergenSwap] - { substitute, allergen } if matched via allergen substitution
  */
-function ingChip(name, cls) {
+function ingChip(name, cls, allergenSwap) {
   const display = stripMeasure(decodeHTML(name));
   const gf = gfSwap(name);
   const sf = sugarSwap(name);
   const gfTag = gf ? `<span class="gf-swap">GF: ${escHTML(gf)}</span>` : '';
   const sfTag = sf ? `<span class="sf-swap">Lower-carb: ${escHTML(sf)}</span>` : '';
+  const allergyTag = allergenSwap
+    ? `<span class="allergy-swap">${escHTML(_formatAllergen(allergenSwap.allergen))} allergy: use your ${escHTML(allergenSwap.substitute)}</span>`
+    : '';
 
-  const extraCls = gf ? ' c-gluten' : sf ? ' c-sugar' : '';
-  return `<span class="${cls}${extraCls}">${escHTML(display)}${gfTag}${sfTag}</span>`;
+  // Class priority: allergen (safety) > gluten > sugar
+  const extraCls = allergenSwap ? ' c-allergen' : gf ? ' c-gluten' : sf ? ' c-sugar' : '';
+  return `<span class="${cls}${extraCls}">${escHTML(display)}${gfTag}${sfTag}${allergyTag}</span>`;
 }
 
 /**
@@ -185,8 +196,11 @@ export function renderCard(result, opts = {}) {
   const needDisplay = (r.need && r.need.length) ? r.need : (r.needNames || []);
   const haveNames = r.haveNames || [];  // kept for substitution lookup below
   const needNames = r.needNames || [];
+  // Allergen swaps: lookup from the matcher result (keyed by displayCanonical
+  // — same string as in r.have). Lets each chip surface its own substitute.
+  const swaps = r.allergenSwaps || {};
   const haveChips = haveDisplay.length
-    ? `<div class="chip-label-sm">You have</div><div class="chips">${haveDisplay.map(n => ingChip(n, 'c-have')).join('')}</div>`
+    ? `<div class="chip-label-sm">You have</div><div class="chips">${haveDisplay.map(n => ingChip(n, 'c-have', swaps[n])).join('')}</div>`
     : '';
   const needChips = needDisplay.length
     ? `<div class="chip-label-sm" style="margin-top:4px">You need</div><div class="chips">${needDisplay.map(n => ingChip(n, 'c-need')).join('')}</div>`

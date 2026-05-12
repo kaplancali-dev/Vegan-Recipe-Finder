@@ -347,13 +347,31 @@ function _renderFullDetail(recipe, ings, staples) {
   // with the recipe's iclean canonical names) so detail-page checkmarks
   // match what the card shows. Without this, the detail page silently
   // diverged: card said "have black beans" while detail said "missing
-  // no-salt-added black beans".
+  // no-salt-added black beans". Pass allergies so the matcher can
+  // compute allergen swaps for the detail-page chips/callouts.
   const userIngSet = new Set(userIngs);
-  const scored = findRecipes({ recipes: [recipe], ingredients: ings, staples })[0];
+  const allergies = get('allergies') || [];
+  const scored = findRecipes({
+    recipes: [recipe],
+    ingredients: ings,
+    staples,
+    allergies: allergies.length ? new Set(allergies) : undefined,
+  })[0];
   const haveSet = new Set(scored ? scored.haveNames : []);
+  const allergenSwaps = scored?.allergenSwaps || {};
+  // Match allergen swap by raw ingredient name → reverse-lookup via haveNames
+  // index (haveNames[i] = raw, have[i] = displayCanonical key in allergenSwaps).
+  const rawToSwap = {};
+  if (scored && scored.have && scored.haveNames) {
+    scored.haveNames.forEach((rawName, i) => {
+      const canonical = scored.have[i];
+      if (allergenSwaps[canonical]) rawToSwap[rawName] = allergenSwaps[canonical];
+    });
+  }
   const ingList = (recipe.ing || []).map(ing => ({
     name: ing,
     have: haveSet.has(ing),
+    allergenSwap: rawToSwap[ing] || null,
   }));
 
   // Count using the matcher's own logic so it agrees with the card.
@@ -386,11 +404,21 @@ function _renderFullDetail(recipe, ings, staples) {
         </div>`
       : '';
     const swaps = _swapTags(i.name, displayName);
-    const extraCls = _gfSwap(i.name) ? ' c-gluten' : _sugarSwap(i.name) ? ' c-sugar' : '';
+    // Allergen swap callout: prominent, distinct color, near the ingredient.
+    // The user MUST see this — they're looking at "almond milk" in the
+    // ingredient list and need to know HARVEST matched it via their oat milk.
+    const allergyCallout = i.allergenSwap
+      ? `<div class="detail-allergen-swap">⚠️ <strong>${escHTML(i.allergenSwap.allergen.replace(/\b\w/g, c => c.toUpperCase()))} allergy:</strong> use your <strong>${escHTML(i.allergenSwap.substitute)}</strong> instead.</div>`
+      : '';
+    // Class priority: allergen wins over gluten/sugar (safety-first)
+    const extraCls = i.allergenSwap
+      ? ' c-allergen'
+      : _gfSwap(i.name) ? ' c-gluten' : _sugarSwap(i.name) ? ' c-sugar' : '';
     const tappable = info && info.benefits.length ? ' has-benefits' : '';
     return `<li class="detail-ing ${i.have ? 'have' : 'missing'}${tappable}${extraCls}">
       <span class="ing-name">${i.have ? '✓' : '○'} ${escHTML(displayName)}${tappable ? ' <span class="ing-info-icon">ℹ</span>' : ''}</span>
       ${swaps}
+      ${allergyCallout}
       ${benefitsHtml}
     </li>`;
   }).join('');
