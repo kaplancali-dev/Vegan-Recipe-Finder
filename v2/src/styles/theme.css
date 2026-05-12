@@ -2646,6 +2646,12 @@ input, select, textarea {
     grid-template-columns: repeat(3, 1fr);
     gap: 8px;
   }
+  /* On laptop the Quick Wins subtitle has plenty of horizontal room,
+     so suppress the <br> that's there for phone wrapping. Result: one
+     line on laptop, two lines on phone, no JS needed. */
+  .qw-phone-br {
+    display: none;
+  }
 }
 
 .suggestion-row {
