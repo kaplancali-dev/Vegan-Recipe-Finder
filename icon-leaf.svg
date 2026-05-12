@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="HARVEST leaf">
+  <!-- Solid brand-green background. iOS/Android round the corners
+       automatically when this is used as an app icon, so we keep the
+       backdrop perfectly square. -->
+  <rect width="512" height="512" fill="#2d7a4f"/>
+
+  <!-- Almond-shaped leaf silhouette — quadratic Béziers with sharp
+       points at top (64) and bottom (448), widest at the vertical
+       center. Reads unambiguously as a leaf at every size from 512px
+       down to 32px favicon. -->
+  <path d="M 256 64
+           Q 416 256, 256 448
+           Q 96 256, 256 64 Z"
+        fill="#ffffff"/>
+
+  <!-- Center vein in the brand green. Thin enough to read at small
+       sizes without dominating; extends nearly the full length of
+       the leaf for botanical credibility. -->
+  <path d="M 256 96 L 256 416"
+        stroke="#2d7a4f" stroke-width="10" stroke-linecap="round"/>
+</svg>
