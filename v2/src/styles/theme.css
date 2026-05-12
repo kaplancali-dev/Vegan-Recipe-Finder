@@ -2716,26 +2716,30 @@ input, select, textarea {
    Also need to reset overflow/text-overflow from the base rule so
    wrapped text doesn't get clipped. */
 @media (max-width: 767px) {
+  .suggestions-list {
+    /* Tighten inter-chip gap on phone — was 6px */
+    gap: 4px;
+  }
   .suggestion-row {
     display: grid;
     grid-template-columns: auto 1fr;
     grid-template-areas:
       "icon name"
       "count count";
-    gap: 2px 6px;
-    padding: 8px 10px;
+    gap: 0 6px;
+    padding: 5px 8px;
     align-items: center;
   }
   .suggestion-add-icon {
     grid-area: icon;
-    width: 22px;
-    height: 22px;
-    font-size: 0.95rem;
+    width: 20px;
+    height: 20px;
+    font-size: 0.85rem;
   }
   .suggestion-name {
     grid-area: name;
-    font-size: 0.78rem;
-    line-height: 1.2;
+    font-size: 0.76rem;
+    line-height: 1.15;
     white-space: normal;
     word-break: break-word;
     overflow: visible;
@@ -2744,9 +2748,9 @@ input, select, textarea {
   .suggestion-count {
     grid-area: count;
     text-align: center;
-    font-size: 0.95rem;
+    font-size: 0.88rem;
     font-weight: 700;
-    margin-top: 2px;
+    margin-top: 1px;
   }
 }
 
