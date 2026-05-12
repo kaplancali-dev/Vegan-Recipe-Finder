@@ -2618,8 +2618,13 @@ input, select, textarea {
    reads as "good thing — do it" rather than just an info card. */
 
 .suggestions-list {
-  display: flex;
-  flex-direction: column;
+  /* Responsive grid: 1 column on narrow screens, 2 on tablet, 3 on
+     desktop. auto-fit + minmax means the layout adapts to whatever
+     space is available without us hard-coding breakpoints. 280px
+     minimum keeps each row wide enough for the full sentence not to
+     wrap awkwardly. */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 8px;
 }
 
