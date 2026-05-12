@@ -152,6 +152,7 @@ export const STAPLE_SECTIONS = [
     'chocolate chips (any)','white chocolate chips','dark chocolate',
     { name: 'cacao nibs', hint: 'chocolate for grown-ups' },
     { name: 'cacao butter', hint: 'for raw chocolate making' },
+    { name: 'coconut milk', hint: 'the canned kind, for puddings, ice cream & baking' },
     { name: 'coconut cream', hint: 'thicker than coconut milk, for whipped toppings & rich desserts' },
     'shredded coconut',
     'date sugar','allulose','stevia / monk fruit',
