@@ -2648,28 +2648,41 @@ input, select, textarea {
   }
 }
 
-/* Phone-specific compaction so full ingredient names fit without
-   ellipsis. Below 768px each column is only ~150-180px wide; without
-   tightening everything we'd truncate "mushrooms (any)" etc. */
+/* Phone layout: vertical stack — name on top row (gets the full chip
+   width), count centered on bottom row. Solves the truncation problem
+   of the horizontal layout (only ~150-180px per chip on phone wasn't
+   enough for names like "coconut cream" or "mushrooms (any)" alongside
+   the icon and count). */
 @media (max-width: 767px) {
   .suggestion-row {
-    padding: 6px 8px;
-    gap: 6px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-areas:
+      "icon name"
+      "count count";
+    gap: 2px 6px;
+    padding: 8px 10px;
+    align-items: center;
   }
   .suggestion-add-icon {
-    width: 20px;
-    height: 20px;
-    font-size: 0.9rem;
+    grid-area: icon;
+    width: 22px;
+    height: 22px;
+    font-size: 0.95rem;
   }
   .suggestion-name {
+    grid-area: name;
     font-size: 0.78rem;
-    /* Allow wrap as a fallback so genuinely-long names like
-       'mushrooms (any)' don't get cut off mid-word. */
+    line-height: 1.2;
     white-space: normal;
     word-break: break-word;
   }
   .suggestion-count {
-    font-size: 0.85rem;
+    grid-area: count;
+    text-align: center;
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-top: 2px;
   }
 }
 
