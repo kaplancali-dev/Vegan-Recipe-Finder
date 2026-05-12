@@ -53,7 +53,19 @@ echo "→ Committing & pushing…"
 find .git -name "*.lock" -type f -delete 2>/dev/null || true
 find .git/objects -name "tmp_obj_*" -type f -delete 2>/dev/null || true
 git add -A
-git commit -m "$MSG"
+# Only commit if there's something staged. Without this guard, an
+# asset-only deploy (e.g. icon swap that doesn't change JS/CSS hashes)
+# leaves nothing for `git commit` to do — the commit fails and `set -e`
+# kills the script BEFORE `git push` runs, leaving prior commits
+# stranded on the local branch and the live site stale.
+if ! git diff --cached --quiet; then
+  git commit -m "$MSG"
+else
+  echo "  (build produced no new files — skipping commit)"
+fi
+# Always push. If local has unpushed commits from a previous run that
+# was interrupted, this catches them. If everything is already in sync,
+# this is a harmless no-op.
 git push
 
 echo "✓ Done."
