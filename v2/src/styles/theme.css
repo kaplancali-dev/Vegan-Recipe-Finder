@@ -2631,17 +2631,20 @@ input, select, textarea {
    reads as "good thing — do it" rather than just an info card. */
 
 .suggestions-list {
-  /* Responsive grid using auto-fit + 200px min-width:
-     - Phone (~375px):       1 column, all 6 stacked
-     - Small tablet (~600px): 2 columns × 3 rows
-     - Tablet (~720-1080px):  3 columns × 2 rows (the "2 lines, 3 items"
-                              layout this is optimized for)
-     - Laptop (~1200px+):     6 columns × 1 row (everything on one line)
-     200px min keeps each row readable without the longest ingredient
-     name (e.g. "mushrooms (any)") wrapping. */
+  /* Fixed-count responsive grid (no auto-fit). David explicitly wanted:
+     - Phone:  2 columns × 3 rows (6 items)
+     - Laptop: 3 columns × 2 rows (6 items)
+     auto-fit was producing variable column counts that looked weird
+     at intermediate widths (5 + 1 alone on wider laptops). */
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: 8px;
+}
+
+@media (min-width: 768px) {
+  .suggestions-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 .suggestion-row {
