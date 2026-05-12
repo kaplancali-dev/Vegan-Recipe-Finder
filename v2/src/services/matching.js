@@ -450,6 +450,12 @@ const IDENTITY_SUFFIXES = new Set([
   // baking products. Users who have "chocolate chips (any)" via the
   // staples picker get the chip alias automatically.
   'leather', 'jerky', 'crisp', 'crisps', 'chip', 'chips',
+  // Sprouts — bean sprouts, alfalfa sprouts, broccoli sprouts are
+  // distinct fresh produce items, NOT the same as dried beans or seeds
+  // they grow from. User with "kidney beans" (which alias-expands to
+  // include generic "beans") should NOT match recipes calling for
+  // "bean sprouts". Same logic for alfalfa → alfalfa sprouts, etc.
+  'sprout', 'sprouts',
   // Alcohol and infusions
   'wine', 'wines', 'liqueur', 'liqueurs', 'beer', 'beers', 'tea', 'teas',
   // (Note: "pasta" and "noodles" deliberately EXCLUDED from this list.
