@@ -2638,12 +2638,38 @@ input, select, textarea {
      at intermediate widths (5 + 1 alone on wider laptops). */
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 8px;
+  gap: 6px;
 }
 
 @media (min-width: 768px) {
   .suggestions-list {
     grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+}
+
+/* Phone-specific compaction so full ingredient names fit without
+   ellipsis. Below 768px each column is only ~150-180px wide; without
+   tightening everything we'd truncate "mushrooms (any)" etc. */
+@media (max-width: 767px) {
+  .suggestion-row {
+    padding: 6px 8px;
+    gap: 6px;
+  }
+  .suggestion-add-icon {
+    width: 20px;
+    height: 20px;
+    font-size: 0.9rem;
+  }
+  .suggestion-name {
+    font-size: 0.78rem;
+    /* Allow wrap as a fallback so genuinely-long names like
+       'mushrooms (any)' don't get cut off mid-word. */
+    white-space: normal;
+    word-break: break-word;
+  }
+  .suggestion-count {
+    font-size: 0.85rem;
   }
 }
 
