@@ -2646,11 +2646,17 @@ input, select, textarea {
     grid-template-columns: repeat(3, 1fr);
     gap: 8px;
   }
-  /* On laptop the Quick Wins subtitle has plenty of horizontal room,
-     so suppress the <br> that's there for phone wrapping. Result: one
-     line on laptop, two lines on phone, no JS needed. */
-  .qw-phone-br {
-    display: none;
+}
+
+/* Phone: stack the Quick Wins title above the subtitle. Without this
+   the .card-title flex layout puts them side-by-side and the subtitle
+   is squeezed into ~210px (4 lines). Stacked, the subtitle gets the
+   full card width and wraps cleanly to ~2 lines. */
+@media (max-width: 767px) {
+  #suggestionsCard .card-title {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
   }
 }
 
