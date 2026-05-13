@@ -37,6 +37,19 @@ function _isAndroid() {
 function _isMobile() {
   return _isIOS() || _isAndroid();
 }
+/**
+ * On iOS, Apple only allows SAFARI to add web apps to the home screen.
+ * Chrome, Firefox, Edge, etc. on iOS use WebKit but are explicitly blocked
+ * from the install API. Detecting this lets us tell those users to switch
+ * to Safari first instead of confusing them with instructions that won't
+ * work in their current browser.
+ */
+function _isNonSafariIOS() {
+  if (!_isIOS()) return false;
+  // CriOS = Chrome iOS, FxiOS = Firefox iOS, EdgiOS = Edge iOS,
+  // OPiOS = Opera iOS, YaBrowser = Yandex, etc.
+  return /CriOS|FxiOS|EdgiOS|OPiOS|YaBrowser|UCBrowser|DuckDuckGo/.test(navigator.userAgent);
+}
 function _isStandalone() {
   // Already installed (running from home-screen icon)
   return window.matchMedia('(display-mode: standalone)').matches
@@ -165,13 +178,19 @@ async function _onInstallTap() {
 function _showInstructions() {
   if (document.getElementById('installInstructions')) return;
   const ios = _isIOS();
+  const nonSafariIOS = _isNonSafariIOS();
+  // Title varies by platform/browser context
+  const title = nonSafariIOS
+    ? '📱 Open HARVEST in Safari first'
+    : ios ? '📱 Add HARVEST to your iPhone'
+          : '📱 Add HARVEST to your phone';
   const overlay = document.createElement('div');
   overlay.id = 'installInstructions';
   overlay.className = 'install-instructions-overlay';
   overlay.innerHTML = `
     <div class="install-instructions-box" role="dialog" aria-labelledby="installHowTitle">
       <button class="install-instructions-close" id="installInstrClose" aria-label="Close">×</button>
-      <h3 id="installHowTitle">${ios ? '📱 Add HARVEST to your iPhone' : '📱 Add HARVEST to your phone'}</h3>
+      <h3 id="installHowTitle">${title}</h3>
       <p class="install-instructions-why">
         <strong>More room for recipes.</strong> No Safari address bar, no tab bar — just HARVEST,
         edge to edge. You'll see roughly a third more on every screen.
@@ -183,7 +202,36 @@ function _showInstructions() {
         stay exactly where they are.
       </p>
       <ol class="install-instructions-steps">
-        ${ios ? `
+        ${nonSafariIOS ? `
+        <li>
+          <span class="install-step-num">!</span>
+          <div>
+            <strong>Apple only lets Safari install apps on iPhone</strong>
+            <span class="install-step-hint">Chrome, Firefox, and other iPhone browsers can't add to your home screen — that's an Apple restriction, not a HARVEST limitation. Switch to Safari and you're a few taps from done.</span>
+          </div>
+        </li>
+        <li>
+          <span class="install-step-num">1</span>
+          <div>
+            <strong>Tap the Share icon <span class="install-step-icon">⬆️</span></strong>
+            <span class="install-step-hint">In Chrome it's the box-with-an-up-arrow at the bottom of the screen.</span>
+          </div>
+        </li>
+        <li>
+          <span class="install-step-num">2</span>
+          <div>
+            <strong>Scroll down and tap "Open in Safari"</strong>
+            <span class="install-step-hint">You may need to scroll the share menu to find it.</span>
+          </div>
+        </li>
+        <li>
+          <span class="install-step-num">3</span>
+          <div>
+            <strong>In Safari, tap <span class="install-step-icon">•••</span> then "Add to Home Screen"</strong>
+            <span class="install-step-hint">Same address bar position. Tap "Add" — HARVEST appears with the leaf icon.</span>
+          </div>
+        </li>
+        ` : ios ? `
         <li>
           <span class="install-step-num">1</span>
           <div>
