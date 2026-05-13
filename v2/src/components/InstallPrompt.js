@@ -8,18 +8,21 @@
  * UX rules:
  *   - Never shown if already installed (display-mode: standalone)
  *   - Never shown on desktop (different value prop, different gesture)
- *   - Throttled: once per 30 days max, dismiss-able
- *   - Triggered after engagement, not on first load
- *       • 2nd+ visit, OR
- *       • Onboarding completed, OR
- *       • 5+ pantry items selected
+ *   - Onboarded users in web mode see the banner on EVERY visit until they
+ *     either install or explicitly dismiss for the session. The reminder is
+ *     intentional — every visit they're missing the bigger screen / faster
+ *     navigation / one-tap launch benefits.
+ *   - Dismissal is session-only (sessionStorage). Closing the tab and
+ *     coming back later → banner returns. Refreshing the same tab → banner
+ *     stays dismissed. This balances "remind users" with "don't be a pest."
+ *   - On first-time onboarding completion, the FULL instructions modal
+ *     fires immediately (peak teachable moment) instead of the small banner.
  */
 
 import { get, subscribe } from '../state/store.js';
 
-const DISMISS_KEY = 'h_install_dismissed_at';
+const SESSION_DISMISS_KEY = 'h_install_dismissed_session';
 const VISIT_KEY = 'h_visit_count';
-const COOLDOWN_DAYS = 30;
 
 let _deferredPrompt = null;  // captured beforeinstallprompt event (Android)
 
@@ -39,30 +42,20 @@ function _isStandalone() {
   return window.matchMedia('(display-mode: standalone)').matches
     || window.navigator.standalone === true;
 }
-function _wasDismissedRecently() {
+/**
+ * True if the user already closed the install prompt during this browsing
+ * session. Uses sessionStorage so the flag clears when they close the tab
+ * and the banner returns on their next visit — this is the per-visit
+ * reminder behavior we want.
+ */
+function _wasDismissedThisSession() {
   try {
-    const ts = localStorage.getItem(DISMISS_KEY);
-    if (!ts) return false;
-    const days = (Date.now() - Number(ts)) / 86400000;
-    return days < COOLDOWN_DAYS;
+    return sessionStorage.getItem(SESSION_DISMISS_KEY) === '1';
   } catch { return false; }
 }
 
-/* ── Engagement triggers ──────────────────────────────────────── */
-
-function _meetsEngagementBar() {
-  // 2nd+ visit
-  try {
-    const visits = Number(localStorage.getItem(VISIT_KEY) || 0);
-    if (visits >= 2) return true;
-  } catch {}
-  // Onboarding completed
-  if (get('onboarded')) return true;
-  // 5+ pantry items
-  const staples = get('staples') || [];
-  const ings = get('ingredients') || [];
-  if (staples.length + ings.length >= 5) return true;
-  return false;
+function _markDismissedSession() {
+  try { sessionStorage.setItem(SESSION_DISMISS_KEY, '1'); } catch {}
 }
 
 function _bumpVisitCount() {
@@ -82,35 +75,42 @@ window.addEventListener('beforeinstallprompt', (e) => {
 /* ── Public API ──────────────────────────────────────────────── */
 
 /**
- * Initialize install prompt logic. Bumps visit count, then schedules a
- * banner appearance if the user is mobile + uninstalled + engaged + not
- * recently dismissed. Also subscribes to the 'onboarded' state so we can
- * fire the install instructions IMMEDIATELY when onboarding completes
- * — the highest-engagement teachable moment a new user has.
+ * Initialize install prompt logic. Two trigger paths:
+ *
+ *   1. Per-visit banner — for users who have ALREADY onboarded but are
+ *      still using the web version on their phone (not installed as PWA).
+ *      Banner shows on every visit; dismissal is session-only so it
+ *      returns next visit. Reminds them they're missing the bigger-screen
+ *      / faster-launch / one-tap benefits of the installed version.
+ *
+ *   2. First-onboarding instructions modal — when a brand-new user
+ *      completes onboarding for the first time, show the full step-by-step
+ *      install instructions immediately. This is the peak teachable
+ *      moment, and it skips the banner entirely (modal does the same job
+ *      with more detail at the right moment).
  */
 export function initInstallPrompt() {
   _bumpVisitCount();
 
   if (!_isMobile()) return;        // desktop — no install prompt
-  if (_isStandalone()) return;     // already installed
-  if (_wasDismissedRecently()) return;
+  if (_isStandalone()) return;     // already installed (PWA mode)
 
-  // Wait a moment for state to settle, then check engagement
+  // Path 1: per-visit reminder banner (only for users who've already
+  // onboarded — pre-onboarding users will get Path 2 modal instead).
   setTimeout(() => {
-    if (!_meetsEngagementBar()) return;
+    if (!get('onboarded')) return;            // pre-onboarding — wait for Path 2
+    if (_wasDismissedThisSession()) return;   // user closed it this session
+    if (_isStandalone()) return;              // double-check
     _showBanner();
   }, 1500);
 
-  // Subscribe to the 'onboarded' state — when a first-time user finishes
-  // onboarding (transition false → true happens within this session),
-  // show install instructions immediately. This catches users who would
-  // otherwise have to come back for visit #2 before seeing any prompt.
-  // _wasDismissedRecently() is re-checked at fire time so users who
-  // already dismissed won't be re-prompted.
+  // Path 2: first-onboarding instructions modal. Subscribes to the
+  // 'onboarded' state — when a new user completes onboarding (transitions
+  // false → true within this session), show full install instructions.
   subscribe('onboarded', (newVal) => {
-    if (!newVal) return;                  // only fire on transition to true
-    if (_isStandalone()) return;          // already installed
-    if (_wasDismissedRecently()) return;  // user dismissed recently
+    if (!newVal) return;                       // only fire on transition to true
+    if (_isStandalone()) return;               // already installed
+    if (_wasDismissedThisSession()) return;    // already dismissed this session
     // Brief delay so onboarding overlay finishes its dismiss animation
     // before we layer the install instructions on top.
     setTimeout(() => _showInstructions(), 600);
@@ -138,7 +138,7 @@ function _showBanner() {
 }
 
 function _dismissBanner() {
-  try { localStorage.setItem(DISMISS_KEY, String(Date.now())); } catch {}
+  _markDismissedSession();
   const banner = document.getElementById('installBanner');
   if (banner) banner.remove();
 }
