@@ -533,16 +533,12 @@ function showQAPopup(category, anchorEl) {
     }
   });
 
-  // Position relative to grid
-  const grid = $('#qaGrid');
-  if (grid) {
-    grid.style.position = 'relative';
-    grid.appendChild(popup);
-    // Scroll the popup into view so the user sees the items they tapped
-    requestAnimationFrame(() => {
-      popup.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    });
-  }
+  // Mount on body so the fixed-positioned popup escapes any ancestor
+  // overflow:hidden that would clip it. (Earlier this was appended to
+  // #qaGrid with position:absolute + scrollIntoView; that broke once
+  // chips with hints made the popup tall enough to extend below the
+  // viewport, clipping the Close button.)
+  document.body.appendChild(popup);
 
   // Close on outside click (with tracked cleanup)
   setTimeout(() => {

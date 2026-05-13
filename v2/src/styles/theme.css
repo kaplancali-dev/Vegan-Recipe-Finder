@@ -2593,13 +2593,18 @@ input, select, textarea {
 }
 
 .qa-popup {
-  position: absolute;
+  /* Was 'absolute' inside #qaGrid — that meant the popup's bottom
+     could extend below the viewport (especially after hints made
+     chips taller), clipping the Close button. Fixed positioning
+     anchors to the viewport so the popup is always fully visible. */
+  position: fixed;
   z-index: 150;
   left: 50%;
-  transform: translateX(-50%);
+  top: 50%;
+  transform: translate(-50%, -50%);
   width: 90%;
   max-width: 480px;
-  max-height: 60vh;
+  max-height: 85vh;
   overflow: hidden;
   box-sizing: border-box;
   display: flex;
