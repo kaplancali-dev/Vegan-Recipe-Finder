@@ -15,7 +15,7 @@
  *       • 5+ pantry items selected
  */
 
-import { get } from '../state/store.js';
+import { get, subscribe } from '../state/store.js';
 
 const DISMISS_KEY = 'h_install_dismissed_at';
 const VISIT_KEY = 'h_visit_count';
@@ -84,7 +84,9 @@ window.addEventListener('beforeinstallprompt', (e) => {
 /**
  * Initialize install prompt logic. Bumps visit count, then schedules a
  * banner appearance if the user is mobile + uninstalled + engaged + not
- * recently dismissed.
+ * recently dismissed. Also subscribes to the 'onboarded' state so we can
+ * fire the install instructions IMMEDIATELY when onboarding completes
+ * — the highest-engagement teachable moment a new user has.
  */
 export function initInstallPrompt() {
   _bumpVisitCount();
@@ -98,6 +100,21 @@ export function initInstallPrompt() {
     if (!_meetsEngagementBar()) return;
     _showBanner();
   }, 1500);
+
+  // Subscribe to the 'onboarded' state — when a first-time user finishes
+  // onboarding (transition false → true happens within this session),
+  // show install instructions immediately. This catches users who would
+  // otherwise have to come back for visit #2 before seeing any prompt.
+  // _wasDismissedRecently() is re-checked at fire time so users who
+  // already dismissed won't be re-prompted.
+  subscribe('onboarded', (newVal) => {
+    if (!newVal) return;                  // only fire on transition to true
+    if (_isStandalone()) return;          // already installed
+    if (_wasDismissedRecently()) return;  // user dismissed recently
+    // Brief delay so onboarding overlay finishes its dismiss animation
+    // before we layer the install instructions on top.
+    setTimeout(() => _showInstructions(), 600);
+  });
 }
 
 /* ── Banner UI ───────────────────────────────────────────────── */
