@@ -1,21 +1,40 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="HARVEST leaf">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="HARVEST herb sprig">
   <!-- Solid brand-green background. iOS/Android round the corners
-       automatically when this is used as an app icon, so we keep the
-       backdrop perfectly square. -->
+       automatically when this is used as an app icon, so the backdrop
+       stays a perfect square here. -->
   <rect width="512" height="512" fill="#2d7a4f"/>
 
-  <!-- Almond-shaped leaf silhouette — quadratic Béziers with sharp
-       points at top (64) and bottom (448), widest at the vertical
-       center. Reads unambiguously as a leaf at every size from 512px
-       down to 32px favicon. -->
-  <path d="M 256 64
-           Q 416 256, 256 448
-           Q 96 256, 256 64 Z"
-        fill="#ffffff"/>
+  <!-- Multi-leaf herb sprig — mimics the visual character of the 🌿
+       emoji (which is what HARVEST uses as its brand mark in the
+       website header). Curved central stem with paired leaves along
+       it, smaller leaves toward the top. Two tones (white + faint
+       green tint) give depth so leaves don't read as a single blob. -->
+  <g transform="translate(256, 256)">
 
-  <!-- Center vein in the brand green. Thin enough to read at small
-       sizes without dominating; extends nearly the full length of
-       the leaf for botanical credibility. -->
-  <path d="M 256 96 L 256 416"
-        stroke="#2d7a4f" stroke-width="10" stroke-linecap="round"/>
+    <!-- Central curved stem (slight S-curve, bottom-right → top) -->
+    <path d="M 30 185 Q 5 90 -8 -10 Q -15 -115 0 -200"
+          stroke="#a8d5b3" stroke-width="5" fill="none"
+          stroke-linecap="round"/>
+
+    <!-- Bottom pair of leaves — largest, rooted closest to the soil -->
+    <ellipse cx="58" cy="160" rx="58" ry="24"
+             transform="rotate(30 58 160)" fill="#ffffff"/>
+    <ellipse cx="-52" cy="125" rx="54" ry="22"
+             transform="rotate(-25 -52 125)" fill="#e8f3ec"/>
+
+    <!-- Middle pair of leaves -->
+    <ellipse cx="58" cy="55" rx="60" ry="25"
+             transform="rotate(35 58 55)" fill="#ffffff"/>
+    <ellipse cx="-58" cy="22" rx="56" ry="23"
+             transform="rotate(-30 -58 22)" fill="#e8f3ec"/>
+
+    <!-- Upper pair of leaves — slightly smaller -->
+    <ellipse cx="44" cy="-68" rx="52" ry="22"
+             transform="rotate(40 44 -68)" fill="#ffffff"/>
+    <ellipse cx="-44" cy="-100" rx="50" ry="21"
+             transform="rotate(-35 -44 -100)" fill="#e8f3ec"/>
+
+    <!-- Top tip — small vertical leaf at the apex of the stem -->
+    <ellipse cx="0" cy="-175" rx="20" ry="36" fill="#ffffff"/>
+  </g>
 </svg>
