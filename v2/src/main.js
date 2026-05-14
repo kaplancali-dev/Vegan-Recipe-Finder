@@ -190,6 +190,11 @@ if (_showLanding) {
       } else {
         dismissLanding();
       }
+    } else if (action.dataset.landingAction === 'signin') {
+      // Returning user — open the sign-in modal. Lazy-loaded so first-
+      // time visitors don't pay the cost. After successful verify the
+      // modal pulls cloud data and reloads the page into the app shell.
+      import('./components/SignInModal.js').then(m => m.showSignInModal());
     }
   });
 }

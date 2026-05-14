@@ -5672,3 +5672,204 @@ input, select, textarea {
   font-weight: 500;
   color: var(--green);
 }
+
+/* ──────────────────────────────────────────────────────────────
+ * Landing page — sign-in link for returning users.
+ * Sits directly below the SHOW ME WHAT'S POSSIBLE button. Small
+ * and unobtrusive so it doesn't compete with the primary CTA,
+ * but discoverable to anyone who arrives on a new device/browser
+ * and needs to restore their pantry.
+ * ────────────────────────────────────────────────────────────── */
+.landing-signin-link {
+  display: inline-flex;
+  align-items: center;
+  background: transparent;
+  border: none;
+  color: var(--ink-soft);
+  font-family: inherit;
+  font-size: 0.82rem;
+  margin-top: 8px;
+  padding: 6px 4px;
+  cursor: pointer;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+.landing-signin-link:hover {
+  color: var(--ink);
+  border-bottom-color: color-mix(in srgb, var(--ink) 30%, transparent);
+}
+.landing-signin-link:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+}
+
+/* ──────────────────────────────────────────────────────────────
+ * Sign-in modal (SignInModal.js)
+ * 2-step OTP flow for returning users — email → 6-digit code →
+ * cloudPull → reload. Self-contained styling so it works whether
+ * launched from the landing page or anywhere else later.
+ * ────────────────────────────────────────────────────────────── */
+.sin-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 11000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sin-modal[hidden] { display: none; }
+
+.sin-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+}
+.sin-modal__panel {
+  position: relative;
+  background: var(--bg);
+  border-radius: 16px;
+  max-width: 420px;
+  width: calc(100% - 32px);
+  padding: 32px 28px 24px;
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.35);
+  color: var(--ink);
+  text-align: left;
+}
+.sin-modal__close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  background: transparent;
+  border: none;
+  color: var(--ink-soft);
+  font-size: 1.6rem;
+  line-height: 1;
+  padding: 4px 10px;
+  cursor: pointer;
+  border-radius: 6px;
+}
+.sin-modal__close:hover {
+  background: color-mix(in srgb, var(--ink) 8%, transparent);
+  color: var(--ink);
+}
+
+.sin-step[hidden] { display: none; }
+
+.sin-modal__title {
+  font-family: Georgia, serif;
+  font-size: 1.5rem;
+  color: var(--green-deep);
+  margin: 0 0 8px;
+  font-weight: 600;
+}
+.sin-modal__sub {
+  font-size: 0.92rem;
+  color: var(--ink);
+  line-height: 1.5;
+  margin: 0 0 18px;
+}
+.sin-modal__sub strong {
+  color: var(--green-deep);
+  font-weight: 600;
+}
+
+.sin-modal__input {
+  display: block;
+  width: 100%;
+  padding: 12px 14px;
+  font-size: 1rem;
+  font-family: inherit;
+  background: var(--bg);
+  color: var(--ink);
+  border: 1.5px solid color-mix(in srgb, var(--ink) 18%, transparent);
+  border-radius: 10px;
+  transition: border-color 0.15s ease;
+  box-sizing: border-box;
+}
+.sin-modal__input:focus {
+  outline: none;
+  border-color: var(--green);
+}
+.sin-modal__input--code {
+  letter-spacing: 0.15em;
+  font-variant-numeric: tabular-nums;
+}
+
+.sin-modal__error {
+  margin-top: 8px;
+  font-size: 0.82rem;
+  color: #b85b3d; /* warm coral — same family as the kitchen accent */
+}
+
+.sin-modal__btn {
+  display: block;
+  width: 100%;
+  margin-top: 14px;
+  padding: 12px 18px;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: inherit;
+  background: var(--green-deep);
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.08s ease;
+}
+.sin-modal__btn:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--green-deep) 88%, #000 12%);
+}
+.sin-modal__btn:active:not(:disabled) {
+  transform: scale(0.99);
+}
+.sin-modal__btn:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+
+.sin-modal__back {
+  display: block;
+  width: 100%;
+  margin-top: 10px;
+  padding: 8px;
+  background: transparent;
+  border: none;
+  font-family: inherit;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  cursor: pointer;
+  border-radius: 6px;
+}
+.sin-modal__back:hover {
+  color: var(--ink);
+  background: color-mix(in srgb, var(--ink) 5%, transparent);
+}
+
+.sin-modal__newhere {
+  margin: 18px 0 0;
+  padding: 12px 14px;
+  background: color-mix(in srgb, var(--ink) 4%, transparent);
+  border-radius: 10px;
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+  line-height: 1.5;
+}
+.sin-modal__newhere strong {
+  color: var(--ink);
+  letter-spacing: 0.02em;
+  font-weight: 600;
+}
+
+.sin-modal__spinner {
+  width: 32px;
+  height: 32px;
+  margin: 16px auto 0;
+  border: 3px solid color-mix(in srgb, var(--green) 25%, transparent);
+  border-top-color: var(--green-deep);
+  border-radius: 50%;
+  animation: sin-spin 0.8s linear infinite;
+}
+@keyframes sin-spin {
+  to { transform: rotate(360deg); }
+}

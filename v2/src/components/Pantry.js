@@ -275,7 +275,7 @@ function renderMyIngs() {
   const inactive = getRef('inactiveIngs');
 
   if (!active.length && !inactive.length) {
-    container.innerHTML = '<span class="muted" style="font-size:0.82rem">No ingredients yet — type what you bought above</span>';
+    container.innerHTML = '<span class="muted" style="font-size:0.82rem;font-weight:600">No ingredients yet — type what you bought above</span>';
     return;
   }
 
