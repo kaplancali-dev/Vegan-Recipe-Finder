@@ -5490,3 +5490,35 @@ input, select, textarea {
   color: var(--green-deep);
   font-weight: 500;
 }
+
+/* ──────────────────────────────────────────────────────────────
+ * Mobile cleanup — section toggle headers
+ *
+ * On narrow viewports, the "(filtered out of all recipes)" /
+ * "(always on hand)" / "(what I bought)" parentheticals wrap
+ * awkwardly inline next to the title, leaving the dropdown ▾
+ * arrow visually disconnected. Fix: let the title row stay
+ * single-line (emoji + title + arrow), and drop the parenthetical
+ * to its own line beneath. Pure CSS — no HTML changes.
+ * ────────────────────────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .card-title.section-toggle {
+    flex-wrap: wrap;
+    row-gap: 2px;
+  }
+  /* Push parenthetical descriptor to its own line below the title */
+  .card-title.section-toggle .muted {
+    flex-basis: 100%;
+    order: 3;
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--ink-soft);
+    margin-top: 0;
+    padding-left: 26px; /* indent under the emoji */
+  }
+  /* Keep arrow on the title row, anchored right */
+  .card-title.section-toggle .guide-arrow {
+    order: 2;
+    margin-left: auto;
+  }
+}
