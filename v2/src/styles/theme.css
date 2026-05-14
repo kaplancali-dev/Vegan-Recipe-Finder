@@ -5569,10 +5569,19 @@ input, select, textarea {
 
 /* ── Slot-specific overrides ───────────────────────────────── */
 
-/* Desktop install card — icon sits between QR and copy */
-.hv-install-card__icon {
-  width: 48px;
-  height: 48px;
+/* Desktop install card — icon is INLINE inside the copy, sized to
+   match the line height. Appears between "HARVEST" and "on" so it
+   reads as a brand mark, not a separate visual element. */
+.hv-app-icon--inline {
+  display: inline-block;
+  width: 1.4em;
+  height: 1.4em;
+  vertical-align: -0.32em;
+  margin: 0 0.18em;
+  border-radius: 22.37%;
+  border: 0.5px solid color-mix(in srgb, var(--ink) 10%, transparent);
+  /* Don't let line-wrapping split the icon from "HARVEST" */
+  /* (achieved via parent <strong>, which wraps the brand + icon + "on") */
 }
 
 /* Desktop install modal — bigger home-screen tile centered above QR */

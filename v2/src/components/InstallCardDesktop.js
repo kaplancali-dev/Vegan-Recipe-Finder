@@ -134,11 +134,10 @@ export function mountInstallCardDesktop(container) {
   card.setAttribute('aria-label', 'Get HARVEST on your phone or iPad');
   card.innerHTML = `
     <div class="hv-install-card__qr">${QR_SVG}</div>
-    <img class="hv-app-icon hv-install-card__icon" src="/icon-192.png" alt="HARVEST app icon">
     <div class="hv-install-card__copy">
       <div class="hv-install-card__line">
         Don't just cook from your laptop.
-        <strong>Get HARVEST on your phone, iPad →</strong>
+        <strong>Get HARVEST <img class="hv-app-icon--inline" src="/icon-192.png" alt="HARVEST app icon"> on your phone, iPad →</strong>
       </div>
       <div class="hv-install-card__hint">Point your phone camera at the code — it takes 5 seconds.</div>
     </div>
