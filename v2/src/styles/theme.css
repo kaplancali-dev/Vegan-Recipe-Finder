@@ -5308,3 +5308,185 @@ input, select, textarea {
   justify-content: center;
   margin-top: 16px;
 }
+
+/* ──────────────────────────────────────────────────────────────
+ * Desktop install card — appears at the bottom of recipe detail
+ * for laptop visitors. Hidden on mobile and on installed PWAs.
+ * See components/InstallCardDesktop.js
+ * ────────────────────────────────────────────────────────────── */
+
+.hv-install-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 24px 0 8px;
+  padding: 12px 14px;
+  background: var(--green-soft);
+  border: 1px solid color-mix(in srgb, var(--green) 25%, transparent);
+  border-radius: 12px;
+  color: var(--green-deep);
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+}
+.hv-install-card:hover {
+  background: color-mix(in srgb, var(--green-soft) 70%, var(--green) 12%);
+  border-color: color-mix(in srgb, var(--green) 40%, transparent);
+}
+.hv-install-card:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 2px;
+}
+.hv-install-card:active {
+  transform: scale(0.998);
+}
+.hv-install-card__qr {
+  flex-shrink: 0;
+  width: 72px;
+  height: 72px;
+  padding: 5px;
+  background: #ffffff;
+  border-radius: 8px;
+  border: 1px solid color-mix(in srgb, var(--green) 25%, transparent);
+  color: var(--green-deep);
+}
+.hv-install-card__qr svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.hv-install-card__copy {
+  flex: 1;
+  min-width: 0;
+}
+.hv-install-card__line {
+  font-family: Georgia, serif;
+  font-size: 0.95rem;
+  line-height: 1.35;
+  color: var(--green-deep);
+}
+.hv-install-card__line strong {
+  font-weight: 600;
+}
+.hv-install-card__hint {
+  font-size: 0.78rem;
+  color: var(--green);
+  margin-top: 3px;
+}
+.hv-install-card__close {
+  flex-shrink: 0;
+  background: transparent;
+  border: none;
+  color: var(--ink-soft);
+  font-size: 1.2rem;
+  line-height: 1;
+  padding: 6px 10px;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background 0.12s ease, color 0.12s ease;
+}
+.hv-install-card__close:hover {
+  background: color-mix(in srgb, var(--ink) 8%, transparent);
+  color: var(--ink);
+}
+
+/* Tighter layout on narrow viewports (rare here since we suppress on
+   mobile, but a desktop window can still shrink) */
+@media (max-width: 600px) {
+  .hv-install-card {
+    flex-wrap: wrap;
+  }
+  .hv-install-card__copy {
+    flex-basis: calc(100% - 92px);
+  }
+  .hv-install-card__close {
+    margin-left: auto;
+  }
+}
+
+/* ── Expanded modal ─────────────────────────────────────────── */
+
+.hv-install-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 10500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hv-install-modal[hidden] { display: none; }
+
+.hv-install-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+}
+.hv-install-modal__panel {
+  position: relative;
+  background: var(--bg);
+  border-radius: 16px;
+  max-width: 420px;
+  width: calc(100% - 32px);
+  padding: 28px 24px 22px;
+  text-align: center;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.35);
+  color: var(--ink);
+}
+.hv-install-modal__close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  background: transparent;
+  border: none;
+  color: var(--ink-soft);
+  font-size: 1.6rem;
+  line-height: 1;
+  padding: 4px 10px;
+  cursor: pointer;
+  border-radius: 6px;
+}
+.hv-install-modal__close:hover {
+  background: color-mix(in srgb, var(--ink) 8%, transparent);
+  color: var(--ink);
+}
+.hv-install-modal__qr {
+  width: 200px;
+  height: 200px;
+  margin: 4px auto 18px;
+  padding: 10px;
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid color-mix(in srgb, var(--green) 25%, transparent);
+  color: var(--green-deep);
+}
+.hv-install-modal__qr svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.hv-install-modal__title {
+  font-family: Georgia, serif;
+  font-size: 1.05rem;
+  line-height: 1.4;
+  color: var(--green-deep);
+  margin-bottom: 16px;
+}
+.hv-install-modal__title strong {
+  font-weight: 600;
+}
+.hv-install-modal__steps {
+  text-align: left;
+  margin: 0 auto;
+  padding-left: 1.2em;
+  max-width: 320px;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--ink);
+}
+.hv-install-modal__steps li {
+  margin-bottom: 4px;
+}
+.hv-install-modal__steps em {
+  font-style: italic;
+  color: var(--green-deep);
+  font-weight: 500;
+}

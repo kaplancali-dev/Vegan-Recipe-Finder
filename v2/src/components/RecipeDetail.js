@@ -18,6 +18,7 @@ import { showToast } from '../utils/toast.js';
 import { handleCook } from '../actions/cook.js';
 import { getIngredientBenefits } from '../data/ingredient-benefits.js';
 import { initOnboarding } from './Onboarding.js';
+import { mountInstallCardDesktop } from './InstallCardDesktop.js';
 
 /* ── Pre-normalized GF / sugar swap lookups ───────────────────── */
 
@@ -241,6 +242,11 @@ export function openDetail(id) {
   } else {
     _renderFullDetail(recipe, ings, staples);
   }
+
+  // Append the desktop install card to the bottom of the detail body.
+  // The helper exits early on mobile / standalone / already-dismissed,
+  // so no harm calling it on every open.
+  mountInstallCardDesktop(_body);
 
   _overlay.hidden = false;
   document.body.style.overflow = 'hidden';
