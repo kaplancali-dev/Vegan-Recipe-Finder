@@ -37,3 +37,11 @@ v2/patch.cjs
 # Vite temp files generated during build (should never be committed)
 v2/vite.config.js.timestamp-*.mjs
 *.timestamp-*.mjs
+
+# Local working files — kept on Desktop, not in the public repo
+/Harvest Bar Code.svg
+/Harvest.png
+/https_myharvestvegan_com.jpg
+/https_myharvestvegan_com.pdf
+/qr-install.png
+v2/dist-check/

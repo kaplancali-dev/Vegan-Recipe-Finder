@@ -269,6 +269,32 @@ let _currentSubPage = 0;
 
 /* ── Render ─────────────────────────────────────────────────── */
 
+/**
+ * Build the "Already used HARVEST? Sync your pantry" hint.
+ *
+ * Only rendered when the app is running as an installed PWA
+ * (iOS Safari standalone or display-mode: standalone). Browser-tab
+ * visitors never see it. Targets the iOS edge case where Safari
+ * localStorage and the installed PWA's localStorage are separate
+ * sandboxes — so a returning user who installs the app appears as
+ * a brand-new user with an empty pantry. Cloud Sync is the bridge.
+ */
+function _buildSyncHint() {
+  const isStandalone =
+    window.navigator.standalone === true ||
+    (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches);
+  if (!isStandalone) return '';
+  return `
+    <button class="obd-sync-hint" data-obd-sync-hint type="button" aria-label="Sync pantry from another device">
+      <span class="obd-sync-hint-text">
+        <strong>Already used HARVEST?</strong>
+        <span>Sync your pantry from another device →</span>
+      </span>
+      <span class="obd-sync-hint-icon" aria-hidden="true">⤓</span>
+    </button>
+  `;
+}
+
 function _buildSectionHTML(sec) {
   const subHTML = sec.sub ? `<span class="obd-cat-sub">${escHTML(sec.sub)}</span>` : '';
   return `
@@ -319,6 +345,7 @@ function _buildHTML() {
 
       <!-- STEP 1: Welcome -->
       <div class="obd-step active" data-obd-step="1">
+        ${_buildSyncHint()}
         <div class="obd-hero-icon">🥬🧅🫙</div>
         <div class="obd-title">Welcome to HARVEST</div>
         <div class="obd-hook">Right now, something in your fridge is quietly giving up on you. Let's prove it wrong.</div>
@@ -602,6 +629,24 @@ export function initOnboarding(opts = {}) {
     const goBtn = el.closest('[data-obd-go]');
     if (goBtn) {
       _goToStep(overlay, Number(goBtn.dataset.obdGo));
+      return;
+    }
+
+    // Sync hint — fade out onboarding (without marking onboarded) and
+    // jump to Cloud Sync. We intentionally do NOT call _dismiss() here,
+    // because that sets onboarded=true. If the user bails out of sync,
+    // onboarding should appear again next launch. If sync succeeds,
+    // cloudPull will hydrate `onboarded` + `staples` from the cloud,
+    // which then suppresses onboarding via the existing gate.
+    if (el.closest('[data-obd-sync-hint]')) {
+      overlay.style.opacity = '0';
+      setTimeout(() => {
+        overlay.remove();
+        if (typeof onDismiss === 'function') onDismiss();
+        if (typeof window.__openCloudSync === 'function') {
+          window.__openCloudSync();
+        }
+      }, 350);
       return;
     }
 

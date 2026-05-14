@@ -528,15 +528,34 @@ function toggleDarkMode() {
     });
   }
 
-  // Cloud Sync menu item — switch to Pantry tab and scroll to sync panel
-  const menuSyncBtn = $('#menuCloudSync');
-  if (menuSyncBtn) {
-    menuSyncBtn.addEventListener('click', () => {
-      closeMenu();
-      showTab('pantry');
+  // Cloud Sync deep-link — switch to Pantry tab, scroll to sync panel,
+  // and focus the email input. Exposed globally so other entry points
+  // (e.g. the onboarding "Already used HARVEST?" hint) can reuse it
+  // without re-importing main.js.
+  function openCloudSync() {
+    closeMenu();
+    showTab('pantry');
+    // Wait a frame for the tab swap to apply, then scroll + focus.
+    // 80ms is enough for layout to settle on mid-range phones while
+    // still feeling instant.
+    setTimeout(() => {
       const syncPanel = $('#syncPanel');
       if (syncPanel) syncPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
+      // Focus the email field if we're in signed-out state.
+      // SyncPanel re-renders dynamically, so query after the scroll kicks off.
+      const emailInput = $('#otpEmail');
+      if (emailInput) {
+        // Slight extra delay so the smooth scroll doesn't fight with
+        // iOS auto-scroll on focus (which would yank the page).
+        setTimeout(() => emailInput.focus({ preventScroll: true }), 280);
+      }
+    }, 80);
+  }
+  window.__openCloudSync = openCloudSync;
+
+  const menuSyncBtn = $('#menuCloudSync');
+  if (menuSyncBtn) {
+    menuSyncBtn.addEventListener('click', openCloudSync);
   }
 
   // Header hamburger menu button (desktop)

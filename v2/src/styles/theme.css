@@ -3889,6 +3889,52 @@ input, select, textarea {
   box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4);
 }
 
+/* "Already used HARVEST? Sync your pantry" hint — appears at the top
+   of Step 1, only when running as an installed PWA with no pantry data
+   (i.e. likely a returning Safari user who just installed). */
+.obd-sync-hint {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 14px;
+  margin: 0 0 18px;
+  background: var(--green-soft);
+  border: 1px solid color-mix(in srgb, var(--green) 28%, transparent);
+  border-radius: 12px;
+  color: var(--green-deep);
+  text-align: left;
+  font: inherit;
+  font-size: 0.85rem;
+  line-height: 1.35;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.1s ease, border-color 0.15s ease;
+}
+.obd-sync-hint:hover {
+  background: color-mix(in srgb, var(--green-soft) 70%, var(--green) 15%);
+  border-color: color-mix(in srgb, var(--green) 45%, transparent);
+}
+.obd-sync-hint:active {
+  transform: scale(0.99);
+}
+.obd-sync-hint-text strong {
+  display: block;
+  font-weight: 600;
+  color: var(--green-deep);
+  margin-bottom: 1px;
+}
+.obd-sync-hint-text > span {
+  color: var(--green);
+  font-weight: 500;
+}
+.obd-sync-hint-icon {
+  font-size: 1.25rem;
+  line-height: 1;
+  color: var(--green);
+  flex-shrink: 0;
+}
+
 .obd-step { display: none; }
 .obd-step.active { display: block; }
 
