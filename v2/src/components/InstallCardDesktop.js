@@ -82,6 +82,10 @@ function _openModal() {
       <div class="hv-install-modal__backdrop" data-hv-modal-close></div>
       <div class="hv-install-modal__panel">
         <button class="hv-install-modal__close" data-hv-modal-close aria-label="Close">×</button>
+        <div class="hv-home-tile hv-install-modal__tile" aria-hidden="true">
+          <img class="hv-app-icon" src="/icon-192.png" alt="">
+          <span class="hv-home-tile__label">HARVEST</span>
+        </div>
         <div class="hv-install-modal__qr">${QR_SVG}</div>
         <div id="hvInstallModalTitle" class="hv-install-modal__title">
           Don't just cook from your laptop.<br>
@@ -130,6 +134,7 @@ export function mountInstallCardDesktop(container) {
   card.setAttribute('aria-label', 'Get HARVEST on your phone or iPad');
   card.innerHTML = `
     <div class="hv-install-card__qr">${QR_SVG}</div>
+    <img class="hv-app-icon hv-install-card__icon" src="/icon-192.png" alt="HARVEST app icon">
     <div class="hv-install-card__copy">
       <div class="hv-install-card__line">
         Don't just cook from your laptop.

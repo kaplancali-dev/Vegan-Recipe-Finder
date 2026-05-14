@@ -390,6 +390,13 @@ function _buildHTML() {
         <div class="obd-sub" style="font-size:1rem">Nothing in your fridge is giving up on you anymore. You just gave every ingredient a reason to exist.</div>
         <div style="font-size:.85rem;color:var(--ink-soft);line-height:1.5;margin-bottom:12px">
           Toss in fresh items anytime under <strong>My Pantry</strong> — the more you add, the more recipes unlock.</div>
+        <div class="obd-home-hint">
+          <div class="hv-home-tile" aria-hidden="true">
+            <img class="hv-app-icon" src="/icon-192.png" alt="">
+            <span class="hv-home-tile__label">HARVEST</span>
+          </div>
+          <span class="obd-home-hint__text">On your phone? Look for this on your home screen.</span>
+        </div>
         <button class="obd-btn obd-btn-primary" data-obd-done>Let's cook</button>
       </div>
     </div>

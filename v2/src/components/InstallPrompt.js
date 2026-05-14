@@ -138,6 +138,7 @@ function _showBanner() {
   banner.id = 'installBanner';
   banner.className = 'install-banner';
   banner.innerHTML = `
+    <img class="hv-app-icon install-banner-icon" src="/icon-192.png" alt="HARVEST app icon">
     <div class="install-banner-text">
       <strong>More recipes per screen</strong>
       <span>Add HARVEST to your home screen — drops the browser bar, opens full-screen, one tap to launch.</span>
@@ -191,6 +192,10 @@ function _showInstructions() {
     <div class="install-instructions-box" role="dialog" aria-labelledby="installHowTitle">
       <button class="install-instructions-close" id="installInstrClose" aria-label="Close">×</button>
       <h3 id="installHowTitle">${title}</h3>
+      <div class="hv-home-tile install-instructions-tile" aria-hidden="true">
+        <img class="hv-app-icon" src="/icon-192.png" alt="">
+        <span class="hv-home-tile__label">HARVEST</span>
+      </div>
       <p class="install-instructions-why">
         <strong>More room for recipes.</strong> No Safari address bar, no tab bar — just HARVEST,
         edge to edge. You'll see roughly a third more on every screen.

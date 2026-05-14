@@ -5522,3 +5522,113 @@ input, select, textarea {
     margin-left: auto;
   }
 }
+
+/* ──────────────────────────────────────────────────────────────
+ * HARVEST app icon — shared visual element used wherever we
+ * preview what users will see on their home screen.
+ *
+ * .hv-app-icon       — the bare icon (square with iOS-style
+ *                       rounded corners). Default 48px; override
+ *                       the size from the parent context.
+ * .hv-home-tile      — icon + "HARVEST" label below, mimicking
+ *                       how the install actually renders on iOS.
+ *                       Used in the install modal, install
+ *                       instructions, and onboarding completion.
+ * ────────────────────────────────────────────────────────────── */
+
+.hv-app-icon {
+  display: block;
+  width: 48px;
+  height: 48px;
+  border-radius: 22.37%; /* matches Apple's iOS app icon corner ratio */
+  flex-shrink: 0;
+  /* The icon already has its own background, so no need for one here.
+     A faint border helps it pop against light/dark surfaces. */
+  border: 0.5px solid color-mix(in srgb, var(--ink) 8%, transparent);
+}
+
+.hv-home-tile {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  text-align: center;
+  user-select: none;
+}
+.hv-home-tile .hv-app-icon {
+  width: 64px;
+  height: 64px;
+}
+.hv-home-tile__label {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: var(--ink);
+  line-height: 1;
+}
+
+/* ── Slot-specific overrides ───────────────────────────────── */
+
+/* Desktop install card — icon sits between QR and copy */
+.hv-install-card__icon {
+  width: 48px;
+  height: 48px;
+}
+
+/* Desktop install modal — bigger home-screen tile centered above QR */
+.hv-install-modal__tile {
+  margin: 0 auto 14px;
+}
+.hv-install-modal__tile .hv-app-icon {
+  width: 72px;
+  height: 72px;
+}
+.hv-install-modal__tile .hv-home-tile__label {
+  font-size: 0.78rem;
+}
+
+/* Mobile install banner — small icon at the start of the banner */
+.install-banner-icon {
+  width: 44px;
+  height: 44px;
+}
+
+/* Mobile install instructions modal — home-screen tile preview between
+   title and "why install" copy */
+.install-instructions-tile {
+  margin: 4px auto 14px;
+}
+.install-instructions-tile .hv-app-icon {
+  width: 76px;
+  height: 76px;
+}
+
+/* Onboarding completion (Step 4) — small home-screen tile beside a
+   one-liner hint. Only really useful for desktop users who'll install
+   later; on mobile, the install instructions modal fires right after
+   onboarding anyway, so this is harmless redundancy at most. */
+.obd-home-hint {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin: 16px 0 18px;
+  padding: 12px 14px;
+  background: var(--green-soft);
+  border: 1px solid color-mix(in srgb, var(--green) 18%, transparent);
+  border-radius: 12px;
+  text-align: left;
+}
+.obd-home-hint .hv-home-tile .hv-app-icon {
+  width: 52px;
+  height: 52px;
+}
+.obd-home-hint .hv-home-tile__label {
+  font-size: 0.65rem;
+}
+.obd-home-hint__text {
+  font-size: 0.85rem;
+  line-height: 1.4;
+  color: var(--green-deep);
+  font-style: italic;
+}
