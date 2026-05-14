@@ -119,6 +119,16 @@ function _closeModal() {
 }
 
 /**
+ * Open the desktop install modal directly — used by other entry points
+ * (e.g. the onboarding "Get HARVEST on your home screen" pill) that
+ * want to surface the same QR + steps shown when a user clicks the
+ * recipe-detail install card. No card/dismissal bookkeeping here.
+ */
+export function openDesktopInstallModal() {
+  _openModal();
+}
+
+/**
  * Append the install card to the bottom of a container (recipe detail body).
  * Safe to call on every recipe open — exits early if conditions aren't met.
  *

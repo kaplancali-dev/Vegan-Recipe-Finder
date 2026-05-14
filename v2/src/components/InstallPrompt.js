@@ -176,6 +176,16 @@ async function _onInstallTap() {
   _showInstructions();
 }
 
+/**
+ * Open the mobile install instructions modal directly — used by entry
+ * points outside this module (e.g. the onboarding "Get HARVEST on your
+ * home screen" pill on mobile) that want the same step-by-step the
+ * post-onboarding auto-trigger shows.
+ */
+export function showMobileInstallInstructions() {
+  _showInstructions();
+}
+
 function _showInstructions() {
   if (document.getElementById('installInstructions')) return;
   const ios = _isIOS();

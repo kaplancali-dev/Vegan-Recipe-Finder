@@ -390,13 +390,16 @@ function _buildHTML() {
         <div class="obd-sub" style="font-size:1rem">Nothing in your fridge is giving up on you anymore. You just gave every ingredient a reason to exist.</div>
         <div style="font-size:.85rem;color:var(--ink-soft);line-height:1.5;margin-bottom:12px">
           Toss in fresh items anytime under <strong>My Pantry</strong> — the more you add, the more recipes unlock.</div>
-        <div class="obd-home-hint">
+        <button class="obd-home-hint" data-obd-install-help type="button" aria-label="Show me how to install HARVEST">
           <div class="hv-home-tile" aria-hidden="true">
             <img class="hv-app-icon" src="/icon-192.png" alt="">
             <span class="hv-home-tile__label">HARVEST</span>
           </div>
-          <span class="obd-home-hint__text">On your phone? Look for this on your home screen.</span>
-        </div>
+          <span class="obd-home-hint__text">
+            <strong>Get HARVEST on your home screen.</strong>
+            <span class="obd-home-hint__cta">Show me how →</span>
+          </span>
+        </button>
         <button class="obd-btn obd-btn-primary" data-obd-done>Let's cook</button>
       </div>
     </div>
@@ -636,6 +639,21 @@ export function initOnboarding(opts = {}) {
     const goBtn = el.closest('[data-obd-go]');
     if (goBtn) {
       _goToStep(overlay, Number(goBtn.dataset.obdGo));
+      return;
+    }
+
+    // Install help pill on Step 4 — open platform-appropriate install
+    // instructions WITHOUT dismissing onboarding. Mobile users get the
+    // step-by-step (Share → Add to Home Screen); desktop users get the
+    // QR modal so they can scan with their phone.
+    if (el.closest('[data-obd-install-help]')) {
+      const ua = navigator.userAgent;
+      const isMobile = /iPad|iPhone|iPod|Android/.test(ua);
+      if (isMobile) {
+        import('./InstallPrompt.js').then(m => m.showMobileInstallInstructions());
+      } else {
+        import('./InstallCardDesktop.js').then(m => m.openDesktopInstallModal());
+      }
       return;
     }
 
