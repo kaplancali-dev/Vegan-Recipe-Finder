@@ -96,10 +96,10 @@ function renderSignedIn(container, user) {
       <button id="syncPullBtn" class="btn btn-outline btn-sm">⬇ Pull from Cloud</button>
       <button id="syncSignOutBtn" class="btn btn-danger btn-sm">Sign Out</button>
     </div>
-    <div style="font-size:0.78rem;color:var(--muted);line-height:1.4">
+    <div style="font-size:0.82rem;color:var(--ink);line-height:1.4">
       <p style="margin:0 0 4px"><strong>Push</strong> — saves this device's data to the cloud. Use after making changes you want to keep.</p>
       <p style="margin:0 0 4px"><strong>Pull</strong> — loads your cloud data onto this device. Use when switching between devices (phone, laptop, iPad) or browsers.</p>
-      <p style="margin:0;font-style:italic">Tip: Push from the device you use most, then Pull on your other devices.</p>
+      <p style="margin:0;font-style:italic"><strong>Tip:</strong> Push from the device you use most, then Pull on your other devices.</p>
     </div>
   `;
 

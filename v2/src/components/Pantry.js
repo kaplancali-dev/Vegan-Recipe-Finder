@@ -128,7 +128,7 @@ function renderAllergyChips() {
       return `<span class="chip allergy-chip">${label} <span class="chip-x" data-remove-allergy="${idx}" title="Remove">&times;</span></span>`;
     }).join('');
   } else {
-    container.innerHTML = `<span class="muted" style="font-size:0.82rem">Nothing flagged yet — if your body has opinions about certain foods, note them here and we'll steer clear.</span>`;
+    container.innerHTML = `<span style="font-size:0.82rem;color:var(--ink);line-height:1.4"><strong>Nothing flagged yet.</strong> If your body has opinions about certain foods, note them here and we'll steer clear.</span>`;
   }
 
   container.onclick = (e) => {

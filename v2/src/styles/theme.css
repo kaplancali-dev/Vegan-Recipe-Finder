@@ -686,9 +686,13 @@ input, select, textarea {
 }
 
 .card-title .muted {
-  font-weight: 400;
+  /* Was muted gray + weight 400 — too hard to read at this small
+     size. Bumped to dark ink + weight 600 so the parenthetical
+     instructions ('always on hand', 'what I bought', 'filtered out
+     of all recipes', etc.) are actually legible. */
+  font-weight: 600;
   font-size: 0.85rem;
-  color: var(--muted);
+  color: var(--ink);
   font-family: var(--font-sans);
 }
 
