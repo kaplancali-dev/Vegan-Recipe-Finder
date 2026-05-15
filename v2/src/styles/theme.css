@@ -194,6 +194,38 @@
   font-style: italic;
 }
 
+/* Inversion headline — "Other recipe apps: ... / HARVEST: ..."
+   Two stacked lines. The foil line is muted; the HARVEST line is
+   bigger, bolder, brand green. Text-align left so the colon
+   delimiters line up readably. */
+.landing-headline--inversion {
+  font-size: clamp(1.5rem, 3.6vw, 2.4rem);
+  line-height: 1.35;
+  text-align: left;
+  letter-spacing: 0;
+}
+.landing-headline-foil,
+.landing-headline-ours {
+  display: block;
+}
+.landing-headline-foil {
+  color: var(--ink-soft);
+  font-weight: 400;
+  margin-bottom: 6px;
+}
+.landing-headline-ours {
+  color: var(--green-deep);
+  font-size: 1.18em;
+  margin-top: 4px;
+}
+.landing-headline-label {
+  font-weight: 500;
+  margin-right: 6px;
+}
+.landing-headline-label--harvest {
+  font-weight: 700;
+}
+
 .landing-accent {
   color: #c45a2c;
   font-style: italic;
