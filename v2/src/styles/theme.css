@@ -152,12 +152,15 @@
 .landing-main {
   max-width: 800px;
   margin: 0 auto;
-  padding: 40px 40px 60px;
+  padding: 56px 40px 60px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: calc(100vh - 80px);
-  justify-content: center;
+  /* Was justify-content: center + min-height: 100vh — that worked when
+     the old mustard headline filled the viewport, but the new compact
+     inversion copy is much shorter, so centering left a giant empty gap
+     above the content. Anchor to the top instead. */
+  justify-content: flex-start;
 }
 
 .landing-hero {
@@ -196,13 +199,15 @@
 
 /* Inversion headline — "Other recipe apps: ... / HARVEST: ..."
    Two stacked lines. The foil line is muted; the HARVEST line is
-   bigger, bolder, brand green. Text-align left so the colon
-   delimiters line up readably. */
+   bigger, bolder, brand green. The block is centered on the page,
+   but text-aligned left internally so the two colons line up. */
 .landing-headline--inversion {
-  font-size: clamp(1.5rem, 3.6vw, 2.4rem);
+  font-size: clamp(1.4rem, 3.2vw, 2.2rem);
   line-height: 1.35;
   text-align: left;
   letter-spacing: 0;
+  max-width: 720px;
+  margin: 0 auto 28px;
 }
 .landing-headline-foil,
 .landing-headline-ours {
@@ -215,7 +220,7 @@
 }
 .landing-headline-ours {
   color: var(--green-deep);
-  font-size: 1.18em;
+  font-size: 1.15em;
   margin-top: 4px;
 }
 .landing-headline-label {
@@ -224,6 +229,24 @@
 }
 .landing-headline-label--harvest {
   font-weight: 700;
+}
+
+/* Sub-line override — the new sub is 5 short sentences (~200 chars).
+   The original .landing-sub on desktop set white-space: nowrap, which
+   forced everything onto one line and pushed the right edge past the
+   viewport. Re-enable wrapping and dial down the size for the new copy. */
+@media (min-width: 768px) {
+  .landing-sub {
+    white-space: normal;
+    font-size: 1.2rem;
+    line-height: 1.55;
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .landing-headline--inversion {
+    max-width: 760px;
+  }
 }
 
 .landing-accent {
