@@ -197,38 +197,40 @@
   font-style: italic;
 }
 
-/* Inversion headline — "Other recipe apps: ... / HARVEST: ..."
-   Two stacked lines. The foil line is muted; the HARVEST line is
-   bigger, bolder, brand green. The block is centered on the page,
-   but text-aligned left internally so the two colons line up. */
+/* Inversion headline — behavioral comparison.
+     "Other recipe apps ask what you want, then send you shopping."
+     "HARVEST knows what you have, then asks what you want."
+   Two stacked descriptive sentences. The foil line is muted; the
+   HARVEST line is brand green and slightly larger so the comparison
+   reads as us-vs-them at a glance. Centered as a block, text-aligned
+   left internally for readability. */
 .landing-headline--inversion {
-  font-size: clamp(1.4rem, 3.2vw, 2.2rem);
-  line-height: 1.35;
+  font-size: clamp(1.3rem, 2.8vw, 1.85rem);
+  line-height: 1.4;
   text-align: left;
   letter-spacing: 0;
   max-width: 720px;
   margin: 0 auto 28px;
+  font-style: normal;
 }
 .landing-headline-foil,
 .landing-headline-ours {
   display: block;
+  font-style: normal;
 }
 .landing-headline-foil {
   color: var(--ink-soft);
   font-weight: 400;
-  margin-bottom: 6px;
+  margin-bottom: 10px;
 }
 .landing-headline-ours {
   color: var(--green-deep);
-  font-size: 1.15em;
-  margin-top: 4px;
-}
-.landing-headline-label {
+  font-size: 1.12em;
   font-weight: 500;
-  margin-right: 6px;
 }
-.landing-headline-label--harvest {
+.landing-headline-ours strong {
   font-weight: 700;
+  letter-spacing: 0.01em;
 }
 
 /* Sub-line override — the new sub is 5 short sentences (~200 chars).
