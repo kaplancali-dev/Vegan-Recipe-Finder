@@ -344,7 +344,7 @@
     padding: 14px 18px 6px;
   }
   .landing-main {
-    padding-top: 4px;
+    padding: 4px 12px 32px;
   }
   .landing-logo {
     font-size: 2.1rem;
@@ -378,9 +378,11 @@
     font-size: 1.24em;
   }
   .landing-tagline {
-    font-size: 1rem;
+    /* Scales with viewport so it stays one line on every phone width.
+       Pro Max gets ~1.1rem, SE gets ~0.95rem — both fit. */
+    font-size: clamp(0.95rem, 4vw, 1.25rem);
     font-weight: 700;
-    margin: 18px auto 22px;
+    margin: 22px auto 28px;
     line-height: 1.35;
   }
   .landing-sub {
@@ -389,8 +391,9 @@
     margin-bottom: 10px;
   }
   .landing-welcome {
-    font-size: 0.88rem;
-    margin-bottom: 12px;
+    font-size: 1.05rem;
+    margin-top: 8px;
+    margin-bottom: 20px;
   }
 }
 
