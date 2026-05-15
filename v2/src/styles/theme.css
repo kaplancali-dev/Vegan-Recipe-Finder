@@ -321,6 +321,50 @@
   }
 }
 
+/* Mobile tightening — shrink everything so the inversion landing fits
+   on one phone screen without scrolling. Adds more size contrast
+   between the muted "Other recipe apps..." line and the bigger
+   brand-green "HARVEST..." line so the comparison reads at a glance. */
+@media (max-width: 599px) {
+  .landing-logo {
+    font-size: 2.1rem;
+  }
+  .landing-btn-primary {
+    padding: 9px 20px;
+    font-size: 0.72rem;
+  }
+  .landing-signin-link {
+    font-size: 0.85rem;
+    margin-top: 8px;
+  }
+  .landing-headline--inversion {
+    font-size: 1.05rem;
+    line-height: 1.3;
+    margin-bottom: 10px;
+    max-width: 100%;
+  }
+  .landing-headline-foil {
+    font-size: 0.84em;
+    margin-bottom: 4px;
+  }
+  .landing-headline-ours {
+    font-size: 1.24em;
+  }
+  .landing-tagline {
+    font-size: 0.92rem;
+    margin: 0 auto 12px;
+  }
+  .landing-sub {
+    font-size: 0.88rem;
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+  .landing-welcome {
+    font-size: 0.88rem;
+    margin-bottom: 12px;
+  }
+}
+
 /* CTA buttons */
 .landing-ctas {
   display: flex;
