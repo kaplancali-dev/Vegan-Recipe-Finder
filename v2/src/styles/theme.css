@@ -152,14 +152,12 @@
 .landing-main {
   max-width: 800px;
   margin: 0 auto;
-  padding: 56px 40px 60px;
+  padding: 24px 40px 40px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* Was justify-content: center + min-height: 100vh — that worked when
-     the old mustard headline filled the viewport, but the new compact
-     inversion copy is much shorter, so centering left a giant empty gap
-     above the content. Anchor to the top instead. */
+  /* Anchor to the top — the inversion copy is compact and was leaving
+     a huge gap when centered vertically against a viewport-height min. */
   justify-content: flex-start;
 }
 
@@ -205,12 +203,12 @@
    reads as us-vs-them at a glance. Centered as a block, text-aligned
    left internally for readability. */
 .landing-headline--inversion {
-  font-size: clamp(1.2rem, 2.4vw, 1.6rem);
+  font-size: clamp(1.15rem, 2.2vw, 1.55rem);
   line-height: 1.4;
-  text-align: left;
+  text-align: center;
   letter-spacing: 0;
   max-width: 720px;
-  margin: 0 auto 28px;
+  margin: 0 auto 18px;
   font-style: normal;
 }
 .landing-headline-foil,
@@ -221,7 +219,7 @@
 .landing-headline-foil {
   color: var(--ink-soft);
   font-weight: 400;
-  margin-bottom: 10px;
+  margin-bottom: 6px;
 }
 .landing-headline-ours {
   color: var(--green-deep);
@@ -240,19 +238,18 @@
 @media (min-width: 768px) {
   .landing-sub {
     white-space: normal;
-    font-size: 1.2rem;
+    font-size: 1.15rem;
     line-height: 1.55;
-    max-width: 720px;
+    max-width: 920px;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 16px;
   }
-  /* Each headline sentence ("Other recipe apps ask what you want..." and
-     "HARVEST knows what you have...") needs ~960px to stay on a single
-     line at this font size. Container max-width is bumped to 1080px in
-     the desktop block below; this caps the headline a bit narrower so
-     it doesn't kiss the edge. Sub-line stays narrow for readability. */
+  /* Headline and sub share the same max-width on desktop so they read
+     as a single editorial column. At ~1.55rem font, 920px gives each
+     headline sentence enough room to stay on one line. */
   .landing-headline--inversion {
-    max-width: 1020px;
+    max-width: 920px;
   }
 }
 
@@ -287,16 +284,17 @@
   letter-spacing: 0.02em;
 }
 
-/* Desktop: bump the welcome line so it doesn't feel tiny against
-   the hero typography. Widen the container too so the headline's
-   two sentences can each fit on one line. */
+/* Desktop: container sized to the new editorial column. Headline and
+   sub both cap at 920px so they read as one cohesive block. */
 @media (min-width: 768px) {
   .landing-main {
-    max-width: 1080px;
+    max-width: 1000px;
   }
   .landing-welcome {
-    font-size: 1.4rem;
+    font-size: 1.25rem;
     white-space: nowrap;
+    margin-top: 8px;
+    margin-bottom: 24px;
   }
 }
 
