@@ -36,6 +36,20 @@
   line-height: 1;
 }
 
+/* App icon above the wordmark — preview of what'll appear on the
+   user's home screen after install. Same rounded-corner treatment as
+   the icon shown in the install card/modal so it stays brand-consistent. */
+.landing-app-icon {
+  width: 64px;
+  height: 64px;
+}
+@media (max-width: 599px) {
+  .landing-app-icon {
+    width: 52px;
+    height: 52px;
+  }
+}
+
 /* The CTA in the sticky nav (next to HARVEST logo) is hidden once
    the user clicks it — picker is in control after that. */
 .landing--hero-dismissed .landing-nav .landing-btn-primary {
