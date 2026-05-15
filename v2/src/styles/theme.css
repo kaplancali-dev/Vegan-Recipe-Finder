@@ -326,16 +326,23 @@
    between the muted "Other recipe apps..." line and the bigger
    brand-green "HARVEST..." line so the comparison reads at a glance. */
 @media (max-width: 599px) {
+  .landing-nav {
+    gap: 8px;
+    padding: 14px 18px 12px;
+  }
   .landing-logo {
     font-size: 2.1rem;
   }
   .landing-btn-primary {
     padding: 9px 20px;
     font-size: 0.72rem;
+    margin-bottom: 0;
   }
   .landing-signin-link {
     font-size: 0.85rem;
-    margin-top: 8px;
+    margin-top: 0;
+    padding-top: 2px;
+    padding-bottom: 2px;
   }
   .landing-headline--inversion {
     font-size: 1.05rem;
