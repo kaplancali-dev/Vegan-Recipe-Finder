@@ -205,7 +205,7 @@
    reads as us-vs-them at a glance. Centered as a block, text-aligned
    left internally for readability. */
 .landing-headline--inversion {
-  font-size: clamp(1.3rem, 2.8vw, 1.85rem);
+  font-size: clamp(1.2rem, 2.4vw, 1.6rem);
   line-height: 1.4;
   text-align: left;
   letter-spacing: 0;
@@ -246,8 +246,13 @@
     margin-left: auto;
     margin-right: auto;
   }
+  /* Each headline sentence ("Other recipe apps ask what you want..." and
+     "HARVEST knows what you have...") needs ~960px to stay on a single
+     line at this font size. Container max-width is bumped to 1080px in
+     the desktop block below; this caps the headline a bit narrower so
+     it doesn't kiss the edge. Sub-line stays narrow for readability. */
   .landing-headline--inversion {
-    max-width: 760px;
+    max-width: 1020px;
   }
 }
 
@@ -283,12 +288,11 @@
 }
 
 /* Desktop: bump the welcome line so it doesn't feel tiny against
-   the hero typography. The sub-line sizing is handled by the inversion-
-   headline media block above (the original .landing-sub desktop rules
-   were tuned for a one-line mustard sub and have been retired). */
+   the hero typography. Widen the container too so the headline's
+   two sentences can each fit on one line. */
 @media (min-width: 768px) {
   .landing-main {
-    max-width: 880px;
+    max-width: 1080px;
   }
   .landing-welcome {
     font-size: 1.4rem;
