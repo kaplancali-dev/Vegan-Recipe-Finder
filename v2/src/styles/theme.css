@@ -225,7 +225,18 @@
 .landing-headline-foil {
   color: var(--ink-soft);
   font-weight: 400;
-  margin-bottom: 6px;
+  margin-bottom: 0;
+  position: relative;
+}
+/* Dashed divider between the two thoughts — narrow, centered, subtle.
+   Gives the comparison structural separation without screaming. */
+.landing-headline-foil::after {
+  content: '';
+  display: block;
+  width: 60%;
+  max-width: 220px;
+  margin: 18px auto 16px;
+  border-top: 1px dashed color-mix(in srgb, var(--ink-soft) 45%, transparent);
 }
 .landing-headline-ours {
   color: var(--green-deep);
@@ -328,7 +339,10 @@
 @media (max-width: 599px) {
   .landing-nav {
     gap: 8px;
-    padding: 14px 18px 12px;
+    padding: 14px 18px 6px;
+  }
+  .landing-main {
+    padding-top: 4px;
   }
   .landing-logo {
     font-size: 2.1rem;
@@ -352,7 +366,11 @@
   }
   .landing-headline-foil {
     font-size: 0.84em;
-    margin-bottom: 4px;
+    margin-bottom: 0;
+  }
+  .landing-headline-foil::after {
+    margin: 14px auto 12px;
+    width: 55%;
   }
   .landing-headline-ours {
     font-size: 1.24em;
