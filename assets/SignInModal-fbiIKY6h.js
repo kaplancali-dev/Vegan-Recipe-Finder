@@ -1,4 +1,4 @@
-import{s as h,v as b,c as g}from"./index-CmJF_t3S.js";import"./supabase-DaN4is7k.js";const y=3e4;let i=null,_=0;function v(){const e=document.createElement("div");return e.id="signInModal",e.className="sin-modal",e.hidden=!0,e.setAttribute("role","dialog"),e.setAttribute("aria-modal","true"),e.setAttribute("aria-labelledby","sinTitle"),e.innerHTML=`
+import{s as h,v as b,c as g}from"./index-CN9EfTc3.js";import"./supabase-DaN4is7k.js";const y=3e4;let i=null,_=0;function v(){const e=document.createElement("div");return e.id="signInModal",e.className="sin-modal",e.hidden=!0,e.setAttribute("role","dialog"),e.setAttribute("aria-modal","true"),e.setAttribute("aria-labelledby","sinTitle"),e.innerHTML=`
     <div class="sin-modal__backdrop" data-sin-close></div>
     <div class="sin-modal__panel">
       <button class="sin-modal__close" data-sin-close aria-label="Close">×</button>

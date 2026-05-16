@@ -343,7 +343,7 @@ function _buildHTML() {
       <div class="obd-step" data-obd-step="2">
         <div class="obd-title">What's always in your kitchen?</div>
         <div class="obd-why" id="obdWhyCallout">
-          <strong>Quick game:</strong> tap what usually lives in your kitchen, across <strong>10 quick categories</strong>, about a minute total. The reward: from here on, we filter over 4,000 gluten-free recipes down to <em>only</em> the ones you can cook tonight. No taunting you with ingredients you don't have.
+          <strong>Two quick minutes.</strong> We show you which of the <strong>4,000+ gluten-free recipes</strong> you can cook <em>tonight</em>, and which need just one more ingredient. Let's go.
         </div>
         <div class="obd-sub-progress" id="obdSubProgress">${_buildSubProgress()}</div>
         <div class="obd-sub-label" id="obdSubLabel">1 of ${STAPLE_PAGES.length}</div>
