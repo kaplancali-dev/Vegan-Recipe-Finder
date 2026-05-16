@@ -21,7 +21,7 @@
  *    ─────────────────────────────────────────────────────────────
  *    .landing-app-icon ........ 64px      48px
  *    .landing-logo ............ 3.4rem    2rem
- *    .landing-headline foil ... clamp     1.2rem absolute (~85% of ours)
+ *    .landing-headline foil ... clamp     1.2rem absolute (~85% of ours), weight 700
  *    .landing-headline ours ... 1.12em    1.4rem absolute
  *    .landing-tagline ......... clamp     clamp (700 italic, parens)
  *    .landing-signin-link ..... 1rem      0.85rem
@@ -296,7 +296,7 @@
 }
 .landing-headline-foil {
   color: #2c3e35; /* darker than --ink-soft so the foil reads as muted-but-present */
-  font-weight: 500;
+  font-weight: 700;
   margin-bottom: 0;
   position: relative;
 }
