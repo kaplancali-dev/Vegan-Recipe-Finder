@@ -6147,10 +6147,23 @@ input, select, textarea {
   font-size: 0.92rem;
   color: var(--ink);
   line-height: 1.5;
-  margin: 0 0 18px;
+  margin: 0 0 8px;
 }
 .sin-modal__sub strong {
   color: var(--green-deep);
+  font-weight: 600;
+}
+
+/* Reassurance line — sits between sub and email input. Small, brand
+   green, addresses the "wait, do I have to sign up?" worry users get
+   when they see an email field. */
+.sin-modal__reassure {
+  font-size: 0.85rem;
+  color: var(--green-deep);
+  line-height: 1.4;
+  margin: 0 0 18px;
+}
+.sin-modal__reassure strong {
   font-weight: 600;
 }
 

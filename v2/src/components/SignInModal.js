@@ -36,6 +36,7 @@ function _createModal() {
       <div class="sin-step" data-sin-step="1">
         <h2 id="sinTitle" class="sin-modal__title">Welcome back.</h2>
         <p class="sin-modal__sub">Enter the email you used before. We'll send a 6-digit code to verify it's you.</p>
+        <p class="sin-modal__reassure"><strong>No password to remember. No account to create.</strong></p>
         <input
           class="sin-modal__input" id="sinEmail" type="email"
           placeholder="your@email.com"
