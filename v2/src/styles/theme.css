@@ -24,8 +24,8 @@
  *    ─────────────────────────────────────────────────────────────
  *    .landing-app-icon ........ 64px      48px
  *    .landing-logo ............ 3.4rem    2rem
- *    .landing-headline foil ... clamp     1.1rem absolute (~80% of ours), weight 700
- *    .landing-headline ours ... 1.12em    1.4rem absolute
+ *    .landing-headline foil ... clamp     1.25rem absolute (~80% of ours), weight 700
+ *    .landing-headline ours ... 1.12em    1.55rem absolute
  *    .landing-tagline ......... clamp     clamp (700 italic, parens)
  *    .landing-signin-link ..... 1rem      0.85rem
  *    .landing-welcome ......... 1.25rem   1.05rem
@@ -442,11 +442,11 @@
     max-width: 100%;
   }
   .landing-headline-foil {
-    /* 1.1rem (~80% of ours) so "Other recipe apps ask what you want,"
-       fits on one line at bold weight on iPhone widths. At 1.2rem the
-       comma got pushed to its own line because the bold strokes
-       widened the text past the viewport. */
-    font-size: 1.1rem;
+    /* 1.25rem (~80% of ours). Right at the edge of "Other recipe apps
+       ask what you want," fitting on one line at bold weight on iPhone
+       Pro Max width. If you nudge larger and the comma orphans,
+       this is why. */
+    font-size: 1.25rem;
     margin-bottom: 0;
   }
   .landing-headline-foil::after {
@@ -454,9 +454,9 @@
     width: 55%;
   }
   .landing-headline-ours {
-    /* Bigger than foil for the comparison hierarchy, but absolute rem
-       so the bound "you crave" never overflows the viewport. */
-    font-size: 1.4rem;
+    /* Bigger than foil for the comparison hierarchy. Absolute rem so
+       the bound "you crave" never overflows the viewport. */
+    font-size: 1.55rem;
   }
   .landing-tagline {
     /* Scales with viewport so it stays one line on every phone width.
