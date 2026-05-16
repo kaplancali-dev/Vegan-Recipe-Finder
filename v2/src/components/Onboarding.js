@@ -343,7 +343,7 @@ function _buildHTML() {
       <div class="obd-step" data-obd-step="2">
         <div class="obd-title">What's always in your kitchen?</div>
         <div class="obd-why" id="obdWhyCallout">
-          <strong>Two quick minutes.</strong> We show you which of the <strong>4,000+ gluten-free recipes</strong> you can cook <em>tonight</em>, and which need just one more ingredient. Let's go.
+          <strong>Two quick minutes.</strong> We show you which of the <strong>4,000+ plant-based, gluten-free recipes</strong> you can cook <em>tonight</em>, and which need just one more ingredient. Let's go.
         </div>
         <div class="obd-sub-progress" id="obdSubProgress">${_buildSubProgress()}</div>
         <div class="obd-sub-label" id="obdSubLabel">1 of ${STAPLE_PAGES.length}</div>
