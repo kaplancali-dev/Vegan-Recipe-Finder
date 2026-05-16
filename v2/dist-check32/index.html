@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>HARVEST™ — See What Your Kitchen Already Knows</title>
+<meta name="description" content="Match your ingredients to over 4,000 gluten-free recipes from the world's top nutrition-focused chefs. Prioritizes perishables, filters allergens, and builds your shopping list.">
+<meta property="og:title" content="HARVEST™ — See What Your Kitchen Already Knows">
+<meta property="og:description" content="You open the fridge and think, 'What can I make with this?' HARVEST knows.">
+<meta property="og:image" content="https://myharvestvegan.com/og-preview.png">
+<meta property="og:url" content="https://myharvestvegan.com">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="HARVEST™ — See What Your Kitchen Already Knows">
+<meta name="twitter:description" content="Match your ingredients to over 4,000 gluten-free recipes. Prioritizes perishables, filters allergens, builds your shopping list.">
+<meta name="twitter:image" content="https://myharvestvegan.com/og-preview.png">
+<meta name="apple-mobile-web-app-title" content="HARVEST">
+<link rel="manifest" href="manifest.json?v=3">
+<link rel="apple-touch-icon" href="icon-192.png?v=3">
+<link rel="icon" type="image/png" href="icon-192.png?v=3">
+<meta name="theme-color" content="#2d7a4f">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://static.cloudflareinsights.com https://www.googletagmanager.com https://www.google-analytics.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; img-src 'self' https: data:; connect-src 'self' https://*.supabase.co https://cloudflareinsights.com https://www.google-analytics.com https://harvest-pantry-scan.kaplancali.workers.dev; font-src 'self'; frame-src 'none';">
+  <script type="module" crossorigin src="/assets/index-YAllH5lb.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/supabase-DaN4is7k.js">
+  <link rel="stylesheet" crossorigin href="/assets/index-CH9Wh4nx.css">
+</head>
+<body>
+
+  <!-- ── LANDING PAGE (new visitors only) ───────────────────── -->
+  <div id="landingPage" class="landing" hidden>
+    <nav class="landing-nav">
+      <img class="hv-app-icon landing-app-icon" src="/icon-192.png" alt="HARVEST app icon">
+      <div class="landing-logo">HARVEST.</div>
+      <button class="landing-btn-primary" data-landing-action="enter">SHOW ME WHAT'S POSSIBLE &rarr;</button>
+      <button class="landing-signin-link" data-landing-action="signin" type="button">
+        Already used HARVEST?<span class="signin-tail-long">&nbsp;Sign in to restore your pantry</span><span class="signin-tail-short">&nbsp;Sign in</span> &rarr;
+      </button>
+    </nav>
+
+    <main class="landing-main">
+      <div class="landing-hero">
+        <div class="landing-hero-left">
+          <!-- kicker removed -->
+          <h1 class="landing-headline landing-headline--inversion">
+            <span class="landing-headline-foil">Other recipe apps ask what you want, then send&nbsp;you&nbsp;shopping.</span>
+            <span class="landing-headline-ours"><strong>HARVEST</strong> knows your fridge, then asks what&nbsp;you&nbsp;crave.</span>
+          </h1>
+          <p class="landing-tagline">(Dinner shouldn't start with an errand.)</p>
+          <p class="landing-welcome">&rarr; Welcome to HARVEST.</p>
+        </div>
+      </div>
+    </main>
+
+    <!-- Inline onboarding mounts here so the CTA can scroll into setup
+         on the same page rather than navigating to a modal. -->
+    <section id="landingOnboardingSlot" class="landing-onboarding-slot"></section>
+  </div>
+
+  <!-- Skip to main content (accessibility) -->
+  <a href="#tab-browse" class="skip-link">Skip to content</a>
+
+  <!-- ── APP SHELL ──────────────────────────────────────────── -->
+  <div id="app">
+
+    <!-- Toast notification -->
+    <div id="toast" class="toast" aria-live="polite"></div>
+
+    <!-- Sticky shell: tab bar stays, content scrolls on mobile -->
+    <div id="stickyShell" class="sticky-shell">
+
+    <!-- Tab navigation bar (WAI-ARIA tabs pattern) -->
+    <nav id="tabBar" class="tab-bar" role="tablist" aria-label="Main navigation">
+      <button class="tab-btn" data-tab="pantry" role="tab" aria-selected="false" aria-controls="tab-pantry" id="btn-pantry">🥬 My Pantry</button>
+      <button class="tab-btn on" data-tab="browse" role="tab" aria-selected="true" aria-controls="tab-browse" id="btn-browse">🔍 Browse All</button>
+      <button class="tab-btn" data-tab="canmake" role="tab" aria-selected="false" aria-controls="tab-canmake" id="btn-canmake">
+        🍳 Your Matches
+        <span id="readyCount" class="badge"></span>
+      </button>
+      <button class="tab-btn" data-tab="wantmake" role="tab" aria-selected="false" aria-controls="tab-wantmake" id="btn-wantmake">📌 Make Soon</button>
+      <button class="tab-btn" data-tab="madeit" role="tab" aria-selected="false" aria-controls="tab-madeit" id="btn-madeit">✅ Made It</button>
+      <button class="tab-btn" data-tab="favorites" role="tab" aria-selected="false" aria-controls="tab-favorites" id="btn-favorites">❤️ Favorites</button>
+      <button class="tab-btn" data-tab="shopping" role="tab" aria-selected="false" aria-controls="tab-shopping" id="btn-shopping">🛒 Shopping</button>
+    </nav>
+
+    <!-- Scrollable area: header + tab panels (header scrolls away on mobile) -->
+    <div id="shellScroll" class="shell-scroll">
+
+    <!-- Top header bar -->
+    <header id="header" class="header">
+      <div class="header-inner">
+        <button id="headerMenuBtn" class="header-menu-btn" aria-label="Menu">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+        <h1 class="logo">🌿 HARVEST</h1>
+        <p class="logo-tagline">See What Your Kitchen Already Knows™</p>
+      </div>
+    </header>
+
+    <!-- ── TAB PANELS ─────────────────────────────────────── -->
+
+    <!-- MY PANTRY TAB -->
+    <section id="tab-pantry" class="tab-panel" role="tabpanel" aria-labelledby="btn-pantry" hidden>
+      <!-- Intro hero card (always visible — matches v1) -->
+      <div class="intro-card" id="introCard">
+        <div class="intro-hero-header" id="introToggle">
+          <span class="intro-toggle-label">About HARVEST</span>
+          <span class="intro-chevron" id="introChevron">▾</span>
+        </div>
+        <div class="intro-hero-body" id="introBody">
+        <div class="intro-hero">
+          <div class="intro-hero-grid">
+            <div class="intro-hero-video">
+              <h2 class="intro-hero-title">"What can I make with this?"</h2>
+              <video src="/hero.mp4" class="hero-img" autoplay loop muted playsinline></video>
+            </div>
+            <div class="intro-hero-copy">
+              <p class="intro-hero-sub">
+                You open the fridge. You stare. You close it. You open it again. Hoping. (Nope.)
+              </p>
+              <p class="intro-hero-sub" style="margin-top:8px;">
+                <strong>HARVEST</strong> turns what's already in your kitchen into <strong>4,000+ plant-based, gluten-free recipes</strong> you can cook tonight.
+              </p>
+              <p class="intro-hero-sub" style="margin-top:8px;">
+                <strong>Not just for fridge emergencies.</strong> 5-minute snacks, weekend projects, even desserts that don't taste like an apology.
+              </p>
+              <p class="intro-hero-sub" style="margin-top:8px;">
+                <strong>Sort by what your body needs</strong>: highest protein, most fiber, fastest, lowest calorie.
+              </p>
+              <p class="intro-hero-sub" style="margin-top:8px;">
+                <strong>Quick wins, every visit.</strong> The next 6 ingredients that unlock the most new recipes. Add one, see the next. No more "do I have garlic?" at the store.
+              </p>
+              <p class="intro-hero-sub" style="margin-top:8px;">
+                <strong>Every recipe tells you <em>why</em>.</strong> Less "trust us, it's healthy." More peer-reviewed receipts.
+              </p>
+              <p class="intro-hero-sub" style="margin-top:8px;">
+                <strong>Gluten-free</strong> by default. Smart swaps for sugar and dairy. Even the cheese melts.
+              </p>
+            </div>
+          </div>
+        </div>
+        </div><!-- /intro-hero-body -->
+      </div>
+
+      <!-- Allergies section (collapsible) -->
+      <div class="card" id="allergyCard">
+        <h3 class="card-title section-toggle" data-toggle="allergyBody">⚠️ Allergens <span class="muted">(filtered out of all recipes)</span> <span class="guide-arrow">▾</span></h3>
+        <div id="allergyBody" class="section-body">
+          <div id="allergyChips" class="chip-wrap" style="margin-bottom:8px"></div>
+          <div id="allergyAdd" class="chip-wrap"></div>
+        </div>
+      </div>
+
+      <!-- Grocery scan banner -->
+      <div class="card scan-banner" id="scanBanner">
+        <div class="scan-banner-inner">
+          <div class="scan-banner-title-row">
+            <strong>📷 Got groceries?</strong>
+            <button id="scanBtn" class="btn btn-primary btn-sm">Scan</button>
+          </div>
+          <span class="scan-banner-desc">Snap a photo of your groceries, not your face. You're lovely, but not plant-based 😂. We'll ID the ingredients and stock your pantry.</span>
+        </div>
+      </div>
+
+      <!-- Staples section (collapsible) -->
+      <div class="card">
+        <h3 class="card-title section-toggle" data-toggle="stapleChips">📌 Staples <span class="muted">(always on hand)</span> <span class="guide-arrow">▾</span></h3>
+        <div id="stapleChips" class="chip-wrap section-body"></div>
+      </div>
+
+      <!-- Smart suggestions — top common ingredients to add to unlock more
+           100% recipes. Placed ABOVE Add Staples so it's the first answer
+           to "what should I add?" — before users have to dig through the
+           250+ picker items. Hidden when there are no actionable suggestions
+           (e.g. empty pantry, or user already has every common ingredient). -->
+      <div id="suggestionsCard" class="card" hidden>
+        <h3 class="card-title"><span style="white-space:nowrap">Quick Wins</span> <span class="muted qw-sub-phone" style="font-weight:800">Tap + to add to your pantry.<br>Number = additional 100% matches.</span><span class="muted qw-sub-laptop" style="font-weight:800">(Tap + to add to your pantry. Number = additional 100% matches based on your pantry.)</span></h3>
+        <div id="suggestionsList" class="suggestions-list"></div>
+      </div>
+
+      <!-- Add Staples section (collapsible) -->
+      <div id="quickActions" class="card">
+        <h3 class="card-title section-toggle" data-toggle="qaGrid">📌 Add Staples <span class="guide-arrow">▾</span></h3>
+        <div class="qa-grid section-body" id="qaGrid"></div>
+      </div>
+
+      <!-- My Ingredients — user-typed items with active/inactive toggle -->
+      <div class="card">
+        <h3 class="card-title section-toggle" data-toggle="myIngsBody">🛒 My Ingredients <span class="muted">(what I bought)</span> <span class="guide-arrow">▾</span></h3>
+        <div id="myIngsBody" class="section-body">
+          <p class="pantry-hint">Add what you picked up. Uncheck when you run out. If it's checked, we're matching recipes to it.</p>
+          <div class="input-row" style="margin-bottom:10px">
+            <input id="ingInput" type="text" class="text-input" placeholder="e.g. gochugaru, hearts of palm, black garlic, yuzu" autocomplete="off">
+            <button id="ingAddBtn" class="btn btn-primary">Add</button>
+          </div>
+          <div id="myIngsChips" class="my-ings-list"></div>
+        </div>
+      </div>
+
+      <!-- Cloud sync panel (always visible) -->
+      <div id="syncPanel" class="card sync-card">
+        <h3 class="card-title">☁️ Cloud Sync</h3>
+        <div id="syncContent"></div>
+      </div>
+
+      <!-- About / Instructions / Feedback now live in the Menu panel -->
+
+    </section>
+
+    <!-- BROWSE TAB -->
+    <section id="tab-browse" class="tab-panel" role="tabpanel" aria-labelledby="btn-browse">
+      <!-- Search bar -->
+      <div class="filter-bar card">
+        <div class="input-row">
+          <input id="nameSearch" type="text" class="text-input" placeholder="Recipe name or ingredients (i.e. protein bar, pancakes, chili, kale, broccoli, tofu, black beans, etc.)" data-ph-short="Recipe name or ingredients." autocomplete="off">
+          <button id="filterToggle" class="btn btn-outline btn-sm">Filters</button>
+        </div>
+        <div id="activeFilters" class="active-filters"></div>
+        <!-- Categories drawer (inside sticky bar so it stays in place) -->
+        <div id="filterDrawer" class="filter-drawer" hidden>
+          <div class="filter-section">
+            <h4>Categories <span class="muted" style="font-weight:normal;font-size:0.82rem">(select as many as you like)</span></h4>
+            <div id="catFilters" class="filter-chips"></div>
+          </div>
+          <div class="filter-section">
+            <h4>Max Cook Time</h4>
+            <div class="time-slider-row">
+              <input id="timeSlider" type="range" min="0" max="120" step="5" value="120" class="slider">
+              <span id="timeLabel" class="time-label">Any</span>
+            </div>
+          </div>
+          <div class="filter-section">
+            <h4>⚠️ Allergens <span class="muted" style="font-weight:normal;font-size:0.82rem">(hide recipes containing)</span></h4>
+            <div id="browseAllergenChips" class="filter-chips"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Refresh tip banner (dismissible, shown once) -->
+      <div id="refreshTip" class="refresh-tip" hidden>
+        <span class="tip-mobile">🔄 We improve the user experience, daily. Tap the <strong>refresh icon</strong> at the bottom of your screen to get the latest!</span>
+        <span class="tip-desktop">🔄 We improve the user experience, daily. Hit <strong>refresh</strong> in your browser to get the latest!</span>
+        <button id="refreshTipClose" class="refresh-tip-close" aria-label="Dismiss">&times;</button>
+      </div>
+
+      <!-- Results count + sort bar -->
+      <div class="results-bar">
+        <div id="resultsMeta" class="results-meta"></div>
+        <div id="sortBar" class="sort-btns">
+          <button class="sort-btn on" data-sort="pronutri">Best</button>
+          <button class="sort-btn" data-sort="protein">Protein ↓</button>
+          <button class="sort-btn" data-sort="fiber">Fiber ↓</button>
+          <button class="sort-btn" data-sort="cal">Low Cal</button>
+          <button class="sort-btn" data-sort="time">Fastest</button>
+        </div>
+      </div>
+
+      <!-- Recipe of the Day -->
+      <div id="rotdSpotlight" class="rotd-spotlight" hidden></div>
+
+      <!-- Search-correction banner ("Showing results for X — searched 'Y'") -->
+      <div id="searchCorrection" class="search-correction" hidden></div>
+
+      <!-- Recipe cards list -->
+      <div id="recipeList" class="recipe-list"><div class="skeleton-card"></div><div class="skeleton-card"></div><div class="skeleton-card"></div></div>
+    </section>
+
+    <!-- READY TO COOK TAB -->
+    <section id="tab-canmake" class="tab-panel" role="tabpanel" aria-labelledby="btn-canmake" hidden>
+      <div class="section-intro">
+        <h2>Your Matches</h2>
+        <p>Everything here uses what's already in your kitchen. Perishables first, so nothing dies a slow death in the crisper drawer.</p>
+      </div>
+      <div class="filter-bar card">
+        <div class="input-row">
+          <input id="readySearch" type="text" class="text-input" placeholder="Recipe name or ingredients (i.e. protein bar, pancakes, chili, kale, broccoli, tofu, black beans, etc.)" data-ph-short="Recipe name or ingredients." autocomplete="off">
+          <button id="readyFilterToggle" class="btn btn-outline btn-sm">Filters</button>
+        </div>
+        <div id="readyActiveFilters" class="active-filters"></div>
+        <!-- Categories drawer (inside sticky bar so it stays in place) -->
+        <div id="readyFilterDrawer" class="filter-drawer" hidden>
+          <div class="filter-section">
+            <h4>Categories <span class="muted" style="font-weight:normal;font-size:0.82rem">(select as many as you like)</span></h4>
+            <div id="readyCatFilters" class="filter-chips"></div>
+          </div>
+          <div class="filter-section">
+            <h4>Max Cook Time</h4>
+            <div class="time-slider-row">
+              <input id="readyTimeSlider" type="range" min="0" max="120" step="5" value="120" class="slider">
+              <span id="readyTimeLabel" class="time-label">Any</span>
+            </div>
+          </div>
+          <div class="filter-section">
+            <h4>⚠️ Allergens <span class="muted" style="font-weight:normal;font-size:0.82rem">(hide recipes containing)</span></h4>
+            <div id="readyAllergenChips" class="filter-chips"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Results count + sort bar -->
+      <div class="results-bar">
+        <div id="readyResultsMeta" class="results-meta"></div>
+        <div id="readySortBar" class="sort-btns">
+          <button class="sort-btn on" data-sort="match">Best</button>
+          <button class="sort-btn" data-sort="protein">Protein ↓</button>
+          <button class="sort-btn" data-sort="fiber">Fiber ↓</button>
+          <button class="sort-btn" data-sort="cal">Low Cal</button>
+          <button class="sort-btn" data-sort="time">Fastest</button>
+        </div>
+      </div>
+
+      <div id="canMakeMeta" class="results-meta"></div>
+      <div id="canMakeList" class="recipe-list"><div class="skeleton-card"></div><div class="skeleton-card"></div></div>
+      <div id="canMakeEmpty" class="empty-state" hidden>
+        <p>Your kitchen's holding out on you. Add some ingredients to your pantry and watch recipes appear like magic.</p>
+      </div>
+    </section>
+
+    <!-- MAKE SOON TAB -->
+    <section id="tab-wantmake" class="tab-panel" role="tabpanel" aria-labelledby="btn-wantmake" hidden>
+      <div class="section-intro">
+        <h2>📌 Make Soon</h2>
+        <p style="font-size:0.82rem;color:var(--ink-soft);margin-top:2px">Recipes you're planning to cook in the next few days. Pick the ones you'll shop for and send their ingredients to your shopping list.</p>
+      </div>
+      <div id="wmSubTabs" class="wm-subtab-bar">
+        <button class="wm-subtab on" data-wm-sub="recipes">📌 Recipes</button>
+        <button class="wm-subtab" data-wm-sub="history">✅ History</button>
+      </div>
+      <div id="wantMakeList"></div>
+      <div id="wantMakeEmpty" class="empty-state" hidden>
+        <p>Nothing queued up yet. Tap 📌 Make Soon on any recipe to start building your week.</p>
+      </div>
+      <div id="wmHistoryList" hidden></div>
+    </section>
+
+    <!-- FAVORITES TAB -->
+    <!-- MADE IT TAB (Cooking Journal) -->
+    <section id="tab-madeit" class="tab-panel" role="tabpanel" aria-labelledby="btn-madeit" hidden>
+      <div class="section-intro">
+        <h2>✅ Made It</h2>
+        <p>Your cooking journal. Every recipe you've made, rated, and inevitably told someone about.</p>
+      </div>
+
+      <div id="madeItStats" class="madeit-stats" hidden></div>
+
+      <div id="madeItEmpty" class="empty-state" hidden>
+        <p>Nothing here yet. Once you cook something and tap <strong>✅ Made It</strong>, it'll show up here so you never lose a winner.</p>
+      </div>
+
+      <div class="card" id="madeItJournal" hidden>
+        <div class="cook-history-header has-notes">
+          <span></span>
+          <span>Recipe Name</span>
+          <span>Notes</span>
+          <span>Rating</span>
+          <span>Date Made</span>
+          <span></span>
+        </div>
+        <div id="madeItHistory"></div>
+      </div>
+    </section>
+
+    <section id="tab-favorites" class="tab-panel" role="tabpanel" aria-labelledby="btn-favorites" hidden>
+      <div class="section-intro">
+        <h2>Favorites</h2>
+        <p>The ones you keep coming back to.</p>
+      </div>
+
+      <!-- Collections -->
+      <div class="card">
+        <h3 class="card-title">📂 My Collections</h3>
+        <div id="collectionsGrid" class="collections-grid"></div>
+      </div>
+
+      <!-- Collection detail (shown when a collection is selected) -->
+      <div id="favCollDetail" hidden>
+        <div class="fav-coll-header">
+          <button id="favCollBack" class="btn btn-sm">← Back</button>
+          <h3 id="favCollTitle" class="fav-coll-title"></h3>
+          <button id="favCollShop" class="btn btn-sm btn-primary" hidden>🛒 Shop Missing</button>
+        </div>
+        <div id="favList" class="recipe-list"></div>
+        <div id="favEmpty" class="empty-state" hidden>
+          <p>This collection is waiting for its first recipe. Tap ❤️ on anything that earns a spot.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SHOPPING LIST TAB -->
+    <section id="tab-shopping" class="tab-panel" role="tabpanel" aria-labelledby="btn-shopping" hidden>
+      <div id="makeList" hidden></div>
+      <div class="section-intro">
+        <div class="section-intro-row">
+          <h2>🛒 Shopping List</h2>
+          <div style="display:flex;gap:6px">
+            <button id="shareShopBtn" class="btn btn-outline btn-sm">📤 Share List</button>
+            <button id="clearShopBtn" class="btn btn-outline btn-sm">Clear All</button>
+          </div>
+        </div>
+        <p style="font-size:0.82rem;color:var(--ink-soft);margin-top:2px">Nothing to buy yet. Add recipes to Make Soon, then send their missing ingredients here.</p>
+      </div>
+      <div id="shopList" class="shop-list"></div>
+      <div id="shopEmpty" class="empty-state" hidden>
+        <p>Your shopping list is wide open. Add recipes to your queue and we'll tell you exactly what to grab.</p>
+      </div>
+    </section>
+
+    </div><!-- /.shell-scroll -->
+    </div><!-- /.sticky-shell -->
+
+    <!-- ── RECIPE DETAIL MODAL ────────────────────────────── -->
+    <div id="recipeModal" class="modal-overlay" hidden>
+      <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <div class="modal-header">
+          <h2 id="modalTitle" class="modal-title"></h2>
+          <button id="modalClose" class="modal-close" aria-label="Close">&times;</button>
+        </div>
+        <div id="modalBody" class="modal-body"></div>
+      </div>
+    </div>
+
+
+    <!-- PWA bottom toolbar (share + refresh) -->
+    <!-- Menu overlay panel -->
+    <div id="menuOverlay" class="menu-overlay" hidden>
+      <div class="menu-panel">
+        <div class="menu-header">
+          <h3>🌿 HARVEST</h3>
+          <button id="menuCloseBtn" class="menu-close-btn" aria-label="Close">&times;</button>
+        </div>
+        <nav class="menu-nav">
+          <button class="menu-item" data-menu="instructions">📖 Instructions</button>
+          <button class="menu-item" data-menu="about">🌱 About Us</button>
+          <button class="menu-item" id="menuCloudSync">☁️ Cloud Sync</button>
+          <button class="menu-item" data-menu="feedback">💬 Send Feedback</button>
+          <button class="menu-item" data-menu="privacy">🔒 Privacy Policy</button>
+          <button class="menu-item" id="menuDarkToggle">🌙 Night Mode</button>
+        </nav>
+
+        <!-- Menu sub-panels (shown when a menu item is tapped) -->
+        <div id="menuContent" class="menu-content" hidden>
+          <button id="menuBackBtn" class="menu-back-btn">← Back</button>
+
+          <div id="menuInstructions" class="menu-section" hidden>
+            <h4>Quick Start</h4>
+
+            <p><strong>1. Stock your pantry</strong></p>
+            <ol class="about-steps">
+              <li>Go to <strong>🥬 My Pantry</strong> and tap <strong>📌 Add Staples</strong>: choose Oils, Spices, Grains, Beans, and anything else you always have on hand.</li>
+              <li>Use the <strong>Add Ingredients</strong> input to type items separated by commas. These go into your active ingredient list for matching. Staples are added separately via the <strong>📌 Add Staples</strong> grid.</li>
+              <li>Or tap <strong>📷 Scan</strong> to photograph your groceries. We'll identify what's in the photo and let you confirm before adding anything.</li>
+            </ol>
+
+            <p style="margin-top:12px"><strong>2. Find recipes</strong></p>
+            <ol class="about-steps">
+              <li><strong>🔍 Browse All</strong> shows every recipe in HARVEST, ranked by combined protein and fiber per serving. Use Filters for cuisines, cook time, and allergens.</li>
+              <li><strong>Sort by nutrition</strong>: tap <strong>Protein ↓</strong>, <strong>Fiber ↓</strong>, or <strong>Low Cal</strong> in the sort bar to find the healthiest version of whatever you're craving.</li>
+              <li><strong>🍳 Your Matches</strong> shows only recipes you can cook right now (1 or fewer missing ingredients).</li>
+            </ol>
+
+            <p style="margin-top:12px"><strong>3. Plan, shop, cook</strong></p>
+            <ol class="about-steps">
+              <li>Tap <strong>📌 Make Soon</strong> on any recipe card to save it. When you're ready to shop, tap 🛒 to send it to Shopping.</li>
+              <li><strong>🛒 Shopping</strong> shows only recipes you've sent, with checkboxes for each missing ingredient. Tap 📤 to share the list.</li>
+              <li>After cooking, tap <strong>✅ I Made This</strong> to rate it 1–5 stars and log whether you'd make it again. You'll also get a quick option to share the recipe with a friend.</li>
+            </ol>
+
+            <p style="margin-top:12px"><strong>4. Track what you've made</strong></p>
+            <ol class="about-steps">
+              <li><strong>Made It</strong> (inside ❤️ Favorites) is your cooking journal. It shows every recipe you've cooked, the date you first made it, and your star rating.</li>
+              <li>Tap the stars to update your rating anytime. Tap ✕ to remove an entry.</li>
+              <li>Make Soon's <strong>History</strong> sub-tab shows the same log with sortable columns. Sort by recipe name, rating, date, or "Would make again."</li>
+            </ol>
+
+            <p style="margin-top:12px"><strong>Good to know</strong></p>
+            <ol class="about-steps">
+              <li><strong>❤️ Favorites</strong>: organize saved recipes into collections like Weekly Meal Plan, Celebration, or Game Day.</li>
+              <li><strong>Substitution hints</strong>: when you're missing an ingredient and a good swap exists, a green hint appears (GF and lower-sugar alternatives too).</li>
+              <li><strong>Ingredient benefits</strong>: tap any ingredient in a recipe to see evidence-based health info.</li>
+              <li><strong>📤 Share</strong>: share recipes or shopping lists via text, email, Notes, or social media. After rating a recipe you just cooked, a "Share with a friend" button appears for 5 seconds.</li>
+              <li><strong>⚠️ Allergens</strong>: set in My Pantry or in the Filters drawer on Browse and Your Matches to hide recipes with specific allergens.</li>
+              <li><strong>☁️ Cloud Sync</strong>: open the ☰ Menu and tap Cloud Sync. Enter your email, verify with a one-time code, then push your data to the cloud or pull it down to any device. No password needed.</li>
+              <li><strong>🌟 Recipe of the Day</strong>: a new high-protein recipe spotlighted daily on the Browse tab, matched against your pantry.</li>
+            </ol>
+            <p style="margin-top:12px"><strong>Phone toolbar</strong></p>
+            <p style="margin-bottom:6px;font-size:0.88rem">When installed on your phone, a toolbar appears at the bottom with four buttons:</p>
+            <ol class="about-steps">
+              <li><strong>📤 Share</strong>: share a recipe or the app itself via text, email, or social media so friends can add HARVEST to their home screen too.</li>
+              <li><strong>🔄 Refresh</strong>: reload the app to get the latest recipes and updates.</li>
+              <li><strong>☰ Menu</strong>: open the menu for Instructions, About, Feedback, and Cloud Sync.</li>
+              <li><strong>🌙 Night Mode</strong>: toggle dark mode for easier reading at night.</li>
+            </ol>
+
+            <p class="about-tip">💡 Add HARVEST to your home screen for the best experience!</p>
+          </div>
+
+          <div id="menuAbout" class="menu-section" hidden>
+            <h4>About Us</h4>
+            <p>HARVEST was created by an experienced team of food creators who wanted a better way to answer the daily question: <em>"What can I make right now to help ensure I'm thriving?"</em></p>
+            <p style="margin-top:8px">Our database of over 4,000 gluten-free recipes brings together the best of the world's top plant-based chefs and creators, from Pick Up Limes and Woon Heng to The Korean Vegan and Hot for Food. Whether you're craving Korean comfort food, Italian pasta night, or a quick Indian curry, HARVEST introduces you to creators and cuisines you might never have discovered on your own.</p>
+            <p style="margin-top:8px">Every recipe is 100% plant-based and nutrition-focused. The goal isn't just to cook more. It's to expand your palate, try something new, and make cooking feel effortless again.</p>
+            <p class="about-version" style="margin-top:16px"><span class="muted">HARVEST v2.28 · Made with 💚 and plants</span></p>
+          </div>
+
+          <div id="menuFeedback" class="menu-section" hidden>
+            <h4>Send Feedback</h4>
+            <p style="margin-bottom:8px">Have a suggestion, found a bug, or just want to say hi?</p>
+            <div id="feedbackForm">
+              <div style="display:flex;gap:6px;margin-bottom:6px">
+                <button class="btn btn-outline btn-sm feedback-type-btn on" data-type="suggestion">💡 Suggestion</button>
+                <button class="btn btn-outline btn-sm feedback-type-btn" data-type="bug">🐛 Bug</button>
+                <button class="btn btn-outline btn-sm feedback-type-btn" data-type="love">💚 Love it</button>
+              </div>
+              <textarea id="feedbackMsg" class="text-input" rows="3" placeholder="Tell us what's on your mind…" style="width:100%;resize:vertical;margin-bottom:6px"></textarea>
+              <div style="display:flex;align-items:center;gap:8px">
+                <button id="feedbackSendBtn" class="btn btn-primary btn-sm">Send Feedback</button>
+                <span id="feedbackStatus" class="muted" style="font-size:0.8rem"></span>
+              </div>
+            </div>
+          </div>
+
+          <div id="menuPrivacy" class="menu-section" hidden>
+            <h4>Privacy Policy</h4>
+            <p>HARVEST does not collect, sell, or share your personal data. Your ingredient lists, staples, favorites, and preferences are stored locally on your device.</p>
+            <p style="margin-top:8px">If you enable Cloud Sync, your data is stored securely in your own Supabase account and is never shared with third parties. We use basic analytics to understand how the app is used. No tracking, no ads, ever.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PWA bottom toolbar (Share, Refresh, Menu, Night Mode) -->
+    <div id="pwaToolbar" class="pwa-toolbar" hidden>
+      <button id="pwaShare" class="pwa-btn" aria-label="Share">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+      </button>
+      <button id="pwaRefresh" class="pwa-btn" aria-label="Refresh">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+      </button>
+      <button id="pwaMenu" class="pwa-btn" aria-label="Menu">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+      </button>
+      <button id="pwaDarkToggle" class="pwa-btn" aria-label="Night Mode">
+        <svg id="pwaDarkIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+
+  </div><!-- #app -->
+
+
+  <!-- SW cleanup: stable URL, runs before app bundle to clear stale caches -->
+  <script src="/sw-cleanup.js"></script>
+  <!-- Cloudflare Web Analytics — privacy-friendly, no cookies -->
+  <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "PASTE_YOUR_TOKEN_HERE"}'></script>
+</body>
+</html>

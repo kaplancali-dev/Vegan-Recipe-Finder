@@ -1,3 +1,58 @@
+/* ════════════════════════════════════════════════════════════════
+ *  LANDING PAGE — APPROVED VALUES (do NOT change without re-approval)
+ * ════════════════════════════════════════════════════════════════
+ *
+ *  Last approved by David: this session.
+ *
+ *  COPY (in index.html, not here):
+ *    - Foil:    "Other recipe apps ask what you want, then send you shopping."
+ *               (with &nbsp; binding "send you shopping")
+ *    - Ours:    "HARVEST knows your fridge, then asks what you crave."
+ *               (with &nbsp; ONLY between "you" and "crave" — do NOT
+ *                also bind "asks what" — causes horizontal overflow)
+ *    - Tagline: "(Dinner shouldn't start with an errand.)"
+ *               (parentheses, bold italic, single line)
+ *    - Welcome: "→ Welcome to HARVEST."
+ *    - No sub-paragraph, no footer tagline.
+ *    - Em-dashes are forbidden everywhere on the landing page.
+ *
+ *  TYPOGRAPHY:
+ *    Desktop                              Mobile (max-width: 599px)
+ *    ─────────────────────────────────────────────────────────────
+ *    .landing-app-icon ........ 64px      48px
+ *    .landing-logo ............ 3.4rem    2rem
+ *    .landing-headline foil ... clamp     1rem absolute
+ *    .landing-headline ours ... 1.12em    1.4rem absolute
+ *    .landing-tagline ......... clamp     clamp (700 italic, parens)
+ *    .landing-signin-link ..... 1rem      0.85rem
+ *    .landing-welcome ......... 1.25rem   1.05rem
+ *
+ *  COLORS (explicit hex — do NOT revert to CSS variables, they
+ *  render too pale because of dark-mode resolution issues):
+ *    - Foil:    #2c3e35
+ *    - Ours:    #134024
+ *    - Tagline: #134024
+ *    - Sign-in: #1a2e24
+ *    - Welcome: #1a2e24
+ *    - Divider: #6b7d72
+ *
+ *  LAYOUT BEHAVIOR:
+ *    - Sticky nav: icon + wordmark + button + sign-in link
+ *    - Once .landing--hero-dismissed is set (user clicked SHOW ME):
+ *        the button AND the sign-in link both hide.
+ *        Only icon + wordmark remain in nav.
+ *
+ *  REGRESSION HISTORY (don't repeat these):
+ *    - em-based font-sizes (1.24em, 0.84em) compound unpredictably
+ *      with parent overrides — use absolute rem on mobile instead.
+ *    - white-space: nowrap on the sub-line forced overflow when the
+ *      sub got longer than one sentence. Don't reintroduce.
+ *    - Binding "asks what you crave" with &nbsp; (vs. just "you crave")
+ *      makes the unit wider than the viewport on phones. Don't reintroduce.
+ *    - CSS variables --ink-soft and --green-deep render too pale on
+ *      the cream landing background. Use the explicit hex above.
+ * ════════════════════════════════════════════════════════════════ */
+
 /* ── Landing Page (new visitors) ────────────────────────────────── */
 
 .landing {
