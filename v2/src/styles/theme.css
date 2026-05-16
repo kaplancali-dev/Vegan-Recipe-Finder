@@ -4325,6 +4325,12 @@ input, select, textarea {
 }
 
 .obd-chip-hint {
+  /* Hidden per design — descriptive hints under each chip
+     ("Korean, look for vegan label", "proceed with caution", etc.)
+     looked cluttered in the chip grid. Data still lives in
+     STAPLE_SECTIONS in Onboarding.js — easy to re-enable if we
+     want to surface hints differently (tooltip, info icon, etc). */
+  display: none;
   font-size: 0.78rem;
   color: #2c3e35;
   font-style: italic;
