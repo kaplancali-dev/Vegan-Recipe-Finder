@@ -472,14 +472,17 @@
   font-weight: 400;
 }
 
-/* Welcome line */
+/* Welcome line — italic serif so the whole page lives in just two
+   typefaces (sans for UI, serif for voice). Reads as a natural
+   continuation of the italic tagline above it. */
 .landing-welcome {
-  font-family: 'Courier New', Courier, monospace;
-  font-size: 0.95rem;
-  font-weight: 700;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1rem;
+  font-weight: 600;
   color: #1a2e24;
   margin-bottom: 24px;
-  letter-spacing: 0.02em;
+  letter-spacing: 0;
 }
 
 /* Desktop: container sized to the new editorial column. Headline and
@@ -489,7 +492,7 @@
     max-width: 1000px;
   }
   .landing-welcome {
-    font-size: 1.25rem;
+    font-size: 1.3rem;
     white-space: nowrap;
     margin-top: 8px;
     margin-bottom: 24px;
@@ -561,7 +564,7 @@
     margin-bottom: 10px;
   }
   .landing-welcome {
-    font-size: 1.05rem;
+    font-size: 1.1rem;
     margin-top: 8px;
     margin-bottom: 20px;
   }
