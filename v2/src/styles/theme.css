@@ -474,14 +474,15 @@
 
 /* Welcome line — italic serif so the whole page lives in just two
    typefaces (sans for UI, serif for voice). Reads as a natural
-   continuation of the italic tagline above it. */
+   continuation of the italic tagline above it. Margin-bottom kept
+   small so the SHOW ME button below sits tight against it. */
 .landing-welcome {
   font-family: var(--font-serif);
   font-style: italic;
   font-size: 1rem;
   font-weight: 600;
   color: #1a2e24;
-  margin-bottom: 24px;
+  margin-bottom: 8px;
   letter-spacing: 0;
 }
 
@@ -495,7 +496,7 @@
     font-size: 1.3rem;
     white-space: nowrap;
     margin-top: 8px;
-    margin-bottom: 24px;
+    margin-bottom: 8px;
   }
 }
 
@@ -566,7 +567,7 @@
   .landing-welcome {
     font-size: 1.1rem;
     margin-top: 8px;
-    margin-bottom: 20px;
+    margin-bottom: 8px;
   }
 }
 
@@ -597,14 +598,15 @@
   box-shadow: inset 0 0 0 1.5px transparent;
   transition: background 0.2s;
 }
-/* SHOW ME button sits directly under the welcome line — close enough
-   to read as a natural CTA continuation of the pitch. */
+/* SHOW ME button sits directly under the welcome line — tight enough
+   to read as a natural CTA continuation of the pitch. The welcome
+   line's margin-bottom is also trimmed so the gap stays compact. */
 .landing-btn-primary--main {
-  margin-top: 20px;
+  margin-top: 4px;
 }
 @media (max-width: 599px) {
   .landing-btn-primary--main {
-    margin-top: 14px;
+    margin-top: 4px;
   }
 }
 
