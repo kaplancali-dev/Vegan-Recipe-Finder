@@ -4119,6 +4119,18 @@ input, select, textarea {
   margin-bottom: 10px;
 }
 
+/* Mobile: title fits on one line on every phone width.
+   Trim card padding too so "What's always in your kitchen?" doesn't wrap. */
+@media (max-width: 599px) {
+  .obd-card {
+    padding: 22px 16px;
+  }
+  .obd-title {
+    font-size: 1.2rem;
+    line-height: 1.25;
+  }
+}
+
 .obd-hook {
   font-size: 1.02rem;
   color: var(--ink);
