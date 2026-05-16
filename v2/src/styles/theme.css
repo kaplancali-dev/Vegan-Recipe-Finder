@@ -54,20 +54,21 @@
  *    - Divider: #6b7d72
  *
  *  LAYOUT BEHAVIOR:
- *    - Sticky nav: brand (icon + wordmark) + brand subtitle +
- *      sign-in link
- *      (SHOW ME button MOVED — now sits at bottom of main content,
- *       after the welcome line, as the conversion CTA at end of pitch.)
+ *    - Sticky nav: brand (icon + wordmark) + brand subtitle ONLY.
+ *      Both CTAs (SHOW ME button + sign-in link) moved to bottom of
+ *      main content for cleaner top/bottom symmetry.
  *    - .landing-brand wraps icon+wordmark in a horizontal row at
  *      EVERY viewport. Icon always sits to the LEFT of the wordmark.
  *    - .landing-brand-sub sits BELOW the brand row with the identity
  *      claim "Plant-based. Proud of it." — landing page ONLY,
  *      NOT used in the in-app header (which keeps its existing tagline).
  *    - SHOW ME button (.landing-btn-primary--main) sits at bottom of
- *      .landing-main, after the welcome line.
+ *      .landing-main, after the welcome line. Primary action.
+ *    - Sign-in link (.landing-signin-link) sits below the SHOW ME
+ *      button as a secondary CTA. Both group together at the bottom.
  *    - Once .landing--hero-dismissed is set (user clicked SHOW ME):
- *        the sign-in link hides (nav rule).
- *        landing-main hides (which also hides the SHOW ME button).
+ *        landing-main hides (which hides BOTH the SHOW ME button AND
+ *        the sign-in link, since they're both children of main).
  *        Only icon + wordmark + subtitle remain visible.
  *        On mobile only: nav becomes position: relative so it scrolls
  *        away with content instead of pinning at top during onboarding.
@@ -192,14 +193,11 @@
   }
 }
 
-/* The CTA in the sticky nav (next to HARVEST logo) is hidden once
-   the user clicks it — picker is in control after that. Same for the
-   sign-in link — they've already committed to onboarding, so a "Sign in"
-   second-chance option would only crowd the screen during selection. */
-.landing--hero-dismissed .landing-nav .landing-btn-primary,
-.landing--hero-dismissed .landing-nav .landing-signin-link {
-  display: none;
-}
+/* Both CTAs (SHOW ME button + sign-in link) now sit inside .landing-main,
+   so they're automatically hidden when .landing--hero-dismissed hides
+   landing-main. No explicit display:none rule needed in the nav.
+   (Earlier versions had these CTAs inside .landing-nav and needed
+   selectors here to hide them on hero-dismissed. No longer applicable.) */
 
 /* ── Notes full-screen editor ────────────────────────────────── */
 
