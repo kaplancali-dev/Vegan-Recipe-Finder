@@ -51,8 +51,11 @@
 }
 
 /* The CTA in the sticky nav (next to HARVEST logo) is hidden once
-   the user clicks it — picker is in control after that. */
-.landing--hero-dismissed .landing-nav .landing-btn-primary {
+   the user clicks it — picker is in control after that. Same for the
+   sign-in link — they've already committed to onboarding, so a "Sign in"
+   second-chance option would only crowd the screen during selection. */
+.landing--hero-dismissed .landing-nav .landing-btn-primary,
+.landing--hero-dismissed .landing-nav .landing-signin-link {
   display: none;
 }
 
