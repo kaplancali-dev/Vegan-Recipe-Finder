@@ -45,8 +45,8 @@
 }
 @media (max-width: 599px) {
   .landing-app-icon {
-    width: 52px;
-    height: 52px;
+    width: 44px;
+    height: 44px;
   }
 }
 
@@ -354,14 +354,14 @@
    brand-green "HARVEST..." line so the comparison reads at a glance. */
 @media (max-width: 599px) {
   .landing-nav {
-    gap: 8px;
-    padding: 14px 18px 6px;
+    gap: 6px;
+    padding: 10px 18px 4px;
   }
   .landing-main {
-    padding: 4px 12px 32px;
+    padding: 2px 12px 20px;
   }
   .landing-logo {
-    font-size: 2.1rem;
+    font-size: 1.7rem;
   }
   .landing-btn-primary {
     padding: 9px 20px;
@@ -375,21 +375,24 @@
     padding-bottom: 2px;
   }
   .landing-headline--inversion {
-    font-size: 1.05rem;
+    /* Force absolute base on mobile so em-multipliers don't compound */
+    font-size: 1rem;
     line-height: 1.3;
     margin-bottom: 10px;
     max-width: 100%;
   }
   .landing-headline-foil {
-    font-size: 0.84em;
+    /* Absolute rem instead of em so size stays predictable */
+    font-size: 0.85rem;
     margin-bottom: 0;
   }
   .landing-headline-foil::after {
-    margin: 14px auto 12px;
-    width: 55%;
+    margin: 10px auto 10px;
+    width: 50%;
   }
   .landing-headline-ours {
-    font-size: 1.24em;
+    /* Absolute rem so this can't grow beyond what fits the viewport */
+    font-size: 1.1rem;
   }
   .landing-tagline {
     /* Scales with viewport so it stays one line on every phone width.
