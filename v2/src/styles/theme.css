@@ -62,10 +62,13 @@
  *    - .landing-brand-sub sits BELOW the brand row with the identity
  *      claim "Plant-based. Proud of it." — landing page ONLY,
  *      NOT used in the in-app header (which keeps its existing tagline).
- *    - SHOW ME button (.landing-btn-primary--main) sits at bottom of
- *      .landing-main, after the welcome line. Primary action.
- *    - Sign-in link (.landing-signin-link) sits below the SHOW ME
- *      button as a secondary CTA. Both group together at the bottom.
+ *    - SHOW ME button (.landing-btn-primary--main) sits directly under
+ *      the welcome line as a tight continuation of the pitch. Primary CTA.
+ *    - Sign-in link (.landing-signin-link--bottom) is PINNED to the
+ *      bottom of the viewport via margin-top: auto + landing-main's
+ *      min-height: calc(100vh - 100px). Sits visually separate from the
+ *      SHOW ME button, at the bottom of the screen. Secondary CTA,
+ *      smaller font on desktop.
  *    - Once .landing--hero-dismissed is set (user clicked SHOW ME):
  *        landing-main hides (which hides BOTH the SHOW ME button AND
  *        the sign-in link, since they're both children of main).
@@ -309,13 +312,15 @@
 .landing-main {
   max-width: 800px;
   margin: 0 auto;
-  padding: 16px 18px 32px;
+  padding: 16px 18px 24px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* Anchor to the top — the inversion copy is compact and was leaving
-     a huge gap when centered vertically against a viewport-height min. */
   justify-content: flex-start;
+  /* Min-height so the sign-in link's margin-top:auto has space to
+     push the link to the bottom of the visible viewport. The 100px
+     subtraction accounts for the sticky nav above. */
+  min-height: calc(100vh - 100px);
 }
 
 @media (min-width: 768px) {
@@ -589,11 +594,28 @@
   box-shadow: inset 0 0 0 1.5px transparent;
   transition: background 0.2s;
 }
-/* When the button sits at the bottom of the main content flow
-   (after the welcome line), it needs more breathing room above to
-   feel like a deliberate call-to-action instead of crammed text. */
+/* SHOW ME button sits directly under the welcome line — close enough
+   to read as a natural CTA continuation of the pitch. */
 .landing-btn-primary--main {
-  margin-top: 28px;
+  margin-top: 20px;
+}
+@media (max-width: 599px) {
+  .landing-btn-primary--main {
+    margin-top: 14px;
+  }
+}
+
+/* Sign-in link is pinned to the bottom of the viewport via auto top
+   margin (works because .landing-main has a min-height that fills
+   the screen). Secondary CTA — smaller font on desktop so it doesn't
+   compete with the primary SHOW ME button above. */
+.landing-signin-link--bottom {
+  margin-top: auto;
+}
+@media (min-width: 600px) {
+  .landing-signin-link--bottom {
+    font-size: 0.88rem;
+  }
 }
 
 .landing-btn-primary:hover {
