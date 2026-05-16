@@ -511,12 +511,11 @@
     font-size: 1.55rem;
   }
   .landing-tagline {
-    /* Scales with viewport so it stays one line on every phone width.
-       Pro Max gets ~1.2rem (max), Pro ~1.13rem, SE ~1.05rem.
-       Cap at 1.2rem because that's the largest size where
-       "(Dinner shouldn't start with an errand.)" still fits one line
-       on a Pro Max content width. */
-    font-size: clamp(1.05rem, 4.6vw, 1.2rem);
+    /* Scales with viewport, capped so it stays on one line at every
+       phone width. At 1.1rem italic bold, "(Dinner shouldn't start
+       with an errand.)" needs ~410px and Pro Max content area is
+       ~406px — 1.1rem is the empirical maximum. Don't go higher. */
+    font-size: clamp(1rem, 4.5vw, 1.1rem);
     font-weight: 700;
     margin: 22px auto 28px;
     line-height: 1.35;
