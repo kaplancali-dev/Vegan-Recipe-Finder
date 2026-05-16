@@ -6,16 +6,24 @@
  *
  *  COPY (in index.html, not here):
  *    - Foil:    "Other recipe apps ask what you want, then send you shopping."
- *               Uses ONE <br> after "want," to force 2-line wrap:
+ *               Mobile (.m-br): 3 lines via brs after "ask" and "then"
+ *                 line 1: "Other recipe apps ask"
+ *                 line 2: "what you want, then"
+ *                 line 3: "send you shopping."
+ *               Desktop (.d-br): 2 lines via br after "want,"
  *                 line 1: "Other recipe apps ask what you want,"
  *                 line 2: "then send you shopping."
  *    - Ours:    "HARVEST knows your fridge, then asks what you crave."
- *               Uses ONE <br> after "fridge," to force 2-line wrap:
+ *               Mobile (.m-br): 3 lines via brs after "knows" and "then"
+ *                 line 1: "HARVEST knows"
+ *                 line 2: "your fridge, then"
+ *                 line 3: "asks what you crave."
+ *               Desktop (.d-br): 2 lines via br after "fridge,"
  *                 line 1: "HARVEST knows your fridge,"
  *                 line 2: "then asks what you crave."
  *               + &nbsp; binding "you crave" so the trailing word
  *                 can't orphan to its own line.
- *    - Both lines break at the conjunction "then" — parallel structure.
+ *    - Both lines break at "then" — parallel structure on every viewport.
  *    - Ours:    "HARVEST knows your fridge, then asks what you crave."
  *               (with &nbsp; ONLY between "you" and "crave" — do NOT
  *                also bind "asks what" — causes horizontal overflow)
@@ -116,6 +124,20 @@
     width: 48px;
     height: 48px;
   }
+}
+
+/* Conditional line breaks for the headline.
+     .m-br shows only on mobile  (max-width: 599px)
+     .d-br shows only on desktop (min-width: 600px)
+   Used to give the two headline sentences different wrap patterns per
+   viewport: 3 lines on mobile, 2 lines on desktop, both breaking
+   parallelly at "then". */
+.m-br, .d-br { display: none; }
+@media (max-width: 599px) {
+  .m-br { display: inline; }
+}
+@media (min-width: 600px) {
+  .d-br { display: inline; }
 }
 
 /* .landing-brand groups the app icon and HARVEST. wordmark side by
