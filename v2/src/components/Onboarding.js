@@ -15,7 +15,7 @@ import { startTour } from './GuidedTour.js';
 
 export const STAPLE_SECTIONS = [
   // 0 — Beans & Legumes
-  { label: '🫘 Beans & Legumes', sub: 'the workhorses', items: [
+  { label: '🫘 Beans & Legumes', sub: 'keep your muscles happy', items: [
     'chickpeas','black beans','lentils','kidney beans',
     'cannellini beans','great northern beans','navy beans','butter beans','lima beans','pinto beans',
     { name: 'mung beans', hint: 'sprout-worthy' },
@@ -43,7 +43,7 @@ export const STAPLE_SECTIONS = [
     'GF bread','GF breadcrumbs','GF tortillas',
   ]},
   // 2 — Vegetables
-  { label: '🥦 Vegetables', sub: 'the main event', items: [
+  { label: '🥦 Vegetables', sub: 'go crazy. not literally.', items: [
     { name: 'garlic', hint: 'always more' },
     'yellow onion','white onion','red onion','fresh ginger','spinach',
     { name: 'kale', hint: 'we know' },
@@ -60,7 +60,7 @@ export const STAPLE_SECTIONS = [
     'beets','radishes','artichoke hearts','bean sprouts','bamboo shoots','shallots',
   ]},
   // 3 — Fruits
-  { label: '🍋 Fruits', sub: "for snacking, smoothies, and pretending you're virtuous", items: [
+  { label: '🍋 Fruits', sub: "nature's candy", items: [
     'lemon','lime','banana','berries (any)','cranberries','cherries',
     'mango','apple','oranges','orange juice','pineapple','peaches','pears',
     'kiwi','papaya',
@@ -71,7 +71,7 @@ export const STAPLE_SECTIONS = [
     { name: 'date paste', hint: 'blended dates for sweetening (no refined sugar)' },
   ]},
   // 4 — Nuts & Seeds
-  { label: '🥜 Nuts & Seeds', sub: 'creamy dreams', items: [
+  { label: '🥜 Nuts & Seeds', sub: 'fats, fiber, protein. trifecta.', items: [
     { name: 'nut butter (any)', hint: 'spoon optional' },
     { name: 'cashews', hint: "soak 'em, blend 'em, thank us" },
     'almonds','walnuts','pecans','brazil nuts','macadamia nuts','hazelnuts',
@@ -82,7 +82,7 @@ export const STAPLE_SECTIONS = [
     'flax seeds','pumpkin seeds','sunflower seeds','protein powder',
   ]},
   // 5 — Plant-Based Dairy
-  { label: '🥛 Plant-Based Dairy', sub: 'moo-free zone', items: [
+  { label: '🥛 Plant-Based Dairy', sub: "regular dairy is for their offspring, not you. honest.", items: [
     'almond milk','soy milk','rice milk','hemp milk',
     'macadamia milk','pistachio milk',
     { name: 'oat milk', hint: "the people's champion" },
@@ -177,7 +177,7 @@ export const STAPLE_SECTIONS = [
     'italian seasoning',
   ]},
   // 12 — Dessert Pantry
-  { label: '🍨 Dessert Pantry', sub: 'treat yourself (responsibly)', items: [
+  { label: '🍨 Dessert Pantry', sub: 'encore! encore! encore!', items: [
     'vanilla extract','almond extract','cocoa powder',
     'chocolate chips (any)','white chocolate chips','dark chocolate',
     { name: 'cacao nibs', hint: 'chocolate for grown-ups' },
@@ -242,22 +242,6 @@ const STAPLE_PAGES = [
   { sections: [11],    label: 'Spices & Herbs' },
   { sections: [12],    label: 'Dessert Pantry' },
   { sections: [13],    label: 'Asian Specialty' },
-];
-
-/* ── Page prompts (one per staple sub-page) ────────────────── */
-
-const PAGE_PROMPTS = [
-  "Let's start with the protein heavy-hitters. These are the beans, lentils, and tofu that keep you full and your muscles happy.",
-  "Carbs aren't the enemy — they're the foundation. Pick the grains and starches you always have lurking in a cabinet somewhere.",
-  "The produce aisle. Tap everything you usually grab, even the one you buy and forget about until it's too late.",
-  "Fruit! The stuff you eat with good intentions and the stuff you eat standing over the sink at midnight. Both count.",
-  "Nuts and seeds — tiny but mighty. These add crunch, protein, and that satisfying feeling of eating like a responsible adult.",
-  "Plant milks and oils — because regular dairy is clearly for their offspring, and you, my friend, are not a cow. These are the behind-the-scenes MVPs.",
-  "The pantry shelf essentials. Canned goods, sauces, the stuff that turns 'I have nothing' into an actual meal.",
-  "Sweeteners and vinegars — the sweet-and-sour backbone. A splash of vinegar or drizzle of maple can save almost anything.",
-  "Spices are where the magic happens. This is the difference between 'I ate' and 'I COOKED.' Go wild.",
-  "The dessert pantry. Because sometimes dinner is just the opening act.",
-  "Last stop — Asian specialty items. Skip if Japanese/Korean/Chinese cooking isn't your thing. Otherwise, these unlock a whole new world.",
 ];
 
 /* ── State ──────────────────────────────────────────────────── */
@@ -359,9 +343,8 @@ function _buildHTML() {
       <div class="obd-step" data-obd-step="2">
         <div class="obd-title">What's always in your kitchen?</div>
         <div class="obd-why" id="obdWhyCallout">
-          <strong>Quick game:</strong> tap what usually lives in your kitchen — across <strong>10 quick categories</strong>, about a minute total. The reward: from here on, we filter over 4,000 gluten-free recipes down to <em>only</em> the ones you can cook tonight. No taunting you with ingredients you don't have.
+          <strong>Quick game:</strong> tap what usually lives in your kitchen, across <strong>10 quick categories</strong>, about a minute total. The reward: from here on, we filter over 4,000 gluten-free recipes down to <em>only</em> the ones you can cook tonight. No taunting you with ingredients you don't have.
         </div>
-        <div class="obd-sub obd-page-prompt" id="obdPagePrompt">${PAGE_PROMPTS[0]}</div>
         <div class="obd-sub-progress" id="obdSubProgress">${_buildSubProgress()}</div>
         <div class="obd-sub-label" id="obdSubLabel">1 of ${STAPLE_PAGES.length}</div>
         <div id="obdStaples" class="obd-subpage-container">${_buildStaplePages()}</div>
@@ -425,10 +408,6 @@ function _goToSubPage(overlay, idx) {
   // Update label
   const label = overlay.querySelector('#obdSubLabel');
   if (label) label.textContent = `${idx + 1} of ${total}`;
-
-  // Update page prompt
-  const prompt = overlay.querySelector('#obdPagePrompt');
-  if (prompt && PAGE_PROMPTS[idx]) prompt.textContent = PAGE_PROMPTS[idx];
 
   // Show "Quick game" callout only on the first sub-page
   const whyCallout = overlay.querySelector('#obdWhyCallout');
