@@ -154,21 +154,23 @@
 }
 
 /* Brand subtitle below the icon+wordmark row — identity claim for
-   first-time landing visitors. Italic serif in brand green, smaller
-   than the wordmark, slightly negative margin to hug the H closer. */
+   first-time landing visitors. Italic serif in brand green. Pulled
+   close to the wordmark via negative margin-top that overcomes the
+   nav's gap. Bigger on desktop where there's more breathing room. */
 .landing-brand-sub {
   font-family: var(--font-serif);
   font-style: italic;
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 1.2rem;
   color: #134024;
   text-align: center;
   letter-spacing: 0.02em;
-  margin-top: -2px;
+  margin-top: -10px;
 }
 @media (max-width: 599px) {
   .landing-brand-sub {
     font-size: 0.9rem;
+    margin-top: -2px;
   }
 }
 @media (max-width: 599px) {
