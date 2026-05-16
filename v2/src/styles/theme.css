@@ -6,11 +6,16 @@
  *
  *  COPY (in index.html, not here):
  *    - Foil:    "Other recipe apps ask what you want, then send you shopping."
- *               Uses TWO <br> tags to force a 3-line wrap on every viewport:
- *                 line 1: "Other recipe apps ask"
- *                 line 2: "what you want, then"
- *                 line 3: "send you shopping."
- *               This is the approved layout (David, this session).
+ *               Uses ONE <br> after "want," to force 2-line wrap:
+ *                 line 1: "Other recipe apps ask what you want,"
+ *                 line 2: "then send you shopping."
+ *    - Ours:    "HARVEST knows your fridge, then asks what you crave."
+ *               Uses ONE <br> after "fridge," to force 2-line wrap:
+ *                 line 1: "HARVEST knows your fridge,"
+ *                 line 2: "then asks what you crave."
+ *               + &nbsp; binding "you crave" so the trailing word
+ *                 can't orphan to its own line.
+ *    - Both lines break at the conjunction "then" — parallel structure.
  *    - Ours:    "HARVEST knows your fridge, then asks what you crave."
  *               (with &nbsp; ONLY between "you" and "crave" — do NOT
  *                also bind "asks what" — causes horizontal overflow)
@@ -517,6 +522,9 @@
   font-weight: 600;
   letter-spacing: 0.08em;
   padding: 14px 28px;
+  /* Extra breathing room above so it sits visibly lower than the
+     HARVEST. wordmark, not crammed right under it. */
+  margin-top: 16px;
   background: #3a3a3a;
   color: #fff;
   border: none;
