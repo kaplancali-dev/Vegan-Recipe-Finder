@@ -358,8 +358,8 @@ function _buildHTML() {
 
       <!-- STEP 3: Allergies -->
       <div class="obd-step" data-obd-step="3">
-        <div class="obd-title">Anything your body vetoes?</div>
-        <div class="obd-sub">We'll keep these out of every recipe. Tap any that apply — no judgment, just fewer surprise reactions. (Your throat closing up is not a vibe.)</div>
+        <div class="obd-title">Anything your body, or anyone at your table, vetoes?</div>
+        <div class="obd-sub">We'll keep those out of every recipe. Throat closing up is not a vibe.</div>
         <div class="obd-chips" style="justify-content:center">
           ${_buildAllergenChips()}
         </div>
