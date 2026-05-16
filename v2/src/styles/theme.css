@@ -21,7 +21,7 @@
  *    ─────────────────────────────────────────────────────────────
  *    .landing-app-icon ........ 64px      48px
  *    .landing-logo ............ 3.4rem    2rem
- *    .landing-headline foil ... clamp     1rem absolute
+ *    .landing-headline foil ... clamp     1.2rem absolute (~85% of ours)
  *    .landing-headline ours ... 1.12em    1.4rem absolute
  *    .landing-tagline ......... clamp     clamp (700 italic, parens)
  *    .landing-signin-link ..... 1rem      0.85rem
@@ -439,9 +439,10 @@
     max-width: 100%;
   }
   .landing-headline-foil {
-    /* Same visual size as before, just absolute so we know exactly what
-       we're getting — no em-multiplier surprises. */
-    font-size: 1rem;
+    /* Sized at ~85% of .landing-headline-ours so the comparison reads
+       as parallel — both lines feel like the same beat, just with
+       the muted side a touch smaller. */
+    font-size: 1.2rem;
     margin-bottom: 0;
   }
   .landing-headline-foil::after {
