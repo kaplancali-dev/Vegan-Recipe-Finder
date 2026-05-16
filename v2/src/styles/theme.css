@@ -6,8 +6,10 @@
  *
  *  COPY (in index.html, not here):
  *    - Foil:    "Other recipe apps ask what you want, then send you shopping."
- *               (with &nbsp; binding "then send you shopping" so the
- *                second clause stays on its own line on mobile)
+ *               Uses <br> after "want," to force the wrap exactly there.
+ *               (Tried &nbsp; binding first — didn't work because the comma
+ *                still got pulled to the next line on narrow viewports.
+ *                <br> is the only way to guarantee a specific wrap point.)
  *    - Ours:    "HARVEST knows your fridge, then asks what you crave."
  *               (with &nbsp; ONLY between "you" and "crave" — do NOT
  *                also bind "asks what" — causes horizontal overflow)
