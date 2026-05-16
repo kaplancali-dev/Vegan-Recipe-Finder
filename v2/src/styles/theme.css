@@ -42,8 +42,8 @@
  *
  *  LAYOUT BEHAVIOR:
  *    - Sticky nav: brand (icon + wordmark) + button + sign-in link
- *    - .landing-brand wraps icon+wordmark; vertical stack on desktop,
- *      horizontal row on mobile (saves vertical space).
+ *    - .landing-brand wraps icon+wordmark in a horizontal row at
+ *      EVERY viewport. Icon always sits to the LEFT of the wordmark.
  *    - Once .landing--hero-dismissed is set (user clicked SHOW ME):
  *        the button AND the sign-in link both hide.
  *        Only icon + wordmark remain in nav.
@@ -113,18 +113,16 @@
   }
 }
 
-/* .landing-brand groups the app icon and HARVEST. wordmark so they
-   can stack vertically on desktop (default) and sit horizontally on
-   mobile (saves vertical space). */
+/* .landing-brand groups the app icon and HARVEST. wordmark side by
+   side, icon to the left of the wordmark, on every viewport. */
 .landing-brand {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  gap: 8px;
+  gap: 14px;
 }
 @media (max-width: 599px) {
   .landing-brand {
-    flex-direction: row;
     gap: 10px;
   }
   /* On mobile, drop the sticky nav while the user is in onboarding —
