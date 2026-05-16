@@ -41,10 +41,14 @@
  *    - Divider: #6b7d72
  *
  *  LAYOUT BEHAVIOR:
- *    - Sticky nav: icon + wordmark + button + sign-in link
+ *    - Sticky nav: brand (icon + wordmark) + button + sign-in link
+ *    - .landing-brand wraps icon+wordmark; vertical stack on desktop,
+ *      horizontal row on mobile (saves vertical space).
  *    - Once .landing--hero-dismissed is set (user clicked SHOW ME):
  *        the button AND the sign-in link both hide.
  *        Only icon + wordmark remain in nav.
+ *        On mobile only: nav becomes position: relative so it scrolls
+ *        away with content instead of pinning at top during onboarding.
  *
  *  REGRESSION HISTORY (don't repeat these):
  *    - em-based font-sizes (1.24em, 0.84em) compound unpredictably
@@ -106,6 +110,28 @@
   .landing-app-icon {
     width: 48px;
     height: 48px;
+  }
+}
+
+/* .landing-brand groups the app icon and HARVEST. wordmark so they
+   can stack vertically on desktop (default) and sit horizontally on
+   mobile (saves vertical space). */
+.landing-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+@media (max-width: 599px) {
+  .landing-brand {
+    flex-direction: row;
+    gap: 10px;
+  }
+  /* On mobile, drop the sticky nav while the user is in onboarding —
+     they don't need the brand bar pinned and it eats vertical space
+     they need for chip selections. */
+  .landing--hero-dismissed .landing-nav {
+    position: relative;
   }
 }
 
