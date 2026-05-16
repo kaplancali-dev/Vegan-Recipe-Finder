@@ -6,7 +6,8 @@
  *
  *  COPY (in index.html, not here):
  *    - Foil:    "Other recipe apps ask what you want, then send you shopping."
- *               (with &nbsp; binding "send you shopping")
+ *               (with &nbsp; binding "then send you shopping" so the
+ *                second clause stays on its own line on mobile)
  *    - Ours:    "HARVEST knows your fridge, then asks what you crave."
  *               (with &nbsp; ONLY between "you" and "crave" — do NOT
  *                also bind "asks what" — causes horizontal overflow)
