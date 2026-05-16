@@ -1,4 +1,4 @@
-import{s as h,v as b,c as g}from"./index-CTOA2ZtO.js";import"./supabase-DaN4is7k.js";const y=3e4;let n=null,_=0;function v(){const e=document.createElement("div");return e.id="signInModal",e.className="sin-modal",e.hidden=!0,e.setAttribute("role","dialog"),e.setAttribute("aria-modal","true"),e.setAttribute("aria-labelledby","sinTitle"),e.innerHTML=`
+import{s as h,v as b,c as g}from"./index-BZffy32_.js";import"./supabase-DaN4is7k.js";const y=3e4;let n=null,_=0;function v(){const e=document.createElement("div");return e.id="signInModal",e.className="sin-modal",e.hidden=!0,e.setAttribute("role","dialog"),e.setAttribute("aria-modal","true"),e.setAttribute("aria-labelledby","sinTitle"),e.innerHTML=`
     <div class="sin-modal__backdrop" data-sin-close></div>
     <div class="sin-modal__panel">
       <button class="sin-modal__close" data-sin-close aria-label="Close">×</button>
@@ -7,7 +7,7 @@ import{s as h,v as b,c as g}from"./index-CTOA2ZtO.js";import"./supabase-DaN4is7k
       <div class="sin-step" data-sin-step="1">
         <h2 id="sinTitle" class="sin-modal__title">Welcome back.</h2>
         <p class="sin-modal__sub">Enter the email you used before. We'll send a 6-digit code to verify it's you.</p>
-        <p class="sin-modal__reassure"><strong>No password to remember. No account to create.</strong></p>
+        <p class="sin-modal__reassure"><strong>No password to remember.<br>No account to create.</strong></p>
         <input
           class="sin-modal__input" id="sinEmail" type="email"
           placeholder="your@email.com"
