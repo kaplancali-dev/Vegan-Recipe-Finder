@@ -55,15 +55,20 @@
  *
  *  LAYOUT BEHAVIOR:
  *    - Sticky nav: brand (icon + wordmark) + brand subtitle +
- *      button + sign-in link
+ *      sign-in link
+ *      (SHOW ME button MOVED — now sits at bottom of main content,
+ *       after the welcome line, as the conversion CTA at end of pitch.)
  *    - .landing-brand wraps icon+wordmark in a horizontal row at
  *      EVERY viewport. Icon always sits to the LEFT of the wordmark.
  *    - .landing-brand-sub sits BELOW the brand row with the identity
  *      claim "Plant-based. Proud of it." — landing page ONLY,
  *      NOT used in the in-app header (which keeps its existing tagline).
+ *    - SHOW ME button (.landing-btn-primary--main) sits at bottom of
+ *      .landing-main, after the welcome line.
  *    - Once .landing--hero-dismissed is set (user clicked SHOW ME):
- *        the button AND the sign-in link both hide.
- *        Only icon + wordmark remain in nav.
+ *        the sign-in link hides (nav rule).
+ *        landing-main hides (which also hides the SHOW ME button).
+ *        Only icon + wordmark + subtitle remain visible.
  *        On mobile only: nav becomes position: relative so it scrolls
  *        away with content instead of pinning at top during onboarding.
  *
@@ -573,8 +578,6 @@
   font-weight: 600;
   letter-spacing: 0.08em;
   padding: 14px 28px;
-  /* Extra breathing room above so it sits visibly lower than the
-     HARVEST. wordmark, not crammed right under it. */
   margin-top: 16px;
   background: #3a3a3a;
   color: #fff;
@@ -588,6 +591,13 @@
   box-shadow: inset 0 0 0 1.5px transparent;
   transition: background 0.2s;
 }
+/* When the button sits at the bottom of the main content flow
+   (after the welcome line), it needs more breathing room above to
+   feel like a deliberate call-to-action instead of crammed text. */
+.landing-btn-primary--main {
+  margin-top: 28px;
+}
+
 .landing-btn-primary:hover {
   background: #1a1a1a;
   color: #fff;
