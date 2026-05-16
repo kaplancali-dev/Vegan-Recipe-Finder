@@ -237,8 +237,8 @@
   font-style: normal;
 }
 .landing-headline-foil {
-  color: var(--ink-soft);
-  font-weight: 400;
+  color: #2c3e35; /* darker than --ink-soft so the foil reads as muted-but-present */
+  font-weight: 500;
   margin-bottom: 0;
   position: relative;
 }
@@ -250,15 +250,15 @@
   width: 60%;
   max-width: 220px;
   margin: 18px auto 16px;
-  border-top: 1px dashed color-mix(in srgb, var(--ink-soft) 45%, transparent);
+  border-top: 1px dashed #6b7d72;
 }
 .landing-headline-ours {
-  color: var(--green-deep);
+  color: #134024; /* deeper than --green-deep so the line truly pops */
   font-size: 1.12em;
-  font-weight: 500;
+  font-weight: 600;
 }
 .landing-headline-ours strong {
-  font-weight: 700;
+  font-weight: 800;
   letter-spacing: 0.01em;
 }
 
@@ -271,7 +271,7 @@
   font-style: italic;
   font-weight: 700;
   font-size: clamp(0.95rem, 2.2vw, 1.3rem);
-  color: var(--green-deep);
+  color: #134024; /* deeper than --green-deep — italic strokes need more saturation */
   text-align: center;
   max-width: 100%;
   margin: 0 auto 24px;
@@ -328,8 +328,8 @@
 .landing-welcome {
   font-family: 'Courier New', Courier, monospace;
   font-size: 0.95rem;
-  font-weight: 600;
-  color: #4a4a4a;
+  font-weight: 700;
+  color: #1a2e24;
   margin-bottom: 24px;
   letter-spacing: 0.02em;
 }
@@ -5853,15 +5853,15 @@ input, select, textarea {
   align-items: center;
   background: transparent;
   border: none;
-  color: var(--ink);
+  color: #1a2e24;
   font-family: inherit;
   font-size: 1rem;
-  font-weight: 500;
+  font-weight: 600;
   margin-top: 12px;
   padding: 8px 6px;
   cursor: pointer;
   text-decoration: none;
-  border-bottom: 1px solid color-mix(in srgb, var(--ink) 18%, transparent);
+  border-bottom: 1px solid #6b7d72;
   transition: color 0.15s ease, border-color 0.15s ease;
   white-space: nowrap;
 }
