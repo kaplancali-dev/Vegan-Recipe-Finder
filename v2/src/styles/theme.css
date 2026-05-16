@@ -124,9 +124,11 @@
   height: 64px;
 }
 @media (max-width: 599px) {
+  /* Match the wordmark font-size (2rem = 32px) so icon and HARVEST.
+     read as equal-weight peers in the brand mark, not icon-dominant. */
   .landing-app-icon {
-    width: 48px;
-    height: 48px;
+    width: 32px;
+    height: 32px;
   }
 }
 
