@@ -6,19 +6,21 @@
  *
  *  COPY (in index.html, not here):
  *    - Foil:    "Other recipe apps ask what you want, then send you shopping."
- *               Mobile (.m-br): 3 lines via brs after "ask" and "then"
- *                 line 1: "Other recipe apps ask"
- *                 line 2: "what you want, then"
- *                 line 3: "send you shopping."
- *               Desktop (.d-br): 2 lines via br after "want,"
+ *               Universal <br> after "want," + mobile-only .m-br after "apps".
+ *               Mobile: 3 lines
+ *                 line 1: "Other recipe apps"
+ *                 line 2: "ask what you want,"
+ *                 line 3: "then send you shopping."
+ *               Desktop: 2 lines
  *                 line 1: "Other recipe apps ask what you want,"
  *                 line 2: "then send you shopping."
  *    - Ours:    "HARVEST knows your fridge, then asks what you crave."
- *               Mobile (.m-br): 3 lines via brs after "knows" and "then"
- *                 line 1: "HARVEST knows"
- *                 line 2: "your fridge, then"
- *                 line 3: "asks what you crave."
- *               Desktop (.d-br): 2 lines via br after "fridge,"
+ *               Universal <br> after "fridge," + mobile-only .m-br after "HARVEST".
+ *               Mobile: 3 lines
+ *                 line 1: "HARVEST"
+ *                 line 2: "knows your fridge,"
+ *                 line 3: "then asks what you crave."
+ *               Desktop: 2 lines
  *                 line 1: "HARVEST knows your fridge,"
  *                 line 2: "then asks what you crave."
  *               + &nbsp; binding "you crave" so the trailing word
