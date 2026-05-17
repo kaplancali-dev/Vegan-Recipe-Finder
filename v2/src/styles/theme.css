@@ -6,26 +6,19 @@
  *
  *  COPY (in index.html, not here):
  *    - Foil:    "Other recipe apps ask what you want, then send you shopping."
- *               Universal <br> after "want," + mobile-only .m-br after "apps".
- *               Mobile: 3 lines
+ *               Two universal <br> tags — same 3-line wrap on EVERY
+ *               viewport (desktop and mobile):
  *                 line 1: "Other recipe apps"
  *                 line 2: "ask what you want,"
  *                 line 3: "then send you shopping."
- *               Desktop: 2 lines
- *                 line 1: "Other recipe apps ask what you want,"
- *                 line 2: "then send you shopping."
  *    - Ours:    "HARVEST knows your fridge, then asks what you crave."
- *               Universal <br> after "fridge," + mobile-only .m-br after "HARVEST".
- *               Mobile: 3 lines
+ *               Two universal <br> tags — same 3-line wrap on every viewport:
  *                 line 1: "HARVEST"
  *                 line 2: "knows your fridge,"
  *                 line 3: "then asks what you crave."
- *               Desktop: 2 lines
- *                 line 1: "HARVEST knows your fridge,"
- *                 line 2: "then asks what you crave."
  *               + &nbsp; binding "you crave" so the trailing word
  *                 can't orphan to its own line.
- *    - Both lines break at "then" — parallel structure on every viewport.
+ *    - Both lines pivot at "then" — parallel structure across viewports.
  *    - Ours:    "HARVEST knows your fridge, then asks what you crave."
  *               (with &nbsp; ONLY between "you" and "crave" — do NOT
  *                also bind "asks what" — causes horizontal overflow)
